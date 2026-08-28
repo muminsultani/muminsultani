@@ -6,222 +6,9 @@
     <title>muminsultani</title>
     <!-- Font Awesome (İkonlar için) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background-color: #f4f7f6;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .profile-card {
-            background: #ffffff;
-            width: 100%;
-            max-width: 950px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            padding: 40px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        /* Header Bölümü */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-
-        .logo {
-            font-size: 22px;
-            font-weight: 700;
-            color: #00c853;
-            text-decoration: none;
-        }
-
-        .btn-primary {
-            background-color: #00c853;
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            font-size: 14px;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.2s;
-            text-decoration: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #00b047;
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            color: #00c853;
-            border: 1px solid #00c853;
-            padding: 10px 24px;
-            font-size: 14px;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.2s;
-            text-decoration: none;
-        }
-
-        .btn-outline:hover {
-            background-color: #e8f5e9;
-        }
-
-        /* İçerik Alanı (Grid / Flex) */
-        .content-body {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .info-section {
-            flex: 1;
-        }
-
-        .info-section h1 {
-            font-size: 32px;
-            font-weight: 700;
-            color: #111;
-            margin-bottom: 5px;
-        }
-
-        .info-section h3 {
-            font-size: 16px;
-            font-weight: 500;
-            color: #555;
-            margin-bottom: 20px;
-        }
-
-        .info-section p {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #666;
-            margin-bottom: 25px;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .image-section {
-            flex-shrink: 0;
-        }
-
-        .image-section img {
-            width: 280px;
-            height: 280px;
-            object-fit: cover;
-            border-radius: 24px;
-        }
-
-        /* Footer / İletişim Çubuğu */
-        .footer-bar {
-            background: #fafafa;
-            border: 1px solid #eee;
-            border-radius: 12px;
-            padding: 15px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 20px;
-        }
-
-        .social-icons a {
-            color: #333;
-            font-size: 18px;
-            transition: color 0.2s;
-            text-decoration: none;
-        }
-
-        .social-icons a:hover {
-            color: #00c853;
-        }
-
-        .contact-info {
-            display: flex;
-            gap: 25px;
-            font-size: 14px;
-            color: #555;
-            flex-wrap: wrap;
-        }
-
-        .contact-info div {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .contact-info i {
-            color: #333;
-        }
-
-        /* Responsive Uyumluluk (Mobil Ekranlar İçin) */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            .profile-card {
-                padding: 20px;
-            }
-
-            .content-body {
-                flex-direction: column-reverse;
-                text-align: center;
-                gap: 25px;
-            }
-
-            .image-section img {
-                width: 200px;
-                height: 200px;
-            }
-
-            .action-buttons {
-                justify-content: center;
-                flex-direction: column;
-            }
-
-            .footer-bar {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .contact-info {
-                flex-direction: column;
-                gap: 10px;
-                align-items: center;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
+    
+    
 </head>
 <body>
 
@@ -229,14 +16,17 @@
         <!-- Üst Kısım -->
         <div class="header">
             <a href="#" class="logo">muminsultani</a>
-            <a href="#" class="btn-primary">Book Me</a>
+            <a href="#" class="btn-primary clock-button">
+                <span class="click-icon"></span>08:25:10</a>
+            
+            
         </div>
 
         <!-- Orta İçerik -->
         <div class="content-body">
             <div class="info-section">
-                <h1>Claire Wagner</h1>
-                <h3>Consultant</h3>
+                <h1>Mumin Sultani</h1>
+                <h3>App & Web Developer</h3>
                 <p>Amy Carroll attended Columbia University for a BA in Nutritionist, and graduated summa cum laude with Departmental Honors in Nutritionist. She completed her doctorate in Clinical Nutritionist at Long Island University in Brooklyn.</p>
                 <div class="action-buttons">
                     <a href="#" class="btn-primary">Book me</a>
@@ -245,7 +35,7 @@
             </div>
             <div class="image-section">
                 <!-- Buradaki görsel yolunu kendi görselinizle değiştirebilirsiniz -->
-                <img src="img/20.png" alt="Claire Wagner">
+                <img src="img/mumin.png" alt="muminsultani">
             </div>
         </div>
 
@@ -255,7 +45,7 @@
                 <a href="#"><i class="fa-brands fa-youtube"></i></a>
                 <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
                 <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="instagram.com/@sultanimumin"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://instagram.com/@sultanimumin"><i class="fa-brands fa-instagram"></i></a>
             </div>
             <div class="contact-info">
                 <div><i class="fa-regular fa-envelope"></i> moorelift@gmail.com</div>
@@ -263,6 +53,8 @@
             </div>
         </div>
     </div>
+    
+    <script src="js/script.js"></script>
 
 </body>
 </html>
