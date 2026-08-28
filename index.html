@@ -1,396 +1,268 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elena Rostova — Principal AI Architect & Design Technologist</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <title>WorkeeLover - Profile</title>
+    <!-- Font Awesome (İkonlar için) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        serif: ['Instrument Serif', 'serif']
-                    },
-                    colors: {
-                        deepBlack: '#020204',
-                        panelBg: '#09090e',
-                        cardBg: '#111118',
-                        brandAccent: '#f43f5e'
-                    }
-                }
-            }
-        }
-    </script>
-
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
         body {
-            background-color: #020204;
-            color: #f1f1f5;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
+            background-color: #f4f7f6;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        /* High-end Glass Styling */
-        .glass-nav {
-            background: rgba(9, 9, 14, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        .profile-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 950px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            padding: 40px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .glass-card {
-            background: rgba(17, 17, 24, 0.65);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        
-        .glass-card:hover {
-            border-color: rgba(244, 63, 94, 0.4);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -15px rgba(244, 63, 94, 0.15);
+        /* Header Bölümü */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
         }
 
-        /* Smooth Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #020204;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1f1f2e;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #f43f5e;
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: #00c853;
+            text-decoration: none;
         }
 
-        /* Ambient Glow Mesh */
-        .ambient-glow-1 {
-            position: absolute;
-            top: -10%;
-            left: 10%;
-            width: 550px;
-            height: 550px;
-            background: radial-gradient(circle, rgba(244, 63, 94, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
-            filter: blur(80px);
-            z-index: -1;
-            pointer-events: none;
+        .btn-primary {
+            background-color: #00c853;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
         }
-        .ambient-glow-2 {
-            position: absolute;
-            top: 40%;
-            right: 5%;
-            width: 650px;
-            height: 650px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
-            filter: blur(90px);
-            z-index: -1;
-            pointer-events: none;
+
+        .btn-primary:hover {
+            background-color: #00b047;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #00c853;
+            border: 1px solid #00c853;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-outline:hover {
+            background-color: #e8f5e9;
+        }
+
+        /* İçerik Alanı (Grid / Flex) */
+        .content-body {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .info-section {
+            flex: 1;
+        }
+
+        .info-section h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 5px;
+        }
+
+        .info-section h3 {
+            font-size: 16px;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .info-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .image-section {
+            flex-shrink: 0;
+        }
+
+        .image-section img {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 24px;
+        }
+
+        /* Footer / İletişim Çubuğu */
+        .footer-bar {
+            background: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            color: #333;
+            font-size: 18px;
+            transition: color 0.2s;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            color: #00c853;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 25px;
+            font-size: 14px;
+            color: #555;
+            flex-wrap: wrap;
+        }
+
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-info i {
+            color: #333;
+        }
+
+        /* Responsive Uyumluluk (Mobil Ekranlar İçin) */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .profile-card {
+                padding: 20px;
+            }
+
+            .content-body {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 25px;
+            }
+
+            .image-section img {
+                width: 200px;
+                height: 200px;
+            }
+
+            .action-buttons {
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            .footer-bar {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
         }
     </style>
 </head>
-<body class="selection:bg-rose-500 selection:text-white">
+<body>
 
-    <div class="ambient-glow-1"></div>
-    <div class="ambient-glow-2"></div>
-
-    <header class="fixed top-4 left-0 w-full z-50 px-4 sm:px-8">
-        <div class="max-w-6xl mx-auto glass-nav rounded-2xl px-6 py-3.5 flex items-center justify-between shadow-2xl">
-            <a href="#hero" class="text-lg font-bold tracking-tight text-white flex items-center gap-2 font-serif text-2xl italic">
-                <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span> ER.
-            </a>
-
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
-                <a href="#about" class="hover:text-rose-400 transition-colors">About</a>
-                <a href="#expertise" class="hover:text-rose-400 transition-colors">Expertise</a>
-                <a href="#projects" class="hover:text-rose-400 transition-colors">Projects</a>
-                <a href="#experience" class="hover:text-rose-400 transition-colors">Experience</a>
-            </nav>
-
-            <div class="hidden md:flex items-center gap-4">
-                <a href="#contact" class="px-5 py-2.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-medium text-xs tracking-wide transition-all shadow-lg shadow-rose-500/25">
-                    Let's Talk
-                </a>
-            </div>
-
-            <button onclick="toggleMobileMenu()" class="md:hidden text-zinc-300 hover:text-white focus:outline-none p-1">
-                <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
-            </button>
+    <div class="profile-card">
+        <!-- Üst Kısım -->
+        <div class="header">
+            <a href="#" class="logo">WorkeeLover</a>
+            <a href="#" class="btn-primary">Book Me</a>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden max-w-6xl mx-auto mt-2 glass-nav rounded-2xl p-6 flex flex-col gap-4 text-center shadow-2xl">
-            <a href="#about" onclick="toggleMobileMenu()" class="text-zinc-300 hover:text-rose-400 py-2 text-sm">About</a>
-            <a href="#expertise" onclick="toggleMobileMenu()" class="text-zinc-300 hover:text-rose-400 py-2 text-sm">Expertise</a>
-            <a href="#projects" onclick="toggleMobileMenu()" class="text-zinc-300 hover:text-rose-400 py-2 text-sm">Projects</a>
-            <a href="#experience" onclick="toggleMobileMenu()" class="text-zinc-300 hover:text-rose-400 py-2 text-sm">Experience</a>
-            <a href="#contact" onclick="toggleMobileMenu()" class="w-full py-3 rounded-xl bg-rose-500 text-white font-semibold text-sm shadow-lg shadow-rose-500/30">Let's Talk</a>
+        <!-- Orta İçerik -->
+        <div class="content-body">
+            <div class="info-section">
+                <h1>Claire Wagner</h1>
+                <h3>Consultant</h3>
+                <p>Amy Carroll attended Columbia University for a BA in Nutritionist, and graduated summa cum laude with Departmental Honors in Nutritionist. She completed her doctorate in Clinical Nutritionist at Long Island University in Brooklyn.</p>
+                <div class="action-buttons">
+                    <a href="#" class="btn-primary">Book me</a>
+                    <a href="#" class="btn-outline">Ask me a question</a>
+                </div>
+            </div>
+            <div class="image-section">
+                <!-- Buradaki görsel yolunu kendi görselinizle değiştirebilirsiniz -->
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80" alt="Claire Wagner">
+            </div>
         </div>
-    </header>
 
-    <main class="w-full">
-
-        <section id="hero" class="min-h-screen w-full flex items-center justify-center px-4 sm:px-8 pt-28 pb-16 relative">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
-                
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-left" data-aos="fade-right" data-aos-duration="1000">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/25 text-rose-400 text-xs font-semibold">
-                        <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span> Open for Strategic Consulting
-                    </div>
-
-                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.05]">
-                        Architecting <br class="hidden sm:inline"><span class="font-serif italic font-normal text-rose-500 text-6xl sm:text-7xl lg:text-8xl">intelligent</span> digital futures.
-                    </h1>
-
-                    <p class="text-zinc-400 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
-                        I'm Elena Rostova, a principal design technologist and full-stack engineer merging high-end aesthetic design with advanced neural systems.
-                    </p>
-
-                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-                        <a href="#projects" class="px-7 py-3.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-semibold text-sm transition-all shadow-xl shadow-rose-500/25 flex items-center gap-2">
-                            Explore Featured Work <i class="fa-solid fa-arrow-down text-xs"></i>
-                        </a>
-                        <a href="#contact" class="px-7 py-3.5 rounded-xl glass-card hover:bg-white/5 text-zinc-200 font-semibold text-sm transition-all">
-                            Initialize Contact
-                        </a>
-                    </div>
-
-                    <div class="flex items-center justify-center lg:justify-start gap-4 pt-4 text-zinc-400">
-                        <span class="text-xs font-mono uppercase tracking-widest text-zinc-500">Profiles:</span>
-                        <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center hover:text-rose-400 hover:border-rose-500/40 transition-all"><i class="fa-brands fa-github"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center hover:text-rose-400 hover:border-rose-500/40 transition-all"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center hover:text-rose-400 hover:border-rose-500/40 transition-all"><i class="fa-brands fa-x-twitter"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center hover:text-rose-400 hover:border-rose-500/40 transition-all"><i class="fa-brands fa-dribbble"></i></a>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-5 flex justify-center" data-aos="fade-left" data-aos-duration="1000">
-                    <div class="relative w-72 h-80 sm:w-80 sm:h-96 rounded-3xl p-3 glass-card shadow-2xl group">
-                        <div class="w-full h-full rounded-2xl overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Elena Rostova Portrait" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-6">
-                                <span class="text-white font-bold text-lg">Elena Rostova</span>
-                                <span class="text-rose-400 text-xs font-medium">Zurich, Switzerland</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+        <!-- Alt İletişim ve Sosyal Medya Çubuğu -->
+        <div class="footer-bar">
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
             </div>
-        </section>
-
-        <section id="about" class="min-h-screen w-full flex items-center justify-center px-4 sm:px-8 py-24 bg-deepBlack/40 relative">
-            <div class="max-w-6xl mx-auto w-full space-y-16">
-                
-                <div class="text-center space-y-3" data-aos="fade-up">
-                    <span class="text-xs font-mono uppercase tracking-widest text-rose-400">Core Capabilities</span>
-                    <h2 class="text-3xl sm:text-5xl font-bold text-white">Engineering Meets Artificial Intelligence</h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="glass-card p-8 rounded-3xl group" data-aos="fade-up" data-aos-delay="100">
-                        <div class="w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-brain"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3">AI & Neural Systems</h3>
-                        <p class="text-zinc-400 text-sm leading-relaxed">
-                            Integrating multi-modal LLM endpoints, semantic search vector databases, and custom inference tools directly into high-throughput web frontends.
-                        </p>
-                    </div>
-
-                    <div class="glass-card p-8 rounded-3xl group" data-aos="fade-up" data-aos-delay="200">
-                        <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-code-merge"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Full-Stack Architecture</h3>
-                        <p class="text-zinc-400 text-sm leading-relaxed">
-                            Building rock-solid, type-safe fullstack platforms utilizing Next.js, React, Node.js, Python, PostgreSQL, and resilient cloudless containers.
-                        </p>
-                    </div>
-
-                    <div class="glass-card p-8 rounded-3xl group" data-aos="fade-up" data-aos-delay="300">
-                        <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Design Systems</h3>
-                        <p class="text-zinc-400 text-sm leading-relaxed">
-                            Crafting immaculate interface design kits, accessible component tokens, and fluid micro-interactions tailored for elite enterprise applications.
-                        </p>
-                    </div>
-                </div>
-
+            <div class="contact-info">
+                <div><i class="fa-regular fa-envelope"></i> moorelift@gmail.com</div>
+                <div><i class="fa-solid fa-phone"></i> +1 917-414-7949</div>
             </div>
-        </section>
-
-        <section id="projects" class="min-h-screen w-full flex items-center justify-center px-4 sm:px-8 py-24 relative">
-            <div class="max-w-6xl mx-auto w-full space-y-16">
-                
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6" data-aos="fade-up">
-                    <div class="space-y-3">
-                        <span class="text-xs font-mono uppercase tracking-widest text-rose-400">Portfolio</span>
-                        <h2 class="text-3xl sm:text-5xl font-bold text-white">Selected Case Studies</h2>
-                    </div>
-                    <p class="text-zinc-400 text-sm max-w-sm">
-                        Enterprise platforms, secure trading systems, and generative intelligence workspaces built over recent years.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="glass-card rounded-3xl overflow-hidden group flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
-                        <div class="p-6 sm:p-8 space-y-4">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs font-mono text-rose-400 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">FinTech Platform</span>
-                                <a href="#" class="text-zinc-400 hover:text-white transition-colors"><i class="fa-solid fa-arrow-up-right-from-square text-lg"></i></a>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white">Aura Asset Liquidity Engine</h3>
-                            <p class="text-zinc-400 text-sm leading-relaxed">
-                                Real-time institutional asset management dashboard processing ultra-low latency metrics feeds globally.
-                            </p>
-                            <div class="flex flex-wrap gap-2 pt-2">
-                                <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">React</span>
-                                <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">TypeScript</span>
-                                <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">Rust Core</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="glass-card rounded-3xl overflow-hidden group flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
-                        <div class="p-6 sm:p-8 space-y-4">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs font-mono text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Generative AI Studio</span>
-                                <a href="#" class="text-zinc-400 hover:text-white transition-colors"><i class="fa-solid fa-arrow-up-right-from-square text-lg"></i></a>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white">Vortex Neural Canvas</h3>
-                            <p class="text-zinc-400 text-sm leading-relaxed">
-                                Browser workspace enabling engineers to compose multi-modal AI chains and visual data models seamlessly.
-                            </p>
-                            <div class="flex flex-wrap gap-2 pt-2">
-                                <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">Next.js</span>
-                                <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">Python API</span>
-                                <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">TailwindCSS</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="experience" class="min-h-screen w-full flex items-center justify-center px-4 sm:px-8 py-24 bg-deepBlack/40 relative">
-            <div class="max-w-4xl mx-auto w-full space-y-16">
-                
-                <div class="text-center space-y-3" data-aos="fade-up">
-                    <span class="text-xs font-mono uppercase tracking-widest text-rose-400">Career Trajectory</span>
-                    <h2 class="text-3xl sm:text-5xl font-bold text-white">Work Experience</h2>
-                </div>
-
-                <div class="space-y-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="glass-card p-6 sm:p-8 rounded-3xl">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-                            <h3 class="text-lg font-bold text-white">Principal AI Design Engineer</h3>
-                            <span class="text-xs font-mono text-rose-400 bg-rose-500/10 px-3 py-1 rounded-full w-fit">2023 — Present</span>
-                        </div>
-                        <p class="text-xs font-medium text-zinc-400 mb-2">Vercel Enterprise Partners • Zurich</p>
-                        <p class="text-sm text-zinc-300 leading-relaxed">
-                            Directing frontend architecture teams, launching component ecosystems, and driving adoption of high-performance design workflows across international tech hubs.
-                        </p>
-                    </div>
-
-                    <div class="glass-card p-6 sm:p-8 rounded-3xl">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-                            <h3 class="text-lg font-bold text-white">Senior Full-Stack Developer</h3>
-                            <span class="text-xs font-mono text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full w-fit">2020 — 2023</span>
-                        </div>
-                        <p class="text-xs font-medium text-zinc-400 mb-2">Stripe Global Labs • San Francisco</p>
-                        <p class="text-sm text-zinc-300 leading-relaxed">
-                            Engineered core transaction UI layers, internal design token maps, and micro-animations handling millions of checkout interactions daily.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="contact" class="min-h-screen w-full flex items-center justify-center px-4 sm:px-8 py-24 relative">
-            <div class="max-w-4xl mx-auto w-full space-y-12">
-                
-                <div class="text-center space-y-3" data-aos="fade-up">
-                    <span class="text-xs font-mono uppercase tracking-widest text-rose-400">Get in Touch</span>
-                    <h2 class="text-3xl sm:text-5xl font-bold text-white">Let's build something extraordinary.</h2>
-                    <p class="text-zinc-400 text-sm max-w-lg mx-auto">
-                        Have a project in mind, an advisory role, or just want to connect? Send a transmission below.
-                    </p>
-                </div>
-
-                <div class="glass-card p-8 sm:p-12 rounded-3xl shadow-2xl" data-aos="fade-up" data-aos-delay="100">
-                    <form onsubmit="handleContactForm(event)" class="space-y-6">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div class="space-y-2">
-                                <label class="text-xs font-medium text-zinc-300">Your Name</label>
-                                <input type="text" placeholder="Jane Doe" required class="w-full bg-white/[0.02] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-rose-500 transition-colors">
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-xs font-medium text-zinc-300">Email Address</label>
-                                <input type="email" placeholder="muminsultani@hotmail.com" required class="w-full bg-white/[0.02] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-rose-500 transition-colors">
-                            </div>
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-xs font-medium text-zinc-300">Your Message</label>
-                            <textarea rows="5" placeholder="Tell me about your specifications..." required class="w-full bg-white/[0.02] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-rose-500 transition-colors resize-none"></textarea>
-                        </div>
-                        <button type="submit" class="w-full py-4 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-bold text-sm tracking-wide transition-all shadow-xl shadow-rose-500/30">
-                            Send Transmission Dispatch
-                        </button>
-                    </form>
-                </div>
-
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="w-full py-8 border-t border-white/5 text-center px-6 text-xs text-zinc-500 font-mono">
-        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <span>© 2026 Elena Rostova. All rights reserved.</span>
-            <span>Engineered with HTML5, Tailwind CSS, and AOS Animations</span>
         </div>
-    </footer>
+    </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Initialize AOS Scroll Animations
-        AOS.init({
-            once: true,
-            offset: 80,
-            duration: 800,
-        });
-
-        // Toggle Mobile Menu
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const icon = document.getElementById('menu-icon');
-            menu.classList.toggle('hidden');
-            if(menu.classList.contains('hidden')) {
-                icon.className = "fa-solid fa-bars text-xl";
-            } else {
-                icon.className = "fa-solid fa-xmark text-xl";
-            }
-        }
-
-        // Contact Form Feedback Handler
-        function handleContactForm(e) {
-            e.preventDefault();
-            alert('Transmission successfully sent! Elena will get back to you shortly.');
-            e.target.reset();
-        }
-    </script>
 </body>
 </html>
