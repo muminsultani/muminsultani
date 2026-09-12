@@ -1,389 +1,126 @@
 <!DOCTYPE html>
-<html lang="tr" id="html-root">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimal & Responsive</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
+    <title>İletişim Formu Örneği</title>
+    <!-- Font Awesome İkon Kütüphanesi -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent: #38bdf8;
-            --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
         body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
-            padding: 20px;
+            height: 100vh;
+            margin: 0;
         }
-
-        /* Arka Plan Dekoratif Işıklar */
-        .bg-glow {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: var(--accent);
-            filter: blur(150px);
-            opacity: 0.15;
-            z-index: -1;
-            border-radius: 50%;
-        }
-
-        .glow-1 { top: 10%; left: 10%; }
-        .glow-2 { bottom: 10%; right: 10%; background: #818cf8; }
-
-        /* Ana Konteyner */
-        .container {
+        .contact-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 900px;
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 24px;
+            max-width: 400px;
         }
-
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Kart Tasarımları */
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 32px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-            position: relative; /* Dil seçicinin konumu için gerekli */
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-        }
-
-        /* Profil / Sol Kart */
-        .profile-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
+        .contact-card h2 {
+            margin-bottom: 20px;
+            color: #333;
             text-align: center;
         }
-
-        /* İşaretlenen Yerdeki Dil Seçici */
-        .language-selector {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 6px 10px;
-            border-radius: 10px;
-            color: var(--accent);
-            font-size: 0.8rem;
-            font-weight: 700;
-            outline: none;
-            cursor: pointer;
-            backdrop-filter: blur(8px);
-            transition: all 0.2s ease;
+        .form-group {
+            margin-bottom: 15px;
         }
-
-        .language-selector:hover {
-            background: rgba(56, 189, 248, 0.1);
-            border-color: var(--accent);
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 14px;
         }
-
-        .language-selector option {
-            background-color: #1e293b;
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        /* RTL (Farsça) desteği için sağ üst köşeyi ters çevirme */
-        [dir="rtl"] .language-selector {
-            right: auto;
-            left: 20px;
-        }
-
-        .profile-content {
+        .form-group input, 
+        .form-group textarea {
             width: 100%;
-            margin-top: 15px; /* Dil seçiciyle üstten çakışmayı önlemek için */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box; /* Kutunun taşmasını önler */
         }
-
-        .avatar {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            background: var(--accent-gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
+        .form-group textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        .submit-btn {
+            background-color: #007BFF;
             color: white;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
-        }
-
-        .profile-card h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .profile-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 24px;
-            line-height: 1.5;
-        }
-
-        /* Sosyal / İletişim Butonları */
-        .social-links {
-            display: flex;
-            gap: 12px;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .social-btn {
-            flex: 1;
+            border: none;
             padding: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .social-btn:hover {
-            background: var(--accent);
-            color: var(--bg-color);
-            border-color: var(--accent);
-        }
-
-        /* Sağ İçerik Kartı */
-        .content-card {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        [dir="rtl"] .section-title {
-            flex-direction: row-reverse;
-        }
-
-        .bio-text {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Yetenekler / Etiketler */
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tag {
-            padding: 8px 14px;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent);
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-        }
-
-        /* Aksiyon Butonu */
-        .action-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
             width: 100%;
-            padding: 14px;
-            background: var(--accent-gradient);
-            color: #0f172a;
-            font-weight: 700;
-            border-radius: 12px;
-            text-decoration: none;
-            transition: opacity 0.2s ease, transform 0.2s ease;
-            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
         }
-
-        [dir="rtl"] .action-btn {
-            flex-direction: row-reverse;
+        .submit-btn:hover {
+            background-color: #0056b3;
         }
-
-        .action-btn:hover {
-            opacity: 0.9;
-            transform: scale(1.01);
+        .submit-btn i {
+            margin-right: 8px;
         }
     </style>
 </head>
-<body id="html-root">
+<body>
 
-    <div class="bg-glow glow-1"></div>
-    <div class="bg-glow glow-2"></div>
-
-    <div class="container">
-        <!-- Sol Profil Kartı -->
-        <div class="card profile-card">
-            <!-- İşaretlenen yere yerleştirilen sade dil seçici -->
-            <select id="languageSelect" class="language-selector" onchange="changeLanguage(this.value)">
-                <option value="tr" selected>TR</option>
-                <option value="en">EN</option>
-                <option value="de">DE</option>
-                <option value="fa">FA</option>
-                <option value="ko">KO</option>
-            </select>
-
-            <div class="profile-content">
-                <div class="avatar">
-                    <i class="fa-solid fa-code"></i>
-                </div>
-                <h1 id="i-name">muminsultani</h1>
-                <p id="i-title">Yazılım Geliştirici & Tasarım Meraklısı</p>
-            </div>
+    <div class="contact-card">
+        <h2>Bize Ulaşın</h2>
+        
+        <!-- Form Başlangıcı -->
+        <form id="contactForm" onsubmit="sendEmail(event)">
             
-            <div class="social-links">
-                <a href="https://www.github.com/muminsultani" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="https://www.instagram.com/princeshahin0" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://wa.me/905389480137" class="social-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-            </div>
-        </div>
-
-        <!-- Sağ Detay Kartı -->
-        <div class="card content-card">
-            <div>
-                <div class="section-title"><i class="fa-solid fa-user-astronaut"></i> <span id="i-about-title">Hakkımda</span></div>
-                <p class="bio-text" id="i-about-text">
-                    Karmaşık menülere ve kalabalık tasarımlara ihtiyaç duymadan, odaklanılabilir ve modern dijital deneyimler tasarlıyorum. Kullanıcı odaklı, temiz kod yazma tutkusuyla projeler geliştiriyorum.
-                </p>
+            <div class="form-group">
+                <label for="name">Adınız Soyadınız:</label>
+                <input type="text" id="name" required placeholder="Adınızı girin">
             </div>
 
-            <div>
-                <div class="section-title"><i class="fa-solid fa-layer-group"></i> <span id="i-skills-title">Yetenekler</span></div>
-                <div class="tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">JavaScript</span>
-                    <span class="tag">React</span>
-                    <span class="tag">Django</span>
-                    <span class="tag">UI/UX</span>
-                    <span class="tag">Mobile</span>
-                </div>
+            <div class="form-group">
+                <label for="email">E-posta Adresiniz:</label>
+                <input type="email" id="email" required placeholder="ornek@mail.com">
             </div>
 
-            <div>
-                <a href="mailto:muminsultani@hotmail.com" class="action-btn">
-                    <i class="fa-solid fa-envelope"></i> <span id="i-contact-btn">Send E-mail</span>
-                </a>
+            <div class="form-group">
+                <label for="message">Mesajınız:</label>
+                <textarea id="message" required placeholder="Mesajınızı buraya yazın..."></textarea>
             </div>
-        </div>
+
+            <button type="submit" class="submit-btn">
+                <i class="fa-solid fa-envelope"></i> Mesajı Gönder
+            </button>
+
+        </form>
     </div>
 
     <script>
-        const translations = {
-            tr: {
-                name: "İsim Soyisim",
-                title: "Yazılım Geliştirici & Tasarım Meraklısı",
-                aboutTitle: "Hakkımda",
-                aboutText: "Karmaşık menülere ve kalabalık tasarımlara ihtiyaç duymadan, odaklanılabilir ve modern dijital deneyimler tasarlıyorum. Kullanıcı odaklı, temiz kod yazma tutkusuyla projeler geliştiriyorum.",
-                skillsTitle: "Yetenekler",
-                contactBtn: "İletişime Geç",
-                dir: "ltr"
-            },
-            en: {
-                name: "John Doe",
-                title: "Software Developer & Design Enthusiast",
-                aboutTitle: "About Me",
-                aboutText: "I design focused and modern digital experiences without the need for complex menus and cluttered layouts. I build projects driven by a passion for user-centric, clean coding.",
-                skillsTitle: "Skills",
-                contactBtn: "Get in Touch",
-                dir: "ltr"
-            },
-            de: {
-                name: "Max Mustermann",
-                title: "Softwareentwickler & Design-Enthusiast",
-                aboutTitle: "Über mich",
-                aboutText: "Ich gestalte fokussierte und moderne digitale Erlebnisse ganz ohne komplexe Menüs und überladene Layouts. Ich entwickle Projekte aus einer Leidenschaft für benutzerzentrierten, sauberen Code.",
-                skillsTitle: "Fähigkeiten",
-                contactBtn: "Kontakt aufnehmen",
-                dir: "ltr"
-            },
-            fa: {
-                name: "نام و نام خانوادگی",
-                title: "توسعه‌دهنده نرم‌افزار و علاقه‌مند به طراحی",
-                aboutTitle: "درباره من",
-                aboutText: "من تجربه‌های دیجیتال متمرکز و مدرنی را بدون نیاز به منوهای پیچیده و طراحی‌های شلوغ خلق می‌کنم. پروژه‌ها را با اشتیاق به کدنویسی تمیز و کاربرمحور توسعه می‌دهم.",
-                skillsTitle: "مهارت‌ها",
-                contactBtn: "ارتباط با من",
-                dir: "rtl"
-            },
-            ko: {
-                name: "홍길동",
-                title: "소프트웨어 개발자 & 디자인 애호가",
-                aboutTitle: "소개",
-                aboutText: "복잡한 메뉴나 복잡한 레이아웃 없이 집중도 높고 모던한 디지털 경험을 디자인합니다. 사용자 중심의 클린 코딩에 대한 열정으로 프로젝트를 개발합니다.",
-                skillsTitle: "보유 기술",
-                contactBtn: "연락하기",
-                dir: "ltr"
-            }
-        };
+        function sendEmail(event) {
+            event.preventDefault(); // Sayfanın yenilenmesini engeller
 
-        function changeLanguage(lang) {
-            const data = translations[lang];
-            if (!data) return;
+            // Formdan girilen değerleri alıyoruz
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
 
-            document.getElementById('i-name').innerText = data.name;
-            document.getElementById('i-title').innerText = data.title;
-            document.getElementById('i-about-title').innerText = data.aboutTitle;
-            document.getElementById('i-about-text').innerText = data.aboutText;
-            document.getElementById('i-skills-title').innerText = data.skillsTitle;
-            document.getElementById('i-contact-btn').innerText = data.contactBtn;
+            // Kendi e-posta adresinizi buraya yazın:
+            const targetEmail = "destek@ornek.com"; 
 
-            const root = document.getElementById('html-root');
-            root.setAttribute('lang', lang);
-            root.setAttribute('dir', data.dir);
+            // Konu ve gövdeyi hazırlıyoruz
+            const subject = encodeURIComponent("Web Sitesinden Yeni Mesaj: " + name);
+            const body = encodeURIComponent("Gönderen: " + name + "\nE-posta: " + email + "\n\nMesaj:\n" + message);
+
+            // Mail uygulamasını tetikleyen bağlantıyı açıyoruz
+            window.location.href = `mailto:${targetEmail}?subject=${subject}&body=${body}`;
         }
     </script>
+
 </body>
 </html>
