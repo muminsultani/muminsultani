@@ -54,7 +54,7 @@
             background-color: var(--bg-color);
             color: var(--text-primary);
             min-height: 100vh;
-            padding: 20px 20px;
+            padding: 24px 16px;
             display: block;
             position: relative;
             overflow-x: hidden;
@@ -82,22 +82,24 @@
             flex-direction: column;
             align-items: center;
             gap: 12px;
+            padding: 0 16px;
             animation: introFadeIn 0.8s ease forwards;
         }
 
         .intro-code-box {
             font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #c084fc;
             background: rgba(147, 51, 234, 0.08);
             border: 1px solid rgba(147, 51, 234, 0.2);
-            padding: 8px 16px;
+            padding: 8px 14px;
             border-radius: 8px;
             display: inline-flex;
             align-items: center;
             gap: 6px;
             box-shadow: 0 4px 20px rgba(147, 51, 234, 0.1);
-            white-space: nowrap;
+            max-width: 100%;
+            overflow-x: auto;
         }
 
         .code-keyword { color: #e879f9; }
@@ -119,20 +121,21 @@
         }
 
         .intro-logo {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 800;
-            letter-spacing: -1.5px;
+            letter-spacing: -1px;
             background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
             background-size: 400% 400%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: gradientFlow 4s ease infinite;
+            word-break: break-word;
         }
 
         .intro-sub {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             font-weight: 500;
             opacity: 0.8;
@@ -149,10 +152,11 @@
             top: 15%;
             left: 50%;
             transform: translateX(-50%);
-            width: 900px;
+            width: 100%;
+            max-width: 900px;
             height: 400px;
             background: var(--glow-color);
-            filter: blur(120px);
+            filter: blur(100px);
             z-index: -1;
             pointer-events: none;
         }
@@ -164,28 +168,18 @@
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 36px;
+            gap: 32px;
             transition: max-width 0.3s ease;
         }
 
-        /* Masaüstü Ekranlar İçin Genişlik */
         @media (min-width: 1025px) {
-            .wrapper {
-                max-width: 1120px;
-            }
-            body {
-                padding: 50px 30px;
-            }
+            .wrapper { max-width: 1120px; }
+            body { padding: 50px 30px; }
         }
 
-        /* Çok Büyük Ekranlar / TV İçin Genişlik */
         @media (min-width: 1441px) {
-            .wrapper {
-                max-width: 1240px;
-            }
-            body {
-                padding: 60px 40px;
-            }
+            .wrapper { max-width: 1240px; }
+            body { padding: 60px 40px; }
         }
 
         /* Header Section */
@@ -199,17 +193,19 @@
             align-items: center;
             margin-bottom: 10px;
             position: relative;
+            gap: 12px;
         }
 
         .brand-logo {
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 800;
-            letter-spacing: -1.2px;
+            letter-spacing: -1px;
             background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
             background-size: 400% 400%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: gradientFlow 8s ease infinite;
+            word-break: break-word;
         }
 
         @keyframes gradientFlow {
@@ -222,12 +218,13 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-shrink: 0;
         }
 
         .music-btn-inline {
             background: var(--box-bg);
             border: 1px solid var(--line-color);
-            padding: 5px 11px;
+            padding: 5px 10px;
             border-radius: 8px;
             color: var(--text-secondary);
             font-size: 0.75rem;
@@ -258,10 +255,10 @@
         .lang-btn {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             background: var(--box-bg);
             border: 1px solid var(--line-color);
-            padding: 5px 11px;
+            padding: 5px 10px;
             border-radius: 8px;
             color: var(--text-secondary);
             font-size: 0.75rem;
@@ -326,10 +323,10 @@
         }
 
         .role-text {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             color: var(--text-secondary);
             font-weight: 400;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             letter-spacing: -0.2px;
         }
 
@@ -337,12 +334,12 @@
         .social-row {
             display: flex;
             align-items: center;
-            gap: 22px;
+            gap: 20px;
         }
 
         .social-btn {
             color: var(--text-secondary);
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             text-decoration: none;
             transition: color 0.3s ease, transform 0.3s ease;
             display: inline-flex;
@@ -361,29 +358,29 @@
         /* Sections */
         section {
             border-top: 1px solid var(--line-color);
-            padding-top: 28px;
+            padding-top: 24px;
         }
 
         .section-title {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 0.85rem;
+            gap: 8px;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 2.2px;
+            letter-spacing: 2px;
             color: var(--text-secondary);
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             font-weight: 700;
         }
 
         .section-title i {
             color: #9333ea;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         /* Item Rows */
         .item-row {
-            margin-bottom: 22px;
+            margin-bottom: 20px;
         }
 
         .item-row:last-child {
@@ -395,16 +392,18 @@
             justify-content: space-between;
             align-items: baseline;
             margin-bottom: 4px;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .item-title {
-            font-size: 1.12rem;
+            font-size: 1.05rem;
             font-weight: 600;
             color: var(--text-primary);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: color 0.3s ease;
         }
 
@@ -413,44 +412,46 @@
         }
 
         .item-header i {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
         }
 
         .item-date {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
             font-weight: 500;
+            white-space: nowrap;
         }
 
         .item-desc {
-            font-size: 0.98rem;
+            font-size: 0.92rem;
             color: var(--text-secondary);
             font-weight: 300;
-            line-height: 1.65;
+            line-height: 1.6;
         }
 
         /* Specs Grid */
         .specs-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
+            gap: 20px;
         }
 
         .spec-group span {
             display: block;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1.4px;
+            letter-spacing: 1.2px;
             color: var(--text-secondary);
             margin-bottom: 4px;
             font-weight: 600;
         }
 
         .spec-group strong {
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 500;
             color: var(--text-primary);
+            word-break: break-word;
         }
 
         /* Contact Box */
@@ -460,10 +461,11 @@
             justify-content: space-between;
             background: var(--box-bg);
             border: 1px solid var(--line-color);
-            padding: 18px 22px;
+            padding: 16px 18px;
             border-radius: 12px;
             text-decoration: none;
             transition: all 0.3s ease;
+            gap: 12px;
         }
 
         .contact-box:hover {
@@ -471,31 +473,37 @@
             background: var(--box-hover-bg);
         }
 
+        .contact-text {
+            overflow: hidden;
+        }
+
         .contact-text span {
             display: block;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
         }
 
         .contact-text strong {
-            font-size: 1.08rem;
+            font-size: 1rem;
             color: var(--text-primary);
+            word-break: break-word;
         }
 
         .contact-box i {
             color: #9333ea;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            flex-shrink: 0;
         }
 
         /* Footer */
         footer {
             border-top: 1px solid var(--line-color);
             padding-top: 28px;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 24px;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 22px;
         }
 
         .footer-qr-container {
@@ -503,35 +511,54 @@
             padding: 10px;
             border-radius: 12px;
             display: inline-flex;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 24px rgba(147, 51, 234, 0.2);
             flex-shrink: 0;
         }
 
         .footer-qr-container img {
-            width: 100px;
-            height: 100px;
+            width: 95px;
+            height: 95px;
             display: block;
         }
 
-        .footer-right-block {
+        .footer-text-group {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            gap: 4px;
-            flex-grow: 1;
+            gap: 6px;
         }
 
-        .footer-two-sentences {
-            font-size: 0.92rem;
+        .footer-brand {
+            font-size: 1.9rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientFlow 8s ease infinite;
+            line-height: 1.1;
+        }
+
+        .footer-scan-text {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .footer-copy-text {
+            font-size: 0.64rem;
+            font-weight: 700;
             color: var(--text-secondary);
-            line-height: 1.6;
-            font-weight: 300;
+            letter-spacing: 0.2px;
+            white-space: nowrap;
         }
 
         /* Responsive Breakpoints (Mobile) */
         @media (max-width: 640px) {
             body {
-                padding: 20px 12px;
+                padding: 16px 12px;
             }
             .wrapper {
                 gap: 24px;
@@ -539,20 +566,43 @@
             }
             .specs-grid {
                 grid-template-columns: 1fr;
-                gap: 16px;
+                gap: 14px;
             }
             .brand-logo {
+                font-size: 1.45rem;
+                letter-spacing: -0.5px;
+            }
+            .intro-logo {
                 font-size: 1.65rem;
+                letter-spacing: -0.5px;
             }
-            footer {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 16px;
+            .contact-box {
+                padding: 14px;
             }
-            .footer-right-block {
-                align-items: center;
-                text-align: center;
+            .footer-qr-container img {
+                width: 80px;
+                height: 80px;
+            }
+            .footer-copy-text {
+                font-size: 0.62rem;
+            }
+        }
+
+        /* Sadece Gerçek Masaüstü (Mouse kullanan ve geniş ekranlı bilgisayarlar) İçin Büyütme Ayarı */
+        @media (min-width: 1025px) and (pointer: fine) {
+            .footer-brand {
+                font-size: 3.2rem;
+            }
+            .footer-scan-text {
+                font-size: 1.4rem;
+            }
+            .footer-copy-text {
+                font-size: 1.05rem;
+                white-space: nowrap;
+            }
+            .footer-qr-container img {
+                width: 150px;
+                height: 150px;
             }
         }
     </style>
@@ -592,7 +642,7 @@
                     <div class="lang-dropdown-container">
                         <button class="lang-btn" id="langDropdownBtn" onclick="toggleLangMenu()">
                             <span id="currentLangText">EN</span>
-                            <i class="fa-solid fa-chevron-down" style="font-size: 0.45rem; margin-left: 2px;"></i>
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.4rem; margin-left: 2px;"></i>
                         </button>
                         <div class="lang-menu" id="langMenu">
                             <button class="lang-option" onclick="changeLanguage('en')">English</button>
@@ -605,7 +655,7 @@
             
             <div class="role-text" id="t-role">Software Developer & Tech Enthusiast</div>
             
-            <!-- Sosyal İkonlar (Email kaldırıldı) -->
+            <!-- Sosyal İkonlar -->
             <div class="social-row">
                 <a href="https://github.com" target="_blank" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
                 <a href="https://linkedin.com" target="_blank" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -626,7 +676,7 @@
                 <p class="item-desc" id="t-proj1-desc">A high-performance backend architecture built with Django and modern microservices.</p>
             </div>
 
-            <div class="item-row" style="margin-top: 20px;">
+            <div class="item-row" style="margin-top: 16px;">
                 <div class="item-header">
                     <a href="#" class="item-title">Minimalist CLI Tool <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                 </div>
@@ -700,13 +750,13 @@
         <!-- Footer -->
         <footer>
             <div class="footer-qr-container">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://muminsultani.com" alt="QR Code">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://muminsultani.com" alt="QR Code">
             </div>
 
-            <div class="footer-right-block">
-                <div class="footer-two-sentences" id="t-footer-sentences">
-                    Innovating the digital world one line of code at a time. Always learning and building for the future.
-                </div>
+            <div class="footer-text-group">
+                <div class="footer-brand">muminsultani</div>
+                <div class="footer-scan-text" id="t-scan-text">SCAN TO CONNECT</div>
+                <div class="footer-copy-text">© 2026 muminsultani • All Rights Reserved</div>
             </div>
         </footer>
     </div>
@@ -789,7 +839,7 @@
                 osLabel: "OS Environment", editorLabel: "Editor Stack",
                 stackTitle: "Core Stack", backendLabel: "Backend", frontendLabel: "Frontend",
                 contactTitle: "Get In Touch", contactSub: "Have a project in mind?", contactMain: "Let's talk & build together",
-                footerSentences: "Innovating the digital world one line of code at a time. Always learning and building for the future."
+                scanText: "SCAN TO CONNECT"
             },
             tr: {
                 code: "TR",
@@ -804,7 +854,7 @@
                 osLabel: "İşletim Sistemi", editorLabel: "Editör Yığını",
                 stackTitle: "Temel Yığın", backendLabel: "Arka Uç", frontendLabel: "Ön Uç",
                 contactTitle: "İletişime Geç", contactSub: "Aklında bir proje mi var?", contactMain: "Konuşalım ve birlikte inşa edelim",
-                footerSentences: "Dijital dünyayı her seferinde bir satır kodla dönüştürüyoruz. Gelecek için sürekli öğreniyor ve inşa ediyoruz."
+                scanText: "BAĞLANMAK İÇİN TARAYIN"
             },
             de: {
                 code: "DE",
@@ -819,7 +869,7 @@
                 osLabel: "Betriebssystem", editorLabel: "Editor-Stack",
                 stackTitle: "Kern-Stack", backendLabel: "Backend", frontendLabel: "Frontend",
                 contactTitle: "Kontakt", contactSub: "Haben Sie ein Projekt im Kopf?", contactMain: "Lassen Sie uns sprechen & zusammenbauen",
-                footerSentences: "Die digitale Welt Zeile für Zeile mit Code gestalten. Immer am Lernen und Bauen für die Zukunft."
+                scanText: "SCANNEN ZUM VERBINDEN"
             }
         };
 
@@ -846,7 +896,7 @@
             document.getElementById('t-contact-title').innerText = data.contactTitle;
             document.getElementById('t-contact-sub').innerText = data.contactSub;
             document.getElementById('t-contact-main').innerText = data.contactMain;
-            document.getElementById('t-footer-sentences').innerText = data.footerSentences;
+            document.getElementById('t-scan-text').innerText = data.scanText;
 
             document.getElementById('langMenu').classList.remove('show');
         }
