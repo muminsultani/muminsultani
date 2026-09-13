@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">Mumin Sultani | Software Developer</title>
+    <title id="pageTitle">𝗺𝘂𝗺𝗶𝗻𝘀𝘂𝗹𝘁𝗮𝗻𝗶</title>
     <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,12 +14,12 @@
             --bg-color: #050508;
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
-            --accent: #a855f7;
+            --accent: #2563eb;
             --line-color: rgba(255, 255, 255, 0.08);
             --box-bg: rgba(255, 255, 255, 0.02);
-            --box-hover-bg: rgba(168, 85, 247, 0.03);
+            --box-hover-bg: rgba(37, 99, 235, 0.03);
             --menu-bg: rgba(10, 10, 15, 0.85);
-            --glow-color: radial-gradient(circle, rgba(168, 85, 247, 0.15), rgba(59, 130, 246, 0.06) 60%, transparent 80%);
+            --glow-color: radial-gradient(circle, rgba(37, 99, 235, 0.15), rgba(147, 51, 234, 0.05) 60%, transparent 80%);
         }
 
         /* Eğer Cihaz Aydınlık (Light) Modda ise */
@@ -28,12 +28,12 @@
                 --bg-color: #f8fafc;
                 --text-primary: #0f172a;
                 --text-secondary: #64748b;
-                --accent: #9333ea;
+                --accent: #1d4ed8;
                 --line-color: rgba(0, 0, 0, 0.08);
                 --box-bg: rgba(0, 0, 0, 0.02);
-                --box-hover-bg: rgba(147, 51, 234, 0.03);
+                --box-hover-bg: rgba(29, 78, 216, 0.03);
                 --menu-bg: rgba(255, 255, 255, 0.85);
-                --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.08), rgba(59, 130, 246, 0.03) 60%, transparent 80%);
+                --glow-color: radial-gradient(circle, rgba(29, 78, 216, 0.08), rgba(147, 51, 234, 0.03) 60%, transparent 80%);
             }
         }
 
@@ -94,12 +94,12 @@
             position: relative;
         }
 
-        /* Canlı, Renk İçinde Gezen Logo */
+        /* Kapalı Mavi ve Mor Tonlarında Akışkan Logo */
         .brand-logo {
             font-size: 1.75rem;
             font-weight: 800;
             letter-spacing: -1.2px;
-            background: linear-gradient(270deg, #ff7e5f, #feb47b, #a855f7, #3b82f6, #ff7e5f);
+            background: linear-gradient(270deg, #1e3a8a, #2563eb, #9333ea, #c084fc, #1e3a8a);
             background-size: 400% 400%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -134,7 +134,7 @@
         }
 
         .lang-btn:hover {
-            border-color: rgba(168, 85, 247, 0.4);
+            border-color: rgba(37, 99, 235, 0.4);
             background: var(--box-hover-bg);
         }
 
@@ -355,7 +355,7 @@
         }
 
         .contact-box:hover {
-            border-color: rgba(168, 85, 247, 0.4);
+            border-color: rgba(37, 99, 235, 0.4);
             background: var(--box-hover-bg);
         }
 
@@ -375,7 +375,7 @@
             font-size: 1.15rem;
         }
 
-        /* Footer / Alt Kısım: Sol QR, Sağda İmza ve İmzanın Hemen Altında İki Cümle */
+        /* Footer / Alt Kısım: Sol QR, Sağda Yazı */
         footer {
             border-top: 1px solid var(--line-color);
             padding-top: 28px;
@@ -405,20 +405,14 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            gap: 8px;
+            gap: 4px;
             flex-grow: 1;
         }
 
-        .footer-signature-container img {
-            max-width: 140px;
-            height: auto;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-        }
-
         .footer-two-sentences {
-            font-size: 0.82rem;
+            font-size: 0.88rem;
             color: var(--text-secondary);
-            line-height: 1.4;
+            line-height: 1.5;
             font-weight: 300;
         }
 
@@ -577,19 +571,15 @@
             </a>
         </section>
 
-        <!-- Footer (Sol QR, Sağda İmza ve İmzanın Hemen Altında İki Cümle) -->
+        <!-- Footer (Sol QR, Sağda Yazı) -->
         <footer>
             <!-- Soldaki QR Kod -->
             <div class="footer-qr-container">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://muminsultani.com" alt="QR Code">
             </div>
 
-            <!-- Sağ Taraf: Üstte İmza, İmzanın Altında 2 Cümle Yazı -->
+            <!-- Sağ Taraf: Sadece 2 Cümlelik Yazı -->
             <div class="footer-right-block">
-                <div class="footer-signature-container">
-                    <!-- Kendi imza görselinin dosya yolunu veya linkini buraya ekleyebilirsin -->
-                    <img src="buraya_imza_fotografinizin_linki.png" alt="Mumin Sultani Signature">
-                </div>
                 <div class="footer-two-sentences" id="t-footer-sentences">
                     Innovating the digital world one line of code at a time. Always learning and building for the future.
                 </div>
@@ -598,7 +588,7 @@
     </div>
 
     <script>
-        // Müzik Kontrol Fonksiyonları
+        // Müzik Kontrol ve Otomatik Başlatma Fonksiyonları
         const audio = document.getElementById('bgAudio');
         const musicBtn = document.getElementById('musicToggleBtn');
         const musicIcon = document.getElementById('musicIcon');
@@ -621,17 +611,26 @@
             }
         }
 
-        // Sayfa açıldıktan sonra ilk ekrana dokunulduğu an müziği otomatik başlat
-        document.addEventListener('click', function initAudioPlay() {
-            if (!isMusicPlaying) {
-                audio.play().then(() => {
-                    isMusicPlaying = true;
-                    musicBtn.classList.add('playing');
-                    musicIcon.className = "fa-solid fa-volume-high";
-                }).catch(e => {});
-            }
-            document.removeEventListener('click', initAudioPlay);
-        }, { once: true });
+        // Sayfa yüklendiğinde otomatik olarak müziği başlatmayı dene
+        window.addEventListener('DOMContentLoaded', () => {
+            audio.play().then(() => {
+                isMusicPlaying = true;
+                musicBtn.classList.add('playing');
+                musicIcon.className = "fa-solid fa-volume-high";
+            }).catch(e => {
+                // Tarayıcı otomatik oynatmayı engellerse, ilk tıklamada otomatik başlat
+                document.addEventListener('click', function initAudioPlay() {
+                    if (!isMusicPlaying) {
+                        audio.play().then(() => {
+                            isMusicPlaying = true;
+                            musicBtn.classList.add('playing');
+                            musicIcon.className = "fa-solid fa-volume-high";
+                        }).catch(err => {});
+                    }
+                    document.removeEventListener('click', initAudioPlay);
+                }, { once: true });
+            });
+        });
 
         // Dil Menüsü Açma/Kapatma
         function toggleLangMenu() {
@@ -671,7 +670,7 @@
                 proj2Desc: "Geliştirici verimliliği için yazılmış hızlı iş akışı otomasyon aracı.",
                 expTitle: "Deneyim",
                 jobTitle: "Uzaktan Yazılım Geliştirici",
-                jobDesc: "Python and Node.js kullanarak ölçeklenebilir arka uç servisleri, REST API'ler ve mobil uyumlu web çözümleri geliştirme.",
+                jobDesc: "Python ve Node.js kullanarak ölçeklenebilir arka uç servisleri, REST API'ler ve mobil uyumlu web çözümleri geliştirme.",
                 setupTitle: "Kurulum & Ortam",
                 osLabel: "İşletim Sistemi", editorLabel: "Editör Yığını",
                 stackTitle: "Temel Yığın", backendLabel: "Arka Uç", frontendLabel: "Ön Uç",
