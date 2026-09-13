@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">muminsultani</title>
+    <title id="pageTitle">Mumin Sultani | Software Developer</title>
+    
+    <!-- Tarayıcı Sekme Logosu (Favicon) -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+
     <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="icon" type="20.png" href="/img/20.png">
-
     
     <style>
         /* Cihazın Moduna Göre Değişen Renk Paleti (CSS Variables) */
@@ -52,7 +54,7 @@
             background-color: var(--bg-color);
             color: var(--text-primary);
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 50px 24px;
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -85,10 +87,9 @@
             animation: introFadeIn 0.8s ease forwards;
         }
 
-        /* Yazılım / Kod Animasyon Kutusu */
         .intro-code-box {
             font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #c084fc;
             background: rgba(147, 51, 234, 0.08);
             border: 1px solid rgba(147, 51, 234, 0.2);
@@ -120,7 +121,7 @@
         }
 
         .intro-logo {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 800;
             letter-spacing: -1.5px;
             background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
@@ -131,7 +132,7 @@
         }
 
         .intro-sub {
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -150,24 +151,49 @@
             top: 15%;
             left: 50%;
             transform: translateX(-50%);
-            width: 600px;
-            height: 350px;
+            width: 700px;
+            height: 400px;
             background: var(--glow-color);
-            filter: blur(100px);
+            filter: blur(120px);
             z-index: -1;
             pointer-events: none;
         }
 
-        /* Wrapper */
+        /* Wrapper - Responsive Genişlik Ayarları (Mobile, Tablet, Desktop, TV Uyumlu) */
         .wrapper {
             width: 100%;
-            max-width: 680px;
+            max-width: 720px; /* Tablet / Küçük Ekran varsayılanı */
             display: flex;
             flex-direction: column;
-            gap: 36px;
+            gap: 40px;
+            transition: max-width 0.3s ease;
         }
 
-        /* Top Header Flow */
+        /* Masaüstü Ekranlar İçin Genişlik (Desktop: 1025px ve üzeri) */
+        @media (min-width: 1025px) {
+            .wrapper {
+                max-width: 920px;
+            }
+            body {
+                padding: 60px 32px;
+            }
+        }
+
+        /* Çok Büyük Ekranlar / TV İçin Genişlik (Large Desktop / TV: 1441px ve üzeri) */
+        @media (min-width: 1441px) {
+            .wrapper {
+                max-width: 1080px;
+            }
+            body {
+                padding: 80px 40px;
+            }
+            /* TV ve dev ekranlarda okunabilirlik için ana fontlar ufakça büyütülür */
+            body {
+                font-size: 1.05rem;
+            }
+        }
+
+        /* Header Section */
         .header-section {
             padding-bottom: 4px;
         }
@@ -176,13 +202,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             position: relative;
         }
 
-        /* Sadece Açık Mor Tonlarında Akışkan Logo */
         .brand-logo {
-            font-size: 1.75rem;
+            font-size: 2rem;
             font-weight: 800;
             letter-spacing: -1.2px;
             background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
@@ -198,28 +223,26 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Sağ Üst Araçlar Grubu (Ses İkonu ve Dil Menüsü Yan Yana) */
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
-        /* Kompakt Ses İkonu Kutusu */
         .music-btn-inline {
             background: var(--box-bg);
             border: 1px solid var(--line-color);
-            padding: 4px 9px;
-            border-radius: 6px;
+            padding: 5px 11px;
+            border-radius: 8px;
             color: var(--text-secondary);
-            font-size: 0.68rem;
+            font-size: 0.75rem;
             cursor: pointer;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 26px;
+            height: 30px;
         }
 
         .music-btn-inline:hover {
@@ -233,7 +256,6 @@
             border-color: rgba(147, 51, 234, 0.3);
         }
 
-        /* Kompakt Dil Seçim Menüsü */
         .lang-dropdown-container {
             position: relative;
         }
@@ -241,18 +263,18 @@
         .lang-btn {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             background: var(--box-bg);
             border: 1px solid var(--line-color);
-            padding: 4px 9px;
-            border-radius: 6px;
+            padding: 5px 11px;
+            border-radius: 8px;
             color: var(--text-secondary);
-            font-size: 0.68rem;
+            font-size: 0.75rem;
             font-weight: 700;
             cursor: pointer;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
-            height: 26px;
+            height: 30px;
         }
 
         .lang-btn:hover {
@@ -264,17 +286,17 @@
         .lang-menu {
             position: absolute;
             right: 0;
-            top: calc(100% + 5px);
+            top: calc(100% + 6px);
             background: var(--menu-bg);
             backdrop-filter: blur(16px);
             border: 1px solid var(--line-color);
-            border-radius: 6px;
-            width: 100px;
+            border-radius: 8px;
+            width: 110px;
             display: none;
             flex-direction: column;
             overflow: hidden;
             z-index: 100;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             animation: fadeIn 0.2s ease;
         }
 
@@ -290,9 +312,9 @@
         .lang-option {
             display: flex;
             align-items: center;
-            padding: 6px 10px;
+            padding: 8px 12px;
             color: var(--text-secondary);
-            font-size: 0.68rem;
+            font-size: 0.75rem;
             font-weight: 700;
             cursor: pointer;
             text-decoration: none;
@@ -309,10 +331,10 @@
         }
 
         .role-text {
-            font-size: 1.08rem;
+            font-size: 1.15rem;
             color: var(--text-secondary);
             font-weight: 400;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             letter-spacing: -0.2px;
         }
 
@@ -320,12 +342,12 @@
         .social-row {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 22px;
         }
 
         .social-btn {
             color: var(--text-secondary);
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             text-decoration: none;
             transition: color 0.3s ease, transform 0.3s ease;
             display: inline-flex;
@@ -337,17 +359,21 @@
             transform: translateY(-2px);
         }
 
+        .social-btn.whatsapp:hover {
+            color: #25d366;
+        }
+
         /* Sections */
         section {
             border-top: 1px solid var(--line-color);
-            padding-top: 28px;
+            padding-top: 32px;
         }
 
         .section-title {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 2.2px;
             color: var(--text-secondary);
@@ -357,12 +383,12 @@
 
         .section-title i {
             color: #9333ea;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         /* Item Rows */
         .item-row {
-            margin-bottom: 24px;
+            margin-bottom: 26px;
         }
 
         .item-row:last-child {
@@ -377,7 +403,7 @@
         }
 
         .item-title {
-            font-size: 1.08rem;
+            font-size: 1.12rem;
             font-weight: 600;
             color: var(--text-primary);
             text-decoration: none;
@@ -397,37 +423,37 @@
         }
 
         .item-date {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
             font-weight: 500;
         }
 
         .item-desc {
-            font-size: 0.94rem;
+            font-size: 0.98rem;
             color: var(--text-secondary);
             font-weight: 300;
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
         /* Specs Grid */
         .specs-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
+            gap: 28px;
         }
 
         .spec-group span {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             text-transform: uppercase;
             letter-spacing: 1.4px;
             color: var(--text-secondary);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             font-weight: 600;
         }
 
         .spec-group strong {
-            font-size: 1.02rem;
+            font-size: 1.05rem;
             font-weight: 500;
             color: var(--text-primary);
         }
@@ -439,7 +465,7 @@
             justify-content: space-between;
             background: var(--box-bg);
             border: 1px solid var(--line-color);
-            padding: 18px 22px;
+            padding: 20px 24px;
             border-radius: 12px;
             text-decoration: none;
             transition: all 0.3s ease;
@@ -452,25 +478,25 @@
 
         .contact-text span {
             display: block;
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
         }
 
         .contact-text strong {
-            font-size: 1.02rem;
+            font-size: 1.08rem;
             color: var(--text-primary);
         }
 
         .contact-box i {
             color: #9333ea;
-            font-size: 1.15rem;
+            font-size: 1.2rem;
         }
 
-        /* Footer / Alt Kısım: Sol QR, Sağda Yazı */
+        /* Footer */
         footer {
             border-top: 1px solid var(--line-color);
-            padding-top: 28px;
-            padding-bottom: 10px;
+            padding-top: 32px;
+            padding-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -501,26 +527,27 @@
         }
 
         .footer-two-sentences {
-            font-size: 0.88rem;
+            font-size: 0.92rem;
             color: var(--text-secondary);
-            line-height: 1.5;
+            line-height: 1.6;
             font-weight: 300;
         }
 
-        /* Responsive Breakpoints */
+        /* Responsive Breakpoints (Mobile) */
         @media (max-width: 640px) {
             body {
                 padding: 24px 16px;
             }
             .wrapper {
                 gap: 28px;
+                max-width: 100%;
             }
             .specs-grid {
                 grid-template-columns: 1fr;
-                gap: 16px;
+                gap: 18px;
             }
             .brand-logo {
-                font-size: 1.5rem;
+                font-size: 1.65rem;
             }
             footer {
                 flex-direction: column;
@@ -537,20 +564,20 @@
 </head>
 <body>
 
-    <!-- 1.5 Saniyelik Intro Ekranı (Yazılım / Terminal Efektli) -->
+    <!-- 1.5 Saniyelik Intro Ekranı -->
     <div id="intro-screen">
         <div class="intro-content">
             <div class="intro-code-box">
                 <span class="code-keyword">const</span> dev = <span class="code-string">"muminsultani"</span>;<span class="code-cursor"></span>
             </div>
-            <div class="intro-logo">m u m i n s u l t a n i</div>
-            <div class="intro-sub"></div>
+            <div class="intro-logo">muminsultani</div>
+            <div class="intro-sub">Software Developer</div>
         </div>
     </div>
 
     <!-- Arka Plan Müzik Ögesi -->
     <audio id="bgAudio" loop preload="auto">
-        <source src="/TÛR-Suresi.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Ambient Glow Background -->
@@ -560,8 +587,7 @@
         <!-- Header Section -->
         <header class="header-section">
             <div class="header-top">
-                <!-- Logo ve Sağ Araçlar Aynı Satırda Yan Yana -->
-                <div class="brand-logo">m u m i n s u l t a n i</div>
+                <div class="brand-logo">muminsultani</div>
                 
                 <div class="header-actions">
                     <button class="music-btn-inline" id="musicToggleBtn" onclick="toggleMusic()" title="Toggle Background Music">
@@ -586,9 +612,10 @@
             
             <!-- Sosyal İkonlar -->
             <div class="social-row">
-                <a href="https://github.com/muminsultani" target="_blank" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="https://instagram.com/princeshahin0" target="_blank" class="social-btn" title="LinkedIn"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://wa.me/905389480137" class="social-btn" title="Email"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://github.com" target="_blank" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://wa.me/KUTUPHANE_NUMARANIZ" target="_blank" class="social-btn whatsapp" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="mailto:contact@muminsultani.com" class="social-btn" title="Email"><i class="fa-regular fa-envelope"></i></a>
             </div>
         </header>
 
@@ -676,14 +703,12 @@
             </a>
         </section>
 
-        <!-- Footer (Sol QR, Sağda Yazı) -->
+        <!-- Footer -->
         <footer>
-            <!-- Soldaki QR Kod -->
             <div class="footer-qr-container">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://muminsultani.com" alt="QR Code">
             </div>
 
-            <!-- Sağ Taraf: Sadece 2 Cümlelik Yazı -->
             <div class="footer-right-block">
                 <div class="footer-two-sentences" id="t-footer-sentences">
                     Innovating the digital world one line of code at a time. Always learning and building for the future.
@@ -693,19 +718,17 @@
     </div>
 
     <script>
-        // Intro Ekranı Kaldırma Mantığı (1.5 Saniye Sonra)
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const intro = document.getElementById('intro-screen');
                 if (intro) {
                     intro.style.opacity = '0';
                     intro.style.visibility = 'hidden';
-                    setTimeout(() => intro.remove(), 600); // DOM'dan tamamen temizle
+                    setTimeout(() => intro.remove(), 600);
                 }
-            }, 1500); // 1500 milisaniye = 1.5 saniye
+            }, 1500);
         });
 
-        // Müzik Kontrol ve Otomatik Başlatma Fonksiyonları
         const audio = document.getElementById('bgAudio');
         const musicBtn = document.getElementById('musicToggleBtn');
         const musicIcon = document.getElementById('musicIcon');
@@ -728,14 +751,12 @@
             }
         }
 
-        // Sayfa yüklendiğinde otomatik olarak müziği başlat
         window.addEventListener('DOMContentLoaded', () => {
             audio.play().then(() => {
                 isMusicPlaying = true;
                 musicBtn.classList.add('playing');
                 musicIcon.className = "fa-solid fa-volume-high";
             }).catch(e => {
-                // Tarayıcı politikası otomatik oynatmayı engellerse, ilk etkileşimde otomatik başlat
                 document.addEventListener('click', function initAudioPlay() {
                     if (!isMusicPlaying) {
                         audio.play().then(() => {
@@ -749,20 +770,17 @@
             });
         });
 
-        // Dil Menüsü Açma/Kapatma
         function toggleLangMenu() {
             const menu = document.getElementById('langMenu');
             menu.classList.toggle('show');
         }
 
-        // Sayfa dışına tıklandığında menüyü kapatma
         window.addEventListener('click', function(e) {
             if (!document.getElementById('langDropdownBtn').contains(e.target) && !document.getElementById('langMenu').contains(e.target)) {
                 document.getElementById('langMenu').classList.remove('show');
             }
         });
 
-        // Çeviri Sözlüğü
         const translations = {
             en: {
                 code: "EN",
@@ -811,7 +829,6 @@
             }
         };
 
-        // Dil Değiştirme Fonksiyonu
         function changeLanguage(lang) {
             const data = translations[lang];
             if (!data) return;
