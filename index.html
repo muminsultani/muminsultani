@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">𝗺𝘂𝗺𝗶𝗻𝘀𝘂𝗹𝘁𝗮𝗻𝗶</title>
+    <title id="pageTitle">Mumin Sultani | Software Developer</title>
     <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -56,6 +56,52 @@
             position: relative;
             overflow-x: hidden;
             transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* 3 Saniyelik Intro Ekranı */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .intro-content {
+            text-align: center;
+            animation: introFadeIn 1.2s ease forwards;
+        }
+
+        .intro-logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientFlow 4s ease infinite;
+            margin-bottom: 8px;
+        }
+
+        .intro-sub {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        @keyframes introFadeIn {
+            0% { opacity: 0; transform: scale(0.95) translateY(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         /* Ambient Glow */
@@ -451,9 +497,17 @@
 </head>
 <body>
 
+    <!-- 3 Saniyelik Intro Ekranı -->
+    <div id="intro-screen">
+        <div class="intro-content">
+            <div class="intro-logo">muminsultani</div>
+            <div class="intro-sub"></div>
+        </div>
+    </div>
+
     <!-- Arka Plan Müzik Ögesi -->
     <audio id="bgAudio" loop preload="auto">
-        <source src="/TÛR-Suresi.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Ambient Glow Background -->
@@ -464,7 +518,7 @@
         <header class="header-section">
             <div class="header-top">
                 <!-- Logo ve Sağ Araçlar Aynı Satırda Yan Yana -->
-                <div class="brand-logo">m u m i n s u l t a n i</div>
+                <div class="brand-logo">muminsultani</div>
                 
                 <div class="header-actions">
                     <button class="music-btn-inline" id="musicToggleBtn" onclick="toggleMusic()" title="Toggle Background Music">
@@ -490,7 +544,7 @@
             <!-- Sosyal İkonlar -->
             <div class="social-row">
                 <a href="https://github.com" target="_blank" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="https://instagram.com/princeshahin0" target="_blank" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
                 <a href="mailto:contact@muminsultani.com" class="social-btn" title="Email"><i class="fa-regular fa-envelope"></i></a>
             </div>
         </header>
@@ -596,6 +650,18 @@
     </div>
 
     <script>
+        // Intro Ekranı Kaldırma Mantığı (3 Saniye Sonra)
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const intro = document.getElementById('intro-screen');
+                if (intro) {
+                    intro.style.opacity = '0';
+                    intro.style.visibility = 'hidden';
+                    setTimeout(() => intro.remove(), 800); // DOM'dan tamamen temizle
+                }
+            }, 3000); // 3000 milisaniye = 3 saniye
+        });
+
         // Müzik Kontrol ve Otomatik Başlatma Fonksiyonları
         const audio = document.getElementById('bgAudio');
         const musicBtn = document.getElementById('musicToggleBtn');
