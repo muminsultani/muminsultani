@@ -35,6 +35,33 @@
             align-items: center;
             overflow-x: hidden;
             padding: 20px;
+            position: relative;
+        }
+
+        /* Dil Seçici */
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 12px;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            outline: none;
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+            transition: border-color 0.2s ease;
+        }
+
+        .language-selector:hover {
+            border-color: var(--accent);
+        }
+
+        .language-selector option {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
         }
 
         /* Arka Plan Dekoratif Işıklar */
@@ -76,7 +103,6 @@
             padding: 32px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
-            position: relative; /* Dil seçicinin konumu için gerekli */
         }
 
         .card:hover {
@@ -90,46 +116,6 @@
             justify-content: space-between;
             align-items: center;
             text-align: center;
-        }
-
-        /* İşaretlenen Yerdeki Dil Seçici */
-        .language-selector {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 6px 10px;
-            border-radius: 10px;
-            color: var(--accent);
-            font-size: 0.8rem;
-            font-weight: 700;
-            outline: none;
-            cursor: pointer;
-            backdrop-filter: blur(8px);
-            transition: all 0.2s ease;
-        }
-
-        .language-selector:hover {
-            background: rgba(56, 189, 248, 0.1);
-            border-color: var(--accent);
-        }
-
-        .language-selector option {
-            background-color: #1e293b;
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        /* RTL (Farsça) desteği için sağ üst köşeyi ters çevirme */
-        [dir="rtl"] .language-selector {
-            right: auto;
-            left: 20px;
-        }
-
-        .profile-content {
-            width: 100%;
-            margin-top: 15px; /* Dil seçiciyle üstten çakışmayı önlemek için */
         }
 
         .avatar {
@@ -205,6 +191,7 @@
             gap: 8px;
         }
 
+        /* RTL desteği için ikon boşluğu ayarı */
         [dir="rtl"] .section-title {
             flex-direction: row-reverse;
         }
@@ -259,7 +246,16 @@
         }
     </style>
 </head>
-<body id="html-root">
+<body>
+
+    <!-- Dil Seçici Dropdown -->
+    <select id="languageSelect" class="language-selector" onchange="changeLanguage(this.value)">
+        <option value="tr" selected>Türkçe</option>
+        <option value="en">English</option>
+        <option value="de">Deutsch</option>
+        <option value="fa">فارسی</option>
+        <option value="ko">한국어</option>
+    </select>
 
     <div class="bg-glow glow-1"></div>
     <div class="bg-glow glow-2"></div>
@@ -267,27 +263,18 @@
     <div class="container">
         <!-- Sol Profil Kartı -->
         <div class="card profile-card">
-            <!-- İşaretlenen yere yerleştirilen sade dil seçici -->
-            <select id="languageSelect" class="language-selector" onchange="changeLanguage(this.value)">
-                <option value="tr" selected>TR</option>
-                <option value="en">EN</option>
-                <option value="de">DE</option>
-                <option value="fa">FA</option>
-                <option value="ko">KO</option>
-            </select>
-
-            <div class="profile-content">
+            <div>
                 <div class="avatar">
                     <i class="fa-solid fa-code"></i>
                 </div>
-                <h1 id="i-name">muminsultani</h1>
+                <h1 id="i-name">İsim Soyisim</h1>
                 <p id="i-title">Yazılım Geliştirici & Tasarım Meraklısı</p>
             </div>
             
             <div class="social-links">
-                <a href="https://www.github.com/muminsultani" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="https://www.instagram.com/princeshahin0" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://wa.me/905389480137" class="social-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" class="social-btn" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
             </div>
         </div>
 
@@ -313,8 +300,8 @@
             </div>
 
             <div>
-                <a href="mailto:muminsultani@hotmail.com" class="action-btn">
-                    <i class="fa-solid fa-envelope"></i> <span id="i-contact-btn">Send E-mail</span>
+                <a href="mailto:ornek@email.com" class="action-btn">
+                    <i class="fa-solid fa-paper-plane"></i> <span id="i-contact-btn">İletişime Geç</span>
                 </a>
             </div>
         </div>
@@ -373,6 +360,7 @@
             const data = translations[lang];
             if (!data) return;
 
+            // Metinleri güncelle
             document.getElementById('i-name').innerText = data.name;
             document.getElementById('i-title').innerText = data.title;
             document.getElementById('i-about-title').innerText = data.aboutTitle;
@@ -380,6 +368,7 @@
             document.getElementById('i-skills-title').innerText = data.skillsTitle;
             document.getElementById('i-contact-btn').innerText = data.contactBtn;
 
+            // Sayfa yönünü (RTL/LTR) güncelle
             const root = document.getElementById('html-root');
             root.setAttribute('lang', lang);
             root.setAttribute('dir', data.dir);
