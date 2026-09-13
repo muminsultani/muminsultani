@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">Mumin Sultani | Software Developer</title>
+    <title id="pageTitle">muminsultani</title>
     <!-- Google Fonts & FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -58,7 +58,7 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* 3 Saniyelik Intro Ekranı */
+        /* 1.5 Saniyelik Intro Ekranı */
         #intro-screen {
             position: fixed;
             top: 0;
@@ -70,12 +70,50 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
         }
 
         .intro-content {
             text-align: center;
-            animation: introFadeIn 1.2s ease forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            animation: introFadeIn 0.8s ease forwards;
+        }
+
+        /* Yazılım / Kod Animasyon Kutusu */
+        .intro-code-box {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #c084fc;
+            background: rgba(147, 51, 234, 0.08);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 20px rgba(147, 51, 234, 0.1);
+            white-space: nowrap;
+        }
+
+        .code-keyword { color: #e879f9; }
+        .code-string { color: #f472b6; }
+        
+        .code-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 14px;
+            background-color: #c084fc;
+            animation: blink 0.8s infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         .intro-logo {
@@ -87,11 +125,10 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: gradientFlow 4s ease infinite;
-            margin-bottom: 8px;
         }
 
         .intro-sub {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--text-secondary);
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -497,17 +534,20 @@
 </head>
 <body>
 
-    <!-- 3 Saniyelik Intro Ekranı -->
+    <!-- 1.5 Saniyelik Intro Ekranı (Yazılım / Terminal Efektli) -->
     <div id="intro-screen">
         <div class="intro-content">
-            <div class="intro-logo">muminsultani</div>
+            <div class="intro-code-box">
+                <span class="code-keyword">const</span> dev = <span class="code-string">"muminsultani"</span>;<span class="code-cursor"></span>
+            </div>
+            <div class="intro-logo">m u m i n s u l t a n i</div>
             <div class="intro-sub"></div>
         </div>
     </div>
 
     <!-- Arka Plan Müzik Ögesi -->
     <audio id="bgAudio" loop preload="auto">
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+        <source src="/TÛR-Suresi.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Ambient Glow Background -->
@@ -518,7 +558,7 @@
         <header class="header-section">
             <div class="header-top">
                 <!-- Logo ve Sağ Araçlar Aynı Satırda Yan Yana -->
-                <div class="brand-logo">muminsultani</div>
+                <div class="brand-logo">m u m i n s u l t a n i</div>
                 
                 <div class="header-actions">
                     <button class="music-btn-inline" id="musicToggleBtn" onclick="toggleMusic()" title="Toggle Background Music">
@@ -544,8 +584,8 @@
             <!-- Sosyal İkonlar -->
             <div class="social-row">
                 <a href="https://github.com" target="_blank" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="https://linkedin.com" target="_blank" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="mailto:contact@muminsultani.com" class="social-btn" title="Email"><i class="fa-regular fa-envelope"></i></a>
+                <a href="https://instagram.com/princeshahin0" target="_blank" class="social-btn" title="LinkedIn"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https:ma.wa.com/905389480137" class="social-btn" title="Email"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
         </header>
 
@@ -650,16 +690,16 @@
     </div>
 
     <script>
-        // Intro Ekranı Kaldırma Mantığı (3 Saniye Sonra)
+        // Intro Ekranı Kaldırma Mantığı (1.5 Saniye Sonra)
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const intro = document.getElementById('intro-screen');
                 if (intro) {
                     intro.style.opacity = '0';
                     intro.style.visibility = 'hidden';
-                    setTimeout(() => intro.remove(), 800); // DOM'dan tamamen temizle
+                    setTimeout(() => intro.remove(), 600); // DOM'dan tamamen temizle
                 }
-            }, 3000); // 3000 milisaniye = 3 saniye
+            }, 1500); // 1500 milisaniye = 1.5 saniye
         });
 
         // Müzik Kontrol ve Otomatik Başlatma Fonksiyonları
