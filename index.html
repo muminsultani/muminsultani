@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">𝗺𝘂𝗺𝗶𝗻𝘀𝘂𝗹𝘁𝗮𝗻𝗶</title>
+    <title id="pageTitle">Mumin Sultani | Software Developer</title>
     <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,12 +14,12 @@
             --bg-color: #050508;
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
-            --accent: #2563eb;
+            --accent: #9333ea;
             --line-color: rgba(255, 255, 255, 0.08);
             --box-bg: rgba(255, 255, 255, 0.02);
-            --box-hover-bg: rgba(37, 99, 235, 0.03);
+            --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(10, 10, 15, 0.85);
-            --glow-color: radial-gradient(circle, rgba(37, 99, 235, 0.15), rgba(147, 51, 234, 0.05) 60%, transparent 80%);
+            --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.12), rgba(194, 65, 12, 0.05) 60%, transparent 80%);
         }
 
         /* Eğer Cihaz Aydınlık (Light) Modda ise */
@@ -28,12 +28,12 @@
                 --bg-color: #f8fafc;
                 --text-primary: #0f172a;
                 --text-secondary: #64748b;
-                --accent: #1d4ed8;
+                --accent: #9333ea;
                 --line-color: rgba(0, 0, 0, 0.08);
                 --box-bg: rgba(0, 0, 0, 0.02);
-                --box-hover-bg: rgba(29, 78, 216, 0.03);
+                --box-hover-bg: rgba(147, 51, 234, 0.03);
                 --menu-bg: rgba(255, 255, 255, 0.85);
-                --glow-color: radial-gradient(circle, rgba(29, 78, 216, 0.08), rgba(147, 51, 234, 0.03) 60%, transparent 80%);
+                --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.08), rgba(194, 65, 12, 0.03) 60%, transparent 80%);
             }
         }
 
@@ -94,12 +94,12 @@
             position: relative;
         }
 
-        /* Kapalı Mavi ve Mor Tonlarında Akışkan Logo */
+        /* Sadece Kapalı Mor ve Kapalı Turuncu Tonlarında Akışkan Logo */
         .brand-logo {
             font-size: 1.75rem;
             font-weight: 800;
             letter-spacing: -1.2px;
-            background: linear-gradient(270deg, #1e3a8a, #2563eb, #9333ea, #c084fc, #1e3a8a);
+            background: linear-gradient(270deg, #581c87, #9333ea, #c2410c, #7c2d12, #581c87);
             background-size: 400% 400%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -112,7 +112,42 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Kompakt Dil Seçim Menüsü */
+        /* Sağ Üst Araçlar Grubu (Ses İkonu ve Dil Menüsü Yan Yana) */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Daha Küçültülmüş Ses İkonu Kutusu */
+        .music-btn-inline {
+            background: var(--box-bg);
+            border: 1px solid var(--line-color);
+            padding: 4px 9px;
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-size: 0.68rem;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 26px;
+        }
+
+        .music-btn-inline:hover {
+            border-color: rgba(147, 51, 234, 0.4);
+            background: var(--box-hover-bg);
+            color: #9333ea;
+        }
+
+        .music-btn-inline.playing {
+            color: #9333ea;
+            border-color: rgba(147, 51, 234, 0.3);
+        }
+
+        /* Daha Küçültülmüş Kompakt Dil Seçim Menüsü */
         .lang-dropdown-container {
             position: relative;
         }
@@ -123,19 +158,21 @@
             gap: 5px;
             background: var(--box-bg);
             border: 1px solid var(--line-color);
-            padding: 6px 10px;
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-size: 0.7rem;
-            font-weight: 600;
+            padding: 4px 9px;
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-size: 0.68rem;
+            font-weight: 700;
             cursor: pointer;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
+            height: 26px;
         }
 
         .lang-btn:hover {
-            border-color: rgba(37, 99, 235, 0.4);
+            border-color: rgba(147, 51, 234, 0.4);
             background: var(--box-hover-bg);
+            color: #9333ea;
         }
 
         .lang-menu {
@@ -145,7 +182,7 @@
             background: var(--menu-bg);
             backdrop-filter: blur(16px);
             border: 1px solid var(--line-color);
-            border-radius: 8px;
+            border-radius: 6px;
             width: 100px;
             display: none;
             flex-direction: column;
@@ -167,11 +204,10 @@
         .lang-option {
             display: flex;
             align-items: center;
-            gap: 6px;
             padding: 6px 10px;
             color: var(--text-secondary);
-            font-size: 0.7rem;
-            font-weight: 500;
+            font-size: 0.68rem;
+            font-weight: 700;
             cursor: pointer;
             text-decoration: none;
             transition: all 0.2s ease;
@@ -181,17 +217,9 @@
             text-align: left;
         }
 
-        .flag-icon {
-            font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
-            font-style: normal;
-            display: inline-block;
-            line-height: 1;
-            font-size: 0.8rem;
-        }
-
         .lang-option:hover {
             background: var(--box-hover-bg);
-            color: var(--text-primary);
+            color: #9333ea;
         }
 
         .role-text {
@@ -202,7 +230,7 @@
             letter-spacing: -0.2px;
         }
 
-        /* Social Row & Music Button Container */
+        /* Social Row */
         .social-row {
             display: flex;
             align-items: center;
@@ -219,31 +247,8 @@
         }
 
         .social-btn:hover {
-            color: var(--accent);
+            color: #9333ea;
             transform: translateY(-2px);
-        }
-
-        /* Ses İkonu */
-        .music-btn-inline {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 1.25rem;
-            cursor: pointer;
-            padding: 0;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .music-btn-inline:hover {
-            color: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        .music-btn-inline.playing {
-            color: var(--accent);
         }
 
         /* Sections */
@@ -265,7 +270,7 @@
         }
 
         .section-title i {
-            color: var(--accent);
+            color: #9333ea;
             font-size: 0.9rem;
         }
 
@@ -297,7 +302,7 @@
         }
 
         .item-title:hover {
-            color: var(--accent);
+            color: #9333ea;
         }
 
         .item-header i {
@@ -355,7 +360,7 @@
         }
 
         .contact-box:hover {
-            border-color: rgba(37, 99, 235, 0.4);
+            border-color: rgba(147, 51, 234, 0.4);
             background: var(--box-hover-bg);
         }
 
@@ -371,7 +376,7 @@
         }
 
         .contact-box i {
-            color: var(--accent);
+            color: #9333ea;
             font-size: 1.15rem;
         }
 
@@ -458,32 +463,35 @@
         <!-- Header Section -->
         <header class="header-section">
             <div class="header-top">
+                <!-- Logo ve Sağ Araçlar Aynı Satırda Yan Yana -->
                 <div class="brand-logo">muminsultani</div>
                 
-                <!-- Sağ Üst: Dil Seçim Menüsü -->
-                <div class="lang-dropdown-container">
-                    <button class="lang-btn" id="langDropdownBtn" onclick="toggleLangMenu()">
-                        <span class="flag-icon" id="currentLangFlag">🇬🇧</span> <span id="currentLangText">EN</span>
-                        <i class="fa-solid fa-chevron-down" style="font-size: 0.5rem; margin-left: 2px;"></i>
+                <div class="header-actions">
+                    <button class="music-btn-inline" id="musicToggleBtn" onclick="toggleMusic()" title="Toggle Background Music">
+                        <i class="fa-solid fa-volume-high" id="musicIcon"></i>
                     </button>
-                    <div class="lang-menu" id="langMenu">
-                        <button class="lang-option" onclick="changeLanguage('en')"><span class="flag-icon">🇬🇧</span> <span>English</span></button>
-                        <button class="lang-option" onclick="changeLanguage('tr')"><span class="flag-icon">🇹🇷</span> <span>Türkçe</span></button>
-                        <button class="lang-option" onclick="changeLanguage('de')"><span class="flag-icon">🇩🇪</span> <span>Deutsch</span></button>
+
+                    <div class="lang-dropdown-container">
+                        <button class="lang-btn" id="langDropdownBtn" onclick="toggleLangMenu()">
+                            <span id="currentLangText">EN</span>
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.45rem; margin-left: 2px;"></i>
+                        </button>
+                        <div class="lang-menu" id="langMenu">
+                            <button class="lang-option" onclick="changeLanguage('en')">English</button>
+                            <button class="lang-option" onclick="changeLanguage('tr')">Türkçe</button>
+                            <button class="lang-option" onclick="changeLanguage('de')">Deutsch</button>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div class="role-text" id="t-role">Software Developer & Tech Enthusiast</div>
             
-            <!-- Sosyal İkonlar ve Ses İkonu -->
+            <!-- Sosyal İkonlar -->
             <div class="social-row">
                 <a href="https://github.com" target="_blank" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
                 <a href="https://linkedin.com" target="_blank" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
                 <a href="mailto:contact@muminsultani.com" class="social-btn" title="Email"><i class="fa-regular fa-envelope"></i></a>
-                <button class="music-btn-inline" id="musicToggleBtn" onclick="toggleMusic()" title="Toggle Background Music">
-                    <i class="fa-solid fa-volume-high" id="musicIcon"></i>
-                </button>
             </div>
         </header>
 
@@ -611,14 +619,14 @@
             }
         }
 
-        // Sayfa yüklendiğinde otomatik olarak müziği başlatmayı dene
+        // Sayfa yüklendiğinde otomatik olarak müziği başlat
         window.addEventListener('DOMContentLoaded', () => {
             audio.play().then(() => {
                 isMusicPlaying = true;
                 musicBtn.classList.add('playing');
                 musicIcon.className = "fa-solid fa-volume-high";
             }).catch(e => {
-                // Tarayıcı otomatik oynatmayı engellerse, ilk tıklamada otomatik başlat
+                // Tarayıcı politikası otomatik oynatmayı engellerse, ilk etkileşimde otomatik başlat
                 document.addEventListener('click', function initAudioPlay() {
                     if (!isMusicPlaying) {
                         audio.play().then(() => {
@@ -645,10 +653,10 @@
             }
         });
 
-        // Çeviri Sözlüğü (EN, TR, DE)
+        // Çeviri Sözlüğü
         const translations = {
             en: {
-                flag: "🇬🇧", code: "EN",
+                code: "EN",
                 role: "Software Developer & Tech Enthusiast",
                 projectsTitle: "Featured Projects",
                 proj1Desc: "A high-performance backend architecture built with Django and modern microservices.",
@@ -663,14 +671,14 @@
                 footerSentences: "Innovating the digital world one line of code at a time. Always learning and building for the future."
             },
             tr: {
-                flag: "🇹🇷", code: "TR",
+                code: "TR",
                 role: "Yazılım Geliştirici & Teknoloji Meraklısı",
                 projectsTitle: "Öne Çıkan Projeler",
                 proj1Desc: "Django ve modern mikroservislerle kurulmuş yüksek performanslı bir arka uç mimarisi.",
                 proj2Desc: "Geliştirici verimliliği için yazılmış hızlı iş akışı otomasyon aracı.",
                 expTitle: "Deneyim",
                 jobTitle: "Uzaktan Yazılım Geliştirici",
-                jobDesc: "Python ve Node.js kullanarak ölçeklenebilir arka uç servisleri, REST API'ler ve mobil uyumlu web çözümleri geliştirme.",
+                jobDesc: "Python and Node.js kullanarak ölçeklenebilir arka uç servisleri, REST API'ler ve mobil uyumlu web çözümleri geliştirme.",
                 setupTitle: "Kurulum & Ortam",
                 osLabel: "İşletim Sistemi", editorLabel: "Editör Yığını",
                 stackTitle: "Temel Yığın", backendLabel: "Arka Uç", frontendLabel: "Ön Uç",
@@ -678,7 +686,7 @@
                 footerSentences: "Dijital dünyayı her seferinde bir satır kodla dönüştürüyoruz. Gelecek için sürekli öğreniyor ve inşa ediyoruz."
             },
             de: {
-                flag: "🇩🇪", code: "DE",
+                code: "DE",
                 role: "Softwareentwickler & Tech-Enthusiast",
                 projectsTitle: "Ausgewählte Projekte",
                 proj1Desc: "Eine leistungsstarke Backend-Architektur, entwickelt mit Django und modernen Microservices.",
@@ -700,7 +708,6 @@
             if (!data) return;
 
             document.getElementById('htmlRoot').setAttribute('lang', lang);
-            document.getElementById('currentLangFlag').innerText = data.flag;
             document.getElementById('currentLangText').innerText = data.code;
 
             document.getElementById('t-role').innerText = data.role;
