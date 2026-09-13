@@ -18,6 +18,7 @@
             --skill-pill-bg: rgba(255, 255, 255, 0.025);
             --input-bg: rgba(255, 255, 255, 0.035);
             --overlay-gradient: linear-gradient(to bottom right, rgba(10, 12, 18, 0.92), rgba(10, 12, 18, 0.85));
+            --menu-bg: rgba(13, 15, 20, 0.65);
         }
 
         /* --- AÇIK (LIGHT) MOD DEĞİŞKENLERİ --- */
@@ -32,6 +33,7 @@
             --skill-pill-bg: rgba(0, 0, 0, 0.05);
             --input-bg: rgba(0, 0, 0, 0.03);
             --overlay-gradient: linear-gradient(to bottom right, rgba(240, 243, 248, 0.88), rgba(240, 243, 248, 0.80));
+            --menu-bg: rgba(255, 255, 255, 0.65);
         }
 
         * {
@@ -64,10 +66,9 @@
             flex-direction: column;
             gap: clamp(14px, 2.5vw, 24px);
             z-index: 1;
-            transition: max-width 0.3s ease;
         }
 
-        /* --- TÜM SAYFA ARKA PLAN FOTOĞRAF SLAYT GÖSTERİSİ --- */
+        /* --- ARKA PLAN FOTOĞRAF SLAYT --- */
         .card-bg-slider {
             position: fixed;
             top: 0;
@@ -93,7 +94,6 @@
             opacity: 1;
         }
 
-        /* Arka plan karartma katmanı (Arka plan fotoğraflarının üzerinde her iki modda da çalışır) */
         .card-bg-overlay {
             position: fixed;
             top: 0;
@@ -105,7 +105,7 @@
             transition: background 0.8s ease;
         }
 
-        /* --- KARTLAR İÇİN ORTAK STİL --- */
+        /* --- KARTLAR --- */
         .card {
             background: var(--card-bg);
             backdrop-filter: blur(18px);
@@ -118,42 +118,129 @@
             gap: clamp(14px, 2vw, 20px);
             width: 100%;
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease;
+            transition: background-color 0.8s ease, border-color 0.8s ease;
         }
 
         /* --- ÜST HERO KARTI --- */
         .hero-photo-card {
             position: relative;
-            overflow: hidden;
+            overflow: visible;
             border: 1px solid var(--card-border);
             background: var(--card-bg);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
             border-radius: clamp(16px, 2.5vw, 28px);
-            padding: clamp(35px, 5vw, 60px) clamp(22px, 3.5vw, 38px);
+            padding: clamp(28px, 4vw, 48px) clamp(22px, 3.5vw, 38px);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-            min-height: clamp(210px, 28vw, 280px);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: flex-start;
-            text-align: left;
             width: 100%;
             transition: background-color 0.8s ease, border-color 0.8s ease;
         }
 
-        .hero {
+        /* --- ÜST KISIM: BAŞLIK VE MENÜ AYNI HİZADA --- */
+        .hero-header-row {
             width: 100%;
             display: flex;
-            flex-direction: column;
-            gap: 8px;
-            z-index: 2;
-            position: relative;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
         }
 
-        /* --- İSİM YAZISI VE RENKLERİ --- */
+        /* --- DÜZ BAYRAKLAR İÇİN AYAR --- */
+        .flag-icon {
+            font-style: normal;
+            font-family: sans-serif;
+            display: inline-block;
+        }
+
+        /* --- ŞEFFAF AÇILIR DİL MENÜSÜ (BİR TIK DAHA KÜÇÜK) --- */
+        .lang-dropdown-container {
+            position: relative;
+            z-index: 100;
+        }
+
+        .lang-menu-btn {
+            background: var(--menu-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 6px 11px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .lang-menu-btn:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .lang-menu-dropdown {
+            position: absolute;
+            top: calc(100% + 6px);
+            right: 0;
+            background: var(--menu-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            width: 100px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: all 0.25s ease;
+        }
+
+        .lang-dropdown-container.open .lang-menu-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-option {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            padding: 8px 10px;
+            text-align: left;
+            font-size: 0.76rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Bayrak ile dil kodu arasında boşluk (space) */
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .lang-option:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        /* --- MÜMİNSULTANİ YAZISI BİR TIK KÜÇÜLTÜLDÜ --- */
         .hero h1 {
-            font-size: clamp(2rem, 4.2vw, 3.2rem);
+            font-size: clamp(1.6rem, 3.4vw, 2.6rem);
             font-weight: 800;
             letter-spacing: -0.03em;
             display: flex;
@@ -196,12 +283,12 @@
 
         @keyframes bounceGlow {
             0% { transform: translateY(0); filter: drop-shadow(0 0 2px rgba(0,0,0,0.1)); }
-            100% { transform: translateY(-5px); filter: drop-shadow(0 0 12px currentColor); }
+            100% { transform: translateY(-4px); filter: drop-shadow(0 0 10px currentColor); }
         }
 
         .hero p {
             color: var(--text-muted);
-            font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+            font-size: clamp(0.88rem, 1.4vw, 1.05rem);
             transition: color 0.8s ease;
         }
 
@@ -212,9 +299,7 @@
             width: 100%;
             justify-content: flex-start;
             align-items: center;
-            margin-top: 24px;
-            z-index: 2;
-            position: relative;
+            margin-top: 20px;
         }
 
         .social-btn {
@@ -235,7 +320,6 @@
             width: 15px;
             height: 15px;
             fill: currentColor;
-            transition: fill 0.8s ease;
         }
 
         .social-btn:hover {
@@ -246,15 +330,14 @@
             transform: translateY(-3px);
         }
 
-        /* --- DİĞER KARTLAR VE BİLEŞENLER --- */
+        /* --- DİĞER KART BİLEŞENLERİ --- */
         .card-title {
-            font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
             font-weight: 700;
             display: flex;
             align-items: center;
             gap: 10px;
             color: var(--text-main);
-            transition: color 0.8s ease;
         }
 
         .projects-list {
@@ -286,34 +369,34 @@
             justify-content: space-between;
             align-items: center;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--text-main);
         }
 
         .project-link-icon {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--accent);
         }
 
         .project-desc {
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             line-height: 1.5;
         }
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
         }
 
         .skill-pill {
             background: var(--skill-pill-bg);
             border: 1px solid var(--card-border);
-            padding: 12px 16px;
+            padding: 11px 14px;
             border-radius: 12px;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
             color: var(--text-main);
             transition: all 0.2s ease;
@@ -327,7 +410,7 @@
         .contact-form {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
         }
 
         .form-group {
@@ -338,7 +421,7 @@
         }
 
         .form-group label {
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             font-weight: 500;
         }
@@ -347,11 +430,11 @@
             width: 100%;
             background: var(--input-bg);
             border: 1px solid var(--card-border);
-            padding: 13px 18px;
+            padding: 12px 16px;
             border-radius: 12px;
             color: var(--text-main);
             font-family: inherit;
-            font-size: 0.98rem;
+            font-size: 0.92rem;
             outline: none;
             transition: all 0.25s ease;
         }
@@ -363,21 +446,21 @@
 
         .form-textarea {
             resize: vertical;
-            min-height: 110px;
+            min-height: 100px;
         }
 
         .submit-btn {
             background: var(--accent);
             border: none;
             color: #fff;
-            padding: 14px;
+            padding: 13px;
             border-radius: 12px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.25s ease;
             box-shadow: 0 0 20px var(--accent-glow);
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
         .submit-btn:hover {
@@ -395,13 +478,12 @@
         @media (min-width: 1400px) {
             body { padding: 50px 20px; }
             .wrapper { max-width: 960px; gap: 28px; }
-            .card, .hero-photo-card { padding: 44px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Arka Plan Sabit Fotoğraf Slider'ı (Her 5 saniyede değişir) -->
+    <!-- Arka Plan Sabit Fotoğraf Slider'ı -->
     <div class="card-bg-slider">
         <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&auto=format&fit=crop&q=80" class="card-bg-slide active" alt="Card BG 1">
         <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&auto=format&fit=crop&q=80" class="card-bg-slide" alt="Card BG 2">
@@ -412,12 +494,30 @@
     <div class="wrapper">
         <!-- Üst Hero Kartı -->
         <div class="hero-photo-card">
-            <div class="hero">
-                <h1>
-                    <span>m</span><span>u</span><span>m</span><span>i</span><span>n</span><span>s</span><span>u</span><span>l</span><span>t</span><span>a</span><span>n</span><span>i</span>
-                </h1>
-                <p>Software Developer & Tech Enthusiast</p>
+            
+            <!-- Üst Kısım: muminsultani Yazısı ve Dil Menüsü Aynı Hizada -->
+            <div class="hero-header-row">
+                <div class="hero">
+                    <h1>
+                        <span>m</span><span>u</span><span>m</span><span>i</span><span>n</span><span>s</span><span>u</span><span>l</span><span>t</span><span>a</span><span>n</span><span>i</span>
+                    </h1>
+                </div>
+
+                <!-- Şeffaf Açılır Dil Menüsü -->
+                <div class="lang-dropdown-container" id="langDropdown">
+                    <button class="lang-menu-btn" onclick="toggleLangMenu()">
+                        <span id="current-lang-display"><i class="flag-icon">🇬🇧</i> EN</span>
+                        <svg width="9" height="5" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="lang-menu-dropdown">
+                        <button class="lang-option" onclick="setLanguage('en')"><i class="flag-icon">🇬🇧</i> EN</button>
+                        <button class="lang-option" onclick="setLanguage('tr')"><i class="flag-icon">🇹🇷</i> TR</button>
+                        <button class="lang-option" onclick="setLanguage('de')"><i class="flag-icon">🇩🇪</i> DE</button>
+                    </div>
+                </div>
             </div>
+
+            <p id="hero-desc">Software Developer & Tech Enthusiast</p>
 
             <div class="social-row">
                 <a href="https://github.com" target="_blank" class="social-btn" title="GitHub">
@@ -434,61 +534,161 @@
 
         <!-- 🚀 Featured Projects Kartı -->
         <div class="card">
-            <div class="card-title">🚀 Featured Projects</div>
+            <div class="card-title" id="projects-title">🚀 Featured Projects</div>
             <div class="projects-list">
                 <a href="https://github.com" target="_blank" class="project-card-item">
                     <div class="project-header">
                         <span>Project Alpha</span>
                         <span class="project-link-icon">↗</span>
                     </div>
-                    <div class="project-desc">A high-performance backend architecture built with Django and modern microservices.</div>
+                    <div class="project-desc" id="proj1-desc">A high-performance backend architecture built with Django and modern microservices.</div>
                 </a>
                 <a href="https://github.com" target="_blank" class="project-card-item">
                     <div class="project-header">
                         <span>Minimalist CLI Tool</span>
                         <span class="project-link-icon">↗</span>
                     </div>
-                    <div class="project-desc">Fast workflow automation tool written for developer productivity.</div>
+                    <div class="project-desc" id="proj2-desc">Fast workflow automation tool written for developer productivity.</div>
                 </a>
             </div>
         </div>
 
         <!-- 💻 Setup & Gear Kartı -->
         <div class="card">
-            <div class="card-title">💻 Setup & Gear</div>
+            <div class="card-title" id="setup-title">💻 Setup & Gear</div>
             <div class="skills-grid">
-                <div class="skill-pill">macOS / Linux</div>
-                <div class="skill-pill">VS Code / Neovim</div>
-                <div class="skill-pill">Python & Node.js</div>
-                <div class="skill-pill">Minimalist Desk</div>
-                <div class="skill-pill">Mechanical Keyboard</div>
-                <div class="skill-pill">Docker & Cloud</div>
+                <div class="skill-pill" id="skill-1">macOS / Linux</div>
+                <div class="skill-pill" id="skill-2">VS Code / Neovim</div>
+                <div class="skill-pill" id="skill-3">Python & Node.js</div>
+                <div class="skill-pill" id="skill-4">Minimalist Desk</div>
+                <div class="skill-pill" id="skill-5">Mechanical Keyboard</div>
+                <div class="skill-pill" id="skill-6">Docker & Cloud</div>
             </div>
         </div>
 
         <!-- ✉️ Send an Email Kartı -->
         <div class="card" id="contact">
-            <div class="card-title">✉️ Send an Email</div>
+            <div class="card-title" id="contact-title">✉️ Send an Email</div>
             <form class="contact-form" action="mailto:contact@example.com" method="POST" enctype="text/plain">
                 <div class="form-group">
-                    <label>Your Name</label>
-                    <input type="text" class="form-input" placeholder="Enter your name" required>
+                    <label id="label-name">Your Name</label>
+                    <input type="text" class="form-input" id="input-name-ph" placeholder="Enter your name" required>
                 </div>
                 <div class="form-group">
-                    <label>Your Email</label>
-                    <input type="email" class="form-input" placeholder="Enter your email address" required>
+                    <label id="label-email">Your Email</label>
+                    <input type="email" class="form-input" id="input-email-ph" placeholder="Enter your email address" required>
                 </div>
                 <div class="form-group">
-                    <label>Message</label>
-                    <textarea class="form-textarea" placeholder="Type your message here..." required></textarea>
+                    <label id="label-msg">Message</label>
+                    <textarea class="form-textarea" id="input-msg-ph" placeholder="Type your message here..." required></textarea>
                 </div>
-                <button type="submit" class="submit-btn">Send Message</button>
+                <button type="submit" class="submit-btn" id="submit-btn-text">Send Message</button>
             </form>
         </div>
     </div>
 
     <script>
-        // 1. Arka Plan Fotoğraf Slayt Döngüsü (Her 5 saniyede bir)
+        const translations = {
+            en: {
+                flag: "🇬🇧",
+                name: "EN",
+                heroDesc: "Software Developer & Tech Enthusiast",
+                projectsTitle: "🚀 Featured Projects",
+                proj1Desc: "A high-performance backend architecture built with Django and modern microservices.",
+                proj2Desc: "Fast workflow automation tool written for developer productivity.",
+                setupTitle: "💻 Setup & Gear",
+                skills: ["macOS / Linux", "VS Code / Neovim", "Python & Node.js", "Minimalist Desk", "Mechanical Keyboard", "Docker & Cloud"],
+                contactTitle: "✉️ Send an Email",
+                labelName: "Your Name",
+                inputNamePh: "Enter your name",
+                labelEmail: "Your Email",
+                inputEmailPh: "Enter your email address",
+                labelMsg: "Message",
+                inputMsgPh: "Type your message here...",
+                submitBtnText: "Send Message"
+            },
+            tr: {
+                flag: "🇹🇷",
+                name: "TR",
+                heroDesc: "Yazılımcı & Teknoloji Meraklısı",
+                projectsTitle: "🚀 Öne Çıkan Projeler",
+                proj1Desc: "Django ve modern mikroservisler ile inşa edilmiş yüksek performanslı arka uç mimarisi.",
+                proj2Desc: "Geliştirici verimliliği için yazılmış hızlı iş akışı otomasyon aracı.",
+                setupTitle: "💻 Kurulum & Donanım",
+                skills: ["macOS / Linux", "VS Code / Neovim", "Python & Node.js", "Minimalist Masa", "Mekanik Klavye", "Docker & Bulut"],
+                contactTitle: "✉️ E-posta Gönder",
+                labelName: "Adınız",
+                inputNamePh: "Adınızı girin",
+                labelEmail: "E-posta Adresiniz",
+                inputEmailPh: "E-posta adresinizi girin",
+                labelMsg: "Mesajınız",
+                inputMsgPh: "Mesajınızı buraya yazın...",
+                submitBtnText: "Mesaj Gönder"
+            },
+            de: {
+                flag: "🇩🇪",
+                name: "DE",
+                heroDesc: "Softwareentwickler & Tech-Enthusiast",
+                projectsTitle: "🚀 Ausgewählte Projekte",
+                proj1Desc: "Eine hochleistungsfähige Backend-Architektur, entwickelt mit Django und modernen Microservices.",
+                proj2Desc: "Schnelles Workflow-Automatisierungstool für Entwicklerproduktivität.",
+                setupTitle: "💻 Setup & Ausstattung",
+                skills: ["macOS / Linux", "VS Code / Neovim", "Python & Node.js", "Minimalistischer Schreibtisch", "Mechanische Tastatur", "Docker & Cloud"],
+                contactTitle: "✉️ E-Mail senden",
+                labelName: "Ihr Name",
+                inputNamePh: "Geben Sie Ihren Namen ein",
+                labelEmail: "Ihre E-Mail",
+                inputEmailPh: "Geben Sie Ihre E-Mail-Adresse ein",
+                labelMsg: "Nachricht",
+                inputMsgPh: "Schreiben Sie Ihre Nachricht hier...",
+                submitBtnText: "Nachricht senden"
+            }
+        };
+
+        function toggleLangMenu() {
+            document.getElementById('langDropdown').classList.toggle('open');
+        }
+
+        window.addEventListener('click', function(e) {
+            const container = document.getElementById('langDropdown');
+            if (!container.contains(e.target)) {
+                container.classList.remove('open');
+            }
+        });
+
+        function setLanguage(lang) {
+            localStorage.setItem('selectedLang', lang);
+            document.getElementById('langDropdown').classList.remove('open');
+
+            const t = translations[lang];
+            
+            document.getElementById('current-lang-display').innerHTML = `<i class="flag-icon">${t.flag}</i> ${t.name}`;
+
+            document.getElementById('hero-desc').innerText = t.heroDesc;
+            document.getElementById('projects-title').innerText = t.projectsTitle;
+            document.getElementById('proj1-desc').innerText = t.proj1Desc;
+            document.getElementById('proj2-desc').innerText = t.proj2Desc;
+            document.getElementById('setup-title').innerText = t.setupTitle;
+            
+            for(let i = 1; i <= 6; i++) {
+                document.getElementById(`skill-${i}`).innerText = t.skills[i-1];
+            }
+
+            document.getElementById('contact-title').innerText = t.contactTitle;
+            document.getElementById('label-name').innerText = t.labelName;
+            document.getElementById('input-name-ph').placeholder = t.inputNamePh;
+            document.getElementById('label-email').innerText = t.labelEmail;
+            document.getElementById('input-email-ph').placeholder = t.inputEmailPh;
+            document.getElementById('label-msg').innerText = t.labelMsg;
+            document.getElementById('input-msg-ph').placeholder = t.inputMsgPh;
+            document.getElementById('submit-btn-text').innerText = t.submitBtnText;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('selectedLang') || 'en';
+            setLanguage(savedLang);
+        });
+
         const cardBgSlides = document.querySelectorAll('.card-bg-slide');
         let currentCardBgIndex = 0;
 
@@ -499,7 +699,6 @@
         }
         setInterval(changeCardBackground, 5000);
 
-        // 2. Otomatik Light / Dark Mod Geçişi (Her 20 saniyede bir)
         function toggleAutoTheme() {
             document.documentElement.classList.toggle('light-mode');
         }
