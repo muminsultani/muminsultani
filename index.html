@@ -383,23 +383,10 @@
             align-items: center;
         }
 
-        /* GitHub Sabit Rengi (Dark modda açık gri/beyaz, Light modda koyu) */
-        .social-btn.github {
-            color: #f0f6fc;
-        }
-        body.light-mode .social-btn.github {
-            color: #24292e;
-        }
-
-        /* Instagram Sabit Orijinal Pembe/Mor Tonu */
-        .social-btn.instagram {
-            color: #e1306c;
-        }
-
-        /* WhatsApp Sabit Orijinal Yeşili */
-        .social-btn.whatsapp {
-            color: #25d366;
-        }
+        .social-btn.github { color: #f0f6fc; }
+        body.light-mode .social-btn.github { color: #24292e; }
+        .social-btn.instagram { color: #e1306c; }
+        .social-btn.whatsapp { color: #25d366; }
 
         /* Sections */
         section {
@@ -512,6 +499,7 @@
             text-decoration: none;
             transition: all 0.3s ease;
             gap: 12px;
+            cursor: pointer;
         }
 
         .contact-box:hover {
@@ -541,6 +529,149 @@
             flex-shrink: 0;
         }
 
+        /* Randevu Modal / Alert Penceresi Tasarımı */
+        #appointment-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(5, 5, 8, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 100000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 16px;
+        }
+
+        #appointment-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--bg-color);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            width: 100%;
+            max-width: 440px;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(147, 51, 234, 0.2);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        #appointment-modal.show .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .modal-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-title i {
+            color: #9333ea;
+        }
+
+        .modal-close {
+            background: var(--box-bg);
+            border: 1px solid var(--line-color);
+            color: var(--text-secondary);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--box-hover-bg);
+            color: #9333ea;
+            border-color: rgba(147, 51, 234, 0.4);
+        }
+
+        .appointment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+        }
+
+        .form-group input, .form-group textarea {
+            background: var(--box-bg);
+            border: 1px solid var(--line-color);
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #9333ea;
+            background: var(--box-hover-bg);
+        }
+
+        .form-group textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #9333ea, #7e22ce);
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
         /* Footer */
         footer {
             border-top: 1px solid var(--line-color);
@@ -560,24 +691,12 @@
             box-shadow: 0 4px 24px rgba(147, 51, 234, 0.2);
             flex-shrink: 0;
             position: relative;
-            pointer-events: none;
-        }
-
-        .footer-qr-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 5;
         }
 
         .footer-qr-container img {
             width: 95px;
             height: 95px;
             display: block;
-            pointer-events: none;
         }
 
         .footer-text-group {
@@ -648,6 +767,39 @@
         </div>
     </div>
 
+    <!-- Randevu Modal Penceresi (QR Taratıldığında Otomatik Açılır) -->
+    <div id="appointment-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fa-solid fa-calendar-check"></i> <span id="t-modal-title">Randevu Al</span>
+                </div>
+                <button class="modal-close" onclick="closeAppointmentModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form class="appointment-form" onsubmit="submitAppointment(event)">
+                <div class="form-group">
+                    <label id="t-lbl-name">Ad Soyad</label>
+                    <input type="text" id="apptName" required placeholder="Adınız Soyadınız">
+                </div>
+                <div class="form-group">
+                    <label id="t-lbl-phone">Telefon Numarası</label>
+                    <input type="tel" id="apptPhone" required placeholder="05XX XXX XX XX">
+                </div>
+                <div class="form-group">
+                    <label id="t-lbl-date">Tarih ve Saat</label>
+                    <input type="datetime-local" id="apptDateTime" required>
+                </div>
+                <div class="form-group">
+                    <label id="t-lbl-note">Görüşme Konusu / Not</label>
+                    <textarea id="apptNote" placeholder="Kısaca bahsetmek istedikleriniz..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fa-brands fa-whatsapp"></i> <span id="t-btn-submit">Randevuyu Tamamla (WhatsApp)</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Ambient Glow Background -->
     <div class="ambient-glow"></div>
 
@@ -679,7 +831,7 @@
             
             <div class="role-text" id="t-role">Software Developer & Tech Enthusiast</div>
             
-            <!-- Sosyal İkonlar (Her Zaman Kendi Orijinal Renklerinde, Hover Yok) -->
+            <!-- Sosyal İkonlar (Her Zaman Kendi Orijinal Renklerinde) -->
             <div class="social-row">
                 <a href="https://github.com" target="_blank" class="social-btn github" title="GitHub"><i class="fa-brands fa-github"></i></a>
                 <a href="https://instagram.com/princeshahin0" target="_blank" class="social-btn instagram" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -757,29 +909,30 @@
             </div>
         </section>
 
-        <!-- Get in Touch Section -->
+        <!-- Get in Touch Section (Tıklayınca da Randevu Açılır) -->
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-paper-plane"></i> <span id="t-contact-title">Get In Touch</span>
             </div>
-            <a href="mailto:contact@muminsultani.com" class="contact-box">
+            <div class="contact-box" onclick="openAppointmentModal()">
                 <div class="contact-text">
                     <span id="t-contact-sub">Have a project in mind?</span>
                     <strong id="t-contact-main">Let's talk & build together</strong>
                 </div>
                 <i class="fa-solid fa-arrow-right"></i>
-            </a>
+            </div>
         </section>
 
         <!-- Footer -->
         <footer>
+            <!-- QR Kodu Güncellendi: Artık taranınca siteye girip doğrudan randevu formunu açacak şekilde ayarlandı (#randevu parametresi eklendi) -->
             <div class="footer-qr-container">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://muminsultani.com" alt="QR Code">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://muminsultani.com/#randevu" alt="Randevu QR Kod">
             </div>
 
             <div class="footer-text-group">
                 <div class="footer-brand">muminsultani</div>
-                <div class="footer-scan-text" id="t-scan-text">SCAN TO CONNECT</div>
+                <div class="footer-scan-text" id="t-scan-text">SCAN FOR APPOINTMENT</div>
                 <div class="footer-copy-text">© 2026 muminsultani • All Rights Reserved</div>
             </div>
         </footer>
@@ -831,7 +984,40 @@
                     setTimeout(() => intro.remove(), 600);
                 }
             }, 1500);
+
+            // Eğer QR kod taranıp siteye girildiyse veya URL'de #randevu varsa formu otomatik aç
+            if (window.location.hash === '#randevu') {
+                setTimeout(() => {
+                    openAppointmentModal();
+                }, 1700); // Intro ekranından hemen sonra açılır
+            }
         });
+
+        // Randevu Modal Kontrolleri
+        const appointmentModal = document.getElementById('appointment-modal');
+
+        function openAppointmentModal() {
+            appointmentModal.classList.add('show');
+        }
+
+        function closeAppointmentModal() {
+            appointmentModal.classList.remove('show');
+        }
+
+        // Form gönderildiğinde WhatsApp üzerinden size bildirim düşmesini sağlar
+        function submitAppointment(e) {
+            e.preventDefault();
+            const name = document.getElementById('apptName').value;
+            const phone = document.getElementById('apptPhone').value;
+            const dateTime = document.getElementById('apptDateTime').value;
+            const note = document.getElementById('apptNote').value;
+
+            // WhatsApp mesaj metni oluşturma
+            const text = `Merhaba, yeni bir randevu talebi var!%0A%0A*Ad Soyad:* ${encodeURIComponent(name)}%0A*Telefon:* ${encodeURIComponent(phone)}%0A*Tarih/Saat:* ${encodeURIComponent(dateTime)}%0A*Not:* ${encodeURIComponent(note)}`;
+            
+            // Sizin numaranıza yönlendirir (Kod içindeki numarayı kendi numaranızla değiştirebilirsiniz)
+            window.location.href = `https://wa.me/905389480137?text=${text}`;
+        }
 
         // Tema Değiştirme (Dark / Light Mode) Mantığı
         const themeIcon = document.getElementById('themeIcon');
@@ -871,7 +1057,9 @@
                 osLabel: "OS Environment", editorLabel: "Editor Stack",
                 stackTitle: "Core Stack", backendLabel: "Backend", frontendLabel: "Frontend",
                 contactTitle: "Get In Touch", contactSub: "Have a project in mind?", contactMain: "Let's talk & build together",
-                scanText: "SCAN TO CONNECT"
+                scanText: "SCAN FOR APPOINTMENT",
+                modalTitle: "Book an Appointment",
+                lblName: "Full Name", lblPhone: "Phone Number", lblDate: "Date & Time", lblNote: "Subject / Note", btnSubmit: "Complete via WhatsApp"
             },
             tr: {
                 code: "TR",
@@ -886,7 +1074,9 @@
                 osLabel: "İşletim Sistemi", editorLabel: "Editör Yığını",
                 stackTitle: "Temel Yığın", backendLabel: "Arka Uç", frontendLabel: "Ön Uç",
                 contactTitle: "İletişime Geç", contactSub: "Aklında bir proje mi var?", contactMain: "Konuşalım ve birlikte inşa edelim",
-                scanText: "BAĞLANMAK İÇİN TARAYIN"
+                scanText: "RANDEVU İÇİN TARA",
+                modalTitle: "Randevu Al",
+                lblName: "Ad Soyad", lblPhone: "Telefon Numarası", lblDate: "Tarih ve Saat", lblNote: "Görüşme Konusu / Not", btnSubmit: "WhatsApp ile Tamamla"
             },
             de: {
                 code: "DE",
@@ -901,7 +1091,9 @@
                 osLabel: "Betriebssystem", editorLabel: "Editor-Stack",
                 stackTitle: "Kern-Stack", backendLabel: "Backend", frontendLabel: "Frontend",
                 contactTitle: "Kontakt", contactSub: "Haben Sie ein Projekt im Kopf?", contactMain: "Lassen Sie uns sprechen & zusammenbauen",
-                scanText: "SCANNEN ZUM VERBINDEN"
+                scanText: "FÜR TERMIN SCANNEN",
+                modalTitle: "Termin Vereinbaren",
+                lblName: "Vollständiger Name", lblPhone: "Telefonnummer", lblDate: "Datum & Uhrzeit", lblNote: "Betreff / Notiz", btnSubmit: "Über WhatsApp abschließen"
             }
         };
 
@@ -926,9 +1118,16 @@
             document.getElementById('t-backend-label').innerText = data.backendLabel;
             document.getElementById('t-frontend-label').innerText = data.frontendLabel;
             document.getElementById('t-contact-title').innerText = data.contactTitle;
-            document.getElementById('t-contact-sub').innerText = data.contactSub;
+            document.getElementById('t-contact-sub').innerText = data.contact`sub` || data.contactSub;
             document.getElementById('t-contact-main').innerText = data.contactMain;
             document.getElementById('t-scan-text').innerText = data.scanText;
+
+            document.getElementById('t-modal-title').innerText = data.modalTitle;
+            document.getElementById('t-lbl-name').innerText = data.lblName;
+            document.getElementById('t-lbl-phone').innerText = data.lblPhone;
+            document.getElementById('t-lbl-date').innerText = data.lblDate;
+            document.getElementById('t-lbl-note').innerText = data.lblNote;
+            document.getElementById('t-btn-submit').innerText = data.btnSubmit;
 
             document.getElementById('langMenu').classList.remove('show');
         }
