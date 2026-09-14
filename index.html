@@ -30,16 +30,15 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
-            -webkit-touch-callout: none; /* Mobilde uzun basıp menü açmayı engeller */
+            -webkit-touch-callout: none;
         }
 
         img {
             -webkit-user-drag: none;
             user-drag: none;
-            pointer-events: none; /* QR kod dahil tüm resimlerin tıklanmasını/kaydedilmesini engeller */
+            pointer-events: none;
         }
 
-        /* Güvenlik Karartma Perdesi (Ekran görüntüsü almaya çalışıldığında veya sekme değiştiğinde) */
         #security-curtain {
             position: fixed;
             top: 0;
@@ -57,7 +56,7 @@
             pointer-events: none;
         }
 
-        /* Cihazın Moduna Göre Değişen Renk Paleti (CSS Variables) */
+        /* Renk Paleti (CSS Variables) - Varsayılan Dark Mode */
         :root {
             --bg-color: #050508;
             --text-primary: #f8fafc;
@@ -70,19 +69,17 @@
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.12), rgba(168, 85, 247, 0.05) 60%, transparent 80%);
         }
 
-        /* Eğer Cihaz Aydınlık (Light) Modda ise */
-        @media (prefers-color-scheme: light) {
-            :root {
-                --bg-color: #f8fafc;
-                --text-primary: #0f172a;
-                --text-secondary: #64748b;
-                --accent: #9333ea;
-                --line-color: rgba(0, 0, 0, 0.08);
-                --box-bg: rgba(0, 0, 0, 0.02);
-                --box-hover-bg: rgba(147, 51, 234, 0.03);
-                --menu-bg: rgba(255, 255, 255, 0.85);
-                --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.08), rgba(168, 85, 247, 0.03) 60%, transparent 80%);
-            }
+        /* Light Mode Sınıfı */
+        body.light-mode {
+            --bg-color: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --accent: #9333ea;
+            --line-color: rgba(0, 0, 0, 0.08);
+            --box-bg: rgba(0, 0, 0, 0.02);
+            --box-hover-bg: rgba(147, 51, 234, 0.03);
+            --menu-bg: rgba(255, 255, 255, 0.85);
+            --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.08), rgba(168, 85, 247, 0.03) 60%, transparent 80%);
         }
 
         * {
@@ -268,7 +265,7 @@
             flex-shrink: 0;
         }
 
-        .music-btn-inline {
+        .theme-toggle-btn {
             background: var(--box-bg);
             border: 1px solid var(--line-color);
             padding: 5px 10px;
@@ -284,15 +281,10 @@
             height: 30px;
         }
 
-        .music-btn-inline:hover {
+        .theme-toggle-btn:hover {
             border-color: rgba(147, 51, 234, 0.4);
             background: var(--box-hover-bg);
             color: #9333ea;
-        }
-
-        .music-btn-inline.playing {
-            color: #9333ea;
-            border-color: rgba(147, 51, 234, 0.3);
         }
 
         .lang-dropdown-container {
@@ -377,7 +369,7 @@
             letter-spacing: -0.2px;
         }
 
-        /* Social Row */
+        /* Social Row - Sabit Orijinal Renkler (Hover Yok) */
         .social-row {
             display: flex;
             align-items: center;
@@ -385,20 +377,27 @@
         }
 
         .social-btn {
-            color: var(--text-secondary);
             font-size: 1.25rem;
             text-decoration: none;
-            transition: color 0.3s ease, transform 0.3s ease;
             display: inline-flex;
             align-items: center;
         }
 
-        .social-btn:hover {
-            color: #9333ea;
-            transform: translateY(-2px);
+        /* GitHub Sabit Rengi (Dark modda açık gri/beyaz, Light modda koyu) */
+        .social-btn.github {
+            color: #f0f6fc;
+        }
+        body.light-mode .social-btn.github {
+            color: #24292e;
         }
 
-        .social-btn.whatsapp:hover {
+        /* Instagram Sabit Orijinal Pembe/Mor Tonu */
+        .social-btn.instagram {
+            color: #e1306c;
+        }
+
+        /* WhatsApp Sabit Orijinal Yeşili */
+        .social-btn.whatsapp {
             color: #25d366;
         }
 
@@ -561,10 +560,9 @@
             box-shadow: 0 4px 24px rgba(147, 51, 234, 0.2);
             flex-shrink: 0;
             position: relative;
-            pointer-events: none; /* QR kutusunun tamamında tıklama ve kaydetmeyi engeller */
+            pointer-events: none;
         }
 
-        /* QR kodunun üstüne ekstra koruma katmanı */
         .footer-qr-container::after {
             content: '';
             position: absolute;
@@ -616,61 +614,27 @@
             white-space: nowrap;
         }
 
-        /* Responsive Breakpoints (Mobile) */
         @media (max-width: 640px) {
-            body {
-                padding: 16px 12px;
-            }
-            .wrapper {
-                gap: 24px;
-                max-width: 100%;
-            }
-            .specs-grid {
-                grid-template-columns: 1fr;
-                gap: 14px;
-            }
-            .brand-logo {
-                font-size: 1.45rem;
-                letter-spacing: -0.5px;
-            }
-            .intro-logo {
-                font-size: 1.65rem;
-                letter-spacing: -0.5px;
-            }
-            .contact-box {
-                padding: 14px;
-            }
-            .footer-qr-container img {
-                width: 80px;
-                height: 80px;
-            }
-            .footer-copy-text {
-                font-size: 0.62rem;
-            }
+            body { padding: 16px 12px; }
+            .wrapper { gap: 24px; max-width: 100%; }
+            .specs-grid { grid-template-columns: 1fr; gap: 14px; }
+            .brand-logo { font-size: 1.45rem; letter-spacing: -0.5px; }
+            .intro-logo { font-size: 1.65rem; letter-spacing: -0.5px; }
+            .contact-box { padding: 14px; }
+            .footer-qr-container img { width: 80px; height: 80px; }
+            .footer-copy-text { font-size: 0.62rem; }
         }
 
-        /* Sadece Gerçek Masaüstü İçin Büyütme Ayarı */
         @media (min-width: 1025px) and (pointer: fine) {
-            .footer-brand {
-                font-size: 3.2rem;
-            }
-            .footer-scan-text {
-                font-size: 1.4rem;
-            }
-            .footer-copy-text {
-                font-size: 1.05rem;
-                white-space: nowrap;
-            }
-            .footer-qr-container img {
-                width: 150px;
-                height: 150px;
-            }
+            .footer-brand { font-size: 3.2rem; }
+            .footer-scan-text { font-size: 1.4rem; }
+            .footer-copy-text { font-size: 1.05rem; white-space: nowrap; }
+            .footer-qr-container img { width: 150px; height: 150px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Güvenlik Perdesi -->
     <div id="security-curtain"></div>
 
     <!-- 1.5 Saniyelik Intro Ekranı -->
@@ -684,11 +648,6 @@
         </div>
     </div>
 
-    <!-- Arka Plan Müzik Ögesi -->
-    <audio id="bgAudio" loop preload="auto">
-        <source src="/TÛR-Suresi.mp3" type="audio/mpeg">
-    </audio>
-
     <!-- Ambient Glow Background -->
     <div class="ambient-glow"></div>
 
@@ -699,8 +658,9 @@
                 <div class="brand-logo">m u m i n s u l t a n i</div>
                 
                 <div class="header-actions">
-                    <button class="music-btn-inline" id="musicToggleBtn" onclick="toggleMusic()" title="Toggle Background Music">
-                        <i class="fa-solid fa-volume-high" id="musicIcon"></i>
+                    <!-- Tema Değiştirme Butonu -->
+                    <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                        <i class="fa-solid fa-moon" id="themeIcon"></i>
                     </button>
 
                     <div class="lang-dropdown-container">
@@ -719,10 +679,10 @@
             
             <div class="role-text" id="t-role">Software Developer & Tech Enthusiast</div>
             
-            <!-- Sosyal İkonlar -->
+            <!-- Sosyal İkonlar (Her Zaman Kendi Orijinal Renklerinde, Hover Yok) -->
             <div class="social-row">
-                <a href="https://github.com" target="_blank" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="https://instagram.com/princeshahin0" target="_blank" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://github.com" target="_blank" class="social-btn github" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://instagram.com/princeshahin0" target="_blank" class="social-btn instagram" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
                 <a href="https://wa.me/905389480137" target="_blank" class="social-btn whatsapp" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
         </header>
@@ -826,10 +786,9 @@
     </div>
 
     <script>
-        // Sağ tık menüsünü tamamen engelle
+        // Sağ tık ve kısayol güvenliği
         document.addEventListener('contextmenu', event => event.preventDefault());
 
-        // Klavye kısayollarını engelle (PrintScreen, Ctrl+S, Ctrl+C, F12, Incele vb.)
         document.addEventListener('keydown', (e) => {
             if (
                 e.key === 'PrintScreen' || 
@@ -843,7 +802,6 @@
             }
         });
 
-        // Ekran görüntüsü almaya çalışıldığında perde çek (Pencere odak kaybı veya Visibility API)
         const curtain = document.getElementById('security-curtain');
         function showSecurityCurtain() {
             curtain.style.opacity = '1';
@@ -875,47 +833,19 @@
             }, 1500);
         });
 
-        const audio = document.getElementById('bgAudio');
-        const musicBtn = document.getElementById('musicToggleBtn');
-        const musicIcon = document.getElementById('musicIcon');
-        let isMusicPlaying = false;
-
-        function toggleMusic() {
-            if (isMusicPlaying) {
-                audio.pause();
-                isMusicPlaying = false;
-                musicBtn.classList.remove('playing');
-                musicIcon.className = "fa-solid fa-volume-xmark";
+        // Tema Değiştirme (Dark / Light Mode) Mantığı
+        const themeIcon = document.getElementById('themeIcon');
+        
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                themeIcon.className = "fa-solid fa-sun";
             } else {
-                audio.play().then(() => {
-                    isMusicPlaying = true;
-                    musicBtn.classList.add('playing');
-                    musicIcon.className = "fa-solid fa-volume-high";
-                }).catch(e => {
-                    console.log("Audio play blocked:", e);
-                });
+                themeIcon.className = "fa-solid fa-moon";
             }
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            audio.play().then(() => {
-                isMusicPlaying = true;
-                musicBtn.classList.add('playing');
-                musicIcon.className = "fa-solid fa-volume-high";
-            }).catch(e => {
-                document.addEventListener('click', function initAudioPlay() {
-                    if (!isMusicPlaying) {
-                        audio.play().then(() => {
-                            isMusicPlaying = true;
-                            musicBtn.classList.add('playing');
-                            musicIcon.className = "fa-solid fa-volume-high";
-                        }).catch(err => {});
-                    }
-                    document.removeEventListener('click', initAudioPlay);
-                }, { once: true });
-            });
-        });
-
+        // Dil Menüsü İşlemleri
         function toggleLangMenu() {
             const menu = document.getElementById('langMenu');
             menu.classList.toggle('show');
@@ -951,7 +881,7 @@
                 proj2Desc: "Geliştirici verimliliği için yazılmış hızlı iş akışı otomasyon aracı.",
                 expTitle: "Deneyim",
                 jobTitle: "Uzaktan Yazılım Geliştirici",
-                jobDesc: "Python and Node.js kullanarak ölçeklenebilir arka uç servisleri, REST API'ler ve mobil uyumlu web çözümleri geliştirme.",
+                jobDesc: "Python ve Node.js kullanarak ölçeklenebilir arka uç servisleri, REST API'ler ve mobil uyumlu web çözümleri geliştirme.",
                 setupTitle: "Kurulum & Ortam",
                 osLabel: "İşletim Sistemi", editorLabel: "Editör Yığını",
                 stackTitle: "Temel Yığın", backendLabel: "Arka Uç", frontendLabel: "Ön Uç",
