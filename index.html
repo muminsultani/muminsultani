@@ -542,8 +542,8 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: transparent; /* Arkadaki karanlık katman kaldırıldı, doğrudan animasyon görünür */
-            backdrop-filter: none;     /* Bulanıklık kaldırıldı */
+            background: transparent;
+            backdrop-filter: none;
             z-index: 10000;
             display: flex;
             justify-content: center;
@@ -552,13 +552,13 @@
             visibility: hidden;
             transition: all 0.3s ease;
             padding: 16px;
-            pointer-events: none; /* Modal kapalıyken tıklamaları engellemesin */
+            pointer-events: none;
         }
 
         .modal-overlay.active {
             opacity: 1;
             visibility: visible;
-            pointer-events: auto; /* Modal açıldığında etkileşime izin ver */
+            pointer-events: auto;
         }
 
         .modal-container {
@@ -628,20 +628,36 @@
             margin-bottom: 6px;
         }
 
+        /* DÜZELTME BURADA YAPILDI: Beyazlaşmayı önleyen !important ve autofill kuralları */
         .form-input, .form-textarea {
             width: 100%;
-            background: var(--box-bg);
+            background: var(--box-bg) !important;
             border: 1px solid var(--line-color);
             padding: 10px 14px;
             border-radius: 8px;
-            color: var(--text-primary);
+            color: var(--text-primary) !important;
             font-size: 0.9rem;
             outline: none;
             transition: border-color 0.2s;
+            -webkit-text-fill-color: var(--text-primary) !important;
         }
 
         .form-input:focus, .form-textarea:focus {
             border-color: #9333ea;
+            background: var(--box-bg) !important;
+            color: var(--text-primary) !important;
+            -webkit-text-fill-color: var(--text-primary) !important;
+        }
+
+        .form-input:-webkit-autofill,
+        .form-input:-webkit-autofill:hover, 
+        .form-input:-webkit-autofill:focus,
+        .form-textarea:-webkit-autofill,
+        .form-textarea:-webkit-autofill:hover,
+        .form-textarea:-webkit-autofill:focus {
+            -webkit-box-shadow: 0 0 0 1000px var(--bg-color) inset !important;
+            -webkit-text-fill-color: var(--text-primary) !important;
+            transition: background-color 5000s ease-in-out 0s;
         }
 
         .form-textarea {
