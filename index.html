@@ -1012,25 +1012,25 @@
                 </div>
             </div>
             
-            <!-- Formspree Entegrasyonu: Güncellenen Form Linkiniz -->
-            <form id="appointmentForm" action="https://formspree.io/f/xzezprjy" method="POST" enctype="multipart/form-data" onsubmit="submitFormViaEmail(event)">
+            <!-- Telegram Entegrasyonlu Form -->
+            <form id="appointmentForm" onsubmit="submitFormViaTelegram(event)">
                 <div id="formFieldsContainer">
                     <div class="form-group">
                         <label class="form-label" id="m-label-name">Name & Surname</label>
-                        <input type="text" class="form-input" name="Name" id="clientName" required placeholder="Name & Surname">
+                        <input type="text" class="form-input" id="clientName" required placeholder="Name & Surname">
                     </div>
                     <div class="form-group">
                         <label class="form-label" id="m-label-email">Email Address</label>
-                        <input type="email" class="form-input" name="Email" id="clientEmail" required placeholder="name@sample.com">
+                        <input type="email" class="form-input" id="clientEmail" required placeholder="name@sample.com">
                     </div>
                     <div class="form-group">
                         <label class="form-label" id="m-label-whatsapp">WhatsApp Number <span style="font-weight: normal; color: var(--text-secondary);">(Ülke Kodu)</span></label>
-                        <input type="tel" class="form-input" name="WhatsApp" id="clientWhatsApp" required value="+ " oninput="checkPlus(event)">
+                        <input type="tel" class="form-input" id="clientWhatsApp" required value="+49 " oninput="checkPlus(event)">
                     </div>
                     <div class="form-group">
                         <label class="form-label" id="m-label-file">Attach File / Photo / Video / PDF</label>
                         <div class="file-upload-wrapper">
-                            <input type="file" name="AttachedFile" id="clientFile" accept="image/*,video/*,.pdf" onchange="updateFileName(this)">
+                            <input type="file" id="clientFile" accept="image/*,video/*,.pdf" onchange="updateFileName(this)">
                             <div class="file-upload-text" id="fileUploadText">
                                 <i class="fa-solid fa-paperclip"></i> <span id="fileNameSpan">Dosya seçilmedi (PNG, JPG, Video, PDF)</span>
                             </div>
@@ -1038,7 +1038,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label" id="m-label-desc">Description / Project Details</label>
-                        <textarea class="form-textarea" name="Description" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
+                        <textarea class="form-textarea" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
                     </div>
                     <button type="submit" class="submit-btn" id="m-submit-btn">
                         <i class="fa-solid fa-paper-plane"></i> Gönder / Submit Request
@@ -1255,7 +1255,7 @@
             document.getElementById('formFieldsContainer').style.display = 'block';
             document.getElementById('successMessageBox').style.display = 'none';
             document.getElementById('appointmentForm').reset();
-            document.getElementById('clientWhatsApp').value = "+ ";
+            document.getElementById('clientWhatsApp').value = "+49 ";
             document.getElementById('fileNameSpan').innerText = modalTranslations[document.getElementById('htmlRoot').getAttribute('lang') || 'en'].fileDefault;
             
             document.getElementById('appointmentModal').classList.add('active');
@@ -1292,8 +1292,8 @@
 
         function checkPlus(e) {
             const input = e.target;
-            if (!input.value.startsWith("+ ")) {
-                input.value = "+ ";
+            if (!input.value.startsWith("+")) {
+                input.value = "+49 ";
             }
         }
 
@@ -1304,21 +1304,71 @@
             }
         }
 
-        async function submitFormViaEmail(e) {
+        // --- TELEGRAM GÖNDERİM FONKSİYONU ---
+        async function submitFormViaTelegram(e) {
             e.preventDefault();
-            const form = e.target;
-            const formData = new FormData(form);
+
+            const name = document.getElementById('clientName').value;
+            const email = document.getElementById('clientEmail').value;
+            const whatsapp = document.getElementById('clientWhatsApp').value;
+            const desc = document.getElementById('clientDesc').value;
+            const fileInput = document.getElementById('clientFile');
+
+            // ⚠️ BURAYA KENDİ TELEGRAM BOT BİLGİLERİNİZİ YAZIN:
+            const botToken = 'BURAYA_BOT_TOKEN_YAZIN'; // Örn: 123456789:ABCdefGhIJKlmNo...
+            const chatId = 'BURAYA_CHAT_ID_YAZIN';       // Örn: 987654321
+
+            // Eğer bot token girilmediyse kullanıcıyı uyar
+            if(botToken === 'BURAYA_BOT_TOKEN_YAZIN') {
+                alert("Lütfen Telegram Bot Token ve Chat ID bilgilerini kod içerisine ekleyin.");
+                return;
+            }
+
+            const text = `🔔 *Yeni Randevu / Proje Talebi!*\n\n` +
+                         `👤 *Ad Soyad:* ${name}\n` +
+                         `📧 *E-posta:* ${email}\n` +
+                         `📱 *WhatsApp:* ${whatsapp}\n` +
+                         `💬 *Detay:* ${desc}`;
+
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            const submitBtn = document.getElementById('m-submit-btn');
+            submitBtn.disabled = true;
 
             try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                // 1. Metin mesajını Telegram'a gönder
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: text,
+                        parse_mode: 'Markdown'
+                    })
                 });
 
-                if (response.ok) {
+                const data = await response.json();
+
+                if (data.ok) {
+                    // 2. Eğer dosya seçildiyse onu da ayrıca Telegram'a gönder
+                    if (fileInput.files && fileInput.files[0]) {
+                        const file = fileInput.files[0];
+                        const formData = new FormData();
+                        formData.append('chat_id', chatId);
+                        
+                        let fileEndpoint = 'sendDocument';
+                        if(file.type.startsWith('image/')) fileEndpoint = 'sendPhoto';
+                        else if(file.type.startsWith('video/')) fileEndpoint = 'sendVideo';
+
+                        formData.append(fileEndpoint === 'sendPhoto' ? 'photo' : (fileEndpoint === 'sendVideo' ? 'video' : 'document'), file);
+                        formData.append('caption', `Müşteri Dosyası: ${name}`);
+
+                        await fetch(`https://api.telegram.org/bot${botToken}/${fileEndpoint}`, {
+                            method: 'POST',
+                            body: formData
+                        });
+                    }
+
+                    // Başarılı ekranını göster
                     document.getElementById('formFieldsContainer').style.display = 'none';
                     document.getElementById('successMessageBox').style.display = 'flex';
 
@@ -1326,10 +1376,12 @@
                         closeAppointmentModal();
                     }, 3500);
                 } else {
-                    alert("Gönderim sırasında bir hata oluştu. Lütfen tekrar deneyin.");
+                    alert("Telegram'a gönderilemedi. Lütfen token ve chat ID'yi kontrol edin.");
                 }
             } catch (error) {
                 alert("Bağlantı hatası oluştu.");
+            } finally {
+                submitBtn.disabled = false;
             }
         }
 
