@@ -1314,15 +1314,9 @@
             const desc = document.getElementById('clientDesc').value;
             const fileInput = document.getElementById('clientFile');
 
-            // ⚠️ BURAYA KENDİ TELEGRAM BOT BİLGİLERİNİZİ YAZIN:
-            const botToken = 'BURAYA_BOT_TOKEN_YAZIN'; // Örn: 123456789:ABCdefGhIJKlmNo...
-            const chatId = 'BURAYA_CHAT_ID_YAZIN';       // Örn: 987654321
-
-            // Eğer bot token girilmediyse kullanıcıyı uyar
-            if(botToken === 'BURAYA_BOT_TOKEN_YAZIN') {
-                alert("Lütfen Telegram Bot Token ve Chat ID bilgilerini kod içerisine ekleyin.");
-                return;
-            }
+            // Telegram Bot Bilgileri Eklendi
+            const botToken = '8928757405:AAGPN1oTiCGpWYvQZXStcPuAna6Baf3yCKI';
+            const chatId = '8543954496';
 
             const text = `🔔 *Yeni Randevu / Proje Talebi!*\n\n` +
                          `👤 *Ad Soyad:* ${name}\n` +
