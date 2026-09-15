@@ -711,6 +711,34 @@
             opacity: 0.9;
         }
 
+        /* Başarı Mesajı Stili */
+        .success-message-box {
+            text-align: center;
+            padding: 30px 10px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .success-message-box i {
+            font-size: 3rem;
+            color: #22c55e;
+            margin-bottom: 5px;
+        }
+
+        .success-message-box h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .success-message-box p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
         footer {
             border-top: 1px solid var(--line-color);
             padding-top: 28px;
@@ -989,35 +1017,45 @@
                     <button class="modal-close-btn" onclick="closeAppointmentModal()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
-            <form id="appointmentForm" onsubmit="sendToWhatsApp(event)">
-                <div class="form-group">
-                    <label class="form-label" id="m-label-name">Name & Surname</label>
-                    <input type="text" class="form-input" id="clientName" required placeholder="Name & Surname">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" id="m-label-email">Email Address</label>
-                    <input type="email" class="form-input" id="clientEmail" required placeholder="name@sample.com">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" id="m-label-whatsapp">WhatsApp Number <span style="font-weight: normal; color: var(--text-secondary);">(Ülke Kodu)</span></label>
-                    <input type="tel" class="form-input" id="clientWhatsApp" required value="+ " oninput="checkPlus(event)">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" id="m-label-file">Attach File / Photo / Video / PDF</label>
-                    <div class="file-upload-wrapper">
-                        <input type="file" id="clientFile" accept="image/*,video/*,.pdf" onchange="updateFileName(this)">
-                        <div class="file-upload-text" id="fileUploadText">
-                            <i class="fa-solid fa-paperclip"></i> <span id="fileNameSpan">Dosya seçilmedi (PNG, JPG, Video, PDF)</span>
+            
+            <form id="appointmentForm" onsubmit="submitFormDirectly(event)">
+                <div id="formFieldsContainer">
+                    <div class="form-group">
+                        <label class="form-label" id="m-label-name">Name & Surname</label>
+                        <input type="text" class="form-input" id="clientName" required placeholder="Name & Surname">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" id="m-label-email">Email Address</label>
+                        <input type="email" class="form-input" id="clientEmail" required placeholder="name@sample.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" id="m-label-whatsapp">WhatsApp Number <span style="font-weight: normal; color: var(--text-secondary);">(Ülke Kodu)</span></label>
+                        <input type="tel" class="form-input" id="clientWhatsApp" required value="+ " oninput="checkPlus(event)">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" id="m-label-file">Attach File / Photo / Video / PDF</label>
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="clientFile" accept="image/*,video/*,.pdf" onchange="updateFileName(this)">
+                            <div class="file-upload-text" id="fileUploadText">
+                                <i class="fa-solid fa-paperclip"></i> <span id="fileNameSpan">Dosya seçilmedi (PNG, JPG, Video, PDF)</span>
+                            </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="form-label" id="m-label-desc">Description / Project Details</label>
+                        <textarea class="form-textarea" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" id="m-submit-btn">
+                        <i class="fa-solid fa-paper-plane"></i> Gönder / Submit Request
+                    </button>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" id="m-label-desc">Description / Project Details</label>
-                    <textarea class="form-textarea" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
+
+                <!-- Başarı Mesajı Alanı -->
+                <div class="success-message-box" id="successMessageBox">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <h3 id="successTitle">Mesajınız Başarıyla Gönderildi!</h3>
+                    <p id="successDesc">Talebiniz alınmıştır, en kısa sürede dönüş yapılacaktır.</p>
                 </div>
-                <button type="submit" class="submit-btn" id="m-submit-btn">
-                    <i class="fa-brands fa-whatsapp"></i> Send Request via WhatsApp
-                </button>
             </form>
         </div>
     </div>
@@ -1187,7 +1225,9 @@
                 fileLabel: "Attach File / Photo / Video / PDF",
                 fileDefault: "No file chosen (PNG, JPG, Video, PDF)",
                 descLabel: "Description / Project Details",
-                submitBtn: "Send Request via WhatsApp"
+                submitBtn: "Submit Request",
+                successTitle: "Message Sent Successfully!",
+                successDesc: "Your request has been received, we will get back to you shortly."
             },
             tr: {
                 code: "TR",
@@ -1198,7 +1238,9 @@
                 fileLabel: "Dosya / Görsel / Video / PDF Ekle",
                 fileDefault: "Dosya seçilmedi (PNG, JPG, Video, PDF)",
                 descLabel: "Açıklama / Proje Detayları",
-                submitBtn: "WhatsApp ile Gönder"
+                submitBtn: "Talebi Gönder",
+                successTitle: "Mesajınız Başarıyla Gönderildi!",
+                successDesc: "Talebiniz alınmıştır, en kısa sürede dönüş yapılacaktır."
             },
             de: {
                 code: "DE",
@@ -1209,11 +1251,20 @@
                 fileLabel: "Datei / Foto / Video / PDF anhängen",
                 fileDefault: "Keine Datei ausgewählt (PNG, JPG, Video, PDF)",
                 descLabel: "Beschreibung / Projektdetails",
-                submitBtn: "Über WhatsApp senden"
+                submitBtn: "Anfrage senden",
+                successTitle: "Nachricht erfolgreich gesendet!",
+                successDesc: "Ihre Anfrage wurde empfangen, wir melden uns in Kürze bei Ihnen."
             }
         };
 
         function openAppointmentModal() {
+            // Formu sıfırla ve tekrar görünür yap
+            document.getElementById('formFieldsContainer').style.display = 'block';
+            document.getElementById('successMessageBox').style.display = 'none';
+            document.getElementById('appointmentForm').reset();
+            document.getElementById('clientWhatsApp').value = "+ ";
+            document.getElementById('fileNameSpan').innerText = modalTranslations[document.getElementById('htmlRoot').getAttribute('lang') || 'en'].fileDefault;
+            
             document.getElementById('appointmentModal').classList.add('active');
         }
 
@@ -1239,7 +1290,9 @@
             }
 
             document.getElementById('m-label-desc').innerText = data.descLabel;
-            document.getElementById('m-submit-btn').innerHTML = `<i class="fa-brands fa-whatsapp"></i> ${data.submitBtn}`;
+            document.getElementById('m-submit-btn').innerHTML = `<i class="fa-solid fa-paper-plane"></i> ${data.submitBtn}`;
+            document.getElementById('successTitle').innerText = data.successTitle;
+            document.getElementById('successDesc').innerText = data.successDesc;
 
             document.getElementById('modalLangMenu').classList.remove('show');
         }
@@ -1258,30 +1311,18 @@
             }
         }
 
-        function sendToWhatsApp(e) {
+        // WhatsApp'a yönlendirmek yerine sitede başarı mesajı gösteren fonksiyon
+        function submitFormDirectly(e) {
             e.preventDefault();
             
-            const name = document.getElementById('clientName').value;
-            const email = document.getElementById('clientEmail').value;
-            const whatsapp = document.getElementById('clientWhatsApp').value.trim();
-            const fileInput = document.getElementById('clientFile');
-            const desc = document.getElementById('clientDesc').value;
+            // Form input alanlarını gizle, başarı mesajını göster
+            document.getElementById('formFieldsContainer').style.display = 'none';
+            document.getElementById('successMessageBox').style.display = 'flex';
 
-            let fileInfoText = "Dosya eklenmedi";
-
-            if (fileInput.files && fileInput.files[0]) {
-                fileInfoText = fileInput.files[0].name;
-            }
-
-            // Sadece dosya adını ve temiz verileri içeren mesaj yapısı
-            const text = `--- Yeni Randevu / Proje Talebi ---\n*Ad Soyad:* ${name}\n*E-posta:* ${email}\n*WhatsApp:* ${whatsapp}\n*Dosya:* ${fileInfoText}\n*Açıklama:* ${desc}`;
-            const encodedText = encodeURIComponent(text);
-            const targetPhone = "905389480137";
-            
-            const whatsappUrl = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodedText}`;
-            window.location.href = whatsappUrl;
-            
-            closeAppointmentModal();
+            // İsteğe bağlı olarak 3 saniye sonra modalı otomatik kapatabilirsiniz:
+            setTimeout(() => {
+                closeAppointmentModal();
+            }, 3500);
         }
 
         const canvas = document.getElementById('constellation-canvas');
