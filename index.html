@@ -1273,6 +1273,7 @@
                 fileInfoText = fileInput.files[0].name;
             }
 
+            // Sadece dosya adını ve temiz verileri içeren mesaj yapısı
             const text = `--- Yeni Randevu / Proje Talebi ---\n*Ad Soyad:* ${name}\n*E-posta:* ${email}\n*WhatsApp:* ${whatsapp}\n*Dosya:* ${fileInfoText}\n*Açıklama:* ${desc}`;
             const encodedText = encodeURIComponent(text);
             const targetPhone = "905389480137";
