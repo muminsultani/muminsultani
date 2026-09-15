@@ -15,14 +15,17 @@
 }
     </script>
 
+    <!-- Tarayıcı Sekme Logosu (Favicon) -->
     <link rel="icon" type="image/png" sizes="32x32" href="https://muminsultani.com/img/ms.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://muminsultani.com/img/ms.png">
     <link rel="apple-touch-icon" sizes="180x180" href="https://muminsultani.com/img/180.png">
 
+    <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* Ekran Görüntüsü ve İçerik Koruma (Anti-Screenshot & Anti-Copy) */
         body {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -54,6 +57,7 @@
             pointer-events: none;
         }
 
+        /* Renk Paleti (CSS Variables) - Varsayılan Dark Mode */
         :root {
             --bg-color: #050508;
             --text-primary: #f8fafc;
@@ -63,10 +67,11 @@
             --box-bg: rgba(255, 255, 255, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(10, 10, 15, 0.85);
-            --modal-container-bg: rgba(10, 10, 15, 0.55);
+            --modal-container-bg: rgba(10, 10, 15, 0.55); /* Şeffaf Modal Arka Planı */
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.12), rgba(168, 85, 247, 0.05) 60%, transparent 80%);
         }
 
+        /* Light Mode Sınıfı */
         body.light-mode {
             --bg-color: #f8fafc;
             --text-primary: #0f172a;
@@ -76,7 +81,7 @@
             --box-bg: rgba(0, 0, 0, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(255, 255, 255, 0.85);
-            --modal-container-bg: rgba(255, 255, 255, 0.65);
+            --modal-container-bg: rgba(255, 255, 255, 0.65); /* Light Mode Şeffaf Modal */
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.08), rgba(168, 85, 247, 0.03) 60%, transparent 80%);
         }
 
@@ -99,6 +104,7 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
+        /* İnteraktif Ağ / Parçacık Animasyon Canvas'ı */
         #constellation-canvas {
             position: fixed;
             top: 0;
@@ -109,6 +115,7 @@
             pointer-events: none;
         }
 
+        /* 1.5 Saniyelik Intro Ekranı */
         #intro-screen {
             position: fixed;
             top: 0;
@@ -197,6 +204,7 @@
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
+        /* Ambient Glow */
         .ambient-glow {
             position: fixed;
             top: 15%;
@@ -211,6 +219,7 @@
             pointer-events: none;
         }
 
+        /* Wrapper */
         .wrapper {
             width: 100%;
             max-width: 1000px; 
@@ -231,6 +240,7 @@
             body { padding: 60px 40px; }
         }
 
+        /* Header Section */
         .header-section {
             padding-bottom: 2px;
         }
@@ -373,6 +383,7 @@
             letter-spacing: -0.2px;
         }
 
+        /* Social Row */
         .social-row {
             display: flex;
             align-items: center;
@@ -394,6 +405,7 @@
             display: block;
         }
 
+        /* Sections */
         section {
             border-top: 1px solid var(--line-color);
             padding-top: 24px;
@@ -416,6 +428,7 @@
             font-size: 0.9rem;
         }
 
+        /* Item Rows */
         .item-row {
             margin-bottom: 20px;
         }
@@ -467,6 +480,7 @@
             line-height: 1.6;
         }
 
+        /* Specs Grid */
         .specs-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -490,6 +504,7 @@
             word-break: break-word;
         }
 
+        /* Contact Box */
         .contact-box {
             display: flex;
             align-items: center;
@@ -531,6 +546,7 @@
             flex-shrink: 0;
         }
 
+        /* Modal Panel Styles (Şeffaf / Arkadaki Animasyon Görünür) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -642,48 +658,6 @@
             min-height: 100px;
         }
 
-        .file-upload-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            background: var(--box-bg);
-            border: 1px dashed var(--line-color);
-            border-radius: 8px;
-            padding: 10px 14px;
-            cursor: pointer;
-            transition: border-color 0.2s;
-        }
-
-        .file-upload-wrapper:hover {
-            border-color: #9333ea;
-        }
-
-        .file-upload-wrapper input[type="file"] {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .file-upload-text {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .file-upload-text i {
-            color: #9333ea;
-        }
-
         .submit-btn {
             width: 100%;
             background: linear-gradient(135deg, #9333ea, #c084fc);
@@ -706,33 +680,7 @@
             opacity: 0.9;
         }
 
-        .success-message-box {
-            text-align: center;
-            padding: 30px 10px;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .success-message-box i {
-            font-size: 3rem;
-            color: #22c55e;
-            margin-bottom: 5px;
-        }
-
-        .success-message-box h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .success-message-box p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
+        /* Footer */
         footer {
             border-top: 1px solid var(--line-color);
             padding-top: 28px;
@@ -826,10 +774,12 @@
 </head>
 <body>
 
+    <!-- İnteraktif Parçacık Ağ Arka Planı -->
     <canvas id="constellation-canvas"></canvas>
 
     <div id="security-curtain"></div>
 
+    <!-- 1.5 Saniyelik Intro Ekranı -->
     <div id="intro-screen">
         <div class="intro-content">
             <div class="intro-code-box">
@@ -840,14 +790,17 @@
         </div>
     </div>
 
+    <!-- Ambient Glow Background -->
     <div class="ambient-glow"></div>
 
     <div class="wrapper">
+        <!-- Header Section -->
         <header class="header-section">
             <div class="header-top">
                 <div class="brand-logo">muminsultani</div>
                 
                 <div class="header-actions">
+                    <!-- Tema Değiştirme Butonu -->
                     <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
                         <i class="fa-solid fa-moon" id="themeIcon"></i>
                     </button>
@@ -900,6 +853,7 @@
             </div>
         </header>
 
+        <!-- Featured Projects Section -->
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-rocket"></i> <span id="t-projects-title">Featured Projects</span>
@@ -920,6 +874,7 @@
             </div>
         </section>
 
+        <!-- Experience Section -->
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-briefcase"></i> <span id="t-exp-title">Experience</span>
@@ -934,6 +889,7 @@
             </div>
         </section>
 
+        <!-- Setup & Environment Section -->
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-laptop-code"></i> <span id="t-setup-title">Setup & Environment</span>
@@ -950,6 +906,7 @@
             </div>
         </section>
 
+        <!-- Core Stack Section -->
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-layer-group"></i> <span id="t-stack-title">Core Stack</span>
@@ -966,6 +923,7 @@
             </div>
         </section>
 
+        <!-- Get in Touch Section -->
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-paper-plane"></i> <span id="t-contact-title">Get In Touch</span>
@@ -979,6 +937,7 @@
             </div>
         </section>
 
+        <!-- Footer -->
         <footer>
             <div class="footer-qr-container">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://muminsultani.com" alt="QR Code">
@@ -992,11 +951,13 @@
         </footer>
     </div>
 
+    <!-- Randevu / Proje Formu Paneli (Modal) -->
     <div class="modal-overlay" id="appointmentModal">
         <div class="modal-container">
             <div class="modal-header">
                 <div class="modal-title" id="m-title">Book an Appointment</div>
                 <div class="modal-header-actions">
+                    <!-- Modal İçi Açılır Dil Menüsü -->
                     <div class="lang-dropdown-container">
                         <button class="lang-btn" id="modalLangDropdownBtn" onclick="toggleModalLangMenu()">
                             <span id="modalCurrentLangText">EN</span>
@@ -1011,50 +972,32 @@
                     <button class="modal-close-btn" onclick="closeAppointmentModal()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
-            
-            <!-- Telegram Entegrasyonlu Form -->
-            <form id="appointmentForm" onsubmit="submitFormViaTelegram(event)">
-                <div id="formFieldsContainer">
-                    <div class="form-group">
-                        <label class="form-label" id="m-label-name">Name & Surname</label>
-                        <input type="text" class="form-input" id="clientName" required placeholder="Name & Surname">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" id="m-label-email">Email Address</label>
-                        <input type="email" class="form-input" id="clientEmail" required placeholder="name@sample.com">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" id="m-label-whatsapp">WhatsApp Number <span style="font-weight: normal; color: var(--text-secondary);">(Ülke Kodu)</span></label>
-                        <input type="tel" class="form-input" id="clientWhatsApp" required value="+49 " oninput="checkPlus(event)">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" id="m-label-file">Attach File / Photo / Video / PDF</label>
-                        <div class="file-upload-wrapper">
-                            <input type="file" id="clientFile" accept="image/*,video/*,.pdf" onchange="updateFileName(this)">
-                            <div class="file-upload-text" id="fileUploadText">
-                                <i class="fa-solid fa-paperclip"></i> <span id="fileNameSpan">Dosya seçilmedi (PNG, JPG, Video, PDF)</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" id="m-label-desc">Description / Project Details</label>
-                        <textarea class="form-textarea" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn" id="m-submit-btn">
-                        <i class="fa-solid fa-paper-plane"></i> Gönder / Submit Request
-                    </button>
+            <form id="appointmentForm" onsubmit="sendToWhatsApp(event)">
+                <div class="form-group">
+                    <label class="form-label" id="m-label-name">Name & Surname</label>
+                    <input type="text" class="form-input" id="clientName" required placeholder="Name & Surname">
                 </div>
-
-                <div class="success-message-box" id="successMessageBox">
-                    <i class="fa-solid fa-circle-check"></i>
-                    <h3 id="successTitle">Mesajınız Başarıyla Gönderildi!</h3>
-                    <p id="successDesc">Talebiniz alınmıştır, en kısa sürede dönüş yapılacaktır.</p>
+                <div class="form-group">
+                    <label class="form-label" id="m-label-email">Email Address</label>
+                    <input type="email" class="form-input" id="clientEmail" required placeholder="name@sample.com">
                 </div>
+                <div class="form-group">
+                    <label class="form-label" id="m-label-whatsapp">WhatsApp Number <span style="font-weight: normal; color: var(--text-secondary);">(Ülke Kodu)</span></label>
+                    <input type="tel" class="form-input" id="clientWhatsApp" required value="+ " oninput="checkPlus(event)">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="m-label-desc">Description / Project Details</label>
+                    <textarea class="form-textarea" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn" id="m-submit-btn">
+                    <i class="fa-brands fa-whatsapp"></i> Send Request via WhatsApp
+                </button>
             </form>
         </div>
     </div>
 
     <script>
+        // Sağ tık ve kısayol güvenliği
         document.addEventListener('contextmenu', event => event.preventDefault());
 
         document.addEventListener('keydown', (e) => {
@@ -1101,6 +1044,7 @@
             }, 1500);
         });
 
+        // Tema Değiştirme (Dark / Light Mode) Mantığı
         const themeIcon = document.getElementById('themeIcon');
         
         function toggleTheme() {
@@ -1112,11 +1056,13 @@
             }
         }
 
+        // Ana Dil Menüsü İşlemleri
         function toggleLangMenu() {
             const menu = document.getElementById('langMenu');
             menu.classList.toggle('show');
         }
 
+        // Modal Dil Menüsü İşlemleri
         function toggleModalLangMenu() {
             const menu = document.getElementById('modalLangMenu');
             menu.classList.toggle('show');
@@ -1209,6 +1155,7 @@
             document.getElementById('langMenu').classList.remove('show');
         }
 
+        // Modal (Randevu Paneli) Kontrolleri ve Çevirileri
         const modalTranslations = {
             en: {
                 code: "EN",
@@ -1216,12 +1163,8 @@
                 nameLabel: "Name & Surname",
                 emailLabel: "Email Address",
                 whatsappLabel: "WhatsApp Number",
-                fileLabel: "Attach File / Photo / Video / PDF",
-                fileDefault: "No file chosen (PNG, JPG, Video, PDF)",
                 descLabel: "Description / Project Details",
-                submitBtn: "Submit Request",
-                successTitle: "Message Sent Successfully!",
-                successDesc: "Your request has been received, we will get back to you shortly."
+                submitBtn: "Send Request via WhatsApp"
             },
             tr: {
                 code: "TR",
@@ -1229,12 +1172,8 @@
                 nameLabel: "Ad Soyad",
                 emailLabel: "E-posta Adresi",
                 whatsappLabel: "WhatsApp Numarası",
-                fileLabel: "Dosya / Görsel / Video / PDF Ekle",
-                fileDefault: "Dosya seçilmedi (PNG, JPG, Video, PDF)",
                 descLabel: "Açıklama / Proje Detayları",
-                submitBtn: "Talebi Gönder",
-                successTitle: "Mesajınız Başarıyla Gönderildi!",
-                successDesc: "Talebiniz alınmıştır, en kısa sürede dönüş yapılacaktır."
+                submitBtn: "WhatsApp ile Gönder"
             },
             de: {
                 code: "DE",
@@ -1242,22 +1181,12 @@
                 nameLabel: "Name & Nachname",
                 emailLabel: "E-Mail-Adresse",
                 whatsappLabel: "WhatsApp Nummer",
-                fileLabel: "Datei / Foto / Video / PDF anhängen",
-                fileDefault: "Keine Datei ausgewählt (PNG, JPG, Video, PDF)",
                 descLabel: "Beschreibung / Projektdetails",
-                submitBtn: "Anfrage senden",
-                successTitle: "Nachricht erfolgreich gesendet!",
-                successDesc: "Ihre Anfrage wurde empfangen, wir melden uns in Kürze bei Ihnen."
+                submitBtn: "Über WhatsApp senden"
             }
         };
 
         function openAppointmentModal() {
-            document.getElementById('formFieldsContainer').style.display = 'block';
-            document.getElementById('successMessageBox').style.display = 'none';
-            document.getElementById('appointmentForm').reset();
-            document.getElementById('clientWhatsApp').value = "+49 ";
-            document.getElementById('fileNameSpan').innerText = modalTranslations[document.getElementById('htmlRoot').getAttribute('lang') || 'en'].fileDefault;
-            
             document.getElementById('appointmentModal').classList.add('active');
         }
 
@@ -1274,111 +1203,42 @@
             document.getElementById('m-label-name').innerText = data.nameLabel;
             document.getElementById('clientName').placeholder = data.nameLabel;
             document.getElementById('m-label-email').innerText = data.emailLabel;
-            document.getElementById('m-label-whatsapp').innerHTML = `${data.whatsappLabel} <span style="font-weight: normal; color: var(--text-secondary);">(Ülke Kodu)</span>`;
-            document.getElementById('m-label-file').innerText = data.fileLabel;
             
-            const fileInput = document.getElementById('clientFile');
-            if(fileInput.files.length === 0) {
-                document.getElementById('fileNameSpan').innerText = data.fileDefault;
-            }
-
+            document.getElementById('m-label-whatsapp').innerHTML = `${data.whatsappLabel} <span style="font-weight: normal; color: var(--text-secondary);">(Ülke Kodu)</span>`;
+            
             document.getElementById('m-label-desc').innerText = data.descLabel;
-            document.getElementById('m-submit-btn').innerHTML = `<i class="fa-solid fa-paper-plane"></i> ${data.submitBtn}`;
-            document.getElementById('successTitle').innerText = data.successTitle;
-            document.getElementById('successDesc').innerText = data.successDesc;
+            document.getElementById('m-submit-btn').innerHTML = `<i class="fa-brands fa-whatsapp"></i> ${data.submitBtn}`;
 
             document.getElementById('modalLangMenu').classList.remove('show');
         }
 
+        // "+" işaretinin silinmesini engelleyen fonksiyon
         function checkPlus(e) {
             const input = e.target;
-            if (!input.value.startsWith("+")) {
-                input.value = "+49 ";
+            if (!input.value.startsWith("+ ")) {
+                input.value = "+ ";
             }
         }
 
-        function updateFileName(input) {
-            const span = document.getElementById('fileNameSpan');
-            if (input.files && input.files[0]) {
-                span.innerText = input.files[0].name;
-            }
-        }
-
-        // --- TELEGRAM GÖNDERİM FONKSİYONU ---
-        async function submitFormViaTelegram(e) {
+        function sendToWhatsApp(e) {
             e.preventDefault();
-
+            
             const name = document.getElementById('clientName').value;
             const email = document.getElementById('clientEmail').value;
             const whatsapp = document.getElementById('clientWhatsApp').value;
             const desc = document.getElementById('clientDesc').value;
-            const fileInput = document.getElementById('clientFile');
 
-            // Telegram Bot Bilgileri Eklendi
-            const botToken = '8928757405:AAGPN1oTiCGpWYvQZXStcPuAna6Baf3yCKI';
-            const chatId = '8543954496';
-
-            const text = `🔔 *Yeni Randevu / Proje Talebi!*\n\n` +
-                         `👤 *Ad Soyad:* ${name}\n` +
-                         `📧 *E-posta:* ${email}\n` +
-                         `📱 *WhatsApp:* ${whatsapp}\n` +
-                         `💬 *Detay:* ${desc}`;
-
-            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-            const submitBtn = document.getElementById('m-submit-btn');
-            submitBtn.disabled = true;
-
-            try {
-                // 1. Metin mesajını Telegram'a gönder
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: chatId,
-                        text: text,
-                        parse_mode: 'Markdown'
-                    })
-                });
-
-                const data = await response.json();
-
-                if (data.ok) {
-                    // 2. Eğer dosya seçildiyse onu da ayrıca Telegram'a gönder
-                    if (fileInput.files && fileInput.files[0]) {
-                        const file = fileInput.files[0];
-                        const formData = new FormData();
-                        formData.append('chat_id', chatId);
-                        
-                        let fileEndpoint = 'sendDocument';
-                        if(file.type.startsWith('image/')) fileEndpoint = 'sendPhoto';
-                        else if(file.type.startsWith('video/')) fileEndpoint = 'sendVideo';
-
-                        formData.append(fileEndpoint === 'sendPhoto' ? 'photo' : (fileEndpoint === 'sendVideo' ? 'video' : 'document'), file);
-                        formData.append('caption', `Müşteri Dosyası: ${name}`);
-
-                        await fetch(`https://api.telegram.org/bot${botToken}/${fileEndpoint}`, {
-                            method: 'POST',
-                            body: formData
-                        });
-                    }
-
-                    // Başarılı ekranını göster
-                    document.getElementById('formFieldsContainer').style.display = 'none';
-                    document.getElementById('successMessageBox').style.display = 'flex';
-
-                    setTimeout(() => {
-                        closeAppointmentModal();
-                    }, 3500);
-                } else {
-                    alert("Telegram'a gönderilemedi. Lütfen token ve chat ID'yi kontrol edin.");
-                }
-            } catch (error) {
-                alert("Bağlantı hatası oluştu.");
-            } finally {
-                submitBtn.disabled = false;
-            }
+            const text = `--- New Appointment / Project Request ---\n*Full Name:* ${name}\n*Email:* ${email}\n*WhatsApp:* ${whatsapp}\n*Description:* ${desc}`;
+            const encodedText = encodeURIComponent(text);
+            
+            const targetPhone = "905389480137";
+            const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodedText}`;
+            
+            window.open(whatsappUrl, '_blank');
+            closeAppointmentModal();
         }
 
+        // İnteraktif Ağ / Parçacık Animasyonu (Constellation Network)
         const canvas = document.getElementById('constellation-canvas');
         const ctx = canvas.getContext('2d');
 
