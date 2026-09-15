@@ -628,7 +628,7 @@
             margin-bottom: 6px;
         }
 
-        /* DÜZELTME: Mobil tarayıcılar için kesin Autofill ve Arka Plan Çözümü */
+        /* Dark Mode Autofill */
         .form-input:-webkit-autofill,
         .form-input:-webkit-autofill:hover, 
         .form-input:-webkit-autofill:focus,
@@ -637,6 +637,18 @@
         .form-textarea:-webkit-autofill:focus {
             -webkit-text-fill-color: var(--text-primary) !important;
             -webkit-box-shadow: 0 0 0 1000px #0a0a0f inset !important;
+            transition: background-color 5000s ease-in-out 0s !important;
+        }
+
+        /* Light Mode İçin Autofill Arka Plan Desteği */
+        body.light-mode .form-input:-webkit-autofill,
+        body.light-mode .form-input:-webkit-autofill:hover, 
+        body.light-mode .form-input:-webkit-autofill:focus,
+        body.light-mode .form-textarea:-webkit-autofill,
+        body.light-mode .form-textarea:-webkit-autofill:hover,
+        body.light-mode .form-textarea:-webkit-autofill:focus {
+            -webkit-text-fill-color: var(--text-primary) !important;
+            -webkit-box-shadow: 0 0 0 1000px #f8fafc inset !important;
             transition: background-color 5000s ease-in-out 0s !important;
         }
 
