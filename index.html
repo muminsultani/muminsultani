@@ -73,7 +73,7 @@
             --box-bg: rgba(255, 255, 255, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(10, 10, 15, 0.85);
-            --modal-container-bg: rgba(10, 10, 15, 0.5); 
+            --modal-container-bg: rgba(10, 10, 15, 0.7); 
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.12), rgba(168, 85, 247, 0.05) 60%, transparent 80%);
         }
 
@@ -87,7 +87,7 @@
             --box-bg: rgba(0, 0, 0, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(255, 255, 255, 0.85);
-            --modal-container-bg: rgba(255, 255, 255, 0.6); 
+            --modal-container-bg: rgba(255, 255, 255, 0.8); 
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.08), rgba(168, 85, 247, 0.03) 60%, transparent 80%);
         }
 
@@ -569,14 +569,14 @@
 
         .modal-container {
             background: var(--modal-container-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--line-color);
-            border-radius: 16px;
+            border-radius: 20px;
             width: 100%;
-            max-width: 500px;
-            padding: 24px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            max-width: 540px;
+            padding: 32px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
             position: relative;
             transform: translateY(20px);
             transition: transform 0.3s ease;
@@ -591,44 +591,76 @@
         .modal-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+            align-items: flex-start;
+            margin-bottom: 24px;
             border-bottom: 1px solid var(--line-color);
-            padding-bottom: 12px;
+            padding-bottom: 16px;
+            position: relative;
+            gap: 12px;
+        }
+
+        /* Sol üst köşe hizalaması (muminsultani ve unvan alt alta) */
+        .modal-header-left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        /* Sağ üst köşedeki dil ve kapatma butonları */
+        .modal-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .modal-brand {
+            font-size: 1.4rem; /* Boyut büyütüldü */
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientFlow 8s ease infinite;
+            margin-bottom: 6px; /* İki yazı arasına boşluk bırakıldı */
         }
 
         .modal-title {
             font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .modal-header-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-weight: 600;
+            color: var(--text-secondary);
         }
 
         .modal-close-btn {
-            background: transparent;
-            border: none;
+            background: var(--box-bg);
+            border: 1px solid var(--line-color);
             color: var(--text-secondary);
-            font-size: 1.1rem;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
         }
 
         .modal-close-btn:hover {
+            border-color: rgba(147, 51, 234, 0.4);
+            background: var(--box-hover-bg);
             color: #9333ea;
         }
 
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .form-label {
             display: block;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-secondary);
             margin-bottom: 6px;
@@ -661,10 +693,10 @@
             width: 100%;
             background: var(--box-bg) !important;
             border: 1px solid var(--line-color);
-            padding: 10px 14px;
-            border-radius: 8px;
+            padding: 12px 16px;
+            border-radius: 10px;
             color: var(--text-primary) !important;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             outline: none;
             transition: border-color 0.2s;
             -webkit-text-fill-color: var(--text-primary) !important;
@@ -679,7 +711,7 @@
 
         .form-textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 120px;
         }
 
         .submit-btn {
@@ -687,17 +719,17 @@
             background: linear-gradient(135deg, #9333ea, #c084fc);
             color: #fff;
             border: none;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 14px;
+            border-radius: 10px;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: opacity 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-top: 8px;
+            margin-top: 12px;
         }
 
         .submit-btn:hover {
@@ -785,6 +817,7 @@
             .contact-box { padding: 14px; }
             .footer-qr-container img { width: 80px; height: 80px; }
             .footer-copy-text { font-size: 0.62rem; }
+            .modal-container { padding: 20px; }
         }
 
         @media (min-width: 1025px) and (pointer: fine) {
@@ -795,10 +828,9 @@
         }
     </style>
     
-    <!-- Sayfa yüklenirken tema titremesini (flash) önlemek için anında kontrol -->
     <script>
         if (localStorage.getItem('theme') === 'light') {
-            document.documentElement.classList.add('light-mode-init'); // Opsiyonel
+            document.documentElement.classList.add('light-mode-init');
             document.addEventListener('DOMContentLoaded', () => {
                 document.body.classList.add('light-mode');
                 const icon = document.getElementById('themeIcon');
@@ -978,7 +1010,11 @@
     <div class="modal-overlay" id="appointmentModal">
         <div class="modal-container">
             <div class="modal-header">
-                <div class="modal-title" id="m-title">Book an Appointment</div>
+                <div class="modal-header-left">
+                    <div class="modal-brand">muminsultani</div>
+                    <div class="modal-title" id="m-title">Book an Appointment</div>
+                </div>
+                
                 <div class="modal-header-actions">
                     <div class="lang-dropdown-container">
                         <button class="lang-btn" id="modalLangDropdownBtn" onclick="toggleModalLangMenu()">
@@ -1064,7 +1100,6 @@
                 }
             }, 1500);
 
-            // Sayfa yüklendiğinde hafızadaki temayı uygula
             const savedTheme = localStorage.getItem('theme');
             const themeIcon = document.getElementById('themeIcon');
             if (savedTheme === 'light') {
@@ -1270,7 +1305,7 @@
             e.preventDefault();
             
             const name = document.getElementById('clientName').value;
-            const email = document.getElementById('clientEmail.value') || document.getElementById('clientEmail').value;
+            const email = document.getElementById('clientEmail').value;
             const whatsapp = document.getElementById('clientWhatsApp').value;
             const desc = document.getElementById('clientDesc').value;
 
