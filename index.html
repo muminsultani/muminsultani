@@ -794,6 +794,18 @@
             .footer-qr-container img { width: 150px; height: 150px; }
         }
     </style>
+    
+    <!-- Sayfa yüklenirken tema titremesini (flash) önlemek için anında kontrol -->
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('light-mode-init'); // Opsiyonel
+            document.addEventListener('DOMContentLoaded', () => {
+                document.body.classList.add('light-mode');
+                const icon = document.getElementById('themeIcon');
+                if(icon) icon.className = "fa-solid fa-sun";
+            });
+        }
+    </script>
 </head>
 <body>
 
@@ -1051,6 +1063,17 @@
                     setTimeout(() => intro.remove(), 600);
                 }
             }, 1500);
+
+            // Sayfa yüklendiğinde hafızadaki temayı uygula
+            const savedTheme = localStorage.getItem('theme');
+            const themeIcon = document.getElementById('themeIcon');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                if(themeIcon) themeIcon.className = "fa-solid fa-sun";
+            } else {
+                document.body.classList.remove('light-mode');
+                if(themeIcon) themeIcon.className = "fa-solid fa-moon";
+            }
         });
 
         const themeIcon = document.getElementById('themeIcon');
@@ -1059,8 +1082,10 @@
             document.body.classList.toggle('light-mode');
             if (document.body.classList.contains('light-mode')) {
                 themeIcon.className = "fa-solid fa-sun";
+                localStorage.setItem('theme', 'light');
             } else {
                 themeIcon.className = "fa-solid fa-moon";
+                localStorage.setItem('theme', 'dark');
             }
         }
 
@@ -1245,7 +1270,7 @@
             e.preventDefault();
             
             const name = document.getElementById('clientName').value;
-            const email = document.getElementById('clientEmail').value;
+            const email = document.getElementById('clientEmail.value') || document.getElementById('clientEmail').value;
             const whatsapp = document.getElementById('clientWhatsApp').value;
             const desc = document.getElementById('clientDesc').value;
 
