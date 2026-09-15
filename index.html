@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" id="htmlRoot">
+<html lang="en" id="htmlRoot" style="color-scheme: dark only;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light dark">
+    <meta name="color-scheme" content="dark only">
     <title id="pageTitle">muminsultani</title>
     
     <script type="application/ld+json">
@@ -26,9 +26,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Tarayıcıların renkleri zorla değiştirmesini engelleme */
+        /* Tarayıcıların renkleri zorla değiştirmesini kesin olarak engelleme */
         html {
-            color-scheme: light dark;
+            color-scheme: dark only !important;
+            background-color: #050508 !important;
         }
 
         /* Ekran Görüntüsü ve İçerik Koruma (Anti-Screenshot & Anti-Copy) */
@@ -38,6 +39,7 @@
             -ms-user-select: none;
             user-select: none;
             -webkit-touch-callout: none;
+            color-scheme: dark only !important;
         }
 
         img {
