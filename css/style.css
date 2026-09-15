@@ -10,18 +10,15 @@
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "muminsultani",
-  "url": "https://muminsultani.com"
+  "url": "https://muminsultani.com",
   "logo": "https://muminsultani.com/img/ms.png"
 }
     </script>
 
     <!-- Tarayıcı Sekme Logosu (Favicon) -->
-    <!-- Standart Favicon -->
-<link rel="icon" type="image/png" sizes="32x32" href="https://muminsultani.com/img/ms.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://muminsultani.com/img/ms.png">
-<!-- Apple / Mobil Cihazlar İçin (İsteğe bağlı ama önerilir) -->
-<link rel="apple-touch-icon" sizes="180x180" href="https://muminsultani.com/img/180.png">
-
+    <link rel="icon" type="image/png" sizes="32x32" href="https://muminsultani.com/img/ms.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://muminsultani.com/img/ms.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://muminsultani.com/img/180.png">
 
     <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -105,6 +102,17 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
+        /* İnteraktif Ağ / Parçacık Animasyon Canvas'ı */
+        #constellation-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            pointer-events: none;
+        }
+
         /* 1.5 Saniyelik Intro Ekranı */
         #intro-screen {
             position: fixed;
@@ -112,7 +120,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(rgba(5, 5, 8, 0.85), rgba(5, 5, 8, 0.95)), url('profile.jp');
+            background: linear-gradient(rgba(5, 5, 8, 0.85), rgba(5, 5, 8, 0.95)), url('profile.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -373,7 +381,7 @@
             letter-spacing: -0.2px;
         }
 
-        /* Social Row - Sabit Orijinal Renkler (Hover Yok) */
+        /* Social Row */
         .social-row {
             display: flex;
             align-items: center;
@@ -387,22 +395,12 @@
             align-items: center;
         }
 
-        /* GitHub Sabit Rengi (Dark modda açık gri/beyaz, Light modda koyu) */
-        .social-btn.github {
-            color: #f0f6fc;
-        }
-        body.light-mode .social-btn.github {
-            color: #24292e;
-        }
-
-        /* Instagram Sabit Orijinal Pembe/Mor Tonu */
-        .social-btn.instagram {
-            color: #e1306c;
-        }
-
-        /* WhatsApp Sabit Orijinal Yeşili */
-        .social-btn.whatsapp {
-            color: #25d366;
+        .social-btn.github svg,
+        .social-btn.instagram svg,
+        .social-btn.gmail img {
+            width: 1.25rem;
+            height: 1.25rem;
+            display: block;
         }
 
         /* Sections */
@@ -639,6 +637,9 @@
 </head>
 <body>
 
+    <!-- İnteraktif Parçacık Ağ Arka Planı -->
+    <canvas id="constellation-canvas"></canvas>
+
     <div id="security-curtain"></div>
 
     <!-- 1.5 Saniyelik Intro Ekranı -->
@@ -683,11 +684,35 @@
             
             <div class="role-text" id="t-role">Software Developer</div>
             
-            <!-- Sosyal İkonlar (Her Zaman Kendi Orijinal Renklerinde, Hover Yok) -->
             <div class="social-row">
-                <a href="https://github.com" target="_blank" class="social-btn github" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="https://instagram.com/princeshahin0" target="_blank" class="social-btn instagram" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://wa.me/905389480137" target="_blank" class="social-btn whatsapp" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://github.com/muminsultani" target="_blank" class="social-btn github" title="GitHub">
+                    <svg viewBox="0 0 24 24" width="100%" height="100%">
+                        <defs>
+                            <linearGradient id="github-red-green" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ef4444"/>
+                                <stop offset="100%" stop-color="#22c55e"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#github-red-green)" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="https://instagram.com/princeshahin0" target="_blank" class="social-btn instagram" title="Instagram">
+                    <svg viewBox="0 0 24 24" width="100%" height="100%">
+                        <defs>
+                            <radialGradient id="insta-gradient" cx="30%" cy="107%" r="150%">
+                                <stop offset="0%" stop-color="#fdf497"/>
+                                <stop offset="5%" stop-color="#fdf497"/>
+                                <stop offset="45%" stop-color="#fd5949"/>
+                                <stop offset="60%" stop-color="#d6249f"/>
+                                <stop offset="90%" stop-color="#285AEB"/>
+                            </radialGradient>
+                        </defs>
+                        <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+                <a href="mailto:contact@muminsultani.com" target="_blank" class="social-btn gmail" title="Gmail">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail">
+                </a>
             </div>
         </header>
 
@@ -885,7 +910,7 @@
                 proj2Desc: "Geliştirici verimliliği için yazılmış hızlı iş akışı otomasyon aracı.",
                 expTitle: "Deneyim",
                 jobTitle: "Uzaktan Yazılım Geliştirici",
-                jobDesc: "Python ve Node.js kullanarak ölçeklenebilir arka uç servisleri, REST API'ler ve mobil uyumlu web çözümleri geliştirme.",
+                jobDesc: "Python and Node.js kullanarak ölçeklenebilir arka uç servisleri, REST API'ler ve mobil uyumlu web çözümleri geliştirme.",
                 setupTitle: "Kurulum & Ortam",
                 osLabel: "İşletim Sistemi", editorLabel: "Editör Yığını",
                 stackTitle: "Temel Yığın", backendLabel: "Arka Uç", frontendLabel: "Ön Uç",
@@ -936,6 +961,126 @@
 
             document.getElementById('langMenu').classList.remove('show');
         }
+
+        // İnteraktif Ağ / Parçacık Animasyonu (Constellation Network)
+        const canvas = document.getElementById('constellation-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particlesArray = [];
+        const numberOfParticles = 55;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+
+        // Mouse Konumu Takibi
+        let mouse = {
+            x: null,
+            y: null,
+            radius: 130
+        };
+
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.clientX;
+            mouse.y = event.clientY;
+        });
+
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                this.size = Math.random() * 1.8 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+            }
+
+            draw() {
+                const isLight = document.body.classList.contains('light-mode');
+                ctx.fillStyle = isLight ? 'rgba(147, 51, 234, 0.45)' : 'rgba(168, 85, 247, 0.55)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateConstellation() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const isLight = document.body.classList.contains('light-mode');
+
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+
+                // Parçacıklar arası çizgiler
+                for (let j = i + 1; j < particlesArray.length; j++) {
+                    const dx = particlesArray[i].x - particlesArray[j].x;
+                    const dy = particlesArray[i].y - particlesArray[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 110) {
+                        const opacity = 1 - (distance / 110);
+                        ctx.strokeStyle = isLight 
+                            ? `rgba(147, 51, 234, ${opacity * 0.18})` 
+                            : `rgba(168, 85, 247, ${opacity * 0.22})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                        ctx.stroke();
+                    }
+                }
+
+                // Mouse ile bağlantı efekti
+                if (mouse.x !== null && mouse.y !== null) {
+                    const mdx = particlesArray[i].x - mouse.x;
+                    const mdy = particlesArray[i].y - mouse.y;
+                    const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+
+                    if (mdist < mouse.radius) {
+                        const mOpacity = 1 - (mdist / mouse.radius);
+                        ctx.strokeStyle = isLight 
+                            ? `rgba(147, 51, 234, ${mOpacity * 0.35})` 
+                            : `rgba(192, 132, 252, ${mOpacity * 0.45})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateConstellation);
+        }
+
+        animateConstellation();
     </script>
 </body>
 </html>

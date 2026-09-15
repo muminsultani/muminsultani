@@ -67,6 +67,7 @@
             --box-bg: rgba(255, 255, 255, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(10, 10, 15, 0.85);
+            --modal-container-bg: rgba(10, 10, 15, 0.55); /* Şeffaf Modal Arka Planı */
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.12), rgba(168, 85, 247, 0.05) 60%, transparent 80%);
         }
 
@@ -80,6 +81,7 @@
             --box-bg: rgba(0, 0, 0, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(255, 255, 255, 0.85);
+            --modal-container-bg: rgba(255, 255, 255, 0.65); /* Light Mode Şeffaf Modal */
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.08), rgba(168, 85, 247, 0.03) 60%, transparent 80%);
         }
 
@@ -514,6 +516,7 @@
             text-decoration: none;
             transition: all 0.3s ease;
             gap: 12px;
+            cursor: pointer;
         }
 
         .contact-box:hover {
@@ -541,6 +544,140 @@
             color: #9333ea;
             font-size: 1.1rem;
             flex-shrink: 0;
+        }
+
+        /* Modal Panel Styles (Şeffaf / Arkadaki Animasyon Görünür) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(5, 5, 8, 0.25);
+            backdrop-filter: blur(2px);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 16px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            background: var(--modal-container-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--line-color);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            padding: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--line-color);
+            padding-bottom: 12px;
+        }
+
+        .modal-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .modal-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            color: #9333ea;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            background: var(--box-bg);
+            border: 1px solid var(--line-color);
+            padding: 10px 14px;
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            border-color: #9333ea;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #9333ea, #c084fc);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
         }
 
         /* Footer */
@@ -791,13 +928,13 @@
             <div class="section-title">
                 <i class="fa-solid fa-paper-plane"></i> <span id="t-contact-title">Get In Touch</span>
             </div>
-            <a href="mailto:contact@muminsultani.com" class="contact-box">
+            <div class="contact-box" onclick="openAppointmentModal()">
                 <div class="contact-text">
                     <span id="t-contact-sub">Have a project in mind?</span>
                     <strong id="t-contact-main">Let's talk & build together</strong>
                 </div>
                 <i class="fa-solid fa-arrow-right"></i>
-            </a>
+            </div>
         </section>
 
         <!-- Footer -->
@@ -812,6 +949,51 @@
                 <div class="footer-copy-text">© 2026 muminsultani • All Rights Reserved.</div>
             </div>
         </footer>
+    </div>
+
+    <!-- Randevu / Proje Formu Paneli (Modal) -->
+    <div class="modal-overlay" id="appointmentModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title" id="m-title">Book an Appointment</div>
+                <div class="modal-header-actions">
+                    <!-- Modal İçi Açılır Dil Menüsü -->
+                    <div class="lang-dropdown-container">
+                        <button class="lang-btn" id="modalLangDropdownBtn" onclick="toggleModalLangMenu()">
+                            <span id="modalCurrentLangText">EN</span>
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.4rem; margin-left: 2px;"></i>
+                        </button>
+                        <div class="lang-menu" id="modalLangMenu">
+                            <button class="lang-option" onclick="changeModalLanguage('en')">English</button>
+                            <button class="lang-option" onclick="changeModalLanguage('tr')">Türkçe</button>
+                            <button class="lang-option" onclick="changeModalLanguage('de')">Deutsch</button>
+                        </div>
+                    </div>
+                    <button class="modal-close-btn" onclick="closeAppointmentModal()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <form id="appointmentForm" onsubmit="sendToWhatsApp(event)">
+                <div class="form-group">
+                    <label class="form-label" id="m-label-name">Name & Surname</label>
+                    <input type="text" class="form-input" id="clientName" required placeholder="Name & Surname">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="m-label-email">Email Address</label>
+                    <input type="email" class="form-input" id="clientEmail" required placeholder="name@sample.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="m-label-whatsapp">WhatsApp Number <span style="font-weight: normal; color: var(--text-secondary);">(Ülke Kodu)</span></label>
+                    <input type="tel" class="form-input" id="clientWhatsApp" required value="+ " oninput="checkPlus(event)">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="m-label-desc">Description / Project Details</label>
+                    <textarea class="form-textarea" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn" id="m-submit-btn">
+                    <i class="fa-brands fa-whatsapp"></i> Send Request via WhatsApp
+                </button>
+            </form>
+        </div>
     </div>
 
     <script>
@@ -874,15 +1056,26 @@
             }
         }
 
-        // Dil Menüsü İşlemleri
+        // Ana Dil Menüsü İşlemleri
         function toggleLangMenu() {
             const menu = document.getElementById('langMenu');
+            menu.classList.toggle('show');
+        }
+
+        // Modal Dil Menüsü İşlemleri
+        function toggleModalLangMenu() {
+            const menu = document.getElementById('modalLangMenu');
             menu.classList.toggle('show');
         }
 
         window.addEventListener('click', function(e) {
             if (!document.getElementById('langDropdownBtn').contains(e.target) && !document.getElementById('langMenu').contains(e.target)) {
                 document.getElementById('langMenu').classList.remove('show');
+            }
+            const modalBtn = document.getElementById('modalLangDropdownBtn');
+            const modalMenu = document.getElementById('modalLangMenu');
+            if (modalBtn && modalMenu && !modalBtn.contains(e.target) && !modalMenu.contains(e.target)) {
+                modalMenu.classList.remove('show');
             }
         });
 
@@ -962,6 +1155,89 @@
             document.getElementById('langMenu').classList.remove('show');
         }
 
+        // Modal (Randevu Paneli) Kontrolleri ve Çevirileri
+        const modalTranslations = {
+            en: {
+                code: "EN",
+                title: "Book an Appointment",
+                nameLabel: "Name & Surname",
+                emailLabel: "Email Address",
+                whatsappLabel: "WhatsApp Number",
+                descLabel: "Description / Project Details",
+                submitBtn: "Send Request via WhatsApp"
+            },
+            tr: {
+                code: "TR",
+                title: "Randevu Talebi",
+                nameLabel: "Ad Soyad",
+                emailLabel: "E-posta Adresi",
+                whatsappLabel: "WhatsApp Numarası",
+                descLabel: "Açıklama / Proje Detayları",
+                submitBtn: "WhatsApp ile Gönder"
+            },
+            de: {
+                code: "DE",
+                title: "Termin buchen",
+                nameLabel: "Name & Nachname",
+                emailLabel: "E-Mail-Adresse",
+                whatsappLabel: "WhatsApp Nummer",
+                descLabel: "Beschreibung / Projektdetails",
+                submitBtn: "Über WhatsApp senden"
+            }
+        };
+
+        function openAppointmentModal() {
+            document.getElementById('appointmentModal').classList.add('active');
+        }
+
+        function closeAppointmentModal() {
+            document.getElementById('appointmentModal').classList.remove('active');
+        }
+
+        function changeModalLanguage(lang) {
+            const data = modalTranslations[lang];
+            if (!data) return;
+
+            document.getElementById('modalCurrentLangText').innerText = data.code;
+            document.getElementById('m-title').innerText = data.title;
+            document.getElementById('m-label-name').innerText = data.nameLabel;
+            document.getElementById('clientName').placeholder = data.nameLabel;
+            document.getElementById('m-label-email').innerText = data.emailLabel;
+            
+            document.getElementById('m-label-whatsapp').innerHTML = `${data.whatsappLabel} <span style="font-weight: normal; color: var(--text-secondary);">(Ülke Kodu)</span>`;
+            
+            document.getElementById('m-label-desc').innerText = data.descLabel;
+            document.getElementById('m-submit-btn').innerHTML = `<i class="fa-brands fa-whatsapp"></i> ${data.submitBtn}`;
+
+            document.getElementById('modalLangMenu').classList.remove('show');
+        }
+
+        // "+" işaretinin silinmesini engelleyen fonksiyon
+        function checkPlus(e) {
+            const input = e.target;
+            if (!input.value.startsWith("+ ")) {
+                input.value = "+ ";
+            }
+        }
+
+        function sendToWhatsApp(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('clientName').value;
+            const email = document.getElementById('clientEmail').value;
+            const whatsapp = document.getElementById('clientWhatsApp').value;
+            const desc = document.getElementById('clientDesc').value;
+
+            const text = `--- New Appointment / Project Request ---\n*Full Name:* ${name}\n*Email:* ${email}\n*WhatsApp:* ${whatsapp}\n*Description:* ${desc}`;
+            const encodedText = encodeURIComponent(text);
+            
+            const targetPhone = "905389480137";
+            const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodedText}`;
+            
+            window.open(whatsappUrl, '_blank');
+            closeAppointmentModal();
+        }
+
         // İnteraktif Ağ / Parçacık Animasyonu (Constellation Network)
         const canvas = document.getElementById('constellation-canvas');
         const ctx = canvas.getContext('2d');
@@ -979,7 +1255,6 @@
             initParticles();
         });
 
-        // Mouse Konumu Takibi
         let mouse = {
             x: null,
             y: null,
@@ -1039,7 +1314,6 @@
                 particlesArray[i].update();
                 particlesArray[i].draw();
 
-                // Parçacıklar arası çizgiler
                 for (let j = i + 1; j < particlesArray.length; j++) {
                     const dx = particlesArray[i].x - particlesArray[j].x;
                     const dy = particlesArray[i].y - particlesArray[j].y;
@@ -1058,7 +1332,6 @@
                     }
                 }
 
-                // Mouse ile bağlantı efekti
                 if (mouse.x !== null && mouse.y !== null) {
                     const mdx = particlesArray[i].x - mouse.x;
                     const mdy = particlesArray[i].y - mouse.y;
