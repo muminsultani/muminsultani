@@ -102,6 +102,17 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
+        /* İnteraktif Ağ / Parçacık Animasyon Canvas'ı */
+        #constellation-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            pointer-events: none;
+        }
+
         /* 1.5 Saniyelik Intro Ekranı */
         #intro-screen {
             position: fixed;
@@ -109,7 +120,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(rgba(5, 5, 8, 0.85), rgba(5, 5, 8, 0.95)), url('profile.jp');
+            background: linear-gradient(rgba(5, 5, 8, 0.85), rgba(5, 5, 8, 0.95)), url('profile.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -384,7 +395,6 @@
             align-items: center;
         }
 
-        /* GitHub, Instagram & Gmail İkon Boyutları */
         .social-btn.github svg,
         .social-btn.instagram svg,
         .social-btn.gmail img {
@@ -627,6 +637,9 @@
 </head>
 <body>
 
+    <!-- İnteraktif Parçacık Ağ Arka Planı -->
+    <canvas id="constellation-canvas"></canvas>
+
     <div id="security-curtain"></div>
 
     <!-- 1.5 Saniyelik Intro Ekranı -->
@@ -671,7 +684,6 @@
             
             <div class="role-text" id="t-role">Software Developer</div>
             
-            <!-- Sosyal İkonlar (GitHub Kırmızı-Yeşil Geçişli, Instagram ve Gmail Logoları) -->
             <div class="social-row">
                 <a href="https://github.com/muminsultani" target="_blank" class="social-btn github" title="GitHub">
                     <svg viewBox="0 0 24 24" width="100%" height="100%">
@@ -949,6 +961,126 @@
 
             document.getElementById('langMenu').classList.remove('show');
         }
+
+        // İnteraktif Ağ / Parçacık Animasyonu (Constellation Network)
+        const canvas = document.getElementById('constellation-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particlesArray = [];
+        const numberOfParticles = 55;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+
+        // Mouse Konumu Takibi
+        let mouse = {
+            x: null,
+            y: null,
+            radius: 130
+        };
+
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.clientX;
+            mouse.y = event.clientY;
+        });
+
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                this.size = Math.random() * 1.8 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+            }
+
+            draw() {
+                const isLight = document.body.classList.contains('light-mode');
+                ctx.fillStyle = isLight ? 'rgba(147, 51, 234, 0.45)' : 'rgba(168, 85, 247, 0.55)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateConstellation() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const isLight = document.body.classList.contains('light-mode');
+
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+
+                // Parçacıklar arası çizgiler
+                for (let j = i + 1; j < particlesArray.length; j++) {
+                    const dx = particlesArray[i].x - particlesArray[j].x;
+                    const dy = particlesArray[i].y - particlesArray[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 110) {
+                        const opacity = 1 - (distance / 110);
+                        ctx.strokeStyle = isLight 
+                            ? `rgba(147, 51, 234, ${opacity * 0.18})` 
+                            : `rgba(168, 85, 247, ${opacity * 0.22})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                        ctx.stroke();
+                    }
+                }
+
+                // Mouse ile bağlantı efekti
+                if (mouse.x !== null && mouse.y !== null) {
+                    const mdx = particlesArray[i].x - mouse.x;
+                    const mdy = particlesArray[i].y - mouse.y;
+                    const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+
+                    if (mdist < mouse.radius) {
+                        const mOpacity = 1 - (mdist / mouse.radius);
+                        ctx.strokeStyle = isLight 
+                            ? `rgba(147, 51, 234, ${mOpacity * 0.35})` 
+                            : `rgba(192, 132, 252, ${mOpacity * 0.45})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateConstellation);
+        }
+
+        animateConstellation();
     </script>
 </body>
 </html>
