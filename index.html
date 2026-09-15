@@ -67,7 +67,7 @@
             --box-bg: rgba(255, 255, 255, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(10, 10, 15, 0.85);
-            --modal-container-bg: rgba(10, 10, 15, 0.55); /* Şeffaf Modal Arka Planı */
+            --modal-container-bg: rgba(10, 10, 15, 0.5); 
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.12), rgba(168, 85, 247, 0.05) 60%, transparent 80%);
         }
 
@@ -81,7 +81,7 @@
             --box-bg: rgba(0, 0, 0, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(255, 255, 255, 0.85);
-            --modal-container-bg: rgba(255, 255, 255, 0.65); /* Light Mode Şeffaf Modal */
+            --modal-container-bg: rgba(255, 255, 255, 0.6); 
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.08), rgba(168, 85, 247, 0.03) 60%, transparent 80%);
         }
 
@@ -104,7 +104,6 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* İnteraktif Ağ / Parçacık Animasyon Canvas'ı */
         #constellation-canvas {
             position: fixed;
             top: 0;
@@ -115,7 +114,6 @@
             pointer-events: none;
         }
 
-        /* 1.5 Saniyelik Intro Ekranı */
         #intro-screen {
             position: fixed;
             top: 0;
@@ -204,7 +202,6 @@
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        /* Ambient Glow */
         .ambient-glow {
             position: fixed;
             top: 15%;
@@ -219,7 +216,6 @@
             pointer-events: none;
         }
 
-        /* Wrapper */
         .wrapper {
             width: 100%;
             max-width: 1000px; 
@@ -240,7 +236,6 @@
             body { padding: 60px 40px; }
         }
 
-        /* Header Section */
         .header-section {
             padding-bottom: 2px;
         }
@@ -383,7 +378,6 @@
             letter-spacing: -0.2px;
         }
 
-        /* Social Row */
         .social-row {
             display: flex;
             align-items: center;
@@ -405,7 +399,6 @@
             display: block;
         }
 
-        /* Sections */
         section {
             border-top: 1px solid var(--line-color);
             padding-top: 24px;
@@ -428,7 +421,6 @@
             font-size: 0.9rem;
         }
 
-        /* Item Rows */
         .item-row {
             margin-bottom: 20px;
         }
@@ -480,7 +472,6 @@
             line-height: 1.6;
         }
 
-        /* Specs Grid */
         .specs-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -504,7 +495,6 @@
             word-break: break-word;
         }
 
-        /* Contact Box */
         .contact-box {
             display: flex;
             align-items: center;
@@ -546,15 +536,14 @@
             flex-shrink: 0;
         }
 
-        /* Modal Panel Styles (Şeffaf / Arkadaki Animasyon Görünür) */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(5, 5, 8, 0.25);
-            backdrop-filter: blur(2px);
+            background: transparent; /* Arkadaki karanlık katman kaldırıldı, doğrudan animasyon görünür */
+            backdrop-filter: none;     /* Bulanıklık kaldırıldı */
             z-index: 10000;
             display: flex;
             justify-content: center;
@@ -563,11 +552,13 @@
             visibility: hidden;
             transition: all 0.3s ease;
             padding: 16px;
+            pointer-events: none; /* Modal kapalıyken tıklamaları engellemesin */
         }
 
         .modal-overlay.active {
             opacity: 1;
             visibility: visible;
+            pointer-events: auto; /* Modal açıldığında etkileşime izin ver */
         }
 
         .modal-container {
@@ -680,7 +671,6 @@
             opacity: 0.9;
         }
 
-        /* Footer */
         footer {
             border-top: 1px solid var(--line-color);
             padding-top: 28px;
@@ -774,12 +764,9 @@
 </head>
 <body>
 
-    <!-- İnteraktif Parçacık Ağ Arka Planı -->
     <canvas id="constellation-canvas"></canvas>
-
     <div id="security-curtain"></div>
 
-    <!-- 1.5 Saniyelik Intro Ekranı -->
     <div id="intro-screen">
         <div class="intro-content">
             <div class="intro-code-box">
@@ -790,17 +777,14 @@
         </div>
     </div>
 
-    <!-- Ambient Glow Background -->
     <div class="ambient-glow"></div>
 
     <div class="wrapper">
-        <!-- Header Section -->
         <header class="header-section">
             <div class="header-top">
                 <div class="brand-logo">muminsultani</div>
                 
                 <div class="header-actions">
-                    <!-- Tema Değiştirme Butonu -->
                     <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
                         <i class="fa-solid fa-moon" id="themeIcon"></i>
                     </button>
@@ -853,7 +837,6 @@
             </div>
         </header>
 
-        <!-- Featured Projects Section -->
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-rocket"></i> <span id="t-projects-title">Featured Projects</span>
@@ -874,7 +857,6 @@
             </div>
         </section>
 
-        <!-- Experience Section -->
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-briefcase"></i> <span id="t-exp-title">Experience</span>
@@ -889,7 +871,6 @@
             </div>
         </section>
 
-        <!-- Setup & Environment Section -->
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-laptop-code"></i> <span id="t-setup-title">Setup & Environment</span>
@@ -906,7 +887,6 @@
             </div>
         </section>
 
-        <!-- Core Stack Section -->
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-layer-group"></i> <span id="t-stack-title">Core Stack</span>
@@ -923,7 +903,6 @@
             </div>
         </section>
 
-        <!-- Get in Touch Section -->
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-paper-plane"></i> <span id="t-contact-title">Get In Touch</span>
@@ -937,7 +916,6 @@
             </div>
         </section>
 
-        <!-- Footer -->
         <footer>
             <div class="footer-qr-container">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://muminsultani.com" alt="QR Code">
@@ -957,7 +935,6 @@
             <div class="modal-header">
                 <div class="modal-title" id="m-title">Book an Appointment</div>
                 <div class="modal-header-actions">
-                    <!-- Modal İçi Açılır Dil Menüsü -->
                     <div class="lang-dropdown-container">
                         <button class="lang-btn" id="modalLangDropdownBtn" onclick="toggleModalLangMenu()">
                             <span id="modalCurrentLangText">EN</span>
@@ -982,7 +959,7 @@
                     <input type="email" class="form-input" id="clientEmail" required placeholder="name@sample.com">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" id="m-label-whatsapp">WhatsApp Number <span style="font-weight: normal; color: var(--text-secondary);">(Ülke Kodu)</span></label>
+                    <label class="form-label" id="m-label-whatsapp">WhatsApp Number <span style="font-weight: normal; color: var(--text-secondary);">(Country Code)</span></label>
                     <input type="tel" class="form-input" id="clientWhatsApp" required value="+ " oninput="checkPlus(event)">
                 </div>
                 <div class="form-group">
@@ -997,7 +974,6 @@
     </div>
 
     <script>
-        // Sağ tık ve kısayol güvenliği
         document.addEventListener('contextmenu', event => event.preventDefault());
 
         document.addEventListener('keydown', (e) => {
@@ -1044,7 +1020,6 @@
             }, 1500);
         });
 
-        // Tema Değiştirme (Dark / Light Mode) Mantığı
         const themeIcon = document.getElementById('themeIcon');
         
         function toggleTheme() {
@@ -1056,13 +1031,11 @@
             }
         }
 
-        // Ana Dil Menüsü İşlemleri
         function toggleLangMenu() {
             const menu = document.getElementById('langMenu');
             menu.classList.toggle('show');
         }
 
-        // Modal Dil Menüsü İşlemleri
         function toggleModalLangMenu() {
             const menu = document.getElementById('modalLangMenu');
             menu.classList.toggle('show');
@@ -1155,33 +1128,44 @@
             document.getElementById('langMenu').classList.remove('show');
         }
 
-        // Modal (Randevu Paneli) Kontrolleri ve Çevirileri
         const modalTranslations = {
             en: {
                 code: "EN",
                 title: "Book an Appointment",
                 nameLabel: "Name & Surname",
+                namePlaceholder: "Name & Surname",
                 emailLabel: "Email Address",
+                emailPlaceholder: "name@sample.com",
                 whatsappLabel: "WhatsApp Number",
+                whatsappSub: "Country Code",
                 descLabel: "Description / Project Details",
+                descPlaceholder: "Tell me about your project...",
                 submitBtn: "Send Request via WhatsApp"
             },
             tr: {
                 code: "TR",
                 title: "Randevu Talebi",
                 nameLabel: "Ad Soyad",
+                namePlaceholder: "Ad Soyad",
                 emailLabel: "E-posta Adresi",
+                emailPlaceholder: "ornek@eposta.com",
                 whatsappLabel: "WhatsApp Numarası",
+                whatsappSub: "Ülke Kodu",
                 descLabel: "Açıklama / Proje Detayları",
+                descPlaceholder: "Projeden bahsedin...",
                 submitBtn: "WhatsApp ile Gönder"
             },
             de: {
                 code: "DE",
                 title: "Termin buchen",
                 nameLabel: "Name & Nachname",
+                namePlaceholder: "Name & Nachname",
                 emailLabel: "E-Mail-Adresse",
+                emailPlaceholder: "beispiel@e-mail.de",
                 whatsappLabel: "WhatsApp Nummer",
+                whatsappSub: "Ländervorwahl",
                 descLabel: "Beschreibung / Projektdetails",
+                descPlaceholder: "Erzählen Sie von Ihrem Projekt...",
                 submitBtn: "Über WhatsApp senden"
             }
         };
@@ -1200,19 +1184,23 @@
 
             document.getElementById('modalCurrentLangText').innerText = data.code;
             document.getElementById('m-title').innerText = data.title;
-            document.getElementById('m-label-name').innerText = data.nameLabel;
-            document.getElementById('clientName').placeholder = data.nameLabel;
-            document.getElementById('m-label-email').innerText = data.emailLabel;
             
-            document.getElementById('m-label-whatsapp').innerHTML = `${data.whatsappLabel} <span style="font-weight: normal; color: var(--text-secondary);">(Ülke Kodu)</span>`;
+            document.getElementById('m-label-name').innerText = data.nameLabel;
+            document.getElementById('clientName').placeholder = data.namePlaceholder;
+            
+            document.getElementById('m-label-email').innerText = data.emailLabel;
+            document.getElementById('clientEmail').placeholder = data.emailPlaceholder;
+            
+            document.getElementById('m-label-whatsapp').innerHTML = `${data.whatsappLabel} <span style="font-weight: normal; color: var(--text-secondary);">(${data.whatsappSub})</span>`;
             
             document.getElementById('m-label-desc').innerText = data.descLabel;
+            document.getElementById('clientDesc').placeholder = data.descPlaceholder;
+            
             document.getElementById('m-submit-btn').innerHTML = `<i class="fa-brands fa-whatsapp"></i> ${data.submitBtn}`;
 
             document.getElementById('modalLangMenu').classList.remove('show');
         }
 
-        // "+" işaretinin silinmesini engelleyen fonksiyon
         function checkPlus(e) {
             const input = e.target;
             if (!input.value.startsWith("+ ")) {
@@ -1238,7 +1226,6 @@
             closeAppointmentModal();
         }
 
-        // İnteraktif Ağ / Parçacık Animasyonu (Constellation Network)
         const canvas = document.getElementById('constellation-canvas');
         const ctx = canvas.getContext('2d');
 
