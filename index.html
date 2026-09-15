@@ -1258,19 +1258,49 @@
             }
         }
 
-        function sendToWhatsApp(e) {
+        async function sendToWhatsApp(e) {
             e.preventDefault();
             
             const name = document.getElementById('clientName').value;
             const email = document.getElementById('clientEmail').value;
             const whatsapp = document.getElementById('clientWhatsApp').value.trim();
             const fileInput = document.getElementById('clientFile');
-            const fileName = (fileInput.files && fileInput.files[0]) ? fileInput.files[0].name : "Dosya eklenmedi";
             const desc = document.getElementById('clientDesc').value;
+            const submitBtn = document.getElementById('m-submit-btn');
 
-            const text = `--- Yeni Randevu / Proje Talebi ---\n*Ad Soyad:* ${name}\n*E-posta:* ${email}\n*WhatsApp:* ${whatsapp}\n*Eklenen Dosya:* ${fileName}\n*Açıklama:* ${desc}`;
+            let fileInfoText = "Dosya eklenmedi";
+
+            if (fileInput.files && fileInput.files[0]) {
+                const file = fileInput.files[0];
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Dosya Yükleniyor...`;
+
+                try {
+                    const formData = new FormData();
+                    formData.append('reqtype', 'fileupload');
+                    formData.append('fileToUpload', file);
+
+                    const response = await fetch('https://catbox.moe/user/api.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        const fileUrl = await response.text();
+                        fileInfoText = `${file.name} -> ${fileUrl.trim()}`;
+                    } else {
+                        fileInfoText = `${file.name} (Bulut yükleme başarısız)`;
+                    }
+                } catch (err) {
+                    fileInfoText = `${file.name} (Ağ hatası)`;
+                }
+
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fa-brands fa-whatsapp"></i> Send Request via WhatsApp`;
+            }
+
+            const text = `--- Yeni Randevu / Proje Talebi ---\n*Ad Soyad:* ${name}\n*E-posta:* ${email}\n*WhatsApp:* ${whatsapp}\n*Dosya & Link:* ${fileInfoText}\n*Açıklama:* ${desc}`;
             const encodedText = encodeURIComponent(text);
-            
             const targetPhone = "905389480137";
             
             const whatsappUrl = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodedText}`;
