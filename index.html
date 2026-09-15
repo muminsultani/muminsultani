@@ -67,7 +67,7 @@
             --box-bg: rgba(255, 255, 255, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(10, 10, 15, 0.85);
-            --modal-container-bg: rgba(10, 10, 15, 0.55); /* Şeffaf Modal Arka Planı */
+            --modal-container-bg: rgba(10, 10, 15, 0.55);
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.12), rgba(168, 85, 247, 0.05) 60%, transparent 80%);
         }
 
@@ -81,7 +81,7 @@
             --box-bg: rgba(0, 0, 0, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(255, 255, 255, 0.85);
-            --modal-container-bg: rgba(255, 255, 255, 0.65); /* Light Mode Şeffaf Modal */
+            --modal-container-bg: rgba(255, 255, 255, 0.65);
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.08), rgba(168, 85, 247, 0.03) 60%, transparent 80%);
         }
 
@@ -104,7 +104,6 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* İnteraktif Ağ / Parçacık Animasyon Canvas'ı */
         #constellation-canvas {
             position: fixed;
             top: 0;
@@ -115,7 +114,6 @@
             pointer-events: none;
         }
 
-        /* 1.5 Saniyelik Intro Ekranı */
         #intro-screen {
             position: fixed;
             top: 0;
@@ -204,7 +202,6 @@
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        /* Ambient Glow */
         .ambient-glow {
             position: fixed;
             top: 15%;
@@ -219,7 +216,6 @@
             pointer-events: none;
         }
 
-        /* Wrapper */
         .wrapper {
             width: 100%;
             max-width: 1000px; 
@@ -240,7 +236,6 @@
             body { padding: 60px 40px; }
         }
 
-        /* Header Section */
         .header-section {
             padding-bottom: 2px;
         }
@@ -383,7 +378,6 @@
             letter-spacing: -0.2px;
         }
 
-        /* Social Row */
         .social-row {
             display: flex;
             align-items: center;
@@ -405,7 +399,6 @@
             display: block;
         }
 
-        /* Sections */
         section {
             border-top: 1px solid var(--line-color);
             padding-top: 24px;
@@ -428,7 +421,6 @@
             font-size: 0.9rem;
         }
 
-        /* Item Rows */
         .item-row {
             margin-bottom: 20px;
         }
@@ -480,7 +472,6 @@
             line-height: 1.6;
         }
 
-        /* Specs Grid */
         .specs-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -504,7 +495,6 @@
             word-break: break-word;
         }
 
-        /* Contact Box */
         .contact-box {
             display: flex;
             align-items: center;
@@ -546,7 +536,6 @@
             flex-shrink: 0;
         }
 
-        /* Modal Panel Styles (Şeffaf / Arkadaki Animasyon Görünür) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -658,6 +647,48 @@
             min-height: 100px;
         }
 
+        .file-upload-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: var(--box-bg);
+            border: 1px dashed var(--line-color);
+            border-radius: 8px;
+            padding: 10px 14px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .file-upload-wrapper:hover {
+            border-color: #9333ea;
+        }
+
+        .file-upload-wrapper input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-upload-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .file-upload-text i {
+            color: #9333ea;
+        }
+
         .submit-btn {
             width: 100%;
             background: linear-gradient(135deg, #9333ea, #c084fc);
@@ -680,7 +711,6 @@
             opacity: 0.9;
         }
 
-        /* Footer */
         footer {
             border-top: 1px solid var(--line-color);
             padding-top: 28px;
@@ -774,12 +804,10 @@
 </head>
 <body>
 
-    <!-- İnteraktif Parçacık Ağ Arka Planı -->
     <canvas id="constellation-canvas"></canvas>
 
     <div id="security-curtain"></div>
 
-    <!-- 1.5 Saniyelik Intro Ekranı -->
     <div id="intro-screen">
         <div class="intro-content">
             <div class="intro-code-box">
@@ -790,17 +818,14 @@
         </div>
     </div>
 
-    <!-- Ambient Glow Background -->
     <div class="ambient-glow"></div>
 
     <div class="wrapper">
-        <!-- Header Section -->
         <header class="header-section">
             <div class="header-top">
                 <div class="brand-logo">muminsultani</div>
                 
                 <div class="header-actions">
-                    <!-- Tema Değiştirme Butonu -->
                     <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
                         <i class="fa-solid fa-moon" id="themeIcon"></i>
                     </button>
@@ -853,7 +878,6 @@
             </div>
         </header>
 
-        <!-- Featured Projects Section -->
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-rocket"></i> <span id="t-projects-title">Featured Projects</span>
@@ -874,7 +898,6 @@
             </div>
         </section>
 
-        <!-- Experience Section -->
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-briefcase"></i> <span id="t-exp-title">Experience</span>
@@ -889,7 +912,6 @@
             </div>
         </section>
 
-        <!-- Setup & Environment Section -->
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-laptop-code"></i> <span id="t-setup-title">Setup & Environment</span>
@@ -906,7 +928,6 @@
             </div>
         </section>
 
-        <!-- Core Stack Section -->
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-layer-group"></i> <span id="t-stack-title">Core Stack</span>
@@ -923,7 +944,6 @@
             </div>
         </section>
 
-        <!-- Get in Touch Section -->
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-paper-plane"></i> <span id="t-contact-title">Get In Touch</span>
@@ -937,7 +957,6 @@
             </div>
         </section>
 
-        <!-- Footer -->
         <footer>
             <div class="footer-qr-container">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://muminsultani.com" alt="QR Code">
@@ -951,13 +970,11 @@
         </footer>
     </div>
 
-    <!-- Randevu / Proje Formu Paneli (Modal) -->
     <div class="modal-overlay" id="appointmentModal">
         <div class="modal-container">
             <div class="modal-header">
                 <div class="modal-title" id="m-title">Book an Appointment</div>
                 <div class="modal-header-actions">
-                    <!-- Modal İçi Açılır Dil Menüsü -->
                     <div class="lang-dropdown-container">
                         <button class="lang-btn" id="modalLangDropdownBtn" onclick="toggleModalLangMenu()">
                             <span id="modalCurrentLangText">EN</span>
@@ -986,6 +1003,15 @@
                     <input type="tel" class="form-input" id="clientWhatsApp" required value="+ " oninput="checkPlus(event)">
                 </div>
                 <div class="form-group">
+                    <label class="form-label" id="m-label-file">Attach File / Photo / Video / PDF</label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="clientFile" accept="image/*,video/*,.pdf" onchange="updateFileName(this)">
+                        <div class="file-upload-text" id="fileUploadText">
+                            <i class="fa-solid fa-paperclip"></i> <span id="fileNameSpan">Dosya seçilmedi (PNG, JPG, Video, PDF)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="form-label" id="m-label-desc">Description / Project Details</label>
                     <textarea class="form-textarea" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
                 </div>
@@ -997,7 +1023,6 @@
     </div>
 
     <script>
-        // Sağ tık ve kısayol güvenliği
         document.addEventListener('contextmenu', event => event.preventDefault());
 
         document.addEventListener('keydown', (e) => {
@@ -1044,7 +1069,6 @@
             }, 1500);
         });
 
-        // Tema Değiştirme (Dark / Light Mode) Mantığı
         const themeIcon = document.getElementById('themeIcon');
         
         function toggleTheme() {
@@ -1056,13 +1080,11 @@
             }
         }
 
-        // Ana Dil Menüsü İşlemleri
         function toggleLangMenu() {
             const menu = document.getElementById('langMenu');
             menu.classList.toggle('show');
         }
 
-        // Modal Dil Menüsü İşlemleri
         function toggleModalLangMenu() {
             const menu = document.getElementById('modalLangMenu');
             menu.classList.toggle('show');
@@ -1155,7 +1177,6 @@
             document.getElementById('langMenu').classList.remove('show');
         }
 
-        // Modal (Randevu Paneli) Kontrolleri ve Çevirileri
         const modalTranslations = {
             en: {
                 code: "EN",
@@ -1163,6 +1184,8 @@
                 nameLabel: "Name & Surname",
                 emailLabel: "Email Address",
                 whatsappLabel: "WhatsApp Number",
+                fileLabel: "Attach File / Photo / Video / PDF",
+                fileDefault: "No file chosen (PNG, JPG, Video, PDF)",
                 descLabel: "Description / Project Details",
                 submitBtn: "Send Request via WhatsApp"
             },
@@ -1172,6 +1195,8 @@
                 nameLabel: "Ad Soyad",
                 emailLabel: "E-posta Adresi",
                 whatsappLabel: "WhatsApp Numarası",
+                fileLabel: "Dosya / Görsel / Video / PDF Ekle",
+                fileDefault: "Dosya seçilmedi (PNG, JPG, Video, PDF)",
                 descLabel: "Açıklama / Proje Detayları",
                 submitBtn: "WhatsApp ile Gönder"
             },
@@ -1181,6 +1206,8 @@
                 nameLabel: "Name & Nachname",
                 emailLabel: "E-Mail-Adresse",
                 whatsappLabel: "WhatsApp Nummer",
+                fileLabel: "Datei / Foto / Video / PDF anhängen",
+                fileDefault: "Keine Datei ausgewählt (PNG, JPG, Video, PDF)",
                 descLabel: "Beschreibung / Projektdetails",
                 submitBtn: "Über WhatsApp senden"
             }
@@ -1203,20 +1230,31 @@
             document.getElementById('m-label-name').innerText = data.nameLabel;
             document.getElementById('clientName').placeholder = data.nameLabel;
             document.getElementById('m-label-email').innerText = data.emailLabel;
-            
             document.getElementById('m-label-whatsapp').innerHTML = `${data.whatsappLabel} <span style="font-weight: normal; color: var(--text-secondary);">(Ülke Kodu)</span>`;
+            document.getElementById('m-label-file').innerText = data.fileLabel;
             
+            const fileInput = document.getElementById('clientFile');
+            if(fileInput.files.length === 0) {
+                document.getElementById('fileNameSpan').innerText = data.fileDefault;
+            }
+
             document.getElementById('m-label-desc').innerText = data.descLabel;
             document.getElementById('m-submit-btn').innerHTML = `<i class="fa-brands fa-whatsapp"></i> ${data.submitBtn}`;
 
             document.getElementById('modalLangMenu').classList.remove('show');
         }
 
-        // "+" işaretinin silinmesini engelleyen fonksiyon
         function checkPlus(e) {
             const input = e.target;
             if (!input.value.startsWith("+ ")) {
                 input.value = "+ ";
+            }
+        }
+
+        function updateFileName(input) {
+            const span = document.getElementById('fileNameSpan');
+            if (input.files && input.files[0]) {
+                span.innerText = input.files[0].name;
             }
         }
 
@@ -1225,20 +1263,22 @@
             
             const name = document.getElementById('clientName').value;
             const email = document.getElementById('clientEmail').value;
-            const whatsapp = document.getElementById('clientWhatsApp').value;
+            const whatsapp = document.getElementById('clientWhatsApp').value.trim();
+            const fileInput = document.getElementById('clientFile');
+            const fileName = (fileInput.files && fileInput.files[0]) ? fileInput.files[0].name : "Dosya eklenmedi";
             const desc = document.getElementById('clientDesc').value;
 
-            const text = `--- New Appointment / Project Request ---\n*Full Name:* ${name}\n*Email:* ${email}\n*WhatsApp:* ${whatsapp}\n*Description:* ${desc}`;
+            const text = `--- Yeni Randevu / Proje Talebi ---\n*Ad Soyad:* ${name}\n*E-posta:* ${email}\n*WhatsApp:* ${whatsapp}\n*Eklenen Dosya:* ${fileName}\n*Açıklama:* ${desc}`;
             const encodedText = encodeURIComponent(text);
             
             const targetPhone = "905389480137";
-            const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodedText}`;
             
-            window.open(whatsappUrl, '_blank');
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodedText}`;
+            window.location.href = whatsappUrl;
+            
             closeAppointmentModal();
         }
 
-        // İnteraktif Ağ / Parçacık Animasyonu (Constellation Network)
         const canvas = document.getElementById('constellation-canvas');
         const ctx = canvas.getContext('2d');
 
