@@ -26,6 +26,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* Tarayıcıların renkleri zorla değiştirmesini engelleme */
+        html {
+            color-scheme: light dark;
+        }
+
         /* Ekran Görüntüsü ve İçerik Koruma (Anti-Screenshot & Anti-Copy) */
         body {
             -webkit-user-select: none;
@@ -629,7 +634,7 @@
             margin-bottom: 6px;
         }
 
-        /* Dark Mode Autofill */
+        /* Autofill */
         .form-input:-webkit-autofill,
         .form-input:-webkit-autofill:hover, 
         .form-input:-webkit-autofill:focus,
@@ -641,7 +646,6 @@
             transition: background-color 5000s ease-in-out 0s !important;
         }
 
-        /* Light Mode İçin Autofill Arka Plan Desteği */
         body.light-mode .form-input:-webkit-autofill,
         body.light-mode .form-input:-webkit-autofill:hover, 
         body.light-mode .form-input:-webkit-autofill:focus,
