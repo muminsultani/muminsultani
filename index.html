@@ -15,17 +15,14 @@
 }
     </script>
 
-    <!-- Tarayıcı Sekme Logosu (Favicon) -->
     <link rel="icon" type="image/png" sizes="32x32" href="https://muminsultani.com/img/ms.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://muminsultani.com/img/ms.png">
     <link rel="apple-touch-icon" sizes="180x180" href="https://muminsultani.com/img/180.png">
 
-    <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Ekran Görüntüsü ve İçerik Koruma (Anti-Screenshot & Anti-Copy) */
         body {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -57,7 +54,6 @@
             pointer-events: none;
         }
 
-        /* Renk Paleti (CSS Variables) - Varsayılan Dark Mode */
         :root {
             --bg-color: #050508;
             --text-primary: #f8fafc;
@@ -71,7 +67,6 @@
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.12), rgba(168, 85, 247, 0.05) 60%, transparent 80%);
         }
 
-        /* Light Mode Sınıfı */
         body.light-mode {
             --bg-color: #f8fafc;
             --text-primary: #0f172a;
@@ -711,7 +706,6 @@
             opacity: 0.9;
         }
 
-        /* Başarı Mesajı Stili */
         .success-message-box {
             text-align: center;
             padding: 30px 10px;
@@ -1018,24 +1012,25 @@
                 </div>
             </div>
             
-            <form id="appointmentForm" onsubmit="submitFormDirectly(event)">
+            <!-- Formspree Entegrasyonu: action kısmına kendi form adresinizi yazabilirsiniz -->
+            <form id="appointmentForm" action="https://formspree.io/f/xblygjjy" method="POST" enctype="multipart/form-data" onsubmit="submitFormViaEmail(event)">
                 <div id="formFieldsContainer">
                     <div class="form-group">
                         <label class="form-label" id="m-label-name">Name & Surname</label>
-                        <input type="text" class="form-input" id="clientName" required placeholder="Name & Surname">
+                        <input type="text" class="form-input" name="Name" id="clientName" required placeholder="Name & Surname">
                     </div>
                     <div class="form-group">
                         <label class="form-label" id="m-label-email">Email Address</label>
-                        <input type="email" class="form-input" id="clientEmail" required placeholder="name@sample.com">
+                        <input type="email" class="form-input" name="Email" id="clientEmail" required placeholder="name@sample.com">
                     </div>
                     <div class="form-group">
                         <label class="form-label" id="m-label-whatsapp">WhatsApp Number <span style="font-weight: normal; color: var(--text-secondary);">(Ülke Kodu)</span></label>
-                        <input type="tel" class="form-input" id="clientWhatsApp" required value="+ " oninput="checkPlus(event)">
+                        <input type="tel" class="form-input" name="WhatsApp" id="clientWhatsApp" required value="+ " oninput="checkPlus(event)">
                     </div>
                     <div class="form-group">
                         <label class="form-label" id="m-label-file">Attach File / Photo / Video / PDF</label>
                         <div class="file-upload-wrapper">
-                            <input type="file" id="clientFile" accept="image/*,video/*,.pdf" onchange="updateFileName(this)">
+                            <input type="file" name="AttachedFile" id="clientFile" accept="image/*,video/*,.pdf" onchange="updateFileName(this)">
                             <div class="file-upload-text" id="fileUploadText">
                                 <i class="fa-solid fa-paperclip"></i> <span id="fileNameSpan">Dosya seçilmedi (PNG, JPG, Video, PDF)</span>
                             </div>
@@ -1043,14 +1038,13 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label" id="m-label-desc">Description / Project Details</label>
-                        <textarea class="form-textarea" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
+                        <textarea class="form-textarea" name="Description" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
                     </div>
                     <button type="submit" class="submit-btn" id="m-submit-btn">
                         <i class="fa-solid fa-paper-plane"></i> Gönder / Submit Request
                     </button>
                 </div>
 
-                <!-- Başarı Mesajı Alanı -->
                 <div class="success-message-box" id="successMessageBox">
                     <i class="fa-solid fa-circle-check"></i>
                     <h3 id="successTitle">Mesajınız Başarıyla Gönderildi!</h3>
@@ -1258,7 +1252,6 @@
         };
 
         function openAppointmentModal() {
-            // Formu sıfırla ve tekrar görünür yap
             document.getElementById('formFieldsContainer').style.display = 'block';
             document.getElementById('successMessageBox').style.display = 'none';
             document.getElementById('appointmentForm').reset();
@@ -1311,18 +1304,34 @@
             }
         }
 
-        // WhatsApp'a yönlendirmek yerine sitede başarı mesajı gösteren fonksiyon
-        function submitFormDirectly(e) {
+        // Formu arka planda e-postaya gönderen ve sitede başarı mesajı gösteren fonksiyon
+        async function submitFormViaEmail(e) {
             e.preventDefault();
-            
-            // Form input alanlarını gizle, başarı mesajını göster
-            document.getElementById('formFieldsContainer').style.display = 'none';
-            document.getElementById('successMessageBox').style.display = 'flex';
+            const form = e.target;
+            const formData = new FormData(form);
 
-            // İsteğe bağlı olarak 3 saniye sonra modalı otomatik kapatabilirsiniz:
-            setTimeout(() => {
-                closeAppointmentModal();
-            }, 3500);
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    document.getElementById('formFieldsContainer').style.display = 'none';
+                    document.getElementById('successMessageBox').style.display = 'flex';
+
+                    setTimeout(() => {
+                        closeAppointmentModal();
+                    }, 3500);
+                } else {
+                    alert("Gönderim sırasında bir hata oluştu. Lütfen tekrar deneyin.");
+                }
+            } catch (error) {
+                alert("Bağlantı hatası oluştu.");
+            }
         }
 
         const canvas = document.getElementById('constellation-canvas');
