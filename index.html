@@ -599,7 +599,6 @@
             gap: 12px;
         }
 
-        /* Sol üst köşe hizalaması (muminsultani ve unvan alt alta) */
         .modal-header-left {
             display: flex;
             flex-direction: column;
@@ -607,7 +606,6 @@
             text-align: left;
         }
 
-        /* Sağ üst köşedeki dil ve kapatma butonları */
         .modal-header-actions {
             display: flex;
             align-items: center;
@@ -616,7 +614,7 @@
         }
 
         .modal-brand {
-            font-size: 1.4rem; /* Boyut büyütüldü */
+            font-size: 1.4rem;
             font-weight: 800;
             letter-spacing: -0.5px;
             background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
@@ -624,7 +622,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: gradientFlow 8s ease infinite;
-            margin-bottom: 6px; /* İki yazı arasına boşluk bırakıldı */
+            margin-bottom: 6px;
         }
 
         .modal-title {
@@ -1309,7 +1307,11 @@
             const whatsapp = document.getElementById('clientWhatsApp').value;
             const desc = document.getElementById('clientDesc').value;
 
-            const text = `--- New Appointment / Project Request ---\n*Full Name:* ${name}\n*Email:* ${email}\n*WhatsApp:* ${whatsapp}\n*Description:* ${desc}`;
+            // Site linki ve logo bilgileri mesaja eklendi
+            const siteUrl = "https://muminsultani.com";
+            const logoUrl = "https://muminsultani.com/img/ms.png";
+
+            const text = `--- New Appointment / Project Request ---\n*Full Name:* ${name}\n*Email:* ${email}\n*WhatsApp:* ${whatsapp}\n*Description:* ${desc}\n\n*Website:* ${siteUrl}\n*Logo:* ${logoUrl}`;
             const encodedText = encodeURIComponent(text);
             
             const targetPhone = "905389480137";
