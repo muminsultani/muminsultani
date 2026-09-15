@@ -1271,7 +1271,6 @@
 
             if (fileInput.files && fileInput.files[0]) {
                 const file = fileInput.files[0];
-                // Sadece resim dosyaları için bulut yüklemesi denenir, video/PDF ise doğrudan isim olarak eklenir (Hata almamak için)
                 if (file.type.startsWith('image/')) {
                     try {
                         const formData = new FormData();
@@ -1280,14 +1279,19 @@
                             method: 'POST',
                             body: formData
                         });
-                        const data = await response.json();
-                        if (data && data.success) {
-                            fileInfoText = `${file.name} -> ${data.data.url}`;
+                        
+                        if (response.ok) {
+                            const data = await response.json();
+                            if (data && data.success) {
+                                fileInfoText = `${file.name} -> ${data.data.url}`;
+                            } else {
+                                fileInfoText = `${file.name} (Dosya eklendi, lütfen sohbetten iletin)`;
+                            }
                         } else {
-                            fileInfoText = `${file.name} (Lütfen dosyayı sohbetten gönderin)`;
+                            fileInfoText = `${file.name} (Dosya eklendi, lütfen sohbetten iletin)`;
                         }
                     } catch (err) {
-                        fileInfoText = `${file.name} (Lütfen dosyayı sohbetten gönderin)`;
+                        fileInfoText = `${file.name} (Dosya eklendi, lütfen sohbetten iletin)`;
                     }
                 } else {
                     fileInfoText = `${file.name} (Video/PDF - Lütfen sohbetten gönderin)`;
