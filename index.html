@@ -628,7 +628,18 @@
             margin-bottom: 6px;
         }
 
-        /* DÜZELTME BURADA YAPILDI: Beyazlaşmayı önleyen !important ve autofill kuralları */
+        /* DÜZELTME: Mobil tarayıcılar için kesin Autofill ve Arka Plan Çözümü */
+        .form-input:-webkit-autofill,
+        .form-input:-webkit-autofill:hover, 
+        .form-input:-webkit-autofill:focus,
+        .form-textarea:-webkit-autofill,
+        .form-textarea:-webkit-autofill:hover,
+        .form-textarea:-webkit-autofill:focus {
+            -webkit-text-fill-color: var(--text-primary) !important;
+            -webkit-box-shadow: 0 0 0 1000px #0a0a0f inset !important;
+            transition: background-color 5000s ease-in-out 0s !important;
+        }
+
         .form-input, .form-textarea {
             width: 100%;
             background: var(--box-bg) !important;
@@ -647,17 +658,6 @@
             background: var(--box-bg) !important;
             color: var(--text-primary) !important;
             -webkit-text-fill-color: var(--text-primary) !important;
-        }
-
-        .form-input:-webkit-autofill,
-        .form-input:-webkit-autofill:hover, 
-        .form-input:-webkit-autofill:focus,
-        .form-textarea:-webkit-autofill,
-        .form-textarea:-webkit-autofill:hover,
-        .form-textarea:-webkit-autofill:focus {
-            -webkit-box-shadow: 0 0 0 1000px var(--bg-color) inset !important;
-            -webkit-text-fill-color: var(--text-primary) !important;
-            transition: background-color 5000s ease-in-out 0s;
         }
 
         .form-textarea {
