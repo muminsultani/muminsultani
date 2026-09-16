@@ -702,6 +702,7 @@
             -webkit-text-fill-color: var(--text-primary) !important;
         }
 
+        /* Placeholder renkleri açık gri olarak ayarlandı */
         .form-input::placeholder,
         .form-textarea::placeholder {
             color: #94a3b8;
@@ -1511,7 +1512,6 @@
                 const pdfBlob = doc.output('blob');
                 const blobUrl = URL.createObjectURL(pdfBlob);
                 
-                // Doğrudan tarayıcıda PDF önizlemesini aç
                 window.open(blobUrl, '_blank');
 
                 const downloadLink = document.createElement('a');
@@ -1548,8 +1548,21 @@
             const now = new Date();
             const formattedDate = now.toLocaleString();
 
-            // Sadece PDF oluşturup önizleme gösterir ve indirir
             generatePDF(data.name, data.email, data.phone, data.desc, formattedDate);
+
+            const recipient = "contact@muminsultani.com";
+            const subject = encodeURIComponent("New Appointment Request - " + data.name);
+            const body = encodeURIComponent(
+                `Name: ${data.name}\n` +
+                `Email: ${data.email}\n` +
+                `Phone: ${data.phone}\n` +
+                `Time: ${formattedDate}\n\n` +
+                `Details:\n${data.desc}\n\n` +
+                `---\nmuminsultani.com`
+            );
+
+            const mailtoUrl = `mailto:${recipient}?subject=${subject}&body=${body}`;
+            window.location.href = mailtoUrl;
             closeAppointmentModal();
         }
 
