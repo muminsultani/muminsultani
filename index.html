@@ -333,8 +333,9 @@
             position: absolute;
             right: 0;
             top: calc(100% + 6px);
-            background: var(--menu-bg);
-            backdrop-filter: blur(16px);
+            background: var(--modal-container-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--line-color);
             border-radius: 8px;
             width: 110px;
@@ -626,6 +627,7 @@
             -webkit-text-fill-color: transparent;
             animation: gradientFlow 8s ease infinite;
             margin-top: 6px;
+            margin-bottom: 8px; /* Aralık eklendi */
         }
 
         .modal-title {
@@ -655,16 +657,17 @@
             color: #9333ea;
         }
 
-        /* Modal içindeki dil düğmesi ve diğer küçük butonlar için ortak stil garantisi */
         .modal-container .lang-btn,
-        .modal-container .modal-close-btn {
+        .modal-container .modal-close-btn,
+        .modal-container .theme-toggle-btn {
             background: var(--box-bg);
             border: 1px solid var(--line-color);
             color: var(--text-secondary);
         }
 
         .modal-container .lang-btn:hover,
-        .modal-container .modal-close-btn:hover {
+        .modal-container .modal-close-btn:hover,
+        .modal-container .theme-toggle-btn:hover {
             border-color: rgba(147, 51, 234, 0.4);
             background: var(--box-hover-bg);
             color: #9333ea;
@@ -955,6 +958,8 @@
                 document.body.classList.add('light-mode');
                 const icon = document.getElementById('themeIcon');
                 if(icon) icon.className = "fa-solid fa-sun";
+                const modalIcon = document.getElementById('modalThemeIcon');
+                if(modalIcon) modalIcon.className = "fa-solid fa-sun";
             });
         }
     </script>
@@ -1134,6 +1139,9 @@
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
                         <button class="modal-close-btn" onclick="closeAppointmentModal()" title="Geri / Çıkış"><i class="fa-solid fa-chevron-left"></i></button>
                         <button class="modal-close-btn" onclick="location.reload()" title="Yenile"><i class="fa-solid fa-rotate"></i></button>
+                        <button class="modal-close-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                            <i class="fa-solid fa-moon" id="modalThemeIcon"></i>
+                        </button>
                     </div>
                     <div class="modal-brand">muminsultani</div>
                     <div class="modal-title" id="m-title">Book an Appointment</div>
@@ -1243,24 +1251,32 @@
 
             const savedTheme = localStorage.getItem('theme');
             const themeIcon = document.getElementById('themeIcon');
+            const modalThemeIcon = document.getElementById('modalThemeIcon');
             if (savedTheme === 'light') {
                 document.body.classList.add('light-mode');
                 if(themeIcon) themeIcon.className = "fa-solid fa-sun";
+                if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-sun";
             } else {
                 document.body.classList.remove('light-mode');
                 if(themeIcon) themeIcon.className = "fa-solid fa-moon";
+                if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-moon";
             }
         });
 
         const themeIcon = document.getElementById('themeIcon');
+        const modalThemeIcon = document.getElementById('modalThemeIcon');
         
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
-            if (document.body.classList.contains('light-mode')) {
-                themeIcon.className = "fa-solid fa-sun";
+            const isLight = document.body.classList.contains('light-mode');
+            
+            if (isLight) {
+                if(themeIcon) themeIcon.className = "fa-solid fa-sun";
+                if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-sun";
                 localStorage.setItem('theme', 'light');
             } else {
-                themeIcon.className = "fa-solid fa-moon";
+                if(themeIcon) themeIcon.className = "fa-solid fa-moon";
+                if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-moon";
                 localStorage.setItem('theme', 'dark');
             }
         }
