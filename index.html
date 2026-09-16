@@ -1499,6 +1499,10 @@
                 const pdfBlob = doc.output('blob');
                 const blobUrl = URL.createObjectURL(pdfBlob);
                 
+                // Telefonda doğrudan yeni sekmede önizleme olarak açar
+                window.open(blobUrl, '_blank');
+
+                // Otomatik indirme tetikleyicisi
                 const downloadLink = document.createElement('a');
                 downloadLink.href = blobUrl;
                 downloadLink.download = `Appointment_${name.replace(/\s+/g, '_')}.pdf`;
