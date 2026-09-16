@@ -702,6 +702,25 @@
             -webkit-text-fill-color: var(--text-primary) !important;
         }
 
+        /* Placeholder renkleri açık gri olarak ayarlandı */
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: #94a3b8;
+            opacity: 1;
+        }
+        .form-input::-webkit-input-placeholder,
+        .form-textarea::-webkit-input-placeholder {
+            color: #94a3b8;
+        }
+        .form-input:-ms-input-placeholder,
+        .form-textarea:-ms-input-placeholder {
+            color: #94a3b8;
+        }
+        .form-input::-ms-input-placeholder,
+        .form-textarea::-ms-input-placeholder {
+            color: #94a3b8;
+        }
+
         .form-input:focus, .form-textarea:focus {
             border-color: #9333ea;
             background: var(--box-bg) !important;
@@ -1118,18 +1137,22 @@
                 </div>
             </div>
             <form id="appointmentForm">
+                <!-- 1. Ad Soyad -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-name">Name & Surname</label>
                     <input type="text" class="form-input" id="clientName" required placeholder="Name & Surname">
                 </div>
-                <div class="form-group">
-                    <label class="form-label" id="m-label-phone">Phone Number</label>
-                    <input type="tel" class="form-input" id="clientPhone" required value="+ " oninput="formatPhoneInput(this)">
-                </div>
+                <!-- 2. E-posta Adresi -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-email">Email Address</label>
                     <input type="email" class="form-input" id="clientEmail" required placeholder="name@sample.com">
                 </div>
+                <!-- 3. Telefon Numarası -->
+                <div class="form-group">
+                    <label class="form-label" id="m-label-phone">Phone Number</label>
+                    <input type="tel" class="form-input" id="clientPhone" required value="+ " oninput="formatPhoneInput(this)">
+                </div>
+                <!-- 4. Açıklama / Proje Detayları -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-desc">Description / Project Details</label>
                     <textarea class="form-textarea" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
@@ -1338,8 +1361,10 @@
                 code: "EN",
                 title: "Book an Appointment",
                 nameLabel: "Name & Surname",
-                phoneLabel: "Phone Number",
+                namePlaceholder: "Name & Surname",
                 emailLabel: "Email Address",
+                emailPlaceholder: "name@sample.com",
+                phoneLabel: "Phone Number",
                 descLabel: "Description / Project Details",
                 descPlaceholder: "Tell me about your project...",
                 emailBtn: "Email",
@@ -1349,8 +1374,10 @@
                 code: "TR",
                 title: "Randevu Talebi",
                 nameLabel: "Ad Soyad",
-                phoneLabel: "Telefon Numarası",
+                namePlaceholder: "Ad Soyad",
                 emailLabel: "E-posta Adresi",
+                emailPlaceholder: "ornek@mail.com",
+                phoneLabel: "Telefon Numarası",
                 descLabel: "Açıklama / Proje Detayları",
                 descPlaceholder: "Projeden bahsedin...",
                 emailBtn: "E-posta",
@@ -1360,8 +1387,10 @@
                 code: "DE",
                 title: "Termin buchen",
                 nameLabel: "Name & Nachname",
-                phoneLabel: "Telefonnummer",
+                namePlaceholder: "Name & Nachname",
                 emailLabel: "E-Mail-Adresse",
+                emailPlaceholder: "name@beispiel.de",
+                phoneLabel: "Telefonnummer",
                 descLabel: "Beschreibung / Projektdetails",
                 descPlaceholder: "Erzählen Sie von Ihrem Projekt...",
                 emailBtn: "E-Mail",
@@ -1398,8 +1427,13 @@
             document.getElementById('m-title').innerText = data.title;
             
             document.getElementById('m-label-name').innerText = data.nameLabel;
-            document.getElementById('m-label-phone').innerText = data.phoneLabel;
+            document.getElementById('clientName').placeholder = data.namePlaceholder;
+
             document.getElementById('m-label-email').innerText = data.emailLabel;
+            document.getElementById('clientEmail').placeholder = data.emailPlaceholder;
+
+            document.getElementById('m-label-phone').innerText = data.phoneLabel;
+            
             document.getElementById('m-label-desc').innerText = data.descLabel;
             document.getElementById('clientDesc').placeholder = data.descPlaceholder;
             
@@ -1425,7 +1459,7 @@
             img.src = url;
         }
 
-        function generatePDF(name, phone, email, desc, formattedDate) {
+        function generatePDF(name, email, phone, desc, formattedDate) {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
@@ -1450,8 +1484,8 @@
 
                 const tableData = [
                     ["Name & Surname", name],
-                    ["Phone Number", phone],
                     ["Email Address", email],
+                    ["Phone Number", phone],
                     ["Request Time", formattedDate],
                     ["Project Details", desc]
                 ];
@@ -1495,15 +1529,15 @@
 
         function validateForm() {
             const name = document.getElementById('clientName').value.trim();
-            const phone = document.getElementById('clientPhone').value.trim();
             const email = document.getElementById('clientEmail').value.trim();
+            const phone = document.getElementById('clientPhone').value.trim();
             const desc = document.getElementById('clientDesc').value.trim();
 
-            if (!name || phone === '+' || !email || !desc) {
+            if (!name || !email || phone === '+' || !desc) {
                 showCustomAlert(currentAlertText);
                 return false;
             }
-            return { name, phone, email, desc };
+            return { name, email, phone, desc };
         }
 
         function sendToEmail(e) {
@@ -1514,14 +1548,14 @@
             const now = new Date();
             const formattedDate = now.toLocaleString();
 
-            generatePDF(data.name, data.phone, data.email, data.desc, formattedDate);
+            generatePDF(data.name, data.email, data.phone, data.desc, formattedDate);
 
             const recipient = "contact@muminsultani.com";
             const subject = encodeURIComponent("New Appointment Request - " + data.name);
             const body = encodeURIComponent(
                 `Name: ${data.name}\n` +
-                `Phone: ${data.phone}\n` +
                 `Email: ${data.email}\n` +
+                `Phone: ${data.phone}\n` +
                 `Time: ${formattedDate}\n\n` +
                 `Details:\n${data.desc}\n\n` +
                 `---\nmuminsultani.com`
