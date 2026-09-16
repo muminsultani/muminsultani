@@ -1628,7 +1628,7 @@
 
                 doc.setFontSize(13);
                 doc.setTextColor(30, 41, 59);
-                doc.text("New Appointment Request", 20, 42);
+                doc.text("Project Request", 20, 42);
 
                 doc.setLineWidth(0.4);
                 doc.setStrokeColor(200, 200, 200);
@@ -1669,7 +1669,7 @@
 
                 const downloadLink = document.createElement('a');
                 downloadLink.href = blobUrl;
-                downloadLink.download = `Appointment_${name.replace(/\s+/g, '_')}.pdf`;
+                downloadLink.download = `ProjectRequest_${name.replace(/\s+/g, '_')}.pdf`;
                 document.body.appendChild(downloadLink);
                 downloadLink.click();
                 document.body.removeChild(downloadLink);
@@ -1703,21 +1703,23 @@
 
             const now = new Date();
             const formattedDate = now.toLocaleString();
+            const currentModalLang = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const requestTitle = modalTranslations[currentModalLang] ? modalTranslations[currentModalLang].waProjectRequest : "Project Request";
 
             generatePDF(data.name, data.email, data.phone, data.fileName, data.desc, formattedDate);
 
             const recipient = "contact@muminsultani.com";
-            const subject = encodeURIComponent("New Appointment Request - " + data.name);
+            const subject = encodeURIComponent("Project Request - " + data.name);
             const body = encodeURIComponent(
                 `*${data.name}*\n\n` +
-                `New Appointment / Project Request\n\n` +
-                `*Name:* ${data.name}\n` +
-                `*Email:* ${data.email}\n` +
-                `*Phone:* ${data.phone}\n` +
-                `*File:* ${data.fileName}\n` +
-                `*Time:* ${formattedDate}\n\n` +
-                `*Details:*\n${data.desc}\n\n` +
-                `muminsultani.com`
+                `*${requestTitle}*\n\n` +
+                `*• Name:* ${data.name}\n` +
+                `*• Email:* ${data.email}\n` +
+                `*• Phone:* ${data.phone}\n` +
+                `*• File:* ${data.fileName}\n` +
+                `*• Time:* ${formattedDate}\n\n` +
+                `*• Details:*\n${data.desc}\n\n` +
+                `*muminsultani.com*`
             );
 
             const mailtoUrl = `mailto:${recipient}?subject=${subject}&body=${body}`;
