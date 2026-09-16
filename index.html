@@ -73,7 +73,7 @@
             --box-bg: rgba(255, 255, 255, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(10, 10, 15, 0.85);
-            --modal-container-bg: rgba(10, 10, 15, 0.7); 
+            --modal-container-bg: rgba(10, 10, 15, 0.65); 
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.12), rgba(168, 85, 247, 0.05) 60%, transparent 80%);
         }
 
@@ -87,7 +87,7 @@
             --box-bg: rgba(0, 0, 0, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(255, 255, 255, 0.85);
-            --modal-container-bg: rgba(255, 255, 255, 0.8); 
+            --modal-container-bg: rgba(255, 255, 255, 0.75); 
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.08), rgba(168, 85, 247, 0.03) 60%, transparent 80%);
         }
 
@@ -542,21 +542,23 @@
             flex-shrink: 0;
         }
 
+        /* Modal Overlay & Cam Efekti / Animasyon Güncellemesi */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: transparent;
-            backdrop-filter: none;
+            background: rgba(5, 5, 8, 0.45);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 10000;
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
             padding: 16px;
             pointer-events: none;
         }
@@ -569,8 +571,8 @@
 
         .modal-container {
             background: var(--modal-container-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--line-color);
             border-radius: 20px;
             width: 100%;
@@ -578,14 +580,16 @@
             padding: 32px;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
             position: relative;
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
+            transform: scale(0.95) translateY(15px);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            opacity: 0;
             max-height: 90vh;
             overflow-y: auto;
         }
 
         .modal-overlay.active .modal-container {
-            transform: translateY(0);
+            transform: scale(1) translateY(0);
+            opacity: 1;
         }
 
         .modal-header {
@@ -1249,7 +1253,7 @@
             de: {
                 code: "DE",
                 title: "Termin buchen",
-                nameLevel: "Name & Nachname",
+                nameLabel: "Name & Nachname",
                 namePlaceholder: "Name & Nachname",
                 emailLabel: "E-Mail-Adresse",
                 emailPlaceholder: "beispiel@e-mail.de",
@@ -1307,7 +1311,6 @@
             const whatsapp = document.getElementById('clientWhatsApp').value;
             const desc = document.getElementById('clientDesc').value;
 
-            // En üstte mor renkli logo, hemen altında site linki, ardından temiz ve küçük randevu detayları
             const text = `muminsultani.com\n\n*New Appointment Request*\n\n• *Name:* ${name}\n• *Email:* ${email}\n• *WhatsApp:* ${whatsapp}\n• *Details:* ${desc}`;
             const encodedText = encodeURIComponent(text);
             
