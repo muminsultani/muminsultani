@@ -1505,7 +1505,13 @@
                 emailBtn: "Send",
                 whatsappBtn: "WhatsApp",
                 alertText: "Please fill in all fields.",
-                waProjectRequest: "Project Request"
+                waProjectRequest: "Project Request",
+                lblContactName: "Name & Surname",
+                lblEmail: "Email",
+                lblPhone: "Phone",
+                lblFile: "File",
+                lblTime: "Time",
+                lblDetails: "Details"
             },
             tr: {
                 code: "TR",
@@ -1522,7 +1528,13 @@
                 emailBtn: "Gönder",
                 whatsappBtn: "WhatsApp",
                 alertText: "Lütfen tüm alanları doldurun.",
-                waProjectRequest: "Proje Talebi"
+                waProjectRequest: "Proje Talebi",
+                lblContactName: "Ad Soyad",
+                lblEmail: "E-posta",
+                lblPhone: "Telefon",
+                lblFile: "Dosya",
+                lblTime: "Zaman",
+                lblDetails: "Detaylar"
             },
             de: {
                 code: "DE",
@@ -1539,7 +1551,13 @@
                 emailBtn: "Senden",
                 whatsappBtn: "WhatsApp",
                 alertText: "Bitte füllen Sie alle Felder aus.",
-                waProjectRequest: "Projektanfrage"
+                waProjectRequest: "Projektanfrage",
+                lblContactName: "Name & Nachname",
+                lblEmail: "E-Mail",
+                lblPhone: "Telefon",
+                lblFile: "Datei",
+                lblTime: "Zeit",
+                lblDetails: "Details"
             }
         };
 
@@ -1704,22 +1722,22 @@
             const now = new Date();
             const formattedDate = now.toLocaleString();
             const currentModalLang = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-            const requestTitle = modalTranslations[currentModalLang] ? modalTranslations[currentModalLang].waProjectRequest : "Project Request";
+            const t = modalTranslations[currentModalLang] || modalTranslations.en;
 
             generatePDF(data.name, data.email, data.phone, data.fileName, data.desc, formattedDate);
 
             const recipient = "contact@muminsultani.com";
-            const subject = encodeURIComponent("Project Request - " + data.name);
+            const subject = encodeURIComponent(`${t.waProjectRequest} - ` + data.name);
             
             const body = encodeURIComponent(
-                `${data.name}\n\n` +
-                `${requestTitle}\n\n` +
-                `Name & Surname: ${data.name}\n` +
-                `Email: ${data.email}\n` +
-                `Phone: ${data.phone}\n` +
-                `File: ${data.fileName}\n` +
-                `Time: ${formattedDate}\n\n` +
-                `Details:\n${data.desc}\n\n` +
+                `*${data.name}*\n\n` +
+                `*${t.waProjectRequest}*\n\n` +
+                `*${t.lblContactName}:* ${data.name}\n` +
+                `*${t.lblEmail}:* ${data.email}\n` +
+                `*${t.lblPhone}:* ${data.phone}\n` +
+                `*${t.lblFile}:* ${data.fileName}\n` +
+                `*${t.lblTime}:* ${formattedDate}\n\n` +
+                `*${t.lblDetails}:*\n${data.desc}\n\n` +
                 `muminsultani.com`
             );
 
@@ -1736,17 +1754,17 @@
             const now = new Date();
             const formattedDate = now.toLocaleString();
             const currentModalLang = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-            const requestTitle = modalTranslations[currentModalLang] ? modalTranslations[currentModalLang].waProjectRequest : "Project Request";
+            const t = modalTranslations[currentModalLang] || modalTranslations.en;
 
             const message = 
                 `*${data.name}*\n\n` +
-                `*${requestTitle}*\n\n` +
-                `*• Name & Surname:* ${data.name}\n` +
-                `*• Email:* ${data.email}\n` +
-                `*• Phone:* ${data.phone}\n` +
-                `*• File:* ${data.fileName}\n` +
-                `*• Time:* ${formattedDate}\n\n` +
-                `*• Details:*\n${data.desc}\n\n` +
+                `*${t.waProjectRequest}*\n\n` +
+                `*• ${t.lblContactName}:* ${data.name}\n` +
+                `*• ${t.lblEmail}:* ${data.email}\n` +
+                `*• ${t.lblPhone}:* ${data.phone}\n` +
+                `*• ${t.lblFile}:* ${data.fileName}\n` +
+                `*• ${t.lblTime}:* ${formattedDate}\n\n` +
+                `*• ${t.lblDetails}:*\n${data.desc}\n\n` +
                 `*muminsultani.com*`;
 
             const whatsappNumber = "905389480137";
