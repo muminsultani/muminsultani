@@ -1710,16 +1710,18 @@
 
             const recipient = "contact@muminsultani.com";
             const subject = encodeURIComponent("Project Request - " + data.name);
+            
+            // Yıldızlar kaldırıldı, temiz ve düzenli hale getirildi
             const body = encodeURIComponent(
-                `*${data.name}*\n\n` +
-                `*${requestTitle}*\n\n` +
-                `*• Name:* ${data.name}\n` +
-                `*• Email:* ${data.email}\n` +
-                `*• Phone:* ${data.phone}\n` +
-                `*• File:* ${data.fileName}\n` +
-                `*• Time:* ${formattedDate}\n\n` +
-                `*• Details:*\n${data.desc}\n\n` +
-                `*muminsultani.com*`
+                `${data.name}\n\n` +
+                `${requestTitle}\n\n` +
+                `Name: ${data.name}\n` +
+                `Email: ${data.email}\n` +
+                `Phone: ${data.phone}\n` +
+                `File: ${data.fileName}\n` +
+                `Time: ${formattedDate}\n\n` +
+                `Details:\n${data.desc}\n\n` +
+                `muminsultani.com`
             );
 
             const mailtoUrl = `mailto:${recipient}?subject=${subject}&body=${body}`;
