@@ -1239,7 +1239,7 @@
                 
                 <div class="form-buttons-group">
                     <button type="button" class="submit-btn email-btn" onclick="sendToEmail(event)" id="m-email-btn">
-                        <i class="fa-solid fa-envelope"></i> Send
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1.1rem; height: 1.1rem; display: block;"> Email
                     </button>
                     <button type="button" class="submit-btn whatsapp-btn" onclick="sendToWhatsApp(event)" id="m-whatsapp-btn">
                         <i class="fa-brands fa-whatsapp"></i> WhatsApp
@@ -1502,7 +1502,7 @@
                 filePlaceholder: "Choose file or media...",
                 descLabel: "Description / Project Details",
                 descPlaceholder: "Tell me about your project...",
-                emailBtn: "Send",
+                emailBtn: "Email",
                 whatsappBtn: "WhatsApp",
                 alertText: "Please fill in all required fields.",
                 waProjectRequest: "Project Request",
@@ -1526,7 +1526,7 @@
                 filePlaceholder: "Dosya veya medya seçin...",
                 descLabel: "Açıklama / Proje Detayları",
                 descPlaceholder: "Projeden bahsedin...",
-                emailBtn: "Gönder",
+                emailBtn: "Email",
                 whatsappBtn: "WhatsApp",
                 alertText: "Lütfen gerekli tüm alanları doldurun.",
                 waProjectRequest: "Proje Talebi",
@@ -1550,7 +1550,7 @@
                 filePlaceholder: "Datei oder Medien auswählen...",
                 descLabel: "Beschreibung / Projektdetails",
                 descPlaceholder: "Erzählen Sie von Ihrem Projekt...",
-                emailBtn: "Senden",
+                emailBtn: "Email",
                 whatsappBtn: "WhatsApp",
                 alertText: "Bitte füllen Sie alle Pflichtfelder aus.",
                 waProjectRequest: "Projektanfrage",
@@ -1609,7 +1609,7 @@
             document.getElementById('m-label-desc').innerText = data.descLabel;
             document.getElementById('clientDesc').placeholder = data.descPlaceholder;
             
-            document.getElementById('m-email-btn').innerHTML = `<i class="fa-solid fa-envelope"></i> ${data.emailBtn}`;
+            document.getElementById('m-email-btn').innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1.1rem; height: 1.1rem; display: block;"> ${data.emailBtn}`;
             document.getElementById('m-whatsapp-btn').innerHTML = `<i class="fa-brands fa-whatsapp"></i> ${data.whatsappBtn}`;
 
             document.getElementById('modalLangMenu').classList.remove('show');
@@ -1711,7 +1711,6 @@
             const currentModalLang = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
             const t = modalTranslations[currentModalLang] || modalTranslations.en;
 
-            // Dosya hariç diğer alanlar zorunlu tutuldu
             if (!name || !email || phone === '+' || !desc) {
                 showCustomAlert(currentAlertText);
                 return false;
