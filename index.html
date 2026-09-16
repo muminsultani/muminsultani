@@ -1249,7 +1249,7 @@
             de: {
                 code: "DE",
                 title: "Termin buchen",
-                nameLabel: "Name & Nachname",
+                nameLevel: "Name & Nachname",
                 namePlaceholder: "Name & Nachname",
                 emailLabel: "E-Mail-Adresse",
                 emailPlaceholder: "beispiel@e-mail.de",
@@ -1307,11 +1307,8 @@
             const whatsapp = document.getElementById('clientWhatsApp').value;
             const desc = document.getElementById('clientDesc').value;
 
-            // Site linki ve logo bilgileri mesaja eklendi
-            const siteUrl = "https://muminsultani.com";
-            const logoUrl = "https://muminsultani.com/img/ms.png";
-
-            const text = `--- New Appointment / Project Request ---\n*Full Name:* ${name}\n*Email:* ${email}\n*WhatsApp:* ${whatsapp}\n*Description:* ${desc}\n\n*Website:* ${siteUrl}\n*Logo:* ${logoUrl}`;
+            // En üstte mor renkli logo, hemen altında site linki, ardından temiz ve küçük randevu detayları
+            const text = `muminsultani.com\n\n*New Appointment Request*\n\n• *Name:* ${name}\n• *Email:* ${email}\n• *WhatsApp:* ${whatsapp}\n• *Details:* ${desc}`;
             const encodedText = encodeURIComponent(text);
             
             const targetPhone = "905389480137";
