@@ -713,25 +713,117 @@
             min-height: 120px;
         }
 
+        .form-buttons-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
         .submit-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #9333ea, #c084fc);
+            flex: 1;
             color: #fff;
             border: none;
-            padding: 14px;
+            padding: 14px 8px;
             border-radius: 10px;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.8rem;
             cursor: pointer;
             transition: opacity 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin-top: 12px;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .submit-btn.whatsapp-btn {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+        }
+
+        .submit-btn.email-btn {
+            background: linear-gradient(135deg, #9333ea, #c084fc);
         }
 
         .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Özel Alert Modal Tasarımı */
+        .custom-alert-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(5, 5, 8, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 20000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 16px;
+            pointer-events: none;
+        }
+
+        .custom-alert-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .custom-alert-box {
+            background: var(--modal-container-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--line-color);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 380px;
+            padding: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transform: scale(0.9) translateY(10px);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .custom-alert-overlay.active .custom-alert-box {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .custom-alert-icon {
+            font-size: 2rem;
+            color: #9333ea;
+            margin-bottom: 12px;
+        }
+
+        .custom-alert-message {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .custom-alert-btn {
+            background: linear-gradient(135deg, #9333ea, #c084fc);
+            color: #fff;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .custom-alert-btn:hover {
             opacity: 0.9;
         }
 
@@ -907,7 +999,7 @@
                         <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                     </svg>
                 </a>
-                <a href="mailto:contact@muminsultani.com" target="_blank" class="social-btn gmail" title="Gmail">
+                <a href="mailto:muminsultani@hotmail.com" target="_blank" class="social-btn gmail" title="Gmail">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail">
                 </a>
             </div>
@@ -1029,7 +1121,7 @@
                     <button class="modal-close-btn" onclick="closeAppointmentModal()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
-            <form id="appointmentForm" onsubmit="sendToWhatsApp(event)">
+            <form id="appointmentForm">
                 <div class="form-group">
                     <label class="form-label" id="m-label-name">Name & Surname</label>
                     <input type="text" class="form-input" id="clientName" required placeholder="Name & Surname">
@@ -1046,10 +1138,25 @@
                     <label class="form-label" id="m-label-desc">Description / Project Details</label>
                     <textarea class="form-textarea" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
                 </div>
-                <button type="submit" class="submit-btn" id="m-submit-btn">
-                    <i class="fa-brands fa-whatsapp"></i> Send Request via WhatsApp
-                </button>
+                
+                <div class="form-buttons-group">
+                    <button type="button" class="submit-btn whatsapp-btn" onclick="sendToWhatsApp(event)" id="m-whatsapp-btn">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                    </button>
+                    <button type="button" class="submit-btn email-btn" onclick="sendToEmail(event)" id="m-email-btn">
+                        <i class="fa-solid fa-envelope"></i> E-posta
+                    </button>
+                </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Özel Uyarı Kutusu (Custom Alert Modal) -->
+    <div class="custom-alert-overlay" id="customAlertModal">
+        <div class="custom-alert-box">
+            <div class="custom-alert-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+            <div class="custom-alert-message" id="customAlertMessage">Please fill in all fields.</div>
+            <button class="custom-alert-btn" onclick="closeCustomAlert()" id="customAlertBtn">OK</button>
         </div>
     </div>
 
@@ -1233,7 +1340,9 @@
                 whatsappSub: "Country Code",
                 descLabel: "Description / Project Details",
                 descPlaceholder: "Tell me about your project...",
-                submitBtn: "Send Request via WhatsApp"
+                whatsappBtn: "WhatsApp",
+                emailBtn: "Email",
+                alertText: "Please fill in all fields."
             },
             tr: {
                 code: "TR",
@@ -1246,7 +1355,9 @@
                 whatsappSub: "Ülke Kodu",
                 descLabel: "Açıklama / Proje Detayları",
                 descPlaceholder: "Projeden bahsedin...",
-                submitBtn: "WhatsApp ile Gönder"
+                whatsappBtn: "WhatsApp",
+                emailBtn: "E-posta",
+                alertText: "Lütfen tüm alanları doldurun."
             },
             de: {
                 code: "DE",
@@ -1259,9 +1370,14 @@
                 whatsappSub: "Ländervorwahl",
                 descLabel: "Beschreibung / Projektdetails",
                 descPlaceholder: "Erzählen Sie von Ihrem Projekt...",
-                submitBtn: "Über WhatsApp senden"
+                whatsappBtn: "WhatsApp",
+                emailBtn: "E-Mail",
+                alertText: "Bitte füllen Sie alle Felder aus."
             }
         };
+
+        // Varsayılan dili İngilizce olarak belirleme
+        let currentAlertText = "Please fill in all fields.";
 
         function openAppointmentModal() {
             document.getElementById('appointmentModal').classList.add('active');
@@ -1271,9 +1387,21 @@
             document.getElementById('appointmentModal').classList.remove('active');
         }
 
+        function showCustomAlert(message) {
+            document.getElementById('customAlertMessageinnerText') = message;
+            document.getElementById('customAlertMessage').innerText = message;
+            document.getElementById('customAlertModal').classList.add('active');
+        }
+
+        function closeCustomAlert() {
+            document.getElementById('customAlertModal').classList.remove('active');
+        }
+
         function changeModalLanguage(lang) {
             const data = modalTranslations[lang];
             if (!data) return;
+
+            currentAlertText = data.alertText;
 
             document.getElementById('modalCurrentLangText').innerText = data.code;
             document.getElementById('m-title').innerText = data.title;
@@ -1289,7 +1417,8 @@
             document.getElementById('m-label-desc').innerText = data.descLabel;
             document.getElementById('clientDesc').placeholder = data.descPlaceholder;
             
-            document.getElementById('m-submit-btn').innerHTML = `<i class="fa-brands fa-whatsapp"></i> ${data.submitBtn}`;
+            document.getElementById('m-whatsapp-btn').innerHTML = `<i class="fa-brands fa-whatsapp"></i> ${data.whatsappBtn}`;
+            document.getElementById('m-email-btn').innerHTML = `<i class="fa-solid fa-envelope"></i> ${data.emailBtn}`;
 
             document.getElementById('modalLangMenu').classList.remove('show');
         }
@@ -1322,7 +1451,7 @@
             y += 10;
             doc.text(`WhatsApp: ${whatsapp}`, 20, y);
             y += 10;
-            doc.text(`Request Time: ${formattedDate}`, 20, y);
+            doc.text(`Time: ${formattedDate}`, 20, y);
             y += 10;
             doc.text(`Details: ${desc}`, 20, y);
 
@@ -1333,28 +1462,62 @@
             doc.save(`Appointment_${name.replace(/\s+/g, '_')}.pdf`);
         }
 
+        function validateForm() {
+            const name = document.getElementById('clientName').value.trim();
+            const email = document.getElementById('clientEmail').value.trim();
+            const whatsapp = document.getElementById('clientWhatsApp').value.trim();
+            const desc = document.getElementById('clientDesc').value.trim();
+
+            if (!name || !email || !whatsapp || !desc) {
+                showCustomAlert(currentAlertText);
+                return false;
+            }
+            return { name, email, whatsapp, desc };
+        }
+
         function sendToWhatsApp(e) {
             e.preventDefault();
-            
-            const name = document.getElementById('clientName').value;
-            const email = document.getElementById('clientEmail').value;
-            const whatsapp = document.getElementById('clientWhatsApp').value;
-            const desc = document.getElementById('clientDesc').value;
+            const data = validateForm();
+            if (!data) return;
 
             const now = new Date();
             const formattedDate = now.toLocaleString();
 
-            // Form bilgilerini içeren PDF dosyasını indir
-            generatePDF(name, email, whatsapp, desc, formattedDate);
+            generatePDF(data.name, data.email, data.whatsapp, data.desc, formattedDate);
 
-            // WhatsApp mesajını oluştur ve aç ("Request" kelimesi Time önünden kaldırıldı)
-            const text = `*${name}*\n\n*New Appointment Request*\n\n• *Name:* ${name}\n• *Email:* ${email}\n• *WhatsApp:* ${whatsapp}\n• *Time:* ${formattedDate}\n• *Details:* ${desc}\n\n*Ⓜ️ muminsultani.com*`;
+            const text = `*${data.name}*\n\n*New Appointment Request*\n\n• *Name:* ${data.name}\n• *Email:* ${data.email}\n• *WhatsApp:* ${data.whatsapp}\n• *Time:* ${formattedDate}\n• *Details:* ${data.desc}\n\n*Ⓜ️ muminsultani.com*`;
             const encodedText = encodeURIComponent(text);
             
             const targetPhone = "905389480137";
             const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodedText}`;
             
             window.open(whatsappUrl, '_blank');
+            closeAppointmentModal();
+        }
+
+        function sendToEmail(e) {
+            e.preventDefault();
+            const data = validateForm();
+            if (!data) return;
+
+            const now = new Date();
+            const formattedDate = now.toLocaleString();
+
+            generatePDF(data.name, data.email, data.whatsapp, data.desc, formattedDate);
+
+            const recipient = "muminsultani@hotmail.com";
+            const subject = encodeURIComponent("New Appointment Request - " + data.name);
+            const body = encodeURIComponent(
+                `Name: ${data.name}\n` +
+                `Email: ${data.email}\n` +
+                `WhatsApp: ${data.whatsapp}\n` +
+                `Time: ${formattedDate}\n\n` +
+                `Details:\n${data.desc}\n\n` +
+                `---\nmuminsultani.com`
+            );
+
+            const mailtoUrl = `mailto:${recipient}?subject=${subject}&body=${body}`;
+            window.location.href = mailtoUrl;
             closeAppointmentModal();
         }
 
