@@ -1196,8 +1196,8 @@
             <div class="modal-header">
                 <div class="modal-header-left">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                        <button class="modal-close-btn" onclick="closeAppointmentModal()" title="Geri / Çıkış"><i class="fa-solid fa-chevron-left"></i></button>
-                        <!-- GÜNCELLENEN YENİLEME / TEMİZLEME DÜĞMESİ -->
+                        <button class="modal-close-btn" onclick="clearAndCloseModal()" title="Geri / Çıkış"><i class="fa-solid fa-chevron-left"></i></button>
+                        <!-- YENİLEME / TEMİZLEME DÜĞMESİ -->
                         <button class="modal-close-btn" onclick="resetAppointmentForm()" title="Yenile / Temizle">
                             <i class="fa-solid fa-rotate"></i>
                         </button>
@@ -1225,7 +1225,8 @@
                             <button class="lang-option" onclick="changeModalLanguage('de')">Deutsch</button>
                         </div>
                     </div>
-                    <button class="modal-close-btn" onclick="closeAppointmentModal()"><i class="fa-solid fa-xmark"></i></button>
+                    <!-- İŞARETLEDİĞİNİZ X KAPATMA DÜĞMESİ GÜNCELLENDİ -->
+                    <button class="modal-close-btn" onclick="clearAndCloseModal()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
             <form id="appointmentForm">
@@ -1371,7 +1372,6 @@
             });
         }
 
-        // PANELİ / FORMU SADECE SIFIRLAMA FONKSİYONU
         function resetAppointmentForm() {
             document.getElementById('appointmentForm').reset();
             document.getElementById('clientPhone').value = '+ ';
@@ -1381,6 +1381,12 @@
                 fileTextSpan.innerText = modalTranslations[currentLang].filePlaceholder;
                 fileTextSpan.style.color = '#94a3b8';
             }
+        }
+
+        // X DÜĞMESİ İÇİN FORMU TEMİZLEYİp KAPATAN FONKSİYON
+        function clearAndCloseModal() {
+            resetAppointmentForm();
+            closeAppointmentModal();
         }
 
         function toggleLangMenu() {
