@@ -74,7 +74,7 @@
             --box-bg: rgba(255, 255, 255, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(10, 10, 15, 0.85);
-            --modal-container-bg: rgba(10, 10, 15, 0.65); 
+            --modal-container-bg: rgba(10, 10, 15, 0.45);
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.12), rgba(168, 85, 247, 0.05) 60%, transparent 80%);
         }
 
@@ -87,7 +87,7 @@
             --box-bg: rgba(0, 0, 0, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(255, 255, 255, 0.85);
-            --modal-container-bg: rgba(255, 255, 255, 0.75); 
+            --modal-container-bg: rgba(255, 255, 255, 0.55); 
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.08), rgba(168, 85, 247, 0.03) 60%, transparent 80%);
         }
 
@@ -309,10 +309,11 @@
         .lang-btn {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 5px;
             background: var(--box-bg);
             border: 1px solid var(--line-color);
-            padding: 5px 10px;
+            padding: 0 10px;
             border-radius: 8px;
             color: var(--text-secondary);
             font-size: 0.75rem;
@@ -320,13 +321,22 @@
             cursor: pointer;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
-            height: 30px;
+            height: 32px;
+            box-sizing: border-box;
         }
 
         .lang-btn:hover {
             border-color: rgba(147, 51, 234, 0.4);
             background: var(--box-hover-bg);
             color: #9333ea;
+        }
+
+        /* Modal içi özel küçültülmüş dil butonu */
+        .modal-container .lang-btn {
+            height: 26px;
+            padding: 0 7px;
+            font-size: 0.68rem;
+            border-radius: 6px;
         }
 
         .lang-menu {
@@ -548,9 +558,9 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(5, 5, 8, 0.45);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(5, 5, 8, 0.25);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             z-index: 10000;
             display: flex;
             justify-content: center;
@@ -570,20 +580,34 @@
 
         .modal-container {
             background: var(--modal-container-bg);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border: 1px solid var(--line-color);
             border-radius: 20px;
             width: 100%;
             max-width: 540px;
             padding: 32px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
             position: relative;
             transform: scale(0.95) translateY(15px);
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
             opacity: 0;
             max-height: 90vh;
             overflow-y: auto;
+        }
+
+        .modal-container::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 150px;
+            background: var(--glow-color);
+            filter: blur(40px);
+            z-index: -1;
+            pointer-events: none;
         }
 
         .modal-overlay.active .modal-container {
@@ -605,19 +629,25 @@
         .modal-header-left {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
+            gap: 6px; 
+            overflow: hidden;
         }
 
         .modal-header-actions {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             flex-shrink: 0;
         }
 
+        .modal-brand-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px; 
+        }
+
         .modal-brand {
-            font-size: 1.4rem;
+            font-size: 1.45rem;
             font-weight: 800;
             letter-spacing: -0.5px;
             background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
@@ -625,28 +655,32 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: gradientFlow 8s ease infinite;
-            margin-bottom: 6px;
+            white-space: nowrap;
+            line-height: 1.2;
         }
 
         .modal-title {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-secondary);
+            white-space: nowrap;
+            line-height: 1.2;
         }
 
         .modal-close-btn {
             background: var(--box-bg);
             border: 1px solid var(--line-color);
             color: var(--text-secondary);
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
-            font-size: 0.9rem;
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            font-size: 0.75rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s;
+            box-sizing: border-box;
         }
 
         .modal-close-btn:hover {
@@ -667,28 +701,6 @@
             margin-bottom: 6px;
         }
 
-        .form-input:-webkit-autofill,
-        .form-input:-webkit-autofill:hover, 
-        .form-input:-webkit-autofill:focus,
-        .form-textarea:-webkit-autofill,
-        .form-textarea:-webkit-autofill:hover,
-        .form-textarea:-webkit-autofill:focus {
-            -webkit-text-fill-color: var(--text-primary) !important;
-            -webkit-box-shadow: 0 0 0 1000px #0a0a0f inset !important;
-            transition: background-color 5000s ease-in-out 0s !important;
-        }
-
-        body.light-mode .form-input:-webkit-autofill,
-        body.light-mode .form-input:-webkit-autofill:hover, 
-        body.light-mode .form-input:-webkit-autofill:focus,
-        body.light-mode .form-textarea:-webkit-autofill,
-        body.light-mode .form-textarea:-webkit-autofill:hover,
-        body.light-mode .form-textarea:-webkit-autofill:focus {
-            -webkit-text-fill-color: var(--text-primary) !important;
-            -webkit-box-shadow: 0 0 0 1000px #f8fafc inset !important;
-            transition: background-color 5000s ease-in-out 0s !important;
-        }
-
         .form-input, .form-textarea {
             width: 100%;
             background: var(--box-bg) !important;
@@ -702,23 +714,10 @@
             -webkit-text-fill-color: var(--text-primary) !important;
         }
 
-        /* Placeholder renkleri açık gri olarak ayarlandı */
         .form-input::placeholder,
         .form-textarea::placeholder {
             color: #94a3b8;
             opacity: 1;
-        }
-        .form-input::-webkit-input-placeholder,
-        .form-textarea::-webkit-input-placeholder {
-            color: #94a3b8;
-        }
-        .form-input:-ms-input-placeholder,
-        .form-textarea:-ms-input-placeholder {
-            color: #94a3b8;
-        }
-        .form-input::-ms-input-placeholder,
-        .form-textarea::-ms-input-placeholder {
-            color: #94a3b8;
         }
 
         .form-input:focus, .form-textarea:focus {
@@ -913,52 +912,12 @@
             letter-spacing: 0.2px;
             white-space: nowrap;
         }
-
-        @media (max-width: 640px) {
-            body { padding: 16px 12px; }
-            .wrapper { gap: 24px; max-width: 100%; }
-            .specs-grid { grid-template-columns: 1fr; gap: 14px; }
-            .brand-logo { font-size: 1.45rem; letter-spacing: -0.5px; }
-            .intro-logo { font-size: 1.65rem; letter-spacing: -0.5px; }
-            .contact-box { padding: 14px; }
-            .footer-qr-container img { width: 80px; height: 80px; }
-            .footer-copy-text { font-size: 0.62rem; }
-            .modal-container { padding: 20px; }
-        }
-
-        @media (min-width: 1025px) and (pointer: fine) {
-            .footer-brand { font-size: 3.2rem; }
-            .footer-scan-text { font-size: 1.4rem; }
-            .footer-copy-text { font-size: 1.05rem; white-space: nowrap; }
-            .footer-qr-container img { width: 150px; height: 150px; }
-        }
     </style>
-    
-    <script>
-        if (localStorage.getItem('theme') === 'light') {
-            document.documentElement.classList.add('light-mode-init');
-            document.addEventListener('DOMContentLoaded', () => {
-                document.body.classList.add('light-mode');
-                const icon = document.getElementById('themeIcon');
-                if(icon) icon.className = "fa-solid fa-sun";
-            });
-        }
-    </script>
 </head>
 <body>
 
     <canvas id="constellation-canvas"></canvas>
     <div id="security-curtain"></div>
-
-    <div id="intro-screen">
-        <div class="intro-content">
-            <div class="intro-code-box">
-                <span class="code-keyword">const</span> dev = <span class="code-string">"muminsultani"</span>;<span class="code-cursor"></span>
-            </div>
-            <div class="intro-logo">muminsultani</div>
-            <div class="intro-sub">Software Developer</div>
-        </div>
-    </div>
 
     <div class="ambient-glow"></div>
 
@@ -1117,15 +1076,17 @@
         <div class="modal-container">
             <div class="modal-header">
                 <div class="modal-header-left">
-                    <div class="modal-brand">muminsultani</div>
-                    <div class="modal-title" id="m-title">Book an Appointment</div>
+                    <div class="modal-brand-group">
+                        <div class="modal-brand">muminsultani</div>
+                        <div class="modal-title" id="m-title">Book an Appointment</div>
+                    </div>
                 </div>
                 
                 <div class="modal-header-actions">
                     <div class="lang-dropdown-container">
                         <button class="lang-btn" id="modalLangDropdownBtn" onclick="toggleModalLangMenu()">
                             <span id="modalCurrentLangText">EN</span>
-                            <i class="fa-solid fa-chevron-down" style="font-size: 0.4rem; margin-left: 2px;"></i>
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.35rem; margin-left: 2px;"></i>
                         </button>
                         <div class="lang-menu" id="modalLangMenu">
                             <button class="lang-option" onclick="changeModalLanguage('en')">English</button>
@@ -1137,22 +1098,18 @@
                 </div>
             </div>
             <form id="appointmentForm">
-                <!-- 1. Ad Soyad -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-name">Name & Surname</label>
                     <input type="text" class="form-input" id="clientName" required placeholder="Name & Surname">
                 </div>
-                <!-- 2. E-posta Adresi -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-email">Email Address</label>
                     <input type="email" class="form-input" id="clientEmail" required placeholder="name@sample.com">
                 </div>
-                <!-- 3. Telefon Numarası -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-phone">Phone Number</label>
                     <input type="tel" class="form-input" id="clientPhone" required value="+ " oninput="formatPhoneInput(this)">
                 </div>
-                <!-- 4. Açıklama / Proje Detayları -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-desc">Description / Project Details</label>
                     <textarea class="form-textarea" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
@@ -1167,7 +1124,7 @@
         </div>
     </div>
 
-    <!-- Özel Uyarı Kutusu (Custom Alert Modal) -->
+    <!-- Özel Uyarı Kutusu -->
     <div class="custom-alert-overlay" id="customAlertModal">
         <div class="custom-alert-box">
             <div class="custom-alert-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
@@ -1179,65 +1136,9 @@
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
 
-        document.addEventListener('keydown', (e) => {
-            if (
-                e.key === 'PrintScreen' || 
-                (e.ctrlKey && (e.key === 's' || e.key === 'u' || e.key === 'c' || e.key === 'p')) ||
-                e.key === 'F12' ||
-                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'C' || e.key === 'J'))
-            ) {
-                e.preventDefault();
-                showSecurityCurtain();
-                return false;
-            }
-        });
-
-        const curtain = document.getElementById('security-curtain');
-        function showSecurityCurtain() {
-            curtain.style.opacity = '1';
-            curtain.style.visibility = 'visible';
-            setTimeout(() => {
-                curtain.style.opacity = '0';
-                curtain.style.visibility = 'hidden';
-            }, 1000);
-            document.activeElement?.blur();
-        }
-
-        window.addEventListener('blur', () => {
-            curtain.style.opacity = '1';
-            curtain.style.visibility = 'visible';
-        });
-
-        window.addEventListener('focus', () => {
-            curtain.style.opacity = '0';
-            curtain.style.visibility = 'hidden';
-        });
-
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                const intro = document.getElementById('intro-screen');
-                if (intro) {
-                    intro.style.opacity = '0';
-                    intro.style.visibility = 'hidden';
-                    setTimeout(() => intro.remove(), 600);
-                }
-            }, 1500);
-
-            const savedTheme = localStorage.getItem('theme');
-            const themeIcon = document.getElementById('themeIcon');
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-mode');
-                if(themeIcon) themeIcon.className = "fa-solid fa-sun";
-            } else {
-                document.body.classList.remove('light-mode');
-                if(themeIcon) themeIcon.className = "fa-solid fa-moon";
-            }
-        });
-
-        const themeIcon = document.getElementById('themeIcon');
-        
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
+            const themeIcon = document.getElementById('themeIcon');
             if (document.body.classList.contains('light-mode')) {
                 themeIcon.className = "fa-solid fa-sun";
                 localStorage.setItem('theme', 'light');
@@ -1248,13 +1149,11 @@
         }
 
         function toggleLangMenu() {
-            const menu = document.getElementById('langMenu');
-            menu.classList.toggle('show');
+            document.getElementById('langMenu').classList.toggle('show');
         }
 
         function toggleModalLangMenu() {
-            const menu = document.getElementById('modalLangMenu');
-            menu.classList.toggle('show');
+            document.getElementById('modalLangMenu').classList.toggle('show');
         }
 
         window.addEventListener('click', function(e) {
@@ -1331,10 +1230,8 @@
         function changeLanguage(lang) {
             const data = translations[lang];
             if (!data) return;
-
             document.getElementById('htmlRoot').setAttribute('lang', lang);
             document.getElementById('currentLangText').innerText = data.code;
-
             document.getElementById('t-role').innerText = data.role;
             document.getElementById('t-projects-title').innerText = data.projectsTitle;
             document.getElementById('t-proj1-desc').innerText = data.proj1Desc;
@@ -1352,223 +1249,44 @@
             document.getElementById('t-contact-sub').innerText = data.contactSub;
             document.getElementById('t-contact-main').innerText = data.contactMain;
             document.getElementById('t-scan-text').innerText = data.scanText;
-
             document.getElementById('langMenu').classList.remove('show');
         }
 
         const modalTranslations = {
-            en: {
-                code: "EN",
-                title: "Book an Appointment",
-                nameLabel: "Name & Surname",
-                namePlaceholder: "Name & Surname",
-                emailLabel: "Email Address",
-                emailPlaceholder: "name@sample.com",
-                phoneLabel: "Phone Number",
-                descLabel: "Description / Project Details",
-                descPlaceholder: "Tell me about your project...",
-                emailBtn: "Email",
-                alertText: "Please fill in all fields."
-            },
-            tr: {
-                code: "TR",
-                title: "Randevu Talebi",
-                nameLabel: "Ad Soyad",
-                namePlaceholder: "Ad Soyad",
-                emailLabel: "E-posta Adresi",
-                emailPlaceholder: "ornek@mail.com",
-                phoneLabel: "Telefon Numarası",
-                descLabel: "Açıklama / Proje Detayları",
-                descPlaceholder: "Projeden bahsedin...",
-                emailBtn: "E-posta",
-                alertText: "Lütfen tüm alanları doldurun."
-            },
-            de: {
-                code: "DE",
-                title: "Termin buchen",
-                nameLabel: "Name & Nachname",
-                namePlaceholder: "Name & Nachname",
-                emailLabel: "E-Mail-Adresse",
-                emailPlaceholder: "name@beispiel.de",
-                phoneLabel: "Telefonnummer",
-                descLabel: "Beschreibung / Projektdetails",
-                descPlaceholder: "Erzählen Sie von Ihrem Projekt...",
-                emailBtn: "E-Mail",
-                alertText: "Bitte füllen Sie alle Felder aus."
-            }
+            en: { code: "EN", title: "Book an Appointment", nameLabel: "Name & Surname", namePlaceholder: "Name & Surname", emailLabel: "Email Address", emailPlaceholder: "name@sample.com", phoneLabel: "Phone Number", descLabel: "Description / Project Details", descPlaceholder: "Tell me about your project...", emailBtn: "Email", alertText: "Please fill in all fields." },
+            tr: { code: "TR", title: "Randevu Talebi", nameLabel: "Ad Soyad", namePlaceholder: "Ad Soyad", emailLabel: "E-posta Adresi", emailPlaceholder: "ornek@mail.com", phoneLabel: "Telefon Numarası", descLabel: "Açıklama / Proje Detayları", descPlaceholder: "Projeden bahsedin...", emailBtn: "E-posta", alertText: "Lütfen tüm alanları doldurun." },
+            de: { code: "DE", title: "Termin buchen", nameLabel: "Name & Nachname", namePlaceholder: "Name & Nachname", emailLabel: "E-Mail-Adresse", emailPlaceholder: "name@beispiel.de", phoneLabel: "Telefonnummer", descLabel: "Beschreibung / Projektdetails", descPlaceholder: "Erzählen Sie von Ihrem Projekt...", emailBtn: "E-Mail", alertText: "Bitte füllen Sie alle Felder aus." }
         };
 
         let currentAlertText = "Please fill in all fields.";
 
-        function openAppointmentModal() {
-            document.getElementById('appointmentModal').classList.add('active');
-        }
-
-        function closeAppointmentModal() {
-            document.getElementById('appointmentModal').classList.remove('active');
-        }
-
-        function showCustomAlert(message) {
-            document.getElementById('customAlertMessage').innerText = message;
+        function openAppointmentModal() { document.getElementById('appointmentModal').classList.add('active'); }
+        function closeAppointmentModal() { document.getElementById('appointmentModal').classList.remove('active'); }
+        function showCustomAlert(msg) {
+            document.getElementById('customAlertMessage').innerText = msg;
             document.getElementById('customAlertModal').classList.add('active');
         }
-
-        function closeCustomAlert() {
-            document.getElementById('customAlertModal').classList.remove('active');
-        }
+        function closeCustomAlert() { document.getElementById('customAlertModal').classList.remove('active'); }
 
         function changeModalLanguage(lang) {
             const data = modalTranslations[lang];
             if (!data) return;
-
             currentAlertText = data.alertText;
-
             document.getElementById('modalCurrentLangText').innerText = data.code;
             document.getElementById('m-title').innerText = data.title;
-            
             document.getElementById('m-label-name').innerText = data.nameLabel;
             document.getElementById('clientName').placeholder = data.namePlaceholder;
-
             document.getElementById('m-label-email').innerText = data.emailLabel;
             document.getElementById('clientEmail').placeholder = data.emailPlaceholder;
-
             document.getElementById('m-label-phone').innerText = data.phoneLabel;
-            
             document.getElementById('m-label-desc').innerText = data.descLabel;
             document.getElementById('clientDesc').placeholder = data.descPlaceholder;
-            
             document.getElementById('m-email-btn').innerHTML = `<i class="fa-solid fa-envelope"></i> ${data.emailBtn}`;
-
             document.getElementById('modalLangMenu').classList.remove('show');
-        }
-
-        function getBase64ImageFromURL(url, callback) {
-            const img = new Image();
-            img.crossOrigin = 'Anonymous';
-            img.onload = function() {
-                const canvas = document.createElement('canvas');
-                canvas.width = img.width;
-                canvas.height = img.height;
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(img, 0, 0);
-                callback(canvas.toDataURL('image/png'));
-            };
-            img.onerror = function() {
-                callback(null);
-            };
-            img.src = url;
-        }
-
-        function generatePDF(name, email, phone, desc, formattedDate) {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            getBase64ImageFromURL('https://muminsultani.com/img/ms.png', function(base64Logo) {
-                
-                if (base64Logo) {
-                    doc.addImage(base64Logo, 'PNG', 20, 15, 14, 14);
-                }
-
-                doc.setFont("helvetica", "bold");
-                doc.setFontSize(16);
-                doc.setTextColor(147, 51, 234);
-                doc.text("muminsultani", 38, 25);
-
-                doc.setFontSize(13);
-                doc.setTextColor(30, 41, 59);
-                doc.text("New Appointment Request", 20, 42);
-
-                doc.setLineWidth(0.4);
-                doc.setStrokeColor(200, 200, 200);
-                doc.line(20, 46, 190, 46);
-
-                const tableData = [
-                    ["Name & Surname", name],
-                    ["Email Address", email],
-                    ["Phone Number", phone],
-                    ["Request Time", formattedDate],
-                    ["Project Details", desc]
-                ];
-
-                doc.autoTable({
-                    startY: 52,
-                    body: tableData,
-                    theme: 'grid',
-                    styles: {
-                        font: 'helvetica',
-                        fontSize: 9.5,
-                        cellPadding: 6,
-                        textColor: [30, 41, 59],
-                        lineColor: [226, 232, 240],
-                        lineWidth: 0.3
-                    },
-                    columnStyles: {
-                        0: { fontStyle: 'bold', cellWidth: 45, fillColor: [248, 250, 252] },
-                        1: { cellWidth: 'auto' }
-                    },
-                    margin: { left: 20, right: 20, bottom: 50 }
-                });
-
-                const pdfBlob = doc.output('blob');
-                const blobUrl = URL.createObjectURL(pdfBlob);
-                
-                window.open(blobUrl, '_blank');
-
-                const downloadLink = document.createElement('a');
-                downloadLink.href = blobUrl;
-                downloadLink.download = `Appointment_${name.replace(/\s+/g, '_')}.pdf`;
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
-                
-                setTimeout(() => {
-                    URL.revokeObjectURL(blobUrl);
-                }, 100);
-            });
-        }
-
-        function validateForm() {
-            const name = document.getElementById('clientName').value.trim();
-            const email = document.getElementById('clientEmail').value.trim();
-            const phone = document.getElementById('clientPhone').value.trim();
-            const desc = document.getElementById('clientDesc').value.trim();
-
-            if (!name || !email || phone === '+' || !desc) {
-                showCustomAlert(currentAlertText);
-                return false;
-            }
-            return { name, email, phone, desc };
-        }
-
-        function sendToEmail(e) {
-            e.preventDefault();
-            const data = validateForm();
-            if (!data) return;
-
-            const now = new Date();
-            const formattedDate = now.toLocaleString();
-
-            generatePDF(data.name, data.email, data.phone, data.desc, formattedDate);
-
-            const recipient = "contact@muminsultani.com";
-            const subject = encodeURIComponent("New Appointment Request - " + data.name);
-            const body = encodeURIComponent(
-                `Name: ${data.name}\n` +
-                `Email: ${data.email}\n` +
-                `Phone: ${data.phone}\n` +
-                `Time: ${formattedDate}\n\n` +
-                `Details:\n${data.desc}\n\n` +
-                `---\nmuminsultani.com`
-            );
-
-            const mailtoUrl = `mailto:${recipient}?subject=${subject}&body=${body}`;
-            window.location.href = mailtoUrl;
-            closeAppointmentModal();
         }
 
         const canvas = document.getElementById('constellation-canvas');
         const ctx = canvas.getContext('2d');
-
         let particlesArray = [];
         const numberOfParticles = 55;
 
@@ -1577,26 +1295,11 @@
             canvas.height = window.innerHeight;
         }
         resizeCanvas();
-        window.addEventListener('resize', () => {
-            resizeCanvas();
-            initParticles();
-        });
+        window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
 
-        let mouse = {
-            x: null,
-            y: null,
-            radius: 130
-        };
-
-        window.addEventListener('mousemove', (event) => {
-            mouse.x = event.clientX;
-            mouse.y = event.clientY;
-        });
-
-        window.addEventListener('mouseout', () => {
-            mouse.x = null;
-            mouse.y = null;
-        });
+        let mouse = { x: null, y: null, radius: 130 };
+        window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
 
         class Particle {
             constructor() {
@@ -1606,15 +1309,11 @@
                 this.vy = (Math.random() - 0.5) * 0.8;
                 this.size = Math.random() * 1.8 + 1;
             }
-
             update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
+                this.x += this.vx; this.y += this.vy;
                 if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
                 if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
             }
-
             draw() {
                 const isLight = document.body.classList.contains('light-mode');
                 ctx.fillStyle = isLight ? 'rgba(147, 51, 234, 0.45)' : 'rgba(168, 85, 247, 0.55)';
@@ -1627,30 +1326,23 @@
 
         function initParticles() {
             particlesArray = [];
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
+            for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle());
         }
         initParticles();
 
         function animateConstellation() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             const isLight = document.body.classList.contains('light-mode');
-
             for (let i = 0; i < particlesArray.length; i++) {
                 particlesArray[i].update();
                 particlesArray[i].draw();
-
                 for (let j = i + 1; j < particlesArray.length; j++) {
                     const dx = particlesArray[i].x - particlesArray[j].x;
                     const dy = particlesArray[i].y - particlesArray[j].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-
                     if (distance < 110) {
                         const opacity = 1 - (distance / 110);
-                        ctx.strokeStyle = isLight 
-                            ? `rgba(147, 51, 234, ${opacity * 0.18})` 
-                            : `rgba(168, 85, 247, ${opacity * 0.22})`;
+                        ctx.strokeStyle = isLight ? `rgba(147, 51, 234, ${opacity * 0.18})` : `rgba(168, 85, 247, ${opacity * 0.22})`;
                         ctx.lineWidth = 0.8;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
@@ -1658,28 +1350,9 @@
                         ctx.stroke();
                     }
                 }
-
-                if (mouse.x !== null && mouse.y !== null) {
-                    const mdx = particlesArray[i].x - mouse.x;
-                    const mdy = particlesArray[i].y - mouse.y;
-                    const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-
-                    if (mdist < mouse.radius) {
-                        const mOpacity = 1 - (mdist / mouse.radius);
-                        ctx.strokeStyle = isLight 
-                            ? `rgba(147, 51, 234, ${mOpacity * 0.35})` 
-                            : `rgba(192, 132, 252, ${mOpacity * 0.45})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-                        ctx.lineTo(mouse.x, mouse.y);
-                        ctx.stroke();
-                    }
-                }
             }
             requestAnimationFrame(animateConstellation);
         }
-
         animateConstellation();
     </script>
 </body>
