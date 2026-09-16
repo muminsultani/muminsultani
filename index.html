@@ -74,7 +74,7 @@
             --box-bg: rgba(255, 255, 255, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(10, 10, 15, 0.85);
-            --modal-container-bg: rgba(10, 10, 15, 0.65); 
+            --modal-container-bg: rgba(10, 10, 15, 0.45); /* Animasyonun görünmesi için şeffaflık artırıldı */
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.12), rgba(168, 85, 247, 0.05) 60%, transparent 80%);
         }
 
@@ -87,7 +87,7 @@
             --box-bg: rgba(0, 0, 0, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(255, 255, 255, 0.85);
-            --modal-container-bg: rgba(255, 255, 255, 0.75); 
+            --modal-container-bg: rgba(255, 255, 255, 0.55); /* Light mode için şeffaflık artırıldı */
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.08), rgba(168, 85, 247, 0.03) 60%, transparent 80%);
         }
 
@@ -549,9 +549,9 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(5, 5, 8, 0.45);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(5, 5, 8, 0.3);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             z-index: 10000;
             display: flex;
             justify-content: center;
@@ -571,8 +571,8 @@
 
         .modal-container {
             background: var(--modal-container-bg);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--line-color);
             border-radius: 20px;
             width: 100%;
@@ -627,7 +627,7 @@
             -webkit-text-fill-color: transparent;
             animation: gradientFlow 8s ease infinite;
             margin-top: 6px;
-            margin-bottom: 8px; /* Aralık eklendi */
+            margin-bottom: 8px;
         }
 
         .modal-title {
