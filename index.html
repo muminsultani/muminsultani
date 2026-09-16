@@ -26,12 +26,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Tarayıcıların renkleri zorla değiştirmesini engelleme */
         html {
             color-scheme: light dark;
         }
 
-        /* Ekran Görüntüsü ve İçerik Koruma (Anti-Screenshot & Anti-Copy) */
         body {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -63,7 +61,6 @@
             pointer-events: none;
         }
 
-        /* Renk Paleti (CSS Variables) - Varsayılan Dark Mode */
         :root {
             --bg-color: #050508;
             --text-primary: #f8fafc;
@@ -77,7 +74,6 @@
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.12), rgba(168, 85, 247, 0.05) 60%, transparent 80%);
         }
 
-        /* Light Mode Sınıfı */
         body.light-mode {
             --bg-color: #f8fafc;
             --text-primary: #0f172a;
@@ -542,7 +538,6 @@
             flex-shrink: 0;
         }
 
-        /* Modal Overlay & Cam Efekti / Animasyon Güncellemesi */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -668,7 +663,6 @@
             margin-bottom: 6px;
         }
 
-        /* Autofill */
         .form-input:-webkit-autofill,
         .form-input:-webkit-autofill:hover, 
         .form-input:-webkit-autofill:focus,
@@ -1080,6 +1074,7 @@
                 curtain.style.opacity = '0';
                 curtain.style.visibility = 'hidden';
             }, 1000);
+            document.activeElement?.blur();
         }
 
         window.addEventListener('blur', () => {
@@ -1311,7 +1306,8 @@
             const whatsapp = document.getElementById('clientWhatsApp').value;
             const desc = document.getElementById('clientDesc').value;
 
-            const text = `muminsultani.com\n\n*New Appointment Request*\n\n• *Name:* ${name}\n• *Email:* ${email}\n• *WhatsApp:* ${whatsapp}\n• *Details:* ${desc}`;
+            // İlk satır ve en son satır bold olacak şekilde güncellendi
+            const text = `*${name}*\n\n*New Appointment Request*\n\n• *Name:* ${name}\n• *Email:* ${email}\n• *WhatsApp:* ${whatsapp}\n• *Details:* ${desc}\n\n*Ⓜ️ muminsultani.com*`;
             const encodedText = encodeURIComponent(text);
             
             const targetPhone = "905389480137";
