@@ -1242,7 +1242,7 @@
                         <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1.1rem; height: 1.1rem; display: block;"> Email
                     </button>
                     <button type="button" class="submit-btn whatsapp-btn" onclick="sendToWhatsApp(event)" id="m-whatsapp-btn">
-                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                        <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> WhatsApp
                     </button>
                 </div>
             </form>
@@ -1526,7 +1526,7 @@
                 filePlaceholder: "Dosya veya medya seçin...",
                 descLabel: "Açıklama / Proje Detayları",
                 descPlaceholder: "Projeden bahsedin...",
-                emailBtn: "Email",
+                emailBtn: "E-posta",
                 whatsappBtn: "WhatsApp",
                 alertText: "Lütfen gerekli tüm alanları doldurun.",
                 waProjectRequest: "Proje Talebi",
@@ -1550,7 +1550,7 @@
                 filePlaceholder: "Datei oder Medien auswählen...",
                 descLabel: "Beschreibung / Projektdetails",
                 descPlaceholder: "Erzählen Sie von Ihrem Projekt...",
-                emailBtn: "Email",
+                emailBtn: "E-Mail",
                 whatsappBtn: "WhatsApp",
                 alertText: "Bitte füllen Sie alle Pflichtfelder aus.",
                 waProjectRequest: "Projektanfrage",
@@ -1610,7 +1610,7 @@
             document.getElementById('clientDesc').placeholder = data.descPlaceholder;
             
             document.getElementById('m-email-btn').innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1.1rem; height: 1.1rem; display: block;"> ${data.emailBtn}`;
-            document.getElementById('m-whatsapp-btn').innerHTML = `<i class="fa-brands fa-whatsapp"></i> ${data.whatsappBtn}`;
+            document.getElementById('m-whatsapp-btn').innerHTML = `<i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> ${data.whatsappBtn}`;
 
             document.getElementById('modalLangMenu').classList.remove('show');
         }
