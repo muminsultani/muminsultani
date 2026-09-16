@@ -333,7 +333,7 @@
             position: absolute;
             right: 0;
             top: calc(100% + 6px);
-            background: var(--modal-container-bg);
+            background: var(--menu-bg);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--line-color);
@@ -692,6 +692,7 @@
             margin-bottom: 6px;
         }
 
+        /* Otomatik doldurma (Autofill) arka plan düzeltmesi - Şeffaf ve panel uyumlu */
         .form-input:-webkit-autofill,
         .form-input:-webkit-autofill:hover, 
         .form-input:-webkit-autofill:focus,
@@ -699,7 +700,7 @@
         .form-textarea:-webkit-autofill:hover,
         .form-textarea:-webkit-autofill:focus {
             -webkit-text-fill-color: var(--text-primary) !important;
-            -webkit-box-shadow: 0 0 0 1000px #0a0a0f inset !important;
+            -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.02) inset !important;
             transition: background-color 5000s ease-in-out 0s !important;
         }
 
@@ -710,7 +711,7 @@
         body.light-mode .form-textarea:-webkit-autofill:hover,
         body.light-mode .form-textarea:-webkit-autofill:focus {
             -webkit-text-fill-color: var(--text-primary) !important;
-            -webkit-box-shadow: 0 0 0 1000px #f8fafc inset !important;
+            -webkit-box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.02) inset !important;
             transition: background-color 5000s ease-in-out 0s !important;
         }
 
