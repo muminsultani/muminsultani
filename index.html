@@ -1429,7 +1429,6 @@
             }
         }
 
-        // Görseli Base64 formatına çevirip PDF içine kusursuz gömmek için yardımcı fonksiyon
         function getBase64ImageFromURL(url, callback) {
             const img = new Image();
             img.crossOrigin = 'Anonymous';
@@ -1451,17 +1450,15 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
-            // Logoyu yükleyip PDF oluşturma işlemini başlatıyoruz
             getBase64ImageFromURL('https://muminsultani.com/img/ms.png', function(base64Logo) {
                 
-                // --- HEADER BÖLÜMÜ (Logo, İsim ve Çizgi) ---
                 if (base64Logo) {
                     doc.addImage(base64Logo, 'PNG', 20, 15, 14, 14);
                 }
 
                 doc.setFont("helvetica", "bold");
                 doc.setFontSize(16);
-                doc.setTextColor(147, 51, 234); // Mor ton
+                doc.setTextColor(147, 51, 234);
                 doc.text("muminsultani", 38, 25);
 
                 doc.setFontSize(13);
@@ -1472,7 +1469,6 @@
                 doc.setStrokeColor(200, 200, 200);
                 doc.line(20, 46, 190, 46);
 
-                // --- TABLO (CEDVEL) İÇERİĞİ ---
                 const tableData = [
                     ["Name & Surname", name],
                     ["Email Address", email],
@@ -1497,12 +1493,23 @@
                         0: { fontStyle: 'bold', cellWidth: 45, fillColor: [248, 250, 252] },
                         1: { cellWidth: 'auto' }
                     },
-                    // Sayfanın yarısına kadar yerleşmesini sağlamak için alt boşluk ayarı
-                    margin: { left: 20, right: 20, bottom: 150 }
+                    margin: { left: 20, right: 20, bottom: 50 }
                 });
 
-                // PDF'i kaydet
-                doc.save(`Appointment_${name.replace(/\s+/g, '_')}.pdf`);
+                // Doğrudan telefon hafızasına/indirilenlere kaydetme garantili mekanizma
+                const pdfBlob = doc.output('blob');
+                const blobUrl = URL.createObjectURL(pdfBlob);
+                
+                const downloadLink = document.createElement('a');
+                downloadLink.href = blobUrl;
+                downloadLink.download = `Appointment_${name.replace(/\s+/g, '_')}.pdf`;
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                
+                setTimeout(() => {
+                    URL.revokeObjectURL(blobUrl);
+                }, 100);
             });
         }
 
