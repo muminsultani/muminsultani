@@ -25,6 +25,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- jsPDF Kütüphanesi -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
     <style>
         html {
             color-scheme: light dark;
@@ -1298,6 +1301,38 @@
             }
         }
 
+        function generatePDF(name, email, whatsapp, desc, formattedDate) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(18);
+            doc.text("New Appointment Request", 20, 20);
+
+            doc.setLineWidth(0.5);
+            doc.line(20, 25, 190, 25);
+
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "normal");
+            
+            let y = 35;
+            doc.text(`Name: ${name}`, 20, y);
+            y += 10;
+            doc.text(`Email: ${email}`, 20, y);
+            y += 10;
+            doc.text(`WhatsApp: ${whatsapp}`, 20, y);
+            y += 10;
+            doc.text(`Request Time: ${formattedDate}`, 20, y);
+            y += 10;
+            doc.text(`Details: ${desc}`, 20, y);
+
+            y += 20;
+            doc.setFont("helvetica", "bold");
+            doc.text("muminsultani.com", 20, y);
+
+            doc.save(`Appointment_${name.replace(/\s+/g, '_')}.pdf`);
+        }
+
         function sendToWhatsApp(e) {
             e.preventDefault();
             
@@ -1306,8 +1341,14 @@
             const whatsapp = document.getElementById('clientWhatsApp').value;
             const desc = document.getElementById('clientDesc').value;
 
-            // İlk satır ve en son satır bold olacak şekilde güncellendi
-            const text = `*${name}*\n\n*New Appointment Request*\n\n• *Name:* ${name}\n• *Email:* ${email}\n• *WhatsApp:* ${whatsapp}\n• *Details:* ${desc}\n\n*Ⓜ️ muminsultani.com*`;
+            const now = new Date();
+            const formattedDate = now.toLocaleString();
+
+            // Form bilgilerini içeren PDF dosyasını indir
+            generatePDF(name, email, whatsapp, desc, formattedDate);
+
+            // WhatsApp mesajını oluştur ve aç
+            const text = `*${name}*\n\n*New Appointment Request*\n\n• *Name:* ${name}\n• *Email:* ${email}\n• *WhatsApp:* ${whatsapp}\n• *Request Time:* ${formattedDate}\n• *Details:* ${desc}\n\n*Ⓜ️ muminsultani.com*`;
             const encodedText = encodeURIComponent(text);
             
             const targetPhone = "905389480137";
