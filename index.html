@@ -74,7 +74,7 @@
             --box-bg: rgba(255, 255, 255, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(10, 10, 15, 0.95);
-            --modal-container-bg: rgba(10, 10, 15, 0.95);
+            --modal-container-bg: #0a0a0f;
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.12), rgba(168, 85, 247, 0.05) 60%, transparent 80%);
         }
 
@@ -87,7 +87,7 @@
             --box-bg: rgba(0, 0, 0, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(255, 255, 255, 0.95);
-            --modal-container-bg: rgba(255, 255, 255, 0.95);
+            --modal-container-bg: #ffffff;
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.08), rgba(168, 85, 247, 0.03) 60%, transparent 80%);
         }
 
@@ -267,6 +267,13 @@
             word-break: break-word;
         }
 
+        body.light-mode .brand-logo {
+            background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         @keyframes gradientFlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -299,7 +306,7 @@
         .theme-toggle-btn:hover, .scroll-down-action-btn:hover {
             border-color: rgba(147, 51, 234, 0.4);
             background: var(--box-hover-bg);
-            color: #9333ea;
+            color: var(--accent);
         }
 
         .lang-dropdown-container {
@@ -326,7 +333,7 @@
         .lang-btn:hover {
             border-color: rgba(147, 51, 234, 0.4);
             background: var(--box-hover-bg);
-            color: #9333ea;
+            color: var(--accent);
         }
 
         .lang-menu {
@@ -374,7 +381,7 @@
 
         .lang-option:hover {
             background: var(--box-hover-bg);
-            color: #9333ea;
+            color: var(--accent);
         }
 
         .header-bottom-row {
@@ -431,7 +438,7 @@
         }
 
         .section-title i {
-            color: #9333ea;
+            color: var(--accent);
             font-size: 0.9rem;
         }
 
@@ -464,7 +471,7 @@
         }
 
         .item-title:hover {
-            color: #9333ea;
+            color: var(--accent);
         }
 
         .item-header i {
@@ -545,7 +552,7 @@
         }
 
         .contact-box i {
-            color: #9333ea;
+            color: var(--accent);
             font-size: 1.1rem;
             flex-shrink: 0;
         }
@@ -556,9 +563,9 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(5, 5, 8, 0.75);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+            background: rgba(5, 5, 8, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             z-index: 10000;
             display: flex;
             justify-content: center;
@@ -578,39 +585,18 @@
 
         .modal-container {
             background: var(--modal-container-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--line-color);
             border-radius: 20px;
             width: 100%;
             max-width: 540px;
             padding: 32px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
             position: relative;
             transform: scale(0.95) translateY(15px);
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
             opacity: 0;
             max-height: 90vh;
             overflow-y: auto;
-            overflow-x: hidden; 
-        }
-
-        #modal-code-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            border-radius: 20px;
-            pointer-events: none;
-            opacity: 0.15;
-        }
-
-        /* Modal içindeki her şeyin kanvasın üzerinde kalması için yapı */
-        .modal-header, #appointmentForm {
-            position: relative;
-            z-index: 2;
         }
 
         .modal-overlay.active .modal-container {
@@ -656,6 +642,13 @@
             margin-bottom: 8px;
         }
 
+        body.light-mode .modal-brand {
+            background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         .modal-title {
             font-size: 0.95rem;
             font-weight: 600;
@@ -680,7 +673,7 @@
         .modal-close-btn:hover {
             border-color: rgba(147, 51, 234, 0.4);
             background: var(--box-hover-bg);
-            color: #9333ea;
+            color: var(--accent);
         }
 
         .modal-container .lang-btn,
@@ -696,7 +689,7 @@
         .modal-container .theme-toggle-btn:hover {
             border-color: rgba(147, 51, 234, 0.4);
             background: var(--box-hover-bg);
-            color: #9333ea;
+            color: var(--accent);
         }
 
         .form-group {
@@ -718,7 +711,7 @@
         .form-textarea:-webkit-autofill:hover,
         .form-textarea:-webkit-autofill:focus {
             -webkit-text-fill-color: var(--text-primary) !important;
-            -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.03) inset !important;
+            -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.02) inset !important;
             transition: background-color 5000s ease-in-out 0s !important;
         }
 
@@ -735,7 +728,7 @@
 
         .form-input, .form-textarea {
             width: 100%;
-            background: rgba(255, 255, 255, 0.03) !important;
+            background: var(--box-bg) !important;
             border: 1px solid var(--line-color);
             padding: 12px 16px;
             border-radius: 10px;
@@ -746,15 +739,10 @@
             -webkit-text-fill-color: var(--text-primary) !important;
         }
 
-        body.light-mode .form-input, 
-        body.light-mode .form-textarea {
-            background: rgba(0, 0, 0, 0.02) !important;
-        }
-
         .file-upload-wrapper {
             position: relative;
             width: 100%;
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--box-bg);
             border: 1px dashed var(--line-color);
             padding: 12px 16px;
             border-radius: 10px;
@@ -763,10 +751,6 @@
             justify-content: space-between;
             cursor: pointer;
             transition: all 0.2s ease;
-        }
-
-        body.light-mode .file-upload-wrapper {
-            background: rgba(0, 0, 0, 0.02);
         }
 
         .file-upload-wrapper:hover {
@@ -794,7 +778,7 @@
         }
 
         .file-upload-icon {
-            color: #9333ea;
+            color: var(--accent);
             font-size: 1rem;
             flex-shrink: 0;
             margin-left: 8px;
@@ -803,18 +787,19 @@
         .form-input::placeholder,
         .form-textarea::placeholder {
             color: #94a3b8 !important;
-            opacity: 0.50 !important;
+            opacity: 0.30 !important;
         }
 
         .form-input:focus, .form-textarea:focus {
-            border-color: #9333ea;
+            border-color: var(--accent);
+            background: var(--box-bg) !important;
             color: var(--text-primary) !important;
             -webkit-text-fill-color: var(--text-primary) !important;
         }
 
         .form-textarea {
-            resize: none; /* Taşma ve beyazlığı önlemek için sabitlendi */
-            height: 110px;
+            resize: vertical;
+            min-height: 120px;
         }
 
         .form-buttons-group {
@@ -841,6 +826,10 @@
         }
 
         .submit-btn.email-btn {
+            background: linear-gradient(135deg, #9333ea, #c084fc);
+        }
+
+        body.light-mode .submit-btn.email-btn {
             background: linear-gradient(135deg, #9333ea, #c084fc);
         }
 
@@ -895,7 +884,7 @@
 
         .custom-alert-icon {
             font-size: 2rem;
-            color: #9333ea;
+            color: var(--accent);
             margin-bottom: 12px;
         }
 
@@ -918,6 +907,10 @@
             font-size: 0.85rem;
             cursor: pointer;
             transition: opacity 0.2s;
+        }
+
+        body.light-mode .custom-alert-btn {
+            background: linear-gradient(135deg, #9333ea, #c084fc);
         }
 
         .custom-alert-btn:hover {
@@ -978,6 +971,13 @@
             -webkit-text-fill-color: transparent;
             animation: gradientFlow 8s ease infinite;
             line-height: 1.1;
+        }
+
+        body.light-mode .footer-brand {
+            background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .footer-scan-text {
@@ -1203,9 +1203,6 @@
     <!-- Randevu / Proje Formu Paneli (Modal) -->
     <div class="modal-overlay" id="appointmentModal">
         <div class="modal-container">
-            <!-- Modal Arkası Kod Animasyon Tuvali -->
-            <canvas id="modal-code-canvas"></canvas>
-            
             <div class="modal-header">
                 <div class="modal-header-left">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
@@ -1274,7 +1271,7 @@
         </div>
     </div>
 
-    <!-- Özel Uyarı Kutusu -->
+    <!-- Özel Uyarı Kutusu (Custom Alert Modal) -->
     <div class="custom-alert-overlay" id="customAlertModal">
         <div class="custom-alert-box">
             <div class="custom-alert-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
@@ -1363,12 +1360,18 @@
         }
 
         function scrollPageDown() {
-            window.scrollBy({ top: 450, behavior: 'smooth' });
+            window.scrollBy({
+                top: 450,
+                behavior: 'smooth'
+            });
         }
 
         function goHome() {
             closeAppointmentModal();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
 
         function resetAppointmentForm() {
@@ -1411,8 +1414,12 @@
         function formatPhoneInput(input) {
             let val = input.value.replace(/[^\d]/g, '');
             let formatted = '+ ';
-            if (val.length > 0) { formatted += val.substring(0, 2); }
-            if (val.length > 2) { formatted += ' ' + val.substring(2); }
+            if (val.length > 0) {
+                formatted += val.substring(0, 2);
+            }
+            if (val.length > 2) {
+                formatted += ' ' + val.substring(2);
+            }
             input.value = formatted;
         }
 
@@ -1430,34 +1437,46 @@
 
         const translations = {
             en: {
-                code: "EN", role: "Software Developer", projectsTitle: "Featured Projects",
+                code: "EN",
+                role: "Software Developer",
+                projectsTitle: "Featured Projects",
                 proj1Desc: "A high-performance backend architecture built with Django and modern microservices.",
                 proj2Desc: "Fast workflow automation utility written for developer productivity.",
-                expTitle: "Experience", jobTitle: "Remote Software Developer",
+                expTitle: "Experience",
+                jobTitle: "Remote Software Developer",
                 jobDesc: "Developing scalable backend services, REST APIs, and mobile-friendly web solutions using Python and Node.js.",
-                setupTitle: "Setup & Environment", osLabel: "OS Environment", editorLabel: "Editor Stack",
+                setupTitle: "Setup & Environment",
+                osLabel: "OS Environment", editorLabel: "Editor Stack",
                 stackTitle: "Core Stack", backendLabel: "Backend", frontendLabel: "Frontend",
                 contactTitle: "Get In Touch", contactSub: "Have a project in mind?", contactMain: "Let's talk & build together",
                 scanText: "SCAN TO CONNECT"
             },
             tr: {
-                code: "TR", role: "Yazılım Geliştirici", projectsTitle: "Öne Çıkan Projeler",
+                code: "TR",
+                role: "Yazılım Geliştirici",
+                projectsTitle: "Öne Çıkan Projeler",
                 proj1Desc: "Django ve modern mikroservislerle kurulmuş yüksek performanslı bir arka uç mimarisi.",
                 proj2Desc: "Geliştirici verimliliği için yazılmış hızlı iş akışı otomasyon aracı.",
-                expTitle: "Deneyim", jobTitle: "Uzaktan Yazılım Geliştirici",
+                expTitle: "Deneyim",
+                jobTitle: "Uzaktan Yazılım Geliştirici",
                 jobDesc: "Python and Node.js kullanarak ölçeklenebilir arka uç servisleri, REST API'ler ve mobil uyumlu web çözümleri geliştirme.",
-                setupTitle: "Kurulum & Ortam", osLabel: "İşletim Sistemi", editorLabel: "Editör Yığını",
+                setupTitle: "Kurulum & Ortam",
+                osLabel: "İşletim Sistemi", editorLabel: "Editör Yığını",
                 stackTitle: "Temel Yığın", backendLabel: "Arka Uç", frontendLabel: "Ön Uç",
                 contactTitle: "İletişime Geç", contactSub: "Aklında bir proje mi var?", contactMain: "Konuşalım ve birlikte inşa edelim",
                 scanText: "BAĞLANMAK İÇİN TARAYIN"
             },
             de: {
-                code: "DE", role: "Softwareentwickler", projectsTitle: "Ausgewählte Projekte",
+                code: "DE",
+                role: "Softwareentwickler",
+                projectsTitle: "Ausgewählte Projekte",
                 proj1Desc: "Eine leistungsstarke Backend-Architektur, entwickelt mit Django und modernen Microservices.",
                 proj2Desc: "Schnelles Workflow-Automatisierungstool für Entwicklerproduktivität.",
-                expTitle: "Berufserfahrung", jobTitle: "Remote Softwareentwickler",
+                expTitle: "Berufserfahrung",
+                jobTitle: "Remote Softwareentwickler",
                 jobDesc: "Entwicklung skalierbarer Backend-Dienste, REST-APIs und mobiler Web-Lösungen mit Python und Node.js.",
-                setupTitle: "Setup & Umgebung", osLabel: "Betriebssystem", editorLabel: "Editor-Stack",
+                setupTitle: "Setup & Umgebung",
+                osLabel: "Betriebssystem", editorLabel: "Editor-Stack",
                 stackTitle: "Kern-Stack", backendLabel: "Backend", frontendLabel: "Frontend",
                 contactTitle: "Kontakt", contactSub: "Haben Sie ein Projekt im Kopf?", contactMain: "Lassen Sie uns sprechen & zusammenbauen",
                 scanText: "SCANNEN ZUM VERBINDEN"
@@ -1470,6 +1489,7 @@
 
             document.getElementById('htmlRoot').setAttribute('lang', lang);
             document.getElementById('currentLangText').innerText = data.code;
+
             document.getElementById('t-role').innerText = data.role;
             document.getElementById('t-projects-title').innerText = data.projectsTitle;
             document.getElementById('t-proj1-desc').innerText = data.proj1Desc;
@@ -1493,25 +1513,49 @@
 
         const modalTranslations = {
             en: {
-                code: "EN", title: "Let's talk", nameLabel: "Name & Surname", namePlaceholder: "Name & Surname",
-                emailLabel: "Email Address", emailPlaceholder: "name@sample.com", phoneLabel: "Phone Number",
-                fileLabel: "Attach File (JPG, PNG, PDF, Video)", filePlaceholder: "Choose file or media...",
-                descLabel: "Description / Project Details", descPlaceholder: "Tell me about your project...",
-                emailBtn: "Email", alertText: "Please fill in all fields."
+                code: "EN",
+                title: "Let's talk",
+                nameLabel: "Name & Surname",
+                namePlaceholder: "Name & Surname",
+                emailLabel: "Email Address",
+                emailPlaceholder: "name@sample.com",
+                phoneLabel: "Phone Number",
+                fileLabel: "Attach File (JPG, PNG, PDF, Video)",
+                filePlaceholder: "Choose file or media...",
+                descLabel: "Description / Project Details",
+                descPlaceholder: "Tell me about your project...",
+                emailBtn: "Email",
+                alertText: "Please fill in all fields."
             },
             tr: {
-                code: "TR", title: "Konuşalım", nameLabel: "Ad Soyad", namePlaceholder: "Ad Soyad",
-                emailLabel: "E-posta Adresi", emailPlaceholder: "ornek@mail.com", phoneLabel: "Telefon Numarası",
-                fileLabel: "Dosya Ekle (JPG, PNG, PDF, Video)", filePlaceholder: "Dosya veya medya seçin...",
-                descLabel: "Açıklama / Proje Detayları", descPlaceholder: "Projeden bahsedin...",
-                emailBtn: "E-posta", alertText: "Lütfen tüm alanları doldurun."
+                code: "TR",
+                title: "Konuşalım",
+                nameLabel: "Ad Soyad",
+                namePlaceholder: "Ad Soyad",
+                emailLabel: "E-posta Adresi",
+                emailPlaceholder: "ornek@mail.com",
+                phoneLabel: "Telefon Numarası",
+                fileLabel: "Dosya Ekle (JPG, PNG, PDF, Video)",
+                filePlaceholder: "Dosya veya medya seçin...",
+                descLabel: "Açıklama / Proje Detayları",
+                descPlaceholder: "Projeden bahsedin...",
+                emailBtn: "E-posta",
+                alertText: "Lütfen tüm alanları doldurun."
             },
             de: {
-                code: "DE", title: "Lass uns sprechen", nameLabel: "Name & Nachname", namePlaceholder: "Name & Nachname",
-                emailLabel: "E-Mail-Adresse", emailPlaceholder: "name@beispiel.de", phoneLabel: "Telefonnummer",
-                fileLabel: "Datei anhängen (JPG, PNG, PDF, Video)", filePlaceholder: "Datei oder Medien auswählen...",
-                descLabel: "Beschreibung / Projektdetails", descPlaceholder: "Erzählen Sie von Ihrem Projekt...",
-                emailBtn: "E-Mail", alertText: "Bitte füllen Sie alle Felder aus."
+                code: "DE",
+                title: "Lass uns sprechen",
+                nameLabel: "Name & Nachname",
+                namePlaceholder: "Name & Nachname",
+                emailLabel: "E-Mail-Adresse",
+                emailPlaceholder: "name@beispiel.de",
+                phoneLabel: "Telefonnummer",
+                fileLabel: "Datei anhängen (JPG, PNG, PDF, Video)",
+                filePlaceholder: "Datei oder Medien auswählen...",
+                descLabel: "Beschreibung / Projektdetails",
+                descPlaceholder: "Erzählen Sie von Ihrem Projekt...",
+                emailBtn: "E-Mail",
+                alertText: "Bitte füllen Sie alle Felder aus."
             }
         };
 
@@ -1519,7 +1563,6 @@
 
         function openAppointmentModal() {
             document.getElementById('appointmentModal').classList.add('active');
-            initModalCanvas();
         }
 
         function closeAppointmentModal() {
@@ -1540,20 +1583,27 @@
             if (!data) return;
 
             currentAlertText = data.alertText;
+
             document.getElementById('modalCurrentLangText').innerText = data.code;
             document.getElementById('m-title').innerText = data.title;
+            
             document.getElementById('m-label-name').innerText = data.nameLabel;
             document.getElementById('clientName').placeholder = data.namePlaceholder;
+
             document.getElementById('m-label-email').innerText = data.emailLabel;
             document.getElementById('clientEmail').placeholder = data.emailPlaceholder;
+
             document.getElementById('m-label-phone').innerText = data.phoneLabel;
+            
             document.getElementById('m-label-file').innerText = data.fileLabel;
             const fileInput = document.getElementById('clientFile');
             if (!fileInput.files || fileInput.files.length === 0) {
                 document.getElementById('fileUploadText').innerText = data.filePlaceholder;
             }
+
             document.getElementById('m-label-desc').innerText = data.descLabel;
             document.getElementById('clientDesc').placeholder = data.descPlaceholder;
+            
             document.getElementById('m-email-btn').innerHTML = `<i class="fa-solid fa-envelope"></i> ${data.emailBtn}`;
 
             document.getElementById('modalLangMenu').classList.remove('show');
@@ -1570,7 +1620,9 @@
                 ctx.drawImage(img, 0, 0);
                 callback(canvas.toDataURL('image/png'));
             };
-            img.onerror = function() { callback(null); };
+            img.onerror = function() {
+                callback(null);
+            };
             img.src = url;
         }
 
@@ -1579,6 +1631,7 @@
             const doc = new jsPDF();
 
             getBase64ImageFromURL('https://muminsultani.com/img/ms.png', function(base64Logo) {
+                
                 if (base64Logo) {
                     doc.addImage(base64Logo, 'PNG', 20, 15, 14, 14);
                 }
@@ -1610,8 +1663,12 @@
                     body: tableData,
                     theme: 'grid',
                     styles: {
-                        font: 'helvetica', fontSize: 9.5, cellPadding: 6,
-                        textColor: [30, 41, 59], lineColor: [226, 232, 240], lineWidth: 0.3
+                        font: 'helvetica',
+                        fontSize: 9.5,
+                        cellPadding: 6,
+                        textColor: [30, 41, 59],
+                        lineColor: [226, 232, 240],
+                        lineWidth: 0.3
                     },
                     columnStyles: {
                         0: { fontStyle: 'bold', cellWidth: 45, fillColor: [248, 250, 252] },
@@ -1622,6 +1679,7 @@
 
                 const pdfBlob = doc.output('blob');
                 const blobUrl = URL.createObjectURL(pdfBlob);
+                
                 window.open(blobUrl, '_blank');
 
                 const downloadLink = document.createElement('a');
@@ -1631,7 +1689,9 @@
                 downloadLink.click();
                 document.body.removeChild(downloadLink);
                 
-                setTimeout(() => { URL.revokeObjectURL(blobUrl); }, 100);
+                setTimeout(() => {
+                    URL.revokeObjectURL(blobUrl);
+                }, 100);
             });
         }
 
@@ -1678,9 +1738,9 @@
             closeAppointmentModal();
         }
 
-        // Ana Arka Plan Takımyıldız Efekti
         const canvas = document.getElementById('constellation-canvas');
         const ctx = canvas.getContext('2d');
+
         let particlesArray = [];
         const numberOfParticles = 55;
 
@@ -1694,11 +1754,17 @@
             initParticles();
         });
 
-        let mouse = { x: null, y: null, radius: 130 };
+        let mouse = {
+            x: null,
+            y: null,
+            radius: 130
+        };
+
         window.addEventListener('mousemove', (event) => {
             mouse.x = event.clientX;
             mouse.y = event.clientY;
         });
+
         window.addEventListener('mouseout', () => {
             mouse.x = null;
             mouse.y = null;
@@ -1712,19 +1778,55 @@
                 this.vy = (Math.random() - 0.5) * 0.8;
                 this.size = Math.random() * 1.8 + 1;
             }
+
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
+
                 if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
                 if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
             }
+
             draw() {
-                const isLight = document.body.classList.contains('light-mode');
-                ctx.fillStyle = isLight ? 'rgba(147, 51, 234, 0.45)' : 'rgba(168, 85, 247, 0.55)';
+                ctx.fillStyle = 'rgba(168, 85, 247, 0.55)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.closePath();
                 ctx.fill();
+            }
+        }
+
+        // Light Mode için Matrix / Kod Yağmuru Efekti Sınıfı
+        class MatrixCodeRain {
+            constructor() {
+                this.fontSize = 14;
+                this.columns = Math.floor(canvas.width / this.fontSize);
+                this.drops = [];
+                for (let i = 0; i < this.columns; i++) {
+                    this.drops[i] = Math.floor(Math.random() * -100);
+                }
+                this.chars = "01{}[]<>/-+=#$_constletvarfunction()=>";
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(248, 250, 252, 0.15)'; // Arka planı hafif silme efekti
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = 'rgba(147, 51, 234, 0.45)'; // Mor tonlarında kod rengi
+                ctx.font = `${this.fontSize}px 'Fira Code', monospace`;
+
+                for (let i = 0; i < this.drops.length; i++) {
+                    const text = this.chars.charAt(Math.floor(Math.random() * this.chars.length));
+                    const x = i * this.fontSize;
+                    const y = this.drops[i] * this.fontSize;
+
+                    ctx.fillText(text, x, y);
+
+                    if (y > canvas.height && Math.random() > 0.975) {
+                        this.drops[i] = 0;
+                    }
+                    this.drops[i]++;
+                }
             }
         }
 
@@ -1736,95 +1838,59 @@
         }
         initParticles();
 
+        const matrixRain = new MatrixCodeRain();
+
         function animateConstellation() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
             const isLight = document.body.classList.contains('light-mode');
 
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
+            if (isLight) {
+                // Light modda farklı bir yazılım animasyonu (Kod Yağmuru - Mor Renkli)
+                matrixRain.draw();
+            } else {
+                // Dark modda standart takım yıldızo / molekül animasyonu
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                for (let j = i + 1; j < particlesArray.length; j++) {
-                    const dx = particlesArray[i].x - particlesArray[j].x;
-                    const dy = particlesArray[i].y - particlesArray[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                    particlesArray[i].draw();
 
-                    if (distance < 110) {
-                        const opacity = 1 - (distance / 110);
-                        ctx.strokeStyle = isLight 
-                            ? `rgba(147, 51, 234, ${opacity * 0.18})` 
-                            : `rgba(168, 85, 247, ${opacity * 0.22})`;
-                        ctx.lineWidth = 0.8;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
-                        ctx.stroke();
+                    for (let j = i + 1; j < particlesArray.length; j++) {
+                        const dx = particlesArray[i].x - particlesArray[j].x;
+                        const dy = particlesArray[i].y - particlesArray[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 110) {
+                            const opacity = 1 - (distance / 110);
+                            ctx.strokeStyle = `rgba(168, 85, 247, ${opacity * 0.22})`;
+                            ctx.lineWidth = 0.8;
+                            ctx.beginPath();
+                            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                            ctx.stroke();
+                        }
                     }
-                }
 
-                if (mouse.x !== null && mouse.y !== null) {
-                    const mdx = particlesArray[i].x - mouse.x;
-                    const mdy = particlesArray[i].y - mouse.y;
-                    const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const mdx = particlesArray[i].x - mouse.x;
+                        const mdy = particlesArray[i].y - mouse.y;
+                        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
 
-                    if (mdist < mouse.radius) {
-                        const mOpacity = 1 - (mdist / mouse.radius);
-                        ctx.strokeStyle = isLight 
-                            ? `rgba(147, 51, 234, ${mOpacity * 0.35})` 
-                            : `rgba(192, 132, 252, ${mOpacity * 0.45})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-                        ctx.lineTo(mouse.x, mouse.y);
-                        ctx.stroke();
+                        if (mdist < mouse.radius) {
+                            const mOpacity = 1 - (mdist / mouse.radius);
+                            ctx.strokeStyle = `rgba(192, 132, 252, ${mOpacity * 0.45})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                            ctx.lineTo(mouse.x, mouse.y);
+                            ctx.stroke();
+                        }
                     }
                 }
             }
             requestAnimationFrame(animateConstellation);
         }
+
         animateConstellation();
-
-        // Modal İçi Yazılım/Kod Akış Animasyonu (Matrix Rain Tarzı)
-        let modalAnimationId = null;
-        function initModalCanvas() {
-            const modalCanvas = document.getElementById('modal-code-canvas');
-            const mCtx = modalCanvas.getContext('2d');
-            const modalContainer = modalCanvas.parentElement;
-
-            modalCanvas.width = modalContainer.offsetWidth;
-            modalCanvas.height = modalContainer.offsetHeight;
-
-            const codeCharacters = "01{}[]()<>const let var function python django api async await => ; / \\ + - * =";
-            const fontSize = 11;
-            const columns = Math.floor(modalCanvas.width / fontSize);
-            const drops = [];
-
-            for (let i = 0; i < columns; i++) {
-                drops[i] = 1;
-            }
-
-            function drawModalCode() {
-                mCtx.fillStyle = 'rgba(10, 10, 15, 0.08)';
-                mCtx.fillRect(0, 0, modalCanvas.width, modalCanvas.height);
-
-                mCtx.fillStyle = '#9333ea';
-                mCtx.font = fontSize + 'px "Fira Code", monospace';
-
-                for (let i = 0; i < drops.length; i++) {
-                    const text = codeCharacters.charAt(Math.floor(Math.random() * codeCharacters.length));
-                    mCtx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                    if (drops[i] * fontSize > modalCanvas.height && Math.random() > 0.975) {
-                        drops[i] = 0;
-                    }
-                    drops[i]++;
-                }
-                modalAnimationId = requestAnimationFrame(drawModalCode);
-            }
-
-            if (modalAnimationId) cancelAnimationFrame(modalAnimationId);
-            drawModalCode();
-        }
     </script>
 </body>
 </html>
