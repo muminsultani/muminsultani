@@ -74,7 +74,7 @@
             --box-bg: rgba(255, 255, 255, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(10, 10, 15, 0.95);
-            --modal-container-bg: #0a0a0f; /* Şeffaflık kaldırıldı, tamamen opak koyu renk */
+            --modal-container-bg: #0a0a0f;
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.12), rgba(168, 85, 247, 0.05) 60%, transparent 80%);
         }
 
@@ -87,7 +87,7 @@
             --box-bg: rgba(0, 0, 0, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(255, 255, 255, 0.95);
-            --modal-container-bg: #ffffff; /* Şeffaflık kaldırıldı, tamamen opak beyaz renk */
+            --modal-container-bg: #ffffff;
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.08), rgba(168, 85, 247, 0.03) 60%, transparent 80%);
         }
 
@@ -576,7 +576,6 @@
             pointer-events: auto;
         }
 
-        /* Şeffaflık tamamen kaldırıldı, tamamen opak arka plan */
         .modal-container {
             background: var(--modal-container-bg);
             border: 1px solid var(--line-color);
@@ -776,21 +775,6 @@
             color: #94a3b8 !important;
             opacity: 0.30 !important;
         }
-        .form-input::-webkit-input-placeholder,
-        .form-textarea::-webkit-input-placeholder {
-            color: #94a3b8 !important;
-            opacity: 0.30 !important;
-        }
-        .form-input:-ms-input-placeholder,
-        .form-textarea:-ms-input-placeholder {
-            color: #94a3b8 !important;
-            opacity: 0.30 !important;
-        }
-        .form-input::-ms-input-placeholder,
-        .form-textarea::-ms-input-placeholder {
-            color: #94a3b8 !important;
-            opacity: 0.30 !important;
-        }
 
         .form-input:focus, .form-textarea:focus {
             border-color: #9333ea;
@@ -829,6 +813,10 @@
 
         .submit-btn.email-btn {
             background: linear-gradient(135deg, #9333ea, #c084fc);
+        }
+
+        .submit-btn.whatsapp-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
         }
 
         .submit-btn:hover {
@@ -1193,16 +1181,14 @@
             <div class="modal-header">
                 <div class="modal-header-left">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                        <button class="modal-close-btn" onclick="clearAndCloseModal()" title="Geri / Çıkış"><i class="fa-solid fa-chevron-left"></i></button>
-                        <!-- YENİLEME / TEMİZLEME DÜĞMESİ -->
-                        <button class="modal-close-btn" onclick="resetAppointmentForm()" title="Yenile / Temizle">
+                        <button class="modal-close-btn" onclick="clearAndCloseModal()" title="Back / Exit"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="modal-close-btn" onclick="resetAppointmentForm()" title="Reset / Clear">
                             <i class="fa-solid fa-rotate"></i>
                         </button>
                         <button class="modal-close-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
                             <i class="fa-solid fa-moon" id="modalThemeIcon"></i>
                         </button>
-                        <!-- ANA SAYFA (HOME) DÜĞMESİ -->
-                        <button class="modal-close-btn" onclick="goHome()" title="Ana Sayfa">
+                        <button class="modal-close-btn" onclick="goHome()" title="Home">
                             <i class="fa-solid fa-house"></i>
                         </button>
                     </div>
@@ -1222,27 +1208,22 @@
                             <button class="lang-option" onclick="changeModalLanguage('de')">Deutsch</button>
                         </div>
                     </div>
-                    <!-- X KAPATMA DÜĞMESİ -->
                     <button class="modal-close-btn" onclick="clearAndCloseModal()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
             <form id="appointmentForm">
-                <!-- 1. Ad Soyad -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-name">Name & Surname</label>
                     <input type="text" class="form-input" id="clientName" required placeholder="Name & Surname">
                 </div>
-                <!-- 2. E-posta Adresi -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-email">Email Address</label>
                     <input type="email" class="form-input" id="clientEmail" required placeholder="name@sample.com">
                 </div>
-                <!-- 3. Telefon Numarası -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-phone">Phone Number</label>
                     <input type="tel" class="form-input" id="clientPhone" required value="+ " oninput="formatPhoneInput(this)">
                 </div>
-                <!-- 4. Dosya Ekle (JPG, PNG, PDF, Video vb.) -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-file">Attach File (JPG, PNG, PDF, Video)</label>
                     <div class="file-upload-wrapper">
@@ -1251,7 +1232,6 @@
                         <input type="file" class="file-upload-input" id="clientFile" accept="image/jpeg,image/png,application/pdf,video/*" onchange="updateFileName(this)">
                     </div>
                 </div>
-                <!-- 5. Açıklama / Proje Detayları -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-desc">Description / Project Details</label>
                     <textarea class="form-textarea" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
@@ -1259,7 +1239,10 @@
                 
                 <div class="form-buttons-group">
                     <button type="button" class="submit-btn email-btn" onclick="sendToEmail(event)" id="m-email-btn">
-                        <i class="fa-solid fa-envelope"></i> Email
+                        <i class="fa-solid fa-envelope"></i> Send
+                    </button>
+                    <button type="button" class="submit-btn whatsapp-btn" onclick="sendToWhatsApp(event)" id="m-whatsapp-btn">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
                     </button>
                 </div>
             </form>
@@ -1510,7 +1493,7 @@
             en: {
                 code: "EN",
                 title: "Let's talk",
-                nameLabel: "Name & Surname",
+                nameLabel: "Name",
                 namePlaceholder: "Name & Surname",
                 emailLabel: "Email Address",
                 emailPlaceholder: "name@sample.com",
@@ -1519,13 +1502,15 @@
                 filePlaceholder: "Choose file or media...",
                 descLabel: "Description / Project Details",
                 descPlaceholder: "Tell me about your project...",
-                emailBtn: "Email",
-                alertText: "Please fill in all fields."
+                emailBtn: "Send",
+                whatsappBtn: "WhatsApp",
+                alertText: "Please fill in all fields.",
+                waProjectRequest: "Project Request"
             },
             tr: {
                 code: "TR",
                 title: "Konuşalım",
-                nameLabel: "Ad Soyad",
+                nameLabel: "İsim",
                 namePlaceholder: "Ad Soyad",
                 emailLabel: "E-posta Adresi",
                 emailPlaceholder: "ornek@mail.com",
@@ -1534,13 +1519,15 @@
                 filePlaceholder: "Dosya veya medya seçin...",
                 descLabel: "Açıklama / Proje Detayları",
                 descPlaceholder: "Projeden bahsedin...",
-                emailBtn: "E-posta",
-                alertText: "Lütfen tüm alanları doldurun."
+                emailBtn: "Gönder",
+                whatsappBtn: "WhatsApp",
+                alertText: "Lütfen tüm alanları doldurun.",
+                waProjectRequest: "Proje Talebi"
             },
             de: {
                 code: "DE",
                 title: "Lass uns sprechen",
-                nameLabel: "Name & Nachname",
+                nameLabel: "Name",
                 namePlaceholder: "Name & Nachname",
                 emailLabel: "E-Mail-Adresse",
                 emailPlaceholder: "name@beispiel.de",
@@ -1549,8 +1536,10 @@
                 filePlaceholder: "Datei oder Medien auswählen...",
                 descLabel: "Beschreibung / Projektdetails",
                 descPlaceholder: "Erzählen Sie von Ihrem Projekt...",
-                emailBtn: "E-Mail",
-                alertText: "Bitte füllen Sie alle Felder aus."
+                emailBtn: "Senden",
+                whatsappBtn: "WhatsApp",
+                alertText: "Bitte füllen Sie alle Felder aus.",
+                waProjectRequest: "Projektanfrage"
             }
         };
 
@@ -1600,6 +1589,7 @@
             document.getElementById('clientDesc').placeholder = data.descPlaceholder;
             
             document.getElementById('m-email-btn').innerHTML = `<i class="fa-solid fa-envelope"></i> ${data.emailBtn}`;
+            document.getElementById('m-whatsapp-btn').innerHTML = `<i class="fa-brands fa-whatsapp"></i> ${data.whatsappBtn}`;
 
             document.getElementById('modalLangMenu').classList.remove('show');
         }
@@ -1645,7 +1635,7 @@
                 doc.line(20, 46, 190, 46);
 
                 const tableData = [
-                    ["Name & Surname", name],
+                    ["Name", name],
                     ["Email Address", email],
                     ["Phone Number", phone],
                     ["Attached File", fileName],
@@ -1719,17 +1709,47 @@
             const recipient = "contact@muminsultani.com";
             const subject = encodeURIComponent("New Appointment Request - " + data.name);
             const body = encodeURIComponent(
-                `Name: ${data.name}\n` +
-                `Email: ${data.email}\n` +
-                `Phone: ${data.phone}\n` +
-                `Attached File: ${data.fileName}\n` +
-                `Time: ${formattedDate}\n\n` +
-                `Details:\n${data.desc}\n\n` +
-                `---\nmuminsultani.com`
+                `*${data.name}*\n\n` +
+                `New Appointment / Project Request\n\n` +
+                `*Name:* ${data.name}\n` +
+                `*Email:* ${data.email}\n` +
+                `*Phone:* ${data.phone}\n` +
+                `*File:* ${data.fileName}\n` +
+                `*Time:* ${formattedDate}\n\n` +
+                `*Details:*\n${data.desc}\n\n` +
+                `muminsultani.com`
             );
 
             const mailtoUrl = `mailto:${recipient}?subject=${subject}&body=${body}`;
             window.location.href = mailtoUrl;
+            closeAppointmentModal();
+        }
+
+        function sendToWhatsApp(e) {
+            e.preventDefault();
+            const data = validateForm();
+            if (!data) return;
+
+            const now = new Date();
+            const formattedDate = now.toLocaleString();
+            const currentModalLang = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const requestTitle = modalTranslations[currentModalLang] ? modalTranslations[currentModalLang].waProjectRequest : "Project Request";
+
+            const message = 
+                `*${data.name}*\n\n` +
+                `*${requestTitle}*\n\n` +
+                `*• Name:* ${data.name}\n` +
+                `*• Email:* ${data.email}\n` +
+                `*• Phone:* ${data.phone}\n` +
+                `*• File:* ${data.fileName}\n` +
+                `*• Time:* ${formattedDate}\n\n` +
+                `*• Details:*\n${data.desc}\n\n` +
+                `*muminsultani.com*`;
+
+            const whatsappNumber = "905389480137";
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappUrl, '_blank');
             closeAppointmentModal();
         }
 
