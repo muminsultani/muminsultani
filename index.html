@@ -667,32 +667,10 @@
             margin-bottom: 6px;
         }
 
-        /* Otomatik Doldurma (Autofill) Arka Plan Çözümü */
-        .form-input:-webkit-autofill,
-        .form-input:-webkit-autofill:hover, 
-        .form-input:-webkit-autofill:focus,
-        .form-textarea:-webkit-autofill,
-        .form-textarea:-webkit-autofill:hover,
-        .form-textarea:-webkit-autofill:focus {
-            -webkit-text-fill-color: var(--text-primary) !important;
-            -webkit-box-shadow: 0 0 0 1000px #0a0a0f inset !important;
-            transition: background-color 5000s ease-in-out 0s !important;
-        }
-
-        body.light-mode .form-input:-webkit-autofill,
-        body.light-mode .form-input:-webkit-autofill:hover, 
-        body.light-mode .form-input:-webkit-autofill:focus,
-        body.light-mode .form-textarea:-webkit-autofill,
-        body.light-mode .form-textarea:-webkit-autofill:hover,
-        body.light-mode .form-textarea:-webkit-autofill:focus {
-            -webkit-text-fill-color: var(--text-primary) !important;
-            -webkit-box-shadow: 0 0 0 1000px #f8fafc inset !important;
-            transition: background-color 5000s ease-in-out 0s !important;
-        }
-
+        /* Kesin Çözüm: Düz arka plan renkleri ile Chrome Autofill Beyazlık Engelleme */
         .form-input, .form-textarea {
             width: 100%;
-            background: var(--box-bg) !important;
+            background: #14141c !important;
             border: 1px solid var(--line-color);
             padding: 12px 16px;
             border-radius: 10px;
@@ -703,11 +681,43 @@
             -webkit-text-fill-color: var(--text-primary) !important;
         }
 
+        body.light-mode .form-input, 
+        body.light-mode .form-textarea {
+            background: #ffffff !important;
+        }
+
+        .form-input:-webkit-autofill,
+        .form-input:-webkit-autofill:hover, 
+        .form-input:-webkit-autofill:focus,
+        .form-textarea:-webkit-autofill,
+        .form-textarea:-webkit-autofill:hover,
+        .form-textarea:-webkit-autofill:focus {
+            -webkit-text-fill-color: var(--text-primary) !important;
+            -webkit-box-shadow: 0 0 0 1000px #14141c inset !important;
+            transition: background-color 5000s ease-in-out 0s !important;
+        }
+
+        body.light-mode .form-input:-webkit-autofill,
+        body.light-mode .form-input:-webkit-autofill:hover, 
+        body.light-mode .form-input:-webkit-autofill:focus,
+        body.light-mode .form-textarea:-webkit-autofill,
+        body.light-mode .form-textarea:-webkit-autofill:hover,
+        body.light-mode .form-textarea:-webkit-autofill:focus {
+            -webkit-text-fill-color: var(--text-primary) !important;
+            -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+            transition: background-color 5000s ease-in-out 0s !important;
+        }
+
         .form-input:focus, .form-textarea:focus {
             border-color: #9333ea;
-            background: var(--box-bg) !important;
+            background: #14141c !important;
             color: var(--text-primary) !important;
             -webkit-text-fill-color: var(--text-primary) !important;
+        }
+
+        body.light-mode .form-input:focus, 
+        body.light-mode .form-textarea:focus {
+            background: #ffffff !important;
         }
 
         .form-textarea {
