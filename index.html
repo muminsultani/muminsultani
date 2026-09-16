@@ -1197,7 +1197,10 @@
                 <div class="modal-header-left">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
                         <button class="modal-close-btn" onclick="closeAppointmentModal()" title="Geri / Çıkış"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button class="modal-close-btn" onclick="location.reload()" title="Yenile"><i class="fa-solid fa-rotate"></i></button>
+                        <!-- GÜNCELLENEN YENİLEME / TEMİZLEME DÜĞMESİ -->
+                        <button class="modal-close-btn" onclick="resetAppointmentForm()" title="Yenile / Temizle">
+                            <i class="fa-solid fa-rotate"></i>
+                        </button>
                         <button class="modal-close-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
                             <i class="fa-solid fa-moon" id="modalThemeIcon"></i>
                         </button>
@@ -1366,6 +1369,18 @@
                 top: 0,
                 behavior: 'smooth'
             });
+        }
+
+        // PANELİ / FORMU SADECE SIFIRLAMA FONKSİYONU
+        function resetAppointmentForm() {
+            document.getElementById('appointmentForm').reset();
+            document.getElementById('clientPhone').value = '+ ';
+            const currentLang = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const fileTextSpan = document.getElementById('fileUploadText');
+            if (modalTranslations[currentLang]) {
+                fileTextSpan.innerText = modalTranslations[currentLang].filePlaceholder;
+                fileTextSpan.style.color = '#94a3b8';
+            }
         }
 
         function toggleLangMenu() {
