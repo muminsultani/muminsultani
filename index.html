@@ -1504,14 +1504,15 @@
                 descPlaceholder: "Tell me about your project...",
                 emailBtn: "Send",
                 whatsappBtn: "WhatsApp",
-                alertText: "Please fill in all fields.",
+                alertText: "Please fill in all required fields.",
                 waProjectRequest: "Project Request",
                 lblContactName: "Name & Surname",
                 lblEmail: "Email",
                 lblPhone: "Phone",
                 lblFile: "File",
                 lblTime: "Time",
-                lblDetails: "Details"
+                lblDetails: "Details",
+                noFile: "No file attached"
             },
             tr: {
                 code: "TR",
@@ -1527,14 +1528,15 @@
                 descPlaceholder: "Projeden bahsedin...",
                 emailBtn: "Gönder",
                 whatsappBtn: "WhatsApp",
-                alertText: "Lütfen tüm alanları doldurun.",
+                alertText: "Lütfen gerekli tüm alanları doldurun.",
                 waProjectRequest: "Proje Talebi",
                 lblContactName: "Ad Soyad",
                 lblEmail: "E-posta",
                 lblPhone: "Telefon",
                 lblFile: "Dosya",
                 lblTime: "Zaman",
-                lblDetails: "Detaylar"
+                lblDetails: "Detaylar",
+                noFile: "Dosya eklenmedi"
             },
             de: {
                 code: "DE",
@@ -1550,18 +1552,19 @@
                 descPlaceholder: "Erzählen Sie von Ihrem Projekt...",
                 emailBtn: "Senden",
                 whatsappBtn: "WhatsApp",
-                alertText: "Bitte füllen Sie alle Felder aus.",
+                alertText: "Bitte füllen Sie alle Pflichtfelder aus.",
                 waProjectRequest: "Projektanfrage",
                 lblContactName: "Name & Nachname",
                 lblEmail: "E-Mail",
                 lblPhone: "Telefon",
                 lblFile: "Datei",
                 lblTime: "Zeit",
-                lblDetails: "Details"
+                lblDetails: "Details",
+                noFile: "Keine Datei anhängen"
             }
         };
 
-        let currentAlertText = "Please fill in all fields.";
+        let currentAlertText = "Please fill in all required fields.";
 
         function openAppointmentModal() {
             document.getElementById('appointmentModal').classList.add('active');
@@ -1704,13 +1707,17 @@
             const phone = document.getElementById('clientPhone').value.trim();
             const fileInput = document.getElementById('clientFile');
             const desc = document.getElementById('clientDesc').value.trim();
+            
+            const currentModalLang = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const t = modalTranslations[currentModalLang] || modalTranslations.en;
 
+            // Dosya hariç diğer alanlar zorunlu tutuldu
             if (!name || !email || phone === '+' || !desc) {
                 showCustomAlert(currentAlertText);
                 return false;
             }
 
-            const fileName = (fileInput.files && fileInput.files.length > 0) ? fileInput.files[0].name : "No file attached";
+            const fileName = (fileInput.files && fileInput.files.length > 0) ? fileInput.files[0].name : t.noFile;
             return { name, email, phone, fileName, desc };
         }
 
