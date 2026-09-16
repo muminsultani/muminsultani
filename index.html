@@ -74,7 +74,7 @@
             --box-bg: rgba(255, 255, 255, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(10, 10, 15, 0.95);
-            --modal-container-bg: #0a0a0f;
+            --modal-container-bg: #0a0a0f; /* Şeffaflık kaldırıldı, tamamen opak koyu renk */
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.12), rgba(168, 85, 247, 0.05) 60%, transparent 80%);
         }
 
@@ -87,7 +87,7 @@
             --box-bg: rgba(0, 0, 0, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
             --menu-bg: rgba(255, 255, 255, 0.95);
-            --modal-container-bg: #ffffff;
+            --modal-container-bg: #ffffff; /* Şeffaflık kaldırıldı, tamamen opak beyaz renk */
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.08), rgba(168, 85, 247, 0.03) 60%, transparent 80%);
         }
 
@@ -267,13 +267,6 @@
             word-break: break-word;
         }
 
-        body.light-mode .brand-logo {
-            background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
         @keyframes gradientFlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -306,7 +299,7 @@
         .theme-toggle-btn:hover, .scroll-down-action-btn:hover {
             border-color: rgba(147, 51, 234, 0.4);
             background: var(--box-hover-bg);
-            color: var(--accent);
+            color: #9333ea;
         }
 
         .lang-dropdown-container {
@@ -333,7 +326,7 @@
         .lang-btn:hover {
             border-color: rgba(147, 51, 234, 0.4);
             background: var(--box-hover-bg);
-            color: var(--accent);
+            color: #9333ea;
         }
 
         .lang-menu {
@@ -381,7 +374,7 @@
 
         .lang-option:hover {
             background: var(--box-hover-bg);
-            color: var(--accent);
+            color: #9333ea;
         }
 
         .header-bottom-row {
@@ -438,7 +431,7 @@
         }
 
         .section-title i {
-            color: var(--accent);
+            color: #9333ea;
             font-size: 0.9rem;
         }
 
@@ -471,7 +464,7 @@
         }
 
         .item-title:hover {
-            color: var(--accent);
+            color: #9333ea;
         }
 
         .item-header i {
@@ -552,7 +545,7 @@
         }
 
         .contact-box i {
-            color: var(--accent);
+            color: #9333ea;
             font-size: 1.1rem;
             flex-shrink: 0;
         }
@@ -583,6 +576,7 @@
             pointer-events: auto;
         }
 
+        /* Şeffaflık tamamen kaldırıldı, tamamen opak arka plan */
         .modal-container {
             background: var(--modal-container-bg);
             border: 1px solid var(--line-color);
@@ -642,13 +636,6 @@
             margin-bottom: 8px;
         }
 
-        body.light-mode .modal-brand {
-            background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
         .modal-title {
             font-size: 0.95rem;
             font-weight: 600;
@@ -673,7 +660,7 @@
         .modal-close-btn:hover {
             border-color: rgba(147, 51, 234, 0.4);
             background: var(--box-hover-bg);
-            color: var(--accent);
+            color: #9333ea;
         }
 
         .modal-container .lang-btn,
@@ -689,7 +676,7 @@
         .modal-container .theme-toggle-btn:hover {
             border-color: rgba(147, 51, 234, 0.4);
             background: var(--box-hover-bg);
-            color: var(--accent);
+            color: #9333ea;
         }
 
         .form-group {
@@ -778,7 +765,7 @@
         }
 
         .file-upload-icon {
-            color: var(--accent);
+            color: #9333ea;
             font-size: 1rem;
             flex-shrink: 0;
             margin-left: 8px;
@@ -789,9 +776,24 @@
             color: #94a3b8 !important;
             opacity: 0.30 !important;
         }
+        .form-input::-webkit-input-placeholder,
+        .form-textarea::-webkit-input-placeholder {
+            color: #94a3b8 !important;
+            opacity: 0.30 !important;
+        }
+        .form-input:-ms-input-placeholder,
+        .form-textarea:-ms-input-placeholder {
+            color: #94a3b8 !important;
+            opacity: 0.30 !important;
+        }
+        .form-input::-ms-input-placeholder,
+        .form-textarea::-ms-input-placeholder {
+            color: #94a3b8 !important;
+            opacity: 0.30 !important;
+        }
 
         .form-input:focus, .form-textarea:focus {
-            border-color: var(--accent);
+            border-color: #9333ea;
             background: var(--box-bg) !important;
             color: var(--text-primary) !important;
             -webkit-text-fill-color: var(--text-primary) !important;
@@ -826,10 +828,6 @@
         }
 
         .submit-btn.email-btn {
-            background: linear-gradient(135deg, #9333ea, #c084fc);
-        }
-
-        body.light-mode .submit-btn.email-btn {
             background: linear-gradient(135deg, #9333ea, #c084fc);
         }
 
@@ -884,7 +882,7 @@
 
         .custom-alert-icon {
             font-size: 2rem;
-            color: var(--accent);
+            color: #9333ea;
             margin-bottom: 12px;
         }
 
@@ -907,10 +905,6 @@
             font-size: 0.85rem;
             cursor: pointer;
             transition: opacity 0.2s;
-        }
-
-        body.light-mode .custom-alert-btn {
-            background: linear-gradient(135deg, #9333ea, #c084fc);
         }
 
         .custom-alert-btn:hover {
@@ -971,13 +965,6 @@
             -webkit-text-fill-color: transparent;
             animation: gradientFlow 8s ease infinite;
             line-height: 1.1;
-        }
-
-        body.light-mode .footer-brand {
-            background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .footer-scan-text {
@@ -1207,12 +1194,14 @@
                 <div class="modal-header-left">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
                         <button class="modal-close-btn" onclick="clearAndCloseModal()" title="Geri / Çıkış"><i class="fa-solid fa-chevron-left"></i></button>
+                        <!-- YENİLEME / TEMİZLEME DÜĞMESİ -->
                         <button class="modal-close-btn" onclick="resetAppointmentForm()" title="Yenile / Temizle">
                             <i class="fa-solid fa-rotate"></i>
                         </button>
                         <button class="modal-close-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
                             <i class="fa-solid fa-moon" id="modalThemeIcon"></i>
                         </button>
+                        <!-- ANA SAYFA (HOME) DÜĞMESİ -->
                         <button class="modal-close-btn" onclick="goHome()" title="Ana Sayfa">
                             <i class="fa-solid fa-house"></i>
                         </button>
@@ -1233,22 +1222,27 @@
                             <button class="lang-option" onclick="changeModalLanguage('de')">Deutsch</button>
                         </div>
                     </div>
+                    <!-- X KAPATMA DÜĞMESİ -->
                     <button class="modal-close-btn" onclick="clearAndCloseModal()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
             <form id="appointmentForm">
+                <!-- 1. Ad Soyad -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-name">Name & Surname</label>
                     <input type="text" class="form-input" id="clientName" required placeholder="Name & Surname">
                 </div>
+                <!-- 2. E-posta Adresi -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-email">Email Address</label>
                     <input type="email" class="form-input" id="clientEmail" required placeholder="name@sample.com">
                 </div>
+                <!-- 3. Telefon Numarası -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-phone">Phone Number</label>
                     <input type="tel" class="form-input" id="clientPhone" required value="+ " oninput="formatPhoneInput(this)">
                 </div>
+                <!-- 4. Dosya Ekle (JPG, PNG, PDF, Video vb.) -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-file">Attach File (JPG, PNG, PDF, Video)</label>
                     <div class="file-upload-wrapper">
@@ -1257,6 +1251,7 @@
                         <input type="file" class="file-upload-input" id="clientFile" accept="image/jpeg,image/png,application/pdf,video/*" onchange="updateFileName(this)">
                     </div>
                 </div>
+                <!-- 5. Açıklama / Proje Detayları -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-desc">Description / Project Details</label>
                     <textarea class="form-textarea" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
@@ -1788,45 +1783,12 @@
             }
 
             draw() {
-                ctx.fillStyle = 'rgba(168, 85, 247, 0.55)';
+                const isLight = document.body.classList.contains('light-mode');
+                ctx.fillStyle = isLight ? 'rgba(147, 51, 234, 0.45)' : 'rgba(168, 85, 247, 0.55)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.closePath();
                 ctx.fill();
-            }
-        }
-
-        // Light Mode için Matrix / Kod Yağmuru Efekti Sınıfı
-        class MatrixCodeRain {
-            constructor() {
-                this.fontSize = 14;
-                this.columns = Math.floor(canvas.width / this.fontSize);
-                this.drops = [];
-                for (let i = 0; i < this.columns; i++) {
-                    this.drops[i] = Math.floor(Math.random() * -100);
-                }
-                this.chars = "01{}[]<>/-+=#$_constletvarfunction()=>";
-            }
-
-            draw() {
-                ctx.fillStyle = 'rgba(248, 250, 252, 0.15)'; // Arka planı hafif silme efekti
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                ctx.fillStyle = 'rgba(147, 51, 234, 0.45)'; // Mor tonlarında kod rengi
-                ctx.font = `${this.fontSize}px 'Fira Code', monospace`;
-
-                for (let i = 0; i < this.drops.length; i++) {
-                    const text = this.chars.charAt(Math.floor(Math.random() * this.chars.length));
-                    const x = i * this.fontSize;
-                    const y = this.drops[i] * this.fontSize;
-
-                    ctx.fillText(text, x, y);
-
-                    if (y > canvas.height && Math.random() > 0.975) {
-                        this.drops[i] = 0;
-                    }
-                    this.drops[i]++;
-                }
             }
         }
 
@@ -1838,52 +1800,47 @@
         }
         initParticles();
 
-        const matrixRain = new MatrixCodeRain();
-
         function animateConstellation() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             const isLight = document.body.classList.contains('light-mode');
 
-            if (isLight) {
-                // Light modda farklı bir yazılım animasyonu (Kod Yağmuru - Mor Renkli)
-                matrixRain.draw();
-            } else {
-                // Dark modda standart takım yıldızo / molekül animasyonu
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
 
-                for (let i = 0; i < particlesArray.length; i++) {
-                    particlesArray[i].update();
-                    particlesArray[i].draw();
+                for (let j = i + 1; j < particlesArray.length; j++) {
+                    const dx = particlesArray[i].x - particlesArray[j].x;
+                    const dy = particlesArray[i].y - particlesArray[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
 
-                    for (let j = i + 1; j < particlesArray.length; j++) {
-                        const dx = particlesArray[i].x - particlesArray[j].x;
-                        const dy = particlesArray[i].y - particlesArray[j].y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-
-                        if (distance < 110) {
-                            const opacity = 1 - (distance / 110);
-                            ctx.strokeStyle = `rgba(168, 85, 247, ${opacity * 0.22})`;
-                            ctx.lineWidth = 0.8;
-                            ctx.beginPath();
-                            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-                            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
-                            ctx.stroke();
-                        }
+                    if (distance < 110) {
+                        const opacity = 1 - (distance / 110);
+                        ctx.strokeStyle = isLight 
+                            ? `rgba(147, 51, 234, ${opacity * 0.18})` 
+                            : `rgba(168, 85, 247, ${opacity * 0.22})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                        ctx.stroke();
                     }
+                }
 
-                    if (mouse.x !== null && mouse.y !== null) {
-                        const mdx = particlesArray[i].x - mouse.x;
-                        const mdy = particlesArray[i].y - mouse.y;
-                        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+                if (mouse.x !== null && mouse.y !== null) {
+                    const mdx = particlesArray[i].x - mouse.x;
+                    const mdy = particlesArray[i].y - mouse.y;
+                    const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
 
-                        if (mdist < mouse.radius) {
-                            const mOpacity = 1 - (mdist / mouse.radius);
-                            ctx.strokeStyle = `rgba(192, 132, 252, ${mOpacity * 0.45})`;
-                            ctx.lineWidth = 1;
-                            ctx.beginPath();
-                            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-                            ctx.lineTo(mouse.x, mouse.y);
-                            ctx.stroke();
-                        }
+                    if (mdist < mouse.radius) {
+                        const mOpacity = 1 - (mdist / mouse.radius);
+                        ctx.strokeStyle = isLight 
+                            ? `rgba(147, 51, 234, ${mOpacity * 0.35})` 
+                            : `rgba(192, 132, 252, ${mOpacity * 0.45})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
                     }
                 }
             }
