@@ -392,12 +392,6 @@
             letter-spacing: -0.2px;
         }
 
-        .right-buttons-group {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
         .social-row {
             display: flex;
             align-items: center;
@@ -731,6 +725,52 @@
             outline: none;
             transition: border-color 0.2s;
             -webkit-text-fill-color: var(--text-primary) !important;
+        }
+
+        /* Özel Dosya Yükleme Alanı Stilleri */
+        .file-upload-wrapper {
+            position: relative;
+            width: 100%;
+            background: var(--box-bg);
+            border: 1px dashed var(--line-color);
+            padding: 12px 16px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .file-upload-wrapper:hover {
+            border-color: rgba(147, 51, 234, 0.4);
+            background: var(--box-hover-bg);
+        }
+
+        .file-upload-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-upload-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            pointer-events: none;
+        }
+
+        .file-upload-icon {
+            color: #9333ea;
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-left: 8px;
         }
 
         .form-input::placeholder,
@@ -1195,7 +1235,16 @@
                     <label class="form-label" id="m-label-phone">Phone Number</label>
                     <input type="tel" class="form-input" id="clientPhone" required value="+ " oninput="formatPhoneInput(this)">
                 </div>
-                <!-- 4. Açıklama / Proje Detayları -->
+                <!-- 4. Dosya Ekle (JPG, PNG, PDF, Video vb.) -->
+                <div class="form-group">
+                    <label class="form-label" id="m-label-file">Attach File (JPG, PNG, PDF, Video)</label>
+                    <div class="file-upload-wrapper">
+                        <span class="file-upload-text" id="fileUploadText">Choose file or media...</span>
+                        <i class="fa-solid fa-paperclip file-upload-icon"></i>
+                        <input type="file" class="file-upload-input" id="clientFile" accept="image/jpeg,image/png,application/pdf,video/*" onchange="updateFileName(this)">
+                    </div>
+                </div>
+                <!-- 5. Açıklama / Proje Detayları -->
                 <div class="form-group">
                     <label class="form-label" id="m-label-desc">Description / Project Details</label>
                     <textarea class="form-textarea" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
@@ -1338,6 +1387,18 @@
             input.value = formatted;
         }
 
+        function updateFileName(input) {
+            const textSpan = document.getElementById('fileUploadText');
+            if (input.files && input.files.length > 0) {
+                textSpan.innerText = input.files[0].name;
+                textSpan.style.color = 'var(--text-primary)';
+            } else {
+                const currentLang = document.getElementById('modalCurrentLangText').innerText;
+                textSpan.innerText = modalTranslations[currentLang.toLowerCase()].filePlaceholder;
+                textSpan.style.color = 'var(--text-secondary)';
+            }
+        }
+
         const translations = {
             en: {
                 code: "EN",
@@ -1423,6 +1484,8 @@
                 emailLabel: "Email Address",
                 emailPlaceholder: "name@sample.com",
                 phoneLabel: "Phone Number",
+                fileLabel: "Attach File (JPG, PNG, PDF, Video)",
+                filePlaceholder: "Choose file or media...",
                 descLabel: "Description / Project Details",
                 descPlaceholder: "Tell me about your project...",
                 emailBtn: "Email",
@@ -1436,6 +1499,8 @@
                 emailLabel: "E-posta Adresi",
                 emailPlaceholder: "ornek@mail.com",
                 phoneLabel: "Telefon Numarası",
+                fileLabel: "Dosya Ekle (JPG, PNG, PDF, Video)",
+                filePlaceholder: "Dosya veya medya seçin...",
                 descLabel: "Açıklama / Proje Detayları",
                 descPlaceholder: "Projeden bahsedin...",
                 emailBtn: "E-posta",
@@ -1449,6 +1514,8 @@
                 emailLabel: "E-Mail-Adresse",
                 emailPlaceholder: "name@beispiel.de",
                 phoneLabel: "Telefonnummer",
+                fileLabel: "Datei anhängen (JPG, PNG, PDF, Video)",
+                filePlaceholder: "Datei oder Medien auswählen...",
                 descLabel: "Beschreibung / Projektdetails",
                 descPlaceholder: "Erzählen Sie von Ihrem Projekt...",
                 emailBtn: "E-Mail",
@@ -1492,6 +1559,12 @@
 
             document.getElementById('m-label-phone').innerText = data.phoneLabel;
             
+            document.getElementById('m-label-file').innerText = data.fileLabel;
+            const fileInput = document.getElementById('clientFile');
+            if (!fileInput.files || fileInput.files.length === 0) {
+                document.getElementById('fileUploadText').innerText = data.filePlaceholder;
+            }
+
             document.getElementById('m-label-desc').innerText = data.descLabel;
             document.getElementById('clientDesc').placeholder = data.descPlaceholder;
             
@@ -1517,7 +1590,7 @@
             img.src = url;
         }
 
-        function generatePDF(name, email, phone, desc, formattedDate) {
+        function generatePDF(name, email, phone, fileName, desc, formattedDate) {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
@@ -1544,6 +1617,7 @@
                     ["Name & Surname", name],
                     ["Email Address", email],
                     ["Phone Number", phone],
+                    ["Attached File", fileName],
                     ["Request Time", formattedDate],
                     ["Project Details", desc]
                 ];
@@ -1589,13 +1663,16 @@
             const name = document.getElementById('clientName').value.trim();
             const email = document.getElementById('clientEmail').value.trim();
             const phone = document.getElementById('clientPhone').value.trim();
+            const fileInput = document.getElementById('clientFile');
             const desc = document.getElementById('clientDesc').value.trim();
 
             if (!name || !email || phone === '+' || !desc) {
                 showCustomAlert(currentAlertText);
                 return false;
             }
-            return { name, email, phone, desc };
+
+            const fileName = (fileInput.files && fileInput.files.length > 0) ? fileInput.files[0].name : "No file attached";
+            return { name, email, phone, fileName, desc };
         }
 
         function sendToEmail(e) {
@@ -1606,7 +1683,7 @@
             const now = new Date();
             const formattedDate = now.toLocaleString();
 
-            generatePDF(data.name, data.email, data.phone, data.desc, formattedDate);
+            generatePDF(data.name, data.email, data.phone, data.fileName, data.desc, formattedDate);
 
             const recipient = "contact@muminsultani.com";
             const subject = encodeURIComponent("New Appointment Request - " + data.name);
@@ -1614,6 +1691,7 @@
                 `Name: ${data.name}\n` +
                 `Email: ${data.email}\n` +
                 `Phone: ${data.phone}\n` +
+                `Attached File: ${data.fileName}\n` +
                 `Time: ${formattedDate}\n\n` +
                 `Details:\n${data.desc}\n\n` +
                 `---\nmuminsultani.com`
