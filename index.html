@@ -1080,7 +1080,7 @@
                         <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                     </svg>
                 </a>
-                <button type="button" class="social-btn gmail" onclick="openAppointmentModalWithEmail('muminsultani@hotmail.com')" title="Gmail">
+                <button type="button" class="social-btn gmail" onclick="openGmailNoticeModal('muminsultani@hotmail.com')" title="Gmail">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail">
                 </button>
             </div>
@@ -1194,7 +1194,7 @@
                         <button class="modal-close-btn" onclick="goHome()" title="Home">
                             <i class="fa-solid fa-house"></i>
                         </button>
-                        <button class="modal-close-btn" onclick="openAppointmentModalWithEmail('muminsultani@hotmail.com')" title="Gmail">
+                        <button class="modal-close-btn" onclick="openGmailNoticeModal('muminsultani@hotmail.com')" title="Gmail">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 0.9rem; height: 0.9rem; display: block; filter: grayscale(30%) opacity(0.85);">
                         </button>
                     </div>
@@ -1253,6 +1253,26 @@
                     </button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Gmail Bilgilendirme Özel Uyarı Kutusu -->
+    <div class="custom-alert-overlay" id="gmailNoticeModal">
+        <div class="custom-alert-box" style="max-width: 420px;">
+            <div class="custom-alert-icon" style="color: #9333ea;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 2.2rem; height: 2.2rem; display: inline-block;">
+            </div>
+            <div class="custom-alert-message" id="gmailNoticeMessage" style="font-size: 0.95rem; margin-bottom: 24px;">
+                <strong>muminsultani</strong> Personal Email Address
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="custom-alert-btn" onclick="confirmOpenGmail()" id="gmailNoticeActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1.1rem; height: 1.1rem; display: block;"> Email
+                </button>
+                <button class="custom-alert-btn" onclick="closeGmailNoticeModal()" id="gmailNoticeBackBtn" style="background: #64748b; flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <i class="fa-solid fa-arrow-rotate-left"></i> <span id="gmailNoticeBackText">Back</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -1519,7 +1539,9 @@
                 lblFile: "File",
                 lblTime: "Time",
                 lblDetails: "Details",
-                noFile: "No file attached"
+                noFile: "No file attached",
+                gmailNoticeText: "<strong>muminsultani</strong> Personal Email Address",
+                backText: "Back"
             },
             tr: {
                 code: "TR",
@@ -1533,7 +1555,7 @@
                 filePlaceholder: "Dosya veya medya seçin...",
                 descLabel: "Açıklama / Proje Detayları",
                 descPlaceholder: "Projeden bahsedin...",
-                emailBtn: "E-posta",
+                emailBtn: "Email",
                 whatsappBtn: "WhatsApp",
                 alertText: "Lütfen gerekli tüm alanları doldurun.",
                 waProjectRequest: "Proje Talebi",
@@ -1543,7 +1565,9 @@
                 lblFile: "Dosya",
                 lblTime: "Zaman",
                 lblDetails: "Detaylar",
-                noFile: "Dosya eklenmedi"
+                noFile: "Dosya eklenmedi",
+                gmailNoticeText: "<strong>muminsultani</strong> Kişisel E-posta Adresi",
+                backText: "Geri Dön"
             },
             de: {
                 code: "DE",
@@ -1557,7 +1581,7 @@
                 filePlaceholder: "Datei oder Medien auswählen...",
                 descLabel: "Beschreibung / Projektdetails",
                 descPlaceholder: "Erzählen Sie von Ihrem Projekt...",
-                emailBtn: "E-Mail",
+                emailBtn: "Email",
                 whatsappBtn: "WhatsApp",
                 alertText: "Bitte füllen Sie alle Pflichtfelder aus.",
                 waProjectRequest: "Projektanfrage",
@@ -1567,11 +1591,33 @@
                 lblFile: "Datei",
                 lblTime: "Zeit",
                 lblDetails: "Details",
-                noFile: "Keine Datei anhängen"
+                noFile: "Keine Datei anhängen",
+                gmailNoticeText: "<strong>muminsultani</strong> Persönliche E-Mail-Adresse",
+                backText: "Zurück"
             }
         };
 
         let currentAlertText = "Please fill in all required fields.";
+        let activeNoticeEmail = "muminsultani@hotmail.com";
+
+        function openGmailNoticeModal(email) {
+            activeNoticeEmail = email;
+            const currentModalLang = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const t = modalTranslations[currentModalLang] || modalTranslations.en;
+            
+            document.getElementById('gmailNoticeMessage').innerHTML = t.gmailNoticeText;
+            document.getElementById('gmailNoticeBackText').innerText = t.backText;
+            document.getElementById('gmailNoticeModal').classList.add('active');
+        }
+
+        function closeGmailNoticeModal() {
+            document.getElementById('gmailNoticeModal').classList.remove('active');
+        }
+
+        function confirmOpenGmail() {
+            closeGmailNoticeModal();
+            openAppointmentModalWithEmail(activeNoticeEmail);
+        }
 
         function openAppointmentModalWithEmail(email) {
             document.getElementById('targetRecipientEmail').value = email;
@@ -1619,6 +1665,15 @@
             
             document.getElementById('m-email-btn').innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1.1rem; height: 1.1rem; display: block;"> ${data.emailBtn}`;
             document.getElementById('m-whatsapp-btn').innerHTML = `<i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> ${data.whatsappBtn}`;
+
+            const noticeMsg = document.getElementById('gmailNoticeMessage');
+            if (noticeMsg) {
+                noticeMsg.innerHTML = data.gmailNoticeText;
+            }
+            const backTxt = document.getElementById('gmailNoticeBackText');
+            if (backTxt) {
+                backTxt.innerText = data.backText;
+            }
 
             document.getElementById('modalLangMenu').classList.remove('show');
         }
