@@ -1493,7 +1493,7 @@
             en: {
                 code: "EN",
                 title: "Let's talk",
-                nameLabel: "Name",
+                nameLabel: "Name & Surname",
                 namePlaceholder: "Name & Surname",
                 emailLabel: "Email Address",
                 emailPlaceholder: "name@sample.com",
@@ -1510,7 +1510,7 @@
             tr: {
                 code: "TR",
                 title: "Konuşalım",
-                nameLabel: "İsim",
+                nameLabel: "Ad Soyad",
                 namePlaceholder: "Ad Soyad",
                 emailLabel: "E-posta Adresi",
                 emailPlaceholder: "ornek@mail.com",
@@ -1527,7 +1527,7 @@
             de: {
                 code: "DE",
                 title: "Lass uns sprechen",
-                nameLabel: "Name",
+                nameLabel: "Name & Nachname",
                 namePlaceholder: "Name & Nachname",
                 emailLabel: "E-Mail-Adresse",
                 emailPlaceholder: "name@beispiel.de",
@@ -1635,7 +1635,7 @@
                 doc.line(20, 46, 190, 46);
 
                 const tableData = [
-                    ["Name", name],
+                    ["Name & Surname", name],
                     ["Email Address", email],
                     ["Phone Number", phone],
                     ["Attached File", fileName],
@@ -1711,11 +1711,10 @@
             const recipient = "contact@muminsultani.com";
             const subject = encodeURIComponent("Project Request - " + data.name);
             
-            // Yıldızlar kaldırıldı, temiz ve düzenli hale getirildi
             const body = encodeURIComponent(
                 `${data.name}\n\n` +
                 `${requestTitle}\n\n` +
-                `Name: ${data.name}\n` +
+                `Name & Surname: ${data.name}\n` +
                 `Email: ${data.email}\n` +
                 `Phone: ${data.phone}\n` +
                 `File: ${data.fileName}\n` +
@@ -1742,7 +1741,7 @@
             const message = 
                 `*${data.name}*\n\n` +
                 `*${requestTitle}*\n\n` +
-                `*• Name:* ${data.name}\n` +
+                `*• Name & Surname:* ${data.name}\n` +
                 `*• Email:* ${data.email}\n` +
                 `*• Phone:* ${data.phone}\n` +
                 `*• File:* ${data.fileName}\n` +
