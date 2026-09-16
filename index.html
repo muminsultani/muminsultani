@@ -772,7 +772,6 @@
             margin-left: 8px;
         }
 
-        /* Daha Şeffaf ve Soft Placeholder Tanımlamaları (Opacity: 0.30) */
         .form-input::placeholder,
         .form-textarea::placeholder {
             color: #94a3b8 !important;
@@ -1202,9 +1201,13 @@
                         <button class="modal-close-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
                             <i class="fa-solid fa-moon" id="modalThemeIcon"></i>
                         </button>
+                        <!-- ANA SAYFA (HOME) DÜĞMESİ -->
+                        <button class="modal-close-btn" onclick="goHome()" title="Ana Sayfa">
+                            <i class="fa-solid fa-house"></i>
+                        </button>
                     </div>
                     <div class="modal-brand">muminsultani</div>
-                    <div class="modal-title" id="m-title">Book an Appointment</div>
+                    <div class="modal-title" id="m-title">Let's talk</div>
                 </div>
                 
                 <div class="modal-header-actions">
@@ -1357,6 +1360,14 @@
             });
         }
 
+        function goHome() {
+            closeAppointmentModal();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
         function toggleLangMenu() {
             const menu = document.getElementById('langMenu');
             menu.classList.toggle('show');
@@ -1481,7 +1492,7 @@
         const modalTranslations = {
             en: {
                 code: "EN",
-                title: "Book an Appointment",
+                title: "Let's talk",
                 nameLabel: "Name & Surname",
                 namePlaceholder: "Name & Surname",
                 emailLabel: "Email Address",
@@ -1496,7 +1507,7 @@
             },
             tr: {
                 code: "TR",
-                title: "Randevu Talebi",
+                title: "Konuşalım",
                 nameLabel: "Ad Soyad",
                 namePlaceholder: "Ad Soyad",
                 emailLabel: "E-posta Adresi",
@@ -1511,7 +1522,7 @@
             },
             de: {
                 code: "DE",
-                title: "Termin buchen",
+                title: "Lass uns sprechen",
                 nameLabel: "Name & Nachname",
                 namePlaceholder: "Name & Nachname",
                 emailLabel: "E-Mail-Adresse",
