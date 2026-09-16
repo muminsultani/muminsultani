@@ -1347,8 +1347,8 @@
             // Form bilgilerini içeren PDF dosyasını indir
             generatePDF(name, email, whatsapp, desc, formattedDate);
 
-            // WhatsApp mesajını oluştur ve aç
-            const text = `*${name}*\n\n*New Appointment Request*\n\n• *Name:* ${name}\n• *Email:* ${email}\n• *WhatsApp:* ${whatsapp}\n• *Request Time:* ${formattedDate}\n• *Details:* ${desc}\n\n*Ⓜ️ muminsultani.com*`;
+            // WhatsApp mesajını oluştur ve aç ("Request" kelimesi Time önünden kaldırıldı)
+            const text = `*${name}*\n\n*New Appointment Request*\n\n• *Name:* ${name}\n• *Email:* ${email}\n• *WhatsApp:* ${whatsapp}\n• *Time:* ${formattedDate}\n• *Details:* ${desc}\n\n*Ⓜ️ muminsultani.com*`;
             const encodedText = encodeURIComponent(text);
             
             const targetPhone = "905389480137";
