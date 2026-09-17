@@ -1042,6 +1042,8 @@
                 if(icon) icon.className = "fa-solid fa-sun";
                 const modalIcon = document.getElementById('modalThemeIcon');
                 if(modalIcon) modalIcon.className = "fa-solid fa-sun";
+                const contactModalIcon = document.getElementById('contactModalThemeIcon');
+                if(contactModalIcon) contactModalIcon.className = "fa-solid fa-sun";
             });
         }
     </script>
@@ -1217,7 +1219,7 @@
         </footer>
     </div>
 
-    <!-- GET IN TOUCH ÖZEL ALERT / MODAL PENCERESİ (Boyut ve Logo Küçültüldü) -->
+    <!-- GET IN TOUCH ÖZEL ALERT / MODAL PENCERESİ -->
     <div class="custom-alert-overlay" id="getInTouchModal">
         <div class="custom-alert-box" style="max-width: 360px; padding: 24px 20px; text-align: center;">
             <div style="display: flex; justify-content: center; margin-bottom: 8px;">
@@ -1232,13 +1234,67 @@
                 Get In Touch
             </div>
             <div style="display: flex; gap: 10px;">
-                <button class="custom-alert-btn" onclick="handleGetInTouchAction()" id="gitActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; padding: 10px 6px; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                <button class="custom-alert-btn" onclick="openDirectContactModal()" id="gitActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; padding: 10px 6px; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
                     <i class="fa-solid fa-paper-plane"></i> <span id="gitActionText">Get In Touch</span>
                 </button>
                 <button class="custom-alert-btn" onclick="closeGetInTouchModal()" id="gitBackBtn" style="background: #64748b; flex: 1; padding: 10px 6px; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
                     <i class="fa-solid fa-arrow-rotate-left"></i> <span id="gitBackText">Back</span>
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- BAĞIMSIZ YENİ İLETİŞİM PANELİ (GELİŞMİŞ İLETİŞİM FORMU) -->
+    <div class="modal-overlay" id="directContactModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                        <button class="modal-close-btn" onclick="closeDirectContactModal()" title="Back / Exit"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="modal-close-btn" onclick="resetContactForm()" title="Reset / Clear">
+                            <i class="fa-solid fa-rotate"></i>
+                        </button>
+                        <button class="modal-close-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                            <i class="fa-solid fa-moon" id="contactModalThemeIcon"></i>
+                        </button>
+                        <button class="modal-close-btn" onclick="goHomeFromContact()" title="Home">
+                            <i class="fa-solid fa-house"></i>
+                        </button>
+                    </div>
+                    <div class="modal-brand">muminsultani</div>
+                    <div class="modal-title" id="dc-title">Direct Contact</div>
+                </div>
+                <div class="modal-header-actions">
+                    <button class="modal-close-btn" onclick="closeDirectContactModal()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <form id="directContactForm">
+                <div class="form-group">
+                    <label class="form-label" id="dc-label-name">Name & Surname</label>
+                    <input type="text" class="form-input" id="contactClientName" required placeholder="Name & Surname">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="dc-label-email">Email Address</label>
+                    <input type="email" class="form-input" id="contactClientEmail" required placeholder="name@sample.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="dc-label-phone">Phone Number</label>
+                    <input type="tel" class="form-input" id="contactClientPhone" required placeholder="+ Country Code" oninput="formatPhoneInput(this)" onfocus="if(!this.value) this.value='+ ';">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="dc-label-desc">Message / Details</label>
+                    <textarea class="form-textarea" id="contactClientDesc" required placeholder="Write your message here..."></textarea>
+                </div>
+                
+                <div class="form-buttons-group">
+                    <button type="button" class="submit-btn email-btn" onclick="sendDirectToEmail(event)" id="dc-email-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc);">
+                        <i class="fa-solid fa-paper-plane"></i> Send Message
+                    </button>
+                    <button type="button" class="submit-btn whatsapp-btn" onclick="sendDirectToWhatsApp(event)" id="dc-whatsapp-btn">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> WhatsApp
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -1404,19 +1460,23 @@
             const savedTheme = localStorage.getItem('theme');
             const themeIcon = document.getElementById('themeIcon');
             const modalThemeIcon = document.getElementById('modalThemeIcon');
+            const contactModalThemeIcon = document.getElementById('contactModalThemeIcon');
             if (savedTheme === 'light') {
                 document.body.classList.add('light-mode');
                 if(themeIcon) themeIcon.className = "fa-solid fa-sun";
                 if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-sun";
+                if(contactModalThemeIcon) contactModalThemeIcon.className = "fa-solid fa-sun";
             } else {
                 document.body.classList.remove('light-mode');
                 if(themeIcon) themeIcon.className = "fa-solid fa-moon";
                 if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-moon";
+                if(contactModalThemeIcon) contactModalThemeIcon.className = "fa-solid fa-moon";
             }
         });
 
         const themeIcon = document.getElementById('themeIcon');
         const modalThemeIcon = document.getElementById('modalThemeIcon');
+        const contactModalThemeIcon = document.getElementById('contactModalThemeIcon');
         
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
@@ -1425,10 +1485,12 @@
             if (isLight) {
                 if(themeIcon) themeIcon.className = "fa-solid fa-sun";
                 if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-sun";
+                if(contactModalThemeIcon) contactModalThemeIcon.className = "fa-solid fa-sun";
                 localStorage.setItem('theme', 'light');
             } else {
                 if(themeIcon) themeIcon.className = "fa-solid fa-moon";
-                if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-moon";
+                if(modalThemeIcon) themeIcon.className = "fa-solid fa-moon";
+                if(contactModalThemeIcon) contactModalThemeIcon.className = "fa-solid fa-moon";
                 localStorage.setItem('theme', 'dark');
             }
         }
@@ -1448,6 +1510,14 @@
             });
         }
 
+        function goHomeFromContact() {
+            closeDirectContactModal();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
         function resetAppointmentForm() {
             document.getElementById('appointmentForm').reset();
             document.getElementById('clientPhone').value = "";
@@ -1460,6 +1530,11 @@
                 fileTextSpan.style.color = '#94a3b8';
                 document.getElementById('clientPhone').placeholder = modalTranslations[currentLang].phonePlaceholder;
             }
+        }
+
+        function resetContactForm() {
+            document.getElementById('directContactForm').reset();
+            document.getElementById('contactClientPhone').value = "";
         }
 
         function clearAndCloseModal() {
@@ -1698,9 +1773,13 @@
             document.getElementById('getInTouchModal').classList.remove('active');
         }
 
-        function handleGetInTouchAction() {
+        function openDirectContactModal() {
             closeGetInTouchModal();
-            openAppointmentModalWithEmail('contact@muminsultani.com');
+            document.getElementById('directContactModal').classList.add('active');
+        }
+
+        function closeDirectContactModal() {
+            document.getElementById('directContactModal').classList.remove('active');
         }
 
         let currentAlertText = "Please fill in all required fields.";
@@ -1808,6 +1887,59 @@
             document.getElementById('gitBackText').innerText = data.backText;
 
             document.getElementById('modalLangMenu').classList.remove('show');
+        }
+
+        function sendDirectToEmail(e) {
+            e.preventDefault();
+            const name = document.getElementById('contactClientName').value.trim();
+            const email = document.getElementById('contactClientEmail').value.trim();
+            const phone = document.getElementById('contactClientPhone').value.trim();
+            const desc = document.getElementById('contactClientDesc').value.trim();
+
+            if (!name || !email || !phone || !desc) {
+                showCustomAlert(currentAlertText);
+                return;
+            }
+
+            const recipient = "muminsultani@hotmail.com";
+            const subject = encodeURIComponent("Direct Contact Message - " + name);
+            const body = encodeURIComponent(
+                `*Name & Surname:* ${name}\n` +
+                `*Email:* ${email}\n` +
+                `*Phone:* ${phone}\n\n` +
+                `*Message:* \n${desc}\n\n` +
+                `muminsultani.com`
+            );
+
+            window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+            closeDirectContactModal();
+        }
+
+        function sendDirectToWhatsApp(e) {
+            e.preventDefault();
+            const name = document.getElementById('contactClientName').value.trim();
+            const email = document.getElementById('contactClientEmail').value.trim();
+            const phone = document.getElementById('contactClientPhone').value.trim();
+            const desc = document.getElementById('contactClientDesc').value.trim();
+
+            if (!name || !email || !phone || !desc) {
+                showCustomAlert(currentAlertText);
+                return;
+            }
+
+            const message = 
+                `*New Message from Contact Form*\n\n` +
+                `*• Name & Surname:* ${name}\n` +
+                `*• Email:* ${email}\n` +
+                `*• Phone:* ${phone}\n\n` +
+                `*• Message:* \n${desc}\n\n` +
+                `*muminsultani.com*`;
+
+            const whatsappNumber = "905389480137";
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappUrl, '_blank');
+            closeDirectContactModal();
         }
 
         function getBase64ImageFromURL(url, callback) {
