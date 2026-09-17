@@ -1236,8 +1236,8 @@
                     <input type="email" class="form-input" id="clientEmail" required placeholder="name@sample.com">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" id="m-label-phone">Phone Number</label>
-                    <input type="tel" class="form-input" id="clientPhone" required value="+ " oninput="formatPhoneInput(this)">
+                    <label class="form-label" id="m-label-phone">WhatsApp Number</label>
+                    <input type="tel" class="form-input" id="clientPhone" required placeholder="+90 538 000 00 00" oninput="formatPhoneInput(this)">
                 </div>
                 <div class="form-group">
                     <label class="form-label" id="m-label-file">Attach File (JPG, PNG, PDF, Video)</label>
@@ -1396,7 +1396,6 @@
 
         function resetAppointmentForm() {
             document.getElementById('appointmentForm').reset();
-            document.getElementById('clientPhone').value = '+ ';
             const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
             const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
             const currentLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
@@ -1545,7 +1544,8 @@
                 namePlaceholder: "Name & Surname",
                 emailLabel: "Email Address",
                 emailPlaceholder: "name@sample.com",
-                phoneLabel: "Phone Number",
+                phoneLabel: "WhatsApp Number",
+                phonePlaceholder: "+90 538 000 00 00",
                 fileLabel: "Attach File (JPG, PNG, PDF, Video)",
                 filePlaceholder: "Choose file or media...",
                 descLabel: "Description / Project Details",
@@ -1556,7 +1556,7 @@
                 waProjectRequest: "Project Request",
                 lblContactName: "Name & Surname",
                 lblEmail: "Email",
-                lblPhone: "Phone",
+                lblPhone: "WhatsApp",
                 lblFile: "File",
                 lblTime: "Time",
                 lblDetails: "Details",
@@ -1571,7 +1571,8 @@
                 namePlaceholder: "Ad Soyad",
                 emailLabel: "E-posta Adresi",
                 emailPlaceholder: "ornek@mail.com",
-                phoneLabel: "Telefon Numarası",
+                phoneLabel: "WhatsApp Numarası",
+                phonePlaceholder: "+90 538 000 00 00",
                 fileLabel: "Dosya Ekle (JPG, PNG, PDF, Video)",
                 filePlaceholder: "Dosya veya medya seçin...",
                 descLabel: "Açıklama / Proje Detayları",
@@ -1582,7 +1583,7 @@
                 waProjectRequest: "Proje Talebi",
                 lblContactName: "Ad Soyad",
                 lblEmail: "E-posta",
-                lblPhone: "Telefon",
+                lblPhone: "WhatsApp",
                 lblFile: "Dosya",
                 lblTime: "Zaman",
                 lblDetails: "Detaylar",
@@ -1597,7 +1598,8 @@
                 namePlaceholder: "Name & Nachname",
                 emailLabel: "E-Mail-Adresse",
                 emailPlaceholder: "name@beispiel.de",
-                phoneLabel: "Telefonnummer",
+                phoneLabel: "WhatsApp-Nummer",
+                phonePlaceholder: "+49 151 00000000",
                 fileLabel: "Datei anhängen (JPG, PNG, PDF, Video)",
                 filePlaceholder: "Datei oder Medien auswählen...",
                 descLabel: "Beschreibung / Projektdetails",
@@ -1608,7 +1610,7 @@
                 waProjectRequest: "Projektanfrage",
                 lblContactName: "Name & Nachname",
                 lblEmail: "E-Mail",
-                lblPhone: "Telefon",
+                lblPhone: "WhatsApp",
                 lblFile: "Datei",
                 lblTime: "Zeit",
                 lblDetails: "Details",
@@ -1624,7 +1626,6 @@
         function openGmailNoticeModal(email) {
             activeNoticeEmail = email;
             
-            // Aktif dili güvenli şekilde yakala (Modal dili veya Ana sayfa dili)
             const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
             const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
             const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
@@ -1688,6 +1689,7 @@
             document.getElementById('clientEmail').placeholder = data.emailPlaceholder;
 
             document.getElementById('m-label-phone').innerText = data.phoneLabel;
+            document.getElementById('clientPhone').placeholder = data.phonePlaceholder;
             
             document.getElementById('m-label-file').innerText = data.fileLabel;
             const fileInput = document.getElementById('clientFile');
@@ -1760,7 +1762,7 @@
                 const tableData = [
                     ["Name & Surname", name],
                     ["Email Address", email],
-                    ["Phone Number", phone],
+                    ["WhatsApp Number", phone],
                     ["Attached File", fileName],
                     ["Request Time", formattedDate],
                     ["Project Details", desc]
@@ -1815,7 +1817,7 @@
             const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
             const t = modalTranslations[currentModalLang] || modalTranslations.en;
 
-            if (!name || !email || phone === '+' || !desc) {
+            if (!name || !email || !phone || !desc) {
                 showCustomAlert(currentAlertText);
                 return false;
             }
