@@ -1345,7 +1345,7 @@
             </div>
             <form id="forgotPasswordForm" onsubmit="handleForgotPasswordSubmit(event)">
                 <p class="item-desc" id="fp-desc" style="margin-bottom: 16px; font-size: 0.88rem;">
-                    Enter your registered email address. We will send a recovery code / temporary password to your email and notify the administrator.
+                    Enter your registered email address. We will send a recovery code / temporary password to your email.
                 </p>
                 <div class="form-group">
                     <label class="form-label" id="fp-label-email">Email Address</label>
@@ -1811,9 +1811,10 @@
                 errorSignin: "Invalid email or password!",
                 authRequiredAlert: "You must sign in or register before sending messages via Email or WhatsApp!",
                 fpTitle: "Password Recovery",
-                fpDesc: "Enter your registered email address. We will send a recovery code / temporary password to your email and notify the administrator.",
+                fpDesc: "Enter your registered email address. We will send a recovery code / temporary password to your email.",
                 fpSubmitText: "Send Recovery Details",
-                fpSuccess: "Recovery email successfully simulated and sent to your address & administrator (muminsultani@hotmail.com)!"
+                fpSuccess: "Recovery email successfully sent to your registered address!",
+                fpNotFound: "This email address is not registered in the system!"
             },
             tr: {
                 code: "TR",
@@ -1853,9 +1854,10 @@
                 errorSignin: "Geçersiz e-posta veya şifre!",
                 authRequiredAlert: "E-posta veya WhatsApp üzerinden mesaj gönderebilmek için önce giriş yapmalı veya kayıt olmalısınız!",
                 fpTitle: "Şifre Sıfırlama / Kurtarma",
-                fpDesc: "Kayıtlı e-posta adresinizi girin. E-postanıza kurtarma kodu / şifre bilgisi gönderilecek ve yöneticinin (muminsultani@hotmail.com) posta kutusuna bir kopyası iletilecektir.",
+                fpDesc: "Kayıtlı e-posta adresinizi girin. Kurtarma kodunuz doğrudan sizin e-posta adresinize gönderilecektir.",
                 fpSubmitText: "Kurtarma Bilgisi Gönder",
-                fpSuccess: "Kurtarma e-postası başarıyla simüle edildi ve adresinize ile yöneticiye (muminsultani@hotmail.com) gönderildi!"
+                fpSuccess: "Kurtarma e-postası başarıyla kayıtlı adresinize gönderildi!",
+                fpNotFound: "Bu e-posta adresi sistemde kayıtlı değil!"
             },
             de: {
                 code: "DE",
@@ -1895,9 +1897,10 @@
                 errorSignin: "Ungültige E-Mail-Adresse oder Passwort!",
                 authRequiredAlert: "Sie müssen sich anmelden oder registrieren, bevor Sie Nachrichten per E-Mail oder WhatsApp senden können!",
                 fpTitle: "Passwort Wiederherstellung",
-                fpDesc: "Geben Sie Ihre registrierte E-Mail-Adresse ein. Wir senden Ihnen einen Wiederherstellungscode und eine Kopie an den Administrator (muminsultani@hotmail.com).",
+                fpDesc: "Geben Sie Ihre registrierte E-Mail-Adresse ein. Wir senden Ihnen einen Wiederherstellungscode direkt an Ihre E-Mail.",
                 fpSubmitText: "Wiederherstellung senden",
-                fpSuccess: "Wiederherstellungs-E-Mail erfolgreich gesendet an Ihre Adresse & Administrator (muminsultani@hotmail.com)!"
+                fpSuccess: "Wiederherstellungs-E-Mail erfolgreich an Ihre Adresse gesendet!",
+                fpNotFound: "Diese E-Mail-Adresse ist nicht im System registriert!"
             }
         };
 
@@ -1976,28 +1979,33 @@
                 return;
             }
 
-            // Simüle edilen e-posta gönderimi ve yöneticiye (muminsultani@hotmail.com) bildirim maili oluşturma
+            let users = JSON.parse(localStorage.getItem('site_users') || '[]');
+            const user = users.find(u => u.email === email);
+
+            if (!user && email !== "admin@muminsultani.com") {
+                showCustomAlert(t.fpNotFound);
+                return;
+            }
+
+            // Şifre kurtarma kodu oluşturma
             const recoveryCode = Math.floor(100000 + Math.random() * 900000);
             
-            // Mailto tetikleme veya konsola kaydetme simülasyonu
-            const adminEmail = "muminsultani@hotmail.com";
-            const subject = encodeURIComponent("Password Recovery Request - muminsultani.com");
+            const subject = encodeURIComponent("Password Recovery Code - muminsultani.com");
             const body = encodeURIComponent(
-                `Password recovery requested for account: ${email}\n` +
-                `Generated Recovery Code / Temp Password: ${recoveryCode}\n\n` +
-                `This copy has been sent to admin: ${adminEmail}\n` +
+                `Hello,\n\n` +
+                `You requested a password recovery for your account (${email}).\n` +
+                `Your Recovery Code / Temporary Password: ${recoveryCode}\n\n` +
                 `muminsultani.com`
             );
 
-            // Arka planda kullanıcıya ve admin adresine bilgi mesajı
             closeForgotPasswordModal();
             showCustomAlert(t.fpSuccess);
 
-            // İsteğe bağlı mailto client tetiklemesi
+            // Kodun doğrudan kullanıcının kendi mail adresine gönderilmesi için mailto bağlantısı tetiklenir
             setTimeout(() => {
-                const mailtoUrl = `mailto:${email},${adminEmail}?subject=${subject}&body=${body}`;
-                // window.location.href = mailtoUrl;
-            }, 1000);
+                const mailtoUrl = `mailto:${email}?subject=${subject}&body=${body}`;
+                window.location.href = mailtoUrl;
+            }, 800);
         }
 
         let activeNoticeEmail = "muminsultani@hotmail.com";
