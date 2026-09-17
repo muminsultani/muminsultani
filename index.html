@@ -568,7 +568,7 @@
             align-items: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease;
             padding: 16px;
             pointer-events: none;
         }
@@ -577,6 +577,12 @@
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
+        }
+
+        .modal-overlay.light-blue-bg {
+            background: rgba(135, 206, 250, 0.25) !important;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
         }
 
         .modal-container {
@@ -1194,10 +1200,12 @@
                         <button class="modal-close-btn" onclick="goHome()" title="Home">
                             <i class="fa-solid fa-house"></i>
                         </button>
+                        <!-- ÖNCE GMAIL LOGOSU -->
                         <button class="modal-close-btn" onclick="openGmailNoticeModal('muminsultani@hotmail.com')" title="Gmail">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 0.9rem; height: 0.9rem; display: block; filter: grayscale(30%) opacity(0.85);">
                         </button>
                     </div>
+                    <!-- SONRA MUMINSULTANI LOGOSU -->
                     <div class="modal-brand">muminsultani</div>
                     <div class="modal-title" id="m-title">Let's talk</div>
                 </div>
@@ -1258,12 +1266,19 @@
 
     <!-- Gmail Bilgilendirme Özel Uyarı Kutusu -->
     <div class="custom-alert-overlay" id="gmailNoticeModal">
-        <div class="custom-alert-box" style="max-width: 420px;">
-            <div class="custom-alert-icon" style="color: #9333ea;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 2.2rem; height: 2.2rem; display: inline-block;">
+        <div class="custom-alert-box" style="max-width: 420px; text-align: center;">
+            <div style="display: flex; justify-content: center; margin-bottom: 12px;">
+                <!-- ÖNCE GMAIL LOGOSU -->
+                <div class="custom-alert-icon" style="color: #9333ea; margin-bottom: 0; display: inline-flex; align-items: center;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 2.2rem; height: 2.2rem; display: inline-block;">
+                </div>
+            </div>
+            <!-- SONRA MUMINSULTANI LOGOSU -->
+            <div style="display: flex; justify-content: center; margin-bottom: 8px;">
+                <div class="footer-brand" style="font-size: 1.8rem; line-height: 1;">muminsultani</div>
             </div>
             <div class="custom-alert-message" id="gmailNoticeMessage" style="font-size: 0.95rem; margin-bottom: 24px;">
-                <strong>muminsultani</strong> Personal Email Address
+                Personal Email Address
             </div>
             <div style="display: flex; gap: 10px;">
                 <button class="custom-alert-btn" onclick="confirmOpenGmail()" id="gmailNoticeActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;">
@@ -1434,8 +1449,8 @@
                 textSpan.innerText = input.files[0].name;
                 textSpan.style.color = 'var(--text-primary)';
             } else {
-                const currentLang = document.getElementById('modalCurrentLangText').innerText;
-                textSpan.innerText = modalTranslations[currentLang.toLowerCase()].filePlaceholder;
+                const currentLang = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+                textSpan.innerText = modalTranslations[currentLang].filePlaceholder;
                 textSpan.style.color = '#94a3b8';
             }
         }
@@ -1513,6 +1528,8 @@
             document.getElementById('t-contact-main').innerText = data.contactMain;
             document.getElementById('t-scan-text').innerText = data.scanText;
 
+            changeModalLanguage(lang);
+
             document.getElementById('langMenu').classList.remove('show');
         }
 
@@ -1540,7 +1557,7 @@
                 lblTime: "Time",
                 lblDetails: "Details",
                 noFile: "No file attached",
-                gmailNoticeText: "<strong>muminsultani</strong> Personal Email Address",
+                gmailNoticeText: "Personal Email Address",
                 backText: "Back"
             },
             tr: {
@@ -1566,7 +1583,7 @@
                 lblTime: "Zaman",
                 lblDetails: "Detaylar",
                 noFile: "Dosya eklenmedi",
-                gmailNoticeText: "<strong>muminsultani</strong> Kişisel E-posta Adresi",
+                gmailNoticeText: "Kişisel E-posta Adresi",
                 backText: "Geri Dön"
             },
             de: {
@@ -1592,7 +1609,7 @@
                 lblTime: "Zeit",
                 lblDetails: "Details",
                 noFile: "Keine Datei anhängen",
-                gmailNoticeText: "<strong>muminsultani</strong> Persönliche E-Mail-Adresse",
+                gmailNoticeText: "Persönliche E-Mail-Adresse",
                 backText: "Zurück"
             }
         };
@@ -1605,13 +1622,19 @@
             const currentModalLang = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
             const t = modalTranslations[currentModalLang] || modalTranslations.en;
             
-            document.getElementById('gmailNoticeMessage').innerHTML = t.gmailNoticeText;
+            document.getElementById('gmailNoticeMessage').innerText = t.gmailNoticeText;
             document.getElementById('gmailNoticeBackText').innerText = t.backText;
             document.getElementById('gmailNoticeModal').classList.add('active');
+            
+            const appointmentModal = document.getElementById('appointmentModal');
+            if (appointmentModal.classList.contains('active')) {
+                appointmentModal.classList.add('light-blue-bg');
+            }
         }
 
         function closeGmailNoticeModal() {
             document.getElementById('gmailNoticeModal').classList.remove('active');
+            document.getElementById('appointmentModal').classList.remove('light-blue-bg');
         }
 
         function confirmOpenGmail() {
@@ -1625,7 +1648,9 @@
         }
 
         function closeAppointmentModal() {
-            document.getElementById('appointmentModal').classList.remove('active');
+            const appointmentModal = document.getElementById('appointmentModal');
+            appointmentModal.classList.remove('active');
+            appointmentModal.classList.remove('light-blue-bg');
         }
 
         function showCustomAlert(message) {
@@ -1668,7 +1693,7 @@
 
             const noticeMsg = document.getElementById('gmailNoticeMessage');
             if (noticeMsg) {
-                noticeMsg.innerHTML = data.gmailNoticeText;
+                noticeMsg.innerText = data.gmailNoticeText;
             }
             const backTxt = document.getElementById('gmailNoticeBackText');
             if (backTxt) {
