@@ -1094,7 +1094,6 @@
                         <div class="lang-menu" id="langMenu">
                             <button class="lang-option" onclick="changeLanguage('en')">English</button>
                             <button class="lang-option" onclick="changeLanguage('tr')">Türkçe</button>
-                            <button class="lang-option" onclick="changeLanguage('de')">Deutsch</button>
                         </div>
                     </div>
                 </div>
@@ -1136,12 +1135,12 @@
             </div>
         </header>
 
-        <!-- KULLANICI PROFİL / BİLGİ PANELİ (Giriş Yapılınca Görünür ve Şifre Değiştirme Özelliği Eklenmiştir) -->
+        <!-- KULLANICI PROFİL / BİLGİ PANELİ -->
         <section id="userProfileSection" style="display: none;">
             <div class="section-title">
                 <i class="fa-solid fa-user-gear"></i> <span id="t-profile-title">User Profile & Session</span>
             </div>
-            <div class="contact-box" style="cursor: default; flex-direction: column; align-items: flex-start;">
+            <div class="contact-box" style="cursor: default;">
                 <div class="contact-text" style="width: 100%;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <strong id="profileDisplayName" style="font-size: 1.15rem; color: #9333ea;">Name Surname</strong>
@@ -1154,27 +1153,6 @@
                             <span style="font-size: 0.72rem; color: var(--text-secondary);" id="t-prof-email">Email Address</span>
                             <strong id="profileDisplayEmail" style="font-size: 0.9rem;">email@sample.com</strong>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Şifre Değiştirme Alanı -->
-                <div style="width: 100%; margin-top: 16px; border-top: 1px solid var(--line-color); padding-top: 14px;">
-                    <button type="button" onclick="togglePasswordChangeForm()" style="background: rgba(147, 51, 234, 0.1); border: 1px solid rgba(147, 51, 234, 0.3); color: #9333ea; padding: 6px 12px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-key"></i> <span id="t-change-pwd-toggle">Change Password</span>
-                    </button>
-
-                    <div id="passwordChangeContainer" style="display: none; margin-top: 12px; width: 100%;">
-                        <div class="form-group" style="margin-bottom: 10px;">
-                            <label class="form-label" id="t-label-old-pwd" style="font-size: 0.78rem;">Current Password</label>
-                            <input type="password" class="form-input" id="oldPasswordInput" placeholder="••••••••" style="padding: 8px 12px; font-size: 0.85rem;">
-                        </div>
-                        <div class="form-group" style="margin-bottom: 10px;">
-                            <label class="form-label" id="t-label-new-pwd" style="font-size: 0.78rem;">New Password</label>
-                            <input type="password" class="form-input" id="newPasswordInput" placeholder="••••••••" style="padding: 8px 12px; font-size: 0.85rem;">
-                        </div>
-                        <button type="button" onclick="submitPasswordChange()" class="submit-btn email-btn" style="padding: 8px 12px; font-size: 0.78rem; width: auto;">
-                            <i class="fa-solid fa-check"></i> <span id="t-save-pwd-btn">Update Password</span>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -1272,7 +1250,7 @@
         </footer>
     </div>
 
-    <!-- GET IN TOUCH ÖZEL ALERT / MODAL PENCERESİ -->
+    <!-- GET IN TOUCH MODAL -->
     <div class="custom-alert-overlay" id="getInTouchModal">
         <div class="custom-alert-box" style="max-width: 360px; padding: 24px 20px; text-align: center;">
             <div style="display: flex; justify-content: center; margin-bottom: 8px;">
@@ -1297,7 +1275,7 @@
         </div>
     </div>
 
-    <!-- YENİ HESAP / GİRİŞ PANELİ (SIGN IN / SIGN UP) -->
+    <!-- HESAP / GİRİŞ PANELİ -->
     <div class="modal-overlay" id="directContactModal">
         <div class="modal-container">
             <div class="modal-header">
@@ -1326,14 +1304,12 @@
                         <div class="lang-menu" id="contactModalLangMenu">
                             <button class="lang-option" onclick="changeModalLanguage('en')">English</button>
                             <button class="lang-option" onclick="changeModalLanguage('tr')">Türkçe</button>
-                            <button class="lang-option" onclick="changeModalLanguage('de')">Deutsch</button>
                         </div>
                     </div>
                     <button class="modal-close-btn" onclick="closeDirectContactModal()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
 
-            <!-- Giriş / Kayıt Sekmeleri -->
             <div class="auth-tabs">
                 <button type="button" class="auth-tab-btn active" id="tabSigninBtn" onclick="switchAuthTab('signin')">Sign In</button>
                 <button type="button" class="auth-tab-btn" id="tabSignupBtn" onclick="switchAuthTab('signup')">Sign Up</button>
@@ -1409,7 +1385,7 @@
         </div>
     </div>
 
-    <!-- Randevu / Proje Formu Paneli (Modal) -->
+    <!-- RANDEVU / PROJE FORMU -->
     <div class="modal-overlay" id="appointmentModal">
         <div class="modal-container">
             <div class="modal-header">
@@ -1442,7 +1418,6 @@
                         <div class="lang-menu" id="modalLangMenu">
                             <button class="lang-option" onclick="changeModalLanguage('en')">English</button>
                             <button class="lang-option" onclick="changeModalLanguage('tr')">Türkçe</button>
-                            <button class="lang-option" onclick="changeModalLanguage('de')">Deutsch</button>
                         </div>
                     </div>
                     <button class="modal-close-btn" onclick="clearAndCloseModal()"><i class="fa-solid fa-xmark"></i></button>
@@ -1483,7 +1458,7 @@
         </div>
     </div>
 
-    <!-- Gmail Bilgilendirme Özel Uyarı Kutusu -->
+    <!-- GMAIL BİLGİLENDİRME MODALI -->
     <div class="custom-alert-overlay" id="gmailNoticeModal">
         <div class="custom-alert-box" style="max-width: 420px; text-align: center;">
             <div style="display: flex; justify-content: center; margin-bottom: 12px;">
@@ -1508,7 +1483,7 @@
         </div>
     </div>
 
-    <!-- Özel Uyarı Kutusu -->
+    <!-- ÖZEL UYARI KUTUSU -->
     <div class="custom-alert-overlay" id="customAlertModal">
         <div class="custom-alert-box">
             <div class="custom-alert-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
@@ -1733,11 +1708,7 @@
                 profileTitle: "User Profile & Session",
                 logoutBtn: "Log Out",
                 profEmail: "Email Address",
-                forgotLink: "Forgot Password?",
-                changePwdToggle: "Change Password",
-                oldPwdLabel: "Current Password",
-                newPwdLabel: "New Password",
-                savePwdBtn: "Update Password"
+                forgotLink: "Forgot Password?"
             },
             tr: {
                 code: "TR",
@@ -1758,36 +1729,7 @@
                 profileTitle: "Kullanıcı Profili & Oturum",
                 logoutBtn: "Çıkış Yap",
                 profEmail: "E-posta Adresi",
-                forgotLink: "Şifremi Unuttum?",
-                changePwdToggle: "Şifre Değiştir",
-                oldPwdLabel: "Mevcut Şifre",
-                newPwdLabel: "Yeni Şifre",
-                savePwdBtn: "Şifreyi Güncelle"
-            },
-            de: {
-                code: "DE",
-                role: "Softwareentwickler",
-                projectsTitle: "Ausgewählte Projekte",
-                proj1Desc: "Eine leistungsstarke Backend-Architektur, entwickelt mit Django und modernen Microservices.",
-                proj2Desc: "Schnelles Workflow-Automatisierungstool für Entwicklerproduktivität.",
-                expTitle: "Berufserfahrung",
-                jobTitle: "Remote Softwareentwickler",
-                jobDesc: "Entwicklung skalierbarer Backend-Dienste, REST-APIs und mobiler Web-Lösungen mit Python und Node.js.",
-                setupTitle: "Setup & Umgebung",
-                osLabel: "Betriebssystem", editorLabel: "Editor-Stack",
-                stackTitle: "Kern-Stack", backendLabel: "Backend", frontendLabel: "Frontend",
-                contactTitle: "Anmelden / Registrieren", contactSub: "Anmelden / Registrieren", contactMain: "Jetzt anmelden",
-                scanText: "SCANNEN ZUM VERBINDEN",
-                gitText: "Konto",
-                backText: "Zurück",
-                profileTitle: "Benutzerprofil & Sitzung",
-                logoutBtn: "Abmelden",
-                profEmail: "E-Mail-Adresse",
-                forgotLink: "Passwort vergessen?",
-                changePwdToggle: "Passwort ändern",
-                oldPwdLabel: "Aktuelles Passwort",
-                newPwdLabel: "Neues Passwort",
-                savePwdBtn: "Passwort aktualisieren"
+                forgotLink: "Şifremi Unuttum?"
             }
         };
 
@@ -1824,13 +1766,9 @@
             if(document.getElementById('t-profile-title')) document.getElementById('t-profile-title').innerText = data.profileTitle;
             if(document.getElementById('t-logout-btn')) document.getElementById('t-logout-btn').innerText = data.logoutBtn;
             if(document.getElementById('t-prof-email')) document.getElementById('t-prof-email').innerText = data.profEmail;
-            
-            if(document.getElementById('t-change-pwd-toggle')) document.getElementById('t-change-pwd-toggle').innerText = data.changePwdToggle;
-            if(document.getElementById('t-label-old-pwd')) document.getElementById('t-label-old-pwd').innerText = data.oldPwdLabel;
-            if(document.getElementById('t-label-new-pwd')) document.getElementById('t-label-new-pwd').innerText = data.newPwdLabel;
-            if(document.getElementById('t-save-pwd-btn')) document.getElementById('t-save-pwd-btn').innerText = data.savePwdBtn;
 
             changeModalLanguage(lang);
+
             document.getElementById('langMenu').classList.remove('show');
         }
 
@@ -1916,47 +1854,6 @@
                 fpDesc: "Kayıtlı e-posta adresinizi girin. E-postanıza kurtarma kodu / şifre bilgisi gönderilecek ve yöneticinin (muminsultani@hotmail.com) posta kutusuna bir kopyası iletilecektir.",
                 fpSubmitText: "Kurtarma Bilgisi Gönder",
                 fpSuccess: "Kurtarma e-postası başarıyla simüle edildi ve adresinize ile yöneticiye (muminsultani@hotmail.com) gönderildi!"
-            },
-            de: {
-                code: "DE",
-                title: "Lass uns sprechen",
-                contactHeaderTitle: "Konto-Zugang",
-                nameLabel: "Name & Nachname",
-                namePlaceholder: "Name & Nachname",
-                usernameLabel: "Benutzername",
-                usernamePlaceholder: "@Benutzername",
-                emailLabel: "E-Mail-Adresse",
-                emailPlaceholder: "name@beispiel.de",
-                passwordLabel: "Passwort",
-                passwordPlaceholder: "••••••••",
-                fileLabel: "Datei anhängen (JPG, PNG, PDF, Video)",
-                filePlaceholder: "Datei oder Medien auswählen...",
-                descLabel: "Beschreibung / Projektdetails",
-                descPlaceholder: "Erzählen Sie von Ihrem Projekt...",
-                emailBtn: "E-Mail",
-                whatsappBtn: "WhatsApp",
-                signinBtn: "Anmelden",
-                signupBtn: "Registrieren",
-                alertText: "Bitte füllen Sie alle Pflichtfelder aus.",
-                waProjectRequest: "Projektanfrage",
-                lblContactName: "Name & Nachname",
-                lblEmail: "E-Mail",
-                lblFile: "Datei",
-                lblTime: "Zeit",
-                lblDetails: "Details",
-                noFile: "Keine Datei anhängen",
-                gmailNoticeText: "Persönliche E-Mail-Adresse",
-                backText: "Zurück",
-                contactTitle: "Anmelden / Registrieren",
-                gitText: "Konto",
-                successSignup: "Konto erfolgreich erstellt! Sie können sich jetzt anmelden.",
-                successSignin: "Erfolgreich angemeldet!",
-                errorSignin: "Ungültige E-Mail-Adresse oder Passwort!",
-                authRequiredAlert: "Sie müssen sich anmelden oder registrieren, bevor Sie Nachrichten per E-Mail oder WhatsApp senden können!",
-                fpTitle: "Passwort Wiederherstellung",
-                fpDesc: "Geben Sie Ihre registrierte E-Mail-Adresse ein. Wir senden Ihnen einen Wiederherstellungscode und eine Kopie an den Administrator (muminsultani@hotmail.com).",
-                fpSubmitText: "Wiederherstellung senden",
-                fpSuccess: "Wiederherstellungs-E-Mail erfolgreich gesendet an Ihre Adresse & Administrator (muminsultani@hotmail.com)!"
             }
         };
 
@@ -2230,6 +2127,7 @@
                 const newUser = { name, username, email, password };
                 users.push(newUser);
                 localStorage.setItem('site_users', JSON.stringify(users));
+                
                 localStorage.setItem('logged_user', JSON.stringify(newUser));
                 
                 showCustomAlert(t.successSignup);
@@ -2238,7 +2136,7 @@
             } else {
                 let user = users.find(u => u.email === email && u.password === password);
                 if (!user && email === "admin@muminsultani.com" && password === "admin123") {
-                    user = { name: "Admin User", username: "@Admin", email: "admin@muminsultani.com", password: "admin123" };
+                    user = { name: "Admin User", username: "@Admin", email: "admin@muminsultani.com" };
                 }
 
                 if (user) {
@@ -2278,72 +2176,6 @@
                 if (contactSubEl) contactSubEl.innerText = "Sign In / Sign Up";
                 if (contactMainEl) contactMainEl.innerText = "Bize Katılmak İçin Giriş Yapın";
                 if (authBoxIcon) authBoxIcon.className = "fa-solid fa-right-to-bracket";
-                
-                // Oturum kapalıysa şifre değiştirme alanını da sıfırla/gizle
-                const pwdContainer = document.getElementById('passwordChangeContainer');
-                if(pwdContainer) pwdContainer.style.display = 'none';
-            }
-        }
-
-        function togglePasswordChangeForm() {
-            const container = document.getElementById('passwordChangeContainer');
-            if (container) {
-                container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
-            }
-        }
-
-        function submitPasswordChange() {
-            const oldPwd = document.getElementById('oldPasswordInput').value.trim();
-            const newPwd = document.getElementById('newPasswordInput').value.trim();
-
-            if (!oldPwd || !newPwd) {
-                showCustomAlert("Please fill in both old and new password fields.");
-                return;
-            }
-
-            const loggedUserStr = localStorage.getItem('logged_user');
-            if (!loggedUserStr) {
-                showCustomAlert("No active session found.");
-                return;
-            }
-
-            let loggedUser = JSON.parse(loggedUserStr);
-            let users = JSON.parse(localStorage.getItem('site_users') || '[]');
-
-            // Eğer sabit admin hesabıysa veya kullanıcı kayıtlarındaysa kontrol et
-            if (loggedUser.email === "admin@muminsultani.com") {
-                if (oldPwd !== "admin123" && loggedUser.password && oldPwd !== loggedUser.password) {
-                    showCustomAlert("Current password is incorrect!");
-                    return;
-                }
-                loggedUser.password = newPwd;
-                localStorage.setItem('logged_user', JSON.stringify(loggedUser));
-                showCustomAlert("Password updated successfully!");
-                document.getElementById('oldPasswordInput').value = "";
-                document.getElementById('newPasswordInput').value = "";
-                togglePasswordChangeForm();
-                return;
-            }
-
-            // Normal kullanıcılar için array içinde bul ve güncelle
-            const userIndex = users.findIndex(u => u.email === loggedUser.email);
-            if (userIndex !== -1) {
-                if (users[userIndex].password !== oldPwd) {
-                    showCustomAlert("Current password is incorrect!");
-                    return;
-                }
-                users[userIndex].password = newPwd;
-                loggedUser.password = newPwd;
-                
-                localStorage.setItem('site_users', JSON.stringify(users));
-                localStorage.setItem('logged_user', JSON.stringify(loggedUser));
-
-                showCustomAlert("Password updated successfully!");
-                document.getElementById('oldPasswordInput').value = "";
-                document.getElementById('newPasswordInput').value = "";
-                togglePasswordChangeForm();
-            } else {
-                showCustomAlert("User record not found.");
             }
         }
 
