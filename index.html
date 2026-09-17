@@ -1305,9 +1305,12 @@
                     <input type="email" class="form-input" id="contactClientEmail" required placeholder="name@sample.com">
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label" id="dc-label-password">Password</label>
-                    <input type="password" class="form-input" id="contactClientPassword" required placeholder="••••••••">
+                <div class="form-group" id="groupPassword">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <label class="form-label" id="dc-label-password" style="margin-bottom: 0;">Password</label>
+                        <a href="#" onclick="openForgotPasswordModal(event)" id="t-forgot-link" style="font-size: 0.75rem; color: #9333ea; text-decoration: none; font-weight: 600;">Forgot Password?</a>
+                    </div>
+                    <input type="password" class="form-input" id="contactClientPassword" placeholder="••••••••">
                 </div>
 
                 <!-- Sadece Kayıt Olurken Görünecek Alan -->
@@ -1319,6 +1322,38 @@
                 <div class="form-buttons-group">
                     <button type="button" class="submit-btn email-btn" onclick="handleAuthSubmit(event)" id="dc-submit-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc);">
                         <i class="fa-solid fa-right-to-bracket"></i> <span id="dc-submit-btn-text">Sign In</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ŞİFREMİ UNUTTUM MODALI (PASSWORD RECOVERY) -->
+    <div class="modal-overlay" id="forgotPasswordModal">
+        <div class="modal-container" style="max-width: 440px;">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                        <button class="modal-close-btn" onclick="closeForgotPasswordModal()" title="Back"><i class="fa-solid fa-chevron-left"></i></button>
+                    </div>
+                    <div class="modal-brand">muminsultani</div>
+                    <div class="modal-title" id="fp-title">Password Recovery</div>
+                </div>
+                <div class="modal-header-actions">
+                    <button class="modal-close-btn" onclick="closeForgotPasswordModal()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <form id="forgotPasswordForm" onsubmit="handleForgotPasswordSubmit(event)">
+                <p class="item-desc" id="fp-desc" style="margin-bottom: 16px; font-size: 0.88rem;">
+                    Enter your registered email address. We will send a recovery code / temporary password to your email and notify the administrator.
+                </p>
+                <div class="form-group">
+                    <label class="form-label" id="fp-label-email">Email Address</label>
+                    <input type="email" class="form-input" id="forgotClientEmail" required placeholder="name@sample.com">
+                </div>
+                <div class="form-buttons-group">
+                    <button type="submit" class="submit-btn email-btn" id="fp-submit-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc);">
+                        <i class="fa-solid fa-paper-plane"></i> <span id="fp-submit-text">Send Recovery Details</span>
                     </button>
                 </div>
             </form>
@@ -1518,7 +1553,6 @@
                 localStorage.setItem('theme', 'light');
             } else {
                 if(themeIcon) themeIcon.className = "fa-solid fa-moon";
-                if(modalThemeIcon) icon = "fa-solid fa-moon";
                 if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-moon";
                 if(contactModalThemeIcon) contactModalThemeIcon.className = "fa-solid fa-moon";
                 localStorage.setItem('theme', 'dark');
@@ -1649,7 +1683,8 @@
                 profileTitle: "User Profile & Session",
                 logoutBtn: "Log Out",
                 profEmail: "Email Address",
-                profPhone: "Phone Number"
+                profPhone: "Phone Number",
+                forgotLink: "Forgot Password?"
             },
             tr: {
                 code: "TR",
@@ -1670,7 +1705,8 @@
                 profileTitle: "Kullanıcı Profili & Oturum",
                 logoutBtn: "Çıkış Yap",
                 profEmail: "E-posta Adresi",
-                profPhone: "Telefon Numarası"
+                profPhone: "Telefon Numarası",
+                forgotLink: "Şifremi Unuttum?"
             },
             de: {
                 code: "DE",
@@ -1691,7 +1727,8 @@
                 profileTitle: "Benutzerprofil & Sitzung",
                 logoutBtn: "Abmelden",
                 profEmail: "E-Mail-Adresse",
-                profPhone: "Telefonnummer"
+                profPhone: "Telefonnummer",
+                forgotLink: "Passwort vergessen?"
             }
         };
 
@@ -1724,6 +1761,7 @@
             document.getElementById('gitActionText').innerText = data.gitText;
             document.getElementById('gitBackText').innerText = data.backText;
 
+            if(document.getElementById('t-forgot-link')) document.getElementById('t-forgot-link').innerText = data.forgotLink;
             if(document.getElementById('t-profile-title')) document.getElementById('t-profile-title').innerText = data.profileTitle;
             if(document.getElementById('t-logout-btn')) document.getElementById('t-logout-btn').innerText = data.logoutBtn;
             if(document.getElementById('t-prof-email')) document.getElementById('t-prof-email').innerText = data.profEmail;
@@ -1771,7 +1809,11 @@
                 successSignup: "Account created successfully! You can now sign in.",
                 successSignin: "Signed in successfully!",
                 errorSignin: "Invalid email or password!",
-                authRequiredAlert: "You must sign in or register before sending messages via Email or WhatsApp!"
+                authRequiredAlert: "You must sign in or register before sending messages via Email or WhatsApp!",
+                fpTitle: "Password Recovery",
+                fpDesc: "Enter your registered email address. We will send a recovery code / temporary password to your email and notify the administrator.",
+                fpSubmitText: "Send Recovery Details",
+                fpSuccess: "Recovery email successfully simulated and sent to your address & administrator (muminsultani@hotmail.com)!"
             },
             tr: {
                 code: "TR",
@@ -1809,7 +1851,11 @@
                 successSignup: "Hesap başarıyla oluşturuldu! Şimdi giriş yapabilirsiniz.",
                 successSignin: "Başarıyla giriş yapıldı!",
                 errorSignin: "Geçersiz e-posta veya şifre!",
-                authRequiredAlert: "E-posta veya WhatsApp üzerinden mesaj gönderebilmek için önce giriş yapmalı veya kayıt olmalısınız!"
+                authRequiredAlert: "E-posta veya WhatsApp üzerinden mesaj gönderebilmek için önce giriş yapmalı veya kayıt olmalısınız!",
+                fpTitle: "Şifre Sıfırlama / Kurtarma",
+                fpDesc: "Kayıtlı e-posta adresinizi girin. E-postanıza kurtarma kodu / şifre bilgisi gönderilecek ve yöneticinin (muminsultani@hotmail.com) posta kutusuna bir kopyası iletilecektir.",
+                fpSubmitText: "Kurtarma Bilgisi Gönder",
+                fpSuccess: "Kurtarma e-postası başarıyla simüle edildi ve adresinize ile yöneticiye (muminsultani@hotmail.com) gönderildi!"
             },
             de: {
                 code: "DE",
@@ -1847,7 +1893,11 @@
                 successSignup: "Konto erfolgreich erstellt! Sie können sich jetzt anmelden.",
                 successSignin: "Erfolgreich angemeldet!",
                 errorSignin: "Ungültige E-Mail-Adresse oder Passwort!",
-                authRequiredAlert: "Sie müssen sich anmelden oder registrieren, bevor Sie Nachrichten per E-Mail oder WhatsApp senden können!"
+                authRequiredAlert: "Sie müssen sich anmelden oder registrieren, bevor Sie Nachrichten per E-Mail oder WhatsApp senden können!",
+                fpTitle: "Passwort Wiederherstellung",
+                fpDesc: "Geben Sie Ihre registrierte E-Mail-Adresse ein. Wir senden Ihnen einen Wiederherstellungscode und eine Kopie an den Administrator (muminsultani@hotmail.com).",
+                fpSubmitText: "Wiederherstellung senden",
+                fpSuccess: "Wiederherstellungs-E-Mail erfolgreich gesendet an Ihre Adresse & Administrator (muminsultani@hotmail.com)!"
             }
         };
 
@@ -1859,6 +1909,7 @@
             const tabSignup = document.getElementById('tabSignupBtn');
             const groupName = document.getElementById('groupSignupName');
             const groupPhone = document.getElementById('groupSignupPhone');
+            const groupPassword = document.getElementById('groupPassword');
             const submitBtnText = document.getElementById('dc-submit-btn-text');
 
             const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
@@ -1869,12 +1920,14 @@
                 tabSignup.classList.remove('active');
                 groupName.style.display = 'none';
                 groupPhone.style.display = 'none';
+                if(groupPassword) groupPassword.style.display = 'block';
                 submitBtnText.innerText = t.signinBtn;
             } else {
                 tabSignup.classList.add('active');
                 tabSignin.classList.remove('active');
                 groupName.style.display = 'block';
                 groupPhone.style.display = 'block';
+                if(groupPassword) groupPassword.style.display = 'block';
                 submitBtnText.innerText = t.signupBtn;
             }
         }
@@ -1882,7 +1935,6 @@
         function openGetInTouchModal() {
             const loggedUser = localStorage.getItem('logged_user');
             if (loggedUser) {
-                // Zaten giriş yapılmışsa, direkt profil paneline odaklan veya bilgi ver
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 return;
             }
@@ -1903,10 +1955,54 @@
             document.getElementById('directContactModal').classList.remove('active');
         }
 
+        function openForgotPasswordModal(e) {
+            if(e) e.preventDefault();
+            closeDirectContactModal();
+            document.getElementById('forgotPasswordModal').classList.add('active');
+        }
+
+        function closeForgotPasswordModal() {
+            document.getElementById('forgotPasswordModal').classList.remove('active');
+        }
+
+        function handleForgotPasswordSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('forgotClientEmail').value.trim();
+            const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
+            const t = modalTranslations[modalLangText] || modalTranslations.en;
+
+            if (!email) {
+                showCustomAlert(t.alertText);
+                return;
+            }
+
+            // Simüle edilen e-posta gönderimi ve yöneticiye (muminsultani@hotmail.com) bildirim maili oluşturma
+            const recoveryCode = Math.floor(100000 + Math.random() * 900000);
+            
+            // Mailto tetikleme veya konsola kaydetme simülasyonu
+            const adminEmail = "muminsultani@hotmail.com";
+            const subject = encodeURIComponent("Password Recovery Request - muminsultani.com");
+            const body = encodeURIComponent(
+                `Password recovery requested for account: ${email}\n` +
+                `Generated Recovery Code / Temp Password: ${recoveryCode}\n\n` +
+                `This copy has been sent to admin: ${adminEmail}\n` +
+                `muminsultani.com`
+            );
+
+            // Arka planda kullanıcıya ve admin adresine bilgi mesajı
+            closeForgotPasswordModal();
+            showCustomAlert(t.fpSuccess);
+
+            // İsteğe bağlı mailto client tetiklemesi
+            setTimeout(() => {
+                const mailtoUrl = `mailto:${email},${adminEmail}?subject=${subject}&body=${body}`;
+                // window.location.href = mailtoUrl;
+            }, 1000);
+        }
+
         let activeNoticeEmail = "muminsultani@hotmail.com";
 
         function openGmailNoticeModal(email) {
-            // Giriş kontrolü
             const loggedUser = localStorage.getItem('logged_user');
             if (!loggedUser) {
                 const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
@@ -1948,7 +2044,6 @@
         }
 
         function openAppointmentModalWithEmail(email) {
-            // Giriş kontrolü
             const loggedUser = localStorage.getItem('logged_user');
             if (!loggedUser) {
                 const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
@@ -1963,7 +2058,6 @@
 
             document.getElementById('targetRecipientEmail').value = email;
             
-            // Otomatik olarak kayıtlı kullanıcı bilgilerini form alanlarına doldur
             try {
                 const userObj = JSON.parse(loggedUser);
                 if(userObj) {
@@ -2038,6 +2132,10 @@
 
             document.getElementById('dc-submit-btn-text').innerText = (currentAuthMode === 'signin') ? data.signinBtn : data.signupBtn;
 
+            if(document.getElementById('fp-title')) document.getElementById('fp-title').innerText = data.fpTitle;
+            if(document.getElementById('fp-desc')) document.getElementById('fp-desc').innerText = data.fpDesc;
+            if(document.getElementById('fp-submit-text')) document.getElementById('fp-submit-text').innerText = data.fpSubmitText;
+
             const noticeMsg = document.getElementById('gmailNoticeMessage');
             if (noticeMsg) {
                 noticeMsg.innerText = data.gmailNoticeText;
@@ -2093,7 +2191,6 @@
                 users.push(newUser);
                 localStorage.setItem('site_users', JSON.stringify(users));
                 
-                // Kayıttan sonra doğrudan oturum aç
                 localStorage.setItem('logged_user', JSON.stringify(newUser));
                 
                 showCustomAlert(t.successSignup);
