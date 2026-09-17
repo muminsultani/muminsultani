@@ -860,16 +860,43 @@
 
         .custom-alert-box {
             background: var(--modal-container-bg);
-            border: 1px solid var(--line-color);
-            border-radius: 16px;
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            border-radius: 20px;
             width: 100%;
             max-width: 380px;
-            padding: 24px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            padding: 28px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(147, 51, 234, 0.15);
             text-align: center;
-            transform: scale(0.9) translateY(10px);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transform: scale(0.9) translateY(15px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
             opacity: 0;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .custom-alert-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.12) 0%, rgba(168, 85, 247, 0.04) 40%, transparent 70%);
+            animation: alertGlowMove 6s ease-in-out infinite alternate;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes alertGlowMove {
+            0% { transform: translate(-20px, -20px) scale(0.9); }
+            100% { transform: translate(20px, 20px) scale(1.1); }
+        }
+
+        .custom-alert-box > * {
+            position: relative;
+            z-index: 1;
         }
 
         .custom-alert-overlay.active .custom-alert-box {
@@ -878,16 +905,17 @@
         }
 
         .custom-alert-icon {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: #9333ea;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
+            filter: drop-shadow(0 4px 12px rgba(147, 51, 234, 0.3));
         }
 
         .custom-alert-message {
             font-size: 0.95rem;
             color: var(--text-primary);
             font-weight: 500;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             line-height: 1.5;
         }
 
@@ -897,15 +925,18 @@
             border: none;
             width: 100%;
             padding: 12px;
-            border-radius: 10px;
+            border-radius: 12px;
             font-weight: 700;
             font-size: 0.85rem;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
         }
 
         .custom-alert-btn:hover {
-            opacity: 0.9;
+            opacity: 0.92;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4);
         }
 
         footer {
@@ -1162,7 +1193,8 @@
             <div class="section-title">
                 <i class="fa-solid fa-paper-plane"></i> <span id="t-contact-title">Get In Touch</span>
             </div>
-            <div class="contact-box" onclick="openAppointmentModalWithEmail('contact@muminsultani.com')">
+            <!-- İŞARETLEDİĞİNİZ ALAN: Tıklandığında yeni "getInTouchModal" açılacak -->
+            <div class="contact-box" onclick="openGetInTouchModal()">
                 <div class="contact-text">
                     <span id="t-contact-sub">Have a project in mind?</span>
                     <strong id="t-contact-main">Let's talk & build together</strong>
@@ -1184,6 +1216,26 @@
         </footer>
     </div>
 
+    <!-- YENİ EKLENEN GET IN TOUCH ÖZEL ALERT / MODAL PENCERESİ -->
+    <div class="custom-alert-overlay" id="getInTouchModal">
+        <div class="custom-alert-box" style="max-width: 420px; text-align: center;">
+            <div style="display: flex; justify-content: center; margin-bottom: 8px;">
+                <div class="footer-brand" style="font-size: 1.8rem; line-height: 1;">muminsultani</div>
+            </div>
+            <div class="custom-alert-message" id="gitModalTitle" style="font-size: 1rem; margin-bottom: 24px; font-weight: 600;">
+                Get In Touch
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="custom-alert-btn" onclick="handleGetInTouchAction()" id="gitActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <i class="fa-solid fa-paper-plane"></i> <span id="gitActionText">Get In Touch</span>
+                </button>
+                <button class="custom-alert-btn" onclick="closeGetInTouchModal()" id="gitBackBtn" style="background: #64748b; flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <i class="fa-solid fa-arrow-rotate-left"></i> <span id="gitBackText">Back</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Randevu / Proje Formu Paneli (Modal) -->
     <div class="modal-overlay" id="appointmentModal">
         <div class="modal-container">
@@ -1200,12 +1252,10 @@
                         <button class="modal-close-btn" onclick="goHome()" title="Home">
                             <i class="fa-solid fa-house"></i>
                         </button>
-                        <!-- ÖNCE GMAIL LOGOSU -->
                         <button class="modal-close-btn" onclick="openGmailNoticeModal('muminsultani@hotmail.com')" title="Gmail">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 0.9rem; height: 0.9rem; display: block; filter: grayscale(30%) opacity(0.85);">
                         </button>
                     </div>
-                    <!-- SONRA MUMINSULTANI LOGOSU -->
                     <div class="modal-brand">muminsultani</div>
                     <div class="modal-title" id="m-title">Let's talk</div>
                 </div>
@@ -1268,12 +1318,10 @@
     <div class="custom-alert-overlay" id="gmailNoticeModal">
         <div class="custom-alert-box" style="max-width: 420px; text-align: center;">
             <div style="display: flex; justify-content: center; margin-bottom: 12px;">
-                <!-- ÖNCE GMAIL LOGOSU -->
                 <div class="custom-alert-icon" style="color: #9333ea; margin-bottom: 0; display: inline-flex; align-items: center;">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 2.2rem; height: 2.2rem; display: inline-block;">
                 </div>
             </div>
-            <!-- SONRA MUMINSULTANI LOGOSU -->
             <div style="display: flex; justify-content: center; margin-bottom: 8px;">
                 <div class="footer-brand" style="font-size: 1.8rem; line-height: 1;">muminsultani</div>
             </div>
@@ -1472,7 +1520,9 @@
                 osLabel: "OS Environment", editorLabel: "Editor Stack",
                 stackTitle: "Core Stack", backendLabel: "Backend", frontendLabel: "Frontend",
                 contactTitle: "Get In Touch", contactSub: "Have a project in mind?", contactMain: "Let's talk & build together",
-                scanText: "SCAN TO CONNECT"
+                scanText: "SCAN TO CONNECT",
+                gitText: "Get In Touch",
+                backText: "Back"
             },
             tr: {
                 code: "TR",
@@ -1487,7 +1537,9 @@
                 osLabel: "İşletim Sistemi", editorLabel: "Editör Yığını",
                 stackTitle: "Temel Yığın", backendLabel: "Arka Uç", frontendLabel: "Ön Uç",
                 contactTitle: "İletişime Geç", contactSub: "Aklında bir proje mi var?", contactMain: "Konuşalım ve birlikte inşa edelim",
-                scanText: "BAĞLANMAK İÇİN TARAYIN"
+                scanText: "BAĞLANMAK İÇİN TARAYIN",
+                gitText: "İletişime Geç",
+                backText: "Geri Dön"
             },
             de: {
                 code: "DE",
@@ -1502,7 +1554,9 @@
                 osLabel: "Betriebssystem", editorLabel: "Editor-Stack",
                 stackTitle: "Kern-Stack", backendLabel: "Backend", frontendLabel: "Frontend",
                 contactTitle: "Kontakt", contactSub: "Haben Sie ein Projekt im Kopf?", contactMain: "Lassen Sie uns sprechen & zusammenbauen",
-                scanText: "SCANNEN ZUM VERBINDEN"
+                scanText: "SCANNEN ZUM VERBINDEN",
+                gitText: "Kontakt aufnehmen",
+                backText: "Zurück"
             }
         };
 
@@ -1530,6 +1584,11 @@
             document.getElementById('t-contact-sub').innerText = data.contactSub;
             document.getElementById('t-contact-main').innerText = data.contactMain;
             document.getElementById('t-scan-text').innerText = data.scanText;
+
+            // Get In Touch Modal Metinleri
+            document.getElementById('gitModalTitle').innerText = data.contactTitle;
+            document.getElementById('gitActionText').innerText = data.gitText;
+            document.getElementById('gitBackText').innerText = data.backText;
 
             changeModalLanguage(lang);
 
@@ -1562,7 +1621,9 @@
                 lblDetails: "Details",
                 noFile: "No file attached",
                 gmailNoticeText: "Personal Email Address",
-                backText: "Back"
+                backText: "Back",
+                contactTitle: "Get In Touch",
+                gitText: "Get In Touch"
             },
             tr: {
                 code: "TR",
@@ -1589,7 +1650,9 @@
                 lblDetails: "Detaylar",
                 noFile: "Dosya eklenmedi",
                 gmailNoticeText: "Kişisel E-posta Adresi",
-                backText: "Geri Dön"
+                backText: "Geri Dön",
+                contactTitle: "İletişime Geç",
+                gitText: "İletişime Geç"
             },
             de: {
                 code: "DE",
@@ -1616,9 +1679,25 @@
                 lblDetails: "Details",
                 noFile: "Keine Datei anhängen",
                 gmailNoticeText: "Persönliche E-Mail-Adresse",
-                backText: "Zurück"
+                backText: "Zurück",
+                contactTitle: "Kontakt",
+                gitText: "Kontakt aufnehmen"
             }
         };
+
+        // YENİ GET IN TOUCH MODAL FONKSİYONLARI
+        function openGetInTouchModal() {
+            document.getElementById('getInTouchModal').classList.add('active');
+        }
+
+        function closeGetInTouchModal() {
+            document.getElementById('getInTouchModal').classList.remove('active');
+        }
+
+        function handleGetInTouchAction() {
+            closeGetInTouchModal();
+            openAppointmentModalWithEmail('contact@muminsultani.com');
+        }
 
         let currentAlertText = "Please fill in all required fields.";
         let activeNoticeEmail = "muminsultani@hotmail.com";
@@ -1719,6 +1798,11 @@
             if (backTxt) {
                 backTxt.innerText = data.backText;
             }
+
+            // Get In Touch Modal Metinleri Güncelleme
+            document.getElementById('gitModalTitle').innerText = data.contactTitle;
+            document.getElementById('gitActionText').innerText = data.gitText;
+            document.getElementById('gitBackText').innerText = data.backText;
 
             document.getElementById('modalLangMenu').classList.remove('show');
         }
