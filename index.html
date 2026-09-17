@@ -924,13 +924,15 @@
             color: #fff;
             border: none;
             width: 100%;
-            padding: 12px;
+            padding: 11px 8px;
             border-radius: 12px;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
+            text-align: center;
+            white-space: nowrap;
         }
 
         .custom-alert-btn:hover {
@@ -1193,7 +1195,6 @@
             <div class="section-title">
                 <i class="fa-solid fa-paper-plane"></i> <span id="t-contact-title">Get In Touch</span>
             </div>
-            <!-- İŞARETLEDİĞİNİZ ALAN: Tıklandığında yeni "getInTouchModal" açılacak -->
             <div class="contact-box" onclick="openGetInTouchModal()">
                 <div class="contact-text">
                     <span id="t-contact-sub">Have a project in mind?</span>
@@ -1216,20 +1217,25 @@
         </footer>
     </div>
 
-    <!-- YENİ EKLENEN GET IN TOUCH ÖZEL ALERT / MODAL PENCERESİ -->
+    <!-- GET IN TOUCH ÖZEL ALERT / MODAL PENCERESİ (Boyut ve Logo Küçültüldü) -->
     <div class="custom-alert-overlay" id="getInTouchModal">
-        <div class="custom-alert-box" style="max-width: 420px; text-align: center;">
+        <div class="custom-alert-box" style="max-width: 360px; padding: 24px 20px; text-align: center;">
             <div style="display: flex; justify-content: center; margin-bottom: 8px;">
-                <div class="footer-brand" style="font-size: 1.8rem; line-height: 1;">muminsultani</div>
+                <div class="custom-alert-icon" style="color: #9333ea; font-size: 1.8rem; margin-bottom: 0; display: inline-flex; align-items: center; filter: drop-shadow(0 2px 8px rgba(147, 51, 234, 0.3);">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </div>
             </div>
-            <div class="custom-alert-message" id="gitModalTitle" style="font-size: 1rem; margin-bottom: 24px; font-weight: 600;">
+            <div style="display: flex; justify-content: center; margin-bottom: 4px;">
+                <div class="footer-brand" style="font-size: 1.5rem; line-height: 1;">muminsultani</div>
+            </div>
+            <div class="custom-alert-message" id="gitModalTitle" style="font-size: 0.95rem; margin-bottom: 20px; font-weight: 600;">
                 Get In Touch
             </div>
             <div style="display: flex; gap: 10px;">
-                <button class="custom-alert-btn" onclick="handleGetInTouchAction()" id="gitActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <button class="custom-alert-btn" onclick="handleGetInTouchAction()" id="gitActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; padding: 10px 6px; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
                     <i class="fa-solid fa-paper-plane"></i> <span id="gitActionText">Get In Touch</span>
                 </button>
-                <button class="custom-alert-btn" onclick="closeGetInTouchModal()" id="gitBackBtn" style="background: #64748b; flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <button class="custom-alert-btn" onclick="closeGetInTouchModal()" id="gitBackBtn" style="background: #64748b; flex: 1; padding: 10px 6px; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
                     <i class="fa-solid fa-arrow-rotate-left"></i> <span id="gitBackText">Back</span>
                 </button>
             </div>
@@ -1329,10 +1335,10 @@
                 Personal Email Address
             </div>
             <div style="display: flex; gap: 10px;">
-                <button class="custom-alert-btn" onclick="confirmOpenGmail()" id="gmailNoticeActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <button class="custom-alert-btn" onclick="confirmOpenGmail()" id="gmailNoticeActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1.1rem; height: 1.1rem; display: block;"> <span id="gmailNoticeEmailBtnText">Email</span>
                 </button>
-                <button class="custom-alert-btn" onclick="closeGmailNoticeModal()" id="gmailNoticeBackBtn" style="background: #64748b; flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <button class="custom-alert-btn" onclick="closeGmailNoticeModal()" id="gmailNoticeBackBtn" style="background: #64748b; flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;">
                     <i class="fa-solid fa-arrow-rotate-left"></i> <span id="gmailNoticeBackText">Back</span>
                 </button>
             </div>
@@ -1585,7 +1591,6 @@
             document.getElementById('t-contact-main').innerText = data.contactMain;
             document.getElementById('t-scan-text').innerText = data.scanText;
 
-            // Get In Touch Modal Metinleri
             document.getElementById('gitModalTitle').innerText = data.contactTitle;
             document.getElementById('gitActionText').innerText = data.gitText;
             document.getElementById('gitBackText').innerText = data.backText;
@@ -1685,7 +1690,6 @@
             }
         };
 
-        // YENİ GET IN TOUCH MODAL FONKSİYONLARI
         function openGetInTouchModal() {
             document.getElementById('getInTouchModal').classList.add('active');
         }
@@ -1799,7 +1803,6 @@
                 backTxt.innerText = data.backText;
             }
 
-            // Get In Touch Modal Metinleri Güncelleme
             document.getElementById('gitModalTitle').innerText = data.contactTitle;
             document.getElementById('gitActionText').innerText = data.gitText;
             document.getElementById('gitBackText').innerText = data.backText;
