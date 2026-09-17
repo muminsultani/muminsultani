@@ -1282,7 +1282,7 @@
             </div>
             <div style="display: flex; gap: 10px;">
                 <button class="custom-alert-btn" onclick="confirmOpenGmail()" id="gmailNoticeActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1.1rem; height: 1.1rem; display: block;"> Email
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1.1rem; height: 1.1rem; display: block;"> <span id="gmailNoticeEmailBtnText">Email</span>
                 </button>
                 <button class="custom-alert-btn" onclick="closeGmailNoticeModal()" id="gmailNoticeBackBtn" style="background: #64748b; flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;">
                     <i class="fa-solid fa-arrow-rotate-left"></i> <span id="gmailNoticeBackText">Back</span>
@@ -1397,7 +1397,9 @@
         function resetAppointmentForm() {
             document.getElementById('appointmentForm').reset();
             document.getElementById('clientPhone').value = '+ ';
-            const currentLang = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
+            const currentLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
             const fileTextSpan = document.getElementById('fileUploadText');
             if (modalTranslations[currentLang]) {
                 fileTextSpan.innerText = modalTranslations[currentLang].filePlaceholder;
@@ -1449,7 +1451,9 @@
                 textSpan.innerText = input.files[0].name;
                 textSpan.style.color = 'var(--text-primary)';
             } else {
-                const currentLang = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+                const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+                const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
+                const currentLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
                 textSpan.innerText = modalTranslations[currentLang].filePlaceholder;
                 textSpan.style.color = '#94a3b8';
             }
@@ -1619,10 +1623,16 @@
 
         function openGmailNoticeModal(email) {
             activeNoticeEmail = email;
-            const currentModalLang = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            
+            // Aktif dili güvenli şekilde yakala (Modal dili veya Ana sayfa dili)
+            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
+            const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
+            
             const t = modalTranslations[currentModalLang] || modalTranslations.en;
             
             document.getElementById('gmailNoticeMessage').innerText = t.gmailNoticeText;
+            document.getElementById('gmailNoticeEmailBtnText').innerText = t.emailBtn;
             document.getElementById('gmailNoticeBackText').innerText = t.backText;
             document.getElementById('gmailNoticeModal').classList.add('active');
             
@@ -1694,6 +1704,10 @@
             const noticeMsg = document.getElementById('gmailNoticeMessage');
             if (noticeMsg) {
                 noticeMsg.innerText = data.gmailNoticeText;
+            }
+            const gmailBtnText = document.getElementById('gmailNoticeEmailBtnText');
+            if (gmailBtnText) {
+                gmailBtnText.innerText = data.emailBtn;
             }
             const backTxt = document.getElementById('gmailNoticeBackText');
             if (backTxt) {
@@ -1796,7 +1810,9 @@
             const fileInput = document.getElementById('clientFile');
             const desc = document.getElementById('clientDesc').value.trim();
             
-            const currentModalLang = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
+            const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
             const t = modalTranslations[currentModalLang] || modalTranslations.en;
 
             if (!name || !email || phone === '+' || !desc) {
@@ -1815,7 +1831,9 @@
 
             const now = new Date();
             const formattedDate = now.toLocaleString();
-            const currentModalLang = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
+            const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
             const t = modalTranslations[currentModalLang] || modalTranslations.en;
 
             generatePDF(data.name, data.email, data.phone, data.fileName, data.desc, formattedDate);
@@ -1847,7 +1865,9 @@
 
             const now = new Date();
             const formattedDate = now.toLocaleString();
-            const currentModalLang = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
+            const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
             const t = modalTranslations[currentModalLang] || modalTranslations.en;
 
             const message = 
