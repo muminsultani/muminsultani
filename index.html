@@ -687,16 +687,89 @@
             color: #9333ea;
         }
 
+        /* Auth Tabs Stil */
+        .auth-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: var(--box-bg);
+            padding: 4px;
+            border-radius: 10px;
+            border: 1px solid var(--line-color);
+        }
+
+        .auth-tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .auth-tab-btn.active {
+            background: linear-gradient(135deg, #9333ea, #c084fc);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
+        }
+
         .form-group {
             margin-bottom: 18px;
         }
 
         .form-label {
-            display: block;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-secondary);
             margin-bottom: 6px;
+        }
+
+        .password-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .password-toggle-icon {
+            position: absolute;
+            right: 14px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .password-toggle-icon:hover {
+            color: #9333ea;
+        }
+
+        .auth-extra-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 0.8rem;
+        }
+
+        .auth-link {
+            color: #9333ea;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        
+        .auth-link:hover {
+            text-decoration: underline;
         }
 
         .form-input:-webkit-autofill,
@@ -732,51 +805,6 @@
             outline: none;
             transition: border-color 0.2s;
             -webkit-text-fill-color: var(--text-primary) !important;
-        }
-
-        .file-upload-wrapper {
-            position: relative;
-            width: 100%;
-            background: var(--box-bg);
-            border: 1px dashed var(--line-color);
-            padding: 12px 16px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .file-upload-wrapper:hover {
-            border-color: rgba(147, 51, 234, 0.4);
-            background: var(--box-hover-bg);
-        }
-
-        .file-upload-input {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .file-upload-text {
-            font-size: 0.9rem;
-            color: #94a3b8;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            pointer-events: none;
-        }
-
-        .file-upload-icon {
-            color: #9333ea;
-            font-size: 1rem;
-            flex-shrink: 0;
-            margin-left: 8px;
         }
 
         .form-input::placeholder,
@@ -822,10 +850,6 @@
 
         .submit-btn.email-btn {
             background: linear-gradient(135deg, #9333ea, #c084fc);
-        }
-
-        .submit-btn.whatsapp-btn {
-            background: linear-gradient(135deg, #25D366, #128C7E);
         }
 
         .submit-btn:hover {
@@ -1224,18 +1248,18 @@
         <div class="custom-alert-box" style="max-width: 360px; padding: 24px 20px; text-align: center;">
             <div style="display: flex; justify-content: center; margin-bottom: 8px;">
                 <div class="custom-alert-icon" style="color: #9333ea; font-size: 1.8rem; margin-bottom: 0; display: inline-flex; align-items: center; filter: drop-shadow(0 2px 8px rgba(147, 51, 234, 0.3);">
-                    <i class="fa-solid fa-paper-plane"></i>
+                    <i class="fa-solid fa-user-lock"></i>
                 </div>
             </div>
             <div style="display: flex; justify-content: center; margin-bottom: 4px;">
                 <div class="footer-brand" style="font-size: 1.5rem; line-height: 1;">muminsultani</div>
             </div>
             <div class="custom-alert-message" id="gitModalTitle" style="font-size: 0.95rem; margin-bottom: 20px; font-weight: 600;">
-                Get In Touch
+                Sign In / Sign Up
             </div>
             <div style="display: flex; gap: 10px;">
                 <button class="custom-alert-btn" onclick="openDirectContactModal()" id="gitActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; padding: 10px 6px; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                    <i class="fa-solid fa-paper-plane"></i> <span id="gitActionText">Get In Touch</span>
+                    <i class="fa-solid fa-right-to-bracket"></i> <span id="gitActionText">Account</span>
                 </button>
                 <button class="custom-alert-btn" onclick="closeGetInTouchModal()" id="gitBackBtn" style="background: #64748b; flex: 1; padding: 10px 6px; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
                     <i class="fa-solid fa-arrow-rotate-left"></i> <span id="gitBackText">Back</span>
@@ -1244,7 +1268,7 @@
         </div>
     </div>
 
-    <!-- BAĞIMSIZ YENİ İLETİŞİM PANELİ (GELİŞMİŞ İLETİŞİM FORMU) -->
+    <!-- YENİ HESAP / GİRİŞ PANELİ (SIGN IN / SIGN UP) -->
     <div class="modal-overlay" id="directContactModal">
         <div class="modal-container">
             <div class="modal-header">
@@ -1262,7 +1286,7 @@
                         </button>
                     </div>
                     <div class="modal-brand">muminsultani</div>
-                    <div class="modal-title" id="dc-title">İletişim</div>
+                    <div class="modal-title" id="dc-title">Account Access</div>
                 </div>
                 <div class="modal-header-actions">
                     <div class="lang-dropdown-container">
@@ -1279,30 +1303,51 @@
                     <button class="modal-close-btn" onclick="closeDirectContactModal()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
+
+            <!-- Giriş / Kayıt Sekmeleri -->
+            <div class="auth-tabs">
+                <button type="button" class="auth-tab-btn active" id="tabSigninBtn" onclick="switchAuthTab('signin')">Sign In</button>
+                <button type="button" class="auth-tab-btn" id="tabSignupBtn" onclick="switchAuthTab('signup')">Sign Up</button>
+            </div>
+
             <form id="directContactForm">
-                <div class="form-group">
+                <!-- Sadece Kayıt Olurken Görünecek Alan -->
+                <div class="form-group" id="groupSignupName" style="display: none;">
                     <label class="form-label" id="dc-label-name">Name & Surname</label>
-                    <input type="text" class="form-input" id="contactClientName" required placeholder="Name & Surname">
+                    <input type="text" class="form-input" id="contactClientName" placeholder="Name & Surname">
                 </div>
+
                 <div class="form-group">
                     <label class="form-label" id="dc-label-email">Email Address</label>
                     <input type="email" class="form-input" id="contactClientEmail" required placeholder="name@sample.com">
                 </div>
+
                 <div class="form-group">
-                    <label class="form-label" id="dc-label-phone">Phone Number</label>
-                    <input type="tel" class="form-input" id="contactClientPhone" required placeholder="+ Country Code" oninput="formatPhoneInput(this)" onfocus="if(!this.value) this.value='+ ';">
+                    <label class="form-label">
+                        <span id="dc-label-password">Password</span>
+                        <button type="button" class="auth-link" id="strongPassBtn" onclick="generateStrongPassword()" style="display: none; font-size: 0.75rem;">Generate Strong Password</button>
+                    </label>
+                    <div class="password-wrapper">
+                        <input type="password" class="form-input" id="contactClientPassword" required placeholder="••••••••">
+                        <i class="fa-solid fa-eye password-toggle-icon" id="togglePasswordIcon" onclick="togglePasswordVisibility()"></i>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" id="dc-label-desc">Message / Details</label>
-                    <textarea class="form-textarea" id="contactClientDesc" required placeholder="Write your message here..."></textarea>
+
+                <!-- Şifremi Unuttum ve Giriş Yardımı -->
+                <div class="auth-extra-row" id="authExtraRow">
+                    <span style="color: var(--text-secondary);"></span>
+                    <button type="button" class="auth-link" id="forgotPassText" onclick="handleForgotPassword()">Forgot Password?</button>
+                </div>
+
+                <!-- Sadece Kayıt Olurken Görünecek Alan -->
+                <div class="form-group" id="groupSignupPhone" style="display: none;">
+                    <label class="form-label" id="dc-label-phone">Phone Number</label>
+                    <input type="tel" class="form-input" id="contactClientPhone" placeholder="+ Country Code" oninput="formatPhoneInput(this)" onfocus="if(!this.value) this.value='+ ';">
                 </div>
                 
                 <div class="form-buttons-group">
-                    <button type="button" class="submit-btn email-btn" onclick="sendDirectToEmail(event)" id="dc-email-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc);">
-                        <i class="fa-solid fa-paper-plane"></i> <span id="dc-email-btn-text">İletişime Geç</span>
-                    </button>
-                    <button type="button" class="submit-btn whatsapp-btn" onclick="sendDirectToWhatsApp(event)" id="dc-whatsapp-btn">
-                        <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> WhatsApp
+                    <button type="button" class="submit-btn email-btn" onclick="handleAuthSubmit(event)" id="dc-submit-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc);">
+                        <i class="fa-solid fa-right-to-bracket"></i> <span id="dc-submit-btn-text">Sign In</span>
                     </button>
                 </div>
             </form>
@@ -1500,8 +1545,8 @@
                 localStorage.setItem('theme', 'light');
             } else {
                 if(themeIcon) themeIcon.className = "fa-solid fa-moon";
-                if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-moon";
-                if(contactModalThemeIcon) contactModalThemeIcon.className = "fa-solid fa-moon";
+                if(modalThemeIcon) themeIcon.className = "fa-solid fa-moon";
+                if(contactModalThemeIcon) themeIcon.className = "fa-solid fa-moon";
                 localStorage.setItem('theme', 'dark');
             }
         }
@@ -1545,7 +1590,9 @@
 
         function resetContactForm() {
             document.getElementById('directContactForm').reset();
-            document.getElementById('contactClientPhone').value = "";
+            if(document.getElementById('contactClientPhone')) {
+                document.getElementById('contactClientPhone').value = "";
+            }
         }
 
         function clearAndCloseModal() {
@@ -1584,6 +1631,47 @@
             }
         });
 
+        // Şifre Göster / Gizle Özelliği
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('contactClientPassword');
+            const toggleIcon = document.getElementById('togglePasswordIcon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Güçlü Şifre Oluşturma Özelliği
+        function generateStrongPassword() {
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!%*?&";
+            let password = "";
+            for (let i = 0; i < 12; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            const passwordInput = document.getElementById('contactClientPassword');
+            passwordInput.value = password;
+            passwordInput.type = 'text';
+            document.getElementById('togglePasswordIcon').className = "fa-solid fa-eye-slash password-toggle-icon";
+        }
+
+        // Şifremi Unuttum Özelliği
+        function handleForgotPassword() {
+            const email = document.getElementById('contactClientEmail').value.trim();
+            const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
+            const t = modalTranslations[modalLangText] || modalTranslations.en;
+
+            if (!email) {
+                showCustomAlert(t.enterEmailFirst || "Please enter your email address first.");
+                return;
+            }
+            showCustomAlert(t.passResetSent || "Password reset instructions have been sent to your email.");
+        }
+
         function formatPhoneInput(input) {
             let val = input.value;
             let cleanVal = val.replace(/\+/g, '').trim();
@@ -1621,9 +1709,9 @@
                 setupTitle: "Setup & Environment",
                 osLabel: "OS Environment", editorLabel: "Editor Stack",
                 stackTitle: "Core Stack", backendLabel: "Backend", frontendLabel: "Frontend",
-                contactTitle: "Get In Touch", contactSub: "Have a project in mind?", contactMain: "Let's talk & build together",
+                contactTitle: "Sign In / Sign Up", contactSub: "Have a project in mind?", contactMain: "Let's talk & build together",
                 scanText: "SCAN TO CONNECT",
-                gitText: "Get In Touch",
+                gitText: "Account",
                 backText: "Back"
             },
             tr: {
@@ -1638,9 +1726,9 @@
                 setupTitle: "Kurulum & Ortam",
                 osLabel: "İşletim Sistemi", editorLabel: "Editör Yığını",
                 stackTitle: "Temel Yığın", backendLabel: "Arka Uç", frontendLabel: "Ön Uç",
-                contactTitle: "İletişime Geç", contactSub: "Aklında bir proje mi var?", contactMain: "Konuşalım ve birlikte inşa edelim",
+                contactTitle: "Giriş Yap / Kayıt Ol", contactSub: "Aklında bir proje mi var?", contactMain: "Konuşalım ve birlikte inşa edelim",
                 scanText: "BAĞLANMAK İÇİN TARAYIN",
-                gitText: "İletişime Geç",
+                gitText: "Hesap",
                 backText: "Geri Dön"
             },
             de: {
@@ -1655,9 +1743,9 @@
                 setupTitle: "Setup & Umgebung",
                 osLabel: "Betriebssystem", editorLabel: "Editor-Stack",
                 stackTitle: "Kern-Stack", backendLabel: "Backend", frontendLabel: "Frontend",
-                contactTitle: "Kontakt", contactSub: "Haben Sie ein Projekt im Kopf?", contactMain: "Lassen Sie uns sprechen & zusammenbauen",
+                contactTitle: "Anmelden / Registrieren", contactSub: "Haben Sie ein Projekt im Kopf?", contactMain: "Lassen Sie uns sprechen & zusammenbauen",
                 scanText: "SCANNEN ZUM VERBINDEN",
-                gitText: "Kontakt aufnehmen",
+                gitText: "Konto",
                 backText: "Zurück"
             }
         };
@@ -1700,12 +1788,14 @@
             en: {
                 code: "EN",
                 title: "Let's talk",
-                contactHeaderTitle: "Contact",
+                contactHeaderTitle: "Account Access",
                 nameLabel: "Name & Surname",
                 namePlaceholder: "Name & Surname",
                 emailLabel: "Email Address",
                 emailPlaceholder: "name@sample.com",
-                phoneLabel: "WhatsApp Number",
+                passwordLabel: "Password",
+                passwordPlaceholder: "••••••••",
+                phoneLabel: "Phone Number",
                 phonePlaceholder: "+ Country Code",
                 fileLabel: "Attach File (JPG, PNG, PDF, Video)",
                 filePlaceholder: "Choose file or media...",
@@ -1713,7 +1803,8 @@
                 descPlaceholder: "Tell me about your project...",
                 emailBtn: "Email",
                 whatsappBtn: "WhatsApp",
-                contactSendBtn: "Get In Touch",
+                signinBtn: "Sign In",
+                signupBtn: "Sign Up",
                 alertText: "Please fill in all required fields.",
                 waProjectRequest: "Project Request",
                 lblContactName: "Name & Surname",
@@ -1725,18 +1816,27 @@
                 noFile: "No file attached",
                 gmailNoticeText: "Personal Email Address",
                 backText: "Back",
-                contactTitle: "Get In Touch",
-                gitText: "Get In Touch"
+                contactTitle: "Sign In / Sign Up",
+                gitText: "Account",
+                successSignup: "Account created successfully! You can now sign in.",
+                successSignin: "Signed in successfully!",
+                errorSignin: "Invalid email or password!",
+                forgotPassText: "Forgot Password?",
+                generateStrongPass: "Generate Strong Password",
+                enterEmailFirst: "Please enter your email address first.",
+                passResetSent: "Password reset instructions have been sent to your email."
             },
             tr: {
                 code: "TR",
                 title: "Konuşalım",
-                contactHeaderTitle: "İletişim",
+                contactHeaderTitle: "Hesap İşlemleri",
                 nameLabel: "Ad Soyad",
                 namePlaceholder: "Ad Soyad",
                 emailLabel: "E-posta Adresi",
                 emailPlaceholder: "ornek@mail.com",
-                phoneLabel: "WhatsApp Numarası",
+                passwordLabel: "Şifre",
+                passwordPlaceholder: "••••••••",
+                phoneLabel: "Telefon Numarası",
                 phonePlaceholder: "+ Ülke Kodu",
                 fileLabel: "Dosya Ekle (JPG, PNG, PDF, Video)",
                 filePlaceholder: "Dosya veya medya seçin...",
@@ -1744,7 +1844,8 @@
                 descPlaceholder: "Projeden bahsedin...",
                 emailBtn: "E-posta",
                 whatsappBtn: "WhatsApp",
-                contactSendBtn: "İletişime Geç",
+                signinBtn: "Giriş Yap",
+                signupBtn: "Kayıt Ol",
                 alertText: "Lütfen gerekli tüm alanları doldurun.",
                 waProjectRequest: "Proje Talebi",
                 lblContactName: "Ad Soyad",
@@ -1756,18 +1857,27 @@
                 noFile: "Dosya eklenmedi",
                 gmailNoticeText: "Kişisel E-posta Adresi",
                 backText: "Geri Dön",
-                contactTitle: "İletişime Geç",
-                gitText: "İletişime Geç"
+                contactTitle: "Giriş Yap / Kayıt Ol",
+                gitText: "Hesap",
+                successSignup: "Hesap başarıyla oluşturuldu! Şimdi giriş yapabilirsiniz.",
+                successSignin: "Başarıyla giriş yapıldı!",
+                errorSignin: "Geçersiz e-posta veya şifre!",
+                forgotPassText: "Şifremi Unuttum?",
+                generateStrongPass: "Güçlü Şifre Oluştur",
+                enterEmailFirst: "Lütfen önce e-posta adresinizi girin.",
+                passResetSent: "Şifre sıfırlama talimatları e-postanıza gönderildi."
             },
             de: {
                 code: "DE",
                 title: "Lass uns sprechen",
-                contactHeaderTitle: "Kontakt",
+                contactHeaderTitle: "Konto-Zugang",
                 nameLabel: "Name & Nachname",
                 namePlaceholder: "Name & Nachname",
                 emailLabel: "E-Mail-Adresse",
                 emailPlaceholder: "name@beispiel.de",
-                phoneLabel: "WhatsApp-Nummer",
+                passwordLabel: "Passwort",
+                passwordPlaceholder: "••••••••",
+                phoneLabel: "Telefonnummer",
                 phonePlaceholder: "+ Ländercode",
                 fileLabel: "Datei anhängen (JPG, PNG, PDF, Video)",
                 filePlaceholder: "Datei oder Medien auswählen...",
@@ -1775,7 +1885,8 @@
                 descPlaceholder: "Erzählen Sie von Ihrem Projekt...",
                 emailBtn: "E-Mail",
                 whatsappBtn: "WhatsApp",
-                contactSendBtn: "İletişime Geç",
+                signinBtn: "Anmelden",
+                signupBtn: "Registrieren",
                 alertText: "Bitte füllen Sie alle Pflichtfelder aus.",
                 waProjectRequest: "Projektanfrage",
                 lblContactName: "Name & Nachname",
@@ -1787,10 +1898,51 @@
                 noFile: "Keine Datei anhängen",
                 gmailNoticeText: "Persönliche E-Mail-Adresse",
                 backText: "Zurück",
-                contactTitle: "Kontakt",
-                gitText: "Kontakt aufnehmen"
+                contactTitle: "Anmelden / Registrieren",
+                gitText: "Konto",
+                successSignup: "Konto erfolgreich erstellt! Sie können sich jetzt anmelden.",
+                successSignin: "Erfolgreich angemeldet!",
+                errorSignin: "Ungültige E-Mail-Adresse oder Passwort!",
+                forgotPassText: "Passwort vergessen?",
+                generateStrongPass: "Starkes Passwort generieren",
+                enterEmailFirst: "Bitte geben Sie zuerst Ihre E-Mail-Adresse ein.",
+                passResetSent: "Anweisungen zum Zurücksetzen des Passworts wurden an Ihre E-Mail gesendet."
             }
         };
+
+        let currentAuthMode = 'signin';
+
+        function switchAuthTab(mode) {
+            currentAuthMode = mode;
+            const tabSignin = document.getElementById('tabSigninBtn');
+            const tabSignup = document.getElementById('tabSignupBtn');
+            const groupName = document.getElementById('groupSignupName');
+            const groupPhone = document.getElementById('groupSignupPhone');
+            const submitBtnText = document.getElementById('dc-submit-btn-text');
+            const strongPassBtn = document.getElementById('strongPassBtn');
+            const authExtraRow = document.getElementById('authExtraRow');
+
+            const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
+            const t = modalTranslations[modalLangText] || modalTranslations.en;
+
+            if (mode === 'signin') {
+                tabSignin.classList.add('active');
+                tabSignup.classList.remove('active');
+                groupName.style.display = 'none';
+                groupPhone.style.display = 'none';
+                strongPassBtn.style.display = 'none';
+                authExtraRow.style.display = 'flex';
+                submitBtnText.innerText = t.signinBtn;
+            } else {
+                tabSignup.classList.add('active');
+                tabSignin.classList.remove('active');
+                groupName.style.display = 'block';
+                groupPhone.style.display = 'block';
+                strongPassBtn.style.display = 'inline-block';
+                authExtraRow.style.display = 'none';
+                submitBtnText.innerText = t.signupBtn;
+            }
+        }
 
         function openGetInTouchModal() {
             document.getElementById('getInTouchModal').classList.add('active');
@@ -1802,6 +1954,7 @@
 
         function openDirectContactModal() {
             closeGetInTouchModal();
+            switchAuthTab('signin');
             document.getElementById('directContactModal').classList.add('active');
         }
 
@@ -1897,18 +2050,28 @@
             document.getElementById('m-email-btn').innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1.1rem; height: 1.1rem; display: block;"> ${data.emailBtn}`;
             document.getElementById('m-whatsapp-btn').innerHTML = `<i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> ${data.whatsappBtn}`;
 
-            // Doğrudan İletişim (Direct Contact) modalı metinleri
+            // Hesap / Auth Modalı metinleri
             document.getElementById('contactModalCurrentLangText').innerText = data.code;
             document.getElementById('dc-title').innerText = data.contactHeaderTitle;
+            document.getElementById('tabSigninBtn').innerText = data.signinBtn;
+            document.getElementById('tabSignupBtn').innerText = data.signupBtn;
+
             document.getElementById('dc-label-name').innerText = data.nameLabel;
-            document.getElementById('contactClientName').placeholder = data.namePlaceholder;
+            if(document.getElementById('contactClientName')) document.getElementById('contactClientName').placeholder = data.namePlaceholder;
+
             document.getElementById('dc-label-email').innerText = data.emailLabel;
             document.getElementById('contactClientEmail').placeholder = data.emailPlaceholder;
-            document.getElementById('dc-label-phone').innerText = data.phoneLabel;
-            document.getElementById('contactClientPhone').placeholder = data.phonePlaceholder;
-            document.getElementById('dc-label-desc').innerText = data.descLabel;
-            document.getElementById('contactClientDesc').placeholder = data.descPlaceholder;
-            document.getElementById('dc-email-btn-text').innerText = data.contactSendBtn;
+
+            document.getElementById('dc-label-password').innerText = data.passwordLabel;
+            document.getElementById('contactClientPassword').placeholder = data.passwordPlaceholder;
+
+            document.getElementById('strongPassBtn').innerText = data.generateStrongPass;
+            document.getElementById('forgotPassText').innerText = data.forgotPassText;
+
+            if(document.getElementById('dc-label-phone')) document.getElementById('dc-label-phone').innerText = data.phoneLabel;
+            if(document.getElementById('contactClientPhone')) document.getElementById('contactClientPhone').placeholder = data.phonePlaceholder;
+
+            document.getElementById('dc-submit-btn-text').innerText = (currentAuthMode === 'signin') ? data.signinBtn : data.signupBtn;
 
             const noticeMsg = document.getElementById('gmailNoticeMessage');
             if (noticeMsg) {
@@ -1931,57 +2094,56 @@
             document.getElementById('contactModalLangMenu').classList.remove('show');
         }
 
-        function sendDirectToEmail(e) {
+        // Hesap açma / giriş yapma mantığı ve muminsultani@hotmail.com uyarı e-postası
+        function handleAuthSubmit(e) {
             e.preventDefault();
-            const name = document.getElementById('contactClientName').value.trim();
             const email = document.getElementById('contactClientEmail').value.trim();
-            const phone = document.getElementById('contactClientPhone').value.trim();
-            const desc = document.getElementById('contactClientDesc').value.trim();
-
-            if (!name || !email || !phone || !desc) {
-                showCustomAlert(currentAlertText);
-                return;
-            }
-
-            const recipient = "muminsultani@hotmail.com";
-            const subject = encodeURIComponent("Direct Contact Message - " + name);
-            const body = encodeURIComponent(
-                `*Name & Surname:* ${name}\n` +
-                `*Email:* ${email}\n` +
-                `*Phone:* ${phone}\n\n` +
-                `*Message:* \n${desc}\n\n` +
-                `muminsultani.com`
-            );
-
-            window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
-            closeDirectContactModal();
-        }
-
-        function sendDirectToWhatsApp(e) {
-            e.preventDefault();
-            const name = document.getElementById('contactClientName').value.trim();
-            const email = document.getElementById('contactClientEmail').value.trim();
-            const phone = document.getElementById('contactClientPhone').value.trim();
-            const desc = document.getElementById('contactClientDesc').value.trim();
-
-            if (!name || !email || !phone || !desc) {
-                showCustomAlert(currentAlertText);
-                return;
-            }
-
-            const message = 
-                `*New Message from Contact Form*\n\n` +
-                `*• Name & Surname:* ${name}\n` +
-                `*• Email:* ${email}\n` +
-                `*• Phone:* ${phone}\n\n` +
-                `*• Message:* \n${desc}\n\n` +
-                `*muminsultani.com*`;
-
-            const whatsappNumber = "905389480137";
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            const password = document.getElementById('contactClientPassword').value.trim();
             
-            window.open(whatsappUrl, '_blank');
-            closeDirectContactModal();
+            const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
+            const t = modalTranslations[modalLangText] || modalTranslations.en;
+
+            if (!email || !password) {
+                showCustomAlert(currentAlertText);
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem('site_users') || '[]');
+
+            if (currentAuthMode === 'signup') {
+                const name = document.getElementById('contactClientName').value.trim();
+                const phone = document.getElementById('contactClientPhone').value.trim();
+
+                if (!name || !phone) {
+                    showCustomAlert(currentAlertText);
+                    return;
+                }
+
+                const existing = users.find(u => u.email === email);
+                if (existing) {
+                    showCustomAlert("This email is already registered!");
+                    return;
+                }
+
+                users.push({ name, email, password, phone });
+                localStorage.setItem('site_users', JSON.stringify(users));
+                showCustomAlert(t.successSignup);
+                switchAuthTab('signin');
+            } else {
+                // Sign In
+                const user = users.find(u => u.email === email && u.password === password);
+                if (user || (email === "admin@muminsultani.com" && password === "admin123")) {
+                    showCustomAlert(t.successSignin);
+                    closeDirectContactModal();
+
+                    // Giriş yapıldığında muminsultani@hotmail.com adresine uyarı maili tetikleme
+                    const mailtoSubject = encodeURIComponent("Sitenize Yeni Bir Giriş Yapıldı");
+                    const mailtoBody = encodeURIComponent(`Merhaba Mümin,\n\nSitenize şu e-posta adresiyle başarılı bir giriş yapıldı: ${email}\n\nTarih: ${new Date().toLocaleString()}`);
+                    window.location.href = `mailto:muminsultani@hotmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+                } else {
+                    showCustomAlert(t.errorSignin);
+                }
+            }
         }
 
         function getBase64ImageFromURL(url, callback) {
@@ -2243,7 +2405,7 @@
                         ctx.lineWidth = 0.8;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                        ctx.lineTo(particlesArray[j].x, particles.length > j ? particlesArray[j].y : 0);
                         ctx.stroke();
                     }
                 }
