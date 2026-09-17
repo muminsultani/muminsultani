@@ -1345,7 +1345,7 @@
             </div>
             <form id="forgotPasswordForm" onsubmit="handleForgotPasswordSubmit(event)">
                 <p class="item-desc" id="fp-desc" style="margin-bottom: 16px; font-size: 0.88rem;">
-                    Enter your registered email address. We will send a recovery code to your email.
+                    Enter your registered email address. We will send a recovery code / temporary password to your email.
                 </p>
                 <div class="form-group">
                     <label class="form-label" id="fp-label-email">Email Address</label>
@@ -1353,47 +1353,7 @@
                 </div>
                 <div class="form-buttons-group">
                     <button type="submit" class="submit-btn email-btn" id="fp-submit-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc);">
-                        <i class="fa-solid fa-paper-plane"></i> <span id="fp-submit-text">Send Recovery Code</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- YENİ ŞİFRE OLUŞTURMA MODALI (NEW PASSWORD PANEL) -->
-    <div class="modal-overlay" id="resetPasswordModal">
-        <div class="modal-container" style="max-width: 440px;">
-            <div class="modal-header">
-                <div class="modal-header-left">
-                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                        <button class="modal-close-btn" onclick="closeResetPasswordModal()" title="Back"><i class="fa-solid fa-chevron-left"></i></button>
-                    </div>
-                    <div class="modal-brand">muminsultani</div>
-                    <div class="modal-title" id="np-title">Set New Password</div>
-                </div>
-                <div class="modal-header-actions">
-                    <button class="modal-close-btn" onclick="closeResetPasswordModal()"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-            </div>
-            <form id="resetPasswordForm" onsubmit="handleNewPasswordSubmit(event)">
-                <p class="item-desc" id="np-desc" style="margin-bottom: 16px; font-size: 0.88rem;">
-                    Enter the recovery code sent to your email and set your new password.
-                </p>
-                <div class="form-group">
-                    <label class="form-label" id="np-label-email">Email Address</label>
-                    <input type="email" class="form-input" id="resetClientEmail" required placeholder="name@sample.com">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" id="np-label-code">Recovery Code</label>
-                    <input type="text" class="form-input" id="resetClientCode" required placeholder="123456">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" id="np-label-newpass">New Password</label>
-                    <input type="password" class="form-input" id="resetClientNewPassword" required placeholder="••••••••">
-                </div>
-                <div class="form-buttons-group">
-                    <button type="submit" class="submit-btn email-btn" id="np-submit-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc);">
-                        <i class="fa-solid fa-key"></i> <span id="np-submit-text">Update Password</span>
+                        <i class="fa-solid fa-paper-plane"></i> <span id="fp-submit-text">Send Recovery Details</span>
                     </button>
                 </div>
             </form>
@@ -1851,17 +1811,10 @@
                 errorSignin: "Invalid email or password!",
                 authRequiredAlert: "You must sign in or register before sending messages via Email or WhatsApp!",
                 fpTitle: "Password Recovery",
-                fpDesc: "Enter your registered email address. We will send a recovery code to your email.",
-                fpSubmitText: "Send Recovery Code",
-                fpSuccess: "Recovery code successfully generated! Please enter your new password.",
-                fpNotFound: "This email address is not registered in the system!",
-                npTitle: "Set New Password",
-                npDesc: "Enter the recovery code sent to your email and set your new password.",
-                npLabelCode: "Recovery Code",
-                npLabelNewPass: "New Password",
-                npSubmitText: "Update Password",
-                npSuccess: "Your password has been successfully updated! You can now sign in.",
-                npError: "Invalid recovery code or email address!"
+                fpDesc: "Enter your registered email address. We will send a recovery code / temporary password to your email.",
+                fpSubmitText: "Send Recovery Details",
+                fpSuccess: "Recovery email successfully sent to your registered address!",
+                fpNotFound: "This email address is not registered in the system!"
             },
             tr: {
                 code: "TR",
@@ -1901,17 +1854,10 @@
                 errorSignin: "Geçersiz e-posta veya şifre!",
                 authRequiredAlert: "E-posta veya WhatsApp üzerinden mesaj gönderebilmek için önce giriş yapmalı veya kayıt olmalısınız!",
                 fpTitle: "Şifre Sıfırlama / Kurtarma",
-                fpDesc: "Kayıtlı e-posta adresinizi girin. E-postanıza bir kurtarma kodu göndereceğiz.",
-                fpSubmitText: "Kurtarma Kodu Gönder",
-                fpSuccess: "Kurtarma kodu başarıyla oluşturuldu! Lütfen yeni şifrenizi girin.",
-                fpNotFound: "Bu e-posta adresi sistemde kayıtlı değil!",
-                npTitle: "Yeni Şifre Belirle",
-                npDesc: "E-postanıza gönderilen kurtarma kodunu ve yeni şifrenizi girin.",
-                npLabelCode: "Kurtarma Kodu",
-                npLabelNewPass: "Yeni Şifre",
-                npSubmitText: "Şifreyi Güncelle",
-                npSuccess: "Şifreniz başarıyla güncellendi! Artık giriş yapabilirsiniz.",
-                npError: "Geçersiz kurtarma kodu veya e-posta adresi!"
+                fpDesc: "Kayıtlı e-posta adresinizi girin. Kurtarma kodunuz doğrudan sizin e-posta adresinize gönderilecektir.",
+                fpSubmitText: "Kurtarma Bilgisi Gönder",
+                fpSuccess: "Kurtarma e-postası başarıyla kayıtlı adresinize gönderildi!",
+                fpNotFound: "Bu e-posta adresi sistemde kayıtlı değil!"
             },
             de: {
                 code: "DE",
@@ -1951,17 +1897,10 @@
                 errorSignin: "Ungültige E-Mail-Adresse oder Passwort!",
                 authRequiredAlert: "Sie müssen sich anmelden oder registrieren, bevor Sie Nachrichten per E-Mail oder WhatsApp senden können!",
                 fpTitle: "Passwort Wiederherstellung",
-                fpDesc: "Geben Sie Ihre registrierte E-Mail-Adresse ein. Wir senden Ihnen einen Wiederherstellungscode.",
-                fpSubmitText: "Wiederherstellungscode senden",
-                fpSuccess: "Wiederherstellungscode erfolgreich erstellt! Bitte geben Sie Ihr neues Passwort ein.",
-                fpNotFound: "Diese E-Mail-Adresse ist nicht im System registriert!",
-                npTitle: "Neues Passwort festlegen",
-                npDesc: "Geben Sie den per E-Mail gesendeten Code und Ihr neues Passwort ein.",
-                npLabelCode: "Wiederherstellungscode",
-                npLabelNewPass: "Neues Passwort",
-                npSubmitText: "Passwort aktualisieren",
-                npSuccess: "Ihr Passwort wurde erfolgreich aktualisiert! Sie können sich jetzt anmelden.",
-                npError: "Ungültiger Wiederherstellungscode oder E-Mail-Adresse!"
+                fpDesc: "Geben Sie Ihre registrierte E-Mail-Adresse ein. Wir senden Ihnen einen Wiederherstellungscode direkt an Ihre E-Mail.",
+                fpSubmitText: "Wiederherstellung senden",
+                fpSuccess: "Wiederherstellungs-E-Mail erfolgreich an Ihre Adresse gesendet!",
+                fpNotFound: "Diese E-Mail-Adresse ist nicht im System registriert!"
             }
         };
 
@@ -2029,18 +1968,6 @@
             document.getElementById('forgotPasswordModal').classList.remove('active');
         }
 
-        function openResetPasswordModal(emailToSet = '') {
-            closeForgotPasswordModal();
-            if(emailToSet) {
-                document.getElementById('resetClientEmail').value = emailToSet;
-            }
-            document.getElementById('resetPasswordModal').classList.add('active');
-        }
-
-        function closeResetPasswordModal() {
-            document.getElementById('resetPasswordModal').classList.remove('active');
-        }
-
         function handleForgotPasswordSubmit(e) {
             e.preventDefault();
             const email = document.getElementById('forgotClientEmail').value.trim();
@@ -2060,74 +1987,25 @@
                 return;
             }
 
-            // Kurtarma kodu üret ve localStorage'a geçici olarak kaydet
-            const recoveryCode = Math.floor(100000 + Math.random() * 900000).toString();
-            localStorage.setItem('temp_recovery_' + email, recoveryCode);
+            // Şifre kurtarma kodu oluşturma
+            const recoveryCode = Math.floor(100000 + Math.random() * 900000);
             
             const subject = encodeURIComponent("Password Recovery Code - muminsultani.com");
             const body = encodeURIComponent(
                 `Hello,\n\n` +
                 `You requested a password recovery for your account (${email}).\n` +
-                `Your Recovery Code: ${recoveryCode}\n\n` +
+                `Your Recovery Code / Temporary Password: ${recoveryCode}\n\n` +
                 `muminsultani.com`
             );
 
-            // Mailto tetiklemesi ile kullanıcının kendi posta uygulamasına kod gönderilir
-            const mailtoUrl = `mailto:${email}?subject=${subject}&body=${body}`;
-            window.location.href = mailtoUrl;
-
-            // Ardından kullanıcıyı yeni şifre oluşturma penceresine yönlendir
-            openResetPasswordModal(email);
+            closeForgotPasswordModal();
             showCustomAlert(t.fpSuccess);
-        }
 
-        function handleNewPasswordSubmit(e) {
-            e.preventDefault();
-            const email = document.getElementById('resetClientEmail').value.trim();
-            const code = document.getElementById('resetClientCode').value.trim();
-            const newPassword = document.getElementById('resetClientNewPassword').value.trim();
-
-            const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
-            const t = modalTranslations[modalLangText] || modalTranslations.en;
-
-            if (!email || !code || !newPassword) {
-                showCustomAlert(t.alertText);
-                return;
-            }
-
-            const expectedCode = localStorage.getItem('temp_recovery_' + email);
-
-            if (!expectedCode || expectedCode !== code) {
-                showCustomAlert(t.npError);
-                return;
-            }
-
-            // Şifreyi güncelle
-            let users = JSON.parse(localStorage.getItem('site_users') || '[]');
-            let userFound = false;
-
-            users = users.map(u => {
-                if (u.email === email) {
-                    u.password = newPassword;
-                    userFound = true;
-                }
-                return u;
-            });
-
-            if (userFound) {
-                localStorage.setItem('site_users', JSON.stringify(users));
-                localStorage.removeItem('temp_recovery_' + email);
-                closeResetPasswordModal();
-                showCustomAlert(t.npSuccess);
-                openDirectContactModal();
-            } else if (email === "admin@muminsultani.com") {
-                localStorage.removeItem('temp_recovery_' + email);
-                closeResetPasswordModal();
-                showCustomAlert(t.npSuccess);
-                openDirectContactModal();
-            } else {
-                showCustomAlert(t.npError);
-            }
+            // Kodun doğrudan kullanıcının kendi mail adresine gönderilmesi için mailto bağlantısı tetiklenir
+            setTimeout(() => {
+                const mailtoUrl = `mailto:${email}?subject=${subject}&body=${body}`;
+                window.location.href = mailtoUrl;
+            }, 800);
         }
 
         let activeNoticeEmail = "muminsultani@hotmail.com";
@@ -2265,12 +2143,6 @@
             if(document.getElementById('fp-title')) document.getElementById('fp-title').innerText = data.fpTitle;
             if(document.getElementById('fp-desc')) document.getElementById('fp-desc').innerText = data.fpDesc;
             if(document.getElementById('fp-submit-text')) document.getElementById('fp-submit-text').innerText = data.fpSubmitText;
-
-            if(document.getElementById('np-title')) document.getElementById('np-title').innerText = data.npTitle;
-            if(document.getElementById('np-desc')) document.getElementById('np-desc').innerText = data.npDesc;
-            if(document.getElementById('np-label-code')) document.getElementById('np-label-code').innerText = data.npLabelCode;
-            if(document.getElementById('np-label-newpass')) document.getElementById('np-label-newpass').innerText = data.npLabelNewPass;
-            if(document.getElementById('np-submit-text')) document.getElementById('np-submit-text').innerText = data.npSubmitText;
 
             const noticeMsg = document.getElementById('gmailNoticeMessage');
             if (noticeMsg) {
@@ -2623,6 +2495,12 @@
             }
         }
 
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
         initParticles();
 
         function animateConstellation() {
