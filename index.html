@@ -776,7 +776,6 @@
             -webkit-text-fill-color: var(--text-primary) !important;
         }
 
-        /* Şifre Alanı Konteyneri ve Toggle İkonu İçin Yeni Stiller */
         .password-wrapper {
             position: relative;
             width: 100%;
@@ -1137,12 +1136,12 @@
             </div>
         </header>
 
-        <!-- KULLANICI PROFİL / BİLGİ PANELİ (Giriş Yapılınca Görünür) -->
+        <!-- KULLANICI PROFİL / BİLGİ PANELİ (Giriş Yapılınca Görünür ve Şifre Değiştirme Özelliği Eklenmiştir) -->
         <section id="userProfileSection" style="display: none;">
             <div class="section-title">
                 <i class="fa-solid fa-user-gear"></i> <span id="t-profile-title">User Profile & Session</span>
             </div>
-            <div class="contact-box" style="cursor: default;">
+            <div class="contact-box" style="cursor: default; flex-direction: column; align-items: flex-start;">
                 <div class="contact-text" style="width: 100%;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <strong id="profileDisplayName" style="font-size: 1.15rem; color: #9333ea;">Name Surname</strong>
@@ -1155,6 +1154,27 @@
                             <span style="font-size: 0.72rem; color: var(--text-secondary);" id="t-prof-email">Email Address</span>
                             <strong id="profileDisplayEmail" style="font-size: 0.9rem;">email@sample.com</strong>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Şifre Değiştirme Alanı -->
+                <div style="width: 100%; margin-top: 16px; border-top: 1px solid var(--line-color); padding-top: 14px;">
+                    <button type="button" onclick="togglePasswordChangeForm()" style="background: rgba(147, 51, 234, 0.1); border: 1px solid rgba(147, 51, 234, 0.3); color: #9333ea; padding: 6px 12px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-key"></i> <span id="t-change-pwd-toggle">Change Password</span>
+                    </button>
+
+                    <div id="passwordChangeContainer" style="display: none; margin-top: 12px; width: 100%;">
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <label class="form-label" id="t-label-old-pwd" style="font-size: 0.78rem;">Current Password</label>
+                            <input type="password" class="form-input" id="oldPasswordInput" placeholder="••••••••" style="padding: 8px 12px; font-size: 0.85rem;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <label class="form-label" id="t-label-new-pwd" style="font-size: 0.78rem;">New Password</label>
+                            <input type="password" class="form-input" id="newPasswordInput" placeholder="••••••••" style="padding: 8px 12px; font-size: 0.85rem;">
+                        </div>
+                        <button type="button" onclick="submitPasswordChange()" class="submit-btn email-btn" style="padding: 8px 12px; font-size: 0.78rem; width: auto;">
+                            <i class="fa-solid fa-check"></i> <span id="t-save-pwd-btn">Update Password</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1320,13 +1340,11 @@
             </div>
 
             <form id="directContactForm">
-                <!-- Sadece Kayıt Olurken Görünecek Ad Soyad -->
                 <div class="form-group" id="groupSignupName" style="display: none;">
                     <label class="form-label" id="dc-label-name">Name & Surname</label>
                     <input type="text" class="form-input" id="contactClientName" placeholder="Name & Surname">
                 </div>
 
-                <!-- @Username alanı: Sadece Kayıt Olurken Görünecek -->
                 <div class="form-group" id="groupSignupUsername" style="display: none;">
                     <label class="form-label" id="dc-label-username">Username</label>
                     <input type="text" class="form-input" id="contactClientUsername" placeholder="@Username">
@@ -1337,7 +1355,6 @@
                     <input type="email" class="form-input" id="contactClientEmail" required placeholder="name@sample.com">
                 </div>
 
-                <!-- Şifre Alanı (Göz İkonu Eklenmiş Yapı) -->
                 <div class="form-group" id="groupPassword">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                         <label class="form-label" id="dc-label-password" style="margin-bottom: 0;">Password</label>
@@ -1360,7 +1377,7 @@
         </div>
     </div>
 
-    <!-- ŞİFREMİ UNUTTUM MODALI (PASSWORD RECOVERY) -->
+    <!-- ŞİFREMİ UNUTTUM MODALI -->
     <div class="modal-overlay" id="forgotPasswordModal">
         <div class="modal-container" style="max-width: 440px;">
             <div class="modal-header">
@@ -1491,7 +1508,7 @@
         </div>
     </div>
 
-    <!-- Özel Uyarı Kutusu (Custom Alert Modal) -->
+    <!-- Özel Uyarı Kutusu -->
     <div class="custom-alert-overlay" id="customAlertModal">
         <div class="custom-alert-box">
             <div class="custom-alert-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
@@ -1587,7 +1604,6 @@
             }
         }
 
-        /* Şifre Göster / Gizle Fonksiyonu */
         function togglePasswordVisibility(inputId, iconId) {
             const passwordInput = document.getElementById(inputId);
             const toggleIcon = document.getElementById(iconId);
@@ -1717,7 +1733,11 @@
                 profileTitle: "User Profile & Session",
                 logoutBtn: "Log Out",
                 profEmail: "Email Address",
-                forgotLink: "Forgot Password?"
+                forgotLink: "Forgot Password?",
+                changePwdToggle: "Change Password",
+                oldPwdLabel: "Current Password",
+                newPwdLabel: "New Password",
+                savePwdBtn: "Update Password"
             },
             tr: {
                 code: "TR",
@@ -1738,7 +1758,11 @@
                 profileTitle: "Kullanıcı Profili & Oturum",
                 logoutBtn: "Çıkış Yap",
                 profEmail: "E-posta Adresi",
-                forgotLink: "Şifremi Unuttum?"
+                forgotLink: "Şifremi Unuttum?",
+                changePwdToggle: "Şifre Değiştir",
+                oldPwdLabel: "Mevcut Şifre",
+                newPwdLabel: "Yeni Şifre",
+                savePwdBtn: "Şifreyi Güncelle"
             },
             de: {
                 code: "DE",
@@ -1759,7 +1783,11 @@
                 profileTitle: "Benutzerprofil & Sitzung",
                 logoutBtn: "Abmelden",
                 profEmail: "E-Mail-Adresse",
-                forgotLink: "Passwort vergessen?"
+                forgotLink: "Passwort vergessen?",
+                changePwdToggle: "Passwort ändern",
+                oldPwdLabel: "Aktuelles Passwort",
+                newPwdLabel: "Neues Passwort",
+                savePwdBtn: "Passwort aktualisieren"
             }
         };
 
@@ -1796,9 +1824,13 @@
             if(document.getElementById('t-profile-title')) document.getElementById('t-profile-title').innerText = data.profileTitle;
             if(document.getElementById('t-logout-btn')) document.getElementById('t-logout-btn').innerText = data.logoutBtn;
             if(document.getElementById('t-prof-email')) document.getElementById('t-prof-email').innerText = data.profEmail;
+            
+            if(document.getElementById('t-change-pwd-toggle')) document.getElementById('t-change-pwd-toggle').innerText = data.changePwdToggle;
+            if(document.getElementById('t-label-old-pwd')) document.getElementById('t-label-old-pwd').innerText = data.oldPwdLabel;
+            if(document.getElementById('t-label-new-pwd')) document.getElementById('t-label-new-pwd').innerText = data.newPwdLabel;
+            if(document.getElementById('t-save-pwd-btn')) document.getElementById('t-save-pwd-btn').innerText = data.savePwdBtn;
 
             changeModalLanguage(lang);
-
             document.getElementById('langMenu').classList.remove('show');
         }
 
@@ -2198,7 +2230,6 @@
                 const newUser = { name, username, email, password };
                 users.push(newUser);
                 localStorage.setItem('site_users', JSON.stringify(users));
-                
                 localStorage.setItem('logged_user', JSON.stringify(newUser));
                 
                 showCustomAlert(t.successSignup);
@@ -2207,7 +2238,7 @@
             } else {
                 let user = users.find(u => u.email === email && u.password === password);
                 if (!user && email === "admin@muminsultani.com" && password === "admin123") {
-                    user = { name: "Admin User", username: "@Admin", email: "admin@muminsultani.com" };
+                    user = { name: "Admin User", username: "@Admin", email: "admin@muminsultani.com", password: "admin123" };
                 }
 
                 if (user) {
@@ -2247,6 +2278,72 @@
                 if (contactSubEl) contactSubEl.innerText = "Sign In / Sign Up";
                 if (contactMainEl) contactMainEl.innerText = "Bize Katılmak İçin Giriş Yapın";
                 if (authBoxIcon) authBoxIcon.className = "fa-solid fa-right-to-bracket";
+                
+                // Oturum kapalıysa şifre değiştirme alanını da sıfırla/gizle
+                const pwdContainer = document.getElementById('passwordChangeContainer');
+                if(pwdContainer) pwdContainer.style.display = 'none';
+            }
+        }
+
+        function togglePasswordChangeForm() {
+            const container = document.getElementById('passwordChangeContainer');
+            if (container) {
+                container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+            }
+        }
+
+        function submitPasswordChange() {
+            const oldPwd = document.getElementById('oldPasswordInput').value.trim();
+            const newPwd = document.getElementById('newPasswordInput').value.trim();
+
+            if (!oldPwd || !newPwd) {
+                showCustomAlert("Please fill in both old and new password fields.");
+                return;
+            }
+
+            const loggedUserStr = localStorage.getItem('logged_user');
+            if (!loggedUserStr) {
+                showCustomAlert("No active session found.");
+                return;
+            }
+
+            let loggedUser = JSON.parse(loggedUserStr);
+            let users = JSON.parse(localStorage.getItem('site_users') || '[]');
+
+            // Eğer sabit admin hesabıysa veya kullanıcı kayıtlarındaysa kontrol et
+            if (loggedUser.email === "admin@muminsultani.com") {
+                if (oldPwd !== "admin123" && loggedUser.password && oldPwd !== loggedUser.password) {
+                    showCustomAlert("Current password is incorrect!");
+                    return;
+                }
+                loggedUser.password = newPwd;
+                localStorage.setItem('logged_user', JSON.stringify(loggedUser));
+                showCustomAlert("Password updated successfully!");
+                document.getElementById('oldPasswordInput').value = "";
+                document.getElementById('newPasswordInput').value = "";
+                togglePasswordChangeForm();
+                return;
+            }
+
+            // Normal kullanıcılar için array içinde bul ve güncelle
+            const userIndex = users.findIndex(u => u.email === loggedUser.email);
+            if (userIndex !== -1) {
+                if (users[userIndex].password !== oldPwd) {
+                    showCustomAlert("Current password is incorrect!");
+                    return;
+                }
+                users[userIndex].password = newPwd;
+                loggedUser.password = newPwd;
+                
+                localStorage.setItem('site_users', JSON.stringify(users));
+                localStorage.setItem('logged_user', JSON.stringify(loggedUser));
+
+                showCustomAlert("Password updated successfully!");
+                document.getElementById('oldPasswordInput').value = "";
+                document.getElementById('newPasswordInput').value = "";
+                togglePasswordChangeForm();
+            } else {
+                showCustomAlert("User record not found.");
             }
         }
 
