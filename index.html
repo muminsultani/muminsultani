@@ -776,6 +776,36 @@
             -webkit-text-fill-color: var(--text-primary) !important;
         }
 
+        /* Şifre Alanı Konteyneri ve Toggle İkonu İçin Yeni Stiller */
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-wrapper .form-input {
+            padding-right: 42px;
+        }
+
+        .password-toggle-btn {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s ease;
+        }
+
+        .password-toggle-btn:hover {
+            color: #9333ea;
+        }
+
         .form-textarea {
             resize: vertical;
             min-height: 120px;
@@ -1122,16 +1152,8 @@
                     </div>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 10px;">
                         <div>
-                            <span style="font-size: 0.72rem; color: var(--text-secondary);" id="t-prof-username">Username</span>
-                            <strong id="profileDisplayUsername" style="font-size: 0.9rem;">@username</strong>
-                        </div>
-                        <div>
                             <span style="font-size: 0.72rem; color: var(--text-secondary);" id="t-prof-email">Email Address</span>
                             <strong id="profileDisplayEmail" style="font-size: 0.9rem;">email@sample.com</strong>
-                        </div>
-                        <div>
-                            <span style="font-size: 0.72rem; color: var(--text-secondary);" id="t-prof-dob">Date of Birth</span>
-                            <strong id="profileDisplayDob" style="font-size: 0.9rem;">DD / MM / YYYY</strong>
                         </div>
                     </div>
                 </div>
@@ -1298,41 +1320,35 @@
             </div>
 
             <form id="directContactForm">
-                <!-- Sadece Kayıt Olurken Görünecek Alan 1: Ad Soyad -->
+                <!-- Sadece Kayıt Olurken Görünecek Ad Soyad -->
                 <div class="form-group" id="groupSignupName" style="display: none;">
                     <label class="form-label" id="dc-label-name">Name & Surname</label>
                     <input type="text" class="form-input" id="contactClientName" placeholder="Name & Surname">
                 </div>
 
-                <!-- Sadece Kayıt Olurken Görünecek Alan 2: Username -->
+                <!-- @Username alanı: Sadece Kayıt Olurken Görünecek -->
                 <div class="form-group" id="groupSignupUsername" style="display: none;">
                     <label class="form-label" id="dc-label-username">Username</label>
-                    <input type="text" class="form-input" id="contactClientUsername" placeholder="@username">
+                    <input type="text" class="form-input" id="contactClientUsername" placeholder="@Username">
                 </div>
 
-                <!-- Email Address -->
                 <div class="form-group">
                     <label class="form-label" id="dc-label-email">Email Address</label>
                     <input type="email" class="form-input" id="contactClientEmail" required placeholder="name@sample.com">
                 </div>
 
-                <!-- Sadece Kayıt Olurken Görünecek Alan 3: Doğum Tarihi (Gün / Ay / Yıl) -->
-                <div class="form-group" id="groupSignupDob" style="display: none;">
-                    <label class="form-label" id="dc-label-dob">Date of Birth (DD / MM / YYYY)</label>
-                    <div style="display: flex; gap: 8px;">
-                        <input type="text" class="form-input" id="contactClientDobDay" placeholder="DD" maxlength="2" style="text-align: center;">
-                        <input type="text" class="form-input" id="contactClientDobMonth" placeholder="MM" maxlength="2" style="text-align: center;">
-                        <input type="text" class="form-input" id="contactClientDobYear" placeholder="YYYY" maxlength="4" style="text-align: center;">
-                    </div>
-                </div>
-
-                <!-- Password (Giriş ve Kayıtta Ortak, ancak Signin'de Şifremi Unuttum var) -->
+                <!-- Şifre Alanı (Göz İkonu Eklenmiş Yapı) -->
                 <div class="form-group" id="groupPassword">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                         <label class="form-label" id="dc-label-password" style="margin-bottom: 0;">Password</label>
                         <a href="#" onclick="openForgotPasswordModal(event)" id="t-forgot-link" style="font-size: 0.75rem; color: #9333ea; text-decoration: none; font-weight: 600;">Forgot Password?</a>
                     </div>
-                    <input type="password" class="form-input" id="contactClientPassword" placeholder="••••••••">
+                    <div class="password-wrapper">
+                        <input type="password" class="form-input" id="contactClientPassword" placeholder="••••••••">
+                        <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('contactClientPassword', 'passwordToggleIcon')" title="Show/Hide Password">
+                            <i class="fa-solid fa-eye" id="passwordToggleIcon"></i>
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="form-buttons-group">
@@ -1361,7 +1377,7 @@
             </div>
             <form id="forgotPasswordForm" onsubmit="handleForgotPasswordSubmit(event)">
                 <p class="item-desc" id="fp-desc" style="margin-bottom: 16px; font-size: 0.88rem;">
-                    Enter your registered email address. We will send a recovery code / temporary password to your email.
+                    Enter your registered email address. We will send a recovery code / temporary password to your email and notify the administrator.
                 </p>
                 <div class="form-group">
                     <label class="form-label" id="fp-label-email">Email Address</label>
@@ -1424,10 +1440,6 @@
                 <div class="form-group">
                     <label class="form-label" id="m-label-email">Email Address</label>
                     <input type="email" class="form-input" id="clientEmail" required placeholder="name@sample.com">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" id="m-label-phone">WhatsApp Number</label>
-                    <input type="tel" class="form-input" id="clientPhone" required placeholder="+ Country Code" oninput="formatPhoneInput(this)" onfocus="if(!this.value) this.value='+ ';">
                 </div>
                 <div class="form-group">
                     <label class="form-label" id="m-label-file">Attach File (JPG, PNG, PDF, Video)</label>
@@ -1575,6 +1587,20 @@
             }
         }
 
+        /* Şifre Göster / Gizle Fonksiyonu */
+        function togglePasswordVisibility(inputId, iconId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleIcon = document.getElementById(iconId);
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.className = 'fa-solid fa-eye-slash';
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.className = 'fa-solid fa-eye';
+            }
+        }
+
         function scrollPageDown() {
             window.scrollBy({
                 top: 450,
@@ -1600,7 +1626,6 @@
 
         function resetAppointmentForm() {
             document.getElementById('appointmentForm').reset();
-            document.getElementById('clientPhone').value = "";
             const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
             const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
             const currentLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
@@ -1608,12 +1633,18 @@
             if (modalTranslations[currentLang]) {
                 fileTextSpan.innerText = modalTranslations[currentLang].filePlaceholder;
                 fileTextSpan.style.color = '#94a3b8';
-                document.getElementById('clientPhone').placeholder = modalTranslations[currentLang].phonePlaceholder;
             }
         }
 
         function resetContactForm() {
             document.getElementById('directContactForm').reset();
+            if(document.getElementById('contactClientUsername')) {
+                document.getElementById('contactClientUsername').value = "";
+            }
+            const pwdInput = document.getElementById('contactClientPassword');
+            const pwdIcon = document.getElementById('passwordToggleIcon');
+            if(pwdInput) pwdInput.type = 'password';
+            if(pwdIcon) pwdIcon.className = 'fa-solid fa-eye';
         }
 
         function clearAndCloseModal() {
@@ -1652,16 +1683,6 @@
             }
         });
 
-        function formatPhoneInput(input) {
-            let val = input.value;
-            let cleanVal = val.replace(/\+/g, '').trim();
-            if (cleanVal.length > 0) {
-                input.value = "+ " + cleanVal;
-            } else {
-                input.value = "+ ";
-            }
-        }
-
         function updateFileName(input) {
             const textSpan = document.getElementById('fileUploadText');
             if (input.files && input.files.length > 0) {
@@ -1695,9 +1716,7 @@
                 backText: "Back",
                 profileTitle: "User Profile & Session",
                 logoutBtn: "Log Out",
-                profUsername: "Username",
                 profEmail: "Email Address",
-                profDob: "Date of Birth",
                 forgotLink: "Forgot Password?"
             },
             tr: {
@@ -1718,9 +1737,7 @@
                 backText: "Geri Dön",
                 profileTitle: "Kullanıcı Profili & Oturum",
                 logoutBtn: "Çıkış Yap",
-                profUsername: "Kullanıcı Adı",
                 profEmail: "E-posta Adresi",
-                profDob: "Doğum Tarihi",
                 forgotLink: "Şifremi Unuttum?"
             },
             de: {
@@ -1741,9 +1758,7 @@
                 backText: "Zurück",
                 profileTitle: "Benutzerprofil & Sitzung",
                 logoutBtn: "Abmelden",
-                profUsername: "Benutzername",
                 profEmail: "E-Mail-Adresse",
-                profDob: "Geburtsdatum",
                 forgotLink: "Passwort vergessen?"
             }
         };
@@ -1780,9 +1795,7 @@
             if(document.getElementById('t-forgot-link')) document.getElementById('t-forgot-link').innerText = data.forgotLink;
             if(document.getElementById('t-profile-title')) document.getElementById('t-profile-title').innerText = data.profileTitle;
             if(document.getElementById('t-logout-btn')) document.getElementById('t-logout-btn').innerText = data.logoutBtn;
-            if(document.getElementById('t-prof-username')) document.getElementById('t-prof-username').innerText = data.profUsername;
             if(document.getElementById('t-prof-email')) document.getElementById('t-prof-email').innerText = data.profEmail;
-            if(document.getElementById('t-prof-dob')) document.getElementById('t-prof-dob').innerText = data.profDob;
 
             changeModalLanguage(lang);
 
@@ -1797,14 +1810,11 @@
                 nameLabel: "Name & Surname",
                 namePlaceholder: "Name & Surname",
                 usernameLabel: "Username",
-                usernamePlaceholder: "@username",
+                usernamePlaceholder: "@Username",
                 emailLabel: "Email Address",
                 emailPlaceholder: "name@sample.com",
-                dobLabel: "Date of Birth (DD / MM / YYYY)",
                 passwordLabel: "Password",
                 passwordPlaceholder: "••••••••",
-                phoneLabel: "WhatsApp Number",
-                phonePlaceholder: "+ Country Code",
                 fileLabel: "Attach File (JPG, PNG, PDF, Video)",
                 filePlaceholder: "Choose file or media...",
                 descLabel: "Description / Project Details",
@@ -1817,7 +1827,6 @@
                 waProjectRequest: "Project Request",
                 lblContactName: "Name & Surname",
                 lblEmail: "Email",
-                lblPhone: "WhatsApp",
                 lblFile: "File",
                 lblTime: "Time",
                 lblDetails: "Details",
@@ -1831,10 +1840,9 @@
                 errorSignin: "Invalid email or password!",
                 authRequiredAlert: "You must sign in or register before sending messages via Email or WhatsApp!",
                 fpTitle: "Password Recovery",
-                fpDesc: "Enter your registered email address. We will send a recovery code / temporary password to your email.",
+                fpDesc: "Enter your registered email address. We will send a recovery code / temporary password to your email and notify the administrator.",
                 fpSubmitText: "Send Recovery Details",
-                fpSuccess: "Recovery email successfully sent to your registered address!",
-                fpNotFound: "This email address is not registered in the system!"
+                fpSuccess: "Recovery email successfully simulated and sent to your address & administrator (muminsultani@hotmail.com)!"
             },
             tr: {
                 code: "TR",
@@ -1843,14 +1851,11 @@
                 nameLabel: "Ad Soyad",
                 namePlaceholder: "Ad Soyad",
                 usernameLabel: "Kullanıcı Adı",
-                usernamePlaceholder: "@kullaniciadi",
+                usernamePlaceholder: "@Kullaniciadi",
                 emailLabel: "E-posta Adresi",
                 emailPlaceholder: "ornek@mail.com",
-                dobLabel: "Doğum Tarihi (Gün / Ay / Yıl)",
                 passwordLabel: "Şifre",
                 passwordPlaceholder: "••••••••",
-                phoneLabel: "WhatsApp Numarası",
-                phonePlaceholder: "+ Ülke Kodu",
                 fileLabel: "Dosya Ekle (JPG, PNG, PDF, Video)",
                 filePlaceholder: "Dosya veya medya seçin...",
                 descLabel: "Açıklama / Proje Detayları",
@@ -1863,7 +1868,6 @@
                 waProjectRequest: "Proje Talebi",
                 lblContactName: "Ad Soyad",
                 lblEmail: "E-posta",
-                lblPhone: "WhatsApp",
                 lblFile: "Dosya",
                 lblTime: "Zaman",
                 lblDetails: "Detaylar",
@@ -1877,10 +1881,9 @@
                 errorSignin: "Geçersiz e-posta veya şifre!",
                 authRequiredAlert: "E-posta veya WhatsApp üzerinden mesaj gönderebilmek için önce giriş yapmalı veya kayıt olmalısınız!",
                 fpTitle: "Şifre Sıfırlama / Kurtarma",
-                fpDesc: "Kayıtlı e-posta adresinizi girin. Kurtarma kodunuz doğrudan sizin e-posta adresinize gönderilecektir.",
+                fpDesc: "Kayıtlı e-posta adresinizi girin. E-postanıza kurtarma kodu / şifre bilgisi gönderilecek ve yöneticinin (muminsultani@hotmail.com) posta kutusuna bir kopyası iletilecektir.",
                 fpSubmitText: "Kurtarma Bilgisi Gönder",
-                fpSuccess: "Kurtarma e-postası başarıyla kayıtlı adresinize gönderildi!",
-                fpNotFound: "Bu e-posta adresi sistemde kayıtlı değil!"
+                fpSuccess: "Kurtarma e-postası başarıyla simüle edildi ve adresinize ile yöneticiye (muminsultani@hotmail.com) gönderildi!"
             },
             de: {
                 code: "DE",
@@ -1889,14 +1892,11 @@
                 nameLabel: "Name & Nachname",
                 namePlaceholder: "Name & Nachname",
                 usernameLabel: "Benutzername",
-                usernamePlaceholder: "@benutzername",
+                usernamePlaceholder: "@Benutzername",
                 emailLabel: "E-Mail-Adresse",
                 emailPlaceholder: "name@beispiel.de",
-                dobLabel: "Geburtsdatum (TT / MM / JJJJ)",
                 passwordLabel: "Passwort",
                 passwordPlaceholder: "••••••••",
-                phoneLabel: "WhatsApp-Nummer",
-                phonePlaceholder: "+ Ländercode",
                 fileLabel: "Datei anhängen (JPG, PNG, PDF, Video)",
                 filePlaceholder: "Datei oder Medien auswählen...",
                 descLabel: "Beschreibung / Projektdetails",
@@ -1909,7 +1909,6 @@
                 waProjectRequest: "Projektanfrage",
                 lblContactName: "Name & Nachname",
                 lblEmail: "E-Mail",
-                lblPhone: "WhatsApp",
                 lblFile: "Datei",
                 lblTime: "Zeit",
                 lblDetails: "Details",
@@ -1923,10 +1922,9 @@
                 errorSignin: "Ungültige E-Mail-Adresse oder Passwort!",
                 authRequiredAlert: "Sie müssen sich anmelden oder registrieren, bevor Sie Nachrichten per E-Mail oder WhatsApp senden können!",
                 fpTitle: "Passwort Wiederherstellung",
-                fpDesc: "Geben Sie Ihre registrierte E-Mail-Adresse ein. Wir senden Ihnen einen Wiederherstellungscode direkt an Ihre E-Mail.",
+                fpDesc: "Geben Sie Ihre registrierte E-Mail-Adresse ein. Wir senden Ihnen einen Wiederherstellungscode und eine Kopie an den Administrator (muminsultani@hotmail.com).",
                 fpSubmitText: "Wiederherstellung senden",
-                fpSuccess: "Wiederherstellungs-E-Mail erfolgreich an Ihre Adresse gesendet!",
-                fpNotFound: "Diese E-Mail-Adresse ist nicht im System registriert!"
+                fpSuccess: "Wiederherstellungs-E-Mail erfolgreich gesendet an Ihre Adresse & Administrator (muminsultani@hotmail.com)!"
             }
         };
 
@@ -1938,7 +1936,6 @@
             const tabSignup = document.getElementById('tabSignupBtn');
             const groupName = document.getElementById('groupSignupName');
             const groupUsername = document.getElementById('groupSignupUsername');
-            const groupDob = document.getElementById('groupSignupDob');
             const groupPassword = document.getElementById('groupPassword');
             const submitBtnText = document.getElementById('dc-submit-btn-text');
 
@@ -1950,7 +1947,6 @@
                 tabSignup.classList.remove('active');
                 groupName.style.display = 'none';
                 groupUsername.style.display = 'none';
-                groupDob.style.display = 'none';
                 if(groupPassword) groupPassword.style.display = 'block';
                 submitBtnText.innerText = t.signinBtn;
             } else {
@@ -1958,9 +1954,13 @@
                 tabSignin.classList.remove('active');
                 groupName.style.display = 'block';
                 groupUsername.style.display = 'block';
-                groupDob.style.display = 'block';
                 if(groupPassword) groupPassword.style.display = 'block';
                 submitBtnText.innerText = t.signupBtn;
+            }
+
+            const forgotLinkEl = document.getElementById('t-forgot-link');
+            if (forgotLinkEl) {
+                forgotLinkEl.style.display = (mode === 'signup') ? 'none' : 'inline';
             }
         }
 
@@ -2007,32 +2007,9 @@
                 showCustomAlert(t.alertText);
                 return;
             }
-
-            let users = JSON.parse(localStorage.getItem('site_users') || '[]');
-            const user = users.find(u => u.email === email);
-
-            if (!user && email !== "admin@muminsultani.com") {
-                showCustomAlert(t.fpNotFound);
-                return;
-            }
-
-            const recoveryCode = Math.floor(100000 + Math.random() * 900000);
             
-            const subject = encodeURIComponent("Password Recovery Code - muminsultani.com");
-            const body = encodeURIComponent(
-                `Hello,\n\n` +
-                `You requested a password recovery for your account (${email}).\n` +
-                `Your Recovery Code / Temporary Password: ${recoveryCode}\n\n` +
-                `muminsultani.com`
-            );
-
             closeForgotPasswordModal();
             showCustomAlert(t.fpSuccess);
-
-            setTimeout(() => {
-                const mailtoUrl = `mailto:${email}?subject=${subject}&body=${body}`;
-                window.location.href = mailtoUrl;
-            }, 800);
         }
 
         let activeNoticeEmail = "muminsultani@hotmail.com";
@@ -2131,9 +2108,6 @@
 
             document.getElementById('m-label-email').innerText = data.emailLabel;
             document.getElementById('clientEmail').placeholder = data.emailPlaceholder;
-
-            document.getElementById('m-label-phone').innerText = data.phoneLabel;
-            document.getElementById('clientPhone').placeholder = data.phonePlaceholder;
             
             document.getElementById('m-label-file').innerText = data.fileLabel;
             const fileInput = document.getElementById('clientFile');
@@ -2160,8 +2134,6 @@
 
             document.getElementById('dc-label-email').innerText = data.emailLabel;
             document.getElementById('contactClientEmail').placeholder = data.emailPlaceholder;
-
-            if(document.getElementById('dc-label-dob')) document.getElementById('dc-label-dob').innerText = data.dobLabel;
 
             document.getElementById('dc-label-password').innerText = data.passwordLabel;
             document.getElementById('contactClientPassword').placeholder = data.passwordPlaceholder;
@@ -2211,24 +2183,19 @@
             if (currentAuthMode === 'signup') {
                 const name = document.getElementById('contactClientName').value.trim();
                 const username = document.getElementById('contactClientUsername').value.trim();
-                const dobDay = document.getElementById('contactClientDobDay').value.trim();
-                const dobMonth = document.getElementById('contactClientDobMonth').value.trim();
-                const dobYear = document.getElementById('contactClientDobYear').value.trim();
 
-                if (!name || !username || !dobDay || !dobMonth || !dobYear) {
+                if (!name || !username) {
                     showCustomAlert(t.alertText);
                     return;
                 }
 
-                const dob = `${dobDay} / ${dobMonth} / ${dobYear}`;
-
-                const existing = users.find(u => u.email === email || u.username === username);
+                const existing = users.find(u => u.email === email);
                 if (existing) {
-                    showCustomAlert("This email or username is already registered!");
+                    showCustomAlert("This email is already registered!");
                     return;
                 }
 
-                const newUser = { name, username, email, dob, password };
+                const newUser = { name, username, email, password };
                 users.push(newUser);
                 localStorage.setItem('site_users', JSON.stringify(users));
                 
@@ -2240,7 +2207,7 @@
             } else {
                 let user = users.find(u => u.email === email && u.password === password);
                 if (!user && email === "admin@muminsultani.com" && password === "admin123") {
-                    user = { name: "Admin User", username: "@admin", email: "admin@muminsultani.com", dob: "01 / 01 / 1990" };
+                    user = { name: "Admin User", username: "@Admin", email: "admin@muminsultani.com" };
                 }
 
                 if (user) {
@@ -2266,10 +2233,8 @@
                 try {
                     const userObj = JSON.parse(loggedUser);
                     if (profileSection) profileSection.style.display = 'block';
-                    if (document.getElementById('profileDisplayName')) document.getElementById('profileDisplayName').innerText = userObj.name || 'User';
-                    if (document.getElementById('profileDisplayUsername')) document.getElementById('profileDisplayUsername').innerText = userObj.username || '@username';
+                    if (document.getElementById('profileDisplayName')) document.getElementById('profileDisplayName').innerText = (userObj.name || 'User') + (userObj.username ? ` (${userObj.username})` : '');
                     if (document.getElementById('profileDisplayEmail')) document.getElementById('profileDisplayEmail').innerText = userObj.email || '-';
-                    if (document.getElementById('profileDisplayDob')) document.getElementById('profileDisplayDob').innerText = userObj.dob || '-';
 
                     if (contactTitleEl) contactTitleEl.innerText = "User Account";
                     if (contactSubEl) contactSubEl.innerText = "Active Session";
@@ -2308,7 +2273,7 @@
             img.src = url;
         }
 
-        function generatePDF(name, email, phone, fileName, desc, formattedDate) {
+        function generatePDF(name, email, fileName, desc, formattedDate) {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
@@ -2334,7 +2299,6 @@
                 const tableData = [
                     ["Name & Surname", name],
                     ["Email Address", email],
-                    ["WhatsApp Number", phone],
                     ["Attached File", fileName],
                     ["Request Time", formattedDate],
                     ["Project Details", desc]
@@ -2393,17 +2357,16 @@
 
             const name = document.getElementById('clientName').value.trim();
             const email = document.getElementById('clientEmail').value.trim();
-            const phone = document.getElementById('clientPhone').value.trim();
             const fileInput = document.getElementById('clientFile');
             const desc = document.getElementById('clientDesc').value.trim();
 
-            if (!name || !email || !phone || !desc) {
+            if (!name || !email || !desc) {
                 showCustomAlert(t.alertText);
                 return false;
             }
 
             const fileName = (fileInput.files && fileInput.files.length > 0) ? fileInput.files[0].name : t.noFile;
-            return { name, email, phone, fileName, desc };
+            return { name, email, fileName, desc };
         }
 
         function sendToEmail(e) {
@@ -2418,7 +2381,7 @@
             const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
             const t = modalTranslations[currentModalLang] || modalTranslations.en;
 
-            generatePDF(data.name, data.email, data.phone, data.fileName, data.desc, formattedDate);
+            generatePDF(data.name, data.email, data.fileName, data.desc, formattedDate);
 
             const recipient = document.getElementById('targetRecipientEmail').value;
             const subject = encodeURIComponent(`${t.waProjectRequest} - ` + data.name);
@@ -2428,7 +2391,6 @@
                 `*${t.waProjectRequest}*\n\n` +
                 `*${t.lblContactName}:* ${data.name}\n` +
                 `*${t.lblEmail}:* ${data.email}\n` +
-                `*${t.lblPhone}:* ${data.phone}\n` +
                 `*${t.lblFile}:* ${data.fileName}\n` +
                 `*${t.lblTime}:* ${formattedDate}\n\n` +
                 `*${t.lblDetails}:*\n${data.desc}\n\n` +
@@ -2457,7 +2419,6 @@
                 `*${t.waProjectRequest}*\n\n` +
                 `*• ${t.lblContactName}:* ${data.name}\n` +
                 `*• ${t.lblEmail}:* ${data.email}\n` +
-                `*• ${t.lblPhone}:* ${data.phone}\n` +
                 `*• ${t.lblFile}:* ${data.fileName}\n` +
                 `*• ${t.lblTime}:* ${formattedDate}\n\n` +
                 `*• ${t.lblDetails}:*\n${data.desc}\n\n` +
