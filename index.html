@@ -1122,12 +1122,16 @@
                     </div>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 10px;">
                         <div>
+                            <span style="font-size: 0.72rem; color: var(--text-secondary);" id="t-prof-username">Username</span>
+                            <strong id="profileDisplayUsername" style="font-size: 0.9rem;">@username</strong>
+                        </div>
+                        <div>
                             <span style="font-size: 0.72rem; color: var(--text-secondary);" id="t-prof-email">Email Address</span>
                             <strong id="profileDisplayEmail" style="font-size: 0.9rem;">email@sample.com</strong>
                         </div>
                         <div>
-                            <span style="font-size: 0.72rem; color: var(--text-secondary);" id="t-prof-phone">Phone Number</span>
-                            <strong id="profileDisplayPhone" style="font-size: 0.9rem;">+ --</strong>
+                            <span style="font-size: 0.72rem; color: var(--text-secondary);" id="t-prof-dob">Date of Birth</span>
+                            <strong id="profileDisplayDob" style="font-size: 0.9rem;">DD / MM / YYYY</strong>
                         </div>
                     </div>
                 </div>
@@ -1294,29 +1298,41 @@
             </div>
 
             <form id="directContactForm">
-                <!-- Sadece Kayıt Olurken Görünecek Alan -->
+                <!-- Sadece Kayıt Olurken Görünecek Alan 1: Ad Soyad -->
                 <div class="form-group" id="groupSignupName" style="display: none;">
                     <label class="form-label" id="dc-label-name">Name & Surname</label>
                     <input type="text" class="form-input" id="contactClientName" placeholder="Name & Surname">
                 </div>
 
+                <!-- Sadece Kayıt Olurken Görünecek Alan 2: Username -->
+                <div class="form-group" id="groupSignupUsername" style="display: none;">
+                    <label class="form-label" id="dc-label-username">Username</label>
+                    <input type="text" class="form-input" id="contactClientUsername" placeholder="@username">
+                </div>
+
+                <!-- Email Address -->
                 <div class="form-group">
                     <label class="form-label" id="dc-label-email">Email Address</label>
                     <input type="email" class="form-input" id="contactClientEmail" required placeholder="name@sample.com">
                 </div>
 
+                <!-- Sadece Kayıt Olurken Görünecek Alan 3: Doğum Tarihi (Gün / Ay / Yıl) -->
+                <div class="form-group" id="groupSignupDob" style="display: none;">
+                    <label class="form-label" id="dc-label-dob">Date of Birth (DD / MM / YYYY)</label>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" class="form-input" id="contactClientDobDay" placeholder="DD" maxlength="2" style="text-align: center;">
+                        <input type="text" class="form-input" id="contactClientDobMonth" placeholder="MM" maxlength="2" style="text-align: center;">
+                        <input type="text" class="form-input" id="contactClientDobYear" placeholder="YYYY" maxlength="4" style="text-align: center;">
+                    </div>
+                </div>
+
+                <!-- Password (Giriş ve Kayıtta Ortak, ancak Signin'de Şifremi Unuttum var) -->
                 <div class="form-group" id="groupPassword">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                         <label class="form-label" id="dc-label-password" style="margin-bottom: 0;">Password</label>
                         <a href="#" onclick="openForgotPasswordModal(event)" id="t-forgot-link" style="font-size: 0.75rem; color: #9333ea; text-decoration: none; font-weight: 600;">Forgot Password?</a>
                     </div>
                     <input type="password" class="form-input" id="contactClientPassword" placeholder="••••••••">
-                </div>
-
-                <!-- Sadece Kayıt Olurken Görünecek Alan -->
-                <div class="form-group" id="groupSignupPhone" style="display: none;">
-                    <label class="form-label" id="dc-label-phone">Phone Number</label>
-                    <input type="tel" class="form-input" id="contactClientPhone" placeholder="+ Country Code" oninput="formatPhoneInput(this)" onfocus="if(!this.value) this.value='+ ';">
                 </div>
                 
                 <div class="form-buttons-group">
@@ -1598,9 +1614,6 @@
 
         function resetContactForm() {
             document.getElementById('directContactForm').reset();
-            if(document.getElementById('contactClientPhone')) {
-                document.getElementById('contactClientPhone').value = "";
-            }
         }
 
         function clearAndCloseModal() {
@@ -1682,8 +1695,9 @@
                 backText: "Back",
                 profileTitle: "User Profile & Session",
                 logoutBtn: "Log Out",
+                profUsername: "Username",
                 profEmail: "Email Address",
-                profPhone: "Phone Number",
+                profDob: "Date of Birth",
                 forgotLink: "Forgot Password?"
             },
             tr: {
@@ -1704,8 +1718,9 @@
                 backText: "Geri Dön",
                 profileTitle: "Kullanıcı Profili & Oturum",
                 logoutBtn: "Çıkış Yap",
+                profUsername: "Kullanıcı Adı",
                 profEmail: "E-posta Adresi",
-                profPhone: "Telefon Numarası",
+                profDob: "Doğum Tarihi",
                 forgotLink: "Şifremi Unuttum?"
             },
             de: {
@@ -1726,8 +1741,9 @@
                 backText: "Zurück",
                 profileTitle: "Benutzerprofil & Sitzung",
                 logoutBtn: "Abmelden",
+                profUsername: "Benutzername",
                 profEmail: "E-Mail-Adresse",
-                profPhone: "Telefonnummer",
+                profDob: "Geburtsdatum",
                 forgotLink: "Passwort vergessen?"
             }
         };
@@ -1764,8 +1780,9 @@
             if(document.getElementById('t-forgot-link')) document.getElementById('t-forgot-link').innerText = data.forgotLink;
             if(document.getElementById('t-profile-title')) document.getElementById('t-profile-title').innerText = data.profileTitle;
             if(document.getElementById('t-logout-btn')) document.getElementById('t-logout-btn').innerText = data.logoutBtn;
+            if(document.getElementById('t-prof-username')) document.getElementById('t-prof-username').innerText = data.profUsername;
             if(document.getElementById('t-prof-email')) document.getElementById('t-prof-email').innerText = data.profEmail;
-            if(document.getElementById('t-prof-phone')) document.getElementById('t-prof-phone').innerText = data.profPhone;
+            if(document.getElementById('t-prof-dob')) document.getElementById('t-prof-dob').innerText = data.profDob;
 
             changeModalLanguage(lang);
 
@@ -1779,11 +1796,14 @@
                 contactHeaderTitle: "Account Access",
                 nameLabel: "Name & Surname",
                 namePlaceholder: "Name & Surname",
+                usernameLabel: "Username",
+                usernamePlaceholder: "@username",
                 emailLabel: "Email Address",
                 emailPlaceholder: "name@sample.com",
+                dobLabel: "Date of Birth (DD / MM / YYYY)",
                 passwordLabel: "Password",
                 passwordPlaceholder: "••••••••",
-                phoneLabel: "Phone Number",
+                phoneLabel: "WhatsApp Number",
                 phonePlaceholder: "+ Country Code",
                 fileLabel: "Attach File (JPG, PNG, PDF, Video)",
                 filePlaceholder: "Choose file or media...",
@@ -1822,11 +1842,14 @@
                 contactHeaderTitle: "Hesap İşlemleri",
                 nameLabel: "Ad Soyad",
                 namePlaceholder: "Ad Soyad",
+                usernameLabel: "Kullanıcı Adı",
+                usernamePlaceholder: "@kullaniciadi",
                 emailLabel: "E-posta Adresi",
                 emailPlaceholder: "ornek@mail.com",
+                dobLabel: "Doğum Tarihi (Gün / Ay / Yıl)",
                 passwordLabel: "Şifre",
                 passwordPlaceholder: "••••••••",
-                phoneLabel: "Telefon Numarası",
+                phoneLabel: "WhatsApp Numarası",
                 phonePlaceholder: "+ Ülke Kodu",
                 fileLabel: "Dosya Ekle (JPG, PNG, PDF, Video)",
                 filePlaceholder: "Dosya veya medya seçin...",
@@ -1865,11 +1888,14 @@
                 contactHeaderTitle: "Konto-Zugang",
                 nameLabel: "Name & Nachname",
                 namePlaceholder: "Name & Nachname",
+                usernameLabel: "Benutzername",
+                usernamePlaceholder: "@benutzername",
                 emailLabel: "E-Mail-Adresse",
                 emailPlaceholder: "name@beispiel.de",
+                dobLabel: "Geburtsdatum (TT / MM / JJJJ)",
                 passwordLabel: "Passwort",
                 passwordPlaceholder: "••••••••",
-                phoneLabel: "Telefonnummer",
+                phoneLabel: "WhatsApp-Nummer",
                 phonePlaceholder: "+ Ländercode",
                 fileLabel: "Datei anhängen (JPG, PNG, PDF, Video)",
                 filePlaceholder: "Datei oder Medien auswählen...",
@@ -1911,7 +1937,8 @@
             const tabSignin = document.getElementById('tabSigninBtn');
             const tabSignup = document.getElementById('tabSignupBtn');
             const groupName = document.getElementById('groupSignupName');
-            const groupPhone = document.getElementById('groupSignupPhone');
+            const groupUsername = document.getElementById('groupSignupUsername');
+            const groupDob = document.getElementById('groupSignupDob');
             const groupPassword = document.getElementById('groupPassword');
             const submitBtnText = document.getElementById('dc-submit-btn-text');
 
@@ -1922,14 +1949,16 @@
                 tabSignin.classList.add('active');
                 tabSignup.classList.remove('active');
                 groupName.style.display = 'none';
-                groupPhone.style.display = 'none';
+                groupUsername.style.display = 'none';
+                groupDob.style.display = 'none';
                 if(groupPassword) groupPassword.style.display = 'block';
                 submitBtnText.innerText = t.signinBtn;
             } else {
                 tabSignup.classList.add('active');
                 tabSignin.classList.remove('active');
                 groupName.style.display = 'block';
-                groupPhone.style.display = 'block';
+                groupUsername.style.display = 'block';
+                groupDob.style.display = 'block';
                 if(groupPassword) groupPassword.style.display = 'block';
                 submitBtnText.innerText = t.signupBtn;
             }
@@ -1987,7 +2016,6 @@
                 return;
             }
 
-            // Şifre kurtarma kodu oluşturma
             const recoveryCode = Math.floor(100000 + Math.random() * 900000);
             
             const subject = encodeURIComponent("Password Recovery Code - muminsultani.com");
@@ -2001,7 +2029,6 @@
             closeForgotPasswordModal();
             showCustomAlert(t.fpSuccess);
 
-            // Kodun doğrudan kullanıcının kendi mail adresine gönderilmesi için mailto bağlantısı tetiklenir
             setTimeout(() => {
                 const mailtoUrl = `mailto:${email}?subject=${subject}&body=${body}`;
                 window.location.href = mailtoUrl;
@@ -2071,7 +2098,6 @@
                 if(userObj) {
                     if(document.getElementById('clientName')) document.getElementById('clientName').value = userObj.name || '';
                     if(document.getElementById('clientEmail')) document.getElementById('clientEmail').value = userObj.email || '';
-                    if(document.getElementById('clientPhone')) document.getElementById('clientPhone').value = userObj.phone || '';
                 }
             } catch(e) {}
 
@@ -2129,14 +2155,16 @@
             document.getElementById('dc-label-name').innerText = data.nameLabel;
             if(document.getElementById('contactClientName')) document.getElementById('contactClientName').placeholder = data.namePlaceholder;
 
+            if(document.getElementById('dc-label-username')) document.getElementById('dc-label-username').innerText = data.usernameLabel;
+            if(document.getElementById('contactClientUsername')) document.getElementById('contactClientUsername').placeholder = data.usernamePlaceholder;
+
             document.getElementById('dc-label-email').innerText = data.emailLabel;
             document.getElementById('contactClientEmail').placeholder = data.emailPlaceholder;
 
+            if(document.getElementById('dc-label-dob')) document.getElementById('dc-label-dob').innerText = data.dobLabel;
+
             document.getElementById('dc-label-password').innerText = data.passwordLabel;
             document.getElementById('contactClientPassword').placeholder = data.passwordPlaceholder;
-
-            if(document.getElementById('dc-label-phone')) document.getElementById('dc-label-phone').innerText = data.phoneLabel;
-            if(document.getElementById('contactClientPhone')) document.getElementById('contactClientPhone').placeholder = data.phonePlaceholder;
 
             document.getElementById('dc-submit-btn-text').innerText = (currentAuthMode === 'signin') ? data.signinBtn : data.signupBtn;
 
@@ -2182,20 +2210,25 @@
 
             if (currentAuthMode === 'signup') {
                 const name = document.getElementById('contactClientName').value.trim();
-                const phone = document.getElementById('contactClientPhone').value.trim();
+                const username = document.getElementById('contactClientUsername').value.trim();
+                const dobDay = document.getElementById('contactClientDobDay').value.trim();
+                const dobMonth = document.getElementById('contactClientDobMonth').value.trim();
+                const dobYear = document.getElementById('contactClientDobYear').value.trim();
 
-                if (!name || !phone) {
+                if (!name || !username || !dobDay || !dobMonth || !dobYear) {
                     showCustomAlert(t.alertText);
                     return;
                 }
 
-                const existing = users.find(u => u.email === email);
+                const dob = `${dobDay} / ${dobMonth} / ${dobYear}`;
+
+                const existing = users.find(u => u.email === email || u.username === username);
                 if (existing) {
-                    showCustomAlert("This email is already registered!");
+                    showCustomAlert("This email or username is already registered!");
                     return;
                 }
 
-                const newUser = { name, email, password, phone };
+                const newUser = { name, username, email, dob, password };
                 users.push(newUser);
                 localStorage.setItem('site_users', JSON.stringify(users));
                 
@@ -2207,7 +2240,7 @@
             } else {
                 let user = users.find(u => u.email === email && u.password === password);
                 if (!user && email === "admin@muminsultani.com" && password === "admin123") {
-                    user = { name: "Admin User", email: "admin@muminsultani.com", phone: "+90 555 555 55 55" };
+                    user = { name: "Admin User", username: "@admin", email: "admin@muminsultani.com", dob: "01 / 01 / 1990" };
                 }
 
                 if (user) {
@@ -2234,8 +2267,9 @@
                     const userObj = JSON.parse(loggedUser);
                     if (profileSection) profileSection.style.display = 'block';
                     if (document.getElementById('profileDisplayName')) document.getElementById('profileDisplayName').innerText = userObj.name || 'User';
+                    if (document.getElementById('profileDisplayUsername')) document.getElementById('profileDisplayUsername').innerText = userObj.username || '@username';
                     if (document.getElementById('profileDisplayEmail')) document.getElementById('profileDisplayEmail').innerText = userObj.email || '-';
-                    if (document.getElementById('profileDisplayPhone')) document.getElementById('profileDisplayPhone').innerText = userObj.phone || '-';
+                    if (document.getElementById('profileDisplayDob')) document.getElementById('profileDisplayDob').innerText = userObj.dob || '-';
 
                     if (contactTitleEl) contactTitleEl.innerText = "User Account";
                     if (contactSubEl) contactSubEl.innerText = "Active Session";
