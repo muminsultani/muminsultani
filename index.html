@@ -1107,6 +1107,33 @@
             </div>
         </header>
 
+        <!-- KULLANICI PROFİL / BİLGİ PANELİ (Giriş Yapılınca Görünür) -->
+        <section id="userProfileSection" style="display: none;">
+            <div class="section-title">
+                <i class="fa-solid fa-user-gear"></i> <span id="t-profile-title">User Profile & Session</span>
+            </div>
+            <div class="contact-box" style="cursor: default;">
+                <div class="contact-text" style="width: 100%;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <strong id="profileDisplayName" style="font-size: 1.15rem; color: #9333ea;">Name Surname</strong>
+                        <button onclick="handleLogout()" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer;">
+                            <i class="fa-solid fa-right-from-bracket"></i> <span id="t-logout-btn">Log Out</span>
+                        </button>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 10px;">
+                        <div>
+                            <span style="font-size: 0.72rem; color: var(--text-secondary);" id="t-prof-email">Email Address</span>
+                            <strong id="profileDisplayEmail" style="font-size: 0.9rem;">email@sample.com</strong>
+                        </div>
+                        <div>
+                            <span style="font-size: 0.72rem; color: var(--text-secondary);" id="t-prof-phone">Phone Number</span>
+                            <strong id="profileDisplayPhone" style="font-size: 0.9rem;">+ --</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section>
             <div class="section-title">
                 <i class="fa-solid fa-rocket"></i> <span id="t-projects-title">Featured Projects</span>
@@ -1182,7 +1209,7 @@
                     <span id="t-contact-sub">Sign In / Sign Up</span>
                     <strong id="t-contact-main">Bize Katılmak İçin Giriş Yapın</strong>
                 </div>
-                <i class="fa-solid fa-right-to-bracket"></i>
+                <i class="fa-solid fa-right-to-bracket" id="authBoxIcon"></i>
             </div>
         </section>
 
@@ -1472,6 +1499,8 @@
                 if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-moon";
                 if(contactModalThemeIcon) contactModalThemeIcon.className = "fa-solid fa-moon";
             }
+
+            checkUserSession();
         });
 
         const themeIcon = document.getElementById('themeIcon');
@@ -1489,6 +1518,7 @@
                 localStorage.setItem('theme', 'light');
             } else {
                 if(themeIcon) themeIcon.className = "fa-solid fa-moon";
+                if(modalThemeIcon) icon = "fa-solid fa-moon";
                 if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-moon";
                 if(contactModalThemeIcon) contactModalThemeIcon.className = "fa-solid fa-moon";
                 localStorage.setItem('theme', 'dark');
@@ -1615,7 +1645,11 @@
                 contactTitle: "Sign In / Sign Up", contactSub: "Sign In / Sign Up", contactMain: "Sign in to join us",
                 scanText: "SCAN TO CONNECT",
                 gitText: "Account",
-                backText: "Back"
+                backText: "Back",
+                profileTitle: "User Profile & Session",
+                logoutBtn: "Log Out",
+                profEmail: "Email Address",
+                profPhone: "Phone Number"
             },
             tr: {
                 code: "TR",
@@ -1632,7 +1666,11 @@
                 contactTitle: "Giriş Yap / Kayıt Ol", contactSub: "Giriş Yap / Kayıt Ol", contactMain: "Bize Katılmak İçin Giriş Yapın",
                 scanText: "BAĞLANMAK İÇİN TARAYIN",
                 gitText: "Hesap",
-                backText: "Geri Dön"
+                backText: "Geri Dön",
+                profileTitle: "Kullanıcı Profili & Oturum",
+                logoutBtn: "Çıkış Yap",
+                profEmail: "E-posta Adresi",
+                profPhone: "Telefon Numarası"
             },
             de: {
                 code: "DE",
@@ -1649,7 +1687,11 @@
                 contactTitle: "Anmelden / Registrieren", contactSub: "Anmelden / Registrieren", contactMain: "Jetzt anmelden",
                 scanText: "SCANNEN ZUM VERBINDEN",
                 gitText: "Konto",
-                backText: "Zurück"
+                backText: "Zurück",
+                profileTitle: "Benutzerprofil & Sitzung",
+                logoutBtn: "Abmelden",
+                profEmail: "E-Mail-Adresse",
+                profPhone: "Telefonnummer"
             }
         };
 
@@ -1681,6 +1723,11 @@
             document.getElementById('gitModalTitle').innerText = data.contactTitle;
             document.getElementById('gitActionText').innerText = data.gitText;
             document.getElementById('gitBackText').innerText = data.backText;
+
+            if(document.getElementById('t-profile-title')) document.getElementById('t-profile-title').innerText = data.profileTitle;
+            if(document.getElementById('t-logout-btn')) document.getElementById('t-logout-btn').innerText = data.logoutBtn;
+            if(document.getElementById('t-prof-email')) document.getElementById('t-prof-email').innerText = data.profEmail;
+            if(document.getElementById('t-prof-phone')) document.getElementById('t-prof-phone').innerText = data.profPhone;
 
             changeModalLanguage(lang);
 
@@ -1723,7 +1770,8 @@
                 gitText: "Account",
                 successSignup: "Account created successfully! You can now sign in.",
                 successSignin: "Signed in successfully!",
-                errorSignin: "Invalid email or password!"
+                errorSignin: "Invalid email or password!",
+                authRequiredAlert: "You must sign in or register before sending messages via Email or WhatsApp!"
             },
             tr: {
                 code: "TR",
@@ -1760,7 +1808,8 @@
                 gitText: "Hesap",
                 successSignup: "Hesap başarıyla oluşturuldu! Şimdi giriş yapabilirsiniz.",
                 successSignin: "Başarıyla giriş yapıldı!",
-                errorSignin: "Geçersiz e-posta veya şifre!"
+                errorSignin: "Geçersiz e-posta veya şifre!",
+                authRequiredAlert: "E-posta veya WhatsApp üzerinden mesaj gönderebilmek için önce giriş yapmalı veya kayıt olmalısınız!"
             },
             de: {
                 code: "DE",
@@ -1797,7 +1846,8 @@
                 gitText: "Konto",
                 successSignup: "Konto erfolgreich erstellt! Sie können sich jetzt anmelden.",
                 successSignin: "Erfolgreich angemeldet!",
-                errorSignin: "Ungültige E-Mail-Adresse oder Passwort!"
+                errorSignin: "Ungültige E-Mail-Adresse oder Passwort!",
+                authRequiredAlert: "Sie müssen sich anmelden oder registrieren, bevor Sie Nachrichten per E-Mail oder WhatsApp senden können!"
             }
         };
 
@@ -1830,6 +1880,12 @@
         }
 
         function openGetInTouchModal() {
+            const loggedUser = localStorage.getItem('logged_user');
+            if (loggedUser) {
+                // Zaten giriş yapılmışsa, direkt profil paneline odaklan veya bilgi ver
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
             document.getElementById('getInTouchModal').classList.add('active');
         }
 
@@ -1847,12 +1903,23 @@
             document.getElementById('directContactModal').classList.remove('active');
         }
 
-        let currentAlertText = "Please fill in all required fields.";
         let activeNoticeEmail = "muminsultani@hotmail.com";
 
         function openGmailNoticeModal(email) {
+            // Giriş kontrolü
+            const loggedUser = localStorage.getItem('logged_user');
+            if (!loggedUser) {
+                const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+                const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
+                const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
+                const t = modalTranslations[currentModalLang] || modalTranslations.en;
+                
+                showCustomAlert(t.authRequiredAlert);
+                openGetInTouchModal();
+                return;
+            }
+
             activeNoticeEmail = email;
-            
             const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
             const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
             const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
@@ -1881,11 +1948,31 @@
         }
 
         function openAppointmentModalWithEmail(email) {
-            document.getElementById('targetRecipientEmail').value = email;
-            const phoneInput = document.getElementById('clientPhone');
-            if(!phoneInput.value) {
-                phoneInput.value = "";
+            // Giriş kontrolü
+            const loggedUser = localStorage.getItem('logged_user');
+            if (!loggedUser) {
+                const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+                const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
+                const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
+                const t = modalTranslations[currentModalLang] || modalTranslations.en;
+                
+                showCustomAlert(t.authRequiredAlert);
+                openGetInTouchModal();
+                return;
             }
+
+            document.getElementById('targetRecipientEmail').value = email;
+            
+            // Otomatik olarak kayıtlı kullanıcı bilgilerini form alanlarına doldur
+            try {
+                const userObj = JSON.parse(loggedUser);
+                if(userObj) {
+                    if(document.getElementById('clientName')) document.getElementById('clientName').value = userObj.name || '';
+                    if(document.getElementById('clientEmail')) document.getElementById('clientEmail').value = userObj.email || '';
+                    if(document.getElementById('clientPhone')) document.getElementById('clientPhone').value = userObj.phone || '';
+                }
+            } catch(e) {}
+
             document.getElementById('appointmentModal').classList.add('active');
         }
 
@@ -1907,8 +1994,6 @@
         function changeModalLanguage(lang) {
             const data = modalTranslations[lang];
             if (!data) return;
-
-            currentAlertText = data.alertText;
 
             document.getElementById('modalCurrentLangText').innerText = data.code;
             document.getElementById('m-title').innerText = data.title;
@@ -1983,7 +2068,7 @@
             const t = modalTranslations[modalLangText] || modalTranslations.en;
 
             if (!email || !password) {
-                showCustomAlert(currentAlertText);
+                showCustomAlert(t.alertText);
                 return;
             }
 
@@ -1994,7 +2079,7 @@
                 const phone = document.getElementById('contactClientPhone').value.trim();
 
                 if (!name || !phone) {
-                    showCustomAlert(currentAlertText);
+                    showCustomAlert(t.alertText);
                     return;
                 }
 
@@ -2004,19 +2089,67 @@
                     return;
                 }
 
-                users.push({ name, email, password, phone });
+                const newUser = { name, email, password, phone };
+                users.push(newUser);
                 localStorage.setItem('site_users', JSON.stringify(users));
+                
+                // Kayıttan sonra doğrudan oturum aç
+                localStorage.setItem('logged_user', JSON.stringify(newUser));
+                
                 showCustomAlert(t.successSignup);
-                switchAuthTab('signin');
+                closeDirectContactModal();
+                checkUserSession();
             } else {
-                const user = users.find(u => u.email === email && u.password === password);
-                if (user || (email === "admin@muminsultani.com" && password === "admin123")) {
+                let user = users.find(u => u.email === email && u.password === password);
+                if (!user && email === "admin@muminsultani.com" && password === "admin123") {
+                    user = { name: "Admin User", email: "admin@muminsultani.com", phone: "+90 555 555 55 55" };
+                }
+
+                if (user) {
+                    localStorage.setItem('logged_user', JSON.stringify(user));
                     showCustomAlert(t.successSignin);
                     closeDirectContactModal();
+                    checkUserSession();
                 } else {
                     showCustomAlert(t.errorSignin);
                 }
             }
+        }
+
+        function checkUserSession() {
+            const loggedUser = localStorage.getItem('logged_user');
+            const profileSection = document.getElementById('userProfileSection');
+            const contactTitleEl = document.getElementById('t-contact-title');
+            const contactSubEl = document.getElementById('t-contact-sub');
+            const contactMainEl = document.getElementById('t-contact-main');
+            const authBoxIcon = document.getElementById('authBoxIcon');
+
+            if (loggedUser) {
+                try {
+                    const userObj = JSON.parse(loggedUser);
+                    if (profileSection) profileSection.style.display = 'block';
+                    if (document.getElementById('profileDisplayName')) document.getElementById('profileDisplayName').innerText = userObj.name || 'User';
+                    if (document.getElementById('profileDisplayEmail')) document.getElementById('profileDisplayEmail').innerText = userObj.email || '-';
+                    if (document.getElementById('profileDisplayPhone')) document.getElementById('profileDisplayPhone').innerText = userObj.phone || '-';
+
+                    if (contactTitleEl) contactTitleEl.innerText = "User Account";
+                    if (contactSubEl) contactSubEl.innerText = "Active Session";
+                    if (contactMainEl) contactMainEl.innerText = userObj.name ? `Hoş geldiniz, ${userObj.name}` : "Oturum Açık";
+                    if (authBoxIcon) authBoxIcon.className = "fa-solid fa-user-check";
+                } catch(e) {}
+            } else {
+                if (profileSection) profileSection.style.display = 'none';
+                if (contactTitleEl) contactTitleEl.innerText = "Sign In / Sign Up";
+                if (contactSubEl) contactSubEl.innerText = "Sign In / Sign Up";
+                if (contactMainEl) contactMainEl.innerText = "Bize Katılmak İçin Giriş Yapın";
+                if (authBoxIcon) authBoxIcon.className = "fa-solid fa-right-to-bracket";
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('logged_user');
+            checkUserSession();
+            showCustomAlert("Oturum kapatıldı.");
         }
 
         function getBase64ImageFromURL(url, callback) {
@@ -2106,19 +2239,27 @@
         }
 
         function validateForm() {
-            const name = document.getElementById('clientName').value.trim();
-            const email = document.getElementById('clientEmail').value.trim();
-            const phone = document.getElementById('clientPhone').value.trim();
-            const fileInput = document.getElementById('clientFile');
-            const desc = document.getElementById('clientDesc').value.trim();
-            
+            const loggedUser = localStorage.getItem('logged_user');
             const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
             const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
             const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
             const t = modalTranslations[currentModalLang] || modalTranslations.en;
 
+            if (!loggedUser) {
+                showCustomAlert(t.authRequiredAlert);
+                closeAppointmentModal();
+                openGetInTouchModal();
+                return false;
+            }
+
+            const name = document.getElementById('clientName').value.trim();
+            const email = document.getElementById('clientEmail').value.trim();
+            const phone = document.getElementById('clientPhone').value.trim();
+            const fileInput = document.getElementById('clientFile');
+            const desc = document.getElementById('clientDesc').value.trim();
+
             if (!name || !email || !phone || !desc) {
-                showCustomAlert(currentAlertText);
+                showCustomAlert(t.alertText);
                 return false;
             }
 
