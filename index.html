@@ -1237,7 +1237,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label" id="m-label-phone">WhatsApp Number</label>
-                    <input type="tel" class="form-input" id="clientPhone" required placeholder="+90 538 000 00 00" oninput="formatPhoneInput(this)">
+                    <input type="tel" class="form-input" id="clientPhone" required placeholder="+ Country Code" oninput="formatPhoneInput(this)" onfocus="if(!this.value) this.value='+ ';">
                 </div>
                 <div class="form-group">
                     <label class="form-label" id="m-label-file">Attach File (JPG, PNG, PDF, Video)</label>
@@ -1396,6 +1396,7 @@
 
         function resetAppointmentForm() {
             document.getElementById('appointmentForm').reset();
+            document.getElementById('clientPhone').value = "";
             const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
             const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
             const currentLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
@@ -1403,6 +1404,7 @@
             if (modalTranslations[currentLang]) {
                 fileTextSpan.innerText = modalTranslations[currentLang].filePlaceholder;
                 fileTextSpan.style.color = '#94a3b8';
+                document.getElementById('clientPhone').placeholder = modalTranslations[currentLang].phonePlaceholder;
             }
         }
 
@@ -1433,15 +1435,13 @@
         });
 
         function formatPhoneInput(input) {
-            let val = input.value.replace(/[^\d]/g, '');
-            let formatted = '+ ';
-            if (val.length > 0) {
-                formatted += val.substring(0, 2);
+            let val = input.value;
+            let cleanVal = val.replace(/\+/g, '').trim();
+            if (cleanVal.length > 0) {
+                input.value = "+ " + cleanVal;
+            } else {
+                input.value = "+ ";
             }
-            if (val.length > 2) {
-                formatted += ' ' + val.substring(2);
-            }
-            input.value = formatted;
         }
 
         function updateFileName(input) {
@@ -1545,7 +1545,7 @@
                 emailLabel: "Email Address",
                 emailPlaceholder: "name@sample.com",
                 phoneLabel: "WhatsApp Number",
-                phonePlaceholder: "+90 538 000 00 00",
+                phonePlaceholder: "+ Country Code",
                 fileLabel: "Attach File (JPG, PNG, PDF, Video)",
                 filePlaceholder: "Choose file or media...",
                 descLabel: "Description / Project Details",
@@ -1572,7 +1572,7 @@
                 emailLabel: "E-posta Adresi",
                 emailPlaceholder: "ornek@mail.com",
                 phoneLabel: "WhatsApp Numarası",
-                phonePlaceholder: "+90 538 000 00 00",
+                phonePlaceholder: "+ Ülke Kodu",
                 fileLabel: "Dosya Ekle (JPG, PNG, PDF, Video)",
                 filePlaceholder: "Dosya veya medya seçin...",
                 descLabel: "Açıklama / Proje Detayları",
@@ -1599,7 +1599,7 @@
                 emailLabel: "E-Mail-Adresse",
                 emailPlaceholder: "name@beispiel.de",
                 phoneLabel: "WhatsApp-Nummer",
-                phonePlaceholder: "+49 151 00000000",
+                phonePlaceholder: "+ Ländercode",
                 fileLabel: "Datei anhängen (JPG, PNG, PDF, Video)",
                 filePlaceholder: "Datei oder Medien auswählen...",
                 descLabel: "Beschreibung / Projektdetails",
@@ -1655,6 +1655,10 @@
 
         function openAppointmentModalWithEmail(email) {
             document.getElementById('targetRecipientEmail').value = email;
+            const phoneInput = document.getElementById('clientPhone');
+            if(!phoneInput.value) {
+                phoneInput.value = "";
+            }
             document.getElementById('appointmentModal').classList.add('active');
         }
 
