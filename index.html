@@ -1262,9 +1262,20 @@
                         </button>
                     </div>
                     <div class="modal-brand">muminsultani</div>
-                    <div class="modal-title" id="dc-title">Direct Contact</div>
+                    <div class="modal-title" id="dc-title">İletişim</div>
                 </div>
                 <div class="modal-header-actions">
+                    <div class="lang-dropdown-container">
+                        <button class="lang-btn" id="contactModalLangDropdownBtn" onclick="toggleContactModalLangMenu()">
+                            <span id="contactModalCurrentLangText">EN</span>
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.4rem; margin-left: 2px;"></i>
+                        </button>
+                        <div class="lang-menu" id="contactModalLangMenu">
+                            <button class="lang-option" onclick="changeModalLanguage('en')">English</button>
+                            <button class="lang-option" onclick="changeModalLanguage('tr')">Türkçe</button>
+                            <button class="lang-option" onclick="changeModalLanguage('de')">Deutsch</button>
+                        </div>
+                    </div>
                     <button class="modal-close-btn" onclick="closeDirectContactModal()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
@@ -1288,7 +1299,7 @@
                 
                 <div class="form-buttons-group">
                     <button type="button" class="submit-btn email-btn" onclick="sendDirectToEmail(event)" id="dc-email-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc);">
-                        <i class="fa-solid fa-paper-plane"></i> Send Message
+                        <i class="fa-solid fa-paper-plane"></i> <span id="dc-email-btn-text">İletişime Geç</span>
                     </button>
                     <button type="button" class="submit-btn whatsapp-btn" onclick="sendDirectToWhatsApp(event)" id="dc-whatsapp-btn">
                         <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> WhatsApp
@@ -1489,7 +1500,7 @@
                 localStorage.setItem('theme', 'light');
             } else {
                 if(themeIcon) themeIcon.className = "fa-solid fa-moon";
-                if(modalThemeIcon) themeIcon.className = "fa-solid fa-moon";
+                if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-moon";
                 if(contactModalThemeIcon) contactModalThemeIcon.className = "fa-solid fa-moon";
                 localStorage.setItem('theme', 'dark');
             }
@@ -1552,6 +1563,11 @@
             menu.classList.toggle('show');
         }
 
+        function toggleContactModalLangMenu() {
+            const menu = document.getElementById('contactModalLangMenu');
+            menu.classList.toggle('show');
+        }
+
         window.addEventListener('click', function(e) {
             if (!document.getElementById('langDropdownBtn').contains(e.target) && !document.getElementById('langMenu').contains(e.target)) {
                 document.getElementById('langMenu').classList.remove('show');
@@ -1560,6 +1576,11 @@
             const modalMenu = document.getElementById('modalLangMenu');
             if (modalBtn && modalMenu && !modalBtn.contains(e.target) && !modalMenu.contains(e.target)) {
                 modalMenu.classList.remove('show');
+            }
+            const contactModalBtn = document.getElementById('contactModalLangDropdownBtn');
+            const contactModalMenu = document.getElementById('contactModalLangMenu');
+            if (contactModalBtn && contactModalMenu && !contactModalBtn.contains(e.target) && !contactModalMenu.contains(e.target)) {
+                contactModalMenu.classList.remove('show');
             }
         });
 
@@ -1679,6 +1700,7 @@
             en: {
                 code: "EN",
                 title: "Let's talk",
+                contactHeaderTitle: "Contact",
                 nameLabel: "Name & Surname",
                 namePlaceholder: "Name & Surname",
                 emailLabel: "Email Address",
@@ -1691,6 +1713,7 @@
                 descPlaceholder: "Tell me about your project...",
                 emailBtn: "Email",
                 whatsappBtn: "WhatsApp",
+                contactSendBtn: "Get In Touch",
                 alertText: "Please fill in all required fields.",
                 waProjectRequest: "Project Request",
                 lblContactName: "Name & Surname",
@@ -1708,6 +1731,7 @@
             tr: {
                 code: "TR",
                 title: "Konuşalım",
+                contactHeaderTitle: "İletişim",
                 nameLabel: "Ad Soyad",
                 namePlaceholder: "Ad Soyad",
                 emailLabel: "E-posta Adresi",
@@ -1720,6 +1744,7 @@
                 descPlaceholder: "Projeden bahsedin...",
                 emailBtn: "E-posta",
                 whatsappBtn: "WhatsApp",
+                contactSendBtn: "İletişime Geç",
                 alertText: "Lütfen gerekli tüm alanları doldurun.",
                 waProjectRequest: "Proje Talebi",
                 lblContactName: "Ad Soyad",
@@ -1737,6 +1762,7 @@
             de: {
                 code: "DE",
                 title: "Lass uns sprechen",
+                contactHeaderTitle: "Kontakt",
                 nameLabel: "Name & Nachname",
                 namePlaceholder: "Name & Nachname",
                 emailLabel: "E-Mail-Adresse",
@@ -1749,6 +1775,7 @@
                 descPlaceholder: "Erzählen Sie von Ihrem Projekt...",
                 emailBtn: "E-Mail",
                 whatsappBtn: "WhatsApp",
+                contactSendBtn: "İletişime Geç",
                 alertText: "Bitte füllen Sie alle Pflichtfelder aus.",
                 waProjectRequest: "Projektanfrage",
                 lblContactName: "Name & Nachname",
@@ -1845,6 +1872,7 @@
 
             currentAlertText = data.alertText;
 
+            // Randevu modalı metinleri
             document.getElementById('modalCurrentLangText').innerText = data.code;
             document.getElementById('m-title').innerText = data.title;
             
@@ -1869,6 +1897,19 @@
             document.getElementById('m-email-btn').innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1.1rem; height: 1.1rem; display: block;"> ${data.emailBtn}`;
             document.getElementById('m-whatsapp-btn').innerHTML = `<i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> ${data.whatsappBtn}`;
 
+            // Doğrudan İletişim (Direct Contact) modalı metinleri
+            document.getElementById('contactModalCurrentLangText').innerText = data.code;
+            document.getElementById('dc-title').innerText = data.contactHeaderTitle;
+            document.getElementById('dc-label-name').innerText = data.nameLabel;
+            document.getElementById('contactClientName').placeholder = data.namePlaceholder;
+            document.getElementById('dc-label-email').innerText = data.emailLabel;
+            document.getElementById('contactClientEmail').placeholder = data.emailPlaceholder;
+            document.getElementById('dc-label-phone').innerText = data.phoneLabel;
+            document.getElementById('contactClientPhone').placeholder = data.phonePlaceholder;
+            document.getElementById('dc-label-desc').innerText = data.descLabel;
+            document.getElementById('contactClientDesc').placeholder = data.descPlaceholder;
+            document.getElementById('dc-email-btn-text').innerText = data.contactSendBtn;
+
             const noticeMsg = document.getElementById('gmailNoticeMessage');
             if (noticeMsg) {
                 noticeMsg.innerText = data.gmailNoticeText;
@@ -1887,6 +1928,7 @@
             document.getElementById('gitBackText').innerText = data.backText;
 
             document.getElementById('modalLangMenu').classList.remove('show');
+            document.getElementById('contactModalLangMenu').classList.remove('show');
         }
 
         function sendDirectToEmail(e) {
