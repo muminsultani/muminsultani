@@ -843,6 +843,32 @@
             opacity: 0.9;
         }
 
+        /* Google Butonu Stili */
+        .submit-btn.google-btn {
+            background: #ffffff;
+            color: #333333;
+            border: 1px solid #dddddd;
+            font-weight: 600;
+        }
+        .submit-btn.google-btn:hover {
+            background: #f1f1f1;
+        }
+        .submit-btn.google-btn img {
+            width: 1.1rem;
+            height: 1.1rem;
+            display: block;
+        }
+        
+        /* Karanlık modda Google butonu */
+        body:not(.light-mode) .submit-btn.google-btn {
+            background: #1e1e24;
+            color: #f8fafc;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        body:not(.light-mode) .submit-btn.google-btn:hover {
+            background: #2a2a35;
+        }
+
         .custom-alert-overlay {
             position: fixed;
             top: 0;
@@ -1024,7 +1050,7 @@
             white-space: nowrap;
         }
 
-        /* Profil ikonları için özel stiller */
+        /* Profil ikonları için özel stiller (Bunlara dokunulmadı) */
         .profile-action-btn {
             background: var(--box-bg);
             border: 1px solid var(--line-color);
@@ -1079,7 +1105,7 @@
             border-color: rgba(147, 51, 234, 0.4);
         }
 
-        /* Masaüstü / Tablet / TV için özel düzen (min-width: 768px) */
+        /* Masaüstü / Tablet / TV için özel düzen */
         @media (min-width: 768px) {
             .desktop-info-row {
                 display: flex !important;
@@ -1108,13 +1134,12 @@
                 gap: 8px;
                 flex-shrink: 0;
             }
-            /* Mobilde gizlenecek olan orijinal satırlar */
             .mobile-email-row, .mobile-birthdate-row {
                 display: none !important;
             }
         }
 
-        /* Mobilde görünecek olan orijinal satırlar (Varsayılan) */
+        /* Mobilde görünecek olan orijinal satırlar */
         .mobile-email-row, .mobile-birthdate-row {
             display: flex;
             align-items: center;
@@ -1122,19 +1147,83 @@
         }
 
         .desktop-info-row {
-            display: none; /* Masaüstünde görünecek, mobilde gizli */
+            display: none;
         }
 
+        /* =========================================
+           KÜÇÜLTME İŞLEMLERİ (Tüm Paneller, Alertler,
+           Placeholder'lar, Etiketler ve Butonlar)
+           ========================================= */
+        
+        /* Panelleri Küçült */
+        .modal-container {
+            max-width: 480px !important;
+            padding: 24px !important;
+        }
+        .custom-alert-box {
+            max-width: 340px !important;
+            padding: 22px !important;
+        }
+        .contact-box {
+            padding: 14px 16px !important;
+        }
+
+        /* Alert İkonlarını ve Başlıklarını Küçült */
+        .custom-alert-icon { font-size: 1.8rem !important; margin-bottom: 10px !important; }
+        .custom-alert-message { font-size: 0.85rem !important; margin-bottom: 18px !important; }
+        .modal-brand { font-size: 1.2rem !important; }
+        .modal-title { font-size: 0.85rem !important; }
+
+        /* Placeholder ve Etiketleri Küçült */
+        .form-input, .form-textarea {
+            padding: 10px 14px !important;
+            font-size: 0.85rem !important;
+            border-radius: 8px !important;
+        }
+        .form-input::placeholder, .form-textarea::placeholder {
+            font-size: 0.78rem !important;
+        }
+        .form-label {
+            font-size: 0.75rem !important;
+            margin-bottom: 5px !important;
+        }
+        
+        /* Genel Butonları ve İçindeki Yazıları Küçült (Profil ikonları hariç) */
+        .submit-btn {
+            padding: 11px 8px !important;
+            font-size: 0.78rem !important;
+            border-radius: 8px !important;
+            gap: 6px !important;
+        }
+        .custom-alert-btn {
+            padding: 9px 8px !important;
+            font-size: 0.72rem !important;
+            border-radius: 10px !important;
+        }
+        .auth-tab-btn {
+            padding: 8px !important;
+            font-size: 0.78rem !important;
+        }
+        .modal-close-btn {
+            width: 26px !important;
+            height: 26px !important;
+            font-size: 0.8rem !important;
+            border-radius: 6px !important;
+        }
+        .password-toggle-btn {
+            font-size: 0.85rem !important;
+            right: 12px !important;
+        }
+
+        /* Mobil / Küçük ekranlar için ekstra ayarlar */
         @media (max-width: 640px) {
             body { padding: 16px 12px; }
             .wrapper { gap: 24px; max-width: 100%; }
             .specs-grid { grid-template-columns: 1fr; gap: 14px; }
             .brand-logo { font-size: 1.45rem; letter-spacing: -0.5px; }
             .intro-logo { font-size: 1.65rem; letter-spacing: -0.5px; }
-            .contact-box { padding: 14px; }
             .footer-qr-container img { width: 80px; height: 80px; }
             .footer-copy-text { font-size: 0.62rem; }
-            .modal-container { padding: 20px; }
             .profile-action-btn { width: 32px; height: 28px; font-size: 0.7rem; }
             .profile-photo-wrapper { width: 32px; height: 28px; }
             .profile-photo-wrapper img { width: 26px; height: 26px; }
@@ -1241,7 +1330,7 @@
             </div>
         </header>
 
-        <!-- KULLANICI PROFİL / BİLGİ PANELİ (Responsive Düzen - Düzeltildi) -->
+        <!-- KULLANICI PROFİL / BİLGİ PANELİ -->
         <section id="userProfileSection" style="display: none;">
             <div class="section-title">
                 <i class="fa-solid fa-user-gear"></i> <span id="t-profile-title">User Profile & Session</span>
@@ -1446,7 +1535,7 @@
 
     <!-- ŞİFRE DEĞİŞTİRME MODALI -->
     <div class="modal-overlay" id="changePasswordModal">
-        <div class="modal-container" style="max-width: 440px;">
+        <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
                 <div class="modal-header-left">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
@@ -1498,7 +1587,7 @@
 
     <!-- HESAP SİLME ONAY MODALI -->
     <div class="modal-overlay" id="deleteAccountModal">
-        <div class="modal-container" style="max-width: 440px;">
+        <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
                 <div class="modal-header-left">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
@@ -1512,7 +1601,7 @@
                 </div>
             </div>
             <form id="deleteAccountForm" onsubmit="handleDeleteAccount(event)">
-                <p class="item-desc" id="da-desc" style="margin-bottom: 16px; font-size: 0.88rem; color: #ef4444;">
+                <p class="item-desc" id="da-desc" style="margin-bottom: 16px; font-size: 0.8rem; color: #ef4444;">
                     Warning: This action cannot be undone. To confirm deletion, please type your username below.
                 </p>
                 <div class="form-group">
@@ -1530,23 +1619,23 @@
 
     <!-- GET IN TOUCH MODAL -->
     <div class="custom-alert-overlay" id="getInTouchModal">
-        <div class="custom-alert-box" style="max-width: 360px; padding: 24px 20px; text-align: center;">
+        <div class="custom-alert-box" style="max-width: 320px; padding: 20px 18px; text-align: center;">
             <div style="display: flex; justify-content: center; margin-bottom: 8px;">
-                <div class="custom-alert-icon" style="color: #9333ea; font-size: 1.8rem; margin-bottom: 0; display: inline-flex; align-items: center; filter: drop-shadow(0 2px 8px rgba(147, 51, 234, 0.3);">
+                <div class="custom-alert-icon" style="color: #9333ea; font-size: 1.6rem; margin-bottom: 0; display: inline-flex; align-items: center; filter: drop-shadow(0 2px 8px rgba(147, 51, 234, 0.3);">
                     <i class="fa-solid fa-user-lock"></i>
                 </div>
             </div>
             <div style="display: flex; justify-content: center; margin-bottom: 4px;">
-                <div class="footer-brand" style="font-size: 1.5rem; line-height: 1;">muminsultani</div>
+                <div class="footer-brand" style="font-size: 1.3rem; line-height: 1;">muminsultani</div>
             </div>
-            <div class="custom-alert-message" id="gitModalTitle" style="font-size: 0.95rem; margin-bottom: 20px; font-weight: 600;">
+            <div class="custom-alert-message" id="gitModalTitle" style="font-size: 0.85rem; margin-bottom: 16px; font-weight: 600;">
                 Sign In / Sign Up
             </div>
-            <div style="display: flex; gap: 10px;">
-                <button class="custom-alert-btn" onclick="openDirectContactModal()" id="gitActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; padding: 10px 6px; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
+            <div style="display: flex; gap: 8px;">
+                <button class="custom-alert-btn" onclick="openDirectContactModal()" id="gitActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; padding: 8px 6px; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
                     <i class="fa-solid fa-right-to-bracket"></i> <span id="gitActionText">Account</span>
                 </button>
-                <button class="custom-alert-btn" onclick="closeGetInTouchModal()" id="gitBackBtn" style="background: #64748b; flex: 1; padding: 10px 6px; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                <button class="custom-alert-btn" onclick="closeGetInTouchModal()" id="gitBackBtn" style="background: #64748b; flex: 1; padding: 8px 6px; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
                     <i class="fa-solid fa-arrow-rotate-left"></i> <span id="gitBackText">Back</span>
                 </button>
             </div>
@@ -1612,7 +1701,7 @@
                 <div class="form-group" id="groupPassword">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                         <label class="form-label" id="dc-label-password" style="margin-bottom: 0;">Password</label>
-                        <a href="#" onclick="openForgotPasswordModal(event)" id="t-forgot-link" style="font-size: 0.75rem; color: #9333ea; text-decoration: none; font-weight: 600;">Forgot Password?</a>
+                        <a href="#" onclick="openForgotPasswordModal(event)" id="t-forgot-link" style="font-size: 0.7rem; color: #9333ea; text-decoration: none; font-weight: 600;">Forgot Password?</a>
                     </div>
                     <div class="password-wrapper">
                         <input type="password" class="form-input" id="contactClientPassword" placeholder="••••••••">
@@ -1622,9 +1711,15 @@
                     </div>
                 </div>
                 
-                <div class="form-buttons-group">
-                    <button type="button" class="submit-btn email-btn" onclick="handleAuthSubmit(event)" id="dc-submit-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc);">
+                <div class="form-buttons-group" style="flex-direction: column; gap: 10px;">
+                    <button type="button" class="submit-btn email-btn" onclick="handleAuthSubmit(event)" id="dc-submit-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc); width: 100%;">
                         <i class="fa-solid fa-right-to-bracket"></i> <span id="dc-submit-btn-text">Sign In</span>
+                    </button>
+                    
+                    <!-- Google ile Devam Et Butonu -->
+                    <button type="button" class="submit-btn google-btn" onclick="handleGoogleAuth()" id="dc-google-btn" style="width: 100%;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
+                        <span id="dc-google-btn-text">Continue with Google</span>
                     </button>
                 </div>
             </form>
@@ -1633,7 +1728,7 @@
 
     <!-- ŞİFREMİ UNUTTUM MODALI -->
     <div class="modal-overlay" id="forgotPasswordModal">
-        <div class="modal-container" style="max-width: 440px;">
+        <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
                 <div class="modal-header-left">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
@@ -1647,7 +1742,7 @@
                 </div>
             </div>
             <form id="forgotPasswordForm" onsubmit="handleForgotPasswordSubmit(event)">
-                <p class="item-desc" id="fp-desc" style="margin-bottom: 16px; font-size: 0.88rem;">
+                <p class="item-desc" id="fp-desc" style="margin-bottom: 16px; font-size: 0.8rem;">
                     Enter your registered email address. We will send a recovery code / temporary password to your email and notify the administrator.
                 </p>
                 <div class="form-group">
@@ -1738,23 +1833,23 @@
 
     <!-- GMAIL BİLGİLENDİRME MODALI -->
     <div class="custom-alert-overlay" id="gmailNoticeModal">
-        <div class="custom-alert-box" style="max-width: 420px; text-align: center;">
+        <div class="custom-alert-box" style="max-width: 380px; text-align: center;">
             <div style="display: flex; justify-content: center; margin-bottom: 12px;">
                 <div class="custom-alert-icon" style="color: #9333ea; margin-bottom: 0; display: inline-flex; align-items: center;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 2.2rem; height: 2.2rem; display: inline-block;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 2rem; height: 2rem; display: inline-block;">
                 </div>
             </div>
             <div style="display: flex; justify-content: center; margin-bottom: 8px;">
-                <div class="footer-brand" style="font-size: 1.8rem; line-height: 1;">muminsultani</div>
+                <div class="footer-brand" style="font-size: 1.6rem; line-height: 1;">muminsultani</div>
             </div>
-            <div class="custom-alert-message" id="gmailNoticeMessage" style="font-size: 0.95rem; margin-bottom: 24px;">
+            <div class="custom-alert-message" id="gmailNoticeMessage" style="font-size: 0.85rem; margin-bottom: 20px;">
                 Personal Email Address
             </div>
             <div style="display: flex; gap: 10px;">
-                <button class="custom-alert-btn" onclick="confirmOpenGmail()" id="gmailNoticeActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1.1rem; height: 1.1rem; display: block;"> <span id="gmailNoticeEmailBtnText">Email</span>
+                <button class="custom-alert-btn" onclick="confirmOpenGmail()" id="gmailNoticeActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 8px; font-size: 0.75rem;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1rem; height: 1rem; display: block;"> <span id="gmailNoticeEmailBtnText">Email</span>
                 </button>
-                <button class="custom-alert-btn" onclick="closeGmailNoticeModal()" id="gmailNoticeBackBtn" style="background: #64748b; flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                <button class="custom-alert-btn" onclick="closeGmailNoticeModal()" id="gmailNoticeBackBtn" style="background: #64748b; flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 8px; font-size: 0.75rem;">
                     <i class="fa-solid fa-arrow-rotate-left"></i> <span id="gmailNoticeBackText">Back</span>
                 </button>
             </div>
@@ -1991,6 +2086,36 @@
             reader.readAsDataURL(file);
         }
 
+        // Google ile Giriş Simülasyonu
+        function handleGoogleAuth() {
+            const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
+            const t = modalTranslations[modalLangText] || modalTranslations.en;
+
+            const googleUser = {
+                name: "Google User",
+                username: "@google_user",
+                email: "google.user@gmail.com",
+                password: "google_oauth_placeholder",
+                birthDay: "01",
+                birthMonth: "01",
+                birthYear: "1990",
+                profilePhoto: "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+            };
+
+            let users = JSON.parse(localStorage.getItem('site_users') || '[]');
+            const existing = users.find(u => u.email === googleUser.email);
+            if (!existing) {
+                users.push(googleUser);
+                localStorage.setItem('site_users', JSON.stringify(users));
+            }
+            
+            localStorage.setItem('logged_user', JSON.stringify(googleUser));
+            
+            showCustomAlert(t.successSignin || "Signed in successfully with Google!");
+            closeDirectContactModal();
+            checkUserSession();
+        }
+
         const translations = {
             en: {
                 code: "EN",
@@ -2013,7 +2138,8 @@
                 editBtn: "Edit Profile",
                 profUsername: "Username",
                 profEmail: "Email Address",
-                forgotLink: "Forgot Password?"
+                forgotLink: "Forgot Password?",
+                googleBtn: "Continue with Google"
             },
             tr: {
                 code: "TR",
@@ -2036,7 +2162,8 @@
                 editBtn: "Profili Düzenle",
                 profUsername: "Kullanıcı Adı",
                 profEmail: "E-posta Adresi",
-                forgotLink: "Şifremi Unuttum?"
+                forgotLink: "Şifremi Unuttum?",
+                googleBtn: "Google ile Devam Et"
             }
         };
 
@@ -2071,6 +2198,7 @@
 
             if(document.getElementById('t-forgot-link')) document.getElementById('t-forgot-link').innerText = data.forgotLink;
             if(document.getElementById('t-profile-title')) document.getElementById('t-profile-title').innerText = data.profileTitle;
+            if(document.getElementById('dc-google-btn-text')) document.getElementById('dc-google-btn-text').innerText = data.googleBtn;
 
             changeModalLanguage(lang);
 
@@ -2098,6 +2226,7 @@
                 whatsappBtn: "WhatsApp",
                 signinBtn: "Sign In",
                 signupBtn: "Sign Up",
+                googleBtn: "Continue with Google",
                 alertText: "Please fill in all required fields.",
                 waProjectRequest: "Project Request",
                 lblContactName: "Name & Surname",
@@ -2159,6 +2288,7 @@
                 whatsappBtn: "WhatsApp",
                 signinBtn: "Giriş Yap",
                 signupBtn: "Kayıt Ol",
+                googleBtn: "Google ile Devam Et",
                 alertText: "Lütfen gerekli tüm alanları doldurun.",
                 waProjectRequest: "Proje Talebi",
                 lblContactName: "Ad Soyad",
@@ -2552,6 +2682,7 @@
             document.getElementById('dc-title').innerText = data.contactHeaderTitle;
             document.getElementById('tabSigninBtn').innerText = data.signinBtn;
             document.getElementById('tabSignupBtn').innerText = data.signupBtn;
+            document.getElementById('dc-google-btn-text').innerText = data.googleBtn;
 
             document.getElementById('dc-label-name').innerText = data.nameLabel;
             if(document.getElementById('contactClientName')) document.getElementById('contactClientName').placeholder = data.namePlaceholder;
@@ -2577,14 +2708,12 @@
             if(document.getElementById('ep-label-birthdate')) document.getElementById('ep-label-birthdate').innerText = data.birthdateLabel;
             if(document.getElementById('ep-submit-text')) document.getElementById('ep-submit-text').innerText = data.saveChanges;
 
-            // Change Password Modal translations
             if(document.getElementById('cp-title')) document.getElementById('cp-title').innerText = data.cpTitle;
             if(document.getElementById('cp-label-old')) document.getElementById('cp-label-old').innerText = data.cpOldLabel;
             if(document.getElementById('cp-label-new')) document.getElementById('cp-label-new').innerText = data.cpNewLabel;
             if(document.getElementById('cp-label-confirm')) document.getElementById('cp-label-confirm').innerText = data.cpConfirmLabel;
             if(document.getElementById('cp-submit-text')) document.getElementById('cp-submit-text').innerText = data.cpBtn;
 
-            // Delete Account Modal translations
             if(document.getElementById('da-title')) document.getElementById('da-title').innerText = data.delConfirmTitle;
             if(document.getElementById('da-desc')) document.getElementById('da-desc').innerText = data.delConfirmDesc;
             if(document.getElementById('da-label-username')) document.getElementById('da-label-username').innerText = data.delConfirmLabel;
@@ -2681,7 +2810,6 @@
                     if (profileSection) profileSection.style.display = 'block';
                     if (document.getElementById('profileDisplayName')) document.getElementById('profileDisplayName').innerText = userObj.name || 'User';
 
-                    // Masaüstü için güncellemeler
                     if (document.getElementById('profileDisplayUsernameDesktop')) document.getElementById('profileDisplayUsernameDesktop').innerText = userObj.username || '@username';
                     if (document.getElementById('profileDisplayEmailDesktop')) document.getElementById('profileDisplayEmailDesktop').innerText = userObj.email || '-';
                     if (document.getElementById('profileDisplayBirthdateDesktop')) {
@@ -2692,16 +2820,13 @@
                         }
                     }
 
-                    // Mobil için güncellemeler
                     if (document.getElementById('profileDisplayUsernameMobile')) document.getElementById('profileDisplayUsernameMobile').innerText = userObj.username || '@username';
                     if (document.getElementById('profileDisplayEmail')) document.getElementById('profileDisplayEmail').innerText = userObj.email || '-';
 
-                    // Profil fotoğrafı
                     if (document.getElementById('profilePhotoDisplay')) {
                         document.getElementById('profilePhotoDisplay').src = userObj.profilePhoto || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + encodeURIComponent(userObj.username || 'muminsultani');
                     }
 
-                    // Doğum tarihi (Mobil için)
                     const birthRow = document.getElementById('profileBirthdateRow');
                     const birthDisplay = document.getElementById('profileDisplayBirthdate');
                     if (userObj.birthDay && userObj.birthMonth && userObj.birthYear) {
