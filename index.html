@@ -22,7 +22,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="https://muminsultani.com/img/ms.png">
     <link rel="icon" sizes="180x180" href="https://muminsultani.com/img/180.png">
 
-    <!-- Google Fonts: Plus Jakarta Sans ve Inter eklendi -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -1203,7 +1202,7 @@
         }
 
         /* =========================================
-           YENİ EKLENEN PROFİL FOTOĞRAFI PANELİ STİLLERİ
+           PROFİL FOTOĞRAFI PANELİ VE LIGHTBOX STİLLERİ
            ========================================= */
         .profile-photo-large-view {
             display: flex;
@@ -1224,6 +1223,10 @@
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             pointer-events: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--box-bg);
         }
 
         .profile-photo-large-view .photo-container:hover {
@@ -1239,30 +1242,41 @@
             pointer-events: none;
         }
 
+        /* Yeni buton düzeni: Geri Dön (solda) - Değiştir (sağda) - Sıfırla (alt) */
         .photo-action-buttons {
             display: flex;
-            gap: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
             width: 100%;
             justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 6px;
         }
 
         .photo-action-buttons button {
             flex: 1;
-            min-width: 120px;
-            max-width: 180px;
-            padding: 12px 16px;
+            min-width: 90px;
+            padding: 12px 12px;
             border-radius: 12px;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             border: none;
             cursor: pointer;
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
+        }
+
+        .btn-back-photo {
+            background: var(--box-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--line-color) !important;
+        }
+
+        .btn-back-photo:hover {
+            background: var(--box-hover-bg);
+            border-color: rgba(147, 51, 234, 0.4) !important;
+            color: #9333ea;
         }
 
         .btn-change-photo {
@@ -1277,28 +1291,30 @@
             box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4);
         }
 
-        .btn-back-photo {
-            background: var(--box-bg);
-            color: var(--text-primary);
-            border: 1px solid var(--line-color);
+        .btn-reset-photo {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3) !important;
+            flex: 1 1 100% !important; /* Tam genişlik */
+            max-width: 100%;
         }
 
-        .btn-back-photo:hover {
-            background: var(--box-hover-bg);
-            border-color: rgba(147, 51, 234, 0.4);
-            color: #9333ea;
+        .btn-reset-photo:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444 !important;
+            transform: translateY(-2px);
         }
 
-        /* Lightbox (Tam Ekran Fotoğraf) */
+        /* Lightbox (Önizleme Penceresi) - Artık tam ekran değil, kare bir kutu */
         .lightbox-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(5, 5, 8, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 100000;
             display: flex;
             justify-content: center;
@@ -1316,35 +1332,69 @@
             pointer-events: auto;
         }
 
-        .lightbox-overlay img {
-            max-width: 90vw;
-            max-height: 90vh;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(147, 51, 234, 0.5);
-            object-fit: contain;
-            pointer-events: none;
+        .lightbox-content-box {
+            background: var(--modal-container-bg);
+            border: 1px solid var(--line-color);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 400px;
+            padding: 16px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(147, 51, 234, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            transform: scale(0.9) translateY(15px);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .lightbox-overlay.active .lightbox-content-box {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .lightbox-content-box .lightbox-image-wrapper {
+            width: 100%;
+            aspect-ratio: 1 / 1; /* Kare */
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(147, 51, 234, 0.3);
+            background: var(--box-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content-box .lightbox-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .lightbox-close-btn {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            width: 44px;
-            height: 44px;
+            top: -12px;
+            right: -12px;
+            background: var(--modal-container-bg);
+            border: 1px solid var(--line-color);
+            color: var(--text-secondary);
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            font-size: 1.2rem;
+            font-size: 0.9rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         .lightbox-close-btn:hover {
-            background: rgba(147, 51, 234, 0.6);
+            background: #9333ea;
+            color: #fff;
             border-color: #9333ea;
             transform: rotate(90deg);
         }
@@ -1660,7 +1710,7 @@
         </footer>
     </div>
 
-    <!-- YENİ: PROFİL FOTOĞRAFI PANELİ -->
+    <!-- PROFİL FOTOĞRAFI PANELİ -->
     <div class="modal-overlay" id="profilePhotoPanelModal">
         <div class="modal-container" style="max-width: 420px !important;">
             <div class="modal-header">
@@ -1678,22 +1728,30 @@
                     <img id="profilePhotoLarge" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile Large">
                 </div>
                 
+                <!-- Yeni Buton Düzeni: Geri Dön (solda), Değiştir (sağda), Sıfırla (altta) -->
                 <div class="photo-action-buttons">
+                    <button class="btn-back-photo" onclick="closeProfilePhotoPanel()">
+                        <i class="fa-solid fa-arrow-left"></i> Geri Dön
+                    </button>
                     <button class="btn-change-photo" onclick="document.getElementById('profilePhotoInput').click()">
                         <i class="fa-solid fa-camera"></i> Değiştir
                     </button>
-                    <button class="btn-back-photo" onclick="closeProfilePhotoPanel()">
-                        <i class="fa-solid fa-arrow-left"></i> Geri Dön
+                    <button class="btn-reset-photo" onclick="resetProfilePhoto()">
+                        <i class="fa-solid fa-rotate-left"></i> Sıfırla
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- LIGHTBOX (TAM EKRAN FOTOĞRAF) -->
+    <!-- LIGHTBOX (ÖNİZLEME PENCERESİ) - Artık tam ekran değil, kare bir kutu -->
     <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
-        <button class="lightbox-close-btn" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
-        <img id="lightboxImage" src="" alt="Profile Full Screen">
+        <div class="lightbox-content-box" onclick="event.stopPropagation()">
+            <button class="lightbox-close-btn" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="lightbox-image-wrapper">
+                <img id="lightboxImage" src="" alt="Profile Preview">
+            </div>
+        </div>
     </div>
 
     <!-- PROFİL DÜZENLEME MODALI -->
@@ -2179,7 +2237,7 @@
             }
         }
 
-        // YENİ: Profil Fotoğrafı Paneli Fonksiyonları
+        // Profil Fotoğrafı Paneli Fonksiyonları
         function openProfilePhotoPanel() {
             const loggedUser = localStorage.getItem('logged_user');
             if (!loggedUser) return;
@@ -2197,6 +2255,30 @@
             document.getElementById('profilePhotoPanelModal').classList.remove('active');
         }
 
+        // YENİ: Profil Fotoğrafını Sıfırlama Fonksiyonu
+        function resetProfilePhoto() {
+            const loggedUser = localStorage.getItem('logged_user');
+            if (!loggedUser) return;
+
+            const defaultAvatar = 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + encodeURIComponent('muminsultani');
+            
+            // Görselleri güncelle
+            document.getElementById('profilePhotoDisplay').src = defaultAvatar;
+            document.getElementById('profilePhotoLarge').src = defaultAvatar;
+
+            // LocalStorage'ı güncelle
+            try {
+                let userObj = JSON.parse(loggedUser);
+                userObj.profilePhoto = ''; // Boş string varsayılan avatar anlamına gelir
+                
+                let users = JSON.parse(localStorage.getItem('site_users') || '[]');
+                users = users.map(u => u.email === userObj.email ? userObj : u);
+                localStorage.setItem('site_users', JSON.stringify(users));
+                localStorage.setItem('logged_user', JSON.stringify(userObj));
+            } catch(err) {}
+        }
+
+        // Lightbox (Önizleme) Fonksiyonları
         function openLightbox() {
             const largeImgSrc = document.getElementById('profilePhotoLarge').src;
             document.getElementById('lightboxImage').src = largeImgSrc;
@@ -2943,6 +3025,8 @@
             if(document.getElementById('pp-title')) document.getElementById('pp-title').innerText = data.photoPanelTitle;
             if(document.querySelector('.btn-change-photo')) document.querySelector('.btn-change-photo').innerHTML = `<i class="fa-solid fa-camera"></i> ${data.btnChange}`;
             if(document.querySelector('.btn-back-photo')) document.querySelector('.btn-back-photo').innerHTML = `<i class="fa-solid fa-arrow-left"></i> ${data.btnBack}`;
+            // Sıfırla butonu için de çeviri eklendi
+            if(document.querySelector('.btn-reset-photo')) document.querySelector('.btn-reset-photo').innerHTML = `<i class="fa-solid fa-rotate-left"></i> Sıfırla`;
 
             const noticeMsg = document.getElementById('gmailNoticeMessage');
             if (noticeMsg) {
