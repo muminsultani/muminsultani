@@ -22,7 +22,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="https://muminsultani.com/img/ms.png">
     <link rel="icon" sizes="180x180" href="https://muminsultani.com/img/180.png">
 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Plus Jakarta Sans ve Inter eklendi -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -840,31 +841,6 @@
             opacity: 0.9;
         }
 
-        /* Google Butonu Stili (Artık kullanılmıyor ama silmedim) */
-        .submit-btn.google-btn {
-            background: #ffffff;
-            color: #333333;
-            border: 1px solid #dddddd;
-            font-weight: 600;
-        }
-        .submit-btn.google-btn:hover {
-            background: #f1f1f1;
-        }
-        .submit-btn.google-btn img {
-            width: 1.1rem;
-            height: 1.1rem;
-            display: block;
-        }
-        
-        body:not(.light-mode) .submit-btn.google-btn {
-            background: #1e1e24;
-            color: #f8fafc;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        body:not(.light-mode) .submit-btn.google-btn:hover {
-            background: #2a2a35;
-        }
-
         .custom-alert-overlay {
             position: fixed;
             top: 0;
@@ -1225,21 +1201,216 @@
             .footer-copy-text { font-size: 1.05rem; white-space: nowrap; }
             .footer-qr-container img { width: 150px; height: 150px; }
         }
+
+        /* =========================================
+           YENİ EKLENEN PROFİL FOTOĞRAFI PANELİ STİLLERİ
+           ========================================= */
+        .profile-photo-large-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 10px 0;
+        }
+
+        .profile-photo-large-view .photo-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(147, 51, 234, 0.4);
+            box-shadow: 0 10px 40px rgba(147, 51, 234, 0.25);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            pointer-events: auto;
+        }
+
+        .profile-photo-large-view .photo-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 48px rgba(147, 51, 234, 0.4);
+        }
+
+        .profile-photo-large-view .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+        }
+
+        .photo-action-buttons {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .photo-action-buttons button {
+            flex: 1;
+            min-width: 120px;
+            max-width: 180px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-change-photo {
+            background: linear-gradient(135deg, #9333ea, #c084fc);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
+        }
+
+        .btn-change-photo:hover {
+            opacity: 0.92;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4);
+        }
+
+        .btn-back-photo {
+            background: var(--box-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--line-color);
+        }
+
+        .btn-back-photo:hover {
+            background: var(--box-hover-bg);
+            border-color: rgba(147, 51, 234, 0.4);
+            color: #9333ea;
+        }
+
+        /* Lightbox (Tam Ekran Fotoğraf) */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 100000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 20px;
+            pointer-events: none;
+        }
+
+        .lightbox-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(147, 51, 234, 0.5);
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        .lightbox-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .lightbox-close-btn:hover {
+            background: rgba(147, 51, 234, 0.6);
+            border-color: #9333ea;
+            transform: rotate(90deg);
+        }
+
+        /* Profil Bilgi Alanı Fontları ve Renkleri */
+        #profileDisplayName {
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 800 !important;
+            font-size: 1.35rem !important;
+            letter-spacing: -0.5px !important;
+            background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientFlow 8s ease infinite;
+            margin-bottom: 4px;
+        }
+
+        #profileDisplayUsernameDesktop,
+        #profileDisplayEmailDesktop,
+        #profileDisplayBirthdateDesktop,
+        #profileDisplayUsernameMobile,
+        #profileDisplayEmail,
+        #profileDisplayBirthdate {
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 500 !important;
+            font-size: 0.95rem !important;
+            color: var(--text-primary) !important;
+            letter-spacing: -0.2px !important;
+        }
+
+        .desktop-username-area i,
+        .desktop-email-area i,
+        .desktop-birthdate-area i,
+        .mobile-email-row i,
+        .mobile-birthdate-row i {
+            color: #9333ea !important;
+            font-size: 0.95rem !important;
+        }
     </style>
     
     <script>
-        if (localStorage.getItem('theme') === 'light') {
-            document.documentElement.classList.add('light-mode-init');
-            document.addEventListener('DOMContentLoaded', () => {
-                document.body.classList.add('light-mode');
-                const icon = document.getElementById('themeIcon');
-                if(icon) icon.className = "fa-solid fa-sun";
-                const modalIcon = document.getElementById('modalThemeIcon');
-                if(modalIcon) modalIcon.className = "fa-solid fa-sun";
-                const contactModalIcon = document.getElementById('contactModalThemeIcon');
-                if(contactModalIcon) contactModalIcon.className = "fa-solid fa-sun";
-            });
-        }
+        // Sayfa yüklenmeden önce tarayıcı temasını ayarla (FOUC önleme)
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const hour = new Date().getHours();
+            let theme = savedTheme;
+            
+            // Eğer kullanıcı manuel tema seçmediyse, saat bazlı otomatik seçim yap
+            if (!theme) {
+                theme = (hour >= 6 && hour < 18) ? 'light' : 'dark';
+            }
+            
+            if (theme === 'light') {
+                document.documentElement.classList.add('light-mode-init');
+                document.addEventListener('DOMContentLoaded', () => {
+                    document.body.classList.add('light-mode');
+                    const icon = document.getElementById('themeIcon');
+                    if(icon) icon.className = "fa-solid fa-sun";
+                    const modalIcon = document.getElementById('modalThemeIcon');
+                    if(modalIcon) modalIcon.className = "fa-solid fa-sun";
+                    const contactModalIcon = document.getElementById('contactModalThemeIcon');
+                    if(contactModalIcon) contactModalIcon.className = "fa-solid fa-sun";
+                });
+            }
+        })();
     </script>
 </head>
 <body>
@@ -1329,15 +1500,15 @@
                 
                 <!-- Üst Kısım: Solda profil fotoğrafı, sağda ikonlar -->
                 <div style="display: flex; gap: 12px; width: 100%; align-items: center; justify-content: space-between; flex-wrap: wrap;">
-                    <!-- Sol Taraf: Yuvarlak Profil Fotoğrafı -->
+                    <!-- Sol Taraf: Yuvarlak Profil Fotoğrafı - Tıklanınca panel açılacak -->
                     <div class="profile-photo-wrapper" style="align-self: center;">
-                        <img id="profilePhotoDisplay" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile" onclick="document.getElementById('profilePhotoInput').click()" title="Change Photo">
+                        <img id="profilePhotoDisplay" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile" onclick="openProfilePhotoPanel()" title="Profil Fotoğrafını Görüntüle / Değiştir">
                         <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;" onchange="handleProfilePhotoUpload(event)">
                     </div>
                     
                     <!-- Sağ Taraf: İkonlar -->
                     <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-                        <!-- YENİ: GİZLİLİK BUTONU -->
+                        <!-- GİZLİLİK BUTONU -->
                         <button onclick="toggleProfilePrivacy()" title="Gizle/Göster" class="profile-action-btn" id="privacyToggleBtn">
                             <i class="fa-solid fa-eye" id="privacyIcon"></i>
                         </button>
@@ -1358,8 +1529,8 @@
 
                 <!-- Alt Kısım: Bilgiler (Gizlilik durumuna göre gösterilir/gizlenir) -->
                 <div id="profileDetailsContainer" style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
-                    <!-- İsim -->
-                    <strong id="profileDisplayName" style="font-size: 1.15rem; color: #9333ea;">Mumin</strong>
+                    <!-- İsim - Canlı Mor Gradyan -->
+                    <strong id="profileDisplayName" style="font-size: 1.35rem; color: #9333ea;">Mumin</strong>
                     
                     <!-- Masaüstü için: Tek Satırda @username, Email ve Doğum Tarihi -->
                     <div class="desktop-info-row">
@@ -1489,7 +1660,43 @@
         </footer>
     </div>
 
-    <!-- PROFIL DÜZENLEME MODALI -->
+    <!-- YENİ: PROFİL FOTOĞRAFI PANELİ -->
+    <div class="modal-overlay" id="profilePhotoPanelModal">
+        <div class="modal-container" style="max-width: 420px !important;">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div class="modal-brand">muminsultani</div>
+                    <div class="modal-title" id="pp-title">Profil Fotoğrafı</div>
+                </div>
+                <div class="modal-header-actions">
+                    <button class="modal-close-btn" onclick="closeProfilePhotoPanel()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            
+            <div class="profile-photo-large-view">
+                <div class="photo-container" onclick="openLightbox()">
+                    <img id="profilePhotoLarge" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile Large">
+                </div>
+                
+                <div class="photo-action-buttons">
+                    <button class="btn-change-photo" onclick="document.getElementById('profilePhotoInput').click()">
+                        <i class="fa-solid fa-camera"></i> Değiştir
+                    </button>
+                    <button class="btn-back-photo" onclick="closeProfilePhotoPanel()">
+                        <i class="fa-solid fa-arrow-left"></i> Geri Dön
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX (TAM EKRAN FOTOĞRAF) -->
+    <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
+        <button class="lightbox-close-btn" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
+        <img id="lightboxImage" src="" alt="Profile Full Screen">
+    </div>
+
+    <!-- PROFİL DÜZENLEME MODALI -->
     <div class="modal-overlay" id="editProfileModal">
         <div class="modal-container">
             <div class="modal-header">
@@ -1709,7 +1916,6 @@
                     <button type="button" class="submit-btn email-btn" onclick="handleAuthSubmit(event)" id="dc-submit-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc); width: 100%;">
                         <i class="fa-solid fa-right-to-bracket"></i> <span id="dc-submit-btn-text">Sign In</span>
                     </button>
-                    <!-- GOOGLE İLE DEVAM ET BUTONU KALDIRILDI -->
                 </div>
             </form>
         </div>
@@ -1891,6 +2097,35 @@
             curtain.style.visibility = 'hidden';
         });
 
+        // Tema başlangıç kontrolü
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const hour = new Date().getHours();
+            let theme = savedTheme;
+            
+            if (!theme) {
+                theme = (hour >= 6 && hour < 18) ? 'light' : 'dark';
+            }
+            
+            if (theme === 'light') {
+                document.body.classList.add('light-mode');
+                updateThemeIcons('sun');
+            } else {
+                document.body.classList.remove('light-mode');
+                updateThemeIcons('moon');
+            }
+        }
+
+        function updateThemeIcons(type) {
+            const themeIcon = document.getElementById('themeIcon');
+            const modalThemeIcon = document.getElementById('modalThemeIcon');
+            const contactModalThemeIcon = document.getElementById('contactModalThemeIcon');
+            const iconClass = type === 'sun' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            if(themeIcon) themeIcon.className = iconClass;
+            if(modalThemeIcon) modalThemeIcon.className = iconClass;
+            if(contactModalThemeIcon) contactModalThemeIcon.className = iconClass;
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const intro = document.getElementById('intro-screen');
@@ -1901,42 +2136,19 @@
                 }
             }, 1500);
 
-            const savedTheme = localStorage.getItem('theme');
-            const themeIcon = document.getElementById('themeIcon');
-            const modalThemeIcon = document.getElementById('modalThemeIcon');
-            const contactModalThemeIcon = document.getElementById('contactModalThemeIcon');
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-mode');
-                if(themeIcon) themeIcon.className = "fa-solid fa-sun";
-                if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-sun";
-                if(contactModalThemeIcon) contactModalThemeIcon.className = "fa-solid fa-sun";
-            } else {
-                document.body.classList.remove('light-mode');
-                if(themeIcon) themeIcon.className = "fa-solid fa-moon";
-                if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-moon";
-                if(contactModalThemeIcon) contactModalThemeIcon.className = "fa-solid fa-moon";
-            }
-
+            initTheme();
             checkUserSession();
         });
 
-        const themeIcon = document.getElementById('themeIcon');
-        const modalThemeIcon = document.getElementById('modalThemeIcon');
-        const contactModalThemeIcon = document.getElementById('contactModalThemeIcon');
-        
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
             const isLight = document.body.classList.contains('light-mode');
             
             if (isLight) {
-                if(themeIcon) themeIcon.className = "fa-solid fa-sun";
-                if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-sun";
-                if(contactModalThemeIcon) contactModalThemeIcon.className = "fa-solid fa-sun";
+                updateThemeIcons('sun');
                 localStorage.setItem('theme', 'light');
             } else {
-                if(themeIcon) themeIcon.className = "fa-solid fa-moon";
-                if(modalThemeIcon) modalThemeIcon.className = "fa-solid fa-moon";
-                if(contactModalThemeIcon) contactModalThemeIcon.className = "fa-solid fa-moon";
+                updateThemeIcons('moon');
                 localStorage.setItem('theme', 'dark');
             }
         }
@@ -1954,7 +2166,6 @@
             }
         }
 
-        // YENİ: PROFİL GİZLİLİK FONKSİYONU
         function toggleProfilePrivacy() {
             const detailsContainer = document.getElementById('profileDetailsContainer');
             const privacyIcon = document.getElementById('privacyIcon');
@@ -1966,6 +2177,34 @@
                 detailsContainer.style.display = 'none';
                 privacyIcon.className = 'fa-solid fa-eye-slash';
             }
+        }
+
+        // YENİ: Profil Fotoğrafı Paneli Fonksiyonları
+        function openProfilePhotoPanel() {
+            const loggedUser = localStorage.getItem('logged_user');
+            if (!loggedUser) return;
+            
+            try {
+                const userObj = JSON.parse(loggedUser);
+                const photoSrc = userObj.profilePhoto || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + encodeURIComponent(userObj.username || 'muminsultani');
+                document.getElementById('profilePhotoLarge').src = photoSrc;
+            } catch(e) {}
+            
+            document.getElementById('profilePhotoPanelModal').classList.add('active');
+        }
+
+        function closeProfilePhotoPanel() {
+            document.getElementById('profilePhotoPanelModal').classList.remove('active');
+        }
+
+        function openLightbox() {
+            const largeImgSrc = document.getElementById('profilePhotoLarge').src;
+            document.getElementById('lightboxImage').src = largeImgSrc;
+            document.getElementById('lightboxOverlay').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxOverlay').classList.remove('active');
         }
 
         function scrollPageDown() {
@@ -2071,7 +2310,11 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 const photoData = e.target.result;
+                
+                // Küçük ikonu güncelle
                 document.getElementById('profilePhotoDisplay').src = photoData;
+                // Büyük paneli güncelle
+                document.getElementById('profilePhotoLarge').src = photoData;
                 
                 const loggedUser = localStorage.getItem('logged_user');
                 if (loggedUser) {
@@ -2088,8 +2331,6 @@
             };
             reader.readAsDataURL(file);
         }
-
-        // Google Girişi Fonksiyonu Kaldırıldı
 
         const translations = {
             en: {
@@ -2241,7 +2482,10 @@
                 cpSuccess: "Password changed successfully!",
                 cpErrorOld: "Current password is incorrect!",
                 cpErrorMatch: "New passwords do not match!",
-                birthdateLabel: "Date of Birth (DD/MM/YYYY)"
+                birthdateLabel: "Date of Birth (DD/MM/YYYY)",
+                photoPanelTitle: "Profile Photo",
+                btnChange: "Change",
+                btnBack: "Back"
             },
             tr: {
                 code: "TR",
@@ -2303,7 +2547,10 @@
                 cpSuccess: "Şifre başarıyla değiştirildi!",
                 cpErrorOld: "Mevcut şifre yanlış!",
                 cpErrorMatch: "Yeni şifreler eşleşmiyor!",
-                birthdateLabel: "Doğum Tarihi (GG/AA/YYYY)"
+                birthdateLabel: "Doğum Tarihi (GG/AA/YYYY)",
+                photoPanelTitle: "Profil Fotoğrafı",
+                btnChange: "Değiştir",
+                btnBack: "Geri Dön"
             }
         };
 
@@ -2657,7 +2904,6 @@
             document.getElementById('dc-title').innerText = data.contactHeaderTitle;
             document.getElementById('tabSigninBtn').innerText = data.signinBtn;
             document.getElementById('tabSignupBtn').innerText = data.signupBtn;
-            // Google btn text güncellemesi kaldırıldı
 
             document.getElementById('dc-label-name').innerText = data.nameLabel;
             if(document.getElementById('contactClientName')) document.getElementById('contactClientName').placeholder = data.namePlaceholder;
@@ -2693,6 +2939,10 @@
             if(document.getElementById('da-desc')) document.getElementById('da-desc').innerText = data.delConfirmDesc;
             if(document.getElementById('da-label-username')) document.getElementById('da-label-username').innerText = data.delConfirmLabel;
             if(document.getElementById('da-submit-text')) document.getElementById('da-submit-text').innerText = data.delConfirmBtn;
+
+            if(document.getElementById('pp-title')) document.getElementById('pp-title').innerText = data.photoPanelTitle;
+            if(document.querySelector('.btn-change-photo')) document.querySelector('.btn-change-photo').innerHTML = `<i class="fa-solid fa-camera"></i> ${data.btnChange}`;
+            if(document.querySelector('.btn-back-photo')) document.querySelector('.btn-back-photo').innerHTML = `<i class="fa-solid fa-arrow-left"></i> ${data.btnBack}`;
 
             const noticeMsg = document.getElementById('gmailNoticeMessage');
             if (noticeMsg) {
@@ -2798,8 +3048,12 @@
                     if (document.getElementById('profileDisplayUsernameMobile')) document.getElementById('profileDisplayUsernameMobile').innerText = userObj.username || '@username';
                     if (document.getElementById('profileDisplayEmail')) document.getElementById('profileDisplayEmail').innerText = userObj.email || '-';
 
+                    const photoSrc = userObj.profilePhoto || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + encodeURIComponent(userObj.username || 'muminsultani');
                     if (document.getElementById('profilePhotoDisplay')) {
-                        document.getElementById('profilePhotoDisplay').src = userObj.profilePhoto || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + encodeURIComponent(userObj.username || 'muminsultani');
+                        document.getElementById('profilePhotoDisplay').src = photoSrc;
+                    }
+                    if (document.getElementById('profilePhotoLarge')) {
+                        document.getElementById('profilePhotoLarge').src = photoSrc;
                     }
 
                     const birthRow = document.getElementById('profileBirthdateRow');
@@ -2816,7 +3070,6 @@
                     if (contactMainEl) contactMainEl.innerText = userObj.name ? `Hoş geldiniz, ${userObj.name}` : "Oturum Açık";
                     if (authBoxIcon) authBoxIcon.className = "fa-solid fa-user-check";
                     
-                    // Gizlilik butonunu sıfırla (görünür yap)
                     document.getElementById('profileDetailsContainer').style.display = 'flex';
                     document.getElementById('privacyIcon').className = 'fa-solid fa-eye';
                     
@@ -2830,33 +3083,27 @@
             }
         }
 
-        // YENİ: ÇIKIŞ ONAY FONKSİYONU
         function confirmLogout() {
             const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
             const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
             const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
             const t = modalTranslations[currentModalLang] || modalTranslations.en;
 
-            // Custom alert kullanarak onay isteyelim
             const alertBox = document.getElementById('customAlertModal');
             const alertMsg = document.getElementById('customAlertMessage');
             const alertBtn = document.getElementById('customAlertBtn');
             
-            // Mevcut alert içeriğini değiştir
             alertMsg.innerText = "Çıkış yapmak istediğinizden emin misiniz?";
             
-            // Alert butonunu geçici olarak değiştir
             const originalOnClick = alertBtn.onclick;
             alertBtn.innerHTML = '<i class="fa-solid fa-door-open"></i> Çıkış Yap';
             alertBtn.onclick = function() {
-                // Orijinal alert butonunu geri yükle
                 alertBtn.innerHTML = 'OK';
                 alertBtn.onclick = originalOnClick;
                 closeCustomAlert();
                 handleLogout();
             };
             
-            // Alert'i göster
             alertBox.classList.add('active');
         }
 
