@@ -1024,7 +1024,7 @@
             white-space: nowrap;
         }
 
-        /* Profil ikonları için özel stiller (Sağ üstteki butonlarla aynı) */
+        /* Profil ikonları için özel stiller (Mavi alandaki butonlarla birebir aynı) */
         .profile-action-btn {
             background: var(--box-bg);
             border: 1px solid var(--line-color);
@@ -1065,7 +1065,7 @@
         .profile-photo-wrapper img {
             width: 30px;
             height: 30px;
-            border-radius: 50%; /* Yuvarlak yapıldı */
+            border-radius: 50%;
             object-fit: cover;
             border: 1px solid var(--line-color);
             background: var(--box-bg);
@@ -1195,54 +1195,52 @@
             </div>
         </header>
 
-        <!-- KULLANICI PROFİL / BİLGİ PANELİ (Düzenlendi: Profil fotoğrafı sağda ve yuvarlak) -->
+        <!-- KULLANICI PROFİL / BİLGİ PANELİ (Düzenlendi: İkonlar sağda, profil fotoğrafı solda) -->
         <section id="userProfileSection" style="display: none;">
             <div class="section-title">
                 <i class="fa-solid fa-user-gear"></i> <span id="t-profile-title">User Profile & Session</span>
             </div>
             <div class="contact-box" style="cursor: default; align-items: flex-start; flex-direction: column; gap: 12px;">
                 
-                <!-- Üst Kısım: Solda bilgiler, sağda profil fotoğrafı -->
-                <div style="display: flex; gap: 12px; width: 100%; align-items: flex-start;">
-                    <!-- Sol Taraf: Bilgiler ve İkonlar -->
-                    <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
-                        <!-- İkonlar -->
-                        <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-                            <button onclick="openEditProfileModal()" title="Edit Profile" class="profile-action-btn">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button onclick="openChangePasswordModal()" title="Change Password" class="profile-action-btn">
-                                <i class="fa-solid fa-key"></i>
-                            </button>
-                            <button onclick="openDeleteAccountModal()" title="Delete Account" class="profile-action-btn">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
-                            <button onclick="handleLogout()" title="Log Out" class="profile-action-btn">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                            </button>
-                        </div>
-                        <!-- İsim ve Bilgiler -->
-                        <div style="display: flex; flex-direction: column; gap: 8px;">
-                            <strong id="profileDisplayName" style="font-size: 1.15rem; color: #9333ea;">Mumin</strong>
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <i class="fa-solid fa-at" style="color: #9333ea; font-size: 0.9rem;"></i>
-                                <strong id="profileDisplayUsername" style="font-size: 0.95rem;">@mumin</strong>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <i class="fa-solid fa-envelope" style="color: #9333ea; font-size: 0.9rem;"></i>
-                                <strong id="profileDisplayEmail" style="font-size: 0.95rem;">muminsultani@hotmail.com</strong>
-                            </div>
-                            <div id="profileBirthdateRow" style="display: none; align-items: center; gap: 8px;">
-                                <i class="fa-solid fa-cake-candles" style="color: #9333ea; font-size: 0.9rem;"></i>
-                                <strong id="profileDisplayBirthdate" style="font-size: 0.95rem;"></strong>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Sağ Taraf: Yuvarlak Profil Fotoğrafı -->
-                    <div class="profile-photo-wrapper" style="align-self: flex-start;">
+                <!-- Üst Kısım: Solda profil fotoğrafı, sağda ikonlar -->
+                <div style="display: flex; gap: 12px; width: 100%; align-items: center; justify-content: space-between;">
+                    <!-- Sol Taraf: Yuvarlak Profil Fotoğrafı -->
+                    <div class="profile-photo-wrapper" style="align-self: center;">
                         <img id="profilePhotoDisplay" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile" onclick="document.getElementById('profilePhotoInput').click()" title="Change Photo">
                         <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;" onchange="handleProfilePhotoUpload(event)">
+                    </div>
+                    
+                    <!-- Sağ Taraf: İkonlar (Mavi alandaki butonlarla aynı stilde) -->
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                        <button onclick="openEditProfileModal()" title="Edit Profile" class="profile-action-btn">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button onclick="openChangePasswordModal()" title="Change Password" class="profile-action-btn">
+                            <i class="fa-solid fa-key"></i>
+                        </button>
+                        <button onclick="openDeleteAccountModal()" title="Delete Account" class="profile-action-btn">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                        <button onclick="handleLogout()" title="Log Out" class="profile-action-btn">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- İsim ve Bilgiler Altta -->
+                <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                    <strong id="profileDisplayName" style="font-size: 1.15rem; color: #9333ea;">Mumin</strong>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-at" style="color: #9333ea; font-size: 0.9rem;"></i>
+                        <strong id="profileDisplayUsername" style="font-size: 0.95rem;">@mumin</strong>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-envelope" style="color: #9333ea; font-size: 0.9rem;"></i>
+                        <strong id="profileDisplayEmail" style="font-size: 0.95rem;">muminsultani@hotmail.com</strong>
+                    </div>
+                    <div id="profileBirthdateRow" style="display: none; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-cake-candles" style="color: #9333ea; font-size: 0.9rem;"></i>
+                        <strong id="profileDisplayBirthdate" style="font-size: 0.95rem;"></strong>
                     </div>
                 </div>
             </div>
