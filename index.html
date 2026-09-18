@@ -516,12 +516,14 @@
             word-break: break-word;
         }
 
+        /* KULLANICI PROFİL KUTUSU - Arka planı şeffaflaştırıldı */
         .contact-box {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(10, 10, 15, 0.4);
+            background: rgba(10, 10, 15, 0.3); /* Daha şeffaf */
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--line-color);
             padding: 14px 16px;
             border-radius: 12px;
@@ -534,7 +536,7 @@
         }
 
         body.light-mode .contact-box {
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.3);
         }
 
         .contact-box:hover {
@@ -901,7 +903,7 @@
             pointer-events: auto;
         }
 
-        /* Alert kutusu: Boyut sınırları eklendi, içeriğe göre otomatik boyutlanacak */
+        /* Alert kutusu boyut düzeltmesi */
         .custom-alert-box {
             background: var(--modal-container-bg);
             backdrop-filter: blur(20px);
@@ -910,9 +912,7 @@
             border-radius: 20px;
             width: 100%;
             max-width: 340px;
-            min-height: 200px;
-            max-height: 80vh;
-            padding: 22px;
+            padding: 24px 22px;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(147, 51, 234, 0.15);
             text-align: center;
             position: relative;
@@ -924,6 +924,9 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
+            gap: 12px;
+            min-height: auto;
         }
 
         .alert-canvas {
@@ -968,7 +971,7 @@
         .custom-alert-icon {
             font-size: 1.8rem;
             color: #9333ea;
-            margin-bottom: 10px;
+            margin-bottom: 0;
             filter: drop-shadow(0 4px 12px rgba(147, 51, 234, 0.3));
         }
 
@@ -976,8 +979,9 @@
             font-size: 0.85rem;
             color: var(--text-primary);
             font-weight: 500;
-            margin-bottom: 18px;
+            margin-bottom: 0;
             line-height: 1.5;
+            text-align: center;
         }
 
         .custom-alert-btn {
@@ -985,15 +989,16 @@
             color: #fff;
             border: none;
             width: 100%;
-            padding: 9px 8px;
+            padding: 10px 8px;
             border-radius: 10px;
             font-weight: 700;
-            font-size: 0.72rem;
+            font-size: 0.75rem;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
             text-align: center;
             white-space: nowrap;
+            margin-top: 4px;
         }
 
         .custom-alert-btn:hover {
@@ -1567,7 +1572,7 @@
         </div>
     </div>
 
-    <!-- HESAP / GİRİŞ PANELİ (GET IN TOUCH MODAL KALDIRILDI, DOĞRUDAN AÇILIR) -->
+    <!-- HESAP / GİRİŞ PANELİ -->
     <div class="modal-overlay" id="directContactModal">
         <div class="modal-container">
             <canvas class="modal-canvas"></canvas>
