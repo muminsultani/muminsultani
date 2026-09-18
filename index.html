@@ -927,11 +927,17 @@
             line-height: 1.5;
         }
 
+        .custom-alert-btn-group {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+        }
+
         .custom-alert-btn {
             background: linear-gradient(135deg, #9333ea, #c084fc);
             color: #fff;
             border: none;
-            width: 100%;
+            flex: 1;
             padding: 11px 8px;
             border-radius: 12px;
             font-weight: 700;
@@ -941,12 +947,30 @@
             box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
             text-align: center;
             white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
 
         .custom-alert-btn:hover {
             opacity: 0.92;
             transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4);
+        }
+
+        .custom-alert-btn.cancel-btn {
+            background: var(--box-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--line-color);
+            box-shadow: none;
+        }
+
+        .custom-alert-btn.cancel-btn:hover {
+            background: var(--box-hover-bg);
+            border-color: rgba(147, 51, 234, 0.4);
+            color: #9333ea;
+            box-shadow: none;
         }
 
         footer {
@@ -1242,7 +1266,6 @@
             pointer-events: none;
         }
 
-        /* Yeni buton düzeni: Geri Dön (solda) - Değiştir (sağda) - Sıfırla (alt) */
         .photo-action-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -1295,7 +1318,7 @@
             background: rgba(239, 68, 68, 0.1);
             color: #ef4444;
             border: 1px solid rgba(239, 68, 68, 0.3) !important;
-            flex: 1 1 100% !important; /* Tam genişlik */
+            flex: 1 1 100% !important;
             max-width: 100%;
         }
 
@@ -1305,7 +1328,6 @@
             transform: translateY(-2px);
         }
 
-        /* Lightbox (Önizleme Penceresi) - Artık tam ekran değil, kare bir kutu */
         .lightbox-overlay {
             position: fixed;
             top: 0;
@@ -1356,7 +1378,7 @@
 
         .lightbox-content-box .lightbox-image-wrapper {
             width: 100%;
-            aspect-ratio: 1 / 1; /* Kare */
+            aspect-ratio: 1 / 1;
             border-radius: 12px;
             overflow: hidden;
             border: 2px solid rgba(147, 51, 234, 0.3);
@@ -1474,7 +1496,7 @@
                 <span class="code-keyword">const</span> dev = <span class="code-string">"muminsultani"</span>;<span class="code-cursor"></span>
             </div>
             <div class="intro-logo">muminsultani</div>
-            <div class="intro-sub">Software Developer</div>
+            <div class="intro-sub" id="introSub">Software Developer</div>
         </div>
     </div>
 
@@ -1552,14 +1574,14 @@
                 <div style="display: flex; gap: 12px; width: 100%; align-items: center; justify-content: space-between; flex-wrap: wrap;">
                     <!-- Sol Taraf: Yuvarlak Profil Fotoğrafı - Tıklanınca panel açılacak -->
                     <div class="profile-photo-wrapper" style="align-self: center;">
-                        <img id="profilePhotoDisplay" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile" onclick="openProfilePhotoPanel()" title="Profil Fotoğrafını Görüntüle / Değiştir">
+                        <img id="profilePhotoDisplay" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile" onclick="openProfilePhotoPanel()" title="View / Change Profile Photo">
                         <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;" onchange="handleProfilePhotoUpload(event)">
                     </div>
                     
                     <!-- Sağ Taraf: İkonlar -->
                     <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
                         <!-- GİZLİLİK BUTONU -->
-                        <button onclick="toggleProfilePrivacy()" title="Gizle/Göster" class="profile-action-btn" id="privacyToggleBtn">
+                        <button onclick="toggleProfilePrivacy()" title="Hide/Show" class="profile-action-btn" id="privacyToggleBtn">
                             <i class="fa-solid fa-eye" id="privacyIcon"></i>
                         </button>
                         <button onclick="openEditProfileModal()" title="Edit Profile" class="profile-action-btn">
@@ -1716,7 +1738,7 @@
             <div class="modal-header">
                 <div class="modal-header-left">
                     <div class="modal-brand">muminsultani</div>
-                    <div class="modal-title" id="pp-title">Profil Fotoğrafı</div>
+                    <div class="modal-title" id="pp-title">Profile Photo</div>
                 </div>
                 <div class="modal-header-actions">
                     <button class="modal-close-btn" onclick="closeProfilePhotoPanel()"><i class="fa-solid fa-xmark"></i></button>
@@ -1728,23 +1750,22 @@
                     <img id="profilePhotoLarge" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile Large">
                 </div>
                 
-                <!-- Yeni Buton Düzeni: Geri Dön (solda), Değiştir (sağda), Sıfırla (altta) -->
                 <div class="photo-action-buttons">
                     <button class="btn-back-photo" onclick="closeProfilePhotoPanel()">
-                        <i class="fa-solid fa-arrow-left"></i> Geri Dön
+                        <i class="fa-solid fa-arrow-left"></i> <span id="pp-back-text">Back</span>
                     </button>
                     <button class="btn-change-photo" onclick="document.getElementById('profilePhotoInput').click()">
-                        <i class="fa-solid fa-camera"></i> Değiştir
+                        <i class="fa-solid fa-camera"></i> <span id="pp-change-text">Change</span>
                     </button>
                     <button class="btn-reset-photo" onclick="resetProfilePhoto()">
-                        <i class="fa-solid fa-rotate-left"></i> Sıfırla
+                        <i class="fa-solid fa-rotate-left"></i> <span id="pp-reset-text">Reset</span>
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- LIGHTBOX (ÖNİZLEME PENCERESİ) - Artık tam ekran değil, kare bir kutu -->
+    <!-- LIGHTBOX (ÖNİZLEME PENCERESİ) -->
     <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
         <div class="lightbox-content-box" onclick="event.stopPropagation()">
             <button class="lightbox-close-btn" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
@@ -1894,7 +1915,7 @@
                 <button class="custom-alert-btn" onclick="openDirectContactModal()" id="gitActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; padding: 8px 6px; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
                     <i class="fa-solid fa-right-to-bracket"></i> <span id="gitActionText">Account</span>
                 </button>
-                <button class="custom-alert-btn" onclick="closeGetInTouchModal()" id="gitBackBtn" style="background: #64748b; flex: 1; padding: 8px 6px; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                <button class="custom-alert-btn cancel-btn" onclick="closeGetInTouchModal()" id="gitBackBtn" style="flex: 1; padding: 8px 6px; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
                     <i class="fa-solid fa-arrow-rotate-left"></i> <span id="gitBackText">Back</span>
                 </button>
             </div>
@@ -2102,7 +2123,7 @@
                 <button class="custom-alert-btn" onclick="confirmOpenGmail()" id="gmailNoticeActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 8px; font-size: 0.75rem;">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1rem; height: 1rem; display: block;"> <span id="gmailNoticeEmailBtnText">Email</span>
                 </button>
-                <button class="custom-alert-btn" onclick="closeGmailNoticeModal()" id="gmailNoticeBackBtn" style="background: #64748b; flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 8px; font-size: 0.75rem;">
+                <button class="custom-alert-btn cancel-btn" onclick="closeGmailNoticeModal()" id="gmailNoticeBackBtn" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 8px; font-size: 0.75rem;">
                     <i class="fa-solid fa-arrow-rotate-left"></i> <span id="gmailNoticeBackText">Back</span>
                 </button>
             </div>
@@ -2112,9 +2133,11 @@
     <!-- ÖZEL UYARI KUTUSU -->
     <div class="custom-alert-overlay" id="customAlertModal">
         <div class="custom-alert-box">
-            <div class="custom-alert-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+            <div class="custom-alert-icon" id="customAlertIcon"><i class="fa-solid fa-circle-exclamation"></i></div>
             <div class="custom-alert-message" id="customAlertMessage">Please fill in all fields.</div>
-            <button class="custom-alert-btn" onclick="closeCustomAlert()" id="customAlertBtn">OK</button>
+            <div class="custom-alert-btn-group" id="customAlertBtnGroup">
+                <button class="custom-alert-btn" onclick="closeCustomAlert()" id="customAlertBtn">OK</button>
+            </div>
         </div>
     </div>
 
@@ -2196,6 +2219,9 @@
 
             initTheme();
             checkUserSession();
+            
+            // Varsayılan dili İngilizce olarak ayarla
+            changeLanguage('en');
         });
 
         function toggleTheme() {
@@ -2255,21 +2281,18 @@
             document.getElementById('profilePhotoPanelModal').classList.remove('active');
         }
 
-        // YENİ: Profil Fotoğrafını Sıfırlama Fonksiyonu
         function resetProfilePhoto() {
             const loggedUser = localStorage.getItem('logged_user');
             if (!loggedUser) return;
 
             const defaultAvatar = 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + encodeURIComponent('muminsultani');
             
-            // Görselleri güncelle
             document.getElementById('profilePhotoDisplay').src = defaultAvatar;
             document.getElementById('profilePhotoLarge').src = defaultAvatar;
 
-            // LocalStorage'ı güncelle
             try {
                 let userObj = JSON.parse(loggedUser);
-                userObj.profilePhoto = ''; // Boş string varsayılan avatar anlamına gelir
+                userObj.profilePhoto = '';
                 
                 let users = JSON.parse(localStorage.getItem('site_users') || '[]');
                 users = users.map(u => u.email === userObj.email ? userObj : u);
@@ -2393,9 +2416,7 @@
             reader.onload = function(e) {
                 const photoData = e.target.result;
                 
-                // Küçük ikonu güncelle
                 document.getElementById('profilePhotoDisplay').src = photoData;
-                // Büyük paneli güncelle
                 document.getElementById('profilePhotoLarge').src = photoData;
                 
                 const loggedUser = localStorage.getItem('logged_user');
@@ -2437,7 +2458,20 @@
                 profUsername: "Username",
                 profEmail: "Email Address",
                 forgotLink: "Forgot Password?",
-                googleBtn: "Continue with Google"
+                googleBtn: "Continue with Google",
+                photoPanelTitle: "Profile Photo",
+                btnChange: "Change",
+                btnBack: "Back",
+                btnReset: "Reset",
+                // Yeni eklenen çeviriler
+                logoutTitle: "Log Out",
+                logoutConfirm: "Are you sure you want to log out?",
+                logoutYes: "Log Out",
+                logoutNo: "Back",
+                logoutSuccess: "Session closed.",
+                loginSuccess: "Signed in successfully!",
+                signupSuccess: "Account created successfully! You can now sign in.",
+                loginError: "Invalid email or password!"
             },
             tr: {
                 code: "TR",
@@ -2461,18 +2495,37 @@
                 profUsername: "Kullanıcı Adı",
                 profEmail: "E-posta Adresi",
                 forgotLink: "Şifremi Unuttum?",
-                googleBtn: "Google ile Devam Et"
+                googleBtn: "Google ile Devam Et",
+                photoPanelTitle: "Profil Fotoğrafı",
+                btnChange: "Değiştir",
+                btnBack: "Geri Dön",
+                btnReset: "Sıfırla",
+                // Yeni eklenen çeviriler
+                logoutTitle: "Çıkış Yap",
+                logoutConfirm: "Çıkış yapmak istediğinizden emin misiniz?",
+                logoutYes: "Çıkış Yap",
+                logoutNo: "Geri Dön",
+                logoutSuccess: "Oturum kapatıldı.",
+                loginSuccess: "Başarıyla giriş yapıldı!",
+                signupSuccess: "Hesap başarıyla oluşturuldu! Şimdi giriş yapabilirsiniz.",
+                loginError: "Geçersiz e-posta veya şifre!"
             }
         };
 
+        // Dil değişkeni
+        let currentLang = 'en';
+
         function changeLanguage(lang) {
+            currentLang = lang;
             const data = translations[lang];
             if (!data) return;
 
             document.getElementById('htmlRoot').setAttribute('lang', lang);
             document.getElementById('currentLangText').innerText = data.code;
 
+            // Ana sayfa metinleri
             document.getElementById('t-role').innerText = data.role;
+            document.getElementById('introSub').innerText = data.role;
             document.getElementById('t-projects-title').innerText = data.projectsTitle;
             document.getElementById('t-proj1-desc').innerText = data.proj1Desc;
             document.getElementById('t-proj2-desc').innerText = data.proj2Desc;
@@ -2490,14 +2543,22 @@
             document.getElementById('t-contact-main').innerText = data.contactMain;
             document.getElementById('t-scan-text').innerText = data.scanText;
 
+            // Profil metinleri
+            if(document.getElementById('t-profile-title')) document.getElementById('t-profile-title').innerText = data.profileTitle;
+            if(document.getElementById('t-forgot-link')) document.getElementById('t-forgot-link').innerText = data.forgotLink;
+
+            // Profil fotoğrafı paneli metinleri
+            if(document.getElementById('pp-title')) document.getElementById('pp-title').innerText = data.photoPanelTitle;
+            if(document.getElementById('pp-back-text')) document.getElementById('pp-back-text').innerText = data.btnBack;
+            if(document.getElementById('pp-change-text')) document.getElementById('pp-change-text').innerText = data.btnChange;
+            if(document.getElementById('pp-reset-text')) document.getElementById('pp-reset-text').innerText = data.btnReset;
+
+            // Modal metinleri
             document.getElementById('gitModalTitle').innerText = data.contactTitle;
             document.getElementById('gitActionText').innerText = data.gitText;
             document.getElementById('gitBackText').innerText = data.backText;
 
-            if(document.getElementById('t-forgot-link')) document.getElementById('t-forgot-link').innerText = data.forgotLink;
-            if(document.getElementById('t-profile-title')) document.getElementById('t-profile-title').innerText = data.profileTitle;
-            if(document.getElementById('dc-google-btn-text')) document.getElementById('dc-google-btn-text').innerText = data.googleBtn;
-
+            // Modal içi çevirileri güncelle
             changeModalLanguage(lang);
 
             document.getElementById('langMenu').classList.remove('show');
@@ -2567,7 +2628,14 @@
                 birthdateLabel: "Date of Birth (DD/MM/YYYY)",
                 photoPanelTitle: "Profile Photo",
                 btnChange: "Change",
-                btnBack: "Back"
+                btnBack: "Back",
+                btnReset: "Reset",
+                // Çıkış onay metinleri
+                logoutTitle: "Log Out",
+                logoutConfirm: "Are you sure you want to log out?",
+                logoutYes: "Log Out",
+                logoutNo: "Back",
+                logoutSuccess: "Session closed."
             },
             tr: {
                 code: "TR",
@@ -2632,7 +2700,14 @@
                 birthdateLabel: "Doğum Tarihi (GG/AA/YYYY)",
                 photoPanelTitle: "Profil Fotoğrafı",
                 btnChange: "Değiştir",
-                btnBack: "Geri Dön"
+                btnBack: "Geri Dön",
+                btnReset: "Sıfırla",
+                // Çıkış onay metinleri
+                logoutTitle: "Çıkış Yap",
+                logoutConfirm: "Çıkış yapmak istediğinizden emin misiniz?",
+                logoutYes: "Çıkış Yap",
+                logoutNo: "Geri Dön",
+                logoutSuccess: "Oturum kapatıldı."
             }
         };
 
@@ -2948,13 +3023,83 @@
             appointmentModal.classList.remove('light-blue-bg');
         }
 
-        function showCustomAlert(message) {
-            document.getElementById('customAlertMessage').innerText = message;
-            document.getElementById('customAlertModal').classList.add('active');
+        function showCustomAlert(message, type = 'info', onConfirm = null) {
+            const alertBox = document.getElementById('customAlertModal');
+            const alertIcon = document.getElementById('customAlertIcon');
+            const alertMsg = document.getElementById('customAlertMessage');
+            const alertBtnGroup = document.getElementById('customAlertBtnGroup');
+            
+            alertMsg.innerText = message;
+            
+            // İkonu ayarla
+            if (type === 'logout') {
+                alertIcon.innerHTML = '<i class="fa-solid fa-door-open"></i>';
+            } else {
+                alertIcon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+            }
+            
+            if (onConfirm) {
+                // Çift butonlu gösterim
+                const currentLangText = document.getElementById('currentLangText').innerText.toLowerCase();
+                const t = modalTranslations[currentLangText] || modalTranslations.en;
+                
+                alertBtnGroup.innerHTML = `
+                    <button class="custom-alert-btn cancel-btn" onclick="closeCustomAlert()" style="flex: 1;">
+                        <i class="fa-solid fa-arrow-left"></i> ${t.logoutNo}
+                    </button>
+                    <button class="custom-alert-btn" onclick="confirmLogoutAction()" style="flex: 1;">
+                        <i class="fa-solid fa-door-open"></i> ${t.logoutYes}
+                    </button>
+                `;
+                // Onay fonksiyonunu global olarak sakla
+                window._logoutConfirmCallback = onConfirm;
+            } else {
+                // Tek butonlu gösterim
+                const currentLangText = document.getElementById('currentLangText').innerText.toLowerCase();
+                const t = modalTranslations[currentLangText] || modalTranslations.en;
+                
+                alertBtnGroup.innerHTML = `
+                    <button class="custom-alert-btn" onclick="closeCustomAlert()" style="flex: 1;">
+                        ${t.backText || 'OK'}
+                    </button>
+                `;
+            }
+            
+            alertBox.classList.add('active');
         }
 
         function closeCustomAlert() {
             document.getElementById('customAlertModal').classList.remove('active');
+            window._logoutConfirmCallback = null;
+        }
+
+        function confirmLogoutAction() {
+            if (window._logoutConfirmCallback) {
+                const callback = window._logoutConfirmCallback;
+                closeCustomAlert();
+                callback();
+            } else {
+                closeCustomAlert();
+            }
+        }
+
+        function confirmLogout() {
+            const currentLangText = document.getElementById('currentLangText').innerText.toLowerCase();
+            const t = modalTranslations[currentLangText] || modalTranslations.en;
+            
+            showCustomAlert(
+                t.logoutConfirm, 
+                'logout', 
+                function() {
+                    // Onaylandığında çıkış yap
+                    localStorage.removeItem('logged_user');
+                    checkUserSession();
+                    // Çıkış başarılı mesajı göster
+                    setTimeout(() => {
+                        showCustomAlert(t.logoutSuccess, 'success');
+                    }, 300);
+                }
+            );
         }
 
         function changeModalLanguage(lang) {
@@ -3023,10 +3168,9 @@
             if(document.getElementById('da-submit-text')) document.getElementById('da-submit-text').innerText = data.delConfirmBtn;
 
             if(document.getElementById('pp-title')) document.getElementById('pp-title').innerText = data.photoPanelTitle;
-            if(document.querySelector('.btn-change-photo')) document.querySelector('.btn-change-photo').innerHTML = `<i class="fa-solid fa-camera"></i> ${data.btnChange}`;
-            if(document.querySelector('.btn-back-photo')) document.querySelector('.btn-back-photo').innerHTML = `<i class="fa-solid fa-arrow-left"></i> ${data.btnBack}`;
-            // Sıfırla butonu için de çeviri eklendi
-            if(document.querySelector('.btn-reset-photo')) document.querySelector('.btn-reset-photo').innerHTML = `<i class="fa-solid fa-rotate-left"></i> Sıfırla`;
+            if(document.getElementById('pp-change-text')) document.getElementById('pp-change-text').innerText = data.btnChange;
+            if(document.getElementById('pp-back-text')) document.getElementById('pp-back-text').innerText = data.btnBack;
+            if(document.getElementById('pp-reset-text')) document.getElementById('pp-reset-text').innerText = data.btnReset;
 
             const noticeMsg = document.getElementById('gmailNoticeMessage');
             if (noticeMsg) {
@@ -3151,7 +3295,7 @@
 
                     if (contactTitleEl) contactTitleEl.innerText = "User Account";
                     if (contactSubEl) contactSubEl.innerText = "Active Session";
-                    if (contactMainEl) contactMainEl.innerText = userObj.name ? `Hoş geldiniz, ${userObj.name}` : "Oturum Açık";
+                    if (contactMainEl) contactMainEl.innerText = userObj.name ? `Welcome, ${userObj.name}` : "Session Active";
                     if (authBoxIcon) authBoxIcon.className = "fa-solid fa-user-check";
                     
                     document.getElementById('profileDetailsContainer').style.display = 'flex';
@@ -3165,36 +3309,6 @@
                 if (contactMainEl) contactMainEl.innerText = "Sign in to join us";
                 if (authBoxIcon) authBoxIcon.className = "fa-solid fa-right-to-bracket";
             }
-        }
-
-        function confirmLogout() {
-            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-            const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
-            const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
-            const t = modalTranslations[currentModalLang] || modalTranslations.en;
-
-            const alertBox = document.getElementById('customAlertModal');
-            const alertMsg = document.getElementById('customAlertMessage');
-            const alertBtn = document.getElementById('customAlertBtn');
-            
-            alertMsg.innerText = "Çıkış yapmak istediğinizden emin misiniz?";
-            
-            const originalOnClick = alertBtn.onclick;
-            alertBtn.innerHTML = '<i class="fa-solid fa-door-open"></i> Çıkış Yap';
-            alertBtn.onclick = function() {
-                alertBtn.innerHTML = 'OK';
-                alertBtn.onclick = originalOnClick;
-                closeCustomAlert();
-                handleLogout();
-            };
-            
-            alertBox.classList.add('active');
-        }
-
-        function handleLogout() {
-            localStorage.removeItem('logged_user');
-            checkUserSession();
-            showCustomAlert("Oturum kapatıldı.");
         }
 
         function getBase64ImageFromURL(url, callback) {
