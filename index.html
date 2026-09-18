@@ -25,6 +25,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- ✅ YENİ: Cropper.js (fotoğraf kırpma için) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
     
@@ -1574,34 +1578,164 @@
             color: var(--text-secondary);
         }
 
-        /* ✅ YENİ: Geçici şifre kopyalama butonu */
+        /* ✅ YENİ: Geçici şifre kopyalama butonu ve tek satır düzeni */
+        .mock-pass-row {
+            display: flex !important;
+            align-items: center !important;
+            gap: 5px !important;
+            flex-wrap: nowrap !important;
+            white-space: nowrap !important;
+            overflow-x: auto !important;
+            padding-bottom: 2px !important;
+            margin-bottom: 12px !important;
+            scrollbar-width: none !important;
+        }
+        .mock-pass-row::-webkit-scrollbar {
+            display: none !important;
+        }
+        .mock-pass-row strong {
+            flex-shrink: 0 !important;
+            font-size: 0.82rem !important;
+            color: var(--text-primary) !important;
+        }
+        #mock-email-pass-value {
+            flex-shrink: 0 !important;
+            font-size: 0.82rem !important;
+            padding: 2px 6px !important;
+            color: #9333ea !important;
+            font-family: 'Fira Code', monospace !important;
+            font-weight: 700 !important;
+            background: rgba(147,51,234,0.1) !important;
+            border-radius: 4px !important;
+            display: inline-block !important;
+        }
         .copy-pass-btn {
-            background: transparent;
-            border: 1px solid rgba(147, 51, 234, 0.3);
-            color: #9333ea;
-            cursor: pointer;
-            padding: 4px 8px;
-            margin-left: 6px;
-            font-size: 0.75rem;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            vertical-align: middle;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
+            flex-shrink: 0 !important;
+            background: transparent !important;
+            border: 1px solid rgba(147, 51, 234, 0.35) !important;
+            color: #9333ea !important;
+            cursor: pointer !important;
+            padding: 4px 7px !important;
+            font-size: 0.72rem !important;
+            border-radius: 6px !important;
+            transition: all 0.2s ease !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            line-height: 1 !important;
         }
-
         .copy-pass-btn:hover {
-            background: rgba(147, 51, 234, 0.1);
-            border-color: #9333ea;
-            transform: translateY(-1px);
+            background: rgba(147, 51, 234, 0.12) !important;
+            border-color: #9333ea !important;
         }
-
         .copy-pass-btn.copied {
             color: #22c55e !important;
             border-color: #22c55e !important;
-            background: rgba(34, 197, 94, 0.1) !important;
+            background: rgba(34, 197, 94, 0.12) !important;
+        }
+
+        @media (max-width: 400px) {
+            .mock-pass-row strong,
+            #mock-email-pass-value {
+                font-size: 0.76rem !important;
+            }
+            .copy-pass-btn {
+                padding: 3px 6px !important;
+                font-size: 0.68rem !important;
+            }
+        }
+
+        /* ✅ YENİ: Fotoğraf kırpma modal stilleri */
+        .crop-container-wrapper {
+            width: 100%;
+            height: 300px;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .crop-container-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            pointer-events: auto !important;
+            -webkit-user-drag: auto !important;
+            user-drag: auto !important;
+        }
+        .crop-ratio-buttons {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .ratio-btn {
+            flex: 1;
+            min-width: 52px;
+            padding: 8px 6px;
+            border-radius: 8px;
+            background: var(--box-bg);
+            border: 1px solid var(--line-color);
+            color: var(--text-secondary);
+            font-size: 0.72rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .ratio-btn:hover {
+            border-color: rgba(147, 51, 234, 0.4);
+            color: #9333ea;
+            background: var(--box-hover-bg);
+        }
+        .ratio-btn.active {
+            background: linear-gradient(135deg, #9333ea, #c084fc);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
+        }
+        .crop-action-buttons {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+        .crop-action-buttons button {
+            flex: 1;
+            padding: 11px 8px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.78rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .btn-crop-cancel {
+            background: var(--box-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--line-color) !important;
+        }
+        .btn-crop-cancel:hover {
+            background: var(--box-hover-bg);
+            border-color: rgba(147, 51, 234, 0.4) !important;
+            color: #9333ea;
+        }
+        .btn-crop-apply {
+            background: linear-gradient(135deg, #9333ea, #c084fc);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
+        }
+        .btn-crop-apply:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4);
         }
     </style>
     
@@ -1740,7 +1874,7 @@
                     </div>
                 </div>
 
-                <div id="profileDetailsContainer" style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                <div id="profileDetailsContainer" style="display: none; flex-direction: column; gap: 8px; width: 100%;">
                     <strong id="profileDisplayName" style="font-size: 1.35rem; color: #9333ea;">Mumin</strong>
                     
                     <div class="desktop-info-row">
@@ -1866,6 +2000,7 @@
         </footer>
     </div>
 
+    <!-- PROFİL FOTOĞRAFI PANELİ -->
     <div class="modal-overlay" id="profilePhotoPanelModal">
         <div class="modal-container" style="max-width: 420px !important;">
             <div class="modal-header">
@@ -1883,17 +2018,54 @@
                     <img id="profilePhotoLarge" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile Large">
                 </div>
                 
+                <!-- ✅ Buton sırası değiştirildi: Değiştir (sol), Geri Dön (sağ) -->
                 <div class="photo-action-buttons">
-                    <button class="btn-back-photo" onclick="closeProfilePhotoPanel()">
-                        <i class="fa-solid fa-arrow-left"></i> <span id="pp-back-text">Back</span>
-                    </button>
                     <button class="btn-change-photo" onclick="document.getElementById('profilePhotoInput').click()">
                         <i class="fa-solid fa-camera"></i> <span id="pp-change-text">Change</span>
+                    </button>
+                    <button class="btn-back-photo" onclick="closeProfilePhotoPanel()">
+                        <i class="fa-solid fa-arrow-left"></i> <span id="pp-back-text">Back</span>
                     </button>
                     <button class="btn-reset-photo" onclick="resetProfilePhoto()">
                         <i class="fa-solid fa-rotate-left"></i> <span id="pp-reset-text">Reset</span>
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✅ YENİ: FOTOĞRAF KIRPMA MODALI -->
+    <div class="modal-overlay" id="cropModal">
+        <div class="modal-container" style="max-width: 460px !important;">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div class="modal-brand">muminsultani</div>
+                    <div class="modal-title" id="crop-title">Crop Photo</div>
+                </div>
+                <div class="modal-header-actions">
+                    <button class="modal-close-btn" onclick="closeCropModal()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            
+            <div class="crop-container-wrapper">
+                <img id="cropImage" src="" alt="Crop Preview">
+            </div>
+            
+            <div class="crop-ratio-buttons">
+                <button type="button" class="ratio-btn active" data-ratio="1" onclick="setCropRatio(1, this)">1:1</button>
+                <button type="button" class="ratio-btn" data-ratio="1.3333" onclick="setCropRatio(1.3333, this)">4:3</button>
+                <button type="button" class="ratio-btn" data-ratio="1.7777" onclick="setCropRatio(1.7777, this)">16:9</button>
+                <button type="button" class="ratio-btn" data-ratio="0.75" onclick="setCropRatio(0.75, this)">3:4</button>
+                <button type="button" class="ratio-btn" data-ratio="0" onclick="setCropRatio(NaN, this)">Free</button>
+            </div>
+            
+            <div class="crop-action-buttons">
+                <button type="button" class="btn-crop-cancel" onclick="closeCropModal()">
+                    <i class="fa-solid fa-arrow-left"></i> <span id="crop-cancel-text">Cancel</span>
+                </button>
+                <button type="button" class="btn-crop-apply" onclick="applyCrop()">
+                    <i class="fa-solid fa-check"></i> <span id="crop-apply-text">Apply</span>
+                </button>
             </div>
         </div>
     </div>
@@ -2235,13 +2407,13 @@
                     <p id="mock-email-greeting">Hello,</p>
                     <p id="mock-email-desc">We received a request to reset your password. A temporary password has been generated for your account.</p>
                     <p><strong id="mock-email-user-label">Your Email:</strong> <span id="mock-email-user-value"></span></p>
-                    <p style="display: flex; align-items: center; flex-wrap: wrap; gap: 4px;">
-                        <strong id="mock-email-pass-label">Temporary Password:</strong> 
-                        <span id="mock-email-pass-value" style="color: #9333ea; font-family: monospace; font-weight: bold; background: rgba(147,51,234,0.1); padding: 3px 8px; border-radius: 4px; display: inline-block;"></span>
+                    <div class="mock-pass-row">
+                        <strong id="mock-email-pass-label">Temporary Password:</strong>
+                        <span id="mock-email-pass-value"></span>
                         <button type="button" class="copy-pass-btn" id="copyPassBtn" onclick="copyTempPassword()" title="Copy Password">
                             <i class="fa-regular fa-copy" id="copyPassIcon"></i>
                         </button>
-                    </p>
+                    </div>
                     <div class="mock-email-footer">
                         <span id="mock-email-admin-label">Admin:</span>
                         <span>admin@muminsultani.com</span>
@@ -2417,6 +2589,10 @@
         document.addEventListener('contextmenu', event => event.preventDefault());
 
         document.addEventListener('keydown', (e) => {
+            // Crop modalı açıkken kısayolları engelleme
+            const cropOpen = document.getElementById('cropModal').classList.contains('active');
+            if (cropOpen) return;
+            
             if (
                 e.key === 'PrintScreen' || 
                 (e.ctrlKey && (e.key === 's' || e.key === 'u' || e.key === 'c' || e.key === 'p')) ||
@@ -2441,6 +2617,8 @@
         }
 
         window.addEventListener('blur', () => {
+            // Crop modal açıkken blur curtain gösterme
+            if (document.getElementById('cropModal').classList.contains('active')) return;
             curtain.style.opacity = '1';
             curtain.style.visibility = 'visible';
         });
@@ -2680,12 +2858,10 @@
 
         function resetAppointmentForm() {
             document.getElementById('appointmentForm').reset();
-            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-            const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
-            const currentLangLocal = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
+            const t = modalTranslations[currentLang] || modalTranslations.en;
             const fileTextSpan = document.getElementById('fileUploadText');
-            if (modalTranslations[currentLangLocal]) {
-                fileTextSpan.innerText = modalTranslations[currentLangLocal].filePlaceholder;
+            if (t) {
+                fileTextSpan.innerText = t.filePlaceholder;
                 fileTextSpan.style.color = '#94a3b8';
             }
         }
@@ -2757,22 +2933,116 @@
             }
         }
 
+        // ============================================================
+        // ✅ YENİ: FOTOĞRAF KIRPMA (CROPPER.JS)
+        // ============================================================
+        let cropperInstance = null;
+
         function handleProfilePhotoUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
             
             const reader = new FileReader();
             reader.onload = function(e) {
-                const photoData = e.target.result;
+                openCropModal(e.target.result);
+            };
+            reader.readAsDataURL(file);
+            
+            // Aynı dosyayı tekrar seçebilmek için input'u temizle
+            event.target.value = '';
+        }
+
+        function openCropModal(imageSrc) {
+            const cropImg = document.getElementById('cropImage');
+            cropImg.src = imageSrc;
+            
+            // Aktif ratio'yu 1:1'e sıfırla
+            document.querySelectorAll('.ratio-btn').forEach(b => b.classList.remove('active'));
+            const defaultBtn = document.querySelector('.ratio-btn[data-ratio="1"]');
+            if (defaultBtn) defaultBtn.classList.add('active');
+            
+            document.getElementById('cropModal').classList.add('active');
+            
+            // Eski cropper'ı yok et
+            if (cropperInstance) {
+                try { cropperInstance.destroy(); } catch(e) {}
+                cropperInstance = null;
+            }
+            
+            // Görselin yüklenmesini bekle
+            const initCropper = () => {
+                try {
+                    cropperInstance = new Cropper(cropImg, {
+                        aspectRatio: 1,
+                        viewMode: 1,
+                        autoCropArea: 0.9,
+                        background: false,
+                        responsive: true,
+                        guides: true,
+                        center: true,
+                        highlight: false,
+                        movable: true,
+                        zoomable: true,
+                        rotatable: false,
+                        scalable: false,
+                        dragMode: 'move'
+                    });
+                } catch(e) {
+                    console.error('Cropper init error:', e);
+                }
+            };
+            
+            if (cropImg.complete && cropImg.naturalWidth > 0) {
+                setTimeout(initCropper, 50);
+            } else {
+                cropImg.onload = () => setTimeout(initCropper, 50);
+            }
+        }
+
+        function closeCropModal() {
+            if (cropperInstance) {
+                try { cropperInstance.destroy(); } catch(e) {}
+                cropperInstance = null;
+            }
+            document.getElementById('cropModal').classList.remove('active');
+        }
+
+        function setCropRatio(ratio, btn) {
+            document.querySelectorAll('.ratio-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            
+            if (cropperInstance) {
+                try {
+                    cropperInstance.setAspectRatio(isNaN(ratio) ? NaN : ratio);
+                } catch(e) {}
+            }
+        }
+
+        function applyCrop() {
+            if (!cropperInstance) return;
+            
+            try {
+                const canvas = cropperInstance.getCroppedCanvas({
+                    width: 400,
+                    height: 400,
+                    imageSmoothingEnabled: true,
+                    imageSmoothingQuality: 'high',
+                    fillColor: '#ffffff'
+                });
                 
-                document.getElementById('profilePhotoDisplay').src = photoData;
-                document.getElementById('profilePhotoLarge').src = photoData;
+                if (!canvas) return;
+                
+                const croppedDataUrl = canvas.toDataURL('image/png');
+                
+                // Kaydet
+                document.getElementById('profilePhotoDisplay').src = croppedDataUrl;
+                document.getElementById('profilePhotoLarge').src = croppedDataUrl;
                 
                 const loggedUser = localStorage.getItem('logged_user');
                 if (loggedUser) {
                     try {
                         let userObj = JSON.parse(loggedUser);
-                        userObj.profilePhoto = photoData;
+                        userObj.profilePhoto = croppedDataUrl;
                         
                         let users = JSON.parse(localStorage.getItem('site_users') || '[]');
                         users = users.map(u => u.email === userObj.email ? userObj : u);
@@ -2780,11 +3050,14 @@
                         localStorage.setItem('logged_user', JSON.stringify(userObj));
                     } catch(err) {}
                 }
-            };
-            reader.readAsDataURL(file);
+                
+                closeCropModal();
+            } catch(err) {
+                console.error('Crop apply error:', err);
+            }
         }
 
-        // ✅ YENİ: Geçici şifreyi kopyalama fonksiyonu
+        // ✅ Geçici şifreyi kopyalama
         function copyTempPassword() {
             const passValueEl = document.getElementById('mock-email-pass-value');
             const copyIcon = document.getElementById('copyPassIcon');
@@ -2864,43 +3137,9 @@
                 btnChange: "Change",
                 btnBack: "Back",
                 btnReset: "Reset",
-                logoutTitle: "Log Out",
-                logoutConfirm: "Are you sure you want to log out?",
-                logoutYes: "Log Out",
-                logoutNo: "Back",
-                logoutSuccess: "Session closed.",
-                loginSuccess: "Signed in successfully!",
-                signupSuccess: "Account created successfully! You can now sign in.",
-                loginError: "Invalid email or password!",
-                passwordStrengthError: "Password must be at least 8 characters and include uppercase, lowercase, number, and special character (€$@#&!*).",
-                usernameAvailable: "Username is available.",
-                usernameTaken: "This username is already taken.",
-                successBtn: "OK",
-                delConfirmAlert: "Are you sure you want to delete your account? This action cannot be undone.",
-                delConfirmYes: "Yes, Delete",
-                delConfirmNo: "Cancel",
-                delPassTitle: "Confirm Deletion",
-                delPassDesc: "Please enter your password to confirm.",
-                delPassLabel: "Password",
-                delPassBtn: "Delete Account",
-                delPassError: "Incorrect password! Account not deleted.",
-                fpSubmitText: "Send Recovery Email",
-                mockEmailTitle: "Password Recovery Email",
-                mockEmailGreeting: "Hello,",
-                mockEmailDesc: "We received a request to reset your password. A temporary password has been generated for your account.",
-                mockEmailUserLabel: "Your Email:",
-                mockEmailPassLabel: "Temporary Password:",
-                mockEmailAdminLabel: "Admin:",
-                mockEmailResetBtn: "Reset Password",
-                rpTitle: "Reset Password",
-                rpEmailLabel: "Your Email",
-                rpCodeLabel: "Temporary Password / Code",
-                rpCodePlaceholder: "Paste the code from your email",
-                rpNewLabel: "New Password",
-                rpSubmitText: "Update Password",
-                rpSuccess: "Password reset successfully! You can now sign in.",
-                rpErrorCode: "Invalid or expired recovery code!",
-                rpEmailNotFound: "This email address is not registered!"
+                cropTitle: "Crop Photo",
+                cropCancel: "Cancel",
+                cropApply: "Apply"
             },
             tr: {
                 code: "TR",
@@ -2930,43 +3169,9 @@
                 btnChange: "Değiştir",
                 btnBack: "Geri Dön",
                 btnReset: "Sıfırla",
-                logoutTitle: "Çıkış Yap",
-                logoutConfirm: "Çıkış yapmak istediğinizden emin misiniz?",
-                logoutYes: "Çıkış Yap",
-                logoutNo: "Geri Dön",
-                logoutSuccess: "Oturum kapatıldı.",
-                loginSuccess: "Başarıyla giriş yapıldı!",
-                signupSuccess: "Hesap başarıyla oluşturuldu! Şimdi giriş yapabilirsiniz.",
-                loginError: "Geçersiz e-posta veya şifre!",
-                passwordStrengthError: "Şifre en az 8 karakter olmalı ve büyük harf, küçük harf, rakam ve özel karakter (€$@#&!*) içermelidir.",
-                usernameAvailable: "Kullanıcı adı kullanılabilir.",
-                usernameTaken: "Bu kullanıcı adı zaten alınmış.",
-                successBtn: "Tamam",
-                delConfirmAlert: "Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
-                delConfirmYes: "Evet, Sil",
-                delConfirmNo: "İptal",
-                delPassTitle: "Silmeyi Onayla",
-                delPassDesc: "Onaylamak için lütfen şifrenizi girin.",
-                delPassLabel: "Şifre",
-                delPassBtn: "Hesabı Sil",
-                delPassError: "Şifre yanlış! Hesap silinmedi.",
-                fpSubmitText: "Kurtarma E-postası Gönder",
-                mockEmailTitle: "Şifre Kurtarma E-postası",
-                mockEmailGreeting: "Merhaba,",
-                mockEmailDesc: "Şifrenizi sıfırlama talebinizi aldık. Hesabınız için geçici bir şifre oluşturuldu.",
-                mockEmailUserLabel: "E-postanız:",
-                mockEmailPassLabel: "Geçici Şifre:",
-                mockEmailAdminLabel: "Yönetici:",
-                mockEmailResetBtn: "Şifreyi Sıfırla",
-                rpTitle: "Şifreyi Sıfırla",
-                rpEmailLabel: "E-postanız",
-                rpCodeLabel: "Geçici Şifre / Kod",
-                rpCodePlaceholder: "E-postanızdaki kodu yapıştırın",
-                rpNewLabel: "Yeni Şifre",
-                rpSubmitText: "Şifreyi Güncelle",
-                rpSuccess: "Şifre başarıyla sıfırlandı! Şimdi giriş yapabilirsiniz.",
-                rpErrorCode: "Geçersiz veya süresi dolmuş kurtarma kodu!",
-                rpEmailNotFound: "Bu e-posta adresi kayıtlı değil!"
+                cropTitle: "Fotoğrafı Kırp",
+                cropCancel: "İptal",
+                cropApply: "Uygula"
             }
         };
 
@@ -3018,8 +3223,12 @@
             setText('gitModalTitle', data.contactTitle);
             setText('gitActionText', data.gitText);
             setText('gitBackText', data.backText);
+            
+            // ✅ Yeni: Crop modal çevirileri
+            setText('crop-title', data.cropTitle);
+            setText('crop-cancel-text', data.cropCancel);
+            setText('crop-apply-text', data.cropApply);
 
-            // Copy butonu tooltip'ini güncelle
             const copyBtn = document.getElementById('copyPassBtn');
             if (copyBtn) {
                 copyBtn.title = (lang === 'tr') ? 'Şifreyi Kopyala' : 'Copy Password';
@@ -3372,7 +3581,6 @@
             const birthMonth = document.getElementById('editClientMonth').value.trim();
             const birthYear = document.getElementById('editClientYear').value.trim();
 
-            // ✅ currentLang kullan
             const t = modalTranslations[currentLang] || modalTranslations.en;
 
             if (!newName || !newUsername || !newEmail) {
@@ -3417,7 +3625,6 @@
             const newPass = document.getElementById('changeNewPassword').value.trim();
             const confirmPass = document.getElementById('changeConfirmPassword').value.trim();
 
-            // ✅ currentLang kullan
             const t = modalTranslations[currentLang] || modalTranslations.en;
 
             if (!oldPass || !newPass || !confirmPass) {
@@ -3460,7 +3667,6 @@
             if (!loggedUser) return;
 
             const inputUsername = document.getElementById('deleteConfirmUsername').value.trim();
-            // ✅ currentLang kullan (modal dropdown'a bağımlı değil)
             const t = modalTranslations[currentLang] || modalTranslations.en;
 
             try {
@@ -3474,7 +3680,6 @@
                     return;
                 }
 
-                // ✅ currentLang kullan → doğru dilde onay mesajı
                 showCustomAlert(t.delConfirmAlert, 'delete', function() {
                     document.getElementById('deleteAccountModal').classList.remove('active');
                     openDeletePasswordModal();
@@ -3488,7 +3693,6 @@
             if (!loggedUser) return;
 
             const enteredPass = document.getElementById('deleteConfirmPassword').value.trim();
-            // ✅ currentLang kullan
             const t = modalTranslations[currentLang] || modalTranslations.en;
 
             try {
@@ -3504,15 +3708,9 @@
                 localStorage.setItem('site_users', JSON.stringify(users));
                 localStorage.removeItem('logged_user');
 
-                try { sessionStorage.removeItem('site_lang'); } catch(e) {}
-
                 closeDeletePasswordModal();
-                
-                // ✅ ÖNEMLİ: Mesaj göstermeden ÖNCE dili EN'e al, ama mesajı gösterirken TR'yi kaybetme
-                // Sıralamayı değiştir: Önce mesajı TR'de göster, kullanıcı OK'a bastığında dil değişsin
                 showCustomAlert(t.successDelete, 'success');
                 
-                // Dil değişimini alert kapandıktan sonraya ertele
                 window._pendingLangReset = true;
                 checkUserSession();
             } catch(err) {}
@@ -3532,7 +3730,6 @@
         function handleForgotPasswordSubmit(e) {
             e.preventDefault();
             const email = document.getElementById('forgotClientEmail').value.trim();
-            // ✅ currentLang kullan
             const t = modalTranslations[currentLang] || modalTranslations.en;
 
             if (!email) {
@@ -3562,7 +3759,6 @@
             document.getElementById('mock-email-user-value').innerText = email;
             document.getElementById('mock-email-pass-value').innerText = tempPass;
             
-            // Copy ikonunu sıfırla
             const copyIcon = document.getElementById('copyPassIcon');
             const copyBtn = document.getElementById('copyPassBtn');
             if (copyIcon) copyIcon.className = 'fa-regular fa-copy';
@@ -3596,7 +3792,6 @@
             const code = document.getElementById('resetClientCode').value.trim();
             const newPass = document.getElementById('resetClientNewPassword').value.trim();
 
-            // ✅ currentLang kullan
             const t = modalTranslations[currentLang] || modalTranslations.en;
 
             if (!code || !newPass) {
@@ -3722,7 +3917,6 @@
                 alertIcon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
             }
             
-            // ✅ currentLang kullan (header dropdown'ından değil)
             const t = modalTranslations[currentLang] || modalTranslations.en;
             
             if (onConfirm) {
@@ -3770,7 +3964,6 @@
             document.getElementById('customAlertModal').classList.remove('active');
             window._confirmActionCallback = null;
             
-            // ✅ Hesap silindikten sonra dil sıfırlamayı geciktir
             if (window._pendingLangReset) {
                 window._pendingLangReset = false;
                 try { sessionStorage.removeItem('site_lang'); } catch(e) {}
@@ -3850,7 +4043,6 @@
 
             document.getElementById('dc-submit-btn-text').innerText = (currentAuthMode === 'signin') ? data.signinBtn : data.signupBtn;
 
-            // ✅ FIX: Forgot Password modal - label ve placeholder çevirisi eklendi
             if(document.getElementById('fp-title')) document.getElementById('fp-title').innerText = data.fpTitle;
             if(document.getElementById('fp-desc')) document.getElementById('fp-desc').innerText = data.fpDesc;
             if(document.getElementById('fp-submit-text')) document.getElementById('fp-submit-text').innerText = data.fpSubmitText;
@@ -3906,7 +4098,6 @@
             if(document.getElementById('mock-email-admin-label')) document.getElementById('mock-email-admin-label').innerText = data.mockEmailAdminLabel;
             if(document.getElementById('mock-email-reset-btn')) document.getElementById('mock-email-reset-btn').innerText = data.mockEmailResetBtn;
 
-            // ✅ FIX: Reset Password modal - label, placeholder çevirisi eklendi
             if(document.getElementById('rp-title')) document.getElementById('rp-title').innerText = data.rpTitle;
             if(document.getElementById('rp-label-email')) document.getElementById('rp-label-email').innerText = data.rpEmailLabel;
             if(document.getElementById('rp-label-code')) document.getElementById('rp-label-code').innerText = data.rpCodeLabel;
@@ -3918,7 +4109,6 @@
             document.getElementById('gitActionText').innerText = data.gitText;
             document.getElementById('gitBackText').innerText = data.backText;
 
-            // Copy butonu tooltip'ini güncelle
             const copyBtn = document.getElementById('copyPassBtn');
             if (copyBtn) {
                 copyBtn.title = (lang === 'tr') ? 'Şifreyi Kopyala' : 'Copy Password';
@@ -3967,6 +4157,9 @@
                     setText('pp-change-text', mainData.btnChange);
                     setText('pp-reset-text', mainData.btnReset);
                     setText('footerRightsText', mainData.allRightsReserved);
+                    setText('crop-title', mainData.cropTitle);
+                    setText('crop-cancel-text', mainData.cropCancel);
+                    setText('crop-apply-text', mainData.cropApply);
                     
                     checkUserSession();
                 }
@@ -4100,8 +4293,9 @@
                         : sessionT.sessionActive;
                     if (authBoxIcon) authBoxIcon.className = "fa-solid fa-user-check";
                     
-                    document.getElementById('profileDetailsContainer').style.display = 'flex';
-                    document.getElementById('privacyIcon').className = 'fa-solid fa-eye';
+                    // ✅ GİZLİLİK: Default olarak gizli
+                    document.getElementById('profileDetailsContainer').style.display = 'none';
+                    document.getElementById('privacyIcon').className = 'fa-solid fa-eye-slash';
                     
                 } catch(e) {}
             } else {
