@@ -1081,18 +1081,32 @@
 
         /* Masaüstü / Tablet / TV için özel düzen (min-width: 768px) */
         @media (min-width: 768px) {
-            .desktop-email-row {
+            .desktop-info-row {
                 display: flex !important;
                 align-items: center;
-                gap: 8px;
-                margin-left: 20px; /* Sarı alan için boşluk */
+                justify-content: space-between;
+                width: 100%;
+                margin-top: 8px;
+                gap: 15px;
             }
-            .desktop-birthdate-row {
-                display: flex !important;
+            .desktop-username-area {
+                display: flex;
                 align-items: center;
                 gap: 8px;
-                margin-left: auto; /* Sağa yaslamak için */
-                padding-right: 10px;
+                flex-shrink: 0;
+            }
+            .desktop-email-area {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                flex: 1;
+                justify-content: center;
+            }
+            .desktop-birthdate-area {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                flex-shrink: 0;
             }
             /* Mobilde gizlenecek olan orijinal satırlar */
             .mobile-email-row, .mobile-birthdate-row {
@@ -1105,6 +1119,10 @@
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        .desktop-info-row {
+            display: none; /* Masaüstünde görünecek, mobilde gizli */
         }
 
         @media (max-width: 640px) {
@@ -1223,14 +1241,14 @@
             </div>
         </header>
 
-        <!-- KULLANICI PROFİL / BİLGİ PANELİ (Responsive Düzen) -->
+        <!-- KULLANICI PROFİL / BİLGİ PANELİ (Responsive Düzen - Düzeltildi) -->
         <section id="userProfileSection" style="display: none;">
             <div class="section-title">
                 <i class="fa-solid fa-user-gear"></i> <span id="t-profile-title">User Profile & Session</span>
             </div>
             <div class="contact-box" style="cursor: default; align-items: flex-start; flex-direction: column; gap: 12px;">
                 
-                <!-- Üst Kısım: Solda profil fotoğrafı, sağda ikonlar (Mobil ve Masaüstü uyumlu) -->
+                <!-- Üst Kısım: Solda profil fotoğrafı, sağda ikonlar -->
                 <div style="display: flex; gap: 12px; width: 100%; align-items: center; justify-content: space-between; flex-wrap: wrap;">
                     <!-- Sol Taraf: Yuvarlak Profil Fotoğrafı -->
                     <div class="profile-photo-wrapper" style="align-self: center;">
@@ -1255,30 +1273,35 @@
                     </div>
                 </div>
 
-                <!-- Alt Kısım: Bilgiler (Responsive Düzen) -->
+                <!-- Alt Kısım: Bilgiler -->
                 <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
                     <!-- İsim -->
                     <strong id="profileDisplayName" style="font-size: 1.15rem; color: #9333ea;">Mumin</strong>
                     
-                    <!-- Masaüstü için: Kullanıcı Adı ve E-posta Yan Yana (Sarı Alan) -->
-                    <div class="desktop-email-row" style="display: none;">
-                        <div style="display: flex; align-items: center; gap: 8px;">
+                    <!-- Masaüstü için: Tek Satırda @username, Email ve Doğum Tarihi -->
+                    <div class="desktop-info-row">
+                        <!-- Sol: Username -->
+                        <div class="desktop-username-area">
                             <i class="fa-solid fa-at" style="color: #9333ea; font-size: 0.9rem;"></i>
                             <strong id="profileDisplayUsernameDesktop" style="font-size: 0.95rem;">@mumin</strong>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
+                        <!-- Orta: Email -->
+                        <div class="desktop-email-area">
                             <i class="fa-solid fa-envelope" style="color: #9333ea; font-size: 0.9rem;"></i>
                             <strong id="profileDisplayEmailDesktop" style="font-size: 0.95rem;">muminsultani@hotmail.com</strong>
                         </div>
+                        <!-- Sağ: Doğum Tarihi -->
+                        <div class="desktop-birthdate-area">
+                            <i class="fa-solid fa-cake-candles" style="color: #9333ea; font-size: 0.9rem;"></i>
+                            <strong id="profileDisplayBirthdateDesktop" style="font-size: 0.95rem;">27/03/2000</strong>
+                        </div>
                     </div>
 
-                    <!-- Masaüstü için: Doğum Tarihi (Mavi Alan) -->
-                    <div class="desktop-birthdate-row" style="display: none;">
-                        <i class="fa-solid fa-cake-candles" style="color: #9333ea; font-size: 0.9rem;"></i>
-                        <strong id="profileDisplayBirthdateDesktop" style="font-size: 0.95rem;">27/03/2000</strong>
+                    <!-- Mobil için: @username, E-posta ve Doğum Tarihi (Alt Alta) -->
+                    <div class="mobile-email-row" style="display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-at" style="color: #9333ea; font-size: 0.9rem;"></i>
+                        <strong id="profileDisplayUsernameMobile" style="font-size: 0.95rem;">@mumin</strong>
                     </div>
-
-                    <!-- Mobil için: E-posta ve Doğum Tarihi (Alt Alta - Varsayılan) -->
                     <div class="mobile-email-row">
                         <i class="fa-solid fa-envelope" style="color: #9333ea; font-size: 0.9rem;"></i>
                         <strong id="profileDisplayEmail" style="font-size: 0.95rem;">muminsultani@hotmail.com</strong>
@@ -2657,8 +2680,6 @@
                     const userObj = JSON.parse(loggedUser);
                     if (profileSection) profileSection.style.display = 'block';
                     if (document.getElementById('profileDisplayName')) document.getElementById('profileDisplayName').innerText = userObj.name || 'User';
-                    if (document.getElementById('profileDisplayUsername')) document.getElementById('profileDisplayUsername').innerText = userObj.username || '@username';
-                    if (document.getElementById('profileDisplayEmail')) document.getElementById('profileDisplayEmail').innerText = userObj.email || '-';
 
                     // Masaüstü için güncellemeler
                     if (document.getElementById('profileDisplayUsernameDesktop')) document.getElementById('profileDisplayUsernameDesktop').innerText = userObj.username || '@username';
@@ -2670,6 +2691,10 @@
                             document.getElementById('profileDisplayBirthdateDesktop').innerText = '--/--/----';
                         }
                     }
+
+                    // Mobil için güncellemeler
+                    if (document.getElementById('profileDisplayUsernameMobile')) document.getElementById('profileDisplayUsernameMobile').innerText = userObj.username || '@username';
+                    if (document.getElementById('profileDisplayEmail')) document.getElementById('profileDisplayEmail').innerText = userObj.email || '-';
 
                     // Profil fotoğrafı
                     if (document.getElementById('profilePhotoDisplay')) {
