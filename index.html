@@ -1137,31 +1137,33 @@
             </div>
         </header>
 
-        <!-- KULLANICI PROFİL / BİLGİ PANELİ -->
+        <!-- KULLANICI PROFİL / BİLGİ PANELİ (Düzenlendi: Butonlar üstte, isim altta) -->
         <section id="userProfileSection" style="display: none;">
             <div class="section-title">
                 <i class="fa-solid fa-user-gear"></i> <span id="t-profile-title">User Profile & Session</span>
             </div>
-            <div class="contact-box" style="cursor: default; align-items: flex-start; flex-direction: column;">
-                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 12px;">
-                    <strong id="profileDisplayName" style="font-size: 1.15rem; color: #9333ea;">Name Surname</strong>
-                    <div style="display: flex; gap: 6px;">
-                        <button onclick="openEditProfileModal()" style="background: rgba(147, 51, 234, 0.15); border: 1px solid rgba(147, 51, 234, 0.3); color: #c084fc; padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer;">
-                            <i class="fa-solid fa-pen-to-square"></i> <span id="t-edit-prof-btn">Edit</span>
-                        </button>
-                        <button onclick="handleLogout()" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer;">
-                            <i class="fa-solid fa-right-from-bracket"></i> <span id="t-logout-btn">Log Out</span>
-                        </button>
-                    </div>
+            <div class="contact-box" style="cursor: default; align-items: flex-start; flex-direction: column; gap: 12px;">
+                
+                <!-- Butonlar Üstte -->
+                <div style="display: flex; gap: 8px; width: 100%;">
+                    <button onclick="openEditProfileModal()" style="background: rgba(147, 51, 234, 0.15); border: 1px solid rgba(147, 51, 234, 0.3); color: #c084fc; padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                        <i class="fa-solid fa-pen-to-square"></i> <span id="t-edit-prof-btn">Edit Profile</span>
+                    </button>
+                    <button onclick="handleLogout()" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                        <i class="fa-solid fa-right-from-bracket"></i> <span id="t-logout-btn">Log Out</span>
+                    </button>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; width: 100%;">
-                    <div>
-                        <span style="font-size: 0.72rem; color: var(--text-secondary);" id="t-prof-username">Username</span>
-                        <strong id="profileDisplayUsername" style="font-size: 0.9rem;">@username</strong>
+
+                <!-- İsim ve Bilgiler Altta -->
+                <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                    <strong id="profileDisplayName" style="font-size: 1.15rem; color: #9333ea;">Mumin</strong>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-at" style="color: #9333ea; font-size: 0.9rem;"></i>
+                        <strong id="profileDisplayUsername" style="font-size: 0.95rem;">@mumin</strong>
                     </div>
-                    <div>
-                        <span style="font-size: 0.72rem; color: var(--text-secondary);" id="t-prof-email">Email Address</span>
-                        <strong id="profileDisplayEmail" style="font-size: 0.9rem;">email@sample.com</strong>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-envelope" style="color: #9333ea; font-size: 0.9rem;"></i>
+                        <strong id="profileDisplayEmail" style="font-size: 0.95rem;">muminsultani@hotmail.com</strong>
                     </div>
                 </div>
             </div>
@@ -1293,8 +1295,40 @@
                     <button type="submit" class="submit-btn email-btn" id="ep-submit-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc); width: 100%;">
                         <i class="fa-solid fa-floppy-disk"></i> <span id="ep-submit-text">Save Changes</span>
                     </button>
-                    <button type="button" class="submit-btn" onclick="handleDeleteAccount()" id="ep-delete-btn" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #ef4444; width: 100%;">
+                    <button type="button" class="submit-btn" onclick="openDeleteConfirmModal()" id="ep-delete-btn" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #ef4444; width: 100%;">
                         <i class="fa-solid fa-trash-can"></i> <span id="ep-delete-text">Delete Account</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- HESAP SİLME ONAY MODALI -->
+    <div class="modal-overlay" id="deleteConfirmModal">
+        <div class="modal-container" style="max-width: 440px;">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                        <button class="modal-close-btn" onclick="closeDeleteConfirmModal()" title="Back"><i class="fa-solid fa-chevron-left"></i></button>
+                    </div>
+                    <div class="modal-brand">muminsultani</div>
+                    <div class="modal-title" id="dc-title-del">Delete Account</div>
+                </div>
+                <div class="modal-header-actions">
+                    <button class="modal-close-btn" onclick="closeDeleteConfirmModal()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <form id="deleteConfirmForm" onsubmit="handleDeleteAccountConfirm(event)">
+                <p class="item-desc" id="del-desc" style="margin-bottom: 16px; font-size: 0.88rem; color: #ef4444;">
+                    Warning: This action cannot be undone. To confirm deletion, please type your username below.
+                </p>
+                <div class="form-group">
+                    <label class="form-label" id="del-label-username">Type your username to confirm</label>
+                    <input type="text" class="form-input" id="deleteConfirmUsername" required placeholder="@Username">
+                </div>
+                <div class="form-buttons-group">
+                    <button type="submit" class="submit-btn" id="del-submit-btn" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                        <i class="fa-solid fa-trash-can"></i> <span id="del-submit-text">Delete Permanently</span>
                     </button>
                 </div>
             </form>
@@ -1758,7 +1792,7 @@
                 backText: "Back",
                 profileTitle: "User Profile & Session",
                 logoutBtn: "Log Out",
-                editBtn: "Edit",
+                editBtn: "Edit Profile",
                 profUsername: "Username",
                 profEmail: "Email Address",
                 forgotLink: "Forgot Password?"
@@ -1781,7 +1815,7 @@
                 backText: "Geri Dön",
                 profileTitle: "Kullanıcı Profili & Oturum",
                 logoutBtn: "Çıkış Yap",
-                editBtn: "Düzenle",
+                editBtn: "Profili Düzenle",
                 profUsername: "Kullanıcı Adı",
                 profEmail: "E-posta Adresi",
                 forgotLink: "Şifremi Unuttum?"
@@ -1821,8 +1855,6 @@
             if(document.getElementById('t-profile-title')) document.getElementById('t-profile-title').innerText = data.profileTitle;
             if(document.getElementById('t-logout-btn')) document.getElementById('t-logout-btn').innerText = data.logoutBtn;
             if(document.getElementById('t-edit-prof-btn')) document.getElementById('t-edit-prof-btn').innerText = data.editBtn;
-            if(document.getElementById('t-prof-username')) document.getElementById('t-prof-username').innerText = data.profUsername;
-            if(document.getElementById('t-prof-email')) document.getElementById('t-prof-email').innerText = data.profEmail;
 
             changeModalLanguage(lang);
 
@@ -1875,7 +1907,12 @@
                 saveChanges: "Save Changes",
                 deleteAccount: "Delete Account",
                 successUpdate: "Profile updated successfully!",
-                successDelete: "Account deleted successfully."
+                successDelete: "Account deleted successfully.",
+                delConfirmTitle: "Delete Account",
+                delConfirmDesc: "Warning: This action cannot be undone. To confirm deletion, please type your username below.",
+                delConfirmLabel: "Type your username to confirm",
+                delConfirmBtn: "Delete Permanently",
+                delConfirmError: "Username does not match. Account not deleted."
             },
             tr: {
                 code: "TR",
@@ -1922,7 +1959,12 @@
                 saveChanges: "Değişiklikleri Kaydet",
                 deleteAccount: "Hesabı Sil",
                 successUpdate: "Profil başarıyla güncellendi!",
-                successDelete: "Hesap başarıyla silindi."
+                successDelete: "Hesap başarıyla silindi.",
+                delConfirmTitle: "Hesabı Sil",
+                delConfirmDesc: "Uyarı: Bu işlem geri alınamaz. Silme işlemini onaylamak için lütfen kullanıcı adınızı yazın.",
+                delConfirmLabel: "Onaylamak için kullanıcı adınızı yazın",
+                delConfirmBtn: "Kalıcı Olarak Sil",
+                delConfirmError: "Kullanıcı adı eşleşmiyor. Hesap silinmedi."
             }
         };
 
@@ -2001,6 +2043,17 @@
             document.getElementById('editProfileModal').classList.remove('active');
         }
 
+        function openDeleteConfirmModal() {
+            const loggedUser = localStorage.getItem('logged_user');
+            if (!loggedUser) return;
+            document.getElementById('deleteConfirmUsername').value = '';
+            document.getElementById('deleteConfirmModal').classList.add('active');
+        }
+
+        function closeDeleteConfirmModal() {
+            document.getElementById('deleteConfirmModal').classList.remove('active');
+        }
+
         function handleProfileUpdate(e) {
             e.preventDefault();
             const loggedUser = localStorage.getItem('logged_user');
@@ -2028,7 +2081,6 @@
                     userObj.password = newPassword;
                 }
 
-                // Kullanıcı listesinde güncelle
                 users = users.map(u => u.email === userObj.email ? userObj : u);
                 localStorage.setItem('site_users', JSON.stringify(users));
                 localStorage.setItem('logged_user', JSON.stringify(userObj));
@@ -2039,21 +2091,35 @@
             } catch(err) {}
         }
 
-        function handleDeleteAccount() {
+        function handleDeleteAccountConfirm(e) {
+            e.preventDefault();
             const loggedUser = localStorage.getItem('logged_user');
             if (!loggedUser) return;
 
+            const inputUsername = document.getElementById('deleteConfirmUsername').value.trim();
+            
             const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
             const t = modalTranslations[modalLangText] || modalTranslations.en;
 
             try {
                 const userObj = JSON.parse(loggedUser);
-                let users = JSON.parse(localStorage.getItem('site_users') || '[]');
+                const actualUsername = userObj.username || '';
+                
+                // Kullanıcı adını @ olmadan karşılaştır
+                const cleanInput = inputUsername.startsWith('@') ? inputUsername.substring(1) : inputUsername;
+                const cleanActual = actualUsername.startsWith('@') ? actualUsername.substring(1) : actualUsername;
 
+                if (cleanInput.toLowerCase() !== cleanActual.toLowerCase()) {
+                    showCustomAlert(t.delConfirmError);
+                    return;
+                }
+
+                let users = JSON.parse(localStorage.getItem('site_users') || '[]');
                 users = users.filter(u => u.email !== userObj.email);
                 localStorage.setItem('site_users', JSON.stringify(users));
                 localStorage.removeItem('logged_user');
 
+                closeDeleteConfirmModal();
                 closeEditProfileModal();
                 checkUserSession();
                 showCustomAlert(t.successDelete);
@@ -2223,6 +2289,12 @@
             if(document.getElementById('ep-label-newpass')) document.getElementById('ep-label-newpass').innerText = data.newPassLabel;
             if(document.getElementById('ep-submit-text')) document.getElementById('ep-submit-text').innerText = data.saveChanges;
             if(document.getElementById('ep-delete-text')) document.getElementById('ep-delete-text').innerText = data.deleteAccount;
+
+            // Delete Confirmation Modal translations
+            if(document.getElementById('dc-title-del')) document.getElementById('dc-title-del').innerText = data.delConfirmTitle;
+            if(document.getElementById('del-desc')) document.getElementById('del-desc').innerText = data.delConfirmDesc;
+            if(document.getElementById('del-label-username')) document.getElementById('del-label-username').innerText = data.delConfirmLabel;
+            if(document.getElementById('del-submit-text')) document.getElementById('del-submit-text').innerText = data.delConfirmBtn;
 
             const noticeMsg = document.getElementById('gmailNoticeMessage');
             if (noticeMsg) {
