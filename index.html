@@ -1137,25 +1137,32 @@
             </div>
         </header>
 
-        <!-- KULLANICI PROFİL / BİLGİ PANELİ (Düzenlendi: Tüm butonlar ikon olarak üstte) -->
+        <!-- KULLANICI PROFİL / BİLGİ PANELİ (Düzenlendi: Profil fotoğrafı ve kompakt butonlar) -->
         <section id="userProfileSection" style="display: none;">
             <div class="section-title">
                 <i class="fa-solid fa-user-gear"></i> <span id="t-profile-title">User Profile & Session</span>
             </div>
             <div class="contact-box" style="cursor: default; align-items: flex-start; flex-direction: column; gap: 12px;">
                 
-                <!-- Tüm Butonlar Tek Satırda ve İkon Olarak -->
-                <div style="display: flex; gap: 8px; width: 100%; flex-wrap: wrap;">
-                    <button onclick="openEditProfileModal()" title="Edit Profile" style="background: rgba(147, 51, 234, 0.15); border: 1px solid rgba(147, 51, 234, 0.3); color: #c084fc; padding: 8px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px;">
+                <!-- Profil Fotoğrafı ve Butonlar Tek Satırda -->
+                <div style="display: flex; gap: 8px; width: 100%; flex-wrap: wrap; align-items: center;">
+                    <!-- Profil Fotoğrafı -->
+                    <div style="position: relative; flex-shrink: 0;">
+                        <img id="profilePhotoDisplay" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile" style="width: 36px; height: 36px; border-radius: 8px; object-fit: cover; border: 1px solid rgba(147, 51, 234, 0.3); background: rgba(147, 51, 234, 0.1); display: block; pointer-events: auto; cursor: pointer;" onclick="document.getElementById('profilePhotoInput').click()" title="Change Photo">
+                        <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;" onchange="handleProfilePhotoUpload(event)">
+                    </div>
+                    
+                    <!-- Butonlar -->
+                    <button onclick="openEditProfileModal()" title="Edit Profile" style="background: rgba(147, 51, 234, 0.15); border: 1px solid rgba(147, 51, 234, 0.3); color: #c084fc; padding: 0; border-radius: 6px; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; flex-shrink: 0;">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
-                    <button onclick="openChangePasswordModal()" title="Change Password" style="background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.3); color: #22c55e; padding: 8px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px;">
+                    <button onclick="openChangePasswordModal()" title="Change Password" style="background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.3); color: #22c55e; padding: 0; border-radius: 6px; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; flex-shrink: 0;">
                         <i class="fa-solid fa-key"></i>
                     </button>
-                    <button onclick="openDeleteAccountModal()" title="Delete Account" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; padding: 8px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px;">
+                    <button onclick="openDeleteAccountModal()" title="Delete Account" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; padding: 0; border-radius: 6px; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; flex-shrink: 0;">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
-                    <button onclick="handleLogout()" title="Log Out" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; padding: 8px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px;">
+                    <button onclick="handleLogout()" title="Log Out" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; padding: 0; border-radius: 6px; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; flex-shrink: 0;">
                         <i class="fa-solid fa-right-from-bracket"></i>
                     </button>
                 </div>
@@ -1170,6 +1177,10 @@
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <i class="fa-solid fa-envelope" style="color: #9333ea; font-size: 0.9rem;"></i>
                         <strong id="profileDisplayEmail" style="font-size: 0.95rem;">muminsultani@hotmail.com</strong>
+                    </div>
+                    <div id="profileBirthdateRow" style="display: none; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-cake-candles" style="color: #9333ea; font-size: 0.9rem;"></i>
+                        <strong id="profileDisplayBirthdate" style="font-size: 0.95rem;"></strong>
                     </div>
                 </div>
             </div>
@@ -1267,7 +1278,7 @@
         </footer>
     </div>
 
-    <!-- PROFIL DÜZENLEME MODALI (Doğum Tarihi eklendi, Şifre ve Silme çıkarıldı) -->
+    <!-- PROFIL DÜZENLEME MODALI (Doğum Tarihi eklendi) -->
     <div class="modal-overlay" id="editProfileModal">
         <div class="modal-container">
             <div class="modal-header">
@@ -1305,7 +1316,7 @@
         </div>
     </div>
 
-    <!-- ŞİFRE DEĞİŞTİRME MODALI (Dışarıya taşındı) -->
+    <!-- ŞİFRE DEĞİŞTİRME MODALI -->
     <div class="modal-overlay" id="changePasswordModal">
         <div class="modal-container" style="max-width: 440px;">
             <div class="modal-header">
@@ -1357,7 +1368,7 @@
         </div>
     </div>
 
-    <!-- HESAP SİLME ONAY MODALI (Dışarıya taşındı) -->
+    <!-- HESAP SİLME ONAY MODALI -->
     <div class="modal-overlay" id="deleteAccountModal">
         <div class="modal-container" style="max-width: 440px;">
             <div class="modal-header">
@@ -1524,7 +1535,7 @@
         </div>
     </div>
 
-    <!-- RANDEVU / PROJE FORMU -->
+    <!-- RANDEVU / PROJE FORMU (Düzenlendi) -->
     <div class="modal-overlay" id="appointmentModal">
         <div class="modal-container">
             <div class="modal-header">
@@ -1562,7 +1573,7 @@
                     <button class="modal-close-btn" onclick="clearAndCloseModal()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
-            <form id="appointmentForm">
+            <form id="appointmentForm" style="display: flex; flex-direction: column; gap: 0;">
                 <input type="hidden" id="targetRecipientEmail" value="contact@muminsultani.com">
                 <div class="form-group">
                     <label class="form-label" id="m-label-name">Name & Surname</label>
@@ -1585,11 +1596,11 @@
                     <textarea class="form-textarea" id="clientDesc" required placeholder="Tell me about your project..."></textarea>
                 </div>
                 
-                <div class="form-buttons-group">
-                    <button type="button" class="submit-btn email-btn" onclick="sendToEmail(event)" id="m-email-btn">
+                <div class="form-buttons-group" style="display: flex; gap: 10px; width: 100%;">
+                    <button type="button" class="submit-btn email-btn" onclick="sendToEmail(event)" id="m-email-btn" style="flex: 1;">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1.1rem; height: 1.1rem; display: block;"> Email
                     </button>
-                    <button type="button" class="submit-btn whatsapp-btn" onclick="sendToWhatsApp(event)" id="m-whatsapp-btn">
+                    <button type="button" class="submit-btn whatsapp-btn" onclick="sendToWhatsApp(event)" id="m-whatsapp-btn" style="flex: 1;">
                         <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> WhatsApp
                     </button>
                 </div>
@@ -1827,6 +1838,31 @@
             }
         }
 
+        function handleProfilePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const photoData = e.target.result;
+                document.getElementById('profilePhotoDisplay').src = photoData;
+                
+                const loggedUser = localStorage.getItem('logged_user');
+                if (loggedUser) {
+                    try {
+                        let userObj = JSON.parse(loggedUser);
+                        userObj.profilePhoto = photoData;
+                        
+                        let users = JSON.parse(localStorage.getItem('site_users') || '[]');
+                        users = users.map(u => u.email === userObj.email ? userObj : u);
+                        localStorage.setItem('site_users', JSON.stringify(users));
+                        localStorage.setItem('logged_user', JSON.stringify(userObj));
+                    } catch(err) {}
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
         const translations = {
             en: {
                 code: "EN",
@@ -1907,8 +1943,6 @@
 
             if(document.getElementById('t-forgot-link')) document.getElementById('t-forgot-link').innerText = data.forgotLink;
             if(document.getElementById('t-profile-title')) document.getElementById('t-profile-title').innerText = data.profileTitle;
-            if(document.getElementById('t-logout-btn')) document.getElementById('t-logout-btn').innerText = data.logoutBtn;
-            if(document.getElementById('t-edit-prof-btn')) document.getElementById('t-edit-prof-btn').innerText = data.editBtn;
 
             changeModalLanguage(lang);
 
@@ -2479,7 +2513,7 @@
                     return;
                 }
 
-                const newUser = { name, username, email, password, birthDay: '', birthMonth: '', birthYear: '' };
+                const newUser = { name, username, email, password, birthDay: '', birthMonth: '', birthYear: '', profilePhoto: '' };
                 users.push(newUser);
                 localStorage.setItem('site_users', JSON.stringify(users));
                 
@@ -2491,7 +2525,7 @@
             } else {
                 let user = users.find(u => u.email === email && u.password === password);
                 if (!user && email === "admin@muminsultani.com" && password === "admin123") {
-                    user = { name: "Admin User", username: "@Admin", email: "admin@muminsultani.com", password: "admin123", birthDay: '', birthMonth: '', birthYear: '' };
+                    user = { name: "Admin User", username: "@Admin", email: "admin@muminsultani.com", password: "admin123", birthDay: '', birthMonth: '', birthYear: '', profilePhoto: '' };
                 }
 
                 if (user) {
@@ -2520,6 +2554,21 @@
                     if (document.getElementById('profileDisplayName')) document.getElementById('profileDisplayName').innerText = userObj.name || 'User';
                     if (document.getElementById('profileDisplayUsername')) document.getElementById('profileDisplayUsername').innerText = userObj.username || '@username';
                     if (document.getElementById('profileDisplayEmail')) document.getElementById('profileDisplayEmail').innerText = userObj.email || '-';
+
+                    // Profil fotoğrafı
+                    if (document.getElementById('profilePhotoDisplay')) {
+                        document.getElementById('profilePhotoDisplay').src = userObj.profilePhoto || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + encodeURIComponent(userObj.username || 'muminsultani');
+                    }
+
+                    // Doğum tarihi
+                    const birthRow = document.getElementById('profileBirthdateRow');
+                    const birthDisplay = document.getElementById('profileDisplayBirthdate');
+                    if (userObj.birthDay && userObj.birthMonth && userObj.birthYear) {
+                        if (birthRow) birthRow.style.display = 'flex';
+                        if (birthDisplay) birthDisplay.innerText = `${userObj.birthDay}/${userObj.birthMonth}/${userObj.birthYear}`;
+                    } else {
+                        if (birthRow) birthRow.style.display = 'none';
+                    }
 
                     if (contactTitleEl) contactTitleEl.innerText = "User Account";
                     if (contactSubEl) contactSubEl.innerText = "Active Session";
