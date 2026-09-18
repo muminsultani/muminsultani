@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <meta name="description" content="muminsultani's official personal website. Find out about software projects, contact channels, and the digital portfolio.">
+    <meta name="description" content="muminsultani's official personal website. Find out about software projects, contact channels,  the digital portfolio.">
 
     <title id="pageTitle">muminsultani</title>
     
@@ -1845,7 +1845,7 @@
             <div class="footer-text-group">
                 <div class="footer-brand">muminsultani</div>
                 <div class="footer-scan-text" id="t-scan-text">SCAN TO CONNECT</div>
-                <div class="footer-copy-text">© 2026 muminsultani • All Rights Reserved.</div>
+                <div class="footer-copy-text">© 2026 muminsultani • <span id="footerRightsText">All Rights Reserved.</span></div>
             </div>
         </footer>
     </div>
@@ -2477,7 +2477,9 @@
                 if (intro) {
                     intro.style.opacity = '0';
                     intro.style.visibility = 'hidden';
-                    setTimeout(() => intro.remove(), 600);
+                    // ✅ DÜZELTME: intro.remove() yerine display:none kullanıyoruz
+                    // Böylece #introSub elementi DOM'da kalır ve changeLanguage hata vermez
+                    setTimeout(() => { intro.style.display = 'none'; }, 600);
                 }
             }, 1500);
 
@@ -2796,6 +2798,7 @@
                 stackTitle: "Core Stack", backendLabel: "Backend", frontendLabel: "Frontend",
                 contactTitle: "Sign In / Sign Up", contactSub: "Sign In / Sign Up", contactMain: "Sign in to join us",
                 scanText: "SCAN TO CONNECT",
+                allRightsReserved: "All Rights Reserved.",
                 gitText: "Sign In",
                 backText: "Back",
                 profileTitle: "User Profile & Session",
@@ -2821,7 +2824,6 @@
                 usernameAvailable: "Username is available.",
                 usernameTaken: "This username is already taken.",
                 successBtn: "OK",
-                // Yeni çeviriler
                 delConfirmAlert: "Are you sure you want to delete your account? This action cannot be undone.",
                 delConfirmYes: "Yes, Delete",
                 delConfirmNo: "Cancel",
@@ -2861,6 +2863,7 @@
                 stackTitle: "Temel Yığın", backendLabel: "Arka Uç", frontendLabel: "Ön Uç",
                 contactTitle: "Giriş Yap / Kayıt Ol", contactSub: "Giriş Yap / Kayıt Ol", contactMain: "Bize Katılmak İçin Giriş Yapın",
                 scanText: "BAĞLANMAK İÇİN TARAYIN",
+                allRightsReserved: "Tüm Hakları Saklıdır.",
                 gitText: "Giriş Yap",
                 backText: "Geri Dön",
                 profileTitle: "Kullanıcı Profili & Oturum",
@@ -2886,7 +2889,6 @@
                 usernameAvailable: "Kullanıcı adı kullanılabilir.",
                 usernameTaken: "Bu kullanıcı adı zaten alınmış.",
                 successBtn: "Tamam",
-                // Yeni çeviriler
                 delConfirmAlert: "Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
                 delConfirmYes: "Evet, Sil",
                 delConfirmNo: "İptal",
@@ -2917,53 +2919,69 @@
         let currentLang = 'en';
         let currentResetEmail = '';
 
+        // ✅ DÜZELTİLMİŞ: Null-safe versiyon - introSub silinse bile hata vermez
         function changeLanguage(lang) {
             currentLang = lang;
             const data = translations[lang];
             if (!data) return;
 
             document.getElementById('htmlRoot').setAttribute('lang', lang);
-            document.getElementById('currentLangText').innerText = data.code;
+
+            // Güvenli metin güncelleme yardımcısı (null kontrolü yapar)
+            const setText = (id, text) => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = text;
+            };
+
+            const currentLangTextEl = document.getElementById('currentLangText');
+            if (currentLangTextEl) currentLangTextEl.innerText = data.code;
 
             // Ana sayfa metinleri
-            document.getElementById('t-role').innerText = data.role;
-            document.getElementById('introSub').innerText = data.role;
-            document.getElementById('t-projects-title').innerText = data.projectsTitle;
-            document.getElementById('t-proj1-desc').innerText = data.proj1Desc;
-            document.getElementById('t-proj2-desc').innerText = data.proj2Desc;
-            document.getElementById('t-exp-title').innerText = data.expTitle;
-            document.getElementById('t-job-title').innerText = data.jobTitle;
-            document.getElementById('t-job-desc').innerText = data.jobDesc;
-            document.getElementById('t-setup-title').innerText = data.setupTitle;
-            document.getElementById('t-os-label').innerText = data.osLabel;
-            document.getElementById('t-editor-label').innerText = data.editorLabel;
-            document.getElementById('t-stack-title').innerText = data.stackTitle;
-            document.getElementById('t-backend-label').innerText = data.backendLabel;
-            document.getElementById('t-frontend-label').innerText = data.frontendLabel;
-            document.getElementById('t-contact-title').innerText = data.contactTitle;
-            document.getElementById('t-contact-sub').innerText = data.contactSub;
-            document.getElementById('t-contact-main').innerText = data.contactMain;
-            document.getElementById('t-scan-text').innerText = data.scanText;
+            setText('t-role', data.role);
+            setText('introSub', data.role);
+            setText('t-projects-title', data.projectsTitle);
+            setText('t-proj1-desc', data.proj1Desc);
+            setText('t-proj2-desc', data.proj2Desc);
+            setText('t-exp-title', data.expTitle);
+            setText('t-job-title', data.jobTitle);
+            setText('t-job-desc', data.jobDesc);
+            setText('t-setup-title', data.setupTitle);
+            setText('t-os-label', data.osLabel);
+            setText('t-editor-label', data.editorLabel);
+            setText('t-stack-title', data.stackTitle);
+            setText('t-backend-label', data.backendLabel);
+            setText('t-frontend-label', data.frontendLabel);
+            setText('t-contact-title', data.contactTitle);
+            setText('t-contact-sub', data.contactSub);
+            setText('t-contact-main', data.contactMain);
+            setText('t-scan-text', data.scanText);
+
+            // Footer hak metni
+            setText('footerRightsText', data.allRightsReserved);
 
             // Profil metinleri
-            if(document.getElementById('t-profile-title')) document.getElementById('t-profile-title').innerText = data.profileTitle;
-            if(document.getElementById('t-forgot-link')) document.getElementById('t-forgot-link').innerText = data.forgotLink;
+            setText('t-profile-title', data.profileTitle);
+            setText('t-forgot-link', data.forgotLink);
 
             // Profil fotoğrafı paneli metinleri
-            if(document.getElementById('pp-title')) document.getElementById('pp-title').innerText = data.photoPanelTitle;
-            if(document.getElementById('pp-back-text')) document.getElementById('pp-back-text').innerText = data.btnBack;
-            if(document.getElementById('pp-change-text')) document.getElementById('pp-change-text').innerText = data.btnChange;
-            if(document.getElementById('pp-reset-text')) document.getElementById('pp-reset-text').innerText = data.btnReset;
+            setText('pp-title', data.photoPanelTitle);
+            setText('pp-back-text', data.btnBack);
+            setText('pp-change-text', data.btnChange);
+            setText('pp-reset-text', data.btnReset);
 
-            // Modal metinleri
-            document.getElementById('gitModalTitle').innerText = data.contactTitle;
-            document.getElementById('gitActionText').innerText = data.gitText;
-            document.getElementById('gitBackText').innerText = data.backText;
+            // Modal ana başlık metinleri
+            setText('gitModalTitle', data.contactTitle);
+            setText('gitActionText', data.gitText);
+            setText('gitBackText', data.backText);
 
             // Modal içi çevirileri güncelle
             changeModalLanguage(lang);
 
-            document.getElementById('langMenu').classList.remove('show');
+            // Profil alanını yeni dilde yeniden çiz
+            checkUserSession();
+
+            const langMenu = document.getElementById('langMenu');
+            if (langMenu) langMenu.classList.remove('show');
         }
 
         const modalTranslations = {
@@ -3041,7 +3059,6 @@
                 usernameAvailable: "Username is available.",
                 usernameTaken: "This username is already taken.",
                 successBtn: "OK",
-                // Yeni çeviriler
                 delConfirmAlert: "Are you sure you want to delete your account? This action cannot be undone.",
                 delConfirmYes: "Yes, Delete",
                 delConfirmNo: "Cancel",
@@ -3064,7 +3081,14 @@
                 rpSubmitText: "Update Password",
                 rpSuccess: "Password reset successfully! You can now sign in.",
                 rpErrorCode: "Invalid or expired recovery code!",
-                rpEmailNotFound: "This email address is not registered!"
+                rpEmailNotFound: "This email address is not registered!",
+                emailAlreadyRegistered: "This email is already registered!",
+                userAccount: "User Account",
+                activeSession: "Active Session",
+                welcomeUser: "Welcome,",
+                sessionActive: "Session Active",
+                signInSignUp: "Sign In / Sign Up",
+                signInToJoin: "Sign in to join us"
             },
             tr: {
                 code: "TR",
@@ -3140,7 +3164,6 @@
                 usernameAvailable: "Kullanıcı adı kullanılabilir.",
                 usernameTaken: "Bu kullanıcı adı zaten alınmış.",
                 successBtn: "Tamam",
-                // Yeni çeviriler
                 delConfirmAlert: "Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
                 delConfirmYes: "Evet, Sil",
                 delConfirmNo: "İptal",
@@ -3163,7 +3186,14 @@
                 rpSubmitText: "Şifreyi Güncelle",
                 rpSuccess: "Şifre başarıyla sıfırlandı! Şimdi giriş yapabilirsiniz.",
                 rpErrorCode: "Geçersiz veya süresi dolmuş kurtarma kodu!",
-                rpEmailNotFound: "Bu e-posta adresi kayıtlı değil!"
+                rpEmailNotFound: "Bu e-posta adresi kayıtlı değil!",
+                emailAlreadyRegistered: "Bu e-posta zaten kayıtlı!",
+                userAccount: "Kullanıcı Hesabı",
+                activeSession: "Aktif Oturum",
+                welcomeUser: "Hoş geldiniz,",
+                sessionActive: "Oturum Açık",
+                signInSignUp: "Giriş Yap / Kayıt Ol",
+                signInToJoin: "Bize Katılmak İçin Giriş Yapın"
             }
         };
 
@@ -3307,7 +3337,7 @@
 
                 const emailExists = users.some(u => u.email === newEmail && u.email !== userObj.email);
                 if (emailExists) {
-                    showCustomAlert("This email is already registered!");
+                    showCustomAlert(t.emailAlreadyRegistered);
                     return;
                 }
 
@@ -3795,7 +3825,7 @@
             if(document.getElementById('da-label-username')) document.getElementById('da-label-username').innerText = data.delConfirmLabel;
             if(document.getElementById('da-submit-text')) document.getElementById('da-submit-text').innerText = data.delConfirmBtn;
             
-            // Yeni Eklenen Delete Password Modal Çevirileri
+            // Delete Password Modal Çevirileri
             if(document.getElementById('dp-title')) document.getElementById('dp-title').innerText = data.delPassTitle;
             if(document.getElementById('dp-desc')) document.getElementById('dp-desc').innerText = data.delPassDesc;
             if(document.getElementById('dp-label-password')) document.getElementById('dp-label-password').innerText = data.delPassLabel;
@@ -3840,6 +3870,50 @@
 
             document.getElementById('modalLangMenu').classList.remove('show');
             document.getElementById('contactModalLangMenu').classList.remove('show');
+
+            // Modal dilinden ana sayfa diline senkronize et (null-safe)
+            if (currentLang !== lang) {
+                currentLang = lang;
+                const mainData = translations[lang];
+                if (mainData) {
+                    const setText = (id, text) => {
+                        const el = document.getElementById(id);
+                        if (el) el.innerText = text;
+                    };
+                    
+                    document.getElementById('htmlRoot').setAttribute('lang', lang);
+                    const cl = document.getElementById('currentLangText');
+                    if (cl) cl.innerText = mainData.code;
+                    
+                    setText('t-role', mainData.role);
+                    setText('introSub', mainData.role);
+                    setText('t-projects-title', mainData.projectsTitle);
+                    setText('t-proj1-desc', mainData.proj1Desc);
+                    setText('t-proj2-desc', mainData.proj2Desc);
+                    setText('t-exp-title', mainData.expTitle);
+                    setText('t-job-title', mainData.jobTitle);
+                    setText('t-job-desc', mainData.jobDesc);
+                    setText('t-setup-title', mainData.setupTitle);
+                    setText('t-os-label', mainData.osLabel);
+                    setText('t-editor-label', mainData.editorLabel);
+                    setText('t-stack-title', mainData.stackTitle);
+                    setText('t-backend-label', mainData.backendLabel);
+                    setText('t-frontend-label', mainData.frontendLabel);
+                    setText('t-contact-title', mainData.contactTitle);
+                    setText('t-contact-sub', mainData.contactSub);
+                    setText('t-contact-main', mainData.contactMain);
+                    setText('t-scan-text', mainData.scanText);
+                    setText('t-profile-title', mainData.profileTitle);
+                    setText('t-forgot-link', mainData.forgotLink);
+                    setText('pp-title', mainData.photoPanelTitle);
+                    setText('pp-back-text', mainData.btnBack);
+                    setText('pp-change-text', mainData.btnChange);
+                    setText('pp-reset-text', mainData.btnReset);
+                    setText('footerRightsText', mainData.allRightsReserved);
+                    
+                    checkUserSession();
+                }
+            }
         }
 
         function handleAuthSubmit(e) {
@@ -3888,7 +3962,7 @@
 
                 const existing = users.find(u => u.email === email);
                 if (existing) {
-                    showCustomAlert("This email is already registered!");
+                    showCustomAlert(t.emailAlreadyRegistered);
                     return;
                 }
 
@@ -3962,9 +4036,13 @@
                         if (birthRow) birthRow.style.display = 'none';
                     }
 
-                    if (contactTitleEl) contactTitleEl.innerText = currentLang === 'tr' ? "Kullanıcı Hesabı" : "User Account";
-                    if (contactSubEl) contactSubEl.innerText = currentLang === 'tr' ? "Aktif Oturum" : "Active Session";
-                    if (contactMainEl) contactMainEl.innerText = userObj.name ? (currentLang === 'tr' ? `Hoş geldiniz, ${userObj.name}` : `Welcome, ${userObj.name}`) : (currentLang === 'tr' ? "Oturum Açık" : "Session Active");
+                    // Dil bazlı çeviri kullanımı
+                    const sessionT = modalTranslations[currentLang] || modalTranslations.en;
+                    if (contactTitleEl) contactTitleEl.innerText = sessionT.userAccount;
+                    if (contactSubEl) contactSubEl.innerText = sessionT.activeSession;
+                    if (contactMainEl) contactMainEl.innerText = userObj.name 
+                        ? `${sessionT.welcomeUser} ${userObj.name}` 
+                        : sessionT.sessionActive;
                     if (authBoxIcon) authBoxIcon.className = "fa-solid fa-user-check";
                     
                     document.getElementById('profileDetailsContainer').style.display = 'flex';
@@ -3972,10 +4050,11 @@
                     
                 } catch(e) {}
             } else {
+                const sessionT = modalTranslations[currentLang] || modalTranslations.en;
                 if (profileSection) profileSection.style.display = 'none';
-                if (contactTitleEl) contactTitleEl.innerText = "Sign In / Sign Up";
-                if (contactSubEl) contactSubEl.innerText = "Sign In / Sign Up";
-                if (contactMainEl) contactMainEl.innerText = "Sign in to join us";
+                if (contactTitleEl) contactTitleEl.innerText = sessionT.signInSignUp;
+                if (contactSubEl) contactSubEl.innerText = sessionT.signInSignUp;
+                if (contactMainEl) contactMainEl.innerText = sessionT.signInToJoin;
                 if (authBoxIcon) authBoxIcon.className = "fa-solid fa-right-to-bracket";
             }
         }
