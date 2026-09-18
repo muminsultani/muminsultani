@@ -1527,6 +1527,53 @@
             display: none;
             font-weight: 500;
         }
+
+        /* YENİ: Mock Email Stilleri */
+        .mock-email-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .mock-email-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientFlow 8s ease infinite;
+            margin-bottom: 10px;
+        }
+        .mock-email-body {
+            background: var(--box-bg);
+            border: 1px solid var(--line-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: left;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .mock-email-body p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .mock-email-body p strong {
+            color: var(--text-primary);
+        }
+        .mock-email-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--line-color);
+            padding-top: 12px;
+            margin-top: 12px;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
     </style>
     
     <script>
@@ -1836,7 +1883,7 @@
         </div>
     </div>
 
-    <!-- LIGHTBOX (ÖNİZLEME PENCERESİ) - Artık zoom yapılamaz -->
+    <!-- LIGHTBOX (ÖNİZLEME PENCERESİ) -->
     <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
         <div class="lightbox-content-box" onclick="event.stopPropagation()">
             <button class="lightbox-close-btn" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
@@ -1867,7 +1914,6 @@
                     <label class="form-label" id="ep-label-username">Username</label>
                     <input type="text" class="form-input" id="editClientUsername" required>
                 </div>
-                <!-- YENİ EKLENEN EMAIL ALANI -->
                 <div class="form-group">
                     <label class="form-label" id="ep-label-email">Email Address</label>
                     <input type="email" class="form-input" id="editClientEmail" required>
@@ -1998,7 +2044,7 @@
             </div>
             <div style="display: flex; gap: 8px;">
                 <button class="custom-alert-btn" onclick="openDirectContactModal()" id="gitActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; padding: 8px 6px; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                    <i class="fa-solid fa-right-to-bracket"></i> <span id="gitActionText">Account</span>
+                    <i class="fa-solid fa-right-to-bracket"></i> <span id="gitActionText">Sign In</span>
                 </button>
                 <button class="custom-alert-btn cancel-btn" onclick="closeGetInTouchModal()" id="gitBackBtn" style="flex: 1; padding: 8px 6px; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
                     <i class="fa-solid fa-arrow-rotate-left"></i> <span id="gitBackText">Back</span>
@@ -2075,7 +2121,6 @@
                             <i class="fa-solid fa-eye" id="passwordToggleIcon"></i>
                         </button>
                     </div>
-                    <!-- Şifre Güçlülük Göstergesi (Giriş yaparken gizlenecek) -->
                     <div id="signupPasswordHint" class="password-hint" style="display: none;">
                         <ul>
                             <li data-rule="length">8+ char</li>
@@ -2096,7 +2141,7 @@
         </div>
     </div>
 
-    <!-- ŞİFREMİ UNUTTUM MODALI -->
+    <!-- ŞİFREMİ UNUTTUM MODALI (GELİŞMİŞ) -->
     <div class="modal-overlay" id="forgotPasswordModal">
         <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
@@ -2113,7 +2158,7 @@
             </div>
             <form id="forgotPasswordForm" onsubmit="handleForgotPasswordSubmit(event)">
                 <p class="item-desc" id="fp-desc" style="margin-bottom: 16px; font-size: 0.8rem;">
-                    Enter your registered email address. We will send a recovery code / temporary password to your email and notify the administrator.
+                    Enter your registered email address. We will send a temporary password to your email and notify the administrator.
                 </p>
                 <div class="form-group">
                     <label class="form-label" id="fp-label-email">Email Address</label>
@@ -2121,7 +2166,93 @@
                 </div>
                 <div class="form-buttons-group">
                     <button type="submit" class="submit-btn email-btn" id="fp-submit-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc);">
-                        <i class="fa-solid fa-paper-plane"></i> <span id="fp-submit-text">Send Recovery Details</span>
+                        <i class="fa-solid fa-paper-plane"></i> <span id="fp-submit-text">Send Recovery Email</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- E-POSTA ÖNİZLEME (MOCK EMAIL) MODALI -->
+    <div class="modal-overlay" id="mockEmailModal">
+        <div class="modal-container" style="max-width: 420px;">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div class="modal-brand">muminsultani</div>
+                    <div class="modal-title" id="mock-email-title">Password Recovery Email</div>
+                </div>
+                <div class="modal-header-actions">
+                    <button class="modal-close-btn" onclick="closeMockEmailModal()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            
+            <div class="mock-email-container">
+                <div class="mock-email-logo">muminsultani</div>
+                <div class="mock-email-body">
+                    <p id="mock-email-greeting">Hello,</p>
+                    <p id="mock-email-desc">We received a request to reset your password. A temporary password has been generated for your account.</p>
+                    <p><strong id="mock-email-user-label">Your Email:</strong> <span id="mock-email-user-value"></span></p>
+                    <p><strong id="mock-email-pass-label">Temporary Password:</strong> <span id="mock-email-pass-value" style="color: #9333ea; font-family: monospace; font-weight: bold; background: rgba(147,51,234,0.1); padding: 2px 6px; border-radius: 4px;"></span></p>
+                    <div class="mock-email-footer">
+                        <span id="mock-email-admin-label">Admin:</span>
+                        <span>admin@muminsultani.com</span>
+                    </div>
+                </div>
+                
+                <div class="form-buttons-group" style="width: 100%;">
+                    <button class="submit-btn email-btn" onclick="openResetPasswordModal()" style="width: 100%;">
+                        <i class="fa-solid fa-key"></i> <span id="mock-email-reset-btn">Reset Password</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ŞİFRE SIFIRLAMA MODALI -->
+    <div class="modal-overlay" id="resetPasswordModal">
+        <div class="modal-container" style="max-width: 400px;">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                        <button class="modal-close-btn" onclick="closeResetPasswordModal()" title="Back"><i class="fa-solid fa-chevron-left"></i></button>
+                    </div>
+                    <div class="modal-brand">muminsultani</div>
+                    <div class="modal-title" id="rp-title">Reset Password</div>
+                </div>
+                <div class="modal-header-actions">
+                    <button class="modal-close-btn" onclick="closeResetPasswordModal()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <form id="resetPasswordForm" onsubmit="handleResetPasswordSubmit(event)">
+                <div class="form-group">
+                    <label class="form-label" id="rp-label-email">Your Email</label>
+                    <input type="email" class="form-input" id="resetClientEmail" readonly style="opacity: 0.7;">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="rp-label-code">Temporary Password / Code</label>
+                    <input type="text" class="form-input" id="resetClientCode" required placeholder="Paste the code from your email">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="rp-label-new">New Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" class="form-input" id="resetClientNewPassword" required placeholder="••••••••" oninput="updatePasswordHint('resetClientNewPassword', 'resetPasswordHint')">
+                        <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('resetClientNewPassword', 'resetNewPasswordToggleIcon')" title="Show/Hide Password">
+                            <i class="fa-solid fa-eye" id="resetNewPasswordToggleIcon"></i>
+                        </button>
+                    </div>
+                    <div id="resetPasswordHint" class="password-hint">
+                        <ul>
+                            <li data-rule="length">8+ char</li>
+                            <li data-rule="upper">A-Z</li>
+                            <li data-rule="lower">a-z</li>
+                            <li data-rule="digit">0-9</li>
+                            <li data-rule="special">€$@#&!</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-buttons-group">
+                    <button type="submit" class="submit-btn email-btn" id="rp-submit-btn" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                        <i class="fa-solid fa-check"></i> <span id="rp-submit-text">Update Password</span>
                     </button>
                 </div>
             </form>
@@ -2628,7 +2759,7 @@
                 stackTitle: "Core Stack", backendLabel: "Backend", frontendLabel: "Frontend",
                 contactTitle: "Sign In / Sign Up", contactSub: "Sign In / Sign Up", contactMain: "Sign in to join us",
                 scanText: "SCAN TO CONNECT",
-                gitText: "Account",
+                gitText: "Sign In",
                 backText: "Back",
                 profileTitle: "User Profile & Session",
                 logoutBtn: "Log Out",
@@ -2652,7 +2783,24 @@
                 passwordStrengthError: "Password must be at least 8 characters and include uppercase, lowercase, number, and special character (€$@#&!*).",
                 usernameAvailable: "Username is available.",
                 usernameTaken: "This username is already taken.",
-                successBtn: "OK"
+                successBtn: "OK",
+                // Yeni çeviriler
+                fpSubmitText: "Send Recovery Email",
+                mockEmailTitle: "Password Recovery Email",
+                mockEmailGreeting: "Hello,",
+                mockEmailDesc: "We received a request to reset your password. A temporary password has been generated for your account.",
+                mockEmailUserLabel: "Your Email:",
+                mockEmailPassLabel: "Temporary Password:",
+                mockEmailAdminLabel: "Admin:",
+                mockEmailResetBtn: "Reset Password",
+                rpTitle: "Reset Password",
+                rpEmailLabel: "Your Email",
+                rpCodeLabel: "Temporary Password / Code",
+                rpNewLabel: "New Password",
+                rpSubmitText: "Update Password",
+                rpSuccess: "Password reset successfully! You can now sign in.",
+                rpErrorCode: "Invalid or expired recovery code!",
+                rpEmailNotFound: "This email address is not registered!"
             },
             tr: {
                 code: "TR",
@@ -2668,7 +2816,7 @@
                 stackTitle: "Temel Yığın", backendLabel: "Arka Uç", frontendLabel: "Ön Uç",
                 contactTitle: "Giriş Yap / Kayıt Ol", contactSub: "Giriş Yap / Kayıt Ol", contactMain: "Bize Katılmak İçin Giriş Yapın",
                 scanText: "BAĞLANMAK İÇİN TARAYIN",
-                gitText: "Hesap",
+                gitText: "Giriş Yap",
                 backText: "Geri Dön",
                 profileTitle: "Kullanıcı Profili & Oturum",
                 logoutBtn: "Çıkış Yap",
@@ -2692,7 +2840,24 @@
                 passwordStrengthError: "Şifre en az 8 karakter olmalı ve büyük harf, küçük harf, rakam ve özel karakter (€$@#&!*) içermelidir.",
                 usernameAvailable: "Kullanıcı adı kullanılabilir.",
                 usernameTaken: "Bu kullanıcı adı zaten alınmış.",
-                successBtn: "Tamam"
+                successBtn: "Tamam",
+                // Yeni çeviriler
+                fpSubmitText: "Kurtarma E-postası Gönder",
+                mockEmailTitle: "Şifre Kurtarma E-postası",
+                mockEmailGreeting: "Merhaba,",
+                mockEmailDesc: "Şifrenizi sıfırlama talebinizi aldık. Hesabınız için geçici bir şifre oluşturuldu.",
+                mockEmailUserLabel: "E-postanız:",
+                mockEmailPassLabel: "Geçici Şifre:",
+                mockEmailAdminLabel: "Yönetici:",
+                mockEmailResetBtn: "Şifreyi Sıfırla",
+                rpTitle: "Şifreyi Sıfırla",
+                rpEmailLabel: "E-postanız",
+                rpCodeLabel: "Geçici Şifre / Kod",
+                rpNewLabel: "Yeni Şifre",
+                rpSubmitText: "Şifreyi Güncelle",
+                rpSuccess: "Şifre başarıyla sıfırlandı! Şimdi giriş yapabilirsiniz.",
+                rpErrorCode: "Geçersiz veya süresi dolmuş kurtarma kodu!",
+                rpEmailNotFound: "Bu e-posta adresi kayıtlı değil!"
             }
         };
 
@@ -2780,15 +2945,15 @@
                 gmailNoticeText: "Personal Email Address",
                 backText: "Back",
                 contactTitle: "Sign In / Sign Up",
-                gitText: "Account",
+                gitText: "Sign In",
                 successSignup: "Account created successfully! You can now sign in.",
                 successSignin: "Signed in successfully!",
                 errorSignin: "Invalid email or password!",
                 authRequiredAlert: "You must sign in or register before sending messages via Email or WhatsApp!",
                 fpTitle: "Password Recovery",
-                fpDesc: "Enter your registered email address. We will send a recovery code / temporary password to your email and notify the administrator.",
-                fpSubmitText: "Send Recovery Details",
-                fpSuccess: "Recovery email successfully simulated and sent to your address & administrator (muminsultani@hotmail.com)!",
+                fpDesc: "Enter your registered email address. We will send a temporary password to your email and notify the administrator.",
+                fpSubmitText: "Send Recovery Email",
+                fpSuccess: "Recovery email successfully sent! Please check your inbox.",
                 epTitle: "Edit Profile & Settings",
                 newPassLabel: "New Password (optional)",
                 saveChanges: "Save Changes",
@@ -2821,7 +2986,23 @@
                 passwordStrengthError: "Password must be at least 8 characters and include uppercase, lowercase, number, and special character (€$@#&!*).",
                 usernameAvailable: "Username is available.",
                 usernameTaken: "This username is already taken.",
-                successBtn: "OK"
+                successBtn: "OK",
+                // Yeni çeviriler
+                mockEmailTitle: "Password Recovery Email",
+                mockEmailGreeting: "Hello,",
+                mockEmailDesc: "We received a request to reset your password. A temporary password has been generated for your account.",
+                mockEmailUserLabel: "Your Email:",
+                mockEmailPassLabel: "Temporary Password:",
+                mockEmailAdminLabel: "Admin:",
+                mockEmailResetBtn: "Reset Password",
+                rpTitle: "Reset Password",
+                rpEmailLabel: "Your Email",
+                rpCodeLabel: "Temporary Password / Code",
+                rpNewLabel: "New Password",
+                rpSubmitText: "Update Password",
+                rpSuccess: "Password reset successfully! You can now sign in.",
+                rpErrorCode: "Invalid or expired recovery code!",
+                rpEmailNotFound: "This email address is not registered!"
             },
             tr: {
                 code: "TR",
@@ -2855,15 +3036,15 @@
                 gmailNoticeText: "Kişisel E-posta Adresi",
                 backText: "Geri Dön",
                 contactTitle: "Giriş Yap / Kayıt Ol",
-                gitText: "Hesap",
+                gitText: "Giriş Yap",
                 successSignup: "Hesap başarıyla oluşturuldu! Şimdi giriş yapabilirsiniz.",
                 successSignin: "Başarıyla giriş yapıldı!",
                 errorSignin: "Geçersiz e-posta veya şifre!",
                 authRequiredAlert: "E-posta veya WhatsApp üzerinden mesaj gönderebilmek için önce giriş yapmalı veya kayıt olmalısınız!",
                 fpTitle: "Şifre Sıfırlama / Kurtarma",
-                fpDesc: "Kayıtlı e-posta adresinizi girin. E-postanıza kurtarma kodu / şifre bilgisi gönderilecek ve yöneticinin (muminsultani@hotmail.com) posta kutusuna bir kopyası iletilecektir.",
-                fpSubmitText: "Kurtarma Bilgisi Gönder",
-                fpSuccess: "Kurtarma e-postası başarıyla simüle edildi ve adresinize ile yöneticiye (muminsultani@hotmail.com) gönderildi!",
+                fpDesc: "Kayıtlı e-posta adresinizi girin. E-postanıza geçici bir şifre gönderilecek ve yönetici bilgilendirilecektir.",
+                fpSubmitText: "Kurtarma E-postası Gönder",
+                fpSuccess: "Kurtarma e-postası başarıyla gönderildi! Lütfen gelen kutunuzu kontrol edin.",
                 epTitle: "Profili Düzenle & Ayarlar",
                 newPassLabel: "Yeni Şifre (isteğe bağlı)",
                 saveChanges: "Değişiklikleri Kaydet",
@@ -2896,11 +3077,28 @@
                 passwordStrengthError: "Şifre en az 8 karakter olmalı ve büyük harf, küçük harf, rakam ve özel karakter (€$@#&!*) içermelidir.",
                 usernameAvailable: "Kullanıcı adı kullanılabilir.",
                 usernameTaken: "Bu kullanıcı adı zaten alınmış.",
-                successBtn: "Tamam"
+                successBtn: "Tamam",
+                // Yeni çeviriler
+                mockEmailTitle: "Şifre Kurtarma E-postası",
+                mockEmailGreeting: "Merhaba,",
+                mockEmailDesc: "Şifrenizi sıfırlama talebinizi aldık. Hesabınız için geçici bir şifre oluşturuldu.",
+                mockEmailUserLabel: "E-postanız:",
+                mockEmailPassLabel: "Geçici Şifre:",
+                mockEmailAdminLabel: "Yönetici:",
+                mockEmailResetBtn: "Şifreyi Sıfırla",
+                rpTitle: "Şifreyi Sıfırla",
+                rpEmailLabel: "E-postanız",
+                rpCodeLabel: "Geçici Şifre / Kod",
+                rpNewLabel: "Yeni Şifre",
+                rpSubmitText: "Şifreyi Güncelle",
+                rpSuccess: "Şifre başarıyla sıfırlandı! Şimdi giriş yapabilirsiniz.",
+                rpErrorCode: "Geçersiz veya süresi dolmuş kurtarma kodu!",
+                rpEmailNotFound: "Bu e-posta adresi kayıtlı değil!"
             }
         };
 
         let currentAuthMode = 'signin';
+        let currentResetEmail = '';
 
         function switchAuthTab(mode) {
             currentAuthMode = mode;
@@ -3029,7 +3227,6 @@
                 let userObj = JSON.parse(loggedUser);
                 let users = JSON.parse(localStorage.getItem('site_users') || '[]');
 
-                // E-posta zaten başka bir kullanıcı tarafından kullanılıyor mu?
                 const emailExists = users.some(u => u.email === newEmail && u.email !== userObj.email);
                 if (emailExists) {
                     showCustomAlert("This email is already registered!");
@@ -3136,6 +3333,7 @@
         function openForgotPasswordModal(e) {
             if(e) e.preventDefault();
             closeDirectContactModal();
+            document.getElementById('forgotPasswordForm').reset();
             document.getElementById('forgotPasswordModal').classList.add('active');
         }
 
@@ -3143,6 +3341,7 @@
             document.getElementById('forgotPasswordModal').classList.remove('active');
         }
 
+        // GELİŞMİŞ ŞİFRE KURTARMA MANTIĞI
         function handleForgotPasswordSubmit(e) {
             e.preventDefault();
             const email = document.getElementById('forgotClientEmail').value.trim();
@@ -3153,9 +3352,101 @@
                 showCustomAlert(t.alertText);
                 return;
             }
+
+            let users = JSON.parse(localStorage.getItem('site_users') || '[]');
+            const user = users.find(u => u.email === email);
+
+            if (!user) {
+                showCustomAlert(t.rpEmailNotFound);
+                return;
+            }
+
+            // Geçici şifre oluştur ve kaydet
+            const tempPass = "Temp" + Math.floor(1000 + Math.random() * 9000) + "!";
             
+            let resetCodes = JSON.parse(localStorage.getItem('reset_codes') || '{}');
+            resetCodes[email] = tempPass;
+            localStorage.setItem('reset_codes', JSON.stringify(resetCodes));
+
+            currentResetEmail = email;
+
             closeForgotPasswordModal();
-            showCustomAlert(t.fpSuccess, 'success');
+            
+            // Mock Email Modalını Aç
+            const mockModal = document.getElementById('mockEmailModal');
+            document.getElementById('mock-email-user-value').innerText = email;
+            document.getElementById('mock-email-pass-value').innerText = tempPass;
+            
+            mockModal.classList.add('active');
+        }
+
+        function closeMockEmailModal() {
+            document.getElementById('mockEmailModal').classList.remove('active');
+        }
+
+        function openResetPasswordModal() {
+            closeMockEmailModal();
+            document.getElementById('resetClientEmail').value = currentResetEmail;
+            document.getElementById('resetPasswordForm').reset();
+            document.getElementById('resetClientEmail').value = currentResetEmail; // Tekrar set et çünkü reset formu temizler
+            document.getElementById('resetPasswordModal').classList.add('active');
+        }
+
+        function closeResetPasswordModal() {
+            document.getElementById('resetPasswordModal').classList.remove('active');
+        }
+
+        function handleResetPasswordSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('resetClientEmail').value;
+            const code = document.getElementById('resetClientCode').value.trim();
+            const newPass = document.getElementById('resetClientNewPassword').value.trim();
+
+            const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
+            const t = modalTranslations[modalLangText] || modalTranslations.en;
+
+            if (!code || !newPass) {
+                showCustomAlert(t.alertText);
+                return;
+            }
+
+            if (!isValidPassword(newPass)) {
+                showCustomAlert(t.passwordStrengthError);
+                return;
+            }
+
+            let resetCodes = JSON.parse(localStorage.getItem('reset_codes') || '{}');
+            const storedCode = resetCodes[email];
+
+            if (!storedCode || storedCode !== code) {
+                showCustomAlert(t.rpErrorCode);
+                return;
+            }
+
+            // Şifreyi güncelle
+            let users = JSON.parse(localStorage.getItem('site_users') || '[]');
+            let userUpdated = false;
+
+            users = users.map(u => {
+                if (u.email === email) {
+                    u.password = newPass;
+                    userUpdated = true;
+                }
+                return u;
+            });
+
+            if (userUpdated) {
+                localStorage.setItem('site_users', JSON.stringify(users));
+                
+                // Reset kodunu temizle
+                delete resetCodes[email];
+                localStorage.setItem('reset_codes', JSON.stringify(resetCodes));
+
+                closeResetPasswordModal();
+                showCustomAlert(t.rpSuccess, 'success');
+            } else {
+                showCustomAlert(t.rpEmailNotFound);
+            }
         }
 
         let activeNoticeEmail = "muminsultani@hotmail.com";
@@ -3402,6 +3693,21 @@
             if (backTxt) {
                 backTxt.innerText = data.backText;
             }
+
+            // Yeni Modallar İçin Çeviri Güncellemeleri
+            if(document.getElementById('mock-email-title')) document.getElementById('mock-email-title').innerText = data.mockEmailTitle;
+            if(document.getElementById('mock-email-greeting')) document.getElementById('mock-email-greeting').innerText = data.mockEmailGreeting;
+            if(document.getElementById('mock-email-desc')) document.getElementById('mock-email-desc').innerText = data.mockEmailDesc;
+            if(document.getElementById('mock-email-user-label')) document.getElementById('mock-email-user-label').innerText = data.mockEmailUserLabel;
+            if(document.getElementById('mock-email-pass-label')) document.getElementById('mock-email-pass-label').innerText = data.mockEmailPassLabel;
+            if(document.getElementById('mock-email-admin-label')) document.getElementById('mock-email-admin-label').innerText = data.mockEmailAdminLabel;
+            if(document.getElementById('mock-email-reset-btn')) document.getElementById('mock-email-reset-btn').innerText = data.mockEmailResetBtn;
+
+            if(document.getElementById('rp-title')) document.getElementById('rp-title').innerText = data.rpTitle;
+            if(document.getElementById('rp-label-email')) document.getElementById('rp-label-email').innerText = data.rpEmailLabel;
+            if(document.getElementById('rp-label-code')) document.getElementById('rp-label-code').innerText = data.rpCodeLabel;
+            if(document.getElementById('rp-label-new')) document.getElementById('rp-label-new').innerText = data.rpNewLabel;
+            if(document.getElementById('rp-submit-text')) document.getElementById('rp-submit-text').innerText = data.rpSubmitText;
 
             document.getElementById('gitModalTitle').innerText = data.contactTitle;
             document.getElementById('gitActionText').innerText = data.gitText;
