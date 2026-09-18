@@ -75,8 +75,8 @@
             --line-color: rgba(255, 255, 255, 0.08);
             --box-bg: rgba(255, 255, 255, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
-            --menu-bg: rgba(10, 10, 15, 0.95);
-            --modal-container-bg: #0a0a0f;
+            --menu-bg: rgba(10, 10, 15, 0.75);
+            --modal-container-bg: rgba(10, 10, 15, 0.75);
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.12), rgba(168, 85, 247, 0.05) 60%, transparent 80%);
         }
 
@@ -88,8 +88,8 @@
             --line-color: rgba(0, 0, 0, 0.08);
             --box-bg: rgba(0, 0, 0, 0.02);
             --box-hover-bg: rgba(147, 51, 234, 0.03);
-            --menu-bg: rgba(255, 255, 255, 0.95);
-            --modal-container-bg: #ffffff;
+            --menu-bg: rgba(255, 255, 255, 0.75);
+            --modal-container-bg: rgba(255, 255, 255, 0.75);
             --glow-color: radial-gradient(circle, rgba(147, 51, 234, 0.08), rgba(168, 85, 247, 0.03) 60%, transparent 80%);
         }
 
@@ -118,7 +118,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -2;
+            z-index: -1;
             pointer-events: none;
         }
 
@@ -220,7 +220,7 @@
             height: 400px;
             background: var(--glow-color);
             filter: blur(100px);
-            z-index: -1;
+            z-index: 0;
             pointer-events: none;
         }
 
@@ -232,6 +232,8 @@
             flex-direction: column;
             gap: 32px;
             transition: max-width 0.3s ease;
+            position: relative;
+            z-index: 1;
         }
 
         @media (min-width: 1025px) {
@@ -518,14 +520,21 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: var(--box-bg);
+            background: rgba(10, 10, 15, 0.4);
+            backdrop-filter: blur(10px);
             border: 1px solid var(--line-color);
-            padding: 16px 18px;
+            padding: 14px 16px;
             border-radius: 12px;
             text-decoration: none;
             transition: all 0.3s ease;
             gap: 12px;
             cursor: pointer;
+            position: relative;
+            z-index: 1;
+        }
+
+        body.light-mode .contact-box {
+            background: rgba(255, 255, 255, 0.4);
         }
 
         .contact-box:hover {
@@ -589,11 +598,13 @@
 
         .modal-container {
             background: var(--modal-container-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--line-color);
             border-radius: 20px;
             width: 100%;
-            max-width: 540px;
-            padding: 32px;
+            max-width: 480px;
+            padding: 24px;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
             position: relative;
             transform: scale(0.95) translateY(15px);
@@ -601,6 +612,19 @@
             opacity: 0;
             max-height: 90vh;
             overflow-y: auto;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .modal-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.6;
         }
 
         .modal-overlay.active .modal-container {
@@ -617,6 +641,7 @@
             padding-bottom: 16px;
             position: relative;
             gap: 12px;
+            z-index: 1;
         }
 
         .modal-header-left {
@@ -634,7 +659,7 @@
         }
 
         .modal-brand {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 800;
             letter-spacing: -0.5px;
             background: linear-gradient(270deg, #9333ea, #c084fc, #e879f9, #c084fc, #9333ea);
@@ -647,7 +672,7 @@
         }
 
         .modal-title {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-secondary);
         }
@@ -656,10 +681,10 @@
             background: var(--box-bg);
             border: 1px solid var(--line-color);
             color: var(--text-secondary);
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
-            font-size: 0.9rem;
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            font-size: 0.8rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -697,16 +722,18 @@
             padding: 4px;
             border-radius: 10px;
             border: 1px solid var(--line-color);
+            position: relative;
+            z-index: 1;
         }
 
         .auth-tab-btn {
             flex: 1;
             background: transparent;
             border: none;
-            padding: 10px;
+            padding: 8px;
             border-radius: 8px;
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -720,14 +747,16 @@
 
         .form-group {
             margin-bottom: 18px;
+            position: relative;
+            z-index: 1;
         }
 
         .form-label {
             display: block;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--text-secondary);
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
         .form-input:-webkit-autofill,
@@ -756,10 +785,10 @@
             width: 100%;
             background: var(--box-bg) !important;
             border: 1px solid var(--line-color);
-            padding: 12px 16px;
-            border-radius: 10px;
+            padding: 10px 14px;
+            border-radius: 8px;
             color: var(--text-primary) !important;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             outline: none;
             transition: border-color 0.2s;
             -webkit-text-fill-color: var(--text-primary) !important;
@@ -769,6 +798,7 @@
         .form-textarea::placeholder {
             color: #94a3b8 !important;
             opacity: 0.30 !important;
+            font-size: 0.78rem;
         }
 
         .form-input:focus, .form-textarea:focus {
@@ -789,14 +819,14 @@
 
         .password-toggle-btn {
             position: absolute;
-            right: 14px;
+            right: 12px;
             top: 50%;
             transform: translateY(-50%);
             background: transparent;
             border: none;
             color: var(--text-secondary);
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -816,22 +846,24 @@
             display: flex;
             gap: 10px;
             margin-top: 12px;
+            position: relative;
+            z-index: 1;
         }
 
         .submit-btn {
             flex: 1;
             color: #fff;
             border: none;
-            padding: 14px 8px;
-            border-radius: 10px;
+            padding: 11px 8px;
+            border-radius: 8px;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             cursor: pointer;
             transition: opacity 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             white-space: nowrap;
         }
 
@@ -841,32 +873,6 @@
 
         .submit-btn:hover {
             opacity: 0.9;
-        }
-
-        /* Google Butonu Stili */
-        .submit-btn.google-btn {
-            background: #ffffff;
-            color: #333333;
-            border: 1px solid #dddddd;
-            font-weight: 600;
-        }
-        .submit-btn.google-btn:hover {
-            background: #f1f1f1;
-        }
-        .submit-btn.google-btn img {
-            width: 1.1rem;
-            height: 1.1rem;
-            display: block;
-        }
-        
-        /* Karanlık modda Google butonu */
-        body:not(.light-mode) .submit-btn.google-btn {
-            background: #1e1e24;
-            color: #f8fafc;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        body:not(.light-mode) .submit-btn.google-btn:hover {
-            background: #2a2a35;
         }
 
         .custom-alert-overlay {
@@ -895,13 +901,18 @@
             pointer-events: auto;
         }
 
+        /* Alert kutusu: Boyut sınırları eklendi, içeriğe göre otomatik boyutlanacak */
         .custom-alert-box {
             background: var(--modal-container-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(147, 51, 234, 0.3);
             border-radius: 20px;
             width: 100%;
-            max-width: 380px;
-            padding: 28px;
+            max-width: 340px;
+            min-height: 200px;
+            max-height: 80vh;
+            padding: 22px;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(147, 51, 234, 0.15);
             text-align: center;
             position: relative;
@@ -909,8 +920,21 @@
             transform: scale(0.9) translateY(15px);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
             opacity: 0;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .alert-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            height: 100% !important;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.6;
         }
 
         .custom-alert-box::before {
@@ -942,17 +966,17 @@
         }
 
         .custom-alert-icon {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             color: #9333ea;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
             filter: drop-shadow(0 4px 12px rgba(147, 51, 234, 0.3));
         }
 
         .custom-alert-message {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--text-primary);
             font-weight: 500;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
             line-height: 1.5;
         }
 
@@ -961,10 +985,10 @@
             color: #fff;
             border: none;
             width: 100%;
-            padding: 11px 8px;
-            border-radius: 12px;
+            padding: 9px 8px;
+            border-radius: 10px;
             font-weight: 700;
-            font-size: 0.78rem;
+            font-size: 0.72rem;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
@@ -986,6 +1010,8 @@
             flex-direction: row;
             align-items: flex-start;
             gap: 22px;
+            position: relative;
+            z-index: 1;
         }
 
         .footer-qr-container {
@@ -1050,7 +1076,6 @@
             white-space: nowrap;
         }
 
-        /* Profil ikonları için özel stiller (Bunlara dokunulmadı) */
         .profile-action-btn {
             background: var(--box-bg);
             border: 1px solid var(--line-color);
@@ -1105,7 +1130,6 @@
             border-color: rgba(147, 51, 234, 0.4);
         }
 
-        /* Masaüstü / Tablet / TV için özel düzen */
         @media (min-width: 768px) {
             .desktop-info-row {
                 display: flex !important;
@@ -1139,7 +1163,6 @@
             }
         }
 
-        /* Mobilde görünecek olan orijinal satırlar */
         .mobile-email-row, .mobile-birthdate-row {
             display: flex;
             align-items: center;
@@ -1150,72 +1173,6 @@
             display: none;
         }
 
-        /* =========================================
-           KÜÇÜLTME İŞLEMLERİ (Tüm Paneller, Alertler,
-           Placeholder'lar, Etiketler ve Butonlar)
-           ========================================= */
-        
-        /* Panelleri Küçült */
-        .modal-container {
-            max-width: 480px !important;
-            padding: 24px !important;
-        }
-        .custom-alert-box {
-            max-width: 340px !important;
-            padding: 22px !important;
-        }
-        .contact-box {
-            padding: 14px 16px !important;
-        }
-
-        /* Alert İkonlarını ve Başlıklarını Küçült */
-        .custom-alert-icon { font-size: 1.8rem !important; margin-bottom: 10px !important; }
-        .custom-alert-message { font-size: 0.85rem !important; margin-bottom: 18px !important; }
-        .modal-brand { font-size: 1.2rem !important; }
-        .modal-title { font-size: 0.85rem !important; }
-
-        /* Placeholder ve Etiketleri Küçült */
-        .form-input, .form-textarea {
-            padding: 10px 14px !important;
-            font-size: 0.85rem !important;
-            border-radius: 8px !important;
-        }
-        .form-input::placeholder, .form-textarea::placeholder {
-            font-size: 0.78rem !important;
-        }
-        .form-label {
-            font-size: 0.75rem !important;
-            margin-bottom: 5px !important;
-        }
-        
-        /* Genel Butonları ve İçindeki Yazıları Küçült (Profil ikonları hariç) */
-        .submit-btn {
-            padding: 11px 8px !important;
-            font-size: 0.78rem !important;
-            border-radius: 8px !important;
-            gap: 6px !important;
-        }
-        .custom-alert-btn {
-            padding: 9px 8px !important;
-            font-size: 0.72rem !important;
-            border-radius: 10px !important;
-        }
-        .auth-tab-btn {
-            padding: 8px !important;
-            font-size: 0.78rem !important;
-        }
-        .modal-close-btn {
-            width: 26px !important;
-            height: 26px !important;
-            font-size: 0.8rem !important;
-            border-radius: 6px !important;
-        }
-        .password-toggle-btn {
-            font-size: 0.85rem !important;
-            right: 12px !important;
-        }
-
-        /* Mobil / Küçük ekranlar için ekstra ayarlar */
         @media (max-width: 640px) {
             body { padding: 16px 12px; }
             .wrapper { gap: 24px; max-width: 100%; }
@@ -1324,7 +1281,7 @@
                         <path fill="url(#insta-gradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                     </svg>
                 </a>
-                <button type="button" class="social-btn gmail" onclick="openGmailNoticeModal('muminsultani@hotmail.com')" title="Gmail">
+                <button type="button" class="social-btn gmail" onclick="openAppointmentModalWithEmail('muminsultani@hotmail.com')" title="Gmail">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail">
                 </button>
             </div>
@@ -1337,15 +1294,12 @@
             </div>
             <div class="contact-box" style="cursor: default; align-items: flex-start; flex-direction: column; gap: 12px;">
                 
-                <!-- Üst Kısım: Solda profil fotoğrafı, sağda ikonlar -->
                 <div style="display: flex; gap: 12px; width: 100%; align-items: center; justify-content: space-between; flex-wrap: wrap;">
-                    <!-- Sol Taraf: Yuvarlak Profil Fotoğrafı -->
                     <div class="profile-photo-wrapper" style="align-self: center;">
                         <img id="profilePhotoDisplay" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile" onclick="document.getElementById('profilePhotoInput').click()" title="Change Photo">
                         <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;" onchange="handleProfilePhotoUpload(event)">
                     </div>
                     
-                    <!-- Sağ Taraf: İkonlar -->
                     <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
                         <button onclick="openEditProfileModal()" title="Edit Profile" class="profile-action-btn">
                             <i class="fa-solid fa-pen-to-square"></i>
@@ -1362,31 +1316,24 @@
                     </div>
                 </div>
 
-                <!-- Alt Kısım: Bilgiler -->
                 <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
-                    <!-- İsim -->
                     <strong id="profileDisplayName" style="font-size: 1.15rem; color: #9333ea;">Mumin</strong>
                     
-                    <!-- Masaüstü için: Tek Satırda @username, Email ve Doğum Tarihi -->
                     <div class="desktop-info-row">
-                        <!-- Sol: Username -->
                         <div class="desktop-username-area">
                             <i class="fa-solid fa-at" style="color: #9333ea; font-size: 0.9rem;"></i>
                             <strong id="profileDisplayUsernameDesktop" style="font-size: 0.95rem;">@mumin</strong>
                         </div>
-                        <!-- Orta: Email -->
                         <div class="desktop-email-area">
                             <i class="fa-solid fa-envelope" style="color: #9333ea; font-size: 0.9rem;"></i>
                             <strong id="profileDisplayEmailDesktop" style="font-size: 0.95rem;">muminsultani@hotmail.com</strong>
                         </div>
-                        <!-- Sağ: Doğum Tarihi -->
                         <div class="desktop-birthdate-area">
                             <i class="fa-solid fa-cake-candles" style="color: #9333ea; font-size: 0.9rem;"></i>
                             <strong id="profileDisplayBirthdateDesktop" style="font-size: 0.95rem;">27/03/2000</strong>
                         </div>
                     </div>
 
-                    <!-- Mobil için: @username, E-posta ve Doğum Tarihi (Alt Alta) -->
                     <div class="mobile-email-row" style="display: flex; align-items: center; gap: 8px;">
                         <i class="fa-solid fa-at" style="color: #9333ea; font-size: 0.9rem;"></i>
                         <strong id="profileDisplayUsernameMobile" style="font-size: 0.95rem;">@mumin</strong>
@@ -1473,7 +1420,7 @@
             <div class="section-title">
                 <i class="fa-solid fa-right-to-bracket"></i> <span id="t-contact-title">Sign In / Sign Up</span>
             </div>
-            <div class="contact-box" onclick="openGetInTouchModal()">
+            <div class="contact-box" onclick="openDirectContactModal()">
                 <div class="contact-text">
                     <span id="t-contact-sub">Sign In / Sign Up</span>
                     <strong id="t-contact-main">Sign in to join us</strong>
@@ -1498,6 +1445,7 @@
     <!-- PROFIL DÜZENLEME MODALI -->
     <div class="modal-overlay" id="editProfileModal">
         <div class="modal-container">
+            <canvas class="modal-canvas"></canvas>
             <div class="modal-header">
                 <div class="modal-header-left">
                     <div class="modal-brand">muminsultani</div>
@@ -1536,6 +1484,7 @@
     <!-- ŞİFRE DEĞİŞTİRME MODALI -->
     <div class="modal-overlay" id="changePasswordModal">
         <div class="modal-container" style="max-width: 400px;">
+            <canvas class="modal-canvas"></canvas>
             <div class="modal-header">
                 <div class="modal-header-left">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
@@ -1588,6 +1537,7 @@
     <!-- HESAP SİLME ONAY MODALI -->
     <div class="modal-overlay" id="deleteAccountModal">
         <div class="modal-container" style="max-width: 400px;">
+            <canvas class="modal-canvas"></canvas>
             <div class="modal-header">
                 <div class="modal-header-left">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
@@ -1617,34 +1567,10 @@
         </div>
     </div>
 
-    <!-- GET IN TOUCH MODAL -->
-    <div class="custom-alert-overlay" id="getInTouchModal">
-        <div class="custom-alert-box" style="max-width: 320px; padding: 20px 18px; text-align: center;">
-            <div style="display: flex; justify-content: center; margin-bottom: 8px;">
-                <div class="custom-alert-icon" style="color: #9333ea; font-size: 1.6rem; margin-bottom: 0; display: inline-flex; align-items: center; filter: drop-shadow(0 2px 8px rgba(147, 51, 234, 0.3);">
-                    <i class="fa-solid fa-user-lock"></i>
-                </div>
-            </div>
-            <div style="display: flex; justify-content: center; margin-bottom: 4px;">
-                <div class="footer-brand" style="font-size: 1.3rem; line-height: 1;">muminsultani</div>
-            </div>
-            <div class="custom-alert-message" id="gitModalTitle" style="font-size: 0.85rem; margin-bottom: 16px; font-weight: 600;">
-                Sign In / Sign Up
-            </div>
-            <div style="display: flex; gap: 8px;">
-                <button class="custom-alert-btn" onclick="openDirectContactModal()" id="gitActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; padding: 8px 6px; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                    <i class="fa-solid fa-right-to-bracket"></i> <span id="gitActionText">Account</span>
-                </button>
-                <button class="custom-alert-btn" onclick="closeGetInTouchModal()" id="gitBackBtn" style="background: #64748b; flex: 1; padding: 8px 6px; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                    <i class="fa-solid fa-arrow-rotate-left"></i> <span id="gitBackText">Back</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- HESAP / GİRİŞ PANELİ -->
+    <!-- HESAP / GİRİŞ PANELİ (GET IN TOUCH MODAL KALDIRILDI, DOĞRUDAN AÇILIR) -->
     <div class="modal-overlay" id="directContactModal">
         <div class="modal-container">
+            <canvas class="modal-canvas"></canvas>
             <div class="modal-header">
                 <div class="modal-header-left">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
@@ -1711,15 +1637,9 @@
                     </div>
                 </div>
                 
-                <div class="form-buttons-group" style="flex-direction: column; gap: 10px;">
-                    <button type="button" class="submit-btn email-btn" onclick="handleAuthSubmit(event)" id="dc-submit-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc); width: 100%;">
+                <div class="form-buttons-group">
+                    <button type="button" class="submit-btn email-btn" onclick="handleAuthSubmit(event)" id="dc-submit-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc);">
                         <i class="fa-solid fa-right-to-bracket"></i> <span id="dc-submit-btn-text">Sign In</span>
-                    </button>
-                    
-                    <!-- Google ile Devam Et Butonu -->
-                    <button type="button" class="submit-btn google-btn" onclick="handleGoogleAuth()" id="dc-google-btn" style="width: 100%;">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
-                        <span id="dc-google-btn-text">Continue with Google</span>
                     </button>
                 </div>
             </form>
@@ -1729,6 +1649,7 @@
     <!-- ŞİFREMİ UNUTTUM MODALI -->
     <div class="modal-overlay" id="forgotPasswordModal">
         <div class="modal-container" style="max-width: 400px;">
+            <canvas class="modal-canvas"></canvas>
             <div class="modal-header">
                 <div class="modal-header-left">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
@@ -1761,6 +1682,7 @@
     <!-- RANDEVU / PROJE FORMU -->
     <div class="modal-overlay" id="appointmentModal">
         <div class="modal-container">
+            <canvas class="modal-canvas"></canvas>
             <div class="modal-header">
                 <div class="modal-header-left">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
@@ -1774,7 +1696,7 @@
                         <button class="modal-close-btn" onclick="goHome()" title="Home">
                             <i class="fa-solid fa-house"></i>
                         </button>
-                        <button class="modal-close-btn" onclick="openGmailNoticeModal('muminsultani@hotmail.com')" title="Gmail">
+                        <button class="modal-close-btn" onclick="openAppointmentModalWithEmail('muminsultani@hotmail.com')" title="Gmail">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 0.9rem; height: 0.9rem; display: block; filter: grayscale(30%) opacity(0.85);">
                         </button>
                     </div>
@@ -1831,34 +1753,10 @@
         </div>
     </div>
 
-    <!-- GMAIL BİLGİLENDİRME MODALI -->
-    <div class="custom-alert-overlay" id="gmailNoticeModal">
-        <div class="custom-alert-box" style="max-width: 380px; text-align: center;">
-            <div style="display: flex; justify-content: center; margin-bottom: 12px;">
-                <div class="custom-alert-icon" style="color: #9333ea; margin-bottom: 0; display: inline-flex; align-items: center;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 2rem; height: 2rem; display: inline-block;">
-                </div>
-            </div>
-            <div style="display: flex; justify-content: center; margin-bottom: 8px;">
-                <div class="footer-brand" style="font-size: 1.6rem; line-height: 1;">muminsultani</div>
-            </div>
-            <div class="custom-alert-message" id="gmailNoticeMessage" style="font-size: 0.85rem; margin-bottom: 20px;">
-                Personal Email Address
-            </div>
-            <div style="display: flex; gap: 10px;">
-                <button class="custom-alert-btn" onclick="confirmOpenGmail()" id="gmailNoticeActionBtn" style="background: linear-gradient(135deg, #9333ea, #c084fc); flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 8px; font-size: 0.75rem;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1rem; height: 1rem; display: block;"> <span id="gmailNoticeEmailBtnText">Email</span>
-                </button>
-                <button class="custom-alert-btn" onclick="closeGmailNoticeModal()" id="gmailNoticeBackBtn" style="background: #64748b; flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 8px; font-size: 0.75rem;">
-                    <i class="fa-solid fa-arrow-rotate-left"></i> <span id="gmailNoticeBackText">Back</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- ÖZEL UYARI KUTUSU -->
     <div class="custom-alert-overlay" id="customAlertModal">
         <div class="custom-alert-box">
+            <canvas class="alert-canvas"></canvas>
             <div class="custom-alert-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
             <div class="custom-alert-message" id="customAlertMessage">Please fill in all fields.</div>
             <button class="custom-alert-btn" onclick="closeCustomAlert()" id="customAlertBtn">OK</button>
@@ -2086,36 +1984,6 @@
             reader.readAsDataURL(file);
         }
 
-        // Google ile Giriş Simülasyonu
-        function handleGoogleAuth() {
-            const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
-            const t = modalTranslations[modalLangText] || modalTranslations.en;
-
-            const googleUser = {
-                name: "Google User",
-                username: "@google_user",
-                email: "google.user@gmail.com",
-                password: "google_oauth_placeholder",
-                birthDay: "01",
-                birthMonth: "01",
-                birthYear: "1990",
-                profilePhoto: "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-            };
-
-            let users = JSON.parse(localStorage.getItem('site_users') || '[]');
-            const existing = users.find(u => u.email === googleUser.email);
-            if (!existing) {
-                users.push(googleUser);
-                localStorage.setItem('site_users', JSON.stringify(users));
-            }
-            
-            localStorage.setItem('logged_user', JSON.stringify(googleUser));
-            
-            showCustomAlert(t.successSignin || "Signed in successfully with Google!");
-            closeDirectContactModal();
-            checkUserSession();
-        }
-
         const translations = {
             en: {
                 code: "EN",
@@ -2138,8 +2006,7 @@
                 editBtn: "Edit Profile",
                 profUsername: "Username",
                 profEmail: "Email Address",
-                forgotLink: "Forgot Password?",
-                googleBtn: "Continue with Google"
+                forgotLink: "Forgot Password?"
             },
             tr: {
                 code: "TR",
@@ -2162,8 +2029,7 @@
                 editBtn: "Profili Düzenle",
                 profUsername: "Kullanıcı Adı",
                 profEmail: "E-posta Adresi",
-                forgotLink: "Şifremi Unuttum?",
-                googleBtn: "Google ile Devam Et"
+                forgotLink: "Şifremi Unuttum?"
             }
         };
 
@@ -2192,13 +2058,8 @@
             document.getElementById('t-contact-main').innerText = data.contactMain;
             document.getElementById('t-scan-text').innerText = data.scanText;
 
-            document.getElementById('gitModalTitle').innerText = data.contactTitle;
-            document.getElementById('gitActionText').innerText = data.gitText;
-            document.getElementById('gitBackText').innerText = data.backText;
-
             if(document.getElementById('t-forgot-link')) document.getElementById('t-forgot-link').innerText = data.forgotLink;
             if(document.getElementById('t-profile-title')) document.getElementById('t-profile-title').innerText = data.profileTitle;
-            if(document.getElementById('dc-google-btn-text')) document.getElementById('dc-google-btn-text').innerText = data.googleBtn;
 
             changeModalLanguage(lang);
 
@@ -2226,7 +2087,6 @@
                 whatsappBtn: "WhatsApp",
                 signinBtn: "Sign In",
                 signupBtn: "Sign Up",
-                googleBtn: "Continue with Google",
                 alertText: "Please fill in all required fields.",
                 waProjectRequest: "Project Request",
                 lblContactName: "Name & Surname",
@@ -2235,10 +2095,7 @@
                 lblTime: "Time",
                 lblDetails: "Details",
                 noFile: "No file attached",
-                gmailNoticeText: "Personal Email Address",
                 backText: "Back",
-                contactTitle: "Sign In / Sign Up",
-                gitText: "Account",
                 successSignup: "Account created successfully! You can now sign in.",
                 successSignin: "Signed in successfully!",
                 errorSignin: "Invalid email or password!",
@@ -2248,9 +2105,7 @@
                 fpSubmitText: "Send Recovery Details",
                 fpSuccess: "Recovery email successfully simulated and sent to your address & administrator (muminsultani@hotmail.com)!",
                 epTitle: "Edit Profile & Settings",
-                newPassLabel: "New Password (optional)",
                 saveChanges: "Save Changes",
-                deleteAccount: "Delete Account",
                 successUpdate: "Profile updated successfully!",
                 successDelete: "Account deleted successfully.",
                 delConfirmTitle: "Delete Account",
@@ -2288,7 +2143,6 @@
                 whatsappBtn: "WhatsApp",
                 signinBtn: "Giriş Yap",
                 signupBtn: "Kayıt Ol",
-                googleBtn: "Google ile Devam Et",
                 alertText: "Lütfen gerekli tüm alanları doldurun.",
                 waProjectRequest: "Proje Talebi",
                 lblContactName: "Ad Soyad",
@@ -2297,10 +2151,7 @@
                 lblTime: "Zaman",
                 lblDetails: "Detaylar",
                 noFile: "Dosya eklenmedi",
-                gmailNoticeText: "Kişisel E-posta Adresi",
                 backText: "Geri Dön",
-                contactTitle: "Giriş Yap / Kayıt Ol",
-                gitText: "Hesap",
                 successSignup: "Hesap başarıyla oluşturuldu! Şimdi giriş yapabilirsiniz.",
                 successSignin: "Başarıyla giriş yapıldı!",
                 errorSignin: "Geçersiz e-posta veya şifre!",
@@ -2310,9 +2161,7 @@
                 fpSubmitText: "Kurtarma Bilgisi Gönder",
                 fpSuccess: "Kurtarma e-postası başarıyla simüle edildi ve adresinize ile yöneticiye (muminsultani@hotmail.com) gönderildi!",
                 epTitle: "Profili Düzenle & Ayarlar",
-                newPassLabel: "Yeni Şifre (isteğe bağlı)",
                 saveChanges: "Değişiklikleri Kaydet",
-                deleteAccount: "Hesabı Sil",
                 successUpdate: "Profil başarıyla güncellendi!",
                 successDelete: "Hesap başarıyla silindi.",
                 delConfirmTitle: "Hesabı Sil",
@@ -2368,22 +2217,7 @@
             }
         }
 
-        function openGetInTouchModal() {
-            const loggedUser = localStorage.getItem('logged_user');
-            if (loggedUser) {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                return;
-            }
-            document.getElementById('getInTouchModal').classList.add('active');
-        }
-
-        function closeGetInTouchModal() {
-            document.getElementById('getInTouchModal').classList.remove('active');
-        }
-
         function openDirectContactModal() {
-            closeGetInTouchModal();
-            switchAuthTab('signin');
             document.getElementById('directContactModal').classList.add('active');
         }
 
@@ -2569,49 +2403,6 @@
             showCustomAlert(t.fpSuccess);
         }
 
-        let activeNoticeEmail = "muminsultani@hotmail.com";
-
-        function openGmailNoticeModal(email) {
-            const loggedUser = localStorage.getItem('logged_user');
-            if (!loggedUser) {
-                const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-                const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
-                const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
-                const t = modalTranslations[currentModalLang] || modalTranslations.en;
-                
-                showCustomAlert(t.authRequiredAlert);
-                openGetInTouchModal();
-                return;
-            }
-
-            activeNoticeEmail = email;
-            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-            const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
-            const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
-            
-            const t = modalTranslations[currentModalLang] || modalTranslations.en;
-            
-            document.getElementById('gmailNoticeMessage').innerText = t.gmailNoticeText;
-            document.getElementById('gmailNoticeEmailBtnText').innerText = t.emailBtn;
-            document.getElementById('gmailNoticeBackText').innerText = t.backText;
-            document.getElementById('gmailNoticeModal').classList.add('active');
-            
-            const appointmentModal = document.getElementById('appointmentModal');
-            if (appointmentModal.classList.contains('active')) {
-                appointmentModal.classList.add('light-blue-bg');
-            }
-        }
-
-        function closeGmailNoticeModal() {
-            document.getElementById('gmailNoticeModal').classList.remove('active');
-            document.getElementById('appointmentModal').classList.remove('light-blue-bg');
-        }
-
-        function confirmOpenGmail() {
-            closeGmailNoticeModal();
-            openAppointmentModalWithEmail(activeNoticeEmail);
-        }
-
         function openAppointmentModalWithEmail(email) {
             const loggedUser = localStorage.getItem('logged_user');
             if (!loggedUser) {
@@ -2621,7 +2412,7 @@
                 const t = modalTranslations[currentModalLang] || modalTranslations.en;
                 
                 showCustomAlert(t.authRequiredAlert);
-                openGetInTouchModal();
+                openDirectContactModal();
                 return;
             }
 
@@ -2682,7 +2473,6 @@
             document.getElementById('dc-title').innerText = data.contactHeaderTitle;
             document.getElementById('tabSigninBtn').innerText = data.signinBtn;
             document.getElementById('tabSignupBtn').innerText = data.signupBtn;
-            document.getElementById('dc-google-btn-text').innerText = data.googleBtn;
 
             document.getElementById('dc-label-name').innerText = data.nameLabel;
             if(document.getElementById('contactClientName')) document.getElementById('contactClientName').placeholder = data.namePlaceholder;
@@ -2718,23 +2508,6 @@
             if(document.getElementById('da-desc')) document.getElementById('da-desc').innerText = data.delConfirmDesc;
             if(document.getElementById('da-label-username')) document.getElementById('da-label-username').innerText = data.delConfirmLabel;
             if(document.getElementById('da-submit-text')) document.getElementById('da-submit-text').innerText = data.delConfirmBtn;
-
-            const noticeMsg = document.getElementById('gmailNoticeMessage');
-            if (noticeMsg) {
-                noticeMsg.innerText = data.gmailNoticeText;
-            }
-            const gmailBtnText = document.getElementById('gmailNoticeEmailBtnText');
-            if (gmailBtnText) {
-                gmailBtnText.innerText = data.emailBtn;
-            }
-            const backTxt = document.getElementById('gmailNoticeBackText');
-            if (backTxt) {
-                backTxt.innerText = data.backText;
-            }
-
-            document.getElementById('gitModalTitle').innerText = data.contactTitle;
-            document.getElementById('gitActionText').innerText = data.gitText;
-            document.getElementById('gitBackText').innerText = data.backText;
 
             document.getElementById('modalLangMenu').classList.remove('show');
             document.getElementById('contactModalLangMenu').classList.remove('show');
@@ -2951,7 +2724,7 @@
             if (!loggedUser) {
                 showCustomAlert(t.authRequiredAlert);
                 closeAppointmentModal();
-                openGetInTouchModal();
+                openDirectContactModal();
                 return false;
             }
 
@@ -3146,6 +2919,118 @@
         }
 
         animateConstellation();
+
+        // --- Panel ve Alert Canvas Animasyonları ---
+        function initModalCanvas() {
+            const modalCanvases = document.querySelectorAll('.modal-canvas, .alert-canvas');
+            modalCanvases.forEach(canvas => {
+                const ctx = canvas.getContext('2d');
+                let particles = [];
+                const numParticles = 30;
+
+                function resizeModalCanvas() {
+                    const parent = canvas.parentElement;
+                    if (parent) {
+                        canvas.width = parent.offsetWidth;
+                        canvas.height = parent.offsetHeight;
+                    }
+                }
+
+                resizeModalCanvas();
+
+                for (let i = 0; i < numParticles; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        vx: (Math.random() - 0.5) * 0.5,
+                        vy: (Math.random() - 0.5) * 0.5,
+                        size: Math.random() * 1.5 + 0.8
+                    });
+                }
+
+                let modalMouse = { x: null, y: null };
+
+                canvas.addEventListener('mousemove', (e) => {
+                    const rect = canvas.getBoundingClientRect();
+                    modalMouse.x = e.clientX - rect.left;
+                    modalMouse.y = e.clientY - rect.top;
+                });
+
+                canvas.addEventListener('mouseout', () => {
+                    modalMouse.x = null;
+                    modalMouse.y = null;
+                });
+
+                function drawModalAnimation() {
+                    if (canvas.width !== canvas.parentElement.offsetWidth || canvas.height !== canvas.parentElement.offsetHeight) {
+                        resizeModalCanvas();
+                    }
+
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    const isLight = document.body.classList.contains('light-mode');
+
+                    for (let i = 0; i < particles.length; i++) {
+                        const p = particles[i];
+                        p.x += p.vx;
+                        p.y += p.vy;
+
+                        if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
+                        if (p.y < 0 || p.y > canvas.height) p.vy = -p.vy;
+
+                        ctx.fillStyle = isLight ? 'rgba(147, 51, 234, 0.4)' : 'rgba(168, 85, 247, 0.5)';
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        for (let j = i + 1; j < particles.length; j++) {
+                            const p2 = particles[j];
+                            const dx = p.x - p2.x;
+                            const dy = p.y - p2.y;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+
+                            if (dist < 80) {
+                                const opacity = 1 - (dist / 80);
+                                ctx.strokeStyle = isLight 
+                                    ? `rgba(147, 51, 234, ${opacity * 0.15})` 
+                                    : `rgba(168, 85, 247, ${opacity * 0.2})`;
+                                ctx.lineWidth = 0.6;
+                                ctx.beginPath();
+                                ctx.moveTo(p.x, p.y);
+                                ctx.lineTo(p2.x, p2.y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                    requestAnimationFrame(drawModalAnimation);
+                }
+
+                drawModalAnimation();
+            });
+        }
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    const target = mutation.target;
+                    if (target.classList.contains('active')) {
+                        const canvases = target.querySelectorAll('.modal-canvas, .alert-canvas');
+                        canvases.forEach(canvas => {
+                            const parent = canvas.parentElement;
+                            if (parent) {
+                                canvas.width = parent.offsetWidth;
+                                canvas.height = parent.offsetHeight;
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.modal-overlay, .custom-alert-overlay').forEach(el => {
+            observer.observe(el, { attributes: true });
+        });
+
+        window.addEventListener('load', initModalCanvas);
     </script>
 </body>
 </html>
