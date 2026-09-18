@@ -2028,6 +2028,43 @@
         </div>
     </div>
 
+    <!-- YENİ: ŞİFRE ONAY MODALI (Hesap Silme İçin) -->
+    <div class="modal-overlay" id="confirmDeletePasswordModal">
+        <div class="modal-container" style="max-width: 400px;">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                        <button class="modal-close-btn" onclick="closeDeletePasswordModal()" title="Back"><i class="fa-solid fa-chevron-left"></i></button>
+                    </div>
+                    <div class="modal-brand">muminsultani</div>
+                    <div class="modal-title" id="dp-title">Confirm Deletion</div>
+                </div>
+                <div class="modal-header-actions">
+                    <button class="modal-close-btn" onclick="closeDeletePasswordModal()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <form id="deletePasswordForm" onsubmit="handleDeletePasswordSubmit(event)">
+                <p class="item-desc" id="dp-desc" style="margin-bottom: 16px; font-size: 0.8rem; color: #ef4444;">
+                    Please enter your password to confirm account deletion.
+                </p>
+                <div class="form-group">
+                    <label class="form-label" id="dp-label-password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" class="form-input" id="deleteConfirmPassword" required placeholder="••••••••">
+                        <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('deleteConfirmPassword', 'deleteConfirmPasswordToggleIcon')" title="Show/Hide Password">
+                            <i class="fa-solid fa-eye" id="deleteConfirmPasswordToggleIcon"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-buttons-group">
+                    <button type="submit" class="submit-btn" id="dp-submit-btn" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                        <i class="fa-solid fa-trash-can"></i> <span id="dp-submit-text">Delete Account</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- GET IN TOUCH MODAL -->
     <div class="custom-alert-overlay" id="getInTouchModal">
         <div class="custom-alert-box" style="max-width: 320px; padding: 20px 18px; text-align: center;">
@@ -2141,7 +2178,7 @@
         </div>
     </div>
 
-    <!-- ŞİFREMİ UNUTTUM MODALI (GELİŞMİŞ) -->
+    <!-- ŞİFREMİ UNUTTUM MODALI -->
     <div class="modal-overlay" id="forgotPasswordModal">
         <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
@@ -2785,6 +2822,14 @@
                 usernameTaken: "This username is already taken.",
                 successBtn: "OK",
                 // Yeni çeviriler
+                delConfirmAlert: "Are you sure you want to delete your account? This action cannot be undone.",
+                delConfirmYes: "Yes, Delete",
+                delConfirmNo: "Cancel",
+                delPassTitle: "Confirm Deletion",
+                delPassDesc: "Please enter your password to confirm.",
+                delPassLabel: "Password",
+                delPassBtn: "Delete Account",
+                delPassError: "Incorrect password! Account not deleted.",
                 fpSubmitText: "Send Recovery Email",
                 mockEmailTitle: "Password Recovery Email",
                 mockEmailGreeting: "Hello,",
@@ -2842,6 +2887,14 @@
                 usernameTaken: "Bu kullanıcı adı zaten alınmış.",
                 successBtn: "Tamam",
                 // Yeni çeviriler
+                delConfirmAlert: "Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+                delConfirmYes: "Evet, Sil",
+                delConfirmNo: "İptal",
+                delPassTitle: "Silmeyi Onayla",
+                delPassDesc: "Onaylamak için lütfen şifrenizi girin.",
+                delPassLabel: "Şifre",
+                delPassBtn: "Hesabı Sil",
+                delPassError: "Şifre yanlış! Hesap silinmedi.",
                 fpSubmitText: "Kurtarma E-postası Gönder",
                 mockEmailTitle: "Şifre Kurtarma E-postası",
                 mockEmailGreeting: "Merhaba,",
@@ -2862,6 +2915,7 @@
         };
 
         let currentLang = 'en';
+        let currentResetEmail = '';
 
         function changeLanguage(lang) {
             currentLang = lang;
@@ -2988,6 +3042,14 @@
                 usernameTaken: "This username is already taken.",
                 successBtn: "OK",
                 // Yeni çeviriler
+                delConfirmAlert: "Are you sure you want to delete your account? This action cannot be undone.",
+                delConfirmYes: "Yes, Delete",
+                delConfirmNo: "Cancel",
+                delPassTitle: "Confirm Deletion",
+                delPassDesc: "Please enter your password to confirm.",
+                delPassLabel: "Password",
+                delPassBtn: "Delete Account",
+                delPassError: "Incorrect password! Account not deleted.",
                 mockEmailTitle: "Password Recovery Email",
                 mockEmailGreeting: "Hello,",
                 mockEmailDesc: "We received a request to reset your password. A temporary password has been generated for your account.",
@@ -3079,6 +3141,14 @@
                 usernameTaken: "Bu kullanıcı adı zaten alınmış.",
                 successBtn: "Tamam",
                 // Yeni çeviriler
+                delConfirmAlert: "Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+                delConfirmYes: "Evet, Sil",
+                delConfirmNo: "İptal",
+                delPassTitle: "Silmeyi Onayla",
+                delPassDesc: "Onaylamak için lütfen şifrenizi girin.",
+                delPassLabel: "Şifre",
+                delPassBtn: "Hesabı Sil",
+                delPassError: "Şifre yanlış! Hesap silinmedi.",
                 mockEmailTitle: "Şifre Kurtarma E-postası",
                 mockEmailGreeting: "Merhaba,",
                 mockEmailDesc: "Şifrenizi sıfırlama talebinizi aldık. Hesabınız için geçici bir şifre oluşturuldu.",
@@ -3098,7 +3168,6 @@
         };
 
         let currentAuthMode = 'signin';
-        let currentResetEmail = '';
 
         function switchAuthTab(mode) {
             currentAuthMode = mode;
@@ -3203,6 +3272,15 @@
             document.getElementById('deleteAccountModal').classList.remove('active');
         }
 
+        function openDeletePasswordModal() {
+            document.getElementById('deleteConfirmPassword').value = '';
+            document.getElementById('confirmDeletePasswordModal').classList.add('active');
+        }
+
+        function closeDeletePasswordModal() {
+            document.getElementById('confirmDeletePasswordModal').classList.remove('active');
+        }
+
         function handleProfileUpdate(e) {
             e.preventDefault();
             const loggedUser = localStorage.getItem('logged_user');
@@ -3297,20 +3375,19 @@
             } catch(err) {}
         }
 
+        // GÜNCELLENMİŞ: Hesap Silme Adım 1 (Kullanıcı adı kontrolü ve onay)
         function handleDeleteAccount(e) {
             e.preventDefault();
             const loggedUser = localStorage.getItem('logged_user');
             if (!loggedUser) return;
 
             const inputUsername = document.getElementById('deleteConfirmUsername').value.trim();
-            
             const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
             const t = modalTranslations[modalLangText] || modalTranslations.en;
 
             try {
                 const userObj = JSON.parse(loggedUser);
                 const actualUsername = userObj.username || '';
-                
                 const cleanInput = inputUsername.startsWith('@') ? inputUsername.substring(1) : inputUsername;
                 const cleanActual = actualUsername.startsWith('@') ? actualUsername.substring(1) : actualUsername;
 
@@ -3319,12 +3396,40 @@
                     return;
                 }
 
+                // Kullanıcı adı doğruysa, onay uyarısını göster
+                showCustomAlert(t.delConfirmAlert, 'delete', function() {
+                    // Onay verildikten sonra şifre modalını aç
+                    document.getElementById('deleteAccountModal').classList.remove('active');
+                    openDeletePasswordModal();
+                });
+            } catch(err) {}
+        }
+
+        // GÜNCELLENMİŞ: Hesap Silme Adım 2 (Şifre kontrolü ve silme işlemi)
+        function handleDeletePasswordSubmit(e) {
+            e.preventDefault();
+            const loggedUser = localStorage.getItem('logged_user');
+            if (!loggedUser) return;
+
+            const enteredPass = document.getElementById('deleteConfirmPassword').value.trim();
+            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const t = modalTranslations[modalLangText] || modalTranslations.en;
+
+            try {
+                const userObj = JSON.parse(loggedUser);
+                
+                if (userObj.password !== enteredPass) {
+                    showCustomAlert(t.delPassError);
+                    return;
+                }
+
+                // Şifre doğruysa hesabı sil
                 let users = JSON.parse(localStorage.getItem('site_users') || '[]');
                 users = users.filter(u => u.email !== userObj.email);
                 localStorage.setItem('site_users', JSON.stringify(users));
                 localStorage.removeItem('logged_user');
 
-                closeDeleteAccountModal();
+                closeDeletePasswordModal();
                 checkUserSession();
                 showCustomAlert(t.successDelete, 'success');
             } catch(err) {}
@@ -3537,24 +3642,38 @@
                 alertIcon.innerHTML = '<i class="fa-solid fa-door-open"></i>';
             } else if (type === 'success') {
                 alertIcon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            } else if (type === 'delete') {
+                alertIcon.innerHTML = '<i class="fa-solid fa-trash-can" style="color: #ef4444;"></i>';
             } else {
                 alertIcon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
             }
             
             if (onConfirm) {
-                // Çift butonlu gösterim
+                // Çift butonlu gösterim (Silme veya Çıkış onayı)
                 const currentLangText = document.getElementById('currentLangText').innerText.toLowerCase();
                 const t = modalTranslations[currentLangText] || modalTranslations.en;
                 
+                let btnLeftText = t.logoutNo;
+                let btnRightText = t.logoutYes;
+                let btnRightIcon = 'fa-door-open';
+                let btnRightStyle = 'background: linear-gradient(135deg, #9333ea, #c084fc);';
+                
+                if (type === 'delete') {
+                    btnLeftText = t.delConfirmNo;
+                    btnRightText = t.delConfirmYes;
+                    btnRightIcon = 'fa-trash-can';
+                    btnRightStyle = 'background: linear-gradient(135deg, #ef4444, #dc2626);';
+                }
+                
                 alertBtnGroup.innerHTML = `
                     <button class="custom-alert-btn cancel-btn" onclick="closeCustomAlert()" style="flex: 1;">
-                        <i class="fa-solid fa-arrow-left"></i> ${t.logoutNo}
+                        <i class="fa-solid fa-arrow-left"></i> ${btnLeftText}
                     </button>
-                    <button class="custom-alert-btn" onclick="confirmLogoutAction()" style="flex: 1;">
-                        <i class="fa-solid fa-door-open"></i> ${t.logoutYes}
+                    <button class="custom-alert-btn" onclick="confirmAction()" style="flex: 1; ${btnRightStyle}">
+                        <i class="fa-solid ${btnRightIcon}"></i> ${btnRightText}
                     </button>
                 `;
-                window._logoutConfirmCallback = onConfirm;
+                window._confirmActionCallback = onConfirm;
             } else {
                 // Tek butonlu gösterim
                 const currentLangText = document.getElementById('currentLangText').innerText.toLowerCase();
@@ -3580,12 +3699,12 @@
 
         function closeCustomAlert() {
             document.getElementById('customAlertModal').classList.remove('active');
-            window._logoutConfirmCallback = null;
+            window._confirmActionCallback = null;
         }
 
-        function confirmLogoutAction() {
-            if (window._logoutConfirmCallback) {
-                const callback = window._logoutConfirmCallback;
+        function confirmAction() {
+            if (window._confirmActionCallback) {
+                const callback = window._confirmActionCallback;
                 closeCustomAlert();
                 callback();
             } else {
@@ -3675,6 +3794,12 @@
             if(document.getElementById('da-desc')) document.getElementById('da-desc').innerText = data.delConfirmDesc;
             if(document.getElementById('da-label-username')) document.getElementById('da-label-username').innerText = data.delConfirmLabel;
             if(document.getElementById('da-submit-text')) document.getElementById('da-submit-text').innerText = data.delConfirmBtn;
+            
+            // Yeni Eklenen Delete Password Modal Çevirileri
+            if(document.getElementById('dp-title')) document.getElementById('dp-title').innerText = data.delPassTitle;
+            if(document.getElementById('dp-desc')) document.getElementById('dp-desc').innerText = data.delPassDesc;
+            if(document.getElementById('dp-label-password')) document.getElementById('dp-label-password').innerText = data.delPassLabel;
+            if(document.getElementById('dp-submit-text')) document.getElementById('dp-submit-text').innerText = data.delPassBtn;
 
             if(document.getElementById('pp-title')) document.getElementById('pp-title').innerText = data.photoPanelTitle;
             if(document.getElementById('pp-change-text')) document.getElementById('pp-change-text').innerText = data.btnChange;
@@ -3694,7 +3819,7 @@
                 backTxt.innerText = data.backText;
             }
 
-            // Yeni Modallar İçin Çeviri Güncellemeleri
+            // Mock Email ve Reset Modalları İçin Çeviri Güncellemeleri
             if(document.getElementById('mock-email-title')) document.getElementById('mock-email-title').innerText = data.mockEmailTitle;
             if(document.getElementById('mock-email-greeting')) document.getElementById('mock-email-greeting').innerText = data.mockEmailGreeting;
             if(document.getElementById('mock-email-desc')) document.getElementById('mock-email-desc').innerText = data.mockEmailDesc;
