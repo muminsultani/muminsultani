@@ -726,7 +726,6 @@
             box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
         }
 
-        /* ✅ GÜNCELLENDİ: form-group aralığı azaltıldı */
         .form-group {
             margin-bottom: 10px;
         }
@@ -1179,12 +1178,10 @@
         .form-input::placeholder, .form-textarea::placeholder {
             font-size: 0.78rem !important;
         }
-        /* ✅ GÜNCELLENDİ: override label aralığı azaltıldı */
         .form-label {
             font-size: 0.75rem !important;
             margin-bottom: 3px !important;
         }
-        /* ✅ GÜNCELLENDİ: override form-group aralığı azaltıldı */
         .form-group {
             margin-bottom: 8px !important;
         }
@@ -1576,6 +1573,36 @@
             font-size: 0.7rem;
             color: var(--text-secondary);
         }
+
+        /* ✅ YENİ: Geçici şifre kopyalama butonu */
+        .copy-pass-btn {
+            background: transparent;
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            color: #9333ea;
+            cursor: pointer;
+            padding: 4px 8px;
+            margin-left: 6px;
+            font-size: 0.75rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            vertical-align: middle;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .copy-pass-btn:hover {
+            background: rgba(147, 51, 234, 0.1);
+            border-color: #9333ea;
+            transform: translateY(-1px);
+        }
+
+        .copy-pass-btn.copied {
+            color: #22c55e !important;
+            border-color: #22c55e !important;
+            background: rgba(34, 197, 94, 0.1) !important;
+        }
     </style>
     
     <script>
@@ -1839,7 +1866,6 @@
         </footer>
     </div>
 
-    <!-- PROFİL FOTOĞRAFI PANELİ -->
     <div class="modal-overlay" id="profilePhotoPanelModal">
         <div class="modal-container" style="max-width: 420px !important;">
             <div class="modal-header">
@@ -2209,7 +2235,13 @@
                     <p id="mock-email-greeting">Hello,</p>
                     <p id="mock-email-desc">We received a request to reset your password. A temporary password has been generated for your account.</p>
                     <p><strong id="mock-email-user-label">Your Email:</strong> <span id="mock-email-user-value"></span></p>
-                    <p><strong id="mock-email-pass-label">Temporary Password:</strong> <span id="mock-email-pass-value" style="color: #9333ea; font-family: monospace; font-weight: bold; background: rgba(147,51,234,0.1); padding: 2px 6px; border-radius: 4px;"></span></p>
+                    <p style="display: flex; align-items: center; flex-wrap: wrap; gap: 4px;">
+                        <strong id="mock-email-pass-label">Temporary Password:</strong> 
+                        <span id="mock-email-pass-value" style="color: #9333ea; font-family: monospace; font-weight: bold; background: rgba(147,51,234,0.1); padding: 3px 8px; border-radius: 4px; display: inline-block;"></span>
+                        <button type="button" class="copy-pass-btn" id="copyPassBtn" onclick="copyTempPassword()" title="Copy Password">
+                            <i class="fa-regular fa-copy" id="copyPassIcon"></i>
+                        </button>
+                    </p>
                     <div class="mock-email-footer">
                         <span id="mock-email-admin-label">Admin:</span>
                         <span>admin@muminsultani.com</span>
@@ -2551,8 +2583,7 @@
                 return uName.toLowerCase() === username.toLowerCase();
             });
 
-            const currentLangText = document.getElementById('currentLangText').innerText.toLowerCase();
-            const t = modalTranslations[currentLangText] || modalTranslations.en;
+            const t = modalTranslations[currentLang] || modalTranslations.en;
 
             msgDiv.style.display = 'block';
             if (exists) {
@@ -2651,10 +2682,10 @@
             document.getElementById('appointmentForm').reset();
             const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
             const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
-            const currentLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
+            const currentLangLocal = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
             const fileTextSpan = document.getElementById('fileUploadText');
-            if (modalTranslations[currentLang]) {
-                fileTextSpan.innerText = modalTranslations[currentLang].filePlaceholder;
+            if (modalTranslations[currentLangLocal]) {
+                fileTextSpan.innerText = modalTranslations[currentLangLocal].filePlaceholder;
                 fileTextSpan.style.color = '#94a3b8';
             }
         }
@@ -2720,10 +2751,8 @@
                 textSpan.innerText = input.files[0].name;
                 textSpan.style.color = 'var(--text-primary)';
             } else {
-                const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-                const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
-                const currentLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
-                textSpan.innerText = modalTranslations[currentLang].filePlaceholder;
+                const t = modalTranslations[currentLang] || modalTranslations.en;
+                textSpan.innerText = t.filePlaceholder;
                 textSpan.style.color = '#94a3b8';
             }
         }
@@ -2753,6 +2782,57 @@
                 }
             };
             reader.readAsDataURL(file);
+        }
+
+        // ✅ YENİ: Geçici şifreyi kopyalama fonksiyonu
+        function copyTempPassword() {
+            const passValueEl = document.getElementById('mock-email-pass-value');
+            const copyIcon = document.getElementById('copyPassIcon');
+            const copyBtn = document.getElementById('copyPassBtn');
+            if (!passValueEl) return;
+            
+            const passValue = passValueEl.innerText.trim();
+            if (!passValue) return;
+            
+            const showCopied = () => {
+                if (copyIcon) {
+                    copyIcon.className = 'fa-solid fa-check';
+                }
+                if (copyBtn) {
+                    copyBtn.classList.add('copied');
+                    copyBtn.title = (currentLang === 'tr') ? 'Kopyalandı!' : 'Copied!';
+                }
+                setTimeout(() => {
+                    if (copyIcon) {
+                        copyIcon.className = 'fa-regular fa-copy';
+                    }
+                    if (copyBtn) {
+                        copyBtn.classList.remove('copied');
+                        copyBtn.title = (currentLang === 'tr') ? 'Şifreyi Kopyala' : 'Copy Password';
+                    }
+                }, 1500);
+            };
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(passValue).then(showCopied).catch(() => {
+                    fallbackCopy(passValue);
+                    showCopied();
+                });
+            } else {
+                fallbackCopy(passValue);
+                showCopied();
+            }
+        }
+
+        function fallbackCopy(text) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            tempInput.style.position = 'fixed';
+            tempInput.style.opacity = '0';
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try { document.execCommand('copy'); } catch(e) {}
+            document.body.removeChild(tempInput);
         }
 
         const translations = {
@@ -2815,6 +2895,7 @@
                 rpTitle: "Reset Password",
                 rpEmailLabel: "Your Email",
                 rpCodeLabel: "Temporary Password / Code",
+                rpCodePlaceholder: "Paste the code from your email",
                 rpNewLabel: "New Password",
                 rpSubmitText: "Update Password",
                 rpSuccess: "Password reset successfully! You can now sign in.",
@@ -2880,6 +2961,7 @@
                 rpTitle: "Şifreyi Sıfırla",
                 rpEmailLabel: "E-postanız",
                 rpCodeLabel: "Geçici Şifre / Kod",
+                rpCodePlaceholder: "E-postanızdaki kodu yapıştırın",
                 rpNewLabel: "Yeni Şifre",
                 rpSubmitText: "Şifreyi Güncelle",
                 rpSuccess: "Şifre başarıyla sıfırlandı! Şimdi giriş yapabilirsiniz.",
@@ -2936,6 +3018,12 @@
             setText('gitModalTitle', data.contactTitle);
             setText('gitActionText', data.gitText);
             setText('gitBackText', data.backText);
+
+            // Copy butonu tooltip'ini güncelle
+            const copyBtn = document.getElementById('copyPassBtn');
+            if (copyBtn) {
+                copyBtn.title = (lang === 'tr') ? 'Şifreyi Kopyala' : 'Copy Password';
+            }
 
             changeModalLanguage(lang);
             checkUserSession();
@@ -3037,6 +3125,7 @@
                 rpTitle: "Reset Password",
                 rpEmailLabel: "Your Email",
                 rpCodeLabel: "Temporary Password / Code",
+                rpCodePlaceholder: "Paste the code from your email",
                 rpNewLabel: "New Password",
                 rpSubmitText: "Update Password",
                 rpSuccess: "Password reset successfully! You can now sign in.",
@@ -3142,6 +3231,7 @@
                 rpTitle: "Şifreyi Sıfırla",
                 rpEmailLabel: "E-postanız",
                 rpCodeLabel: "Geçici Şifre / Kod",
+                rpCodePlaceholder: "E-postanızdaki kodu yapıştırın",
                 rpNewLabel: "Yeni Şifre",
                 rpSubmitText: "Şifreyi Güncelle",
                 rpSuccess: "Şifre başarıyla sıfırlandı! Şimdi giriş yapabilirsiniz.",
@@ -3170,8 +3260,7 @@
             const signupHint = document.getElementById('signupPasswordHint');
             const usernameMsg = document.getElementById('usernameAvailabilityMsg');
 
-            const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
-            const t = modalTranslations[modalLangText] || modalTranslations.en;
+            const t = modalTranslations[currentLang] || modalTranslations.en;
 
             if (mode === 'signin') {
                 tabSignin.classList.add('active');
@@ -3283,8 +3372,8 @@
             const birthMonth = document.getElementById('editClientMonth').value.trim();
             const birthYear = document.getElementById('editClientYear').value.trim();
 
-            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-            const t = modalTranslations[modalLangText] || modalTranslations.en;
+            // ✅ currentLang kullan
+            const t = modalTranslations[currentLang] || modalTranslations.en;
 
             if (!newName || !newUsername || !newEmail) {
                 showCustomAlert(t.alertText);
@@ -3328,8 +3417,8 @@
             const newPass = document.getElementById('changeNewPassword').value.trim();
             const confirmPass = document.getElementById('changeConfirmPassword').value.trim();
 
-            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-            const t = modalTranslations[modalLangText] || modalTranslations.en;
+            // ✅ currentLang kullan
+            const t = modalTranslations[currentLang] || modalTranslations.en;
 
             if (!oldPass || !newPass || !confirmPass) {
                 showCustomAlert(t.alertText);
@@ -3371,8 +3460,8 @@
             if (!loggedUser) return;
 
             const inputUsername = document.getElementById('deleteConfirmUsername').value.trim();
-            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-            const t = modalTranslations[modalLangText] || modalTranslations.en;
+            // ✅ currentLang kullan (modal dropdown'a bağımlı değil)
+            const t = modalTranslations[currentLang] || modalTranslations.en;
 
             try {
                 const userObj = JSON.parse(loggedUser);
@@ -3385,6 +3474,7 @@
                     return;
                 }
 
+                // ✅ currentLang kullan → doğru dilde onay mesajı
                 showCustomAlert(t.delConfirmAlert, 'delete', function() {
                     document.getElementById('deleteAccountModal').classList.remove('active');
                     openDeletePasswordModal();
@@ -3398,8 +3488,8 @@
             if (!loggedUser) return;
 
             const enteredPass = document.getElementById('deleteConfirmPassword').value.trim();
-            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-            const t = modalTranslations[modalLangText] || modalTranslations.en;
+            // ✅ currentLang kullan
+            const t = modalTranslations[currentLang] || modalTranslations.en;
 
             try {
                 const userObj = JSON.parse(loggedUser);
@@ -3415,11 +3505,16 @@
                 localStorage.removeItem('logged_user');
 
                 try { sessionStorage.removeItem('site_lang'); } catch(e) {}
-                changeLanguage('en');
 
                 closeDeletePasswordModal();
-                checkUserSession();
+                
+                // ✅ ÖNEMLİ: Mesaj göstermeden ÖNCE dili EN'e al, ama mesajı gösterirken TR'yi kaybetme
+                // Sıralamayı değiştir: Önce mesajı TR'de göster, kullanıcı OK'a bastığında dil değişsin
                 showCustomAlert(t.successDelete, 'success');
+                
+                // Dil değişimini alert kapandıktan sonraya ertele
+                window._pendingLangReset = true;
+                checkUserSession();
             } catch(err) {}
         }
 
@@ -3437,8 +3532,8 @@
         function handleForgotPasswordSubmit(e) {
             e.preventDefault();
             const email = document.getElementById('forgotClientEmail').value.trim();
-            const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
-            const t = modalTranslations[modalLangText] || modalTranslations.en;
+            // ✅ currentLang kullan
+            const t = modalTranslations[currentLang] || modalTranslations.en;
 
             if (!email) {
                 showCustomAlert(t.alertText);
@@ -3467,6 +3562,15 @@
             document.getElementById('mock-email-user-value').innerText = email;
             document.getElementById('mock-email-pass-value').innerText = tempPass;
             
+            // Copy ikonunu sıfırla
+            const copyIcon = document.getElementById('copyPassIcon');
+            const copyBtn = document.getElementById('copyPassBtn');
+            if (copyIcon) copyIcon.className = 'fa-regular fa-copy';
+            if (copyBtn) {
+                copyBtn.classList.remove('copied');
+                copyBtn.title = (currentLang === 'tr') ? 'Şifreyi Kopyala' : 'Copy Password';
+            }
+            
             mockModal.classList.add('active');
         }
 
@@ -3492,8 +3596,8 @@
             const code = document.getElementById('resetClientCode').value.trim();
             const newPass = document.getElementById('resetClientNewPassword').value.trim();
 
-            const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
-            const t = modalTranslations[modalLangText] || modalTranslations.en;
+            // ✅ currentLang kullan
+            const t = modalTranslations[currentLang] || modalTranslations.en;
 
             if (!code || !newPass) {
                 showCustomAlert(t.alertText);
@@ -3542,22 +3646,14 @@
         function openGmailNoticeModal(email) {
             const loggedUser = localStorage.getItem('logged_user');
             if (!loggedUser) {
-                const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-                const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
-                const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
-                const t = modalTranslations[currentModalLang] || modalTranslations.en;
-                
+                const t = modalTranslations[currentLang] || modalTranslations.en;
                 showCustomAlert(t.authRequiredAlert);
                 openGetInTouchModal();
                 return;
             }
 
             activeNoticeEmail = email;
-            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-            const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
-            const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
-            
-            const t = modalTranslations[currentModalLang] || modalTranslations.en;
+            const t = modalTranslations[currentLang] || modalTranslations.en;
             
             document.getElementById('gmailNoticeMessage').innerText = t.gmailNoticeText;
             document.getElementById('gmailNoticeEmailBtnText').innerText = t.emailBtn;
@@ -3583,11 +3679,7 @@
         function openAppointmentModalWithEmail(email) {
             const loggedUser = localStorage.getItem('logged_user');
             if (!loggedUser) {
-                const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-                const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
-                const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
-                const t = modalTranslations[currentModalLang] || modalTranslations.en;
-                
+                const t = modalTranslations[currentLang] || modalTranslations.en;
                 showCustomAlert(t.authRequiredAlert);
                 openGetInTouchModal();
                 return;
@@ -3630,10 +3722,10 @@
                 alertIcon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
             }
             
+            // ✅ currentLang kullan (header dropdown'ından değil)
+            const t = modalTranslations[currentLang] || modalTranslations.en;
+            
             if (onConfirm) {
-                const currentLangText = document.getElementById('currentLangText').innerText.toLowerCase();
-                const t = modalTranslations[currentLangText] || modalTranslations.en;
-                
                 let btnLeftText = t.logoutNo;
                 let btnRightText = t.logoutYes;
                 let btnRightIcon = 'fa-door-open';
@@ -3656,9 +3748,6 @@
                 `;
                 window._confirmActionCallback = onConfirm;
             } else {
-                const currentLangText = document.getElementById('currentLangText').innerText.toLowerCase();
-                const t = modalTranslations[currentLangText] || modalTranslations.en;
-                
                 let btnText = t.backText || 'OK';
                 let btnIcon = '';
                 
@@ -3680,6 +3769,13 @@
         function closeCustomAlert() {
             document.getElementById('customAlertModal').classList.remove('active');
             window._confirmActionCallback = null;
+            
+            // ✅ Hesap silindikten sonra dil sıfırlamayı geciktir
+            if (window._pendingLangReset) {
+                window._pendingLangReset = false;
+                try { sessionStorage.removeItem('site_lang'); } catch(e) {}
+                changeLanguage('en');
+            }
         }
 
         function confirmAction() {
@@ -3693,8 +3789,7 @@
         }
 
         function confirmLogout() {
-            const currentLangText = document.getElementById('currentLangText').innerText.toLowerCase();
-            const t = modalTranslations[currentLangText] || modalTranslations.en;
+            const t = modalTranslations[currentLang] || modalTranslations.en;
             
             showCustomAlert(
                 t.logoutConfirm, 
@@ -3755,9 +3850,12 @@
 
             document.getElementById('dc-submit-btn-text').innerText = (currentAuthMode === 'signin') ? data.signinBtn : data.signupBtn;
 
+            // ✅ FIX: Forgot Password modal - label ve placeholder çevirisi eklendi
             if(document.getElementById('fp-title')) document.getElementById('fp-title').innerText = data.fpTitle;
             if(document.getElementById('fp-desc')) document.getElementById('fp-desc').innerText = data.fpDesc;
             if(document.getElementById('fp-submit-text')) document.getElementById('fp-submit-text').innerText = data.fpSubmitText;
+            if(document.getElementById('fp-label-email')) document.getElementById('fp-label-email').innerText = data.emailLabel;
+            if(document.getElementById('forgotClientEmail')) document.getElementById('forgotClientEmail').placeholder = data.emailPlaceholder;
 
             if(document.getElementById('ep-title')) document.getElementById('ep-title').innerText = data.epTitle;
             if(document.getElementById('ep-label-name')) document.getElementById('ep-label-name').innerText = data.nameLabel;
@@ -3808,15 +3906,23 @@
             if(document.getElementById('mock-email-admin-label')) document.getElementById('mock-email-admin-label').innerText = data.mockEmailAdminLabel;
             if(document.getElementById('mock-email-reset-btn')) document.getElementById('mock-email-reset-btn').innerText = data.mockEmailResetBtn;
 
+            // ✅ FIX: Reset Password modal - label, placeholder çevirisi eklendi
             if(document.getElementById('rp-title')) document.getElementById('rp-title').innerText = data.rpTitle;
             if(document.getElementById('rp-label-email')) document.getElementById('rp-label-email').innerText = data.rpEmailLabel;
             if(document.getElementById('rp-label-code')) document.getElementById('rp-label-code').innerText = data.rpCodeLabel;
+            if(document.getElementById('resetClientCode')) document.getElementById('resetClientCode').placeholder = data.rpCodePlaceholder;
             if(document.getElementById('rp-label-new')) document.getElementById('rp-label-new').innerText = data.rpNewLabel;
             if(document.getElementById('rp-submit-text')) document.getElementById('rp-submit-text').innerText = data.rpSubmitText;
 
             document.getElementById('gitModalTitle').innerText = data.contactTitle;
             document.getElementById('gitActionText').innerText = data.gitText;
             document.getElementById('gitBackText').innerText = data.backText;
+
+            // Copy butonu tooltip'ini güncelle
+            const copyBtn = document.getElementById('copyPassBtn');
+            if (copyBtn) {
+                copyBtn.title = (lang === 'tr') ? 'Şifreyi Kopyala' : 'Copy Password';
+            }
 
             document.getElementById('modalLangMenu').classList.remove('show');
             document.getElementById('contactModalLangMenu').classList.remove('show');
@@ -3872,8 +3978,7 @@
             const email = document.getElementById('contactClientEmail').value.trim();
             const password = document.getElementById('contactClientPassword').value.trim();
             
-            const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
-            const t = modalTranslations[modalLangText] || modalTranslations.en;
+            const t = modalTranslations[currentLang] || modalTranslations.en;
 
             if (!email || !password) {
                 showCustomAlert(t.alertText);
@@ -4096,10 +4201,7 @@
 
         function validateForm() {
             const loggedUser = localStorage.getItem('logged_user');
-            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-            const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
-            const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
-            const t = modalTranslations[currentModalLang] || modalTranslations.en;
+            const t = modalTranslations[currentLang] || modalTranslations.en;
 
             if (!loggedUser) {
                 showCustomAlert(t.authRequiredAlert);
@@ -4129,10 +4231,7 @@
 
             const now = new Date();
             const formattedDate = now.toLocaleString();
-            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-            const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
-            const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
-            const t = modalTranslations[currentModalLang] || modalTranslations.en;
+            const t = modalTranslations[currentLang] || modalTranslations.en;
 
             generatePDF(data.name, data.email, data.fileName, data.desc, formattedDate);
 
@@ -4162,10 +4261,7 @@
 
             const now = new Date();
             const formattedDate = now.toLocaleString();
-            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
-            const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
-            const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
-            const t = modalTranslations[currentModalLang] || modalTranslations.en;
+            const t = modalTranslations[currentLang] || modalTranslations.en;
 
             const message = 
                 `*${data.name}*\n\n` +
