@@ -1328,6 +1328,7 @@
             transform: translateY(-2px);
         }
 
+        /* Lightbox (Önizleme Penceresi) - Artık tam ekran değil, kare bir kutu ve zoom yapılamaz */
         .lightbox-overlay {
             position: fixed;
             top: 0;
@@ -1346,6 +1347,8 @@
             transition: opacity 0.3s ease, visibility 0.3s ease;
             padding: 20px;
             pointer-events: none;
+            touch-action: none; /* Zoom engelleme */
+            user-select: none; /* Seçim engelleme */
         }
 
         .lightbox-overlay.active {
@@ -1369,6 +1372,7 @@
             transform: scale(0.9) translateY(15px);
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
             opacity: 0;
+            touch-action: none; /* Zoom engelleme */
         }
 
         .lightbox-overlay.active .lightbox-content-box {
@@ -1386,6 +1390,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            pointer-events: none; /* Zoom/etkileşim engelleme */
+            touch-action: none;
         }
 
         .lightbox-content-box .lightbox-image-wrapper img {
@@ -1393,6 +1399,8 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            pointer-events: none;
+            touch-action: none;
         }
 
         .lightbox-close-btn {
@@ -1412,6 +1420,7 @@
             justify-content: center;
             transition: all 0.2s ease;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            pointer-events: auto;
         }
 
         .lightbox-close-btn:hover {
@@ -1455,6 +1464,56 @@
         .mobile-birthdate-row i {
             color: #9333ea !important;
             font-size: 0.95rem !important;
+        }
+
+        /* Şifre Güçlülük Göstergesi Stilleri */
+        .password-hint {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+        .password-hint ul {
+            list-style: none;
+            padding-left: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .password-hint li {
+            background: var(--box-bg);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            border: 1px solid var(--line-color);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .password-hint li::before {
+            content: '○';
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+        }
+        .password-hint li.valid {
+            color: #22c55e;
+            border-color: rgba(34,197,94,0.3);
+            background: rgba(34,197,94,0.05);
+        }
+        .password-hint li.valid::before {
+            content: '●';
+            color: #22c55e;
+        }
+        .password-hint li.invalid {
+            color: #ef4444;
+            border-color: rgba(239,68,68,0.3);
+            background: rgba(239,68,68,0.05);
+        }
+        .password-hint li.invalid::before {
+            content: '×';
+            color: #ef4444;
         }
     </style>
     
@@ -1765,7 +1824,7 @@
         </div>
     </div>
 
-    <!-- LIGHTBOX (ÖNİZLEME PENCERESİ) -->
+    <!-- LIGHTBOX (ÖNİZLEME PENCERESİ) - Artık zoom yapılamaz -->
     <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
         <div class="lightbox-content-box" onclick="event.stopPropagation()">
             <button class="lightbox-close-btn" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
@@ -1841,10 +1900,19 @@
                 <div class="form-group">
                     <label class="form-label" id="cp-label-new">New Password</label>
                     <div class="password-wrapper">
-                        <input type="password" class="form-input" id="changeNewPassword" required placeholder="••••••••">
+                        <input type="password" class="form-input" id="changeNewPassword" required placeholder="••••••••" oninput="updatePasswordHint('changeNewPassword', 'changePasswordHint')">
                         <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('changeNewPassword', 'newPasswordToggleIcon')" title="Show/Hide Password">
                             <i class="fa-solid fa-eye" id="newPasswordToggleIcon"></i>
                         </button>
+                    </div>
+                    <div id="changePasswordHint" class="password-hint">
+                        <ul>
+                            <li data-rule="length">8+ char</li>
+                            <li data-rule="upper">A-Z</li>
+                            <li data-rule="lower">a-z</li>
+                            <li data-rule="digit">0-9</li>
+                            <li data-rule="special">€$@#&!</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="form-group">
@@ -1984,10 +2052,20 @@
                         <a href="#" onclick="openForgotPasswordModal(event)" id="t-forgot-link" style="font-size: 0.7rem; color: #9333ea; text-decoration: none; font-weight: 600;">Forgot Password?</a>
                     </div>
                     <div class="password-wrapper">
-                        <input type="password" class="form-input" id="contactClientPassword" placeholder="••••••••">
+                        <input type="password" class="form-input" id="contactClientPassword" placeholder="••••••••" oninput="updatePasswordHint('contactClientPassword', 'signupPasswordHint')">
                         <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('contactClientPassword', 'passwordToggleIcon')" title="Show/Hide Password">
                             <i class="fa-solid fa-eye" id="passwordToggleIcon"></i>
                         </button>
+                    </div>
+                    <!-- Şifre Güçlülük Göstergesi (Giriş yaparken gizlenecek) -->
+                    <div id="signupPasswordHint" class="password-hint" style="display: none;">
+                        <ul>
+                            <li data-rule="length">8+ char</li>
+                            <li data-rule="upper">A-Z</li>
+                            <li data-rule="lower">a-z</li>
+                            <li data-rule="digit">0-9</li>
+                            <li data-rule="special">€$@#&!</li>
+                        </ul>
                     </div>
                 </div>
                 
@@ -2250,6 +2328,42 @@
             }
         }
 
+        // Şifre Güçlülük Kontrolü
+        function updatePasswordHint(inputId, hintId) {
+            const input = document.getElementById(inputId);
+            const hintContainer = document.getElementById(hintId);
+            if (!input || !hintContainer) return;
+            
+            const password = input.value;
+            const rules = {
+                length: password.length >= 8,
+                upper: /[A-Z]/.test(password),
+                lower: /[a-z]/.test(password),
+                digit: /[0-9]/.test(password),
+                special: /[€$@#&!*]/.test(password)
+            };
+            
+            const listItems = hintContainer.querySelectorAll('li');
+            listItems.forEach(li => {
+                const rule = li.getAttribute('data-rule');
+                if (rules[rule]) {
+                    li.classList.remove('invalid');
+                    li.classList.add('valid');
+                } else {
+                    li.classList.remove('valid');
+                    li.classList.add('invalid');
+                }
+            });
+        }
+
+        function isValidPassword(password) {
+            return password.length >= 8 &&
+                   /[A-Z]/.test(password) &&
+                   /[a-z]/.test(password) &&
+                   /[0-9]/.test(password) &&
+                   /[€$@#&!*]/.test(password);
+        }
+
         function toggleProfilePrivacy() {
             const detailsContainer = document.getElementById('profileDetailsContainer');
             const privacyIcon = document.getElementById('privacyIcon');
@@ -2301,7 +2415,7 @@
             } catch(err) {}
         }
 
-        // Lightbox (Önizleme) Fonksiyonları
+        // Lightbox (Önizleme) Fonksiyonları - Artık zoom yok
         function openLightbox() {
             const largeImgSrc = document.getElementById('profilePhotoLarge').src;
             document.getElementById('lightboxImage').src = largeImgSrc;
@@ -2356,6 +2470,12 @@
             const pwdIcon = document.getElementById('passwordToggleIcon');
             if(pwdInput) pwdInput.type = 'password';
             if(pwdIcon) pwdIcon.className = 'fa-solid fa-eye';
+            
+            // Şifre ipuçlarını sıfırla
+            const hints = document.querySelectorAll('.password-hint li');
+            hints.forEach(li => {
+                li.classList.remove('valid', 'invalid');
+            });
         }
 
         function clearAndCloseModal() {
@@ -2463,7 +2583,6 @@
                 btnChange: "Change",
                 btnBack: "Back",
                 btnReset: "Reset",
-                // Yeni eklenen çeviriler
                 logoutTitle: "Log Out",
                 logoutConfirm: "Are you sure you want to log out?",
                 logoutYes: "Log Out",
@@ -2471,7 +2590,8 @@
                 logoutSuccess: "Session closed.",
                 loginSuccess: "Signed in successfully!",
                 signupSuccess: "Account created successfully! You can now sign in.",
-                loginError: "Invalid email or password!"
+                loginError: "Invalid email or password!",
+                passwordStrengthError: "Password must be at least 8 characters and include uppercase, lowercase, number, and special character (€$@#&!*)."
             },
             tr: {
                 code: "TR",
@@ -2500,7 +2620,6 @@
                 btnChange: "Değiştir",
                 btnBack: "Geri Dön",
                 btnReset: "Sıfırla",
-                // Yeni eklenen çeviriler
                 logoutTitle: "Çıkış Yap",
                 logoutConfirm: "Çıkış yapmak istediğinizden emin misiniz?",
                 logoutYes: "Çıkış Yap",
@@ -2508,11 +2627,11 @@
                 logoutSuccess: "Oturum kapatıldı.",
                 loginSuccess: "Başarıyla giriş yapıldı!",
                 signupSuccess: "Hesap başarıyla oluşturuldu! Şimdi giriş yapabilirsiniz.",
-                loginError: "Geçersiz e-posta veya şifre!"
+                loginError: "Geçersiz e-posta veya şifre!",
+                passwordStrengthError: "Şifre en az 8 karakter olmalı ve büyük harf, küçük harf, rakam ve özel karakter (€$@#&!*) içermelidir."
             }
         };
 
-        // Dil değişkeni
         let currentLang = 'en';
 
         function changeLanguage(lang) {
@@ -2630,12 +2749,12 @@
                 btnChange: "Change",
                 btnBack: "Back",
                 btnReset: "Reset",
-                // Çıkış onay metinleri
                 logoutTitle: "Log Out",
                 logoutConfirm: "Are you sure you want to log out?",
                 logoutYes: "Log Out",
                 logoutNo: "Back",
-                logoutSuccess: "Session closed."
+                logoutSuccess: "Session closed.",
+                passwordStrengthError: "Password must be at least 8 characters and include uppercase, lowercase, number, and special character (€$@#&!*)."
             },
             tr: {
                 code: "TR",
@@ -2702,12 +2821,12 @@
                 btnChange: "Değiştir",
                 btnBack: "Geri Dön",
                 btnReset: "Sıfırla",
-                // Çıkış onay metinleri
                 logoutTitle: "Çıkış Yap",
                 logoutConfirm: "Çıkış yapmak istediğinizden emin misiniz?",
                 logoutYes: "Çıkış Yap",
                 logoutNo: "Geri Dön",
-                logoutSuccess: "Oturum kapatıldı."
+                logoutSuccess: "Oturum kapatıldı.",
+                passwordStrengthError: "Şifre en az 8 karakter olmalı ve büyük harf, küçük harf, rakam ve özel karakter (€$@#&!*) içermelidir."
             }
         };
 
@@ -2721,6 +2840,7 @@
             const groupUsername = document.getElementById('groupSignupUsername');
             const groupPassword = document.getElementById('groupPassword');
             const submitBtnText = document.getElementById('dc-submit-btn-text');
+            const signupHint = document.getElementById('signupPasswordHint'); // <--- Şifre ipucu elementini al
 
             const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
             const t = modalTranslations[modalLangText] || modalTranslations.en;
@@ -2731,6 +2851,7 @@
                 groupName.style.display = 'none';
                 groupUsername.style.display = 'none';
                 if(groupPassword) groupPassword.style.display = 'block';
+                if(signupHint) signupHint.style.display = 'none'; // <--- Giriş yaparken gizle
                 submitBtnText.innerText = t.signinBtn;
             } else {
                 tabSignup.classList.add('active');
@@ -2738,6 +2859,7 @@
                 groupName.style.display = 'block';
                 groupUsername.style.display = 'block';
                 if(groupPassword) groupPassword.style.display = 'block';
+                if(signupHint) signupHint.style.display = 'block'; // <--- Kayıt olurken göster
                 submitBtnText.innerText = t.signupBtn;
             }
 
@@ -2863,6 +2985,11 @@
 
             if (!oldPass || !newPass || !confirmPass) {
                 showCustomAlert(t.alertText);
+                return;
+            }
+
+            if (!isValidPassword(newPass)) {
+                showCustomAlert(t.passwordStrengthError);
                 return;
             }
 
@@ -3034,6 +3161,8 @@
             // İkonu ayarla
             if (type === 'logout') {
                 alertIcon.innerHTML = '<i class="fa-solid fa-door-open"></i>';
+            } else if (type === 'success') {
+                alertIcon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
             } else {
                 alertIcon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
             }
@@ -3051,7 +3180,6 @@
                         <i class="fa-solid fa-door-open"></i> ${t.logoutYes}
                     </button>
                 `;
-                // Onay fonksiyonunu global olarak sakla
                 window._logoutConfirmCallback = onConfirm;
             } else {
                 // Tek butonlu gösterim
@@ -3091,10 +3219,8 @@
                 t.logoutConfirm, 
                 'logout', 
                 function() {
-                    // Onaylandığında çıkış yap
                     localStorage.removeItem('logged_user');
                     checkUserSession();
-                    // Çıkış başarılı mesajı göster
                     setTimeout(() => {
                         showCustomAlert(t.logoutSuccess, 'success');
                     }, 300);
@@ -3217,6 +3343,11 @@
                     return;
                 }
 
+                if (!isValidPassword(password)) {
+                    showCustomAlert(t.passwordStrengthError);
+                    return;
+                }
+
                 const existing = users.find(u => u.email === email);
                 if (existing) {
                     showCustomAlert("This email is already registered!");
@@ -3293,9 +3424,9 @@
                         if (birthRow) birthRow.style.display = 'none';
                     }
 
-                    if (contactTitleEl) contactTitleEl.innerText = "User Account";
-                    if (contactSubEl) contactSubEl.innerText = "Active Session";
-                    if (contactMainEl) contactMainEl.innerText = userObj.name ? `Welcome, ${userObj.name}` : "Session Active";
+                    if (contactTitleEl) contactTitleEl.innerText = currentLang === 'tr' ? "Kullanıcı Hesabı" : "User Account";
+                    if (contactSubEl) contactSubEl.innerText = currentLang === 'tr' ? "Aktif Oturum" : "Active Session";
+                    if (contactMainEl) contactMainEl.innerText = userObj.name ? (currentLang === 'tr' ? `Hoş geldiniz, ${userObj.name}` : `Welcome, ${userObj.name}`) : (currentLang === 'tr' ? "Oturum Açık" : "Session Active");
                     if (authBoxIcon) authBoxIcon.className = "fa-solid fa-user-check";
                     
                     document.getElementById('profileDetailsContainer').style.display = 'flex';
