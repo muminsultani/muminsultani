@@ -1477,22 +1477,22 @@
             list-style: none;
             padding-left: 0;
             display: flex;
-            flex-wrap: nowrap; /* Tek satırda kalması için */
+            flex-wrap: nowrap;
             justify-content: space-between;
-            gap: 4px; /* Küçültülmüş boşluk */
+            gap: 4px;
         }
         .password-hint li {
             background: var(--box-bg);
-            padding: 2px 4px; /* Küçültülmüş iç boşluk */
+            padding: 2px 4px;
             border-radius: 4px;
             font-family: 'Fira Code', monospace;
-            font-size: 0.55rem; /* Küçültülmüş font */
+            font-size: 0.55rem;
             border: 1px solid var(--line-color);
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
             gap: 2px;
-            flex: 1; /* Eşit genişlik */
+            flex: 1;
             justify-content: center;
             white-space: nowrap;
         }
@@ -1866,6 +1866,11 @@
                 <div class="form-group">
                     <label class="form-label" id="ep-label-username">Username</label>
                     <input type="text" class="form-input" id="editClientUsername" required>
+                </div>
+                <!-- YENİ EKLENEN EMAIL ALANI -->
+                <div class="form-group">
+                    <label class="form-label" id="ep-label-email">Email Address</label>
+                    <input type="email" class="form-input" id="editClientEmail" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label" id="ep-label-birthdate">Date of Birth (DD/MM/YYYY)</label>
@@ -2646,7 +2651,8 @@
                 loginError: "Invalid email or password!",
                 passwordStrengthError: "Password must be at least 8 characters and include uppercase, lowercase, number, and special character (€$@#&!*).",
                 usernameAvailable: "Username is available.",
-                usernameTaken: "This username is already taken."
+                usernameTaken: "This username is already taken.",
+                successBtn: "OK"
             },
             tr: {
                 code: "TR",
@@ -2685,7 +2691,8 @@
                 loginError: "Geçersiz e-posta veya şifre!",
                 passwordStrengthError: "Şifre en az 8 karakter olmalı ve büyük harf, küçük harf, rakam ve özel karakter (€$@#&!*) içermelidir.",
                 usernameAvailable: "Kullanıcı adı kullanılabilir.",
-                usernameTaken: "Bu kullanıcı adı zaten alınmış."
+                usernameTaken: "Bu kullanıcı adı zaten alınmış.",
+                successBtn: "Tamam"
             }
         };
 
@@ -2813,7 +2820,8 @@
                 logoutSuccess: "Session closed.",
                 passwordStrengthError: "Password must be at least 8 characters and include uppercase, lowercase, number, and special character (€$@#&!*).",
                 usernameAvailable: "Username is available.",
-                usernameTaken: "This username is already taken."
+                usernameTaken: "This username is already taken.",
+                successBtn: "OK"
             },
             tr: {
                 code: "TR",
@@ -2887,7 +2895,8 @@
                 logoutSuccess: "Oturum kapatıldı.",
                 passwordStrengthError: "Şifre en az 8 karakter olmalı ve büyük harf, küçük harf, rakam ve özel karakter (€$@#&!*) içermelidir.",
                 usernameAvailable: "Kullanıcı adı kullanılabilir.",
-                usernameTaken: "Bu kullanıcı adı zaten alınmış."
+                usernameTaken: "Bu kullanıcı adı zaten alınmış.",
+                successBtn: "Tamam"
             }
         };
 
@@ -2901,8 +2910,8 @@
             const groupUsername = document.getElementById('groupSignupUsername');
             const groupPassword = document.getElementById('groupPassword');
             const submitBtnText = document.getElementById('dc-submit-btn-text');
-            const signupHint = document.getElementById('signupPasswordHint'); // <--- Şifre ipucu elementini al
-            const usernameMsg = document.getElementById('usernameAvailabilityMsg'); // <--- Kullanıcı adı mesajı
+            const signupHint = document.getElementById('signupPasswordHint');
+            const usernameMsg = document.getElementById('usernameAvailabilityMsg');
 
             const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
             const t = modalTranslations[modalLangText] || modalTranslations.en;
@@ -2913,8 +2922,8 @@
                 groupName.style.display = 'none';
                 groupUsername.style.display = 'none';
                 if(groupPassword) groupPassword.style.display = 'block';
-                if(signupHint) signupHint.style.display = 'none'; // <--- Giriş yaparken gizle
-                if(usernameMsg) usernameMsg.style.display = 'none'; // <--- Kullanıcı adı mesajını gizle
+                if(signupHint) signupHint.style.display = 'none';
+                if(usernameMsg) usernameMsg.style.display = 'none';
                 submitBtnText.innerText = t.signinBtn;
             } else {
                 tabSignup.classList.add('active');
@@ -2922,7 +2931,7 @@
                 groupName.style.display = 'block';
                 groupUsername.style.display = 'block';
                 if(groupPassword) groupPassword.style.display = 'block';
-                if(signupHint) signupHint.style.display = 'block'; // <--- Kayıt olurken göster
+                if(signupHint) signupHint.style.display = 'block';
                 submitBtnText.innerText = t.signupBtn;
             }
 
@@ -2962,6 +2971,7 @@
                 const userObj = JSON.parse(loggedUser);
                 document.getElementById('editClientName').value = userObj.name || '';
                 document.getElementById('editClientUsername').value = userObj.username || '';
+                document.getElementById('editClientEmail').value = userObj.email || '';
                 document.getElementById('editClientDay').value = userObj.birthDay || '';
                 document.getElementById('editClientMonth').value = userObj.birthMonth || '';
                 document.getElementById('editClientYear').value = userObj.birthYear || '';
@@ -3002,6 +3012,7 @@
 
             const newName = document.getElementById('editClientName').value.trim();
             const newUsername = document.getElementById('editClientUsername').value.trim();
+            const newEmail = document.getElementById('editClientEmail').value.trim();
             const birthDay = document.getElementById('editClientDay').value.trim();
             const birthMonth = document.getElementById('editClientMonth').value.trim();
             const birthYear = document.getElementById('editClientYear').value.trim();
@@ -3009,7 +3020,7 @@
             const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
             const t = modalTranslations[modalLangText] || modalTranslations.en;
 
-            if (!newName || !newUsername) {
+            if (!newName || !newUsername || !newEmail) {
                 showCustomAlert(t.alertText);
                 return;
             }
@@ -3018,19 +3029,28 @@
                 let userObj = JSON.parse(loggedUser);
                 let users = JSON.parse(localStorage.getItem('site_users') || '[]');
 
+                // E-posta zaten başka bir kullanıcı tarafından kullanılıyor mu?
+                const emailExists = users.some(u => u.email === newEmail && u.email !== userObj.email);
+                if (emailExists) {
+                    showCustomAlert("This email is already registered!");
+                    return;
+                }
+
+                const oldEmail = userObj.email;
                 userObj.name = newName;
                 userObj.username = newUsername;
+                userObj.email = newEmail;
                 userObj.birthDay = birthDay;
                 userObj.birthMonth = birthMonth;
                 userObj.birthYear = birthYear;
 
-                users = users.map(u => u.email === userObj.email ? userObj : u);
+                users = users.map(u => u.email === oldEmail ? userObj : u);
                 localStorage.setItem('site_users', JSON.stringify(users));
                 localStorage.setItem('logged_user', JSON.stringify(userObj));
 
                 closeEditProfileModal();
                 checkUserSession();
-                showCustomAlert(t.successUpdate);
+                showCustomAlert(t.successUpdate, 'success');
             } catch(err) {}
         }
 
@@ -3076,7 +3096,7 @@
                 localStorage.setItem('logged_user', JSON.stringify(userObj));
 
                 closeChangePasswordModal();
-                showCustomAlert(t.cpSuccess);
+                showCustomAlert(t.cpSuccess, 'success');
             } catch(err) {}
         }
 
@@ -3109,7 +3129,7 @@
 
                 closeDeleteAccountModal();
                 checkUserSession();
-                showCustomAlert(t.successDelete);
+                showCustomAlert(t.successDelete, 'success');
             } catch(err) {}
         }
 
@@ -3135,7 +3155,7 @@
             }
             
             closeForgotPasswordModal();
-            showCustomAlert(t.fpSuccess);
+            showCustomAlert(t.fpSuccess, 'success');
         }
 
         let activeNoticeEmail = "muminsultani@hotmail.com";
@@ -3249,9 +3269,17 @@
                 const currentLangText = document.getElementById('currentLangText').innerText.toLowerCase();
                 const t = modalTranslations[currentLangText] || modalTranslations.en;
                 
+                let btnText = t.backText || 'OK';
+                let btnIcon = '';
+                
+                if (type === 'success') {
+                    btnText = t.successBtn || 'OK';
+                    btnIcon = '<i class="fa-solid fa-check"></i> ';
+                }
+                
                 alertBtnGroup.innerHTML = `
                     <button class="custom-alert-btn" onclick="closeCustomAlert()" style="flex: 1;">
-                        ${t.backText || 'OK'}
+                        ${btnIcon} ${btnText}
                     </button>
                 `;
             }
@@ -3342,6 +3370,7 @@
             if(document.getElementById('ep-title')) document.getElementById('ep-title').innerText = data.epTitle;
             if(document.getElementById('ep-label-name')) document.getElementById('ep-label-name').innerText = data.nameLabel;
             if(document.getElementById('ep-label-username')) document.getElementById('ep-label-username').innerText = data.usernameLabel;
+            if(document.getElementById('ep-label-email')) document.getElementById('ep-label-email').innerText = data.emailLabel;
             if(document.getElementById('ep-label-birthdate')) document.getElementById('ep-label-birthdate').innerText = data.birthdateLabel;
             if(document.getElementById('ep-submit-text')) document.getElementById('ep-submit-text').innerText = data.saveChanges;
 
@@ -3438,7 +3467,7 @@
                 
                 localStorage.setItem('logged_user', JSON.stringify(newUser));
                 
-                showCustomAlert(t.successSignup);
+                showCustomAlert(t.successSignup, 'success');
                 closeDirectContactModal();
                 checkUserSession();
             } else {
@@ -3449,7 +3478,7 @@
 
                 if (user) {
                     localStorage.setItem('logged_user', JSON.stringify(user));
-                    showCustomAlert(t.successSignin);
+                    showCustomAlert(t.successSignin, 'success');
                     closeDirectContactModal();
                     checkUserSession();
                 } else {
