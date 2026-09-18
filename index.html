@@ -119,20 +119,31 @@
             pointer-events: none;
         }
 
+        /* ✅ GÜNCELLENDİ: Intro ekranı artık koyu ve kendi canvas'ına sahip */
         #intro-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(rgba(5, 5, 8, 0.85), rgba(5, 5, 8, 0.95)), url('profile.jpg');
-            background-size: cover;
-            background-position: center;
+            background: #050508;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
             transition: opacity 0.6s ease, visibility 0.6s ease;
+            overflow: hidden;
+        }
+
+        /* ✅ YENİ: Intro canvas (yıldız animasyonu) */
+        #intro-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
         }
 
         .intro-content {
@@ -143,6 +154,8 @@
             gap: 12px;
             padding: 0 16px;
             animation: introFadeIn 0.8s ease forwards;
+            position: relative;
+            z-index: 1;
         }
 
         .intro-code-box {
@@ -1045,7 +1058,6 @@
             white-space: nowrap;
         }
 
-        /* Profil ikonları için özel stiller */
         .profile-action-btn {
             background: var(--box-bg);
             border: 1px solid var(--line-color);
@@ -1100,7 +1112,6 @@
             border-color: rgba(147, 51, 234, 0.4);
         }
 
-        /* Masaüstü / Tablet / TV için özel düzen */
         @media (min-width: 768px) {
             .desktop-info-row {
                 display: flex !important;
@@ -1134,7 +1145,6 @@
             }
         }
 
-        /* Mobilde görünecek olan orijinal satırlar */
         .mobile-email-row, .mobile-birthdate-row {
             display: flex;
             align-items: center;
@@ -1145,9 +1155,6 @@
             display: none;
         }
 
-        /* =========================================
-           KÜÇÜLTME İŞLEMLERİ
-           ========================================= */
         .modal-container {
             max-width: 480px !important;
             padding: 24px !important;
@@ -1204,7 +1211,6 @@
             right: 12px !important;
         }
 
-        /* Mobil / Küçük ekranlar için ekstra ayarlar */
         @media (max-width: 640px) {
             body { padding: 16px 12px; }
             .wrapper { gap: 24px; max-width: 100%; }
@@ -1225,9 +1231,6 @@
             .footer-qr-container img { width: 150px; height: 150px; }
         }
 
-        /* =========================================
-           PROFİL FOTOĞRAFI PANELİ VE LIGHTBOX STİLLERİ
-           ========================================= */
         .profile-photo-large-view {
             display: flex;
             flex-direction: column;
@@ -1328,7 +1331,6 @@
             transform: translateY(-2px);
         }
 
-        /* Lightbox (Önizleme Penceresi) - Artık tam ekran değil, kare bir kutu ve zoom yapılamaz */
         .lightbox-overlay {
             position: fixed;
             top: 0;
@@ -1347,8 +1349,8 @@
             transition: opacity 0.3s ease, visibility 0.3s ease;
             padding: 20px;
             pointer-events: none;
-            touch-action: none; /* Zoom engelleme */
-            user-select: none; /* Seçim engelleme */
+            touch-action: none;
+            user-select: none;
         }
 
         .lightbox-overlay.active {
@@ -1372,7 +1374,7 @@
             transform: scale(0.9) translateY(15px);
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
             opacity: 0;
-            touch-action: none; /* Zoom engelleme */
+            touch-action: none;
         }
 
         .lightbox-overlay.active .lightbox-content-box {
@@ -1390,7 +1392,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            pointer-events: none; /* Zoom/etkileşim engelleme */
+            pointer-events: none;
             touch-action: none;
         }
 
@@ -1430,7 +1432,6 @@
             transform: rotate(90deg);
         }
 
-        /* Profil Bilgi Alanı Fontları ve Renkleri */
         #profileDisplayName {
             font-family: 'Inter', sans-serif !important;
             font-weight: 800 !important;
@@ -1466,7 +1467,6 @@
             font-size: 0.95rem !important;
         }
 
-        /* Şifre Güçlülük Göstergesi Stilleri (Tek Satır Düzeni) */
         .password-hint {
             font-size: 0.7rem;
             color: var(--text-secondary);
@@ -1520,7 +1520,6 @@
             color: #ef4444;
         }
 
-        /* Kullanıcı Adı Uygunluk Mesajı Stili */
         #usernameAvailabilityMsg {
             font-size: 0.7rem;
             margin-top: 4px;
@@ -1528,7 +1527,6 @@
             font-weight: 500;
         }
 
-        /* YENİ: Mock Email Stilleri */
         .mock-email-container {
             display: flex;
             flex-direction: column;
@@ -1577,13 +1575,11 @@
     </style>
     
     <script>
-        // Sayfa yüklenmeden önce tarayıcı temasını ayarla (FOUC önleme)
         (function() {
             const savedTheme = localStorage.getItem('theme');
             const hour = new Date().getHours();
             let theme = savedTheme;
             
-            // Eğer kullanıcı manuel tema seçmediyse, saat bazlı otomatik seçim yap
             if (!theme) {
                 theme = (hour >= 6 && hour < 18) ? 'light' : 'dark';
             }
@@ -1608,7 +1604,9 @@
     <canvas id="constellation-canvas"></canvas>
     <div id="security-curtain"></div>
 
+    <!-- ✅ GÜNCELLENDİ: Intro ekranı artık kendi canvas'ına sahip -->
     <div id="intro-screen">
+        <canvas id="intro-canvas"></canvas>
         <div class="intro-content">
             <div class="intro-code-box">
                 <span class="code-keyword">const</span> dev = <span class="code-string">"muminsultani"</span>;<span class="code-cursor"></span>
@@ -1681,24 +1679,19 @@
             </div>
         </header>
 
-        <!-- KULLANICI PROFİL / BİLGİ PANELİ -->
         <section id="userProfileSection" style="display: none;">
             <div class="section-title">
                 <i class="fa-solid fa-user-gear"></i> <span id="t-profile-title">User Profile & Session</span>
             </div>
             <div class="contact-box" style="cursor: default; align-items: flex-start; flex-direction: column; gap: 12px;">
                 
-                <!-- Üst Kısım: Solda profil fotoğrafı, sağda ikonlar -->
                 <div style="display: flex; gap: 12px; width: 100%; align-items: center; justify-content: space-between; flex-wrap: wrap;">
-                    <!-- Sol Taraf: Yuvarlak Profil Fotoğrafı - Tıklanınca panel açılacak -->
                     <div class="profile-photo-wrapper" style="align-self: center;">
                         <img id="profilePhotoDisplay" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile" onclick="openProfilePhotoPanel()" title="View / Change Profile Photo">
                         <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;" onchange="handleProfilePhotoUpload(event)">
                     </div>
                     
-                    <!-- Sağ Taraf: İkonlar -->
                     <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-                        <!-- GİZLİLİK BUTONU -->
                         <button onclick="toggleProfilePrivacy()" title="Hide/Show" class="profile-action-btn" id="privacyToggleBtn">
                             <i class="fa-solid fa-eye" id="privacyIcon"></i>
                         </button>
@@ -1717,31 +1710,24 @@
                     </div>
                 </div>
 
-                <!-- Alt Kısım: Bilgiler (Gizlilik durumuna göre gösterilir/gizlenir) -->
                 <div id="profileDetailsContainer" style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
-                    <!-- İsim - Canlı Mor Gradyan -->
                     <strong id="profileDisplayName" style="font-size: 1.35rem; color: #9333ea;">Mumin</strong>
                     
-                    <!-- Masaüstü için: Tek Satırda @username, Email ve Doğum Tarihi -->
                     <div class="desktop-info-row">
-                        <!-- Sol: Username -->
                         <div class="desktop-username-area">
                             <i class="fa-solid fa-at" style="color: #9333ea; font-size: 0.9rem;"></i>
                             <strong id="profileDisplayUsernameDesktop" style="font-size: 0.95rem;">@mumin</strong>
                         </div>
-                        <!-- Orta: Email -->
                         <div class="desktop-email-area">
                             <i class="fa-solid fa-envelope" style="color: #9333ea; font-size: 0.9rem;"></i>
                             <strong id="profileDisplayEmailDesktop" style="font-size: 0.95rem;">muminsultani@hotmail.com</strong>
                         </div>
-                        <!-- Sağ: Doğum Tarihi -->
                         <div class="desktop-birthdate-area">
                             <i class="fa-solid fa-cake-candles" style="color: #9333ea; font-size: 0.9rem;"></i>
                             <strong id="profileDisplayBirthdateDesktop" style="font-size: 0.95rem;">27/03/2000</strong>
                         </div>
                     </div>
 
-                    <!-- Mobil için: @username, E-posta ve Doğum Tarihi (Alt Alta) -->
                     <div class="mobile-email-row" style="display: flex; align-items: center; gap: 8px;">
                         <i class="fa-solid fa-at" style="color: #9333ea; font-size: 0.9rem;"></i>
                         <strong id="profileDisplayUsernameMobile" style="font-size: 0.95rem;">@mumin</strong>
@@ -1883,7 +1869,6 @@
         </div>
     </div>
 
-    <!-- LIGHTBOX (ÖNİZLEME PENCERESİ) -->
     <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
         <div class="lightbox-content-box" onclick="event.stopPropagation()">
             <button class="lightbox-close-btn" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
@@ -1893,7 +1878,6 @@
         </div>
     </div>
 
-    <!-- PROFİL DÜZENLEME MODALI -->
     <div class="modal-overlay" id="editProfileModal">
         <div class="modal-container">
             <div class="modal-header">
@@ -1935,7 +1919,6 @@
         </div>
     </div>
 
-    <!-- ŞİFRE DEĞİŞTİRME MODALI -->
     <div class="modal-overlay" id="changePasswordModal">
         <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
@@ -1996,7 +1979,6 @@
         </div>
     </div>
 
-    <!-- HESAP SİLME ONAY MODALI -->
     <div class="modal-overlay" id="deleteAccountModal">
         <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
@@ -2028,7 +2010,6 @@
         </div>
     </div>
 
-    <!-- YENİ: ŞİFRE ONAY MODALI (Hesap Silme İçin) -->
     <div class="modal-overlay" id="confirmDeletePasswordModal">
         <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
@@ -2065,7 +2046,6 @@
         </div>
     </div>
 
-    <!-- GET IN TOUCH MODAL -->
     <div class="custom-alert-overlay" id="getInTouchModal">
         <div class="custom-alert-box" style="max-width: 320px; padding: 20px 18px; text-align: center;">
             <div style="display: flex; justify-content: center; margin-bottom: 8px;">
@@ -2090,7 +2070,6 @@
         </div>
     </div>
 
-    <!-- HESAP / GİRİŞ PANELİ -->
     <div class="modal-overlay" id="directContactModal">
         <div class="modal-container">
             <div class="modal-header">
@@ -2178,7 +2157,6 @@
         </div>
     </div>
 
-    <!-- ŞİFREMİ UNUTTUM MODALI -->
     <div class="modal-overlay" id="forgotPasswordModal">
         <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
@@ -2210,7 +2188,6 @@
         </div>
     </div>
 
-    <!-- E-POSTA ÖNİZLEME (MOCK EMAIL) MODALI -->
     <div class="modal-overlay" id="mockEmailModal">
         <div class="modal-container" style="max-width: 420px;">
             <div class="modal-header">
@@ -2245,7 +2222,6 @@
         </div>
     </div>
 
-    <!-- ŞİFRE SIFIRLAMA MODALI -->
     <div class="modal-overlay" id="resetPasswordModal">
         <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
@@ -2296,7 +2272,6 @@
         </div>
     </div>
 
-    <!-- RANDEVU / PROJE FORMU -->
     <div class="modal-overlay" id="appointmentModal">
         <div class="modal-container">
             <div class="modal-header">
@@ -2369,7 +2344,6 @@
         </div>
     </div>
 
-    <!-- GMAIL BİLGİLENDİRME MODALI -->
     <div class="custom-alert-overlay" id="gmailNoticeModal">
         <div class="custom-alert-box" style="max-width: 380px; text-align: center;">
             <div style="display: flex; justify-content: center; margin-bottom: 12px;">
@@ -2394,7 +2368,6 @@
         </div>
     </div>
 
-    <!-- ÖZEL UYARI KUTUSU -->
     <div class="custom-alert-overlay" id="customAlertModal">
         <div class="custom-alert-box">
             <div class="custom-alert-icon" id="customAlertIcon"><i class="fa-solid fa-circle-exclamation"></i></div>
@@ -2442,7 +2415,6 @@
             curtain.style.visibility = 'hidden';
         });
 
-        // Tema başlangıç kontrolü
         function initTheme() {
             const savedTheme = localStorage.getItem('theme');
             const hour = new Date().getHours();
@@ -2477,17 +2449,22 @@
                 if (intro) {
                     intro.style.opacity = '0';
                     intro.style.visibility = 'hidden';
-                    // ✅ DÜZELTME: intro.remove() yerine display:none kullanıyoruz
-                    // Böylece #introSub elementi DOM'da kalır ve changeLanguage hata vermez
-                    setTimeout(() => { intro.style.display = 'none'; }, 600);
+                    // Intro tamamen kaybolduğunda canvas'ı da durdur (performans için)
+                    setTimeout(() => { 
+                        intro.style.display = 'none';
+                        if (window.introConstellation && window.introConstellation.stop) {
+                            window.introConstellation.stop();
+                        }
+                    }, 600);
                 }
             }, 1500);
 
             initTheme();
             checkUserSession();
             
-            // Varsayılan dili İngilizce olarak ayarla
-            changeLanguage('en');
+            // ✅ DÜZELTME: sessionStorage'dan kayıtlı dili oku (sekme kapanınca silinir → varsayılan EN)
+            const savedLang = sessionStorage.getItem('site_lang') || 'en';
+            changeLanguage(savedLang);
         });
 
         function toggleTheme() {
@@ -2516,7 +2493,6 @@
             }
         }
 
-        // Şifre Güçlülük Kontrolü
         function updatePasswordHint(inputId, hintId) {
             const input = document.getElementById(inputId);
             const hintContainer = document.getElementById(hintId);
@@ -2552,7 +2528,6 @@
                    /[€$@#&!*]/.test(password);
         }
 
-        // Kullanıcı Adı Uygunluk Kontrolü
         function checkUsernameAvailability() {
             const input = document.getElementById('contactClientUsername');
             const msgDiv = document.getElementById('usernameAvailabilityMsg');
@@ -2601,7 +2576,6 @@
             }
         }
 
-        // Profil Fotoğrafı Paneli Fonksiyonları
         function openProfilePhotoPanel() {
             const loggedUser = localStorage.getItem('logged_user');
             if (!loggedUser) return;
@@ -2639,7 +2613,6 @@
             } catch(err) {}
         }
 
-        // Lightbox (Önizleme) Fonksiyonları - Artık zoom yok
         function openLightbox() {
             const largeImgSrc = document.getElementById('profilePhotoLarge').src;
             document.getElementById('lightboxImage').src = largeImgSrc;
@@ -2695,13 +2668,11 @@
             if(pwdInput) pwdInput.type = 'password';
             if(pwdIcon) pwdIcon.className = 'fa-solid fa-eye';
             
-            // Şifre ipuçlarını sıfırla
             const hints = document.querySelectorAll('.password-hint li');
             hints.forEach(li => {
                 li.classList.remove('valid', 'invalid');
             });
 
-            // Kullanıcı adı mesajını sıfırla
             const msgDiv = document.getElementById('usernameAvailabilityMsg');
             if (msgDiv) msgDiv.style.display = 'none';
         }
@@ -2919,15 +2890,16 @@
         let currentLang = 'en';
         let currentResetEmail = '';
 
-        // ✅ DÜZELTİLMİŞ: Null-safe versiyon - introSub silinse bile hata vermez
         function changeLanguage(lang) {
             currentLang = lang;
+            // ✅ YENİ: Dil tercihini sessionStorage'a kaydet (sekme kapanınca silinir → varsayılan EN)
+            try { sessionStorage.setItem('site_lang', lang); } catch(e) {}
+
             const data = translations[lang];
             if (!data) return;
 
             document.getElementById('htmlRoot').setAttribute('lang', lang);
 
-            // Güvenli metin güncelleme yardımcısı (null kontrolü yapar)
             const setText = (id, text) => {
                 const el = document.getElementById(id);
                 if (el) el.innerText = text;
@@ -2936,7 +2908,6 @@
             const currentLangTextEl = document.getElementById('currentLangText');
             if (currentLangTextEl) currentLangTextEl.innerText = data.code;
 
-            // Ana sayfa metinleri
             setText('t-role', data.role);
             setText('introSub', data.role);
             setText('t-projects-title', data.projectsTitle);
@@ -2955,29 +2926,18 @@
             setText('t-contact-sub', data.contactSub);
             setText('t-contact-main', data.contactMain);
             setText('t-scan-text', data.scanText);
-
-            // Footer hak metni
             setText('footerRightsText', data.allRightsReserved);
-
-            // Profil metinleri
             setText('t-profile-title', data.profileTitle);
             setText('t-forgot-link', data.forgotLink);
-
-            // Profil fotoğrafı paneli metinleri
             setText('pp-title', data.photoPanelTitle);
             setText('pp-back-text', data.btnBack);
             setText('pp-change-text', data.btnChange);
             setText('pp-reset-text', data.btnReset);
-
-            // Modal ana başlık metinleri
             setText('gitModalTitle', data.contactTitle);
             setText('gitActionText', data.gitText);
             setText('gitBackText', data.backText);
 
-            // Modal içi çevirileri güncelle
             changeModalLanguage(lang);
-
-            // Profil alanını yeni dilde yeniden çiz
             checkUserSession();
 
             const langMenu = document.getElementById('langMenu');
@@ -3405,7 +3365,6 @@
             } catch(err) {}
         }
 
-        // GÜNCELLENMİŞ: Hesap Silme Adım 1 (Kullanıcı adı kontrolü ve onay)
         function handleDeleteAccount(e) {
             e.preventDefault();
             const loggedUser = localStorage.getItem('logged_user');
@@ -3426,16 +3385,13 @@
                     return;
                 }
 
-                // Kullanıcı adı doğruysa, onay uyarısını göster
                 showCustomAlert(t.delConfirmAlert, 'delete', function() {
-                    // Onay verildikten sonra şifre modalını aç
                     document.getElementById('deleteAccountModal').classList.remove('active');
                     openDeletePasswordModal();
                 });
             } catch(err) {}
         }
 
-        // GÜNCELLENMİŞ: Hesap Silme Adım 2 (Şifre kontrolü ve silme işlemi)
         function handleDeletePasswordSubmit(e) {
             e.preventDefault();
             const loggedUser = localStorage.getItem('logged_user');
@@ -3453,11 +3409,14 @@
                     return;
                 }
 
-                // Şifre doğruysa hesabı sil
                 let users = JSON.parse(localStorage.getItem('site_users') || '[]');
                 users = users.filter(u => u.email !== userObj.email);
                 localStorage.setItem('site_users', JSON.stringify(users));
                 localStorage.removeItem('logged_user');
+
+                // ✅ Hesap silinince dili de EN'e sıfırla
+                try { sessionStorage.removeItem('site_lang'); } catch(e) {}
+                changeLanguage('en');
 
                 closeDeletePasswordModal();
                 checkUserSession();
@@ -3476,7 +3435,6 @@
             document.getElementById('forgotPasswordModal').classList.remove('active');
         }
 
-        // GELİŞMİŞ ŞİFRE KURTARMA MANTIĞI
         function handleForgotPasswordSubmit(e) {
             e.preventDefault();
             const email = document.getElementById('forgotClientEmail').value.trim();
@@ -3496,7 +3454,6 @@
                 return;
             }
 
-            // Geçici şifre oluştur ve kaydet
             const tempPass = "Temp" + Math.floor(1000 + Math.random() * 9000) + "!";
             
             let resetCodes = JSON.parse(localStorage.getItem('reset_codes') || '{}');
@@ -3507,7 +3464,6 @@
 
             closeForgotPasswordModal();
             
-            // Mock Email Modalını Aç
             const mockModal = document.getElementById('mockEmailModal');
             document.getElementById('mock-email-user-value').innerText = email;
             document.getElementById('mock-email-pass-value').innerText = tempPass;
@@ -3523,7 +3479,7 @@
             closeMockEmailModal();
             document.getElementById('resetClientEmail').value = currentResetEmail;
             document.getElementById('resetPasswordForm').reset();
-            document.getElementById('resetClientEmail').value = currentResetEmail; // Tekrar set et çünkü reset formu temizler
+            document.getElementById('resetClientEmail').value = currentResetEmail;
             document.getElementById('resetPasswordModal').classList.add('active');
         }
 
@@ -3558,7 +3514,6 @@
                 return;
             }
 
-            // Şifreyi güncelle
             let users = JSON.parse(localStorage.getItem('site_users') || '[]');
             let userUpdated = false;
 
@@ -3573,7 +3528,6 @@
             if (userUpdated) {
                 localStorage.setItem('site_users', JSON.stringify(users));
                 
-                // Reset kodunu temizle
                 delete resetCodes[email];
                 localStorage.setItem('reset_codes', JSON.stringify(resetCodes));
 
@@ -3667,7 +3621,6 @@
             
             alertMsg.innerText = message;
             
-            // İkonu ayarla
             if (type === 'logout') {
                 alertIcon.innerHTML = '<i class="fa-solid fa-door-open"></i>';
             } else if (type === 'success') {
@@ -3679,7 +3632,6 @@
             }
             
             if (onConfirm) {
-                // Çift butonlu gösterim (Silme veya Çıkış onayı)
                 const currentLangText = document.getElementById('currentLangText').innerText.toLowerCase();
                 const t = modalTranslations[currentLangText] || modalTranslations.en;
                 
@@ -3705,7 +3657,6 @@
                 `;
                 window._confirmActionCallback = onConfirm;
             } else {
-                // Tek butonlu gösterim
                 const currentLangText = document.getElementById('currentLangText').innerText.toLowerCase();
                 const t = modalTranslations[currentLangText] || modalTranslations.en;
                 
@@ -3751,6 +3702,9 @@
                 'logout', 
                 function() {
                     localStorage.removeItem('logged_user');
+                    // ✅ Logout olunca dili EN'e sıfırla
+                    try { sessionStorage.removeItem('site_lang'); } catch(e) {}
+                    changeLanguage('en');
                     checkUserSession();
                     setTimeout(() => {
                         showCustomAlert(t.logoutSuccess, 'success');
@@ -3825,7 +3779,6 @@
             if(document.getElementById('da-label-username')) document.getElementById('da-label-username').innerText = data.delConfirmLabel;
             if(document.getElementById('da-submit-text')) document.getElementById('da-submit-text').innerText = data.delConfirmBtn;
             
-            // Delete Password Modal Çevirileri
             if(document.getElementById('dp-title')) document.getElementById('dp-title').innerText = data.delPassTitle;
             if(document.getElementById('dp-desc')) document.getElementById('dp-desc').innerText = data.delPassDesc;
             if(document.getElementById('dp-label-password')) document.getElementById('dp-label-password').innerText = data.delPassLabel;
@@ -3849,7 +3802,6 @@
                 backTxt.innerText = data.backText;
             }
 
-            // Mock Email ve Reset Modalları İçin Çeviri Güncellemeleri
             if(document.getElementById('mock-email-title')) document.getElementById('mock-email-title').innerText = data.mockEmailTitle;
             if(document.getElementById('mock-email-greeting')) document.getElementById('mock-email-greeting').innerText = data.mockEmailGreeting;
             if(document.getElementById('mock-email-desc')) document.getElementById('mock-email-desc').innerText = data.mockEmailDesc;
@@ -3871,9 +3823,11 @@
             document.getElementById('modalLangMenu').classList.remove('show');
             document.getElementById('contactModalLangMenu').classList.remove('show');
 
-            // Modal dilinden ana sayfa diline senkronize et (null-safe)
             if (currentLang !== lang) {
                 currentLang = lang;
+                // ✅ Modal dilinden ana sayfa diline senkronize et → sessionStorage'a da yaz
+                try { sessionStorage.setItem('site_lang', lang); } catch(e) {}
+                
                 const mainData = translations[lang];
                 if (mainData) {
                     const setText = (id, text) => {
@@ -4036,7 +3990,6 @@
                         if (birthRow) birthRow.style.display = 'none';
                     }
 
-                    // Dil bazlı çeviri kullanımı
                     const sessionT = modalTranslations[currentLang] || modalTranslations.en;
                     if (contactTitleEl) contactTitleEl.innerText = sessionT.userAccount;
                     if (contactSubEl) contactSubEl.innerText = sessionT.activeSession;
@@ -4234,121 +4187,144 @@
             closeAppointmentModal();
         }
 
-        const canvas = document.getElementById('constellation-canvas');
-        const ctx = canvas.getContext('2d');
-
-        let particlesArray = [];
-        const numberOfParticles = 55;
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', () => {
+        // ============================================================
+        // ✅ YENİ: CONSTELLATION (Yıldız) SİSTEMİ - FACTORY PATTERN
+        // Hem ana sayfa canvas'ı hem intro canvas'ı için kullanılır
+        // ============================================================
+        function createConstellationSystem(canvasId, options = {}) {
+            const canvasEl = document.getElementById(canvasId);
+            if (!canvasEl) return { stop: () => {} };
+            
+            const ctx = canvasEl.getContext('2d');
+            const numberOfParticles = options.numberOfParticles || 55;
+            const mouseRadius = options.mouseRadius || 130;
+            const lineDistance = options.lineDistance || 110;
+            
+            let particlesArray = [];
+            let mouse = { x: null, y: null, radius: mouseRadius };
+            let running = true;
+            
+            function resizeCanvas() {
+                canvasEl.width = window.innerWidth;
+                canvasEl.height = window.innerHeight;
+            }
+            
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvasEl.width;
+                    this.y = Math.random() * canvasEl.height;
+                    this.vx = (Math.random() - 0.5) * 0.8;
+                    this.vy = (Math.random() - 0.5) * 0.8;
+                    this.size = Math.random() * 1.8 + 1;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > canvasEl.width) this.vx = -this.vx;
+                    if (this.y < 0 || this.y > canvasEl.height) this.vy = -this.vy;
+                }
+                draw() {
+                    const isLight = document.body.classList.contains('light-mode');
+                    ctx.fillStyle = isLight ? 'rgba(147, 51, 234, 0.45)' : 'rgba(168, 85, 247, 0.55)';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+            }
+            
+            function initParticles() {
+                particlesArray = [];
+                for (let i = 0; i < numberOfParticles; i++) {
+                    particlesArray.push(new Particle());
+                }
+            }
+            
+            function animate() {
+                if (!running) return;
+                ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
+                const isLight = document.body.classList.contains('light-mode');
+                
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                    particlesArray[i].draw();
+                    
+                    for (let j = i + 1; j < particlesArray.length; j++) {
+                        const dx = particlesArray[i].x - particlesArray[j].x;
+                        const dy = particlesArray[i].y - particlesArray[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < lineDistance) {
+                            const opacity = 1 - (distance / lineDistance);
+                            ctx.strokeStyle = isLight 
+                                ? `rgba(147, 51, 234, ${opacity * 0.18})` 
+                                : `rgba(168, 85, 247, ${opacity * 0.22})`;
+                            ctx.lineWidth = 0.8;
+                            ctx.beginPath();
+                            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                    
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const mdx = particlesArray[i].x - mouse.x;
+                        const mdy = particlesArray[i].y - mouse.y;
+                        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+                        
+                        if (mdist < mouse.radius) {
+                            const mOpacity = 1 - (mdist / mouse.radius);
+                            ctx.strokeStyle = isLight 
+                                ? `rgba(147, 51, 234, ${mOpacity * 0.35})` 
+                                : `rgba(192, 132, 252, ${mOpacity * 0.45})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                            ctx.lineTo(mouse.x, mouse.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+            
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                initParticles();
+            });
+            
+            window.addEventListener('mousemove', (event) => {
+                mouse.x = event.clientX;
+                mouse.y = event.clientY;
+            });
+            
+            window.addEventListener('mouseout', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+            
             resizeCanvas();
             initParticles();
-        });
-
-        let mouse = {
-            x: null,
-            y: null,
-            radius: 130
-        };
-
-        window.addEventListener('mousemove', (event) => {
-            mouse.x = event.clientX;
-            mouse.y = event.clientY;
-        });
-
-        window.addEventListener('mouseout', () => {
-            mouse.x = null;
-            mouse.y = null;
-        });
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.8;
-                this.vy = (Math.random() - 0.5) * 0.8;
-                this.size = Math.random() * 1.8 + 1;
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
-                if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
-            }
-
-            draw() {
-                const isLight = document.body.classList.contains('light-mode');
-                ctx.fillStyle = isLight ? 'rgba(147, 51, 234, 0.45)' : 'rgba(168, 85, 247, 0.55)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.closePath();
-                ctx.fill();
-            }
+            animate();
+            
+            return {
+                stop: () => { running = false; }
+            };
         }
-
-        function initParticles() {
-            particlesArray = [];
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
-        initParticles();
-
-        function animateConstellation() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const isLight = document.body.classList.contains('light-mode');
-
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-
-                for (let j = i + 1; j < particlesArray.length; j++) {
-                    const dx = particlesArray[i].x - particlesArray[j].x;
-                    const dy = particlesArray[i].y - particlesArray[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 110) {
-                        const opacity = 1 - (distance / 110);
-                        ctx.strokeStyle = isLight 
-                            ? `rgba(147, 51, 234, ${opacity * 0.18})` 
-                            : `rgba(168, 85, 247, ${opacity * 0.22})`;
-                        ctx.lineWidth = 0.8;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
-                        ctx.stroke();
-                    }
-                }
-
-                if (mouse.x !== null && mouse.y !== null) {
-                    const mdx = particlesArray[i].x - mouse.x;
-                    const mdy = particlesArray[i].y - mouse.y;
-                    const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-
-                    if (mdist < mouse.radius) {
-                        const mOpacity = 1 - (mdist / mouse.radius);
-                        ctx.strokeStyle = isLight 
-                            ? `rgba(147, 51, 234, ${mOpacity * 0.35})` 
-                            : `rgba(192, 132, 252, ${mOpacity * 0.45})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-                        ctx.lineTo(mouse.x, mouse.y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animateConstellation);
-        }
-
-        animateConstellation();
+        
+        // Ana sayfa canvas sistemi
+        const mainConstellation = createConstellationSystem('constellation-canvas', {
+            numberOfParticles: 55,
+            mouseRadius: 130,
+            lineDistance: 110
+        });
+        
+        // ✅ Intro canvas sistemi (yıldız yazılım animasyonu)
+        window.introConstellation = createConstellationSystem('intro-canvas', {
+            numberOfParticles: 50,
+            mouseRadius: 150,
+            lineDistance: 120
+        });
     </script>
 </body>
 </html>
