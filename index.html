@@ -1466,7 +1466,7 @@
             font-size: 0.95rem !important;
         }
 
-        /* Şifre Güçlülük Göstergesi Stilleri */
+        /* Şifre Güçlülük Göstergesi Stilleri (Tek Satır Düzeni) */
         .password-hint {
             font-size: 0.7rem;
             color: var(--text-secondary);
@@ -1477,24 +1477,28 @@
             list-style: none;
             padding-left: 0;
             display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
+            flex-wrap: nowrap; /* Tek satırda kalması için */
+            justify-content: space-between;
+            gap: 4px; /* Küçültülmüş boşluk */
         }
         .password-hint li {
             background: var(--box-bg);
-            padding: 3px 8px;
-            border-radius: 6px;
+            padding: 2px 4px; /* Küçültülmüş iç boşluk */
+            border-radius: 4px;
             font-family: 'Fira Code', monospace;
-            font-size: 0.65rem;
+            font-size: 0.55rem; /* Küçültülmüş font */
             border: 1px solid var(--line-color);
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 2px;
+            flex: 1; /* Eşit genişlik */
+            justify-content: center;
+            white-space: nowrap;
         }
         .password-hint li::before {
             content: '○';
-            font-size: 0.6rem;
+            font-size: 0.5rem;
             color: var(--text-secondary);
         }
         .password-hint li.valid {
@@ -1514,6 +1518,14 @@
         .password-hint li.invalid::before {
             content: '×';
             color: #ef4444;
+        }
+
+        /* Kullanıcı Adı Uygunluk Mesajı Stili */
+        #usernameAvailabilityMsg {
+            font-size: 0.7rem;
+            margin-top: 4px;
+            display: none;
+            font-weight: 500;
         }
     </style>
     
@@ -2038,7 +2050,8 @@
 
                 <div class="form-group" id="groupSignupUsername" style="display: none;">
                     <label class="form-label" id="dc-label-username">Username</label>
-                    <input type="text" class="form-input" id="contactClientUsername" placeholder="@Username">
+                    <input type="text" class="form-input" id="contactClientUsername" placeholder="@Username" oninput="checkUsernameAvailability()">
+                    <div id="usernameAvailabilityMsg"></div>
                 </div>
 
                 <div class="form-group">
@@ -2364,6 +2377,42 @@
                    /[€$@#&!*]/.test(password);
         }
 
+        // Kullanıcı Adı Uygunluk Kontrolü
+        function checkUsernameAvailability() {
+            const input = document.getElementById('contactClientUsername');
+            const msgDiv = document.getElementById('usernameAvailabilityMsg');
+            if (!input || !msgDiv) return;
+
+            let username = input.value.trim();
+            if (username.startsWith('@')) {
+                username = username.substring(1);
+            }
+
+            if (!username) {
+                msgDiv.style.display = 'none';
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('site_users') || '[]');
+            const exists = users.some(u => {
+                let uName = u.username || '';
+                if (uName.startsWith('@')) uName = uName.substring(1);
+                return uName.toLowerCase() === username.toLowerCase();
+            });
+
+            const currentLangText = document.getElementById('currentLangText').innerText.toLowerCase();
+            const t = modalTranslations[currentLangText] || modalTranslations.en;
+
+            msgDiv.style.display = 'block';
+            if (exists) {
+                msgDiv.style.color = '#ef4444';
+                msgDiv.innerText = t.usernameTaken;
+            } else {
+                msgDiv.style.color = '#22c55e';
+                msgDiv.innerText = t.usernameAvailable;
+            }
+        }
+
         function toggleProfilePrivacy() {
             const detailsContainer = document.getElementById('profileDetailsContainer');
             const privacyIcon = document.getElementById('privacyIcon');
@@ -2476,6 +2525,10 @@
             hints.forEach(li => {
                 li.classList.remove('valid', 'invalid');
             });
+
+            // Kullanıcı adı mesajını sıfırla
+            const msgDiv = document.getElementById('usernameAvailabilityMsg');
+            if (msgDiv) msgDiv.style.display = 'none';
         }
 
         function clearAndCloseModal() {
@@ -2591,7 +2644,9 @@
                 loginSuccess: "Signed in successfully!",
                 signupSuccess: "Account created successfully! You can now sign in.",
                 loginError: "Invalid email or password!",
-                passwordStrengthError: "Password must be at least 8 characters and include uppercase, lowercase, number, and special character (€$@#&!*)."
+                passwordStrengthError: "Password must be at least 8 characters and include uppercase, lowercase, number, and special character (€$@#&!*).",
+                usernameAvailable: "Username is available.",
+                usernameTaken: "This username is already taken."
             },
             tr: {
                 code: "TR",
@@ -2628,7 +2683,9 @@
                 loginSuccess: "Başarıyla giriş yapıldı!",
                 signupSuccess: "Hesap başarıyla oluşturuldu! Şimdi giriş yapabilirsiniz.",
                 loginError: "Geçersiz e-posta veya şifre!",
-                passwordStrengthError: "Şifre en az 8 karakter olmalı ve büyük harf, küçük harf, rakam ve özel karakter (€$@#&!*) içermelidir."
+                passwordStrengthError: "Şifre en az 8 karakter olmalı ve büyük harf, küçük harf, rakam ve özel karakter (€$@#&!*) içermelidir.",
+                usernameAvailable: "Kullanıcı adı kullanılabilir.",
+                usernameTaken: "Bu kullanıcı adı zaten alınmış."
             }
         };
 
@@ -2754,7 +2811,9 @@
                 logoutYes: "Log Out",
                 logoutNo: "Back",
                 logoutSuccess: "Session closed.",
-                passwordStrengthError: "Password must be at least 8 characters and include uppercase, lowercase, number, and special character (€$@#&!*)."
+                passwordStrengthError: "Password must be at least 8 characters and include uppercase, lowercase, number, and special character (€$@#&!*).",
+                usernameAvailable: "Username is available.",
+                usernameTaken: "This username is already taken."
             },
             tr: {
                 code: "TR",
@@ -2826,7 +2885,9 @@
                 logoutYes: "Çıkış Yap",
                 logoutNo: "Geri Dön",
                 logoutSuccess: "Oturum kapatıldı.",
-                passwordStrengthError: "Şifre en az 8 karakter olmalı ve büyük harf, küçük harf, rakam ve özel karakter (€$@#&!*) içermelidir."
+                passwordStrengthError: "Şifre en az 8 karakter olmalı ve büyük harf, küçük harf, rakam ve özel karakter (€$@#&!*) içermelidir.",
+                usernameAvailable: "Kullanıcı adı kullanılabilir.",
+                usernameTaken: "Bu kullanıcı adı zaten alınmış."
             }
         };
 
@@ -2841,6 +2902,7 @@
             const groupPassword = document.getElementById('groupPassword');
             const submitBtnText = document.getElementById('dc-submit-btn-text');
             const signupHint = document.getElementById('signupPasswordHint'); // <--- Şifre ipucu elementini al
+            const usernameMsg = document.getElementById('usernameAvailabilityMsg'); // <--- Kullanıcı adı mesajı
 
             const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
             const t = modalTranslations[modalLangText] || modalTranslations.en;
@@ -2852,6 +2914,7 @@
                 groupUsername.style.display = 'none';
                 if(groupPassword) groupPassword.style.display = 'block';
                 if(signupHint) signupHint.style.display = 'none'; // <--- Giriş yaparken gizle
+                if(usernameMsg) usernameMsg.style.display = 'none'; // <--- Kullanıcı adı mesajını gizle
                 submitBtnText.innerText = t.signinBtn;
             } else {
                 tabSignup.classList.add('active');
@@ -3336,10 +3399,25 @@
 
             if (currentAuthMode === 'signup') {
                 const name = document.getElementById('contactClientName').value.trim();
-                const username = document.getElementById('contactClientUsername').value.trim();
+                let username = document.getElementById('contactClientUsername').value.trim();
+
+                if (username.startsWith('@')) {
+                    username = username.substring(1);
+                }
 
                 if (!name || !username) {
                     showCustomAlert(t.alertText);
+                    return;
+                }
+
+                const usernameExists = users.some(u => {
+                    let uName = u.username || '';
+                    if (uName.startsWith('@')) uName = uName.substring(1);
+                    return uName.toLowerCase() === username.toLowerCase();
+                });
+
+                if (usernameExists) {
+                    showCustomAlert(t.usernameTaken);
                     return;
                 }
 
