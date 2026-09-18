@@ -1137,20 +1137,26 @@
             </div>
         </header>
 
-        <!-- KULLANICI PROFİL / BİLGİ PANELİ (Düzenlendi: Butonlar üstte, isim altta) -->
+        <!-- KULLANICI PROFİL / BİLGİ PANELİ (Düzenlendi: Tüm butonlar ikon olarak üstte) -->
         <section id="userProfileSection" style="display: none;">
             <div class="section-title">
                 <i class="fa-solid fa-user-gear"></i> <span id="t-profile-title">User Profile & Session</span>
             </div>
             <div class="contact-box" style="cursor: default; align-items: flex-start; flex-direction: column; gap: 12px;">
                 
-                <!-- Butonlar Üstte -->
-                <div style="display: flex; gap: 8px; width: 100%;">
-                    <button onclick="openEditProfileModal()" style="background: rgba(147, 51, 234, 0.15); border: 1px solid rgba(147, 51, 234, 0.3); color: #c084fc; padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 5px;">
-                        <i class="fa-solid fa-pen-to-square"></i> <span id="t-edit-prof-btn">Edit Profile</span>
+                <!-- Tüm Butonlar Tek Satırda ve İkon Olarak -->
+                <div style="display: flex; gap: 8px; width: 100%; flex-wrap: wrap;">
+                    <button onclick="openEditProfileModal()" title="Edit Profile" style="background: rgba(147, 51, 234, 0.15); border: 1px solid rgba(147, 51, 234, 0.3); color: #c084fc; padding: 8px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px;">
+                        <i class="fa-solid fa-pen-to-square"></i>
                     </button>
-                    <button onclick="handleLogout()" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 5px;">
-                        <i class="fa-solid fa-right-from-bracket"></i> <span id="t-logout-btn">Log Out</span>
+                    <button onclick="openChangePasswordModal()" title="Change Password" style="background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.3); color: #22c55e; padding: 8px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px;">
+                        <i class="fa-solid fa-key"></i>
+                    </button>
+                    <button onclick="openDeleteAccountModal()" title="Delete Account" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; padding: 8px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px;">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                    <button onclick="handleLogout()" title="Log Out" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; padding: 8px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px;">
+                        <i class="fa-solid fa-right-from-bracket"></i>
                     </button>
                 </div>
 
@@ -1261,7 +1267,7 @@
         </footer>
     </div>
 
-    <!-- PROFIL DÜZENLEME / ŞİFRE DEĞİŞTİRME / HESAP SİLME MODALI -->
+    <!-- PROFIL DÜZENLEME MODALI (Doğum Tarihi eklendi, Şifre ve Silme çıkarıldı) -->
     <div class="modal-overlay" id="editProfileModal">
         <div class="modal-container">
             <div class="modal-header">
@@ -1283,52 +1289,100 @@
                     <input type="text" class="form-input" id="editClientUsername" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label" id="ep-label-newpass">New Password (optional)</label>
-                    <div class="password-wrapper">
-                        <input type="password" class="form-input" id="editClientPassword" placeholder="Leave blank to keep current">
-                        <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('editClientPassword', 'editPasswordToggleIcon')" title="Show/Hide Password">
-                            <i class="fa-solid fa-eye" id="editPasswordToggleIcon"></i>
-                        </button>
+                    <label class="form-label" id="ep-label-birthdate">Date of Birth (DD/MM/YYYY)</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" class="form-input" id="editClientDay" placeholder="DD" min="1" max="31" style="text-align: center;">
+                        <input type="number" class="form-input" id="editClientMonth" placeholder="MM" min="1" max="12" style="text-align: center;">
+                        <input type="number" class="form-input" id="editClientYear" placeholder="YYYY" min="1900" max="2026" style="text-align: center;">
                     </div>
                 </div>
                 <div class="form-buttons-group" style="flex-direction: column; gap: 8px;">
                     <button type="submit" class="submit-btn email-btn" id="ep-submit-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc); width: 100%;">
                         <i class="fa-solid fa-floppy-disk"></i> <span id="ep-submit-text">Save Changes</span>
                     </button>
-                    <button type="button" class="submit-btn" onclick="openDeleteConfirmModal()" id="ep-delete-btn" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #ef4444; width: 100%;">
-                        <i class="fa-solid fa-trash-can"></i> <span id="ep-delete-text">Delete Account</span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ŞİFRE DEĞİŞTİRME MODALI (Dışarıya taşındı) -->
+    <div class="modal-overlay" id="changePasswordModal">
+        <div class="modal-container" style="max-width: 440px;">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                        <button class="modal-close-btn" onclick="closeChangePasswordModal()" title="Back"><i class="fa-solid fa-chevron-left"></i></button>
+                    </div>
+                    <div class="modal-brand">muminsultani</div>
+                    <div class="modal-title" id="cp-title">Change Password</div>
+                </div>
+                <div class="modal-header-actions">
+                    <button class="modal-close-btn" onclick="closeChangePasswordModal()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <form id="changePasswordForm" onsubmit="handleChangePassword(event)">
+                <div class="form-group">
+                    <label class="form-label" id="cp-label-old">Current Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" class="form-input" id="changeOldPassword" required placeholder="••••••••">
+                        <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('changeOldPassword', 'oldPasswordToggleIcon')" title="Show/Hide Password">
+                            <i class="fa-solid fa-eye" id="oldPasswordToggleIcon"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="cp-label-new">New Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" class="form-input" id="changeNewPassword" required placeholder="••••••••">
+                        <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('changeNewPassword', 'newPasswordToggleIcon')" title="Show/Hide Password">
+                            <i class="fa-solid fa-eye" id="newPasswordToggleIcon"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="cp-label-confirm">Confirm New Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" class="form-input" id="changeConfirmPassword" required placeholder="••••••••">
+                        <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('changeConfirmPassword', 'confirmPasswordToggleIcon')" title="Show/Hide Password">
+                            <i class="fa-solid fa-eye" id="confirmPasswordToggleIcon"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-buttons-group">
+                    <button type="submit" class="submit-btn email-btn" id="cp-submit-btn" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                        <i class="fa-solid fa-key"></i> <span id="cp-submit-text">Update Password</span>
                     </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- HESAP SİLME ONAY MODALI -->
-    <div class="modal-overlay" id="deleteConfirmModal">
+    <!-- HESAP SİLME ONAY MODALI (Dışarıya taşındı) -->
+    <div class="modal-overlay" id="deleteAccountModal">
         <div class="modal-container" style="max-width: 440px;">
             <div class="modal-header">
                 <div class="modal-header-left">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                        <button class="modal-close-btn" onclick="closeDeleteConfirmModal()" title="Back"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="modal-close-btn" onclick="closeDeleteAccountModal()" title="Back"><i class="fa-solid fa-chevron-left"></i></button>
                     </div>
                     <div class="modal-brand">muminsultani</div>
-                    <div class="modal-title" id="dc-title-del">Delete Account</div>
+                    <div class="modal-title" id="da-title">Delete Account</div>
                 </div>
                 <div class="modal-header-actions">
-                    <button class="modal-close-btn" onclick="closeDeleteConfirmModal()"><i class="fa-solid fa-xmark"></i></button>
+                    <button class="modal-close-btn" onclick="closeDeleteAccountModal()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
-            <form id="deleteConfirmForm" onsubmit="handleDeleteAccountConfirm(event)">
-                <p class="item-desc" id="del-desc" style="margin-bottom: 16px; font-size: 0.88rem; color: #ef4444;">
+            <form id="deleteAccountForm" onsubmit="handleDeleteAccount(event)">
+                <p class="item-desc" id="da-desc" style="margin-bottom: 16px; font-size: 0.88rem; color: #ef4444;">
                     Warning: This action cannot be undone. To confirm deletion, please type your username below.
                 </p>
                 <div class="form-group">
-                    <label class="form-label" id="del-label-username">Type your username to confirm</label>
+                    <label class="form-label" id="da-label-username">Type your username to confirm</label>
                     <input type="text" class="form-input" id="deleteConfirmUsername" required placeholder="@Username">
                 </div>
                 <div class="form-buttons-group">
-                    <button type="submit" class="submit-btn" id="del-submit-btn" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
-                        <i class="fa-solid fa-trash-can"></i> <span id="del-submit-text">Delete Permanently</span>
+                    <button type="submit" class="submit-btn" id="da-submit-btn" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                        <i class="fa-solid fa-trash-can"></i> <span id="da-submit-text">Delete Permanently</span>
                     </button>
                 </div>
             </form>
@@ -1912,7 +1966,16 @@
                 delConfirmDesc: "Warning: This action cannot be undone. To confirm deletion, please type your username below.",
                 delConfirmLabel: "Type your username to confirm",
                 delConfirmBtn: "Delete Permanently",
-                delConfirmError: "Username does not match. Account not deleted."
+                delConfirmError: "Username does not match. Account not deleted.",
+                cpTitle: "Change Password",
+                cpOldLabel: "Current Password",
+                cpNewLabel: "New Password",
+                cpConfirmLabel: "Confirm New Password",
+                cpBtn: "Update Password",
+                cpSuccess: "Password changed successfully!",
+                cpErrorOld: "Current password is incorrect!",
+                cpErrorMatch: "New passwords do not match!",
+                birthdateLabel: "Date of Birth (DD/MM/YYYY)"
             },
             tr: {
                 code: "TR",
@@ -1964,7 +2027,16 @@
                 delConfirmDesc: "Uyarı: Bu işlem geri alınamaz. Silme işlemini onaylamak için lütfen kullanıcı adınızı yazın.",
                 delConfirmLabel: "Onaylamak için kullanıcı adınızı yazın",
                 delConfirmBtn: "Kalıcı Olarak Sil",
-                delConfirmError: "Kullanıcı adı eşleşmiyor. Hesap silinmedi."
+                delConfirmError: "Kullanıcı adı eşleşmiyor. Hesap silinmedi.",
+                cpTitle: "Şifre Değiştir",
+                cpOldLabel: "Mevcut Şifre",
+                cpNewLabel: "Yeni Şifre",
+                cpConfirmLabel: "Yeni Şifreyi Onayla",
+                cpBtn: "Şifreyi Güncelle",
+                cpSuccess: "Şifre başarıyla değiştirildi!",
+                cpErrorOld: "Mevcut şifre yanlış!",
+                cpErrorMatch: "Yeni şifreler eşleşmiyor!",
+                birthdateLabel: "Doğum Tarihi (GG/AA/YYYY)"
             }
         };
 
@@ -2034,7 +2106,9 @@
                 const userObj = JSON.parse(loggedUser);
                 document.getElementById('editClientName').value = userObj.name || '';
                 document.getElementById('editClientUsername').value = userObj.username || '';
-                document.getElementById('editClientPassword').value = '';
+                document.getElementById('editClientDay').value = userObj.birthDay || '';
+                document.getElementById('editClientMonth').value = userObj.birthMonth || '';
+                document.getElementById('editClientYear').value = userObj.birthYear || '';
             } catch(e) {}
             document.getElementById('editProfileModal').classList.add('active');
         }
@@ -2043,15 +2117,26 @@
             document.getElementById('editProfileModal').classList.remove('active');
         }
 
-        function openDeleteConfirmModal() {
+        function openChangePasswordModal() {
+            const loggedUser = localStorage.getItem('logged_user');
+            if (!loggedUser) return;
+            document.getElementById('changePasswordForm').reset();
+            document.getElementById('changePasswordModal').classList.add('active');
+        }
+
+        function closeChangePasswordModal() {
+            document.getElementById('changePasswordModal').classList.remove('active');
+        }
+
+        function openDeleteAccountModal() {
             const loggedUser = localStorage.getItem('logged_user');
             if (!loggedUser) return;
             document.getElementById('deleteConfirmUsername').value = '';
-            document.getElementById('deleteConfirmModal').classList.add('active');
+            document.getElementById('deleteAccountModal').classList.add('active');
         }
 
-        function closeDeleteConfirmModal() {
-            document.getElementById('deleteConfirmModal').classList.remove('active');
+        function closeDeleteAccountModal() {
+            document.getElementById('deleteAccountModal').classList.remove('active');
         }
 
         function handleProfileUpdate(e) {
@@ -2061,7 +2146,9 @@
 
             const newName = document.getElementById('editClientName').value.trim();
             const newUsername = document.getElementById('editClientUsername').value.trim();
-            const newPassword = document.getElementById('editClientPassword').value.trim();
+            const birthDay = document.getElementById('editClientDay').value.trim();
+            const birthMonth = document.getElementById('editClientMonth').value.trim();
+            const birthYear = document.getElementById('editClientYear').value.trim();
 
             const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
             const t = modalTranslations[modalLangText] || modalTranslations.en;
@@ -2077,9 +2164,9 @@
 
                 userObj.name = newName;
                 userObj.username = newUsername;
-                if (newPassword) {
-                    userObj.password = newPassword;
-                }
+                userObj.birthDay = birthDay;
+                userObj.birthMonth = birthMonth;
+                userObj.birthYear = birthYear;
 
                 users = users.map(u => u.email === userObj.email ? userObj : u);
                 localStorage.setItem('site_users', JSON.stringify(users));
@@ -2091,7 +2178,48 @@
             } catch(err) {}
         }
 
-        function handleDeleteAccountConfirm(e) {
+        function handleChangePassword(e) {
+            e.preventDefault();
+            const loggedUser = localStorage.getItem('logged_user');
+            if (!loggedUser) return;
+
+            const oldPass = document.getElementById('changeOldPassword').value.trim();
+            const newPass = document.getElementById('changeNewPassword').value.trim();
+            const confirmPass = document.getElementById('changeConfirmPassword').value.trim();
+
+            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const t = modalTranslations[modalLangText] || modalTranslations.en;
+
+            if (!oldPass || !newPass || !confirmPass) {
+                showCustomAlert(t.alertText);
+                return;
+            }
+
+            try {
+                let userObj = JSON.parse(loggedUser);
+                let users = JSON.parse(localStorage.getItem('site_users') || '[]');
+
+                if (userObj.password !== oldPass) {
+                    showCustomAlert(t.cpErrorOld);
+                    return;
+                }
+
+                if (newPass !== confirmPass) {
+                    showCustomAlert(t.cpErrorMatch);
+                    return;
+                }
+
+                userObj.password = newPass;
+                users = users.map(u => u.email === userObj.email ? userObj : u);
+                localStorage.setItem('site_users', JSON.stringify(users));
+                localStorage.setItem('logged_user', JSON.stringify(userObj));
+
+                closeChangePasswordModal();
+                showCustomAlert(t.cpSuccess);
+            } catch(err) {}
+        }
+
+        function handleDeleteAccount(e) {
             e.preventDefault();
             const loggedUser = localStorage.getItem('logged_user');
             if (!loggedUser) return;
@@ -2105,7 +2233,6 @@
                 const userObj = JSON.parse(loggedUser);
                 const actualUsername = userObj.username || '';
                 
-                // Kullanıcı adını @ olmadan karşılaştır
                 const cleanInput = inputUsername.startsWith('@') ? inputUsername.substring(1) : inputUsername;
                 const cleanActual = actualUsername.startsWith('@') ? actualUsername.substring(1) : actualUsername;
 
@@ -2119,8 +2246,7 @@
                 localStorage.setItem('site_users', JSON.stringify(users));
                 localStorage.removeItem('logged_user');
 
-                closeDeleteConfirmModal();
-                closeEditProfileModal();
+                closeDeleteAccountModal();
                 checkUserSession();
                 showCustomAlert(t.successDelete);
             } catch(err) {}
@@ -2286,15 +2412,21 @@
             if(document.getElementById('ep-title')) document.getElementById('ep-title').innerText = data.epTitle;
             if(document.getElementById('ep-label-name')) document.getElementById('ep-label-name').innerText = data.nameLabel;
             if(document.getElementById('ep-label-username')) document.getElementById('ep-label-username').innerText = data.usernameLabel;
-            if(document.getElementById('ep-label-newpass')) document.getElementById('ep-label-newpass').innerText = data.newPassLabel;
+            if(document.getElementById('ep-label-birthdate')) document.getElementById('ep-label-birthdate').innerText = data.birthdateLabel;
             if(document.getElementById('ep-submit-text')) document.getElementById('ep-submit-text').innerText = data.saveChanges;
-            if(document.getElementById('ep-delete-text')) document.getElementById('ep-delete-text').innerText = data.deleteAccount;
 
-            // Delete Confirmation Modal translations
-            if(document.getElementById('dc-title-del')) document.getElementById('dc-title-del').innerText = data.delConfirmTitle;
-            if(document.getElementById('del-desc')) document.getElementById('del-desc').innerText = data.delConfirmDesc;
-            if(document.getElementById('del-label-username')) document.getElementById('del-label-username').innerText = data.delConfirmLabel;
-            if(document.getElementById('del-submit-text')) document.getElementById('del-submit-text').innerText = data.delConfirmBtn;
+            // Change Password Modal translations
+            if(document.getElementById('cp-title')) document.getElementById('cp-title').innerText = data.cpTitle;
+            if(document.getElementById('cp-label-old')) document.getElementById('cp-label-old').innerText = data.cpOldLabel;
+            if(document.getElementById('cp-label-new')) document.getElementById('cp-label-new').innerText = data.cpNewLabel;
+            if(document.getElementById('cp-label-confirm')) document.getElementById('cp-label-confirm').innerText = data.cpConfirmLabel;
+            if(document.getElementById('cp-submit-text')) document.getElementById('cp-submit-text').innerText = data.cpBtn;
+
+            // Delete Account Modal translations
+            if(document.getElementById('da-title')) document.getElementById('da-title').innerText = data.delConfirmTitle;
+            if(document.getElementById('da-desc')) document.getElementById('da-desc').innerText = data.delConfirmDesc;
+            if(document.getElementById('da-label-username')) document.getElementById('da-label-username').innerText = data.delConfirmLabel;
+            if(document.getElementById('da-submit-text')) document.getElementById('da-submit-text').innerText = data.delConfirmBtn;
 
             const noticeMsg = document.getElementById('gmailNoticeMessage');
             if (noticeMsg) {
@@ -2347,7 +2479,7 @@
                     return;
                 }
 
-                const newUser = { name, username, email, password };
+                const newUser = { name, username, email, password, birthDay: '', birthMonth: '', birthYear: '' };
                 users.push(newUser);
                 localStorage.setItem('site_users', JSON.stringify(users));
                 
@@ -2359,7 +2491,7 @@
             } else {
                 let user = users.find(u => u.email === email && u.password === password);
                 if (!user && email === "admin@muminsultani.com" && password === "admin123") {
-                    user = { name: "Admin User", username: "@Admin", email: "admin@muminsultani.com" };
+                    user = { name: "Admin User", username: "@Admin", email: "admin@muminsultani.com", password: "admin123", birthDay: '', birthMonth: '', birthYear: '' };
                 }
 
                 if (user) {
