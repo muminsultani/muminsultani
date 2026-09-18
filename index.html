@@ -1024,7 +1024,7 @@
             white-space: nowrap;
         }
 
-        /* Profil ikonları için özel stiller (Mavi alandaki butonlarla birebir aynı) */
+        /* Profil ikonları için özel stiller */
         .profile-action-btn {
             background: var(--box-bg);
             border: 1px solid var(--line-color);
@@ -1077,6 +1077,34 @@
 
         .profile-photo-wrapper img:hover {
             border-color: rgba(147, 51, 234, 0.4);
+        }
+
+        /* Masaüstü / Tablet / TV için özel düzen (min-width: 768px) */
+        @media (min-width: 768px) {
+            .desktop-email-row {
+                display: flex !important;
+                align-items: center;
+                gap: 8px;
+                margin-left: 20px; /* Sarı alan için boşluk */
+            }
+            .desktop-birthdate-row {
+                display: flex !important;
+                align-items: center;
+                gap: 8px;
+                margin-left: auto; /* Sağa yaslamak için */
+                padding-right: 10px;
+            }
+            /* Mobilde gizlenecek olan orijinal satırlar */
+            .mobile-email-row, .mobile-birthdate-row {
+                display: none !important;
+            }
+        }
+
+        /* Mobilde görünecek olan orijinal satırlar (Varsayılan) */
+        .mobile-email-row, .mobile-birthdate-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         @media (max-width: 640px) {
@@ -1195,22 +1223,22 @@
             </div>
         </header>
 
-        <!-- KULLANICI PROFİL / BİLGİ PANELİ (Düzenlendi: İkonlar sağda, profil fotoğrafı solda) -->
+        <!-- KULLANICI PROFİL / BİLGİ PANELİ (Responsive Düzen) -->
         <section id="userProfileSection" style="display: none;">
             <div class="section-title">
                 <i class="fa-solid fa-user-gear"></i> <span id="t-profile-title">User Profile & Session</span>
             </div>
             <div class="contact-box" style="cursor: default; align-items: flex-start; flex-direction: column; gap: 12px;">
                 
-                <!-- Üst Kısım: Solda profil fotoğrafı, sağda ikonlar -->
-                <div style="display: flex; gap: 12px; width: 100%; align-items: center; justify-content: space-between;">
+                <!-- Üst Kısım: Solda profil fotoğrafı, sağda ikonlar (Mobil ve Masaüstü uyumlu) -->
+                <div style="display: flex; gap: 12px; width: 100%; align-items: center; justify-content: space-between; flex-wrap: wrap;">
                     <!-- Sol Taraf: Yuvarlak Profil Fotoğrafı -->
                     <div class="profile-photo-wrapper" style="align-self: center;">
                         <img id="profilePhotoDisplay" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile" onclick="document.getElementById('profilePhotoInput').click()" title="Change Photo">
                         <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;" onchange="handleProfilePhotoUpload(event)">
                     </div>
                     
-                    <!-- Sağ Taraf: İkonlar (Mavi alandaki butonlarla aynı stilde) -->
+                    <!-- Sağ Taraf: İkonlar -->
                     <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
                         <button onclick="openEditProfileModal()" title="Edit Profile" class="profile-action-btn">
                             <i class="fa-solid fa-pen-to-square"></i>
@@ -1227,18 +1255,35 @@
                     </div>
                 </div>
 
-                <!-- İsim ve Bilgiler Altta -->
+                <!-- Alt Kısım: Bilgiler (Responsive Düzen) -->
                 <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                    <!-- İsim -->
                     <strong id="profileDisplayName" style="font-size: 1.15rem; color: #9333ea;">Mumin</strong>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <i class="fa-solid fa-at" style="color: #9333ea; font-size: 0.9rem;"></i>
-                        <strong id="profileDisplayUsername" style="font-size: 0.95rem;">@mumin</strong>
+                    
+                    <!-- Masaüstü için: Kullanıcı Adı ve E-posta Yan Yana (Sarı Alan) -->
+                    <div class="desktop-email-row" style="display: none;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-at" style="color: #9333ea; font-size: 0.9rem;"></i>
+                            <strong id="profileDisplayUsernameDesktop" style="font-size: 0.95rem;">@mumin</strong>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-envelope" style="color: #9333ea; font-size: 0.9rem;"></i>
+                            <strong id="profileDisplayEmailDesktop" style="font-size: 0.95rem;">muminsultani@hotmail.com</strong>
+                        </div>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
+
+                    <!-- Masaüstü için: Doğum Tarihi (Mavi Alan) -->
+                    <div class="desktop-birthdate-row" style="display: none;">
+                        <i class="fa-solid fa-cake-candles" style="color: #9333ea; font-size: 0.9rem;"></i>
+                        <strong id="profileDisplayBirthdateDesktop" style="font-size: 0.95rem;">27/03/2000</strong>
+                    </div>
+
+                    <!-- Mobil için: E-posta ve Doğum Tarihi (Alt Alta - Varsayılan) -->
+                    <div class="mobile-email-row">
                         <i class="fa-solid fa-envelope" style="color: #9333ea; font-size: 0.9rem;"></i>
                         <strong id="profileDisplayEmail" style="font-size: 0.95rem;">muminsultani@hotmail.com</strong>
                     </div>
-                    <div id="profileBirthdateRow" style="display: none; align-items: center; gap: 8px;">
+                    <div id="profileBirthdateRow" class="mobile-birthdate-row" style="display: none;">
                         <i class="fa-solid fa-cake-candles" style="color: #9333ea; font-size: 0.9rem;"></i>
                         <strong id="profileDisplayBirthdate" style="font-size: 0.95rem;"></strong>
                     </div>
@@ -2615,12 +2660,23 @@
                     if (document.getElementById('profileDisplayUsername')) document.getElementById('profileDisplayUsername').innerText = userObj.username || '@username';
                     if (document.getElementById('profileDisplayEmail')) document.getElementById('profileDisplayEmail').innerText = userObj.email || '-';
 
+                    // Masaüstü için güncellemeler
+                    if (document.getElementById('profileDisplayUsernameDesktop')) document.getElementById('profileDisplayUsernameDesktop').innerText = userObj.username || '@username';
+                    if (document.getElementById('profileDisplayEmailDesktop')) document.getElementById('profileDisplayEmailDesktop').innerText = userObj.email || '-';
+                    if (document.getElementById('profileDisplayBirthdateDesktop')) {
+                        if (userObj.birthDay && userObj.birthMonth && userObj.birthYear) {
+                            document.getElementById('profileDisplayBirthdateDesktop').innerText = `${userObj.birthDay}/${userObj.birthMonth}/${userObj.birthYear}`;
+                        } else {
+                            document.getElementById('profileDisplayBirthdateDesktop').innerText = '--/--/----';
+                        }
+                    }
+
                     // Profil fotoğrafı
                     if (document.getElementById('profilePhotoDisplay')) {
                         document.getElementById('profilePhotoDisplay').src = userObj.profilePhoto || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + encodeURIComponent(userObj.username || 'muminsultani');
                     }
 
-                    // Doğum tarihi
+                    // Doğum tarihi (Mobil için)
                     const birthRow = document.getElementById('profileBirthdateRow');
                     const birthDisplay = document.getElementById('profileDisplayBirthdate');
                     if (userObj.birthDay && userObj.birthMonth && userObj.birthYear) {
