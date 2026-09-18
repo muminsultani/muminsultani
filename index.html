@@ -18,16 +18,13 @@
     }
     </script>
 
-    <!-- Tarayıcı Sekme Logosu (Favicon) -->
     <link rel="icon" type="image/png" sizes="32x32" href="https://muminsultani.com/img/ms.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://muminsultani.com/img/ms.png">
     <link rel="icon" sizes="180x180" href="https://muminsultani.com/img/180.png">
 
-    <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- jsPDF ve autoTable Kütüphaneleri -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
     
@@ -843,7 +840,7 @@
             opacity: 0.9;
         }
 
-        /* Google Butonu Stili */
+        /* Google Butonu Stili (Artık kullanılmıyor ama silmedim) */
         .submit-btn.google-btn {
             background: #ffffff;
             color: #333333;
@@ -859,7 +856,6 @@
             display: block;
         }
         
-        /* Karanlık modda Google butonu */
         body:not(.light-mode) .submit-btn.google-btn {
             background: #1e1e24;
             color: #f8fafc;
@@ -1050,7 +1046,7 @@
             white-space: nowrap;
         }
 
-        /* Profil ikonları için özel stiller (Bunlara dokunulmadı) */
+        /* Profil ikonları için özel stiller */
         .profile-action-btn {
             background: var(--box-bg);
             border: 1px solid var(--line-color);
@@ -1151,11 +1147,8 @@
         }
 
         /* =========================================
-           KÜÇÜLTME İŞLEMLERİ (Tüm Paneller, Alertler,
-           Placeholder'lar, Etiketler ve Butonlar)
+           KÜÇÜLTME İŞLEMLERİ
            ========================================= */
-        
-        /* Panelleri Küçült */
         .modal-container {
             max-width: 480px !important;
             padding: 24px !important;
@@ -1168,13 +1161,11 @@
             padding: 14px 16px !important;
         }
 
-        /* Alert İkonlarını ve Başlıklarını Küçült */
         .custom-alert-icon { font-size: 1.8rem !important; margin-bottom: 10px !important; }
         .custom-alert-message { font-size: 0.85rem !important; margin-bottom: 18px !important; }
         .modal-brand { font-size: 1.2rem !important; }
         .modal-title { font-size: 0.85rem !important; }
 
-        /* Placeholder ve Etiketleri Küçült */
         .form-input, .form-textarea {
             padding: 10px 14px !important;
             font-size: 0.85rem !important;
@@ -1188,7 +1179,6 @@
             margin-bottom: 5px !important;
         }
         
-        /* Genel Butonları ve İçindeki Yazıları Küçült (Profil ikonları hariç) */
         .submit-btn {
             padding: 11px 8px !important;
             font-size: 0.78rem !important;
@@ -1317,7 +1307,7 @@
                                 <stop offset="0%" stop-color="#fdf497"/>
                                 <stop offset="5%" stop-color="#fdf497"/>
                                 <stop offset="45%" stop-color="#fd5949"/>
-                                <stop ""offset="60%" stop-color="#d6249f"/>
+                                <stop offset="60%" stop-color="#d6249f"/>
                                 <stop offset="90%" stop-color="#285AEB"/>
                             </radialGradient>
                         </defs>
@@ -1347,6 +1337,10 @@
                     
                     <!-- Sağ Taraf: İkonlar -->
                     <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                        <!-- YENİ: GİZLİLİK BUTONU -->
+                        <button onclick="toggleProfilePrivacy()" title="Gizle/Göster" class="profile-action-btn" id="privacyToggleBtn">
+                            <i class="fa-solid fa-eye" id="privacyIcon"></i>
+                        </button>
                         <button onclick="openEditProfileModal()" title="Edit Profile" class="profile-action-btn">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
@@ -1356,14 +1350,14 @@
                         <button onclick="openDeleteAccountModal()" title="Delete Account" class="profile-action-btn">
                             <i class="fa-solid fa-trash-can"></i>
                         </button>
-                        <button onclick="handleLogout()" title="Log Out" class="profile-action-btn">
+                        <button onclick="confirmLogout()" title="Log Out" class="profile-action-btn">
                             <i class="fa-solid fa-right-from-bracket"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- Alt Kısım: Bilgiler -->
-                <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                <!-- Alt Kısım: Bilgiler (Gizlilik durumuna göre gösterilir/gizlenir) -->
+                <div id="profileDetailsContainer" style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
                     <!-- İsim -->
                     <strong id="profileDisplayName" style="font-size: 1.15rem; color: #9333ea;">Mumin</strong>
                     
@@ -1715,12 +1709,7 @@
                     <button type="button" class="submit-btn email-btn" onclick="handleAuthSubmit(event)" id="dc-submit-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc); width: 100%;">
                         <i class="fa-solid fa-right-to-bracket"></i> <span id="dc-submit-btn-text">Sign In</span>
                     </button>
-                    
-                    <!-- Google ile Devam Et Butonu -->
-                    <button type="button" class="submit-btn google-btn" onclick="handleGoogleAuth()" id="dc-google-btn" style="width: 100%;">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
-                        <span id="dc-google-btn-text">Continue with Google</span>
-                    </button>
+                    <!-- GOOGLE İLE DEVAM ET BUTONU KALDIRILDI -->
                 </div>
             </form>
         </div>
@@ -1965,6 +1954,20 @@
             }
         }
 
+        // YENİ: PROFİL GİZLİLİK FONKSİYONU
+        function toggleProfilePrivacy() {
+            const detailsContainer = document.getElementById('profileDetailsContainer');
+            const privacyIcon = document.getElementById('privacyIcon');
+            
+            if (detailsContainer.style.display === 'none') {
+                detailsContainer.style.display = 'flex';
+                privacyIcon.className = 'fa-solid fa-eye';
+            } else {
+                detailsContainer.style.display = 'none';
+                privacyIcon.className = 'fa-solid fa-eye-slash';
+            }
+        }
+
         function scrollPageDown() {
             window.scrollBy({
                 top: 450,
@@ -2086,35 +2089,7 @@
             reader.readAsDataURL(file);
         }
 
-        // Google ile Giriş Simülasyonu
-        function handleGoogleAuth() {
-            const modalLangText = document.getElementById('contactModalCurrentLangText').innerText.toLowerCase();
-            const t = modalTranslations[modalLangText] || modalTranslations.en;
-
-            const googleUser = {
-                name: "Google User",
-                username: "@google_user",
-                email: "google.user@gmail.com",
-                password: "google_oauth_placeholder",
-                birthDay: "01",
-                birthMonth: "01",
-                birthYear: "1990",
-                profilePhoto: "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-            };
-
-            let users = JSON.parse(localStorage.getItem('site_users') || '[]');
-            const existing = users.find(u => u.email === googleUser.email);
-            if (!existing) {
-                users.push(googleUser);
-                localStorage.setItem('site_users', JSON.stringify(users));
-            }
-            
-            localStorage.setItem('logged_user', JSON.stringify(googleUser));
-            
-            showCustomAlert(t.successSignin || "Signed in successfully with Google!");
-            closeDirectContactModal();
-            checkUserSession();
-        }
+        // Google Girişi Fonksiyonu Kaldırıldı
 
         const translations = {
             en: {
@@ -2682,7 +2657,7 @@
             document.getElementById('dc-title').innerText = data.contactHeaderTitle;
             document.getElementById('tabSigninBtn').innerText = data.signinBtn;
             document.getElementById('tabSignupBtn').innerText = data.signupBtn;
-            document.getElementById('dc-google-btn-text').innerText = data.googleBtn;
+            // Google btn text güncellemesi kaldırıldı
 
             document.getElementById('dc-label-name').innerText = data.nameLabel;
             if(document.getElementById('contactClientName')) document.getElementById('contactClientName').placeholder = data.namePlaceholder;
@@ -2840,6 +2815,11 @@
                     if (contactSubEl) contactSubEl.innerText = "Active Session";
                     if (contactMainEl) contactMainEl.innerText = userObj.name ? `Hoş geldiniz, ${userObj.name}` : "Oturum Açık";
                     if (authBoxIcon) authBoxIcon.className = "fa-solid fa-user-check";
+                    
+                    // Gizlilik butonunu sıfırla (görünür yap)
+                    document.getElementById('profileDetailsContainer').style.display = 'flex';
+                    document.getElementById('privacyIcon').className = 'fa-solid fa-eye';
+                    
                 } catch(e) {}
             } else {
                 if (profileSection) profileSection.style.display = 'none';
@@ -2848,6 +2828,36 @@
                 if (contactMainEl) contactMainEl.innerText = "Sign in to join us";
                 if (authBoxIcon) authBoxIcon.className = "fa-solid fa-right-to-bracket";
             }
+        }
+
+        // YENİ: ÇIKIŞ ONAY FONKSİYONU
+        function confirmLogout() {
+            const modalLangText = document.getElementById('modalCurrentLangText').innerText.toLowerCase();
+            const mainLangText = document.getElementById('currentLangText').innerText.toLowerCase();
+            const currentModalLang = modalTranslations[modalLangText] ? modalLangText : (modalTranslations[mainLangText] ? mainLangText : 'en');
+            const t = modalTranslations[currentModalLang] || modalTranslations.en;
+
+            // Custom alert kullanarak onay isteyelim
+            const alertBox = document.getElementById('customAlertModal');
+            const alertMsg = document.getElementById('customAlertMessage');
+            const alertBtn = document.getElementById('customAlertBtn');
+            
+            // Mevcut alert içeriğini değiştir
+            alertMsg.innerText = "Çıkış yapmak istediğinizden emin misiniz?";
+            
+            // Alert butonunu geçici olarak değiştir
+            const originalOnClick = alertBtn.onclick;
+            alertBtn.innerHTML = '<i class="fa-solid fa-door-open"></i> Çıkış Yap';
+            alertBtn.onclick = function() {
+                // Orijinal alert butonunu geri yükle
+                alertBtn.innerHTML = 'OK';
+                alertBtn.onclick = originalOnClick;
+                closeCustomAlert();
+                handleLogout();
+            };
+            
+            // Alert'i göster
+            alertBox.classList.add('active');
         }
 
         function handleLogout() {
