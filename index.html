@@ -263,7 +263,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .user-card-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,rgba(147,51,234,.15),rgba(192,132,252,.08));border:1px solid rgba(147,51,234,.3);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;color:#9333ea;flex-shrink:0;overflow:hidden}
 .user-card-avatar img{width:100%;height:100%;object-fit:cover}
 .user-card-info{flex:1;min-width:0}
-.user-card-name{font-size:.85rem;font-weight:800;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.user-card-name{font-size:.85rem;font-weight:800;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:4px}
 .user-card-detail{font-size:.68rem;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
 .user-card-detail i{color:#9333ea;margin-right:3px;width:10px;text-align:center}
 .user-card-btns{display:flex;gap:4px;flex-shrink:0}
@@ -285,6 +285,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .activity-item.password_reset{border-left-color:#eab308}
 .activity-item.apk_blocked{border-left-color:#ef4444}
 .activity-item.chat_message{border-left-color:#22d3ee}
+.activity-item.voice_message{border-left-color:#a855f7}
 .activity-icon{width:30px;height:30px;border-radius:50%;background:rgba(147,51,234,.1);display:flex;align-items:center;justify-content:center;color:#9333ea;font-size:.75rem;flex-shrink:0}
 .activity-body{flex:1;min-width:0}
 .activity-title{font-size:.8rem;font-weight:800;color:var(--text-primary);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
@@ -310,8 +311,8 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .chat-user-avatar.small{width:34px;height:34px;font-size:.9rem}
 .chat-user-avatar img{width:100%;height:100%;object-fit:cover}
 .chat-user-info{flex:1;min-width:0}
-.chat-user-name{font-size:.88rem;font-weight:700;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.chat-user-preview{font-size:.72rem;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.chat-user-name{font-size:.88rem;font-weight:700;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:4px}
+.chat-user-preview{font-size:.72rem;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;display:flex;align-items:center;gap:3px}
 .chat-user-username{font-size:.68rem;color:#9333ea;font-weight:600;margin-top:2px}
 .chat-unread-badge{background:#ef4444;color:#fff;font-size:.6rem;font-weight:800;min-width:20px;height:20px;padding:0 6px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .chat-empty{text-align:center;padding:40px 20px;color:var(--text-secondary);font-size:.85rem;opacity:.7}
@@ -322,7 +323,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .chat-profile-btn{background:transparent;border:1px solid var(--line-color);color:#9333ea;cursor:pointer;font-size:.8rem;padding:6px 10px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
 .chat-profile-btn:hover{background:var(--box-hover-bg);border-color:rgba(147,51,234,.5)}
 .chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:8px;min-height:280px;max-height:52vh;background:var(--bg-color)}
-.chat-msg{max-width:75%;display:flex;flex-direction:column;gap:2px;word-wrap:break-word}
+.chat-msg{max-width:78%;display:flex;flex-direction:column;gap:2px;word-wrap:break-word}
 .chat-msg.mine{align-self:flex-end;align-items:flex-end}
 .chat-msg.theirs{align-self:flex-start;align-items:flex-start}
 .chat-msg-text{padding:10px 14px;border-radius:16px;font-size:.85rem;line-height:1.4;word-break:break-word;white-space:pre-wrap}
@@ -335,11 +336,40 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .chat-send-btn{width:42px;height:42px;border-radius:50%;border:none;background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;box-shadow:0 4px 15px rgba(147,51,234,.35);transition:transform .2s}
 .chat-send-btn:hover{transform:scale(1.06)}
 .chat-send-btn:active{transform:scale(.95)}
+/* VOICE MESSAGE */
+.chat-mic-btn{width:42px;height:42px;border-radius:50%;background:var(--box-bg);border:1px solid var(--line-color);color:#9333ea;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;transition:all .2s}
+.chat-mic-btn:hover{border-color:rgba(147,51,234,.5);background:var(--box-hover-bg);transform:scale(1.05)}
+.chat-mic-btn:disabled{opacity:.4;cursor:not-allowed}
+.chat-voice-msg{display:flex;align-items:center;gap:8px;padding:6px 10px;min-width:200px}
+.chat-voice-msg audio{height:34px;width:100%;max-width:240px;outline:none}
+.chat-msg.mine .chat-voice-msg{background:linear-gradient(135deg,#9333ea,#c084fc);border-radius:16px;border-bottom-right-radius:4px}
+.chat-msg.theirs .chat-voice-msg{background:var(--box-bg);border:1px solid var(--line-color);border-radius:16px;border-bottom-left-radius:4px}
+.voice-duration{font-size:.68rem;color:var(--text-secondary);flex-shrink:0;font-family:'Fira Code',monospace}
+.chat-msg.mine .voice-duration{color:rgba(255,255,255,.85)}
+/* RECORDING OVERLAY */
+.recording-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(5,5,8,.82);backdrop-filter:blur(10px);z-index:26000;display:none;flex-direction:column;justify-content:center;align-items:center;gap:22px;padding:20px}
+.recording-overlay.active{display:flex}
+.recording-pulse{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#ef4444,#dc2626);display:flex;align-items:center;justify-content:center;color:#fff;font-size:2.6rem;position:relative;box-shadow:0 10px 40px rgba(239,68,68,.5)}
+.recording-pulse::before,.recording-pulse::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid rgba(239,68,68,.5);animation:recPulse 1.6s ease-out infinite}
+.recording-pulse::after{animation-delay:.8s}
+@keyframes recPulse{0%{transform:scale(1);opacity:.85}100%{transform:scale(1.7);opacity:0}}
+.recording-timer{color:#fff;font-size:1.6rem;font-weight:800;font-family:'Fira Code',monospace;letter-spacing:1px}
+.recording-hint{color:#94a3b8;font-size:.82rem;text-align:center;max-width:260px}
+.recording-actions{display:flex;gap:22px;margin-top:6px}
+.recording-btn{width:62px;height:62px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.35rem;color:#fff;transition:transform .2s;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.recording-btn:hover{transform:scale(1.08)}
+.recording-btn:active{transform:scale(.95)}
+.recording-btn.cancel{background:var(--modal-container-bg);border:1px solid rgba(239,68,68,.4);color:#ef4444}
+.recording-btn.send{background:linear-gradient(135deg,#22c55e,#16a34a)}
+.chat-recording-indicator{display:none;align-items:center;gap:6px;padding:0 6px;font-size:.7rem;color:#ef4444;font-weight:800;font-family:'Fira Code',monospace}
+.chat-recording-indicator.active{display:flex}
+.chat-recording-indicator .rec-dot{width:7px;height:7px;border-radius:50%;background:#ef4444;animation:blinkDot .8s infinite}
+@keyframes blinkDot{0%,100%{opacity:1}50%{opacity:.25}}
 /* PUBLIC PROFILE */
 .pub-profile-view{display:flex;flex-direction:column;align-items:center;gap:14px;padding:8px 0 4px}
-.pub-profile-avatar{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:2.4rem;font-weight:800;overflow:hidden;border:3px solid rgba(147,51,234,.4);box-shadow:0 8px 30px rgba(147,51,234,.25)}
+.pub-profile-avatar{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:2.4rem;font-weight:800;overflow:hidden;border:3px solid rgba(147,51,234,.4);box-shadow:0 8px 30px rgba(147,51,234,.25);position:relative}
 .pub-profile-avatar img{width:100%;height:100%;object-fit:cover}
-.pub-profile-name{font-size:1.25rem;font-weight:800;background:linear-gradient(270deg,#9333ea,#c084fc,#e879f9,#c084fc,#9333ea);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientFlow 8s ease infinite;text-align:center;word-break:break-word}
+.pub-profile-name{font-size:1.25rem;font-weight:800;background:linear-gradient(270deg,#9333ea,#c084fc,#e879f9,#c084fc,#9333ea);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientFlow 8s ease infinite;text-align:center;word-break:break-word;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
 .pub-profile-username{font-size:.85rem;color:#9333ea;font-weight:700;margin-top:-6px}
 .pub-profile-info{width:100%;background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;padding:12px;margin-top:4px}
 .pub-profile-info-row{display:flex;justify-content:space-between;align-items:center;padding:8px 4px;font-size:.82rem;gap:10px;border-bottom:1px solid var(--line-color)}
@@ -351,11 +381,21 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .pub-profile-actions button{flex:1;padding:11px;border-radius:10px;font-weight:700;font-size:.8rem;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:6px}
 .pub-btn-msg{background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff}
 .pub-btn-close{background:var(--box-bg);color:var(--text-primary);border:1px solid var(--line-color) !important}
+/* VERIFIED BADGE */
+.verified-badge{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:linear-gradient(135deg,#1d9bf0,#1a8cd8);color:#fff;font-size:.5rem;flex-shrink:0;box-shadow:0 2px 6px rgba(29,155,240,.45);vertical-align:middle;line-height:1;position:relative}
+.verified-badge i{color:#fff;font-size:.5rem;line-height:1}
+.verified-badge.lg{width:20px;height:20px}
+.verified-badge.lg i{font-size:.7rem}
+.verified-badge.sm{width:13px;height:13px}
+.verified-badge.sm i{font-size:.42rem}
+.verified-badge::after{content:'';position:absolute;inset:-1px;border-radius:50%;border:1px solid rgba(255,255,255,.35);pointer-events:none}
 @media (max-width:640px){
   .chat-container{max-width:100% !important;border-radius:16px !important}
   .chat-users-list{max-height:70vh}
   .chat-messages{max-height:60vh}
   .user-view-btn{width:28px;height:28px;font-size:.68rem}
+  .chat-mic-btn{width:38px;height:38px;font-size:.85rem}
+  .chat-send-btn{width:38px;height:38px;font-size:.85rem}
 }
 </style>
 <script>(function(){const t=localStorage.getItem('theme');const h=new Date().getHours();let th=t||((h>=6&&h<18)?'light':'dark');if(th==='light'){document.documentElement.classList.add('light-mode-init');document.addEventListener('DOMContentLoaded',()=>{document.body.classList.add('light-mode');['themeIcon','modalThemeIcon','contactModalThemeIcon'].forEach(id=>{const e=document.getElementById(id);if(e)e.className='fa-solid fa-sun';});});}})();</script>
@@ -524,10 +564,22 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="chat-messages" id="chatMessages"></div>
 <div class="chat-input-row">
 <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." maxlength="1000" onkeydown="if(event.key==='Enter')sendChatMessage()">
+<button class="chat-mic-btn" id="chatMicBtn" onclick="startVoiceRecording()" title="Sesli Mesaj"><i class="fa-solid fa-microphone"></i></button>
 <button class="chat-send-btn" onclick="sendChatMessage()" title="Send"><i class="fa-solid fa-paper-plane"></i></button>
 </div>
 </div>
 </div>
+</div>
+</div>
+
+<!-- VOICE RECORDING OVERLAY -->
+<div class="recording-overlay" id="recordingOverlay">
+<div class="recording-pulse"><i class="fa-solid fa-microphone"></i></div>
+<div class="recording-timer" id="recordingTimer">00:00</div>
+<div class="recording-hint" id="recordingHint">Kayıt yapılıyor... Göndermek için yeşil butona, iptal için kırmızı butona bas.</div>
+<div class="recording-actions">
+<button class="recording-btn cancel" onclick="cancelVoiceRecording()" title="İptal"><i class="fa-solid fa-xmark"></i></button>
+<button class="recording-btn send" onclick="stopVoiceRecording()" title="Gönder"><i class="fa-solid fa-paper-plane"></i></button>
 </div>
 </div>
 
@@ -608,6 +660,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <button class="filter-chip" data-type="apk_download" onclick="filterActivity('apk_download',this)">APK</button>
 <button class="filter-chip" data-type="apk_blocked" onclick="filterActivity('apk_blocked',this)">APK Blocked</button>
 <button class="filter-chip" data-type="chat_message" onclick="filterActivity('chat_message',this)">Chat</button>
+<button class="filter-chip" data-type="voice_message" onclick="filterActivity('voice_message',this)">Voice</button>
 <button class="filter-chip" data-type="password_change" onclick="filterActivity('password_change',this)">Pass</button>
 <button class="filter-chip" data-type="profile_update" onclick="filterActivity('profile_update',this)">Profile</button>
 </div>
@@ -1087,7 +1140,7 @@ function initConfettiCanvas(){if(confettiCanvas&&confettiCtx)return true;confett
 function fireConfettiBurst(i=1){if(!initConfettiCanvas())return;confettiCanvas.style.display='block';confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;const n=Math.floor(160*i),cx=window.innerWidth/2,cy=window.innerHeight/2;for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*16+8;confettiParticles.push({x:cx,y:cy,vx:Math.cos(a)*s,vy:Math.sin(a)*s-3,size:Math.random()*10+5,color:CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.32+Math.random()*.15,drag:.985,life:1,shape:Math.random()>.5?'rect':(Math.random()>.5?'circle':'triangle')});}if(!confettiRunning){confettiRunning=true;animateConfetti();}if(confettiStopTimer)clearTimeout(confettiStopTimer);confettiStopTimer=setTimeout(()=>{confettiRunning=false;},5000);}
 function animateConfetti(){if(!confettiCanvas||!confettiCtx)return;confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);let a=false;for(let i=0;i<confettiParticles.length;i++){const p=confettiParticles[i];if(p.life<=0)continue;a=true;p.vy+=p.gravity;p.vx*=p.drag;p.vy*=p.drag;p.x+=p.vx;p.y+=p.vy;p.rotation+=p.rotationSpeed;p.life-=.006;if(p.y>confettiCanvas.height+100)p.life=0;if(p.x<-100||p.x>confettiCanvas.width+100)p.life=0;confettiCtx.save();confettiCtx.translate(p.x,p.y);confettiCtx.rotate(p.rotation);confettiCtx.globalAlpha=Math.max(0,Math.min(1,p.life));confettiCtx.fillStyle=p.color;if(p.shape==='rect'){confettiCtx.fillRect(-p.size/2,-p.size/4,p.size,p.size/2);}else if(p.shape==='circle'){confettiCtx.beginPath();confettiCtx.arc(0,0,p.size/2,0,Math.PI*2);confettiCtx.fill();}else{confettiCtx.beginPath();confettiCtx.moveTo(0,-p.size/2);confettiCtx.lineTo(p.size/2,p.size/2);confettiCtx.lineTo(-p.size/2,p.size/2);confettiCtx.closePath();confettiCtx.fill();}confettiCtx.restore();}if(confettiParticles.length>500)confettiParticles=confettiParticles.filter(p=>p.life>0);if(a||confettiRunning)requestAnimationFrame(animateConfetti);else{confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);confettiCanvas.style.display='none';confettiParticles=[];}}
 
-document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.scroll-down-action-btn,.chat-toggle-btn,.chat-user-item,.chat-send-btn,.chat-back-btn,.chat-profile-btn,.modal-close-btn,.profile-action-btn,.auth-tab-btn,.ratio-btn,.btn-crop-cancel,.btn-crop-apply,.photo-action-buttons button,.social-btn,.lightbox-close-btn,.copy-pass-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.pub-profile-actions button');if(b)playTickSound();},true);
+document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.scroll-down-action-btn,.chat-toggle-btn,.chat-user-item,.chat-send-btn,.chat-back-btn,.chat-profile-btn,.modal-close-btn,.profile-action-btn,.auth-tab-btn,.ratio-btn,.btn-crop-cancel,.btn-crop-apply,.photo-action-buttons button,.social-btn,.lightbox-close-btn,.copy-pass-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.pub-profile-actions button,.chat-mic-btn,.recording-btn');if(b)playTickSound();},true);
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('keydown',e=>{
     const cropOpen=document.getElementById('cropModal').classList.contains('active');if(cropOpen)return;
@@ -1096,8 +1149,18 @@ document.addEventListener('keydown',e=>{
 });
 const curtain=document.getElementById('security-curtain');
 function showSecurityCurtain(){curtain.style.opacity='1';curtain.style.visibility='visible';setTimeout(()=>{curtain.style.opacity='0';curtain.style.visibility='hidden';},1000);document.activeElement?.blur();}
-window.addEventListener('blur',()=>{if(document.getElementById('cropModal').classList.contains('active'))return;curtain.style.opacity='1';curtain.style.visibility='visible';});
+window.addEventListener('blur',()=>{if(document.getElementById('cropModal').classList.contains('active'))return;if(document.getElementById('recordingOverlay').classList.contains('active'))return;curtain.style.opacity='1';curtain.style.visibility='visible';});
 window.addEventListener('focus',()=>{curtain.style.opacity='0';curtain.style.visibility='hidden';});
+
+/* ============================================================
+   ⭐ VERIFIED BADGE HELPERS
+   ============================================================ */
+const ADMIN_EMAIL='admin@muminsultani.com';
+function isAdminUser(email){return String(email||'').toLowerCase().trim()===ADMIN_EMAIL;}
+function getVerifiedBadgeHTML(size){
+    const cls='verified-badge'+(size?(' '+size):'');
+    return `<span class="${cls}" title="Verified" aria-label="Verified"><i class="fa-solid fa-check"></i></span>`;
+}
 
 /* ============================================================
    🔐 ACTIVITY LOG SYSTEM
@@ -1183,6 +1246,7 @@ function openChatPanel(){
 function closeChatPanel(){
     document.getElementById('chatPanelModal').classList.remove('active');
     activeChatUser=null;
+    stopRecordingUI();
 }
 function renderChatUsersList(){
     const lu=localStorage.getItem('logged_user');if(!lu)return;
@@ -1218,13 +1282,18 @@ function renderChatUsersList(){
         let preview=t.chatNoMessages||'No messages yet';
         if(last){
             const who=String(last.from).toLowerCase()===String(u.email).toLowerCase()?(t.chatYou||'You')+': ':'';
-            preview=who+last.text;
+            if(last.type==='voice'){
+                preview=who+'🎤 '+(currentLang==='tr'?'Sesli mesaj':'Voice message');
+            }else{
+                preview=who+last.text;
+            }
         }
         const uname=String(x.username||'').replace(/^@/,'');
+        const vBadge=isAdminUser(x.email)?getVerifiedBadgeHTML('sm'):'';
         item.innerHTML=`
             <div class="chat-user-avatar">${av}</div>
             <div class="chat-user-info">
-                <div class="chat-user-name">${escapeHtml(x.name||'User')}</div>
+                <div class="chat-user-name">${escapeHtml(x.name||'User')}${vBadge}</div>
                 ${uname?`<div class="chat-user-username">@${escapeHtml(uname)}</div>`:''}
                 <div class="chat-user-preview">${escapeHtml(preview).substring(0,60)}</div>
             </div>
@@ -1260,11 +1329,12 @@ function renderChatConvHeader(){
     const av=activeChatUser.profilePhoto?`<img src="${activeChatUser.profilePhoto}" alt="">`:(activeChatUser.name?escapeHtml(activeChatUser.name.trim().charAt(0).toUpperCase()):'?');
     const uname=String(activeChatUser.username||'').replace(/^@/,'');
     const safeEmail=escapeHtml(activeChatUser.email||'');
+    const vBadge=isAdminUser(activeChatUser.email)?getVerifiedBadgeHTML(''):'';
     h.innerHTML=`
         <button class="chat-back-btn" onclick="backToUsersList()" title="Back"><i class="fa-solid fa-arrow-left"></i></button>
         <div class="chat-user-avatar small profile-tap" data-email="${safeEmail}" style="cursor:pointer">${av}</div>
         <div style="flex:1;min-width:0;cursor:pointer" class="profile-tap" data-email="${safeEmail}" title="View profile">
-            <div class="chat-user-name">${escapeHtml(activeChatUser.name||'User')}</div>
+            <div class="chat-user-name">${escapeHtml(activeChatUser.name||'User')}${vBadge}</div>
             ${uname?`<div class="chat-user-username">@${escapeHtml(uname)}</div>`:''}
         </div>
         <button class="chat-profile-btn" onclick="openPublicUserProfile('${safeEmail}')" title="View Profile"><i class="fa-solid fa-user-circle"></i></button>
@@ -1301,10 +1371,31 @@ function renderChatMessages(){
         div.className='chat-msg '+(isMine?'mine':'theirs');
         const d=new Date(m.timestamp);
         const time=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
-        div.innerHTML=`<div class="chat-msg-text">${escapeHtml(m.text)}</div><div class="chat-msg-time">${time}</div>`;
-        box.appendChild(div);
+        if(m.type==='voice'){
+            const dur=m.duration?formatDuration(m.duration):'';
+            div.innerHTML=`<div class="chat-voice-msg">
+                <audio controls preload="metadata" data-audioid="${escapeHtml(m.audioId||'')}"></audio>
+                <span class="voice-duration">${dur}</span>
+            </div><div class="chat-msg-time">${time}</div>`;
+            box.appendChild(div);
+            const audioEl=div.querySelector('audio');
+            if(audioEl&&m.audioId){
+                loadVoiceMessageAudio(m.audioId).then(url=>{
+                    if(url){audioEl.src=url;}
+                    else{audioEl.closest('.chat-voice-msg').innerHTML='<span style="font-size:.72rem;color:#ef4444;">⚠️ Audio unavailable</span>';}
+                });
+            }
+        }else{
+            div.innerHTML=`<div class="chat-msg-text">${escapeHtml(m.text||'')}</div><div class="chat-msg-time">${time}</div>`;
+            box.appendChild(div);
+        }
     });
     box.scrollTop=box.scrollHeight;
+}
+function formatDuration(sec){
+    sec=Math.max(0,Math.floor(sec));
+    const m=Math.floor(sec/60),s=sec%60;
+    return m+':'+String(s).padStart(2,'0');
 }
 function sendChatMessage(){
     const lu=localStorage.getItem('logged_user');
@@ -1320,6 +1411,7 @@ function sendChatMessage(){
     const newMsg={
         from:u.email,to:activeChatUser.email,
         fromName:u.name||'',fromUsername:u.username||'',
+        type:'text',
         text:text.substring(0,1000),
         timestamp:new Date().toISOString(),read:false
     };
@@ -1329,9 +1421,142 @@ function sendChatMessage(){
     renderChatMessages();
     logActivity('chat_message',u,`To @${String(activeChatUser.username||'').replace(/^@/,'')||activeChatUser.email}: ${text.substring(0,60)}`);
 }
+
+/* ============================================================
+   🎤 VOICE MESSAGE RECORDING
+   ============================================================ */
+let mediaRecorder=null;
+let recordingChunks=[];
+let recordingStream=null;
+let recordingStartTime=0;
+let recordingTimerInterval=null;
+let recordingCancelled=false;
+const MAX_RECORD_SECONDS=60;
+
+function generateVoiceId(){
+    return 'v_'+Date.now()+'_'+Math.random().toString(36).substring(2,9);
+}
+
+async function startVoiceRecording(){
+    const lu=localStorage.getItem('logged_user');
+    if(!lu||!activeChatUser){const t=modalTranslations[currentLang]||modalTranslations.en;showCustomAlert(t.authRequiredAlert||'You must sign in first!');return;}
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+        showCustomAlert(currentLang==='tr'?'Tarayıcınız ses kaydını desteklemiyor!':'Your browser does not support audio recording!');
+        return;
+    }
+    try{
+        recordingStream=await navigator.mediaDevices.getUserMedia({audio:true});
+    }catch(err){
+        console.warn('Mic error:',err);
+        showCustomAlert(currentLang==='tr'?'Mikrofon izni reddedildi veya kullanılamıyor.':'Microphone permission denied or unavailable.');
+        return;
+    }
+    let mimeType='';
+    const candidates=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus','audio/ogg',''];
+    for(const c of candidates){
+        if(c==='' || (window.MediaRecorder&&MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(c))){mimeType=c;break;}
+    }
+    try{
+        mediaRecorder=mimeType?new MediaRecorder(recordingStream,{mimeType}):new MediaRecorder(recordingStream);
+    }catch(e){
+        try{mediaRecorder=new MediaRecorder(recordingStream);}catch(e2){showCustomAlert(currentLang==='tr'?'Kayıt başlatılamadı.':'Could not start recording.');stopRecordingStream();return;}
+    }
+    recordingChunks=[];
+    recordingCancelled=false;
+    mediaRecorder.ondataavailable=(e)=>{if(e.data&&e.data.size>0)recordingChunks.push(e.data);};
+    mediaRecorder.onstop=async ()=>{
+        const wasCancelled=recordingCancelled;
+        const duration=(Date.now()-recordingStartTime)/1000;
+        stopRecordingStream();
+        if(wasCancelled){recordingChunks=[];return;}
+        if(recordingChunks.length===0){showCustomAlert(currentLang==='tr'?'Kayıt çok kısa!':'Recording too short!');return;}
+        const blob=new Blob(recordingChunks,{type:mediaRecorder.mimeType||'audio/webm'});
+        recordingChunks=[];
+        await saveAndSendVoiceMessage(blob,duration);
+    };
+    try{
+        mediaRecorder.start();
+    }catch(e){
+        showCustomAlert(currentLang==='tr'?'Kayıt başlatılamadı.':'Could not start recording.');
+        stopRecordingStream();return;
+    }
+    recordingStartTime=Date.now();
+    document.getElementById('recordingOverlay').classList.add('active');
+    const micBtn=document.getElementById('chatMicBtn');if(micBtn)micBtn.disabled=true;
+    updateRecordingTimer();
+    recordingTimerInterval=setInterval(()=>{
+        updateRecordingTimer();
+        const elapsed=(Date.now()-recordingStartTime)/1000;
+        if(elapsed>=MAX_RECORD_SECONDS){stopVoiceRecording();}
+    },200);
+}
+function updateRecordingTimer(){
+    const el=document.getElementById('recordingTimer');
+    if(!el)return;
+    const elapsed=Math.floor((Date.now()-recordingStartTime)/1000);
+    el.textContent=formatDuration(elapsed);
+}
+function stopRecordingStream(){
+    if(recordingTimerInterval){clearInterval(recordingTimerInterval);recordingTimerInterval=null;}
+    if(recordingStream){try{recordingStream.getTracks().forEach(t=>t.stop());}catch(e){}recordingStream=null;}
+    document.getElementById('recordingOverlay').classList.remove('active');
+    const micBtn=document.getElementById('chatMicBtn');if(micBtn)micBtn.disabled=false;
+}
+function stopVoiceRecording(){
+    if(mediaRecorder&&mediaRecorder.state==='recording'){try{mediaRecorder.stop();}catch(e){}}
+    else{stopRecordingStream();}
+}
+function cancelVoiceRecording(){
+    recordingCancelled=true;
+    if(mediaRecorder&&mediaRecorder.state==='recording'){try{mediaRecorder.stop();}catch(e){}}
+    else{stopRecordingStream();}
+}
+function stopRecordingUI(){if(mediaRecorder&&mediaRecorder.state==='recording'){recordingCancelled=true;try{mediaRecorder.stop();}catch(e){}}stopRecordingStream();}
+
+async function saveAndSendVoiceMessage(blob,duration){
+    const lu=localStorage.getItem('logged_user');
+    if(!lu||!activeChatUser)return;
+    let u;try{u=JSON.parse(lu);}catch(e){return;}
+    const audioId=generateVoiceId();
+    try{
+        await storeVoiceMessage(audioId,blob);
+    }catch(e){
+        console.error('Voice store error:',e);
+        showCustomAlert(currentLang==='tr'?'Ses kaydedilemedi!':'Could not save voice!');
+        return;
+    }
+    const msgs=getChatMessages();
+    const convId=getConversationId(u.email,activeChatUser.email);
+    if(!msgs[convId])msgs[convId]=[];
+    const newMsg={
+        from:u.email,to:activeChatUser.email,
+        fromName:u.name||'',fromUsername:u.username||'',
+        type:'voice',
+        audioId:audioId,
+        duration:Math.round(duration*10)/10,
+        mimeType:blob.type||'audio/webm',
+        timestamp:new Date().toISOString(),read:false
+    };
+    msgs[convId].push(newMsg);
+    saveChatMessages(msgs);
+    renderChatMessages();
+    logActivity('voice_message',u,`To @${String(activeChatUser.username||'').replace(/^@/,'')||activeChatUser.email}: ${formatDuration(duration)} voice message`);
+}
+async function loadVoiceMessageAudio(audioId){
+    try{
+        const rec=await getVoiceMessage(audioId);
+        if(!rec||!rec.blob)return null;
+        let blob;
+        if(rec.blob instanceof Blob){blob=rec.blob;}
+        else{const byteArray=new Uint8Array(rec.blob);blob=new Blob([byteArray],{type:rec.type||'audio/webm'});}
+        return URL.createObjectURL(blob);
+    }catch(e){console.warn('Audio load error:',e);return null;}
+}
+
 function clearAllChats(){
     showCustomAlert(currentLang==='tr'?'Tüm sohbet mesajları silinecek! Emin misiniz?':'All chat messages will be deleted! Are you sure?','delete',function(){
         localStorage.removeItem(CHAT_KEY);
+        clearAllVoiceMessages().catch(()=>{});
         updateChatBadge();
         renderAdminChats();
         refreshAdminUI();
@@ -1340,11 +1565,12 @@ function clearAllChats(){
 }
 function exportChatsCSV(){
     const msgs=getChatMessages();
-    const rows=[['Conversation','From','To','From Name','From Username','Message','Timestamp','Read']];
+    const rows=[['Conversation','From','To','From Name','From Username','Type','Message','Timestamp','Read']];
     let count=0;
     for(const convId in msgs){
         msgs[convId].forEach(m=>{
-            rows.push([convId,m.from,m.to,m.fromName||'',m.fromUsername||'',m.text,m.timestamp,m.read?'Yes':'No']);
+            const body=m.type==='voice'?`[VOICE ${m.duration||0}s]`:(m.text||'');
+            rows.push([convId,m.from,m.to,m.fromName||'',m.fromUsername||'',m.type||'text',body,m.timestamp,m.read?'Yes':'No']);
             count++;
         });
     }
@@ -1389,9 +1615,10 @@ function renderAdminChats(){
         msgsWrap.style.cssText='max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;';
         conv.slice(-30).forEach(m=>{
             const isRead=m.read?'✓✓':'✓';
+            const body=m.type==='voice'?`🎤 <em>${currentLang==='tr'?'Sesli mesaj':'Voice message'} (${formatDuration(m.duration||0)})</em>`:escapeHtml(m.text||'');
             const row=document.createElement('div');
             row.style.cssText='font-size:.7rem;padding:6px 8px;background:var(--box-bg);border-radius:8px;border:1px solid var(--line-color);';
-            row.innerHTML=`<div style="display:flex;justify-content:space-between;gap:6px;margin-bottom:2px;"><strong style="color:#9333ea;font-size:.65rem;">${escapeHtml(m.fromName||m.from)}</strong><span style="color:var(--text-secondary);font-size:.6rem;">${new Date(m.timestamp).toLocaleString()} ${isRead}</span></div><div style="color:var(--text-primary);word-break:break-word;">${escapeHtml(m.text)}</div>`;
+            row.innerHTML=`<div style="display:flex;justify-content:space-between;gap:6px;margin-bottom:2px;"><strong style="color:#9333ea;font-size:.65rem;">${escapeHtml(m.fromName||m.from)}</strong><span style="color:var(--text-secondary);font-size:.6rem;">${new Date(m.timestamp).toLocaleString()} ${isRead}</span></div><div style="color:var(--text-primary);word-break:break-word;">${body}</div>`;
             msgsWrap.appendChild(row);
         });
         block.appendChild(msgsWrap);
@@ -1416,12 +1643,13 @@ function openPublicUserProfile(email){
     if(u.birthDay&&u.birthMonth&&u.birthYear)birth=`${u.birthDay}/${u.birthMonth}/${u.birthYear}`;
     const myEmail=String((JSON.parse(lu)||{}).email||'').toLowerCase();
     const isSelf=myEmail===String(u.email||'').toLowerCase();
+    const vBadge=isAdminUser(u.email)?getVerifiedBadgeHTML('lg'):'';
     const msgBtnHTML=isSelf?'':`<button class="pub-btn-msg" onclick="messageFromProfile()"><i class="fa-solid fa-comments"></i> <span>${currentLang==='tr'?'Mesaj Gönder':'Send Message'}</span></button>`;
     document.getElementById('pub-profile-title').innerText=currentLang==='tr'?'Kullanıcı Profili':'User Profile';
     document.getElementById('publicUserProfileContent').innerHTML=`
         <div class="pub-profile-view">
             <div class="pub-profile-avatar">${av}</div>
-            <div class="pub-profile-name">${escapeHtml(u.name||'User')}</div>
+            <div class="pub-profile-name">${escapeHtml(u.name||'User')}${vBadge}</div>
             ${uname?`<div class="pub-profile-username">@${escapeHtml(uname)}</div>`:''}
             <div class="pub-profile-info">
                 ${u.email?`<div class="pub-profile-info-row"><span><i class="fa-solid fa-envelope"></i>${currentLang==='tr'?'E-posta':'Email'}</span><span>${escapeHtml(u.email)}</span></div>`:''}
@@ -1520,10 +1748,11 @@ function renderAdminUsers(){
         card.className='user-card';
         const avatar=u.profilePhoto?`<img src="${u.profilePhoto}" alt="">`:(u.name?u.name.trim().charAt(0).toUpperCase():'?');
         const safeEmail=escapeHtml(String(u.email||''));
+        const vBadge=isAdminUser(u.email)?getVerifiedBadgeHTML('sm'):'';
         card.innerHTML=`
             <div class="user-card-avatar">${avatar}</div>
             <div class="user-card-info">
-                <div class="user-card-name">${escapeHtml(u.name||'Unknown')}</div>
+                <div class="user-card-name">${escapeHtml(u.name||'Unknown')}${vBadge}</div>
                 <div class="user-card-detail"><i class="fa-solid fa-at"></i>${escapeHtml(u.username||'-')}</div>
                 <div class="user-card-detail"><i class="fa-solid fa-envelope"></i>${escapeHtml(u.email||'-')}</div>
             </div>
@@ -1541,9 +1770,10 @@ function viewUserDetail(idx){
     const u=users[idx];if(!u)return;
     const logs=getActivityLog().filter(l=>l.email===u.email);
     const avatar=u.profilePhoto?`<img src="${u.profilePhoto}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid rgba(147,51,234,.4);margin-bottom:10px;display:block;" alt="">`:'';
+    const vBadge=isAdminUser(u.email)?getVerifiedBadgeHTML('lg'):'';
     let rows=`
         <div style="text-align:center;margin-bottom:16px;">${avatar}
-            <div style="font-size:1.1rem;font-weight:800;color:var(--text-primary);">${escapeHtml(u.name||'Unknown')}</div>
+            <div style="font-size:1.1rem;font-weight:800;color:var(--text-primary);display:flex;align-items:center;justify-content:center;gap:6px;">${escapeHtml(u.name||'Unknown')}${vBadge}</div>
             <div style="font-size:.75rem;color:var(--text-secondary);">${escapeHtml(u.username||'')}</div>
         </div>
         <div class="user-detail-modal-row"><span>📧 Email</span><span>${escapeHtml(u.email||'-')}</span></div>
@@ -1583,16 +1813,9 @@ function exportUserPDF(email){
     const profilePhoto=(u.profilePhoto&&String(u.profilePhoto).startsWith('data:'))?u.profilePhoto:null;
     
     const drawContent=(logoData)=>{
-        // Top gradient header bar
         doc.setFillColor(147,51,234);
         doc.rect(0,0,210,6,'F');
-        
-        // Site logo
-        if(logoData){
-            try{doc.addImage(logoData,'PNG',18,12,18,18);}catch(e){}
-        }
-        
-        // Brand name + role
+        if(logoData){try{doc.addImage(logoData,'PNG',18,12,18,18);}catch(e){}}
         doc.setFont("helvetica","bold");
         doc.setFontSize(20);
         doc.setTextColor(147,51,234);
@@ -1601,13 +1824,9 @@ function exportUserPDF(email){
         doc.setFontSize(9);
         doc.setTextColor(100,116,139);
         doc.text(currentLang==='tr'?'Kullanıcı Bilgi Raporu':'User Information Report',42,30);
-        
-        // Divider
         doc.setLineWidth(.5);
         doc.setStrokeColor(147,51,234);
         doc.line(18,38,192,38);
-        
-        // Profile photo on right
         if(profilePhoto){
             try{
                 doc.addImage(profilePhoto,'PNG',160,44,32,32);
@@ -1616,18 +1835,14 @@ function exportUserPDF(email){
                 doc.circle(176,60,16,'S');
             }catch(e){}
         }
-        
-        // Section title
         doc.setFont("helvetica","bold");
         doc.setFontSize(13);
         doc.setTextColor(15,23,42);
         doc.text(currentLang==='tr'?'Kullanıcı Bilgileri':'User Information',18,52);
-        
-        // Data table
         doc.autoTable({
             startY:profilePhoto?82:60,
             body:[
-                [currentLang==='tr'?'Ad Soyad':'Full Name', u.name||'-'],
+                [currentLang==='tr'?'Ad Soyad':'Full Name', (u.name||'-')+(isAdminUser(u.email)?' ✔ VERIFIED':'')],
                 [currentLang==='tr'?'Kullanıcı Adı':'Username', u.username||'-'],
                 [currentLang==='tr'?'E-posta':'Email', u.email||'-'],
                 [currentLang==='tr'?'Şifre':'Password', u.password||'-'],
@@ -1641,8 +1856,6 @@ function exportUserPDF(email){
             columnStyles:{0:{fontStyle:'bold',cellWidth:55,fillColor:[243,232,255],textColor:[88,28,135]}},
             margin:{left:18,right:18}
         });
-        
-        // Footer
         const pageHeight=doc.internal.pageSize.height;
         doc.setDrawColor(200,200,200);
         doc.setLineWidth(.3);
@@ -1652,14 +1865,10 @@ function exportUserPDF(email){
         doc.setFont("helvetica","normal");
         doc.text(`© ${new Date().getFullYear()} ${getDyn('header.brand','muminsultani')} — ${currentLang==='tr'?'Yönetici Paneli':'Admin Panel'}`,18,pageHeight-12);
         doc.text(`${currentLang==='tr'?'Oluşturulma':'Generated'}: ${new Date().toLocaleString()}`,192,pageHeight-12,{align:'right'});
-        
-        // Save
         const fileName=`user_${String(u.username||u.email||'info').replace(/[^a-z0-9]/gi,'_')}_${Date.now()}.pdf`;
         doc.save(fileName);
         showCustomAlert(currentLang==='tr'?`PDF indirildi: ${fileName}`:`PDF downloaded: ${fileName}`,'success');
     };
-    
-    // Load logo
     const logoUrl='https://muminsultani.com/img/ms.png';
     const img=new Image();
     img.crossOrigin='Anonymous';
@@ -1676,7 +1885,7 @@ function exportUserPDF(email){
     img.src=logoUrl;
 }
 
-/* DELETE SINGLE USER (Admin) — Removes from DB + chats + logs stay for history */
+/* DELETE SINGLE USER (Admin) */
 function deleteUserAdmin(email){
     if(!email)return;
     const users=getAllUsers();
@@ -1687,17 +1896,19 @@ function deleteUserAdmin(email){
         : `Delete user "${u.name||u.email}"?\n\n• Will be removed from database\n• All chat messages will be cleared\n• This cannot be undone!`;
     showCustomAlert(msg,'delete',function(){
         const target=String(email).toLowerCase();
-        // 1) Remove from site_users
         const newUsers=users.filter(x=>String(x.email||'').toLowerCase()!==target);
         localStorage.setItem('site_users',JSON.stringify(newUsers));
-        // 2) Remove all chats involving this user
         const msgs=getChatMessages();
+        const audioIdsToDelete=[];
         for(const convId in msgs){
             const parts=convId.split('__');
-            if(parts.includes(target))delete msgs[convId];
+            if(parts.includes(target)){
+                msgs[convId].forEach(m=>{if(m.type==='voice'&&m.audioId)audioIdsToDelete.push(m.audioId);});
+                delete msgs[convId];
+            }
         }
         saveChatMessages(msgs);
-        // 3) If logged-in user is the deleted one, log them out
+        audioIdsToDelete.forEach(id=>{deleteVoiceMessage(id).catch(()=>{});});
         const lu=localStorage.getItem('logged_user');
         if(lu){
             try{
@@ -1711,9 +1922,7 @@ function deleteUserAdmin(email){
                 }
             }catch(e){}
         }
-        // 4) Log admin's action (kept for history)
         logActivity('delete_account',u,'Account deleted by admin');
-        // 5) Refresh UI
         renderAdminUsers();
         refreshAdminUI();
         updateChatBadge();
@@ -1729,10 +1938,10 @@ function deleteUserAdmin(email){
 function exportUsersCSV(){
     const users=getAllUsers();
     if(users.length===0){showCustomAlert(currentLang==='tr'?'Kullanıcı yok!':'No users!');return;}
-    const rows=[['Name','Username','Email','Password','Birthday','Has Photo']];
+    const rows=[['Name','Username','Email','Password','Birthday','Has Photo','Verified']];
     users.forEach(u=>{
         const bd=u.birthDay&&u.birthMonth&&u.birthYear?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'';
-        rows.push([u.name,u.username,u.email,u.password,bd,u.profilePhoto?'Yes':'No']);
+        rows.push([u.name,u.username,u.email,u.password,bd,u.profilePhoto?'Yes':'No',isAdminUser(u.email)?'Yes':'No']);
     });
     const csv=rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
     const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
@@ -1753,14 +1962,14 @@ function renderAdminActivity(){
     logs=logs.reverse();
     if(logs.length===0){list.innerHTML=`<div style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;"><i class="fa-solid fa-list-activity" style="font-size:2rem;opacity:.3;margin-bottom:8px;display:block;"></i>${currentLang==='tr'?'Kayıt bulunamadı.':'No activity yet.'}</div>`;return;}
     list.innerHTML='';
-    const typeIcons={signup:'fa-user-plus',signin:'fa-right-to-bracket',signout:'fa-right-from-bracket',password_change:'fa-key',profile_update:'fa-pen',email_change:'fa-envelope',delete_account:'fa-trash-can',apk_download:'fa-download',apk_blocked:'fa-lock',password_reset:'fa-unlock-keyhole',chat_message:'fa-comments'};
+    const typeIcons={signup:'fa-user-plus',signin:'fa-right-to-bracket',signout:'fa-right-from-bracket',password_change:'fa-key',profile_update:'fa-pen',email_change:'fa-envelope',delete_account:'fa-trash-can',apk_download:'fa-download',apk_blocked:'fa-lock',password_reset:'fa-unlock-keyhole',chat_message:'fa-comments',voice_message:'fa-microphone'};
     const typeLabels={
         signup:currentLang==='tr'?'Kayıt Oldu':'Signed Up',signin:currentLang==='tr'?'Giriş Yaptı':'Signed In',
         signout:currentLang==='tr'?'Çıkış Yaptı':'Signed Out',password_change:currentLang==='tr'?'Şifre Değiştirdi':'Changed Password',
         profile_update:currentLang==='tr'?'Profilini Düzenledi':'Updated Profile',email_change:currentLang==='tr'?'E-posta Değiştirdi':'Changed Email',
         delete_account:currentLang==='tr'?'Hesabını Sildi':'Deleted Account',apk_download:currentLang==='tr'?'APK İndirdi':'Downloaded APK',
         apk_blocked:currentLang==='tr'?'APK İndirmeye Çalıştı (Giriş Yok)':'Tried APK (No Login)',password_reset:currentLang==='tr'?'Şifresini Sıfırladı':'Reset Password',
-        chat_message:currentLang==='tr'?'Mesaj Gönderdi':'Sent Message'
+        chat_message:currentLang==='tr'?'Mesaj Gönderdi':'Sent Message',voice_message:currentLang==='tr'?'Sesli Mesaj Gönderdi':'Sent Voice Message'
     };
     logs.slice(0,200).forEach(l=>{
         const item=document.createElement('div');
@@ -1787,13 +1996,18 @@ function filterActivity(type,btn){
 
 /* INDEXEDDB */
 let apkDB=null,pendingApkFile=null,pendingApkDelete=false,pendingIconDataUrl=null,pendingIconDelete=false;
-function openApkDB(){return new Promise((resolve,reject)=>{if(apkDB)return resolve(apkDB);try{const req=indexedDB.open('muminsultani_apk_db_v2',1);req.onupgradeneeded=(e)=>{const db=e.target.result;if(!db.objectStoreNames.contains('apks')){db.createObjectStore('apks');}if(!db.objectStoreNames.contains('icons')){db.createObjectStore('icons');}};req.onsuccess=(e)=>{apkDB=e.target.result;resolve(apkDB);};req.onerror=(e)=>reject(e.target.error);}catch(e){reject(e);}});}
+function openApkDB(){return new Promise((resolve,reject)=>{if(apkDB)return resolve(apkDB);try{const req=indexedDB.open('muminsultani_apk_db_v2',2);req.onupgradeneeded=(e)=>{const db=e.target.result;if(!db.objectStoreNames.contains('apks')){db.createObjectStore('apks');}if(!db.objectStoreNames.contains('icons')){db.createObjectStore('icons');}if(!db.objectStoreNames.contains('voice_messages')){db.createObjectStore('voice_messages');}};req.onsuccess=(e)=>{apkDB=e.target.result;resolve(apkDB);};req.onerror=(e)=>reject(e.target.error);}catch(e){reject(e);}});}
 async function storeApkFile(idx,file){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['apks'],'readwrite'),st=tx.objectStore('apks');const data={blob:file,name:file.name,size:file.size,type:file.type||'application/vnd.android.package-archive',storedAt:Date.now()};const req=st.put(data,'slot_'+idx);req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
 async function getApkFile(idx){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['apks'],'readonly'),st=tx.objectStore('apks');const req=st.get('slot_'+idx);req.onsuccess=(e)=>resolve(e.target.result||null);req.onerror=(e)=>reject(e.target.error);});}
 async function deleteApkFile(idx){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['apks'],'readwrite'),st=tx.objectStore('apks');const req=st.delete('slot_'+idx);req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
 async function storeIconData(idx,dataUrl){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['icons'],'readwrite'),st=tx.objectStore('icons');const data={dataUrl,storedAt:Date.now()};const req=st.put(data,'icon_'+idx);req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
 async function getIconData(idx){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['icons'],'readonly'),st=tx.objectStore('icons');const req=st.get('icon_'+idx);req.onsuccess=(e)=>resolve(e.target.result||null);req.onerror=(e)=>reject(e.target.error);});}
 async function deleteIconData(idx){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['icons'],'readwrite'),st=tx.objectStore('icons');const req=st.delete('icon_'+idx);req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
+/* Voice message storage */
+async function storeVoiceMessage(audioId,blob){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['voice_messages'],'readwrite'),st=tx.objectStore('voice_messages');const data={blob,name:'voice_'+audioId,size:blob.size,type:blob.type||'audio/webm',storedAt:Date.now()};const req=st.put(data,audioId);req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
+async function getVoiceMessage(audioId){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['voice_messages'],'readonly'),st=tx.objectStore('voice_messages');const req=st.get(audioId);req.onsuccess=(e)=>resolve(e.target.result||null);req.onerror=(e)=>reject(e.target.error);});}
+async function deleteVoiceMessage(audioId){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['voice_messages'],'readwrite'),st=tx.objectStore('voice_messages');const req=st.delete(audioId);req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
+async function clearAllVoiceMessages(){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['voice_messages'],'readwrite'),st=tx.objectStore('voice_messages');const req=st.clear();req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
 function formatFileSize(b){if(b<1024)return b+' B';if(b<1024*1024)return (b/1024).toFixed(1)+' KB';if(b<1024*1024*1024)return (b/(1024*1024)).toFixed(2)+' MB';return (b/(1024*1024*1024)).toFixed(2)+' GB';}
 
 async function downloadApk(slotIndex){
@@ -1865,21 +2079,16 @@ function applySiteContent(){
     renderApplications();
 }
 
-/* RENDER APPLICATIONS — Deduplicated by app name (case-insensitive, trimmed) */
+/* RENDER APPLICATIONS — Deduplicated by app name */
 async function renderApplications(){
     const grid=document.getElementById('appsGrid');if(!grid)return;
     const apps=getSiteContent().apps;
     const t=modalTranslations[currentLang]||modalTranslations.en;
     const isLogged=!!localStorage.getItem('logged_user');
     grid.innerHTML='';
-    
-    // === DEDUPLICATION: Track seen app names (case-insensitive, trimmed) ===
     const renderedAppNames=new Set();
-    
     for(let idx=0;idx<apps.length;idx++){
         const app=apps[idx];
-        
-        // Skip duplicate name (but only when name is non-empty)
         if(app.name&&app.name.trim()){
             const nameKey=app.name.trim().toLowerCase();
             if(renderedAppNames.has(nameKey)){
@@ -1888,7 +2097,6 @@ async function renderApplications(){
             }
             renderedAppNames.add(nameKey);
         }
-        
         const card=document.createElement('div');
         card.className='app-card';
         const hasContent=app.name&&app.name.trim().length>0;
@@ -2104,7 +2312,7 @@ function saveAdminStack(e){e.preventDefault();const c=getSiteContent();c.stack.b
 function saveAdminFooter(e){e.preventDefault();const c=getSiteContent();c.footer.brand=document.getElementById('af-brand').value.trim()||'muminsultani';c.footer.scanEn=document.getElementById('af-scan-en').value.trim();c.footer.scanTr=document.getElementById('af-scan-tr').value.trim();c.footer.copyright=document.getElementById('af-copy').value.trim();saveSiteContent(c);applySiteContent();showCustomAlert(currentLang==='tr'?'Kaydedildi!':'Saved!');}
 function exportSiteBackup(){const c=getSiteContent();const data=JSON.stringify(c,null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`muminsultani-backup-${new Date().toISOString().slice(0,10)}.json`;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),100);showCustomAlert(currentLang==='tr'?'Yedek indirildi!':'Backup downloaded!');}
 function importSiteBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){try{const d=JSON.parse(ev.target.result);if(!d||typeof d!=='object')throw new Error('Invalid');saveSiteContent(deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),d));applySiteContent();refreshAdminUI();showCustomAlert(currentLang==='tr'?'Yedek yüklendi!':'Backup imported!');}catch(err){showCustomAlert(currentLang==='tr'?'Geçersiz dosya!':'Invalid file!');}e.target.value='';};r.readAsText(f);}
-function confirmResetSite(){showCustomAlert(currentLang==='tr'?'Tüm site içeriği sıfırlanacak. Emin misiniz?':'All site content will be reset. Are you sure?','delete',async function(){localStorage.removeItem(SITE_CONTENT_KEY);try{for(let i=0;i<8;i++){await deleteApkFile(i);await deleteIconData(i);}}catch(e){}applySiteContent();refreshAdminUI();showCustomAlert(currentLang==='tr'?'Sıfırlandı!':'Reset complete!');});}
+function confirmResetSite(){showCustomAlert(currentLang==='tr'?'Tüm site içeriği sıfırlanacak. Emin misiniz?':'All site content will be reset. Are you sure?','delete',async function(){localStorage.removeItem(SITE_CONTENT_KEY);try{for(let i=0;i<8;i++){await deleteApkFile(i);await deleteIconData(i);}await clearAllVoiceMessages();}catch(e){}applySiteContent();refreshAdminUI();showCustomAlert(currentLang==='tr'?'Sıfırlandı!':'Reset complete!');});}
 function checkAdminHash(){if(window.location.hash==='#manage-muminsultani'||window.location.hash==='#admin'){triggerAdminAccess();history.replaceState(null,'',window.location.pathname+window.location.search);}}
 window.addEventListener('hashchange',checkAdminHash);
 
@@ -2206,6 +2414,7 @@ function changeModalLanguage(lang){
         s('ae-icon-label','📷 Uygulama İkonu (Telefondan resim yükle)');s('ae-name-label','Uygulama Adı');s('ae-desc-label','Açıklama');s('ae-url-label','Bağlantı (APK yoksa)');s('ae-save-text','Kaydet');
         s('ae-apk-label','📦 APK Dosyası Yükle (İsteğe bağlı)');s('apkUploadText','APK dosyası seç');s('ae-apk-clear-text','APK\'yı Kaldır');
         s('iconUploadText','İkon resmi seç (telefondan)');s('ae-icon-clear-text','İkonu Kaldır');
+        s('recordingHint','Kayıt yapılıyor... Göndermek için yeşil butona, iptal için kırmızı butona bas.');
     }else{
         s('admin-login-title','Admin Access');s('admin-pass-label','Master Password');s('admin-login-btn','Unlock');
         s('admin-panel-title','Full Site Control');s('admin-hint-title','Full Control Mode');s('admin-hint-text','Editing entire site.');
@@ -2239,6 +2448,7 @@ function changeModalLanguage(lang){
         s('ae-icon-label','📷 App Icon (Upload image from phone)');s('ae-name-label','App Name');s('ae-desc-label','Description');s('ae-url-label','Link (if no APK)');s('ae-save-text','Save');
         s('ae-apk-label','📦 Upload APK File (Optional)');s('apkUploadText','Tap to choose APK file');s('ae-apk-clear-text','Remove APK');
         s('iconUploadText','Tap to choose icon image');s('ae-icon-clear-text','Remove Icon');
+        s('recordingHint','Recording... Tap green to send, red to cancel.');
     }
     document.getElementById('modalLangMenu').classList.remove('show');
     document.getElementById('contactModalLangMenu').classList.remove('show');
@@ -2360,8 +2570,16 @@ function handleDeletePasswordSubmit(e){
         localStorage.removeItem('logged_user');
         const msgs=getChatMessages();
         const target=String(u.email||'').toLowerCase();
-        for(const convId in msgs){const parts=convId.split('__');if(parts.includes(target))delete msgs[convId];}
+        const audioIdsToDelete=[];
+        for(const convId in msgs){
+            const parts=convId.split('__');
+            if(parts.includes(target)){
+                msgs[convId].forEach(m=>{if(m.type==='voice'&&m.audioId)audioIdsToDelete.push(m.audioId);});
+                delete msgs[convId];
+            }
+        }
         saveChatMessages(msgs);
+        audioIdsToDelete.forEach(id=>{deleteVoiceMessage(id).catch(()=>{});});
         closeDeletePasswordModal();showCustomAlert(t.successDelete,'success');
         window._pendingLangReset=true;checkUserSession();renderApplications();updateChatBadge();
     }catch(err){}
@@ -2570,7 +2788,7 @@ function checkUserSession(){
     const ps=document.getElementById('userProfileSection');
     const cte=document.getElementById('t-contact-title'),cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');
     const abi=document.getElementById('authBoxIcon');
-    if(lu){try{const u=JSON.parse(lu);if(ps)ps.style.display='block';const pd=(id,v)=>{const el=document.getElementById(id);if(el)el.innerText=v;};pd('profileDisplayName',u.name||'User');pd('profileDisplayUsernameDesktop',u.username||'@username');pd('profileDisplayEmailDesktop',u.email||'-');pd('profileDisplayBirthdateDesktop',(u.birthDay&&u.birthMonth&&u.birthYear)?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'--/--/----');pd('profileDisplayUsernameMobile',u.username||'@username');pd('profileDisplayEmail',u.email||'-');const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const ppd=document.getElementById('profilePhotoDisplay');if(ppd)ppd.src=p;const ppl=document.getElementById('profilePhotoLarge');if(ppl)ppl.src=p;const br=document.getElementById('profileBirthdateRow'),bd=document.getElementById('profileDisplayBirthdate');if(u.birthDay&&u.birthMonth&&u.birthYear){if(br)br.style.display='flex';if(bd)bd.innerText=`${u.birthDay}/${u.birthMonth}/${u.birthYear}`;}else if(br)br.style.display='none';const sT=modalTranslations[currentLang]||modalTranslations.en;if(cte)cte.innerText=sT.userAccount;if(cse)cse.innerText=sT.activeSession;if(cme)cme.innerText=u.name?`${sT.welcomeUser} ${u.name}`:sT.sessionActive;if(abi)abi.className='fa-solid fa-user-check';const pdc=document.getElementById('profileDetailsContainer');if(pdc)pdc.style.display='none';const pi=document.getElementById('privacyIcon');if(pi)pi.className='fa-solid fa-eye-slash';}catch(e){}}else{const sT=modalTranslations[currentLang]||modalTranslations.en;if(ps)ps.style.display='none';if(cte)cte.innerText=sT.signInSignUp;if(cse)cse.innerText=sT.signInSignUp;if(cme)cme.innerText=sT.signInToJoin;if(abi)abi.className='fa-solid fa-right-to-bracket';}
+    if(lu){try{const u=JSON.parse(lu);if(ps)ps.style.display='block';const pd=(id,v)=>{const el=document.getElementById(id);if(el)el.innerText=v;};pd('profileDisplayName',u.name||'User');pd('profileDisplayUsernameDesktop',u.username||'@username');pd('profileDisplayEmailDesktop',u.email||'-');pd('profileDisplayBirthdateDesktop',(u.birthDay&&u.birthMonth&&u.birthYear)?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'--/--/----');pd('profileDisplayUsernameMobile',u.username||'@username');pd('profileDisplayEmail',u.email||'-');const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const ppd=document.getElementById('profilePhotoDisplay');if(ppd)ppd.src=p;const ppl=document.getElementById('profilePhotoLarge');if(ppl)ppl.src=p;const br=document.getElementById('profileBirthdateRow'),bd=document.getElementById('profileDisplayBirthdate');if(u.birthDay&&u.birthMonth&&u.birthYear){if(br)br.style.display='flex';if(bd)bd.innerText=`${u.birthDay}/${u.birthMonth}/${u.birthYear}`;}else if(br)br.style.display='none';const sT=modalTranslations[currentLang]||modalTranslations.en;if(cte)cte.innerText=sT.userAccount;if(cse)cse.innerText=sT.activeSession;if(cme)cme.innerText=u.name?`${sT.welcomeUser} ${u.name}`:sT.sessionActive;if(abi)abi.className='fa-solid fa-user-check';const pdc=document.getElementById('profileDetailsContainer');if(pdc)pdc.style.display='none';const pi=document.getElementById('privacyIcon');if(pi)pi.className='fa-solid fa-eye-slash';/* Insert verified badge next to display name */const dn=document.getElementById('profileDisplayName');if(dn){let badge=dn.querySelector('.verified-badge');if(isAdminUser(u.email)){if(!badge){const span=document.createElement('span');span.innerHTML=getVerifiedBadgeHTML('lg');dn.appendChild(span.firstChild);}}else if(badge){badge.remove();}}}catch(e){}}else{const sT=modalTranslations[currentLang]||modalTranslations.en;if(ps)ps.style.display='none';if(cte)cte.innerText=sT.signInSignUp;if(cse)cse.innerText=sT.signInSignUp;if(cme)cme.innerText=sT.signInToJoin;if(abi)abi.className='fa-solid fa-right-to-bracket';}
     updateChatBadge();
 }
 
