@@ -1145,10 +1145,9 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 
 <script>
 /* ============================================================
-   ☁️ FIREBASE CLOUD SYNC — Cihazlar arası senkronizasyon
-   ⚠️ AŞAĞIDAKİ DEĞERLERİ KENDİ FIREBASE PROJENDEN AL!
+   ☁️ FIREBASE CLOUD SYNC
    ============================================================ */
-   const FIREBASE_CONFIG = {
+const FIREBASE_CONFIG = {
   apiKey: "AIzaSyC3Pi88DP7K_4IG-R81LeDaGdhCTmHpo-c",
   authDomain: "muminsultani-497b5.firebaseapp.com",
   databaseURL: "https://muminsultani-497b5-default-rtdb.firebaseio.com",
@@ -1156,9 +1155,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
   storageBucket: "muminsultani-497b5.firebasestorage.app",
   messagingSenderId: "929484224535",
   appId: "1:929484224535:web:5e2b05f0b852357212c452"
-};
-
-
 };
 
 const CLOUD_SYNC_KEYS = ['site_users', 'site_chat_v1', 'site_activity_log_v1'];
@@ -1302,6 +1298,20 @@ async function cloudInitSync() {
       if (merged !== cloudVal) cloudPush(key, merged);
     }
   }
+
+  /* Veri geldikten sonra UI'ı yenile */
+  try {
+    if (typeof checkUserSession === 'function') checkUserSession();
+    if (typeof updateChatBadge === 'function') updateChatBadge();
+    if (typeof renderApplications === 'function') renderApplications();
+    if (typeof renderChatUsersList === 'function') {
+      const cp = document.getElementById('chatPanelModal');
+      if (cp && cp.classList.contains('active')) {
+        if (typeof activeChatUser !== 'undefined' && activeChatUser) renderChatMessages();
+        else renderChatUsersList();
+      }
+    }
+  } catch (e) { console.warn('[Cloud] Re-render hatası:', e); }
 
   if (!cloudSubscribed) {
     cloudSubscribed = true;
@@ -2109,7 +2119,6 @@ function renderAdminUsers(){
         const isAdm=isAdminUser(u.email);
         const vBadge=isAdm?getVerifiedBadgeHTML('sm'):'';
         const adminTag=isAdm?getAdminTagHTML():'';
-        const idLabel=getUserIdLabelHTML(u.userId,isAdm);
         card.innerHTML=`
             <div class="user-card-avatar" style="${isAdm?'border-color:#1d9bf0;':''}">${avatar}</div>
             <div class="user-card-info">
@@ -3221,16 +3230,28 @@ const mainConstellation=createConstellationSystem('constellation-canvas',{number
 window.introConstellation=createConstellationSystem('intro-canvas',{numberOfParticles:50,mouseRadius:150,lineDistance:120});
 
 /* INIT */
-window.addEventListener('DOMContentLoaded',async ()=>{
-    try { await cloudInitSync(); } catch(e) { console.warn('[Cloud] Sync failed:', e); }
+window.addEventListener('DOMContentLoaded',()=>{
+    /* 1. INTRO EKRANINI HEMEN KAPAT (Firebase bekleme!) */
+    setTimeout(()=>{
+        const intro=document.getElementById('intro-screen');
+        if(intro){
+            intro.style.opacity='0';
+            intro.style.visibility='hidden';
+            setTimeout(()=>{
+                intro.style.display='none';
+                if(window.introConstellation&&window.introConstellation.stop)window.introConstellation.stop();
+            },600);
+        }
+    },1500);
 
-    setTimeout(()=>{const intro=document.getElementById('intro-screen');if(intro){intro.style.opacity='0';intro.style.visibility='hidden';setTimeout(()=>{intro.style.display='none';if(window.introConstellation&&window.introConstellation.stop)window.introConstellation.stop();},600);}},1500);
-
+    /* 2. Yerel veriyle UI'ı hemen hazırla */
     ensureUserIdsAndAdmin();
+    initTheme();
     checkUserSession();
     applySiteContent();
     const sl=sessionStorage.getItem('site_lang')||'en';
     changeLanguage(sl);
+
     const nf=document.getElementById('contactClientName');
     if(nf){nf.addEventListener('input',function(){const uf=document.getElementById('contactClientUsername');if(!uf)return;const g=generateUsernameFromName(this.value);if(uf.value===''||uf.value===lastAutoUsername){uf.value=g;lastAutoUsername=g;checkUsernameAvailability();}});}
     window.addEventListener('resize',()=>{if(confettiCanvas&&confettiCanvas.style.display!=='none'){confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;}});
@@ -3238,6 +3259,9 @@ window.addEventListener('DOMContentLoaded',async ()=>{
     openApkDB().catch(e=>console.warn('IndexedDB init failed:',e));
     updateChatBadge();
     startChatPolling();
+
+    /* 3. Firebase bağlantısını ARKA PLANDA başlat (UI'yı bloklamaz) */
+    cloudInitSync().catch(e => console.warn('[Cloud] Sync failed:', e));
 });
 </script>
 </body>
