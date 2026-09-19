@@ -105,6 +105,7 @@ section{border-top:1px solid var(--line-color);padding-top:24px}
 .modal-overlay.high-z{z-index:15000}
 .modal-overlay.admin-z{z-index:18000}
 .modal-overlay.chat-z{z-index:19000}
+.modal-overlay.profile-view-z{z-index:20000}
 .modal-overlay.light-blue-bg{background:rgba(135,206,250,.25) !important;backdrop-filter:blur(6px)}
 .modal-container{background:var(--modal-container-bg);border:1px solid var(--line-color);border-radius:20px;width:100%;max-width:540px;padding:32px;box-shadow:0 25px 60px rgba(0,0,0,.6);position:relative;transform:scale(.95) translateY(15px);transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .3s;opacity:0;max-height:90vh;overflow-y:auto}
 .modal-overlay.active .modal-container{transform:scale(1) translateY(0);opacity:1}
@@ -149,9 +150,9 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .footer-brand{font-size:1.9rem;font-weight:800;background:linear-gradient(270deg,#9333ea,#c084fc,#e879f9,#c084fc,#9333ea);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientFlow 8s ease infinite}
 .footer-scan-text{font-size:.82rem;font-weight:700;color:var(--text-primary);letter-spacing:.8px;text-transform:uppercase}
 .footer-copy-text{font-size:.64rem;font-weight:700;color:var(--text-secondary)}
-.profile-action-btn{background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-secondary);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;height:30px;width:36px;font-size:.75rem;transition:all .3s}
+.profile-action-btn{background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-secondary);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;height:30px;width:32px;font-size:.72rem;transition:all .3s;flex-shrink:0;padding:0}
 .profile-action-btn:hover{border-color:rgba(147,51,234,.4);background:var(--box-hover-bg);color:#9333ea}
-.profile-photo-wrapper{position:relative;width:36px;height:30px;display:flex;align-items:center;justify-content:center}
+.profile-photo-wrapper{position:relative;width:36px;height:30px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .profile-photo-wrapper img{width:30px;height:30px;border-radius:50%;object-fit:cover;border:1px solid var(--line-color);background:var(--box-bg);pointer-events:auto;cursor:pointer}
 @media (min-width:768px){.desktop-info-row{display:flex !important;align-items:center;justify-content:space-between;width:100%;margin-top:8px;gap:15px}.desktop-username-area,.desktop-email-area,.desktop-birthdate-area{display:flex;align-items:center;gap:8px}.desktop-email-area{flex:1;justify-content:center}.mobile-email-row,.mobile-birthdate-row{display:none !important}}
 .mobile-email-row,.mobile-birthdate-row{display:flex;align-items:center;gap:8px}
@@ -268,6 +269,8 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .user-card-btns{display:flex;gap:5px;flex-shrink:0}
 .user-view-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--line-color);background:var(--box-bg);color:#9333ea;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.75rem}
 .user-view-btn:hover{border-color:rgba(147,51,234,.5);background:var(--box-hover-bg)}
+.user-view-btn.danger{color:#ef4444;border-color:rgba(239,68,68,.25)}
+.user-view-btn.danger:hover{border-color:rgba(239,68,68,.6);background:rgba(239,68,68,.08);color:#ef4444}
 .activity-item{background:var(--box-bg);border:1px solid var(--line-color);border-radius:10px;padding:10px 12px;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start;border-left-width:3px}
 .activity-item.signup{border-left-color:#22c55e}
 .activity-item.signin{border-left-color:#3b82f6}
@@ -314,6 +317,8 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .chat-conv-header{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line-color);background:var(--box-bg)}
 .chat-back-btn{background:transparent;border:none;color:#9333ea;cursor:pointer;font-size:1rem;padding:6px 10px;border-radius:8px;display:flex;align-items:center;justify-content:center}
 .chat-back-btn:hover{background:var(--box-hover-bg)}
+.chat-profile-btn{background:transparent;border:1px solid var(--line-color);color:#9333ea;cursor:pointer;font-size:.8rem;padding:6px 10px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.chat-profile-btn:hover{background:var(--box-hover-bg);border-color:rgba(147,51,234,.5)}
 .chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:8px;min-height:280px;max-height:52vh;background:var(--bg-color)}
 .chat-msg{max-width:75%;display:flex;flex-direction:column;gap:2px;word-wrap:break-word}
 .chat-msg.mine{align-self:flex-end;align-items:flex-end}
@@ -328,6 +333,22 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .chat-send-btn{width:42px;height:42px;border-radius:50%;border:none;background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;box-shadow:0 4px 15px rgba(147,51,234,.35);transition:transform .2s}
 .chat-send-btn:hover{transform:scale(1.06)}
 .chat-send-btn:active{transform:scale(.95)}
+/* ============ PUBLIC USER PROFILE VIEW ============ */
+.pub-profile-view{display:flex;flex-direction:column;align-items:center;gap:14px;padding:8px 0 4px}
+.pub-profile-avatar{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:2.4rem;font-weight:800;overflow:hidden;border:3px solid rgba(147,51,234,.4);box-shadow:0 8px 30px rgba(147,51,234,.25)}
+.pub-profile-avatar img{width:100%;height:100%;object-fit:cover}
+.pub-profile-name{font-size:1.25rem;font-weight:800;background:linear-gradient(270deg,#9333ea,#c084fc,#e879f9,#c084fc,#9333ea);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientFlow 8s ease infinite;text-align:center;word-break:break-word}
+.pub-profile-username{font-size:.85rem;color:#9333ea;font-weight:700;margin-top:-6px}
+.pub-profile-info{width:100%;background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;padding:12px;margin-top:4px}
+.pub-profile-info-row{display:flex;justify-content:space-between;align-items:center;padding:8px 4px;font-size:.82rem;gap:10px;border-bottom:1px solid var(--line-color)}
+.pub-profile-info-row:last-child{border-bottom:none}
+.pub-profile-info-row span:first-child{color:var(--text-secondary);font-weight:600;display:flex;align-items:center;gap:8px}
+.pub-profile-info-row span:first-child i{color:#9333ea;font-size:.9rem;width:14px;text-align:center}
+.pub-profile-info-row span:last-child{color:var(--text-primary);font-weight:600;text-align:right;word-break:break-word}
+.pub-profile-actions{display:flex;gap:8px;width:100%;margin-top:4px}
+.pub-profile-actions button{flex:1;padding:11px;border-radius:10px;font-weight:700;font-size:.8rem;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.pub-btn-msg{background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff}
+.pub-btn-close{background:var(--box-bg);color:var(--text-primary);border:1px solid var(--line-color) !important}
 @media (max-width:640px){
   .chat-container{max-width:100% !important;border-radius:16px !important}
   .chat-users-list{max-height:70vh}
@@ -389,12 +410,12 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <section id="userProfileSection" style="display:none">
 <div class="section-title"><i class="fa-solid fa-user-gear"></i> <span id="t-profile-title">User Profile & Session</span></div>
 <div class="contact-box" style="cursor:default;align-items:flex-start;flex-direction:column;gap:12px">
-<div style="display:flex;gap:12px;width:100%;align-items:center;justify-content:space-between;flex-wrap:wrap">
-<div class="profile-photo-wrapper" style="align-self:center">
+<div style="display:flex;gap:8px;width:100%;align-items:center;justify-content:space-between;flex-wrap:nowrap">
+<div class="profile-photo-wrapper">
 <img id="profilePhotoDisplay" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile" onclick="openProfilePhotoPanel()">
 <input type="file" id="profilePhotoInput" accept="image/*" style="display:none" onchange="handleProfilePhotoUpload(event)">
 </div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+<div style="display:flex;gap:5px;align-items:center;flex-shrink:1;min-width:0">
 <button onclick="openChatPanel()" title="Messages" class="profile-action-btn" style="color:#9333ea;border-color:rgba(147,51,234,.4)"><i class="fa-solid fa-comments"></i></button>
 <button onclick="toggleProfilePrivacy()" title="Hide/Show" class="profile-action-btn" id="privacyToggleBtn"><i class="fa-solid fa-eye" id="privacyIcon"></i></button>
 <button onclick="openEditProfileModal()" title="Edit Profile" class="profile-action-btn"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -468,6 +489,17 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="footer-copy-text" id="t-copyright">© 2026 muminsultani • All Rights Reserved.</div>
 </div>
 </footer>
+</div>
+
+<!-- ============ PUBLIC USER PROFILE VIEW MODAL ============ -->
+<div class="modal-overlay profile-view-z" id="publicUserProfileModal">
+<div class="modal-container" style="max-width:400px">
+<div class="modal-header">
+<div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="pub-profile-title">User Profile</div></div>
+<div class="modal-header-actions"><button class="modal-close-btn" onclick="closePublicUserProfile()"><i class="fa-solid fa-xmark"></i></button></div>
+</div>
+<div id="publicUserProfileContent"></div>
+</div>
 </div>
 
 <!-- ============ CHAT PANEL ============ -->
@@ -555,7 +587,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 <!-- USERS TAB -->
 <div class="admin-section" data-section="users">
-<div class="admin-hint"><i class="fa-solid fa-users" style="color:#9333ea"></i> <span id="hint-users">All registered users. Click the eye icon to see full details.</span></div>
+<div class="admin-hint"><i class="fa-solid fa-users" style="color:#9333ea"></i> <span id="hint-users">All registered users. Click the eye icon to see full details or the trash icon to delete.</span></div>
 <div id="adminUsersList"></div>
 <div class="admin-actions-grid" style="margin-top:12px">
 <button class="admin-action-btn ghost" onclick="exportUsersCSV()"><i class="fa-solid fa-file-csv"></i> <span id="users-export">Export Users CSV</span></button>
@@ -1052,7 +1084,7 @@ function initConfettiCanvas(){if(confettiCanvas&&confettiCtx)return true;confett
 function fireConfettiBurst(i=1){if(!initConfettiCanvas())return;confettiCanvas.style.display='block';confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;const n=Math.floor(160*i),cx=window.innerWidth/2,cy=window.innerHeight/2;for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*16+8;confettiParticles.push({x:cx,y:cy,vx:Math.cos(a)*s,vy:Math.sin(a)*s-3,size:Math.random()*10+5,color:CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.32+Math.random()*.15,drag:.985,life:1,shape:Math.random()>.5?'rect':(Math.random()>.5?'circle':'triangle')});}if(!confettiRunning){confettiRunning=true;animateConfetti();}if(confettiStopTimer)clearTimeout(confettiStopTimer);confettiStopTimer=setTimeout(()=>{confettiRunning=false;},5000);}
 function animateConfetti(){if(!confettiCanvas||!confettiCtx)return;confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);let a=false;for(let i=0;i<confettiParticles.length;i++){const p=confettiParticles[i];if(p.life<=0)continue;a=true;p.vy+=p.gravity;p.vx*=p.drag;p.vy*=p.drag;p.x+=p.vx;p.y+=p.vy;p.rotation+=p.rotationSpeed;p.life-=.006;if(p.y>confettiCanvas.height+100)p.life=0;if(p.x<-100||p.x>confettiCanvas.width+100)p.life=0;confettiCtx.save();confettiCtx.translate(p.x,p.y);confettiCtx.rotate(p.rotation);confettiCtx.globalAlpha=Math.max(0,Math.min(1,p.life));confettiCtx.fillStyle=p.color;if(p.shape==='rect'){confettiCtx.fillRect(-p.size/2,-p.size/4,p.size,p.size/2);}else if(p.shape==='circle'){confettiCtx.beginPath();confettiCtx.arc(0,0,p.size/2,0,Math.PI*2);confettiCtx.fill();}else{confettiCtx.beginPath();confettiCtx.moveTo(0,-p.size/2);confettiCtx.lineTo(p.size/2,p.size/2);confettiCtx.lineTo(-p.size/2,p.size/2);confettiCtx.closePath();confettiCtx.fill();}confettiCtx.restore();}if(confettiParticles.length>500)confettiParticles=confettiParticles.filter(p=>p.life>0);if(a||confettiRunning)requestAnimationFrame(animateConfetti);else{confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);confettiCanvas.style.display='none';confettiParticles=[];}}
 
-document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.scroll-down-action-btn,.chat-toggle-btn,.chat-user-item,.chat-send-btn,.modal-close-btn,.profile-action-btn,.auth-tab-btn,.ratio-btn,.btn-crop-cancel,.btn-crop-apply,.photo-action-buttons button,.social-btn,.lightbox-close-btn,.copy-pass-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip');if(b)playTickSound();},true);
+document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.scroll-down-action-btn,.chat-toggle-btn,.chat-user-item,.chat-send-btn,.chat-back-btn,.chat-profile-btn,.modal-close-btn,.profile-action-btn,.auth-tab-btn,.ratio-btn,.btn-crop-cancel,.btn-crop-apply,.photo-action-buttons button,.social-btn,.lightbox-close-btn,.copy-pass-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.pub-profile-actions button');if(b)playTickSound();},true);
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('keydown',e=>{
     const cropOpen=document.getElementById('cropModal').classList.contains('active');if(cropOpen)return;
@@ -1100,7 +1132,7 @@ function exportActivityCSV(){
 }
 
 /* ============================================================
-   💬 CHAT SYSTEM — User-to-user messaging
+   💬 CHAT SYSTEM
    ============================================================ */
 const CHAT_KEY='site_chat_v1';
 let activeChatUser=null;
@@ -1185,10 +1217,12 @@ function renderChatUsersList(){
             const who=String(last.from).toLowerCase()===String(u.email).toLowerCase()?(t.chatYou||'You')+': ':'';
             preview=who+last.text;
         }
+        const uname=String(x.username||'').replace(/^@/,'');
         item.innerHTML=`
             <div class="chat-user-avatar">${av}</div>
             <div class="chat-user-info">
                 <div class="chat-user-name">${escapeHtml(x.name||'User')}</div>
+                ${uname?`<div class="chat-user-username">@${escapeHtml(uname)}</div>`:''}
                 <div class="chat-user-preview">${escapeHtml(preview).substring(0,60)}</div>
             </div>
             ${unread>0?`<div class="chat-unread-badge">${unread>99?'99+':unread}</div>`:''}
@@ -1222,14 +1256,19 @@ function renderChatConvHeader(){
     const h=document.getElementById('chatConvHeader');if(!h||!activeChatUser)return;
     const av=activeChatUser.profilePhoto?`<img src="${activeChatUser.profilePhoto}" alt="">`:(activeChatUser.name?escapeHtml(activeChatUser.name.trim().charAt(0).toUpperCase()):'?');
     const uname=String(activeChatUser.username||'').replace(/^@/,'');
+    const safeEmail=escapeHtml(activeChatUser.email||'');
     h.innerHTML=`
         <button class="chat-back-btn" onclick="backToUsersList()" title="Back"><i class="fa-solid fa-arrow-left"></i></button>
-        <div class="chat-user-avatar small">${av}</div>
-        <div style="flex:1;min-width:0;">
+        <div class="chat-user-avatar small profile-tap" data-email="${safeEmail}" style="cursor:pointer">${av}</div>
+        <div style="flex:1;min-width:0;cursor:pointer" class="profile-tap" data-email="${safeEmail}" title="View profile">
             <div class="chat-user-name">${escapeHtml(activeChatUser.name||'User')}</div>
             ${uname?`<div class="chat-user-username">@${escapeHtml(uname)}</div>`:''}
         </div>
+        <button class="chat-profile-btn" onclick="openPublicUserProfile('${safeEmail}')" title="View Profile"><i class="fa-solid fa-user-circle"></i></button>
     `;
+    h.querySelectorAll('.profile-tap').forEach(el=>{
+        el.onclick=(ev)=>{ev.stopPropagation();openPublicUserProfile(el.getAttribute('data-email'));};
+    });
 }
 function backToUsersList(){
     activeChatUser=null;
@@ -1318,7 +1357,6 @@ function exportChatsCSV(){
 function renderAdminChats(){
     const list=document.getElementById('adminChatsList');if(!list)return;
     const msgs=getChatMessages();
-    const t=modalTranslations[currentLang]||modalTranslations.en;
     const convIds=Object.keys(msgs);
     let totalMsgs=0;
     convIds.forEach(c=>totalMsgs+=msgs[c].length);
@@ -1358,17 +1396,94 @@ function renderAdminChats(){
     });
 }
 
-/* CHAT POLLING — check every 2.5s for new messages and update badge */
+/* ============================================================
+   👤 PUBLIC USER PROFILE VIEW
+   ============================================================ */
+let publicProfileEmail=null;
+function openPublicUserProfile(email){
+    const lu=localStorage.getItem('logged_user');
+    if(!lu){const t=modalTranslations[currentLang]||modalTranslations.en;showCustomAlert(t.authRequiredAlert);return;}
+    const allUsers=getAllUsers();
+    const u=allUsers.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());
+    if(!u){showCustomAlert(currentLang==='tr'?'Kullanıcı bulunamadı!':'User not found!');return;}
+    publicProfileEmail=u.email;
+    const t=modalTranslations[currentLang]||modalTranslations.en;
+    const initial=(u.name||'U').trim().charAt(0).toUpperCase();
+    const av=u.profilePhoto?`<img src="${u.profilePhoto}" alt="">`:(u.name?escapeHtml(initial):'?');
+    const uname=String(u.username||'').replace(/^@/,'');
+    const created=u.createdAt?new Date(u.createdAt).toLocaleDateString():(currentLang==='tr'?'Bilinmiyor':'Unknown');
+    let birth='';
+    if(u.birthDay&&u.birthMonth&&u.birthYear)birth=`${u.birthDay}/${u.birthMonth}/${u.birthYear}`;
+    const myEmail=String((JSON.parse(lu)||{}).email||'').toLowerCase();
+    const isSelf=myEmail===String(u.email||'').toLowerCase();
+    const msgBtnHTML=isSelf?'':`<button class="pub-btn-msg" onclick="messageFromProfile()"><i class="fa-solid fa-comments"></i> <span>${currentLang==='tr'?'Mesaj Gönder':'Send Message'}</span></button>`;
+    document.getElementById('pub-profile-title').innerText=currentLang==='tr'?'Kullanıcı Profili':'User Profile';
+    document.getElementById('publicUserProfileContent').innerHTML=`
+        <div class="pub-profile-view">
+            <div class="pub-profile-avatar">${av}</div>
+            <div class="pub-profile-name">${escapeHtml(u.name||'User')}</div>
+            ${uname?`<div class="pub-profile-username">@${escapeHtml(uname)}</div>`:''}
+            <div class="pub-profile-info">
+                ${u.email?`<div class="pub-profile-info-row"><span><i class="fa-solid fa-envelope"></i>${currentLang==='tr'?'E-posta':'Email'}</span><span>${escapeHtml(u.email)}</span></div>`:''}
+                ${birth?`<div class="pub-profile-info-row"><span><i class="fa-solid fa-cake-candles"></i>${currentLang==='tr'?'Doğum Tarihi':'Birthdate'}</span><span>${escapeHtml(birth)}</span></div>`:''}
+                <div class="pub-profile-info-row"><span><i class="fa-solid fa-calendar-days"></i>${currentLang==='tr'?'Katılım Tarihi':'Joined'}</span><span>${escapeHtml(created)}</span></div>
+            </div>
+            <div class="pub-profile-actions">
+                ${msgBtnHTML}
+                <button class="pub-btn-close" onclick="closePublicUserProfile()"><i class="fa-solid fa-arrow-left"></i> <span>${currentLang==='tr'?'Kapat':'Close'}</span></button>
+            </div>
+        </div>
+    `;
+    document.getElementById('publicUserProfileModal').classList.add('active');
+}
+function closePublicUserProfile(){
+    document.getElementById('publicUserProfileModal').classList.remove('active');
+    publicProfileEmail=null;
+}
+function messageFromProfile(){
+    if(!publicProfileEmail)return;
+    const allUsers=getAllUsers();
+    const u=allUsers.find(x=>x.email===publicProfileEmail);
+    if(!u){closePublicUserProfile();return;}
+    closePublicUserProfile();
+    // Open chat panel and start conversation
+    document.getElementById('chatPanelModal').classList.add('active');
+    activeChatUser=null;
+    document.getElementById('chatUsersList').style.display='none';
+    document.getElementById('chatConversation').style.display='none';
+    openConversation(u);
+}
+
+/* Cross-tab sync */
+window.addEventListener('storage',e=>{
+    if(e.key===CHAT_KEY){
+        updateChatBadge();
+        const panel=document.getElementById('chatPanelModal');
+        if(panel&&panel.classList.contains('active')){
+            if(activeChatUser)renderChatMessages();else renderChatUsersList();
+        }
+    }
+    if(e.key==='site_users'){
+        // A user was added/deleted in another tab; recheck
+        checkUserSession();
+        updateChatBadge();
+        const panel=document.getElementById('chatPanelModal');
+        if(panel&&panel.classList.contains('active')){
+            if(activeChatUser)renderChatMessages();else renderChatUsersList();
+        }
+    }
+});
+
+/* CHAT POLLING */
 function startChatPolling(){
     if(chatPollTimer)clearInterval(chatPollTimer);
     chatPollTimer=setInterval(()=>{
         const lu=localStorage.getItem('logged_user');
-        if(!lu){return;}
+        if(!lu){updateChatBadge();return;}
         updateChatBadge();
         const panel=document.getElementById('chatPanelModal');
         if(panel&&panel.classList.contains('active')){
             if(activeChatUser){
-                // Mark new incoming as read if conversation is open
                 let u;try{u=JSON.parse(lu);}catch(e){return;}
                 const msgs=getChatMessages();
                 const convId=getConversationId(u.email,activeChatUser.email);
@@ -1386,16 +1501,6 @@ function startChatPolling(){
         }
     },2500);
 }
-/* Cross-tab sync */
-window.addEventListener('storage',e=>{
-    if(e.key===CHAT_KEY){
-        updateChatBadge();
-        const panel=document.getElementById('chatPanelModal');
-        if(panel&&panel.classList.contains('active')){
-            if(activeChatUser)renderChatMessages();else renderChatUsersList();
-        }
-    }
-});
 
 /* ADMIN */
 const ADMIN_MASTER_PASSWORD='Mum1n$ultan1';
@@ -1427,6 +1532,7 @@ function renderAdminUsers(){
             </div>
             <div class="user-card-btns">
                 <button class="user-view-btn" onclick="viewUserDetail(${idx})" title="View Details"><i class="fa-solid fa-eye"></i></button>
+                <button class="user-view-btn danger" onclick="deleteUserAdmin('${escapeHtml(u.email||'')}')" title="Delete User"><i class="fa-solid fa-trash-can"></i></button>
             </div>
         `;
         list.appendChild(card);
@@ -1446,6 +1552,7 @@ function viewUserDetail(idx){
         <div class="user-detail-modal-row"><span>🔑 Password</span><span style="font-family:'Fira Code',monospace;font-size:.7rem;">${escapeHtml(u.password||'-')}</span></div>
         <div class="user-detail-modal-row"><span>🎂 Birthdate</span><span>${u.birthDay&&u.birthMonth&&u.birthYear?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'-'}</span></div>
         <div class="user-detail-modal-row"><span>👤 Username</span><span>${escapeHtml(u.username||'-')}</span></div>
+        <div class="user-detail-modal-row"><span>📅 Joined</span><span>${u.createdAt?new Date(u.createdAt).toLocaleString():'-'}</span></div>
         <div class="user-detail-modal-row"><span>📊 Total Activities</span><span>${logs.length}</span></div>
     `;
     document.getElementById('userDetailContent').innerHTML=rows;
@@ -1453,6 +1560,57 @@ function viewUserDetail(idx){
     document.getElementById('userDetailTitle').innerText=currentLang==='tr'?'Kullanıcı Detayları':'User Details';
 }
 function closeUserDetail(){document.getElementById('userDetailModal').classList.remove('active');}
+
+/* DELETE SINGLE USER (Admin) */
+function deleteUserAdmin(email){
+    if(!email)return;
+    const users=getAllUsers();
+    const u=users.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());
+    if(!u){showCustomAlert(currentLang==='tr'?'Kullanıcı bulunamadı!':'User not found!');return;}
+    const msg=currentLang==='tr'
+        ? `"${u.name||u.email}" hesabını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz ve kullanıcının tüm verileri (sohbetler dahil) silinecek.`
+        : `Are you sure you want to delete "${u.name||u.email}"? This cannot be undone and all user data (including chats) will be removed.`;
+    showCustomAlert(msg,'delete',function(){
+        // Remove from site_users (database)
+        const target=String(email).toLowerCase();
+        const newUsers=users.filter(x=>String(x.email||'').toLowerCase()!==target);
+        localStorage.setItem('site_users',JSON.stringify(newUsers));
+        
+        // Clean up chat messages involving this user
+        const msgs=getChatMessages();
+        for(const convId in msgs){
+            const parts=convId.split('__');
+            if(parts.includes(target))delete msgs[convId];
+        }
+        saveChatMessages(msgs);
+        
+        // If currently logged-in user (in this browser) is the deleted one, log them out
+        const lu=localStorage.getItem('logged_user');
+        if(lu){
+            try{
+                const cu=JSON.parse(lu);
+                if(String(cu.email||'').toLowerCase()===target){
+                    localStorage.removeItem('logged_user');
+                    try{sessionStorage.removeItem('site_lang');}catch(e){}
+                    changeLanguage('en');
+                    checkUserSession();
+                    renderApplications();
+                }
+            }catch(e){}
+        }
+        
+        logActivity('delete_account',u,'Account deleted by admin');
+        renderAdminUsers();
+        refreshAdminUI();
+        updateChatBadge();
+        const cp=document.getElementById('chatPanelModal');
+        if(cp&&cp.classList.contains('active')){
+            if(activeChatUser)renderChatMessages();else renderChatUsersList();
+        }
+        showCustomAlert(currentLang==='tr'?'Kullanıcı silindi!':'User deleted!','success');
+    });
+}
+
 function exportUsersCSV(){
     const users=getAllUsers();
     if(users.length===0){showCustomAlert(currentLang==='tr'?'Kullanıcı yok!':'No users!');return;}
@@ -1887,7 +2045,6 @@ function changeModalLanguage(lang){
     s('email-change-code-title',data.emailChangeCodeTitle);s('email-change-code-desc',data.emailChangeCodeDesc);s('email-change-code-label',data.emailChangeCodeLabel);s('email-change-verify-text',data.emailChangeVerifyBtn);
     s('signupMockTitle',data.signupMockTitle);s('signupMockGreeting',data.signupMockGreeting);s('signupMockDesc',data.signupMockDesc);s('signupMockEmailLabel',data.emailLabel);s('signupMockCodeLabel',data.signupMockCodeLabel);s('signupMockAdminLabel',data.mockEmailAdminLabel);s('signupMockEnterBtn',data.signupEnterCodeBtn);
     s('signupCodeTitle',data.signupCodeTitle);s('signupCodeDesc',data.signupCodeDesc);s('signupCodeLabel',data.signupCodeLabel);s('signupCodeVerifyText',data.signupVerifyBtn);
-    /* CHAT translations */
     s('chat-panel-title',data.chatPanelTitle);
     const ci=document.getElementById('chatInput');if(ci)ci.placeholder=data.chatPlaceholder;
     const isTR=lang==='tr';
@@ -1908,7 +2065,7 @@ function changeModalLanguage(lang){
         document.querySelectorAll('[data-t="backup"]').forEach(e=>e.textContent='Yedek');
         document.querySelectorAll('[data-t="all"]').forEach(e=>e.textContent='Tümü');
         s('dash-btn-users','Kullanıcılar');s('dash-btn-activity','Aktivite');s('dash-btn-apps','Uygulamalar');s('dash-btn-backup','Yedek');
-        s('hint-users','Tüm kayıtlı kullanıcılar. Detay için göz ikonuna tıklayın.');
+        s('hint-users','Tüm kayıtlı kullanıcılar. Detay için göz ikonuna, silmek için çöp ikonuna tıklayın.');
         s('hint-activity','Kullanıcıların sitede yaptığı her şey sadece sizin için kaydedilir.');
         s('hint-chats','Kullanıcılar arası tüm sohbet mesajları. Sadece admin görebilir.');
         s('users-export','Kullanıcıları CSV İndir');s('users-clear','Tüm Kullanıcıları Sil');
@@ -1941,7 +2098,7 @@ function changeModalLanguage(lang){
         document.querySelectorAll('[data-t="backup"]').forEach(e=>e.textContent='Backup');
         document.querySelectorAll('[data-t="all"]').forEach(e=>e.textContent='All');
         s('dash-btn-users','Users');s('dash-btn-activity','Activity');s('dash-btn-apps','Manage Apps');s('dash-btn-backup','Backup');
-        s('hint-users','All registered users. Click eye icon for full details.');
+        s('hint-users','All registered users. Click the eye icon for details or trash icon to delete.');
         s('hint-activity','Everything users do on the site is logged here for your eyes only.');
         s('hint-chats','All user-to-user chat messages. Only visible to admin.');
         s('users-export','Export Users CSV');s('users-clear','Delete All Users');
@@ -1960,7 +2117,6 @@ function changeModalLanguage(lang){
     }
     document.getElementById('modalLangMenu').classList.remove('show');
     document.getElementById('contactModalLangMenu').classList.remove('show');
-    /* Refresh chat renderers on lang change */
     if(document.getElementById('chatPanelModal').classList.contains('active')){
         if(activeChatUser)renderChatMessages();else renderChatUsersList();
     }
@@ -2077,8 +2233,13 @@ function handleDeletePasswordSubmit(e){
         users=users.filter(x=>x.email!==u.email);
         localStorage.setItem('site_users',JSON.stringify(users));
         localStorage.removeItem('logged_user');
+        // Clean their chats too
+        const msgs=getChatMessages();
+        const target=String(u.email||'').toLowerCase();
+        for(const convId in msgs){const parts=convId.split('__');if(parts.includes(target))delete msgs[convId];}
+        saveChatMessages(msgs);
         closeDeletePasswordModal();showCustomAlert(t.successDelete,'success');
-        window._pendingLangReset=true;checkUserSession();renderApplications();
+        window._pendingLangReset=true;checkUserSession();renderApplications();updateChatBadge();
     }catch(err){}
 }
 
@@ -2262,13 +2423,32 @@ function handleAuthSubmit(e){
             localStorage.setItem('logged_user',JSON.stringify(user));
             logActivity('signin',user,'User signed in');
             showCustomAlert(t.successSignin,'success');closeDirectContactModal();checkUserSession();renderApplications();
+            updateChatBadge();
         }else showCustomAlert(t.errorSignin);
     }
 }
 
-function checkUserSession(){const lu=localStorage.getItem('logged_user');const ps=document.getElementById('userProfileSection');const cte=document.getElementById('t-contact-title'),cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');const abi=document.getElementById('authBoxIcon');if(lu){try{const u=JSON.parse(lu);if(ps)ps.style.display='block';const pd=(id,v)=>{const el=document.getElementById(id);if(el)el.innerText=v;};pd('profileDisplayName',u.name||'User');pd('profileDisplayUsernameDesktop',u.username||'@username');pd('profileDisplayEmailDesktop',u.email||'-');pd('profileDisplayBirthdateDesktop',(u.birthDay&&u.birthMonth&&u.birthYear)?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'--/--/----');pd('profileDisplayUsernameMobile',u.username||'@username');pd('profileDisplayEmail',u.email||'-');const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const ppd=document.getElementById('profilePhotoDisplay');if(ppd)ppd.src=p;const ppl=document.getElementById('profilePhotoLarge');if(ppl)ppl.src=p;const br=document.getElementById('profileBirthdateRow'),bd=document.getElementById('profileDisplayBirthdate');if(u.birthDay&&u.birthMonth&&u.birthYear){if(br)br.style.display='flex';if(bd)bd.innerText=`${u.birthDay}/${u.birthMonth}/${u.birthYear}`;}else if(br)br.style.display='none';const sT=modalTranslations[currentLang]||modalTranslations.en;if(cte)cte.innerText=sT.userAccount;if(cse)cse.innerText=sT.activeSession;if(cme)cme.innerText=u.name?`${sT.welcomeUser} ${u.name}`:sT.sessionActive;if(abi)abi.className='fa-solid fa-user-check';const pdc=document.getElementById('profileDetailsContainer');if(pdc)pdc.style.display='none';const pi=document.getElementById('privacyIcon');if(pi)pi.className='fa-solid fa-eye-slash';}catch(e){}}else{const sT=modalTranslations[currentLang]||modalTranslations.en;if(ps)ps.style.display='none';if(cte)cte.innerText=sT.signInSignUp;if(cse)cse.innerText=sT.signInSignUp;if(cme)cme.innerText=sT.signInToJoin;if(abi)abi.className='fa-solid fa-right-to-bracket';}
-/* Update chat button visibility & badge */
-updateChatBadge();
+function checkUserSession(){
+    const lu=localStorage.getItem('logged_user');
+    // First, verify logged user still exists in database (in case admin deleted them)
+    if(lu){
+        try{
+            const cu=JSON.parse(lu);
+            const allUsers=getAllUsers();
+            const stillExists=allUsers.some(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());
+            if(!stillExists && String(cu.email||'').toLowerCase()!=='admin@muminsultani.com'){
+                localStorage.removeItem('logged_user');
+                try{sessionStorage.removeItem('site_lang');}catch(e){}
+                currentLang='en';
+                return checkUserSession();
+            }
+        }catch(e){}
+    }
+    const ps=document.getElementById('userProfileSection');
+    const cte=document.getElementById('t-contact-title'),cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');
+    const abi=document.getElementById('authBoxIcon');
+    if(lu){try{const u=JSON.parse(lu);if(ps)ps.style.display='block';const pd=(id,v)=>{const el=document.getElementById(id);if(el)el.innerText=v;};pd('profileDisplayName',u.name||'User');pd('profileDisplayUsernameDesktop',u.username||'@username');pd('profileDisplayEmailDesktop',u.email||'-');pd('profileDisplayBirthdateDesktop',(u.birthDay&&u.birthMonth&&u.birthYear)?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'--/--/----');pd('profileDisplayUsernameMobile',u.username||'@username');pd('profileDisplayEmail',u.email||'-');const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const ppd=document.getElementById('profilePhotoDisplay');if(ppd)ppd.src=p;const ppl=document.getElementById('profilePhotoLarge');if(ppl)ppl.src=p;const br=document.getElementById('profileBirthdateRow'),bd=document.getElementById('profileDisplayBirthdate');if(u.birthDay&&u.birthMonth&&u.birthYear){if(br)br.style.display='flex';if(bd)bd.innerText=`${u.birthDay}/${u.birthMonth}/${u.birthYear}`;}else if(br)br.style.display='none';const sT=modalTranslations[currentLang]||modalTranslations.en;if(cte)cte.innerText=sT.userAccount;if(cse)cse.innerText=sT.activeSession;if(cme)cme.innerText=u.name?`${sT.welcomeUser} ${u.name}`:sT.sessionActive;if(abi)abi.className='fa-solid fa-user-check';const pdc=document.getElementById('profileDetailsContainer');if(pdc)pdc.style.display='none';const pi=document.getElementById('privacyIcon');if(pi)pi.className='fa-solid fa-eye-slash';}catch(e){}}else{const sT=modalTranslations[currentLang]||modalTranslations.en;if(ps)ps.style.display='none';if(cte)cte.innerText=sT.signInSignUp;if(cse)cse.innerText=sT.signInSignUp;if(cme)cme.innerText=sT.signInToJoin;if(abi)abi.className='fa-solid fa-right-to-bracket';}
+    updateChatBadge();
 }
 
 /* HELPERS */
