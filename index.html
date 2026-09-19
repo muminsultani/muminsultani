@@ -1222,8 +1222,22 @@ async function renderApplications(){
     const t=modalTranslations[currentLang]||modalTranslations.en;
     const isLogged=!!localStorage.getItem('logged_user');
     grid.innerHTML='';
+    
+    // YENİ: Aynı isimdeki uygulamaların tekrarını önlemek için bir Set oluşturuyoruz
+    const renderedAppNames = new Set();
+    
     for(let idx=0;idx<apps.length;idx++){
         const app=apps[idx];
+        
+        // YENİ: Eğer uygulamanın ismi zaten ekrana çizildiyse, bu döngüyü atla
+        if(app.name && app.name.trim()){
+            const nameKey = app.name.trim().toLowerCase();
+            if(renderedAppNames.has(nameKey)) {
+                continue;
+            }
+            renderedAppNames.add(nameKey);
+        }
+
         const card=document.createElement('div');
         card.className='app-card';
         const hasContent=app.name&&app.name.trim().length>0;
@@ -1916,7 +1930,7 @@ window.introConstellation=createConstellationSystem('intro-canvas',{numberOfPart
 
 /* INIT */
 window.addEventListener('DOMContentLoaded',()=>{
-    setTimeout(()=>{const intro=document.getElementById('intro-screen');if(intro){intro.style.opacity='0';intro.style.visibility='hidden';setTimeout(()=>{intro.style.display='none';if(window.introConstellation&&window.introConstellation.stop)window.introConstellation.stop();fireConfettiBurst(1);},600);}},1500);
+    setTimeout(()=>{const intro=document.getElementById('intro-screen');if(intro){intro.style.opacity='0';intro.style.visibility='hidden';setTimeout(()=>{intro.style.display='none';if(window.introConstellation&&window.introConstellation.stop)window.introConstellation.stop();/* fireConfettiBurst(1); <-- İntro sonrası konfeti patlaması kullanıcı isteğiyle kaldırıldı */},600);}},1500);
     initTheme();checkUserSession();applySiteContent();
     const sl=sessionStorage.getItem('site_lang')||'en';
     changeLanguage(sl);
