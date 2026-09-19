@@ -101,6 +101,7 @@ section{border-top:1px solid var(--line-color);padding-top:24px}
 .app-card-empty span{font-size:.68rem;font-weight:500}
 .app-card-tag{position:absolute;top:9px;right:9px;font-size:.5rem;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:3px 6px;border-radius:5px;background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;box-shadow:0 2px 8px rgba(147,51,234,.3);display:inline-flex;align-items:center;gap:3px}
 .app-card-tag.apk-tag{background:linear-gradient(135deg,#22c55e,#16a34a);box-shadow:0 2px 8px rgba(34,197,94,.35)}
+.app-card-tag.apk-tag.locked-tag{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 2px 8px rgba(239,68,68,.35)}
 .app-card-tag i{font-size:.55rem}
 .modal-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(5,5,8,.5);backdrop-filter:blur(4px);z-index:10000;display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;padding:16px;pointer-events:none}
 .modal-overlay.active{opacity:1;visibility:visible;pointer-events:auto}
@@ -222,6 +223,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .btn-crop-cancel{background:var(--box-bg);color:var(--text-primary);border:1px solid var(--line-color) !important}
 .btn-crop-apply{background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff}
 .code-input{text-align:center !important;font-family:'Fira Code',monospace !important;font-size:1.3rem !important;letter-spacing:6px !important;font-weight:700 !important;color:#9333ea !important}
+/* ADMIN */
 .admin-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:6px;border-bottom:1px solid var(--line-color);scrollbar-width:none}
 .admin-tabs::-webkit-scrollbar{display:none}
 .admin-tab{flex-shrink:0;padding:7px 12px;border-radius:8px;background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-secondary);font-size:.72rem;font-weight:700;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:5px}
@@ -230,12 +232,13 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .admin-section{display:none}
 .admin-section.active{display:block}
 .admin-hint{font-size:.72rem;color:var(--text-secondary);margin-bottom:12px;padding:8px 10px;background:rgba(147,51,234,.06);border:1px solid rgba(147,51,234,.15);border-radius:8px;line-height:1.5}
-.admin-slot{background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;padding:10px;margin-bottom:10px;display:flex;align-items:center;gap:10px;min-height:56px}
+.admin-slot{background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;padding:10px;margin-bottom:10px;display:flex;align-items:center;gap:10px;min-height:56px;transition:all .2s}
+.admin-slot:hover{border-color:rgba(147,51,234,.25);background:var(--box-hover-bg)}
 .admin-slot-num{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;flex-shrink:0}
 .admin-slot-info{flex:1;min-width:0}
-.admin-slot-name{font-size:.82rem;font-weight:700;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:5px}
-.admin-slot-url{font-size:.68rem;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.admin-slot-btns{display:flex;gap:5px}
+.admin-slot-name{font-size:.82rem;font-weight:700;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.admin-slot-url{font-size:.68rem;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.admin-slot-btns{display:flex;gap:5px;flex-shrink:0}
 .admin-slot-btn{width:28px;height:28px;border-radius:7px;border:1px solid var(--line-color);background:var(--box-bg);color:var(--text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.72rem;transition:all .2s}
 .admin-slot-btn:hover{border-color:rgba(147,51,234,.5);color:#9333ea;background:var(--box-hover-bg)}
 .admin-slot-btn.delete:hover{border-color:rgba(239,68,68,.5);color:#ef4444;background:rgba(239,68,68,.06)}
@@ -246,6 +249,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .admin-action-btn.ghost{background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-primary)}
 .admin-stat{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--box-bg);border:1px solid var(--line-color);border-radius:8px;margin-bottom:6px;font-size:.78rem}
 .admin-stat i{color:#9333ea;width:16px;text-align:center}
+/* Upload & Toggle */
 .upload-wrapper{position:relative;background:var(--box-bg);border:2px dashed var(--line-color);border-radius:10px;padding:16px;text-align:center;cursor:pointer;transition:all .2s}
 .upload-wrapper:hover{border-color:rgba(147,51,234,.5);background:var(--box-hover-bg)}
 .upload-wrapper.has-file{border-style:solid;border-color:#22c55e;background:rgba(34,197,94,.05);border-width:1px}
@@ -258,8 +262,22 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .apk-clear-btn{display:inline-flex;align-items:center;gap:5px;margin-top:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:6px 10px;border-radius:8px;font-size:.7rem;font-weight:700;cursor:pointer}
 .apk-clear-btn:hover{background:rgba(239,68,68,.15)}
 .apk-badge{display:inline-flex;align-items:center;gap:3px;font-size:.6rem;font-weight:800;letter-spacing:.5px;padding:2px 6px;border-radius:4px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;text-transform:uppercase}
+.lock-badge{display:inline-flex;align-items:center;gap:3px;font-size:.6rem;font-weight:800;letter-spacing:.5px;padding:2px 6px;border-radius:4px;background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;text-transform:uppercase}
 .icon-preview-mini{width:24px;height:24px;border-radius:6px;object-fit:cover;border:1px solid var(--line-color);flex-shrink:0;pointer-events:auto}
 .icon-preview-big{width:64px;height:64px;border-radius:12px;object-fit:cover;border:2px solid rgba(147,51,234,.4);margin:0 auto 8px;display:block;background:var(--box-bg);pointer-events:auto}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:var(--box-bg);border:1px solid var(--line-color);border-radius:10px;margin-bottom:10px;transition:all .2s}
+.toggle-row:hover{border-color:rgba(147,51,234,.25)}
+.toggle-label{font-size:.78rem;font-weight:700;color:var(--text-primary);display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.toggle-label-title{display:flex;align-items:center;gap:6px}
+.toggle-label-title i{color:#9333ea;font-size:.85rem;width:14px;text-align:center}
+.toggle-label-sub{font-size:.65rem;color:var(--text-secondary);font-weight:400;margin-left:20px;line-height:1.3}
+.toggle-switch{position:relative;display:inline-block;width:44px;height:24px;flex-shrink:0}
+.toggle-switch input{opacity:0;width:0;height:0;position:absolute}
+.toggle-slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:var(--line-color);transition:.3s;border-radius:24px;border:1px solid var(--line-color)}
+.toggle-slider:before{position:absolute;content:"";height:18px;width:18px;left:2px;top:2px;background:#fff;transition:.3s;border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,.25)}
+.toggle-switch input:checked + .toggle-slider{background:linear-gradient(135deg,#9333ea,#c084fc);border-color:transparent}
+.toggle-switch input:checked + .toggle-slider:before{transform:translateX(20px)}
+.toggle-switch input:focus-visible + .toggle-slider{outline:2px solid rgba(147,51,234,.4);outline-offset:2px}
 .user-card{background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
 .user-card-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,rgba(147,51,234,.15),rgba(192,132,252,.08));border:1px solid rgba(147,51,234,.3);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;color:#9333ea;flex-shrink:0;overflow:hidden}
 .user-card-avatar img{width:100%;height:100%;object-fit:cover}
@@ -423,7 +441,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <canvas id="constellation-canvas"></canvas>
 <canvas id="confetti-canvas"></canvas>
 <div id="security-curtain"></div>
-
 <div class="cloud-status" id="cloudStatus"><span class="dot"></span><i class="fa-solid fa-cloud"></i><span id="cloudStatusText">...</span></div>
 
 <div id="intro-screen">
@@ -442,18 +459,12 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="header-top">
 <div class="brand-logo" id="dynBrandHeader">muminsultani</div>
 <div class="header-actions">
-<button class="chat-toggle-btn" id="chatToggleBtn" onclick="openChatPanel()" title="Chat">
-<i class="fa-solid fa-comments"></i>
-<span class="chat-badge" id="chatUnreadBadge">0</span>
-</button>
+<button class="chat-toggle-btn" id="chatToggleBtn" onclick="openChatPanel()" title="Chat"><i class="fa-solid fa-comments"></i><span class="chat-badge" id="chatUnreadBadge">0</span></button>
 <button class="scroll-down-action-btn" onclick="scrollPageDown()"><i class="fa-solid fa-arrow-down"></i></button>
 <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
 <div class="lang-dropdown-container">
 <button class="lang-btn" id="langDropdownBtn" onclick="toggleLangMenu()"><span id="currentLangText">EN</span><i class="fa-solid fa-chevron-down" style="font-size:.4rem;margin-left:2px"></i></button>
-<div class="lang-menu" id="langMenu">
-<button class="lang-option" onclick="changeLanguage('en')">English</button>
-<button class="lang-option" onclick="changeLanguage('tr')">Türkçe</button>
-</div>
+<div class="lang-menu" id="langMenu"><button class="lang-option" onclick="changeLanguage('en')">English</button><button class="lang-option" onclick="changeLanguage('tr')">Türkçe</button></div>
 </div>
 </div>
 </div>
@@ -465,9 +476,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <a href="https://instagram.com/sultanimumin" id="socialInstagram" target="_blank" class="social-btn instagram" title="Instagram">
 <svg viewBox="0 0 24 24" width="100%" height="100%"><defs><radialGradient id="ig" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="5%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><path fill="url(#ig)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
 </a>
-<button type="button" class="social-btn gmail" id="socialGmail" onclick="openGmailNoticeModal(getDyn('social.gmail','muminsultani@hotmail.com'))" title="Gmail">
-<img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail">
-</button>
+<button type="button" class="social-btn gmail" id="socialGmail" onclick="openGmailNoticeModal(getDyn('social.gmail','muminsultani@hotmail.com'))" title="Gmail"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail"></button>
 </div>
 </header>
 
@@ -475,10 +484,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="section-title"><i class="fa-solid fa-user-gear"></i> <span id="t-profile-title">User Profile & Session</span></div>
 <div class="contact-box" style="cursor:default;align-items:flex-start;flex-direction:column;gap:12px">
 <div style="display:flex;gap:8px;width:100%;align-items:center;justify-content:space-between;flex-wrap:nowrap">
-<div class="profile-photo-wrapper">
-<img id="profilePhotoDisplay" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile" onclick="openProfilePhotoPanel()">
-<input type="file" id="profilePhotoInput" accept="image/*" style="display:none" onchange="handleProfilePhotoUpload(event)">
-</div>
+<div class="profile-photo-wrapper"><img id="profilePhotoDisplay" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile" onclick="openProfilePhotoPanel()"><input type="file" id="profilePhotoInput" accept="image/*" style="display:none" onchange="handleProfilePhotoUpload(event)"></div>
 <div style="display:flex;gap:5px;align-items:center;flex-shrink:1;min-width:0">
 <button onclick="openChatPanel()" title="Messages" class="profile-action-btn" style="color:#9333ea;border-color:rgba(147,51,234,.4)"><i class="fa-solid fa-comments"></i></button>
 <button onclick="toggleProfilePrivacy()" title="Hide/Show" class="profile-action-btn" id="privacyToggleBtn"><i class="fa-solid fa-eye" id="privacyIcon"></i></button>
@@ -511,10 +517,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <section>
 <div class="section-title"><i class="fa-solid fa-briefcase"></i> <span id="t-exp-title">Experience</span></div>
 <div class="item-row">
-<div class="item-header">
-<span class="item-title" id="t-job-title">Remote Software Developer</span>
-<span class="item-date" id="t-job-date">2025 - Present</span>
-</div>
+<div class="item-header"><span class="item-title" id="t-job-title">Remote Software Developer</span><span class="item-date" id="t-job-date">2025 - Present</span></div>
 <p class="item-desc" id="t-job-desc">Developing scalable backend services, REST APIs, and mobile-friendly web solutions using Python and Node.js.</p>
 </div>
 </section>
@@ -538,10 +541,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <section>
 <div class="section-title"><i class="fa-solid fa-right-to-bracket"></i> <span id="t-contact-title">Sign In / Sign Up</span></div>
 <div class="contact-box" onclick="openGetInTouchModal()">
-<div class="contact-text">
-<span id="t-contact-sub">Sign In / Sign Up</span>
-<strong id="t-contact-main">Sign in to join us</strong>
-</div>
+<div class="contact-text"><span id="t-contact-sub">Sign In / Sign Up</span><strong id="t-contact-main">Sign in to join us</strong></div>
 <i class="fa-solid fa-right-to-bracket" id="authBoxIcon"></i>
 </div>
 </section>
@@ -558,10 +558,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 
 <div class="modal-overlay profile-view-z" id="publicUserProfileModal">
 <div class="modal-container" style="max-width:400px">
-<div class="modal-header">
-<div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="pub-profile-title">User Profile</div></div>
-<div class="modal-header-actions"><button class="modal-close-btn" onclick="closePublicUserProfile()"><i class="fa-solid fa-xmark"></i></button></div>
-</div>
+<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="pub-profile-title">User Profile</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closePublicUserProfile()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <div id="publicUserProfileContent"></div>
 </div>
 </div>
@@ -569,13 +566,8 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="modal-overlay chat-z" id="chatPanelModal">
 <div class="modal-container chat-container">
 <div class="modal-header">
-<div class="modal-header-left">
-<div class="modal-brand">muminsultani</div>
-<div class="modal-title" id="chat-panel-title">Messages</div>
-</div>
-<div class="modal-header-actions">
-<button class="modal-close-btn" onclick="closeChatPanel()"><i class="fa-solid fa-xmark"></i></button>
-</div>
+<div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="chat-panel-title">Messages</div></div>
+<div class="modal-header-actions"><button class="modal-close-btn" onclick="closeChatPanel()"><i class="fa-solid fa-xmark"></i></button></div>
 </div>
 <div class="chat-body">
 <div class="chat-users-list-wrapper" id="chatUsersListWrapper">
@@ -611,19 +603,10 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 
 <div class="modal-overlay admin-z" id="adminLoginModal">
 <div class="modal-container" style="max-width:380px">
-<div class="modal-header">
-<div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="admin-login-title">Admin Access</div></div>
-<div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminLogin()"><i class="fa-solid fa-xmark"></i></button></div>
-</div>
+<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="admin-login-title">Admin Access</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminLogin()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <form id="adminLoginForm" onsubmit="verifyAdminPassword(event)">
 <p class="item-desc" style="margin-bottom:12px;font-size:.8rem">Restricted area. Enter the master password.</p>
-<div class="form-group">
-<label class="form-label" id="admin-pass-label">Master Password</label>
-<div class="password-wrapper">
-<input type="password" class="form-input" id="adminPasswordInput" required placeholder="••••••••••••">
-<button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('adminPasswordInput','adminPassToggleIcon')"><i class="fa-solid fa-eye" id="adminPassToggleIcon"></i></button>
-</div>
-</div>
+<div class="form-group"><label class="form-label" id="admin-pass-label">Master Password</label><div class="password-wrapper"><input type="password" class="form-input" id="adminPasswordInput" required placeholder="••••••••••••"><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('adminPasswordInput','adminPassToggleIcon')"><i class="fa-solid fa-eye" id="adminPassToggleIcon"></i></button></div></div>
 <div class="form-buttons-group"><button type="submit" class="submit-btn email-btn"><i class="fa-solid fa-unlock"></i> <span id="admin-login-btn">Unlock</span></button></div>
 </form>
 </div>
@@ -631,10 +614,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 
 <div class="modal-overlay admin-z" id="adminPanelModal">
 <div class="modal-container" style="max-width:620px">
-<div class="modal-header">
-<div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="admin-panel-title">Full Site Control</div></div>
-<div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminPanel()"><i class="fa-solid fa-xmark"></i></button></div>
-</div>
+<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="admin-panel-title">Full Site Control</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminPanel()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <div class="admin-tabs">
 <button class="admin-tab active" data-tab="dashboard" onclick="switchAdminTab('dashboard',this)"><i class="fa-solid fa-gauge-high"></i> <span data-t="dash">Dashboard</span></button>
 <button class="admin-tab" data-tab="users" onclick="switchAdminTab('users',this)"><i class="fa-solid fa-users"></i> <span data-t="users">Users</span></button>
@@ -720,7 +700,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </form>
 </div>
 <div class="admin-section" data-section="apps">
-<div class="admin-hint"><i class="fa-solid fa-circle-info" style="color:#9333ea"></i> <span id="hint-apps">8 slots. Upload icon image + APK from phone, or paste URL.</span></div>
+<div class="admin-hint"><i class="fa-solid fa-circle-info" style="color:#9333ea"></i> <span id="hint-apps">8 slots. Upload icon image + APK from phone, or paste URL. Use the lock toggle to require login before download.</span></div>
 <div id="adminSlotsList"></div>
 </div>
 <div class="admin-section" data-section="experience">
@@ -782,16 +762,13 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 
 <div class="modal-overlay admin-z" id="userDetailModal">
 <div class="modal-container" style="max-width:420px">
-<div class="modal-header">
-<div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="user-detail-title">User Details</div></div>
-<div class="modal-header-actions"><button class="modal-close-btn" onclick="closeUserDetail()"><i class="fa-solid fa-xmark"></i></button></div>
-</div>
+<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="user-detail-title">User Details</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeUserDetail()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <div id="userDetailContent"></div>
 </div>
 </div>
 
 <div class="modal-overlay admin-z" id="adminEditModal">
-<div class="modal-container" style="max-width:440px">
+<div class="modal-container" style="max-width:460px">
 <div class="modal-header">
 <div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="admin-edit-title">Edit App Slot</div></div>
 <div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminEdit()"><i class="fa-solid fa-xmark"></i></button></div>
@@ -807,9 +784,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="upload-info" id="iconUploadInfo" style="display:none"></div>
 <input type="file" id="editAppIconFile" accept="image/*" style="display:none" onchange="handleIconUpload(event)">
 </div>
-<button type="button" class="apk-clear-btn" id="iconClearBtn" onclick="clearIconFile();event.stopPropagation();" style="display:none">
-<i class="fa-solid fa-trash-can"></i> <span id="ae-icon-clear-text">Remove Icon</span>
-</button>
+<button type="button" class="apk-clear-btn" id="iconClearBtn" onclick="clearIconFile();event.stopPropagation();" style="display:none"><i class="fa-solid fa-trash-can"></i> <span id="ae-icon-clear-text">Remove Icon</span></button>
 </div>
 <div class="form-group"><label class="form-label" id="ae-name-label">App Name</label><input type="text" class="form-input" id="editAppName" required maxlength="40" placeholder="My App"></div>
 <div class="form-group"><label class="form-label" id="ae-desc-label">Description</label><textarea class="form-textarea" id="editAppDesc" required maxlength="200" style="min-height:60px"></textarea></div>
@@ -822,9 +797,17 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="upload-info" id="apkUploadInfo" style="display:none"></div>
 <input type="file" id="editAppApkFile" accept=".apk,application/vnd.android.package-archive" style="display:none" onchange="handleApkUpload(event)">
 </div>
-<button type="button" class="apk-clear-btn" id="apkClearBtn" onclick="clearApkFile();event.stopPropagation();" style="display:none">
-<i class="fa-solid fa-trash-can"></i> <span id="ae-apk-clear-text">Remove APK</span>
-</button>
+<button type="button" class="apk-clear-btn" id="apkClearBtn" onclick="clearApkFile();event.stopPropagation();" style="display:none"><i class="fa-solid fa-trash-can"></i> <span id="ae-apk-clear-text">Remove APK</span></button>
+</div>
+<div class="toggle-row">
+<div class="toggle-label">
+<div class="toggle-label-title"><i class="fa-solid fa-lock"></i> <span id="ae-lock-title">Require Login to Download</span></div>
+<div class="toggle-label-sub" id="ae-lock-sub">Users must sign in or register before downloading this APK</div>
+</div>
+<label class="toggle-switch">
+<input type="checkbox" id="editAppRequireLogin">
+<span class="toggle-slider"></span>
+</label>
 </div>
 <div class="form-buttons-group" style="flex-direction:column;gap:8px">
 <button type="submit" class="submit-btn email-btn" style="background:linear-gradient(135deg,#22c55e,#16a34a);width:100%"><i class="fa-solid fa-floppy-disk"></i> <span id="ae-save-text">Save</span></button>
@@ -953,11 +936,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeChangePasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="cp-title">Change Password</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeChangePasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <form id="changePasswordForm" onsubmit="handleChangePassword(event)">
 <div class="form-group"><label class="form-label" id="cp-label-old">Current Password</label><div class="password-wrapper"><input type="password" class="form-input" id="changeOldPassword" required placeholder="••••••••"><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('changeOldPassword','oldPasswordToggleIcon')"><i class="fa-solid fa-eye" id="oldPasswordToggleIcon"></i></button></div></div>
-<div class="form-group">
-<label class="form-label" id="cp-label-new">New Password</label>
-<div class="password-wrapper"><input type="password" class="form-input" id="changeNewPassword" required placeholder="••••••••" oninput="updatePasswordHint('changeNewPassword','changePasswordHint')"><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('changeNewPassword','newPasswordToggleIcon')"><i class="fa-solid fa-eye" id="newPasswordToggleIcon"></i></button></div>
-<div id="changePasswordHint" class="password-hint"><ul><li data-rule="length">8+ char</li><li data-rule="upper">A-Z</li><li data-rule="lower">a-z</li><li data-rule="digit">0-9</li><li data-rule="special">€$@#&!</li></ul></div>
-</div>
+<div class="form-group"><label class="form-label" id="cp-label-new">New Password</label><div class="password-wrapper"><input type="password" class="form-input" id="changeNewPassword" required placeholder="••••••••" oninput="updatePasswordHint('changeNewPassword','changePasswordHint')"><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('changeNewPassword','newPasswordToggleIcon')"><i class="fa-solid fa-eye" id="newPasswordToggleIcon"></i></button></div><div id="changePasswordHint" class="password-hint"><ul><li data-rule="length">8+ char</li><li data-rule="upper">A-Z</li><li data-rule="lower">a-z</li><li data-rule="digit">0-9</li><li data-rule="special">€$@#&!</li></ul></div></div>
 <div class="form-group"><label class="form-label" id="cp-label-confirm">Confirm New Password</label><div class="password-wrapper"><input type="password" class="form-input" id="changeConfirmPassword" required placeholder="••••••••"><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('changeConfirmPassword','confirmPasswordToggleIcon')"><i class="fa-solid fa-eye" id="confirmPasswordToggleIcon"></i></button></div></div>
 <div class="form-buttons-group"><button type="submit" class="submit-btn email-btn" id="cp-submit-btn" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-key"></i> <span id="cp-submit-text">Update Password</span></button></div>
 </form>
@@ -1027,10 +1006,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="form-group" id="groupSignupUsername" style="display:none"><label class="form-label" id="dc-label-username">Username</label><input type="text" class="form-input" id="contactClientUsername" placeholder="@Username" oninput="checkUsernameAvailability()"><div id="usernameAvailabilityMsg"></div></div>
 <div class="form-group"><label class="form-label" id="dc-label-email">Email</label><input type="text" class="form-input" id="contactClientEmail" required placeholder="name@sample.com"></div>
 <div class="form-group" id="groupPassword">
-<div style="display:flex;justify-content:space-between;margin-bottom:4px">
-<label class="form-label" id="dc-label-password" style="margin-bottom:0">Password</label>
-<a href="#" onclick="openForgotPasswordModal(event)" id="t-forgot-link" style="font-size:.7rem;color:#9333ea;text-decoration:none;font-weight:600">Forgot Password?</a>
-</div>
+<div style="display:flex;justify-content:space-between;margin-bottom:4px"><label class="form-label" id="dc-label-password" style="margin-bottom:0">Password</label><a href="#" onclick="openForgotPasswordModal(event)" id="t-forgot-link" style="font-size:.7rem;color:#9333ea;text-decoration:none;font-weight:600">Forgot Password?</a></div>
 <div class="password-wrapper"><input type="password" class="form-input" id="contactClientPassword" placeholder="••••••••" oninput="updatePasswordHint('contactClientPassword','signupPasswordHint')"><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('contactClientPassword','passwordToggleIcon')"><i class="fa-solid fa-eye" id="passwordToggleIcon"></i></button></div>
 <div id="signupPasswordHint" class="password-hint" style="display:none"><ul><li data-rule="length">8+ char</li><li data-rule="upper">A-Z</li><li data-rule="lower">a-z</li><li data-rule="digit">0-9</li><li data-rule="special">€$@#&!</li></ul></div>
 </div>
@@ -1073,11 +1049,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <form id="resetPasswordForm" onsubmit="handleResetPasswordSubmit(event)">
 <div class="form-group"><label class="form-label" id="rp-label-email">Email</label><input type="email" class="form-input" id="resetClientEmail" readonly style="opacity:.7"></div>
 <div class="form-group"><label class="form-label" id="rp-label-code">Code</label><input type="text" class="form-input" id="resetClientCode" required placeholder="Paste code"></div>
-<div class="form-group">
-<label class="form-label" id="rp-label-new">New Password</label>
-<div class="password-wrapper"><input type="password" class="form-input" id="resetClientNewPassword" required placeholder="••••••••" oninput="updatePasswordHint('resetClientNewPassword','resetPasswordHint')"><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('resetClientNewPassword','resetNewPasswordToggleIcon')"><i class="fa-solid fa-eye" id="resetNewPasswordToggleIcon"></i></button></div>
-<div id="resetPasswordHint" class="password-hint"><ul><li data-rule="length">8+ char</li><li data-rule="upper">A-Z</li><li data-rule="lower">a-z</li><li data-rule="digit">0-9</li><li data-rule="special">€$@#&!</li></ul></div>
-</div>
+<div class="form-group"><label class="form-label" id="rp-label-new">New Password</label><div class="password-wrapper"><input type="password" class="form-input" id="resetClientNewPassword" required placeholder="••••••••" oninput="updatePasswordHint('resetClientNewPassword','resetPasswordHint')"><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('resetClientNewPassword','resetNewPasswordToggleIcon')"><i class="fa-solid fa-eye" id="resetNewPasswordToggleIcon"></i></button></div><div id="resetPasswordHint" class="password-hint"><ul><li data-rule="length">8+ char</li><li data-rule="upper">A-Z</li><li data-rule="lower">a-z</li><li data-rule="digit">0-9</li><li data-rule="special">€$@#&!</li></ul></div></div>
 <div class="form-buttons-group"><button type="submit" class="submit-btn email-btn" id="rp-submit-btn" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-check"></i> <span id="rp-submit-text">Update Password</span></button></div>
 </form>
 </div>
@@ -1108,14 +1080,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <input type="hidden" id="targetRecipientEmail" value="contact@muminsultani.com">
 <div class="form-group"><label class="form-label" id="m-label-name">Name</label><input type="text" class="form-input" id="clientName" required placeholder="Name & Surname"></div>
 <div class="form-group"><label class="form-label" id="m-label-email">Email</label><input type="email" class="form-input" id="clientEmail" required placeholder="name@sample.com"></div>
-<div class="form-group">
-<label class="form-label" id="m-label-file">Attach File</label>
-<div style="position:relative">
-<span class="file-upload-text" id="fileUploadText" style="display:block;padding:12px 16px;background:var(--box-bg);border:1px solid var(--line-color);border-radius:10px;font-size:.85rem;color:#94a3b8">Choose file...</span>
-<i class="fa-solid fa-paperclip" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--text-secondary)"></i>
-<input type="file" id="clientFile" accept="image/jpeg,image/png,application/pdf,video/*" onchange="updateFileName(this)" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer">
-</div>
-</div>
+<div class="form-group"><label class="form-label" id="m-label-file">Attach File</label><div style="position:relative"><span class="file-upload-text" id="fileUploadText" style="display:block;padding:12px 16px;background:var(--box-bg);border:1px solid var(--line-color);border-radius:10px;font-size:.85rem;color:#94a3b8">Choose file...</span><i class="fa-solid fa-paperclip" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--text-secondary)"></i><input type="file" id="clientFile" accept="image/jpeg,image/png,application/pdf,video/*" onchange="updateFileName(this)" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer"></div></div>
 <div class="form-group"><label class="form-label" id="m-label-desc">Description</label><textarea class="form-textarea" id="clientDesc" required placeholder="Tell me about your project..."></textarea></div>
 <div class="form-buttons-group" style="display:flex;gap:10px;width:100%">
 <button type="button" class="submit-btn email-btn" onclick="sendToEmail(event)" id="m-email-btn" style="flex:1"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width:1.1rem;height:1.1rem;display:block"> Email</button>
@@ -1163,206 +1128,68 @@ const CLOUD_SYNC_KEYS = ['site_users', 'site_chat_v1', 'site_activity_log_v1'];
 let cloudDB = null;
 let cloudEnabled = false;
 let cloudSubscribed = false;
-
 const __ORIG_SET_ITEM__ = localStorage.setItem.bind(localStorage);
 
-function getDeviceId() {
-  let id = localStorage.getItem('_cloud_device_id');
-  if (!id) {
-    id = 'dev_' + Math.random().toString(36).substring(2, 12) + '_' + Date.now();
-    __ORIG_SET_ITEM__('_cloud_device_id', id);
-  }
-  return id;
-}
-
-function updateCloudStatusUI(state, text) {
-  const el = document.getElementById('cloudStatus');
-  const tx = document.getElementById('cloudStatusText');
-  if (el) { el.classList.add('show'); el.classList.remove('online','offline'); el.classList.add(state); }
-  if (tx) tx.textContent = text;
-  const dash = document.getElementById('dash-cloud-status');
-  if (dash) dash.textContent = 'Cloud: ' + text;
-}
-
-function cloudInit() {
-  try {
-    if (!FIREBASE_CONFIG.apiKey || FIREBASE_CONFIG.apiKey === 'BURAYA_API_KEY') {
-      console.warn('[Cloud] Firebase config boş — sadece yerel mod.');
-      updateCloudStatusUI('offline', 'Yerel mod');
-      return false;
-    }
-    if (typeof firebase === 'undefined') {
-      console.warn('[Cloud] Firebase SDK yüklenmedi.');
-      updateCloudStatusUI('offline', 'SDK yok');
-      return false;
-    }
-    if (!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
-    cloudDB = firebase.database();
-    cloudEnabled = true;
-    console.log('[Cloud] ✅ Firebase bağlandı. Cihaz:', getDeviceId());
-    updateCloudStatusUI('online', 'Bağlı');
-    setTimeout(() => { const el = document.getElementById('cloudStatus'); if (el) el.classList.remove('show'); }, 2500);
-    return true;
-  } catch (e) {
-    console.error('[Cloud] Başlatma hatası:', e);
-    cloudEnabled = false;
-    updateCloudStatusUI('offline', 'Hata');
-    return false;
-  }
-}
-
-function cloudPush(key, value) {
-  if (!cloudEnabled || !cloudDB) return;
-  try {
-    cloudDB.ref('muminsultani/' + key).set({
-      data: value,
-      updatedAt: Date.now(),
-      source: getDeviceId()
-    }).catch(e => console.warn('[Cloud] Push hatası:', e));
-  } catch (e) { console.warn(e); }
-}
-
-async function cloudPull(key) {
-  if (!cloudEnabled || !cloudDB) return null;
-  try {
-    const snap = await cloudDB.ref('muminsultani/' + key).once('value');
-    const v = snap.val();
-    return v && v.data !== undefined ? v.data : null;
-  } catch (e) { return null; }
-}
-
-function mergeUsers(localJson, cloudJson) {
-  try {
-    const local = JSON.parse(localJson || '[]');
-    const cloud = JSON.parse(cloudJson || '[]');
-    const map = new Map();
-    cloud.forEach(u => { if (u && u.email) map.set(String(u.email).toLowerCase(), u); });
-    local.forEach(u => { if (u && u.email && !map.has(String(u.email).toLowerCase())) map.set(String(u.email).toLowerCase(), u); });
-    return JSON.stringify(Array.from(map.values()));
-  } catch (e) { return cloudJson || localJson; }
-}
-
-function mergeChats(localJson, cloudJson) {
-  try {
-    const local = JSON.parse(localJson || '{}');
-    const cloud = JSON.parse(cloudJson || '{}');
-    const merged = {};
-    const allConvs = new Set([...Object.keys(local), ...Object.keys(cloud)]);
-    allConvs.forEach(convId => {
-      const a = local[convId] || [];
-      const b = cloud[convId] || [];
-      const seen = new Set();
-      const combined = [];
-      [...a, ...b].forEach(m => {
-        if (!m) return;
-        const k = String(m.timestamp) + '|' + String(m.from) + '|' + String(m.to) + '|' + String(m.text || m.audioId || '');
-        if (!seen.has(k)) { seen.add(k); combined.push(m); }
-      });
-      combined.sort((x, y) => new Date(x.timestamp) - new Date(y.timestamp));
-      merged[convId] = combined;
-    });
-    return JSON.stringify(merged);
-  } catch (e) { return cloudJson || localJson; }
-}
-
-function mergeActivity(localJson, cloudJson) {
-  try {
-    const local = JSON.parse(localJson || '[]');
-    const cloud = JSON.parse(cloudJson || '[]');
-    const seen = new Set();
-    const combined = [];
-    [...local, ...cloud].forEach(l => {
-      if (!l) return;
-      const k = String(l.timestamp) + '|' + String(l.type) + '|' + String(l.email);
-      if (!seen.has(k)) { seen.add(k); combined.push(l); }
-    });
-    combined.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
-    return JSON.stringify(combined.slice(-2000));
-  } catch (e) { return cloudJson || localJson; }
-}
-
-async function cloudInitSync() {
-  if (!cloudInit()) return;
-
-  for (const key of CLOUD_SYNC_KEYS) {
-    const cloudVal = await cloudPull(key);
-    const localVal = localStorage.getItem(key);
-    if (!cloudVal && !localVal) continue;
-
+function getDeviceId(){let id=localStorage.getItem('_cloud_device_id');if(!id){id='dev_'+Math.random().toString(36).substring(2,12)+'_'+Date.now();__ORIG_SET_ITEM__('_cloud_device_id',id);}return id;}
+function updateCloudStatusUI(state,text){const el=document.getElementById('cloudStatus');const tx=document.getElementById('cloudStatusText');if(el){el.classList.add('show');el.classList.remove('online','offline');el.classList.add(state);}if(tx)tx.textContent=text;const dash=document.getElementById('dash-cloud-status');if(dash)dash.textContent='Cloud: '+text;}
+function cloudInit(){try{if(!FIREBASE_CONFIG.apiKey||FIREBASE_CONFIG.apiKey==='BURAYA_API_KEY'){console.warn('[Cloud] Firebase config boş — sadece yerel mod.');updateCloudStatusUI('offline','Yerel mod');return false;}if(typeof firebase==='undefined'){console.warn('[Cloud] Firebase SDK yüklenmedi.');updateCloudStatusUI('offline','SDK yok');return false;}if(!firebase.apps.length)firebase.initializeApp(FIREBASE_CONFIG);cloudDB=firebase.database();cloudEnabled=true;console.log('[Cloud] ✅ Firebase bağlandı. Cihaz:',getDeviceId());updateCloudStatusUI('online','Bağlı');setTimeout(()=>{const el=document.getElementById('cloudStatus');if(el)el.classList.remove('show');},2500);return true;}catch(e){console.error('[Cloud] Başlatma hatası:',e);cloudEnabled=false;updateCloudStatusUI('offline','Hata');return false;}}
+function cloudPush(key,value){if(!cloudEnabled||!cloudDB)return;try{cloudDB.ref('muminsultani/'+key).set({data:value,updatedAt:Date.now(),source:getDeviceId()}).catch(e=>console.warn('[Cloud] Push hatası:',e));}catch(e){console.warn(e);}}
+async function cloudPull(key){if(!cloudEnabled||!cloudDB)return null;try{const snap=await cloudDB.ref('muminsultani/'+key).once('value');const v=snap.val();return v&&v.data!==undefined?v.data:null;}catch(e){return null;}}
+function mergeUsers(localJson,cloudJson){try{const local=JSON.parse(localJson||'[]');const cloud=JSON.parse(cloudJson||'[]');const map=new Map();cloud.forEach(u=>{if(u&&u.email)map.set(String(u.email).toLowerCase(),u);});local.forEach(u=>{if(u&&u.email&&!map.has(String(u.email).toLowerCase()))map.set(String(u.email).toLowerCase(),u);});return JSON.stringify(Array.from(map.values()));}catch(e){return cloudJson||localJson;}}
+function mergeChats(localJson,cloudJson){try{const local=JSON.parse(localJson||'{}');const cloud=JSON.parse(cloudJson||'{}');const merged={};const allConvs=new Set([...Object.keys(local),...Object.keys(cloud)]);allConvs.forEach(convId=>{const a=local[convId]||[];const b=cloud[convId]||[];const seen=new Set();const combined=[];[...a,...b].forEach(m=>{if(!m)return;const k=String(m.timestamp)+'|'+String(m.from)+'|'+String(m.to)+'|'+String(m.text||m.audioId||'');if(!seen.has(k)){seen.add(k);combined.push(m);}});combined.sort((x,y)=>new Date(x.timestamp)-new Date(y.timestamp));merged[convId]=combined;});return JSON.stringify(merged);}catch(e){return cloudJson||localJson;}}
+function mergeActivity(localJson,cloudJson){try{const local=JSON.parse(localJson||'[]');const cloud=JSON.parse(cloudJson||'[]');const seen=new Set();const combined=[];[...local,...cloud].forEach(l=>{if(!l)return;const k=String(l.timestamp)+'|'+String(l.type)+'|'+String(l.email);if(!seen.has(k)){seen.add(k);combined.push(l);}});combined.sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));return JSON.stringify(combined.slice(-2000));}catch(e){return cloudJson||localJson;}}
+async function cloudInitSync(){
+  if(!cloudInit())return;
+  for(const key of CLOUD_SYNC_KEYS){
+    const cloudVal=await cloudPull(key);
+    const localVal=localStorage.getItem(key);
+    if(!cloudVal&&!localVal)continue;
     let merged;
-    if (key === 'site_users') merged = mergeUsers(localVal, cloudVal);
-    else if (key === 'site_chat_v1') merged = mergeChats(localVal, cloudVal);
-    else if (key === 'site_activity_log_v1') merged = mergeActivity(localVal, cloudVal);
-    else merged = cloudVal || localVal;
-
-    if (merged && merged !== localVal) {
-      __ORIG_SET_ITEM__(key, merged);
-      if (merged !== cloudVal) cloudPush(key, merged);
-    }
+    if(key==='site_users')merged=mergeUsers(localVal,cloudVal);
+    else if(key==='site_chat_v1')merged=mergeChats(localVal,cloudVal);
+    else if(key==='site_activity_log_v1')merged=mergeActivity(localVal,cloudVal);
+    else merged=cloudVal||localVal;
+    if(merged&&merged!==localVal){__ORIG_SET_ITEM__(key,merged);if(merged!==cloudVal)cloudPush(key,merged);}
   }
-
-  try {
-    if (typeof checkUserSession === 'function') checkUserSession();
-    if (typeof updateChatBadge === 'function') updateChatBadge();
-    if (typeof renderApplications === 'function') renderApplications();
-    if (typeof renderChatUsersList === 'function') {
-      const cp = document.getElementById('chatPanelModal');
-      if (cp && cp.classList.contains('active')) {
-        if (typeof activeChatUser !== 'undefined' && activeChatUser) renderChatMessages();
-        else renderChatUsersList();
-      }
-    }
-  } catch (e) { console.warn('[Cloud] Re-render hatası:', e); }
-
-  if (!cloudSubscribed) {
-    cloudSubscribed = true;
-    CLOUD_SYNC_KEYS.forEach(key => {
-      cloudDB.ref('muminsultani/' + key).on('value', snap => {
-        const v = snap.val();
-        if (!v || v.data === undefined) return;
-        if (v.source === getDeviceId()) return;
-        if (localStorage.getItem(key) === v.data) return;
-
-        __ORIG_SET_ITEM__(key, v.data);
-        console.log('[Cloud] 🔄 Uzak güncelleme alındı:', key);
-
-        try {
-          if (key === 'site_users') {
-            if (typeof checkUserSession === 'function') checkUserSession();
-            if (typeof updateChatBadge === 'function') updateChatBadge();
-            if (typeof renderApplications === 'function') renderApplications();
-            const cp = document.getElementById('chatPanelModal');
-            if (cp && cp.classList.contains('active')) {
-              if (typeof activeChatUser !== 'undefined' && activeChatUser) renderChatMessages();
-              else renderChatUsersList();
-            }
-            const ap = document.getElementById('adminPanelModal');
-            if (ap && ap.classList.contains('active') && typeof renderAdminUsers === 'function') renderAdminUsers();
-          } else if (key === 'site_chat_v1') {
-            if (typeof updateChatBadge === 'function') updateChatBadge();
-            const cp = document.getElementById('chatPanelModal');
-            if (cp && cp.classList.contains('active')) {
-              if (typeof activeChatUser !== 'undefined' && activeChatUser) renderChatMessages();
-              else renderChatUsersList();
-            }
-          } else if (key === 'site_activity_log_v1') {
-            const ap = document.getElementById('adminPanelModal');
-            if (ap && ap.classList.contains('active') && typeof renderAdminActivity === 'function') renderAdminActivity();
+  try{
+    if(typeof checkUserSession==='function')checkUserSession();
+    if(typeof updateChatBadge==='function')updateChatBadge();
+    if(typeof renderApplications==='function')renderApplications();
+    if(typeof renderChatUsersList==='function'){const cp=document.getElementById('chatPanelModal');if(cp&&cp.classList.contains('active')){if(typeof activeChatUser!=='undefined'&&activeChatUser)renderChatMessages();else renderChatUsersList();}}
+  }catch(e){console.warn('[Cloud] Re-render hatası:',e);}
+  if(!cloudSubscribed){
+    cloudSubscribed=true;
+    CLOUD_SYNC_KEYS.forEach(key=>{
+      cloudDB.ref('muminsultani/'+key).on('value',snap=>{
+        const v=snap.val();
+        if(!v||v.data===undefined)return;
+        if(v.source===getDeviceId())return;
+        if(localStorage.getItem(key)===v.data)return;
+        __ORIG_SET_ITEM__(key,v.data);
+        console.log('[Cloud] 🔄 Uzak güncelleme alındı:',key);
+        try{
+          if(key==='site_users'){
+            if(typeof checkUserSession==='function')checkUserSession();
+            if(typeof updateChatBadge==='function')updateChatBadge();
+            if(typeof renderApplications==='function')renderApplications();
+            const cp=document.getElementById('chatPanelModal');
+            if(cp&&cp.classList.contains('active')){if(typeof activeChatUser!=='undefined'&&activeChatUser)renderChatMessages();else renderChatUsersList();}
+            const ap=document.getElementById('adminPanelModal');
+            if(ap&&ap.classList.contains('active')&&typeof renderAdminUsers==='function')renderAdminUsers();
+          }else if(key==='site_chat_v1'){
+            if(typeof updateChatBadge==='function')updateChatBadge();
+            const cp=document.getElementById('chatPanelModal');
+            if(cp&&cp.classList.contains('active')){if(typeof activeChatUser!=='undefined'&&activeChatUser)renderChatMessages();else renderChatUsersList();}
+          }else if(key==='site_activity_log_v1'){
+            const ap=document.getElementById('adminPanelModal');
+            if(ap&&ap.classList.contains('active')&&typeof renderAdminActivity==='function')renderAdminActivity();
           }
-        } catch (e) { console.warn('[Cloud] Re-render hatası:', e); }
+        }catch(e){console.warn('[Cloud] Re-render hatası:',e);}
       });
     });
   }
 }
-
-(function() {
-  localStorage.setItem = function(key, value) {
-    __ORIG_SET_ITEM__(key, value);
-    if (CLOUD_SYNC_KEYS.includes(key)) {
-      cloudPush(key, value);
-    }
-  };
-})();
+(function(){localStorage.setItem=function(key,value){__ORIG_SET_ITEM__(key,value);if(CLOUD_SYNC_KEYS.includes(key)){cloudPush(key,value);}};})();
 
 /* AUDIO */
 let audioCtx=null;
@@ -1377,7 +1204,7 @@ function initConfettiCanvas(){if(confettiCanvas&&confettiCtx)return true;confett
 function fireConfettiBurst(i=1){if(!initConfettiCanvas())return;confettiCanvas.style.display='block';confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;const n=Math.floor(160*i),cx=window.innerWidth/2,cy=window.innerHeight/2;for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*16+8;confettiParticles.push({x:cx,y:cy,vx:Math.cos(a)*s,vy:Math.sin(a)*s-3,size:Math.random()*10+5,color:CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.32+Math.random()*.15,drag:.985,life:1,shape:Math.random()>.5?'rect':(Math.random()>.5?'circle':'triangle')});}if(!confettiRunning){confettiRunning=true;animateConfetti();}if(confettiStopTimer)clearTimeout(confettiStopTimer);confettiStopTimer=setTimeout(()=>{confettiRunning=false;},5000);}
 function animateConfetti(){if(!confettiCanvas||!confettiCtx)return;confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);let a=false;for(let i=0;i<confettiParticles.length;i++){const p=confettiParticles[i];if(p.life<=0)continue;a=true;p.vy+=p.gravity;p.vx*=p.drag;p.vy*=p.drag;p.x+=p.vx;p.y+=p.vy;p.rotation+=p.rotationSpeed;p.life-=.006;if(p.y>confettiCanvas.height+100)p.life=0;if(p.x<-100||p.x>confettiCanvas.width+100)p.life=0;confettiCtx.save();confettiCtx.translate(p.x,p.y);confettiCtx.rotate(p.rotation);confettiCtx.globalAlpha=Math.max(0,Math.min(1,p.life));confettiCtx.fillStyle=p.color;if(p.shape==='rect'){confettiCtx.fillRect(-p.size/2,-p.size/4,p.size,p.size/2);}else if(p.shape==='circle'){confettiCtx.beginPath();confettiCtx.arc(0,0,p.size/2,0,Math.PI*2);confettiCtx.fill();}else{confettiCtx.beginPath();confettiCtx.moveTo(0,-p.size/2);confettiCtx.lineTo(p.size/2,p.size/2);confettiCtx.lineTo(-p.size/2,p.size/2);confettiCtx.closePath();confettiCtx.fill();}confettiCtx.restore();}if(confettiParticles.length>500)confettiParticles=confettiParticles.filter(p=>p.life>0);if(a||confettiRunning)requestAnimationFrame(animateConfetti);else{confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);confettiCanvas.style.display='none';confettiParticles=[];}}
 
-document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.scroll-down-action-btn,.chat-toggle-btn,.chat-user-item,.chat-send-btn,.chat-back-btn,.chat-profile-btn,.modal-close-btn,.profile-action-btn,.auth-tab-btn,.ratio-btn,.btn-crop-cancel,.btn-crop-apply,.photo-action-buttons button,.social-btn,.lightbox-close-btn,.copy-pass-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.pub-profile-actions button,.chat-mic-btn,.recording-btn');if(b)playTickSound();},true);
+document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.scroll-down-action-btn,.chat-toggle-btn,.chat-user-item,.chat-send-btn,.chat-back-btn,.chat-profile-btn,.modal-close-btn,.profile-action-btn,.auth-tab-btn,.ratio-btn,.btn-crop-cancel,.btn-crop-apply,.photo-action-buttons button,.social-btn,.lightbox-close-btn,.copy-pass-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.pub-profile-actions button,.chat-mic-btn,.recording-btn,.toggle-switch');if(b)playTickSound();},true);
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('keydown',e=>{
     const cropOpen=document.getElementById('cropModal').classList.contains('active');if(cropOpen)return;
@@ -1399,234 +1226,43 @@ function getAdminTagHTML(){return `<span class="admin-tag" title="Admin"><i clas
 function getUserIdLabelHTML(userId,isAdmin){if(!userId)return '';const cls='chat-user-id'+(isAdmin?' admin-id':'');return `<span class="${cls}" title="User ID"><i class="fa-solid fa-hashtag" style="font-size:.5rem"></i>${escapeHtml(userId)}</span>`;}
 
 /* USER ID SYSTEM */
-function generateNextUserId(existingUsers){
-    let maxId=USER_ID_START;
-    (existingUsers||[]).forEach(u=>{
-        const m=String(u.userId||'').match(/^U(\d+)$/);
-        if(m){const n=parseInt(m[1],10);if(n>=maxId)maxId=n+1;}
-    });
-    return 'U'+String(maxId).padStart(4,'0');
-}
-
-function ensureUserIdsAndAdmin(){
-    try{
-        let users=JSON.parse(localStorage.getItem('site_users')||'[]');
-        let changed=false;
-        const adminIdx=users.findIndex(u=>isAdminUser(u.email));
-        if(adminIdx===-1){
-            users.unshift({
-                userId:ADMIN_USER_ID,
-                name:'Admin',
-                username:'@admin',
-                email:ADMIN_EMAIL,
-                password:'admin123',
-                birthDay:'',birthMonth:'',birthYear:'',
-                profilePhoto:'',
-                createdAt:'2020-01-01T00:00:00.000Z',
-                isAdmin:true
-            });
-            changed=true;
-        }else if(!users[adminIdx].userId){
-            users[adminIdx].userId=ADMIN_USER_ID;
-            changed=true;
-        }
-        let maxId=USER_ID_START;
-        users.forEach(u=>{
-            const m=String(u.userId||'').match(/^U(\d+)$/);
-            if(m){const n=parseInt(m[1],10);if(n>=maxId)maxId=n+1;}
-        });
-        users.forEach(u=>{
-            if(!u.userId){
-                u.userId='U'+String(maxId).padStart(4,'0');
-                maxId++;
-                changed=true;
-            }
-        });
-        if(changed){
-            localStorage.setItem('site_users',JSON.stringify(users));
-            const lu=localStorage.getItem('logged_user');
-            if(lu){
-                try{
-                    const cu=JSON.parse(lu);
-                    const fresh=users.find(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());
-                    if(fresh)__ORIG_SET_ITEM__('logged_user',JSON.stringify(fresh));
-                }catch(e){}
-            }
-        }
-    }catch(e){console.warn('ensureUserIdsAndAdmin error:',e);}
-}
-
-function getAdminUser(){
-    const users=getAllUsers();
-    const found=users.find(u=>isAdminUser(u.email));
-    if(found)return Object.assign({},found,{userId:found.userId||ADMIN_USER_ID,isAdmin:true});
-    return {
-        userId:ADMIN_USER_ID,
-        name:'Admin',
-        username:'@admin',
-        email:ADMIN_EMAIL,
-        password:'',
-        birthDay:'',birthMonth:'',birthYear:'',
-        profilePhoto:'',
-        createdAt:'2020-01-01T00:00:00.000Z',
-        isAdmin:true
-    };
-}
-
-function getChatUsersFor(currentEmail){
-    const allUsers=getAllUsers();
-    const curLower=String(currentEmail||'').toLowerCase();
-    let list=allUsers.filter(x=>String(x.email||'').toLowerCase()!==curLower);
-    if(!isAdminUser(currentEmail) && !list.some(x=>isAdminUser(x.email))){
-        list.unshift(getAdminUser());
-    }
-    list.sort((a,b)=>{
-        const aAdmin=isAdminUser(a.email)?0:1;
-        const bAdmin=isAdminUser(b.email)?0:1;
-        if(aAdmin!==bAdmin)return aAdmin-bAdmin;
-        return 0;
-    });
-    return list;
-}
+function generateNextUserId(existingUsers){let maxId=USER_ID_START;(existingUsers||[]).forEach(u=>{const m=String(u.userId||'').match(/^U(\d+)$/);if(m){const n=parseInt(m[1],10);if(n>=maxId)maxId=n+1;}});return 'U'+String(maxId).padStart(4,'0');}
+function ensureUserIdsAndAdmin(){try{let users=JSON.parse(localStorage.getItem('site_users')||'[]');let changed=false;const adminIdx=users.findIndex(u=>isAdminUser(u.email));if(adminIdx===-1){users.unshift({userId:ADMIN_USER_ID,name:'Admin',username:'@admin',email:ADMIN_EMAIL,password:'admin123',birthDay:'',birthMonth:'',birthYear:'',profilePhoto:'',createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true});changed=true;}else if(!users[adminIdx].userId){users[adminIdx].userId=ADMIN_USER_ID;changed=true;}let maxId=USER_ID_START;users.forEach(u=>{const m=String(u.userId||'').match(/^U(\d+)$/);if(m){const n=parseInt(m[1],10);if(n>=maxId)maxId=n+1;}});users.forEach(u=>{if(!u.userId){u.userId='U'+String(maxId).padStart(4,'0');maxId++;changed=true;}});if(changed){localStorage.setItem('site_users',JSON.stringify(users));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);const fresh=users.find(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());if(fresh)__ORIG_SET_ITEM__('logged_user',JSON.stringify(fresh));}catch(e){}}}}catch(e){console.warn('ensureUserIdsAndAdmin error:',e);}}
+function getAdminUser(){const users=getAllUsers();const found=users.find(u=>isAdminUser(u.email));if(found)return Object.assign({},found,{userId:found.userId||ADMIN_USER_ID,isAdmin:true});return {userId:ADMIN_USER_ID,name:'Admin',username:'@admin',email:ADMIN_EMAIL,password:'',birthDay:'',birthMonth:'',birthYear:'',profilePhoto:'',createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true};}
+function getChatUsersFor(currentEmail){const allUsers=getAllUsers();const curLower=String(currentEmail||'').toLowerCase();let list=allUsers.filter(x=>String(x.email||'').toLowerCase()!==curLower);if(!isAdminUser(currentEmail) && !list.some(x=>isAdminUser(x.email))){list.unshift(getAdminUser());}list.sort((a,b)=>{const aAdmin=isAdminUser(a.email)?0:1;const bAdmin=isAdminUser(b.email)?0:1;if(aAdmin!==bAdmin)return aAdmin-bAdmin;return 0;});return list;}
 
 /* ACTIVITY LOG */
 const ACTIVITY_LOG_KEY='site_activity_log_v1';
-function logActivity(type,userData,details){
-    try{
-        let logs=JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');
-        const u=userData||{};
-        logs.push({
-            type:type,timestamp:new Date().toISOString(),
-            name:u.name||'',username:u.username||'',email:u.email||'',userId:u.userId||'',details:details||'',
-            ip:'local',userAgent:navigator.userAgent,language:navigator.language,
-            screen:window.innerWidth+'x'+window.innerHeight,
-            timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||''
-        });
-        if(logs.length>2000)logs=logs.slice(-2000);
-        localStorage.setItem(ACTIVITY_LOG_KEY,JSON.stringify(logs));
-    }catch(e){console.warn('Activity log error:',e);}
-}
+function logActivity(type,userData,details){try{let logs=JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');const u=userData||{};logs.push({type:type,timestamp:new Date().toISOString(),name:u.name||'',username:u.username||'',email:u.email||'',userId:u.userId||'',details:details||'',ip:'local',userAgent:navigator.userAgent,language:navigator.language,screen:window.innerWidth+'x'+window.innerHeight,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||''});if(logs.length>2000)logs=logs.slice(-2000);localStorage.setItem(ACTIVITY_LOG_KEY,JSON.stringify(logs));}catch(e){console.warn('Activity log error:',e);}}
 function getActivityLog(){try{return JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');}catch(e){return[];}}
 function clearActivityLog(){showCustomAlert(currentLang==='tr'?'Tüm aktivite kayıtları silinecek!':'All activity logs will be deleted!','delete',function(){localStorage.removeItem(ACTIVITY_LOG_KEY);cloudPush(ACTIVITY_LOG_KEY,'[]');renderAdminActivity();refreshAdminUI();showCustomAlert(currentLang==='tr'?'Silindi!':'Cleared!','success');});}
-function exportActivityCSV(){
-    const logs=getActivityLog();
-    if(logs.length===0){showCustomAlert(currentLang==='tr'?'Kayıt yok!':'No logs!');return;}
-    const rows=[['Timestamp','Type','User ID','Name','Username','Email','Details','Language','Screen','Timezone','User Agent']];
-    logs.forEach(l=>rows.push([l.timestamp,l.type,l.userId||'',l.name,l.username,l.email,l.details,l.language,l.screen,l.timezone,l.userAgent]));
-    const csv=rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
-    const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
-    const url=URL.createObjectURL(blob);const a=document.createElement('a');
-    a.href=url;a.download=`activity-log-${new Date().toISOString().slice(0,10)}.csv`;
-    document.body.appendChild(a);a.click();document.body.removeChild(a);
-    setTimeout(()=>URL.revokeObjectURL(url),100);
-    showCustomAlert(currentLang==='tr'?'CSV indirildi!':'CSV downloaded!','success');
-}
+function exportActivityCSV(){const logs=getActivityLog();if(logs.length===0){showCustomAlert(currentLang==='tr'?'Kayıt yok!':'No logs!');return;}const rows=[['Timestamp','Type','User ID','Name','Username','Email','Details','Language','Screen','Timezone','User Agent']];logs.forEach(l=>rows.push([l.timestamp,l.type,l.userId||'',l.name,l.username,l.email,l.details,l.language,l.screen,l.timezone,l.userAgent]));const csv=rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`activity-log-${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),100);showCustomAlert(currentLang==='tr'?'CSV indirildi!':'CSV downloaded!','success');}
 
 /* CHAT */
 const CHAT_KEY='site_chat_v1';
 let activeChatUser=null;
 let chatPollTimer=null;
 let chatSearchQuery='';
-
 function getChatMessages(){try{return JSON.parse(localStorage.getItem(CHAT_KEY)||'{}');}catch(e){return{};}}
 function saveChatMessages(msgs){try{localStorage.setItem(CHAT_KEY,JSON.stringify(msgs));}catch(e){}}
 function getConversationId(a,b){return [String(a||'').toLowerCase(),String(b||'').toLowerCase()].sort().join('__');}
-function getTotalUnread(userEmail){
-    if(!userEmail)return 0;
-    const msgs=getChatMessages();
-    let total=0;
-    const target=userEmail.toLowerCase();
-    for(const convId in msgs){
-        const parts=convId.split('__');
-        if(parts.includes(target)){
-            total+=msgs[convId].filter(m=>String(m.to).toLowerCase()===target&&!m.read).length;
-        }
-    }
-    return total;
-}
-function updateChatBadge(){
-    const lu=localStorage.getItem('logged_user');
-    const badge=document.getElementById('chatUnreadBadge');
-    const btn=document.getElementById('chatToggleBtn');
-    if(!lu){if(btn)btn.classList.remove('visible');if(badge)badge.style.display='none';return;}
-    if(btn)btn.classList.add('visible');
-    let u;try{u=JSON.parse(lu);}catch(e){return;}
-    const total=getTotalUnread(u.email);
-    if(badge){
-        if(total>0){badge.style.display='flex';badge.textContent=total>99?'99+':String(total);}
-        else badge.style.display='none';
-    }
-}
-function openChatPanel(){
-    const lu=localStorage.getItem('logged_user');
-    if(!lu){const t=modalTranslations[currentLang]||modalTranslations.en;showCustomAlert(t.authRequiredAlert);openGetInTouchModal();return;}
-    document.getElementById('chatPanelModal').classList.add('active');
-    activeChatUser=null;
-    document.getElementById('chatUsersListWrapper').style.display='flex';
-    document.getElementById('chatConversation').style.display='none';
-    chatSearchQuery='';
-    const si=document.getElementById('chatSearchInput');if(si)si.value='';
-    const sc=document.getElementById('chatSearchClear');if(sc)sc.classList.remove('show');
-    renderChatUsersList();
-    updateChatBadge();
-}
-function closeChatPanel(){
-    document.getElementById('chatPanelModal').classList.remove('active');
-    activeChatUser=null;
-    stopRecordingUI();
-}
-function filterChatUsers(){
-    const inp=document.getElementById('chatSearchInput');
-    chatSearchQuery=inp?inp.value.trim().toLowerCase():'';
-    const clr=document.getElementById('chatSearchClear');
-    if(clr){if(chatSearchQuery)clr.classList.add('show');else clr.classList.remove('show');}
-    renderChatUsersList();
-}
-function clearChatSearch(){
-    chatSearchQuery='';
-    const inp=document.getElementById('chatSearchInput');if(inp)inp.value='';
-    const clr=document.getElementById('chatSearchClear');if(clr)clr.classList.remove('show');
-    renderChatUsersList();
-}
-function matchUserQuery(x,q){
-    if(!q)return true;
-    const qq=q.replace(/^@/,'').replace(/^#/,'').trim();
-    if(!qq)return true;
-    const id=String(x.userId||'').toLowerCase();
-    const idStripped=id.replace(/^u/,'');
-    const nm=String(x.name||'').toLowerCase();
-    const un=String(x.username||'').toLowerCase().replace(/^@/,'');
-    const em=String(x.email||'').toLowerCase();
-    return id.includes(qq)||idStripped===qq||idStripped.includes(qq)||nm.includes(qq)||un.includes(qq)||em.includes(qq);
-}
+function getTotalUnread(userEmail){if(!userEmail)return 0;const msgs=getChatMessages();let total=0;const target=userEmail.toLowerCase();for(const convId in msgs){const parts=convId.split('__');if(parts.includes(target)){total+=msgs[convId].filter(m=>String(m.to).toLowerCase()===target&&!m.read).length;}}return total;}
+function updateChatBadge(){const lu=localStorage.getItem('logged_user');const badge=document.getElementById('chatUnreadBadge');const btn=document.getElementById('chatToggleBtn');if(!lu){if(btn)btn.classList.remove('visible');if(badge)badge.style.display='none';return;}if(btn)btn.classList.add('visible');let u;try{u=JSON.parse(lu);}catch(e){return;}const total=getTotalUnread(u.email);if(badge){if(total>0){badge.style.display='flex';badge.textContent=total>99?'99+':String(total);}else badge.style.display='none';}}
+function openChatPanel(){const lu=localStorage.getItem('logged_user');if(!lu){const t=modalTranslations[currentLang]||modalTranslations.en;showCustomAlert(t.authRequiredAlert);openGetInTouchModal();return;}document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';chatSearchQuery='';const si=document.getElementById('chatSearchInput');if(si)si.value='';const sc=document.getElementById('chatSearchClear');if(sc)sc.classList.remove('show');renderChatUsersList();updateChatBadge();}
+function closeChatPanel(){document.getElementById('chatPanelModal').classList.remove('active');activeChatUser=null;stopRecordingUI();}
+function filterChatUsers(){const inp=document.getElementById('chatSearchInput');chatSearchQuery=inp?inp.value.trim().toLowerCase():'';const clr=document.getElementById('chatSearchClear');if(clr){if(chatSearchQuery)clr.classList.add('show');else clr.classList.remove('show');}renderChatUsersList();}
+function clearChatSearch(){chatSearchQuery='';const inp=document.getElementById('chatSearchInput');if(inp)inp.value='';const clr=document.getElementById('chatSearchClear');if(clr)clr.classList.remove('show');renderChatUsersList();}
+function matchUserQuery(x,q){if(!q)return true;const qq=q.replace(/^@/,'').replace(/^#/,'').trim();if(!qq)return true;const id=String(x.userId||'').toLowerCase();const idStripped=id.replace(/^u/,'');const nm=String(x.name||'').toLowerCase();const un=String(x.username||'').toLowerCase().replace(/^@/,'');const em=String(x.email||'').toLowerCase();return id.includes(qq)||idStripped===qq||idStripped.includes(qq)||nm.includes(qq)||un.includes(qq)||em.includes(qq);}
 function renderChatUsersList(){
     const lu=localStorage.getItem('logged_user');if(!lu)return;
     let u;try{u=JSON.parse(lu);}catch(e){return;}
     let others=getChatUsersFor(u.email);
-    if(chatSearchQuery){
-        others=others.filter(x=>matchUserQuery(x,chatSearchQuery));
-    }
-    const list=document.getElementById('chatUsersList');
-    if(!list)return;
+    if(chatSearchQuery){others=others.filter(x=>matchUserQuery(x,chatSearchQuery));}
+    const list=document.getElementById('chatUsersList');if(!list)return;
     const t=modalTranslations[currentLang]||modalTranslations.en;
-    if(others.length===0){
-        const isSearching=!!chatSearchQuery;
-        list.innerHTML=`<div class="chat-empty"><i class="fa-solid ${isSearching?'fa-magnifying-glass':'fa-user-group'}"></i>${isSearching?(currentLang==='tr'?'Arama sonucu bulunamadı.':'No results found.'):(t.chatNoUsers||'No other users to chat with yet.')}</div>`;
-        return;
-    }
+    if(others.length===0){const isSearching=!!chatSearchQuery;list.innerHTML=`<div class="chat-empty"><i class="fa-solid ${isSearching?'fa-magnifying-glass':'fa-user-group'}"></i>${isSearching?(currentLang==='tr'?'Arama sonucu bulunamadı.':'No results found.'):(t.chatNoUsers||'No other users to chat with yet.')}</div>`;return;}
     const msgs=getChatMessages();
-    others.sort((a,b)=>{
-        const aAdmin=isAdminUser(a.email)?0:1;
-        const bAdmin=isAdminUser(b.email)?0:1;
-        if(aAdmin!==bAdmin)return aAdmin-bAdmin;
-        const ca=getConversationId(u.email,a.email);
-        const cb=getConversationId(u.email,b.email);
-        const la=msgs[ca]&&msgs[ca].length?msgs[ca][msgs[ca].length-1]:null;
-        const lb=msgs[cb]&&msgs[cb].length?msgs[cb][msgs[cb].length-1]:null;
-        const ta=la?new Date(la.timestamp).getTime():0;
-        const tb=lb?new Date(lb.timestamp).getTime():0;
-        return tb-ta;
-    });
+    others.sort((a,b)=>{const aAdmin=isAdminUser(a.email)?0:1;const bAdmin=isAdminUser(b.email)?0:1;if(aAdmin!==bAdmin)return aAdmin-bAdmin;const ca=getConversationId(u.email,a.email);const cb=getConversationId(u.email,b.email);const la=msgs[ca]&&msgs[ca].length?msgs[ca][msgs[ca].length-1]:null;const lb=msgs[cb]&&msgs[cb].length?msgs[cb][msgs[cb].length-1]:null;const ta=la?new Date(la.timestamp).getTime():0;const tb=lb?new Date(lb.timestamp).getTime():0;return tb-ta;});
     list.innerHTML='';
     others.forEach(x=>{
         const isAdmin=isAdminUser(x.email);
@@ -1638,28 +1274,13 @@ function renderChatUsersList(){
         item.className='chat-user-item'+(activeChatUser&&activeChatUser.email===x.email?' active':'')+(isAdmin?' admin-row':'');
         const av=x.profilePhoto?`<img src="${x.profilePhoto}" alt="">`:(x.name?escapeHtml(x.name.trim().charAt(0).toUpperCase()):'?');
         let preview=t.chatNoMessages||'No messages yet';
-        if(last){
-            const who=String(last.from).toLowerCase()===String(u.email).toLowerCase()?(t.chatYou||'You')+': ':'';
-            if(last.type==='voice'){
-                preview=who+'🎤 '+(currentLang==='tr'?'Sesli mesaj':'Voice message');
-            }else{
-                preview=who+last.text;
-            }
-        }
+        if(last){const who=String(last.from).toLowerCase()===String(u.email).toLowerCase()?(t.chatYou||'You')+': ':'';if(last.type==='voice'){preview=who+'🎤 '+(currentLang==='tr'?'Sesli mesaj':'Voice message');}else{preview=who+last.text;}}
         const uname=String(x.username||'').replace(/^@/,'');
         const vBadge=isAdmin?getVerifiedBadgeHTML('sm'):'';
         const adminTag=isAdmin?getAdminTagHTML():'';
         const idLabel=getUserIdLabelHTML(x.userId,isAdmin);
         const crownHTML=isAdmin?`<span class="admin-crown"><i class="fa-solid fa-crown"></i></span>`:'';
-        item.innerHTML=`
-            <div class="chat-user-avatar${isAdmin?' admin-avatar':''}">${crownHTML}${av}</div>
-            <div class="chat-user-info">
-                <div class="chat-user-name">${escapeHtml(x.name||'User')}${vBadge}${adminTag}</div>
-                <div class="chat-user-username">${uname?'@'+escapeHtml(uname):''} ${idLabel}</div>
-                <div class="chat-user-preview">${escapeHtml(preview).substring(0,60)}</div>
-            </div>
-            ${unread>0?`<div class="chat-unread-badge">${unread>99?'99+':unread}</div>`:''}
-        `;
+        item.innerHTML=`<div class="chat-user-avatar${isAdmin?' admin-avatar':''}">${crownHTML}${av}</div><div class="chat-user-info"><div class="chat-user-name">${escapeHtml(x.name||'User')}${vBadge}${adminTag}</div><div class="chat-user-username">${uname?'@'+escapeHtml(uname):''} ${idLabel}</div><div class="chat-user-preview">${escapeHtml(preview).substring(0,60)}</div></div>${unread>0?`<div class="chat-unread-badge">${unread>99?'99+':unread}</div>`:''}`;
         item.onclick=()=>openConversation(x);
         list.appendChild(item);
     });
@@ -1670,20 +1291,11 @@ function openConversation(user){
     activeChatUser=user;
     const msgs=getChatMessages();
     const convId=getConversationId(u.email,user.email);
-    if(msgs[convId]){
-        let changed=false;
-        msgs[convId].forEach(m=>{
-            if(String(m.to).toLowerCase()===String(u.email).toLowerCase()&&!m.read){m.read=true;changed=true;}
-        });
-        if(changed)saveChatMessages(msgs);
-    }
+    if(msgs[convId]){let changed=false;msgs[convId].forEach(m=>{if(String(m.to).toLowerCase()===String(u.email).toLowerCase()&&!m.read){m.read=true;changed=true;}});if(changed)saveChatMessages(msgs);}
     document.getElementById('chatUsersListWrapper').style.display='none';
     document.getElementById('chatConversation').style.display='flex';
-    renderChatConvHeader();
-    renderChatMessages();
-    updateChatBadge();
-    const inp=document.getElementById('chatInput');
-    if(inp){inp.value='';setTimeout(()=>inp.focus(),120);}
+    renderChatConvHeader();renderChatMessages();updateChatBadge();
+    const inp=document.getElementById('chatInput');if(inp){inp.value='';setTimeout(()=>inp.focus(),120);}
 }
 function renderChatConvHeader(){
     const h=document.getElementById('chatConvHeader');if(!h||!activeChatUser)return;
@@ -1695,41 +1307,20 @@ function renderChatConvHeader(){
     const adminTag=isAdmin?getAdminTagHTML():'';
     const idLabel=getUserIdLabelHTML(activeChatUser.userId,isAdmin);
     const crownHTML=isAdmin?`<span class="admin-crown"><i class="fa-solid fa-crown"></i></span>`:'';
-    h.innerHTML=`
-        <button class="chat-back-btn" onclick="backToUsersList()" title="Back"><i class="fa-solid fa-arrow-left"></i></button>
-        <div class="chat-user-avatar small profile-tap${isAdmin?' admin-avatar':''}" data-email="${safeEmail}" style="cursor:pointer">${crownHTML}${av}</div>
-        <div style="flex:1;min-width:0;cursor:pointer" class="profile-tap" data-email="${safeEmail}" title="View profile">
-            <div class="chat-user-name">${escapeHtml(activeChatUser.name||'User')}${vBadge}${adminTag}</div>
-            <div class="chat-user-username">${uname?'@'+escapeHtml(uname):''} ${idLabel}</div>
-        </div>
-        <button class="chat-profile-btn" onclick="openPublicUserProfile('${safeEmail}')" title="View Profile"><i class="fa-solid fa-user-circle"></i></button>
-    `;
-    h.querySelectorAll('.profile-tap').forEach(el=>{
-        el.onclick=(ev)=>{ev.stopPropagation();openPublicUserProfile(el.getAttribute('data-email'));};
-    });
+    h.innerHTML=`<button class="chat-back-btn" onclick="backToUsersList()" title="Back"><i class="fa-solid fa-arrow-left"></i></button><div class="chat-user-avatar small profile-tap${isAdmin?' admin-avatar':''}" data-email="${safeEmail}" style="cursor:pointer">${crownHTML}${av}</div><div style="flex:1;min-width:0;cursor:pointer" class="profile-tap" data-email="${safeEmail}" title="View profile"><div class="chat-user-name">${escapeHtml(activeChatUser.name||'User')}${vBadge}${adminTag}</div><div class="chat-user-username">${uname?'@'+escapeHtml(uname):''} ${idLabel}</div></div><button class="chat-profile-btn" onclick="openPublicUserProfile('${safeEmail}')" title="View Profile"><i class="fa-solid fa-user-circle"></i></button>`;
+    h.querySelectorAll('.profile-tap').forEach(el=>{el.onclick=(ev)=>{ev.stopPropagation();openPublicUserProfile(el.getAttribute('data-email'));};});
 }
-function backToUsersList(){
-    activeChatUser=null;
-    const l=document.getElementById('chatUsersListWrapper');
-    const c=document.getElementById('chatConversation');
-    if(l)l.style.display='flex';
-    if(c)c.style.display='none';
-    renderChatUsersList();
-}
+function backToUsersList(){activeChatUser=null;const l=document.getElementById('chatUsersListWrapper');const c=document.getElementById('chatConversation');if(l)l.style.display='flex';if(c)c.style.display='none';renderChatUsersList();}
 function renderChatMessages(){
     const lu=localStorage.getItem('logged_user');if(!lu||!activeChatUser)return;
     let u;try{u=JSON.parse(lu);}catch(e){return;}
     const msgs=getChatMessages();
     const convId=getConversationId(u.email,activeChatUser.email);
     const conv=msgs[convId]||[];
-    const box=document.getElementById('chatMessages');
-    if(!box)return;
+    const box=document.getElementById('chatMessages');if(!box)return;
     const t=modalTranslations[currentLang]||modalTranslations.en;
     box.innerHTML='';
-    if(conv.length===0){
-        box.innerHTML=`<div class="chat-empty">${t.chatStartConversation||'Start the conversation 👋'}</div>`;
-        return;
-    }
+    if(conv.length===0){box.innerHTML=`<div class="chat-empty">${t.chatStartConversation||'Start the conversation 👋'}</div>`;return;}
     conv.forEach(m=>{
         const isMine=String(m.from).toLowerCase()===String(u.email).toLowerCase();
         const div=document.createElement('div');
@@ -1738,18 +1329,10 @@ function renderChatMessages(){
         const time=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
         if(m.type==='voice'){
             const dur=m.duration?formatDuration(m.duration):'';
-            div.innerHTML=`<div class="chat-voice-msg">
-                <audio controls preload="metadata" data-audioid="${escapeHtml(m.audioId||'')}"></audio>
-                <span class="voice-duration">${dur}</span>
-            </div><div class="chat-msg-time">${time}</div>`;
+            div.innerHTML=`<div class="chat-voice-msg"><audio controls preload="metadata" data-audioid="${escapeHtml(m.audioId||'')}"></audio><span class="voice-duration">${dur}</span></div><div class="chat-msg-time">${time}</div>`;
             box.appendChild(div);
             const audioEl=div.querySelector('audio');
-            if(audioEl&&m.audioId){
-                loadVoiceMessageAudio(m.audioId).then(url=>{
-                    if(url){audioEl.src=url;}
-                    else{audioEl.closest('.chat-voice-msg').innerHTML='<span style="font-size:.72rem;color:#ef4444;">⚠️ Audio unavailable</span>';}
-                });
-            }
+            if(audioEl&&m.audioId){loadVoiceMessageAudio(m.audioId).then(url=>{if(url){audioEl.src=url;}else{audioEl.closest('.chat-voice-msg').innerHTML='<span style="font-size:.72rem;color:#ef4444;">⚠️ Audio unavailable</span>';}});}
         }else{
             div.innerHTML=`<div class="chat-msg-text">${escapeHtml(m.text||'')}</div><div class="chat-msg-time">${time}</div>`;
             box.appendChild(div);
@@ -1757,255 +1340,78 @@ function renderChatMessages(){
     });
     box.scrollTop=box.scrollHeight;
 }
-function formatDuration(sec){
-    sec=Math.max(0,Math.floor(sec));
-    const m=Math.floor(sec/60),s=sec%60;
-    return m+':'+String(s).padStart(2,'0');
-}
+function formatDuration(sec){sec=Math.max(0,Math.floor(sec));const m=Math.floor(sec/60),s=sec%60;return m+':'+String(s).padStart(2,'0');}
 function sendChatMessage(){
-    const lu=localStorage.getItem('logged_user');
-    if(!lu||!activeChatUser)return;
+    const lu=localStorage.getItem('logged_user');if(!lu||!activeChatUser)return;
     let u;try{u=JSON.parse(lu);}catch(e){return;}
-    const inp=document.getElementById('chatInput');
-    if(!inp)return;
-    const text=inp.value.trim();
-    if(!text)return;
+    const inp=document.getElementById('chatInput');if(!inp)return;
+    const text=inp.value.trim();if(!text)return;
     const msgs=getChatMessages();
     const convId=getConversationId(u.email,activeChatUser.email);
     if(!msgs[convId])msgs[convId]=[];
-    const newMsg={
-        from:u.email,to:activeChatUser.email,
-        fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',
-        type:'text',
-        text:text.substring(0,1000),
-        timestamp:new Date().toISOString(),read:false
-    };
-    msgs[convId].push(newMsg);
-    saveChatMessages(msgs);
-    inp.value='';
-    renderChatMessages();
+    const newMsg={from:u.email,to:activeChatUser.email,fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',type:'text',text:text.substring(0,1000),timestamp:new Date().toISOString(),read:false};
+    msgs[convId].push(newMsg);saveChatMessages(msgs);inp.value='';renderChatMessages();
     logActivity('chat_message',u,`To @${String(activeChatUser.username||'').replace(/^@/,'')||activeChatUser.email}: ${text.substring(0,60)}`);
 }
 
 /* VOICE MESSAGE RECORDING */
-let mediaRecorder=null;
-let recordingChunks=[];
-let recordingStream=null;
-let recordingStartTime=0;
-let recordingTimerInterval=null;
-let recordingCancelled=false;
+let mediaRecorder=null,recordingChunks=[],recordingStream=null,recordingStartTime=0,recordingTimerInterval=null,recordingCancelled=false;
 const MAX_RECORD_SECONDS=60;
-
-function generateVoiceId(){
-    return 'v_'+Date.now()+'_'+Math.random().toString(36).substring(2,9);
-}
-
+function generateVoiceId(){return 'v_'+Date.now()+'_'+Math.random().toString(36).substring(2,9);}
 async function startVoiceRecording(){
     const lu=localStorage.getItem('logged_user');
     if(!lu||!activeChatUser){const t=modalTranslations[currentLang]||modalTranslations.en;showCustomAlert(t.authRequiredAlert||'You must sign in first!');return;}
-    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
-        showCustomAlert(currentLang==='tr'?'Tarayıcınız ses kaydını desteklemiyor!':'Your browser does not support audio recording!');
-        return;
-    }
-    try{
-        recordingStream=await navigator.mediaDevices.getUserMedia({audio:true});
-    }catch(err){
-        console.warn('Mic error:',err);
-        showCustomAlert(currentLang==='tr'?'Mikrofon izni reddedildi veya kullanılamıyor.':'Microphone permission denied or unavailable.');
-        return;
-    }
-    let mimeType='';
-    const candidates=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus','audio/ogg',''];
-    for(const c of candidates){
-        if(c==='' || (window.MediaRecorder&&MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(c))){mimeType=c;break;}
-    }
-    try{
-        mediaRecorder=mimeType?new MediaRecorder(recordingStream,{mimeType}):new MediaRecorder(recordingStream);
-    }catch(e){
-        try{mediaRecorder=new MediaRecorder(recordingStream);}catch(e2){showCustomAlert(currentLang==='tr'?'Kayıt başlatılamadı.':'Could not start recording.');stopRecordingStream();return;}
-    }
-    recordingChunks=[];
-    recordingCancelled=false;
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){showCustomAlert(currentLang==='tr'?'Tarayıcınız ses kaydını desteklemiyor!':'Your browser does not support audio recording!');return;}
+    try{recordingStream=await navigator.mediaDevices.getUserMedia({audio:true});}catch(err){console.warn('Mic error:',err);showCustomAlert(currentLang==='tr'?'Mikrofon izni reddedildi veya kullanılamıyor.':'Microphone permission denied or unavailable.');return;}
+    let mimeType='';const candidates=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus','audio/ogg',''];
+    for(const c of candidates){if(c==='' || (window.MediaRecorder&&MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(c))){mimeType=c;break;}}
+    try{mediaRecorder=mimeType?new MediaRecorder(recordingStream,{mimeType}):new MediaRecorder(recordingStream);}catch(e){try{mediaRecorder=new MediaRecorder(recordingStream);}catch(e2){showCustomAlert(currentLang==='tr'?'Kayıt başlatılamadı.':'Could not start recording.');stopRecordingStream();return;}}
+    recordingChunks=[];recordingCancelled=false;
     mediaRecorder.ondataavailable=(e)=>{if(e.data&&e.data.size>0)recordingChunks.push(e.data);};
-    mediaRecorder.onstop=async ()=>{
-        const wasCancelled=recordingCancelled;
-        const duration=(Date.now()-recordingStartTime)/1000;
-        stopRecordingStream();
-        if(wasCancelled){recordingChunks=[];return;}
-        if(recordingChunks.length===0){showCustomAlert(currentLang==='tr'?'Kayıt çok kısa!':'Recording too short!');return;}
-        const blob=new Blob(recordingChunks,{type:mediaRecorder.mimeType||'audio/webm'});
-        recordingChunks=[];
-        await saveAndSendVoiceMessage(blob,duration);
-    };
-    try{
-        mediaRecorder.start();
-    }catch(e){
-        showCustomAlert(currentLang==='tr'?'Kayıt başlatılamadı.':'Could not start recording.');
-        stopRecordingStream();return;
-    }
+    mediaRecorder.onstop=async ()=>{const wasCancelled=recordingCancelled;const duration=(Date.now()-recordingStartTime)/1000;stopRecordingStream();if(wasCancelled){recordingChunks=[];return;}if(recordingChunks.length===0){showCustomAlert(currentLang==='tr'?'Kayıt çok kısa!':'Recording too short!');return;}const blob=new Blob(recordingChunks,{type:mediaRecorder.mimeType||'audio/webm'});recordingChunks=[];await saveAndSendVoiceMessage(blob,duration);};
+    try{mediaRecorder.start();}catch(e){showCustomAlert(currentLang==='tr'?'Kayıt başlatılamadı.':'Could not start recording.');stopRecordingStream();return;}
     recordingStartTime=Date.now();
     document.getElementById('recordingOverlay').classList.add('active');
     const micBtn=document.getElementById('chatMicBtn');if(micBtn)micBtn.disabled=true;
     updateRecordingTimer();
-    recordingTimerInterval=setInterval(()=>{
-        updateRecordingTimer();
-        const elapsed=(Date.now()-recordingStartTime)/1000;
-        if(elapsed>=MAX_RECORD_SECONDS){stopVoiceRecording();}
-    },200);
+    recordingTimerInterval=setInterval(()=>{updateRecordingTimer();const elapsed=(Date.now()-recordingStartTime)/1000;if(elapsed>=MAX_RECORD_SECONDS){stopVoiceRecording();}},200);
 }
-function updateRecordingTimer(){
-    const el=document.getElementById('recordingTimer');
-    if(!el)return;
-    const elapsed=Math.floor((Date.now()-recordingStartTime)/1000);
-    el.textContent=formatDuration(elapsed);
-}
-function stopRecordingStream(){
-    if(recordingTimerInterval){clearInterval(recordingTimerInterval);recordingTimerInterval=null;}
-    if(recordingStream){try{recordingStream.getTracks().forEach(t=>t.stop());}catch(e){}recordingStream=null;}
-    document.getElementById('recordingOverlay').classList.remove('active');
-    const micBtn=document.getElementById('chatMicBtn');if(micBtn)micBtn.disabled=false;
-}
-function stopVoiceRecording(){
-    if(mediaRecorder&&mediaRecorder.state==='recording'){try{mediaRecorder.stop();}catch(e){}}
-    else{stopRecordingStream();}
-}
-function cancelVoiceRecording(){
-    recordingCancelled=true;
-    if(mediaRecorder&&mediaRecorder.state==='recording'){try{mediaRecorder.stop();}catch(e){}}
-    else{stopRecordingStream();}
-}
+function updateRecordingTimer(){const el=document.getElementById('recordingTimer');if(!el)return;const elapsed=Math.floor((Date.now()-recordingStartTime)/1000);el.textContent=formatDuration(elapsed);}
+function stopRecordingStream(){if(recordingTimerInterval){clearInterval(recordingTimerInterval);recordingTimerInterval=null;}if(recordingStream){try{recordingStream.getTracks().forEach(t=>t.stop());}catch(e){}recordingStream=null;}document.getElementById('recordingOverlay').classList.remove('active');const micBtn=document.getElementById('chatMicBtn');if(micBtn)micBtn.disabled=false;}
+function stopVoiceRecording(){if(mediaRecorder&&mediaRecorder.state==='recording'){try{mediaRecorder.stop();}catch(e){}}else{stopRecordingStream();}}
+function cancelVoiceRecording(){recordingCancelled=true;if(mediaRecorder&&mediaRecorder.state==='recording'){try{mediaRecorder.stop();}catch(e){}}else{stopRecordingStream();}}
 function stopRecordingUI(){if(mediaRecorder&&mediaRecorder.state==='recording'){recordingCancelled=true;try{mediaRecorder.stop();}catch(e){}}stopRecordingStream();}
-
 async function saveAndSendVoiceMessage(blob,duration){
-    const lu=localStorage.getItem('logged_user');
-    if(!lu||!activeChatUser)return;
+    const lu=localStorage.getItem('logged_user');if(!lu||!activeChatUser)return;
     let u;try{u=JSON.parse(lu);}catch(e){return;}
     const audioId=generateVoiceId();
-    try{
-        await storeVoiceMessage(audioId,blob);
-    }catch(e){
-        console.error('Voice store error:',e);
-        showCustomAlert(currentLang==='tr'?'Ses kaydedilemedi!':'Could not save voice!');
-        return;
-    }
+    try{await storeVoiceMessage(audioId,blob);}catch(e){console.error('Voice store error:',e);showCustomAlert(currentLang==='tr'?'Ses kaydedilemedi!':'Could not save voice!');return;}
     const msgs=getChatMessages();
     const convId=getConversationId(u.email,activeChatUser.email);
     if(!msgs[convId])msgs[convId]=[];
-    const newMsg={
-        from:u.email,to:activeChatUser.email,
-        fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',
-        type:'voice',
-        audioId:audioId,
-        duration:Math.round(duration*10)/10,
-        mimeType:blob.type||'audio/webm',
-        timestamp:new Date().toISOString(),read:false
-    };
-    msgs[convId].push(newMsg);
-    saveChatMessages(msgs);
-    renderChatMessages();
+    const newMsg={from:u.email,to:activeChatUser.email,fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',type:'voice',audioId:audioId,duration:Math.round(duration*10)/10,mimeType:blob.type||'audio/webm',timestamp:new Date().toISOString(),read:false};
+    msgs[convId].push(newMsg);saveChatMessages(msgs);renderChatMessages();
     logActivity('voice_message',u,`To @${String(activeChatUser.username||'').replace(/^@/,'')||activeChatUser.email}: ${formatDuration(duration)} voice message`);
 }
-async function loadVoiceMessageAudio(audioId){
-    try{
-        const rec=await getVoiceMessage(audioId);
-        if(!rec||!rec.blob)return null;
-        let blob;
-        if(rec.blob instanceof Blob){blob=rec.blob;}
-        else{const byteArray=new Uint8Array(rec.blob);blob=new Blob([byteArray],{type:rec.type||'audio/webm'});}
-        return URL.createObjectURL(blob);
-    }catch(e){console.warn('Audio load error:',e);return null;}
-}
-
-function clearAllChats(){
-    showCustomAlert(currentLang==='tr'?'Tüm sohbet mesajları silinecek! Emin misiniz?':'All chat messages will be deleted! Are you sure?','delete',function(){
-        localStorage.removeItem(CHAT_KEY);
-        cloudPush(CHAT_KEY,'{}');
-        clearAllVoiceMessages().catch(()=>{});
-        updateChatBadge();
-        renderAdminChats();
-        refreshAdminUI();
-        showCustomAlert(currentLang==='tr'?'Sohbetler silindi!':'Chats cleared!','success');
-    });
-}
-function exportChatsCSV(){
-    const msgs=getChatMessages();
-    const rows=[['Conversation','From','To','From Name','From Username','From User ID','Type','Message','Timestamp','Read']];
-    let count=0;
-    for(const convId in msgs){
-        msgs[convId].forEach(m=>{
-            const body=m.type==='voice'?`[VOICE ${m.duration||0}s]`:(m.text||'');
-            rows.push([convId,m.from,m.to,m.fromName||'',m.fromUsername||'',m.fromUserId||'',m.type||'text',body,m.timestamp,m.read?'Yes':'No']);
-            count++;
-        });
-    }
-    if(count===0){showCustomAlert(currentLang==='tr'?'Mesaj yok!':'No messages!');return;}
-    const csv=rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
-    const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
-    const url=URL.createObjectURL(blob);const a=document.createElement('a');
-    a.href=url;a.download=`chats-${new Date().toISOString().slice(0,10)}.csv`;
-    document.body.appendChild(a);a.click();document.body.removeChild(a);
-    setTimeout(()=>URL.revokeObjectURL(url),100);
-    showCustomAlert(currentLang==='tr'?'CSV indirildi!':'CSV downloaded!','success');
-}
-function renderAdminChats(){
-    const list=document.getElementById('adminChatsList');if(!list)return;
-    const msgs=getChatMessages();
-    const convIds=Object.keys(msgs);
-    let totalMsgs=0;
-    convIds.forEach(c=>totalMsgs+=msgs[c].length);
-    if(totalMsgs===0){
-        list.innerHTML=`<div style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;"><i class="fa-solid fa-comments" style="font-size:2rem;opacity:.3;margin-bottom:8px;display:block;"></i>${currentLang==='tr'?'Henüz mesaj yok.':'No messages yet.'}</div>`;
-        return;
-    }
-    list.innerHTML='';
-    convIds.sort((a,b)=>{
-        const la=msgs[a][msgs[a].length-1],lb=msgs[b][msgs[b].length-1];
-        return new Date(lb.timestamp)-new Date(la.timestamp);
-    });
-    convIds.forEach(convId=>{
-        const conv=msgs[convId];
-        if(!conv.length)return;
-        const parts=convId.split('__');
-        const block=document.createElement('div');
-        block.className='admin-slot';
-        block.style.flexDirection='column';
-        block.style.alignItems='stretch';
-        block.style.padding='12px';
-        const header=document.createElement('div');
-        header.style.cssText='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;border-bottom:1px solid var(--line-color);padding-bottom:8px;';
-        header.innerHTML=`<div style="font-size:.78rem;font-weight:800;color:#9333ea;"><i class="fa-solid fa-comments"></i> ${escapeHtml(parts[0])} ↔ ${escapeHtml(parts[1])}</div><div style="font-size:.65rem;color:var(--text-secondary);">${conv.length} ${currentLang==='tr'?'mesaj':'msg'}</div>`;
-        block.appendChild(header);
-        const msgsWrap=document.createElement('div');
-        msgsWrap.style.cssText='max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;';
-        conv.slice(-30).forEach(m=>{
-            const isRead=m.read?'✓✓':'✓';
-            const body=m.type==='voice'?`🎤 <em>${currentLang==='tr'?'Sesli mesaj':'Voice message'} (${formatDuration(m.duration||0)})</em>`:escapeHtml(m.text||'');
-            const row=document.createElement('div');
-            row.style.cssText='font-size:.7rem;padding:6px 8px;background:var(--box-bg);border-radius:8px;border:1px solid var(--line-color);';
-            row.innerHTML=`<div style="display:flex;justify-content:space-between;gap:6px;margin-bottom:2px;"><strong style="color:#9333ea;font-size:.65rem;">${escapeHtml(m.fromName||m.from)}${m.fromUserId?' • '+escapeHtml(m.fromUserId):''}</strong><span style="color:var(--text-secondary);font-size:.6rem;">${new Date(m.timestamp).toLocaleString()} ${isRead}</span></div><div style="color:var(--text-primary);word-break:break-word;">${body}</div>`;
-            msgsWrap.appendChild(row);
-        });
-        block.appendChild(msgsWrap);
-        list.appendChild(block);
-    });
-}
+async function loadVoiceMessageAudio(audioId){try{const rec=await getVoiceMessage(audioId);if(!rec||!rec.blob)return null;let blob;if(rec.blob instanceof Blob){blob=rec.blob;}else{const byteArray=new Uint8Array(rec.blob);blob=new Blob([byteArray],{type:rec.type||'audio/webm'});}return URL.createObjectURL(blob);}catch(e){console.warn('Audio load error:',e);return null;}}
+function clearAllChats(){showCustomAlert(currentLang==='tr'?'Tüm sohbet mesajları silinecek! Emin misiniz?':'All chat messages will be deleted! Are you sure?','delete',function(){localStorage.removeItem(CHAT_KEY);cloudPush(CHAT_KEY,'{}');clearAllVoiceMessages().catch(()=>{});updateChatBadge();renderAdminChats();refreshAdminUI();showCustomAlert(currentLang==='tr'?'Sohbetler silindi!':'Chats cleared!','success');});}
+function exportChatsCSV(){const msgs=getChatMessages();const rows=[['Conversation','From','To','From Name','From Username','From User ID','Type','Message','Timestamp','Read']];let count=0;for(const convId in msgs){msgs[convId].forEach(m=>{const body=m.type==='voice'?`[VOICE ${m.duration||0}s]`:(m.text||'');rows.push([convId,m.from,m.to,m.fromName||'',m.fromUsername||'',m.fromUserId||'',m.type||'text',body,m.timestamp,m.read?'Yes':'No']);count++;});}if(count===0){showCustomAlert(currentLang==='tr'?'Mesaj yok!':'No messages!');return;}const csv=rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`chats-${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),100);showCustomAlert(currentLang==='tr'?'CSV indirildi!':'CSV downloaded!','success');}
+function renderAdminChats(){const list=document.getElementById('adminChatsList');if(!list)return;const msgs=getChatMessages();const convIds=Object.keys(msgs);let totalMsgs=0;convIds.forEach(c=>totalMsgs+=msgs[c].length);if(totalMsgs===0){list.innerHTML=`<div style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;"><i class="fa-solid fa-comments" style="font-size:2rem;opacity:.3;margin-bottom:8px;display:block;"></i>${currentLang==='tr'?'Henüz mesaj yok.':'No messages yet.'}</div>`;return;}list.innerHTML='';convIds.sort((a,b)=>{const la=msgs[a][msgs[a].length-1],lb=msgs[b][msgs[b].length-1];return new Date(lb.timestamp)-new Date(la.timestamp);});convIds.forEach(convId=>{const conv=msgs[convId];if(!conv.length)return;const parts=convId.split('__');const block=document.createElement('div');block.className='admin-slot';block.style.flexDirection='column';block.style.alignItems='stretch';block.style.padding='12px';const header=document.createElement('div');header.style.cssText='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;border-bottom:1px solid var(--line-color);padding-bottom:8px;';header.innerHTML=`<div style="font-size:.78rem;font-weight:800;color:#9333ea;"><i class="fa-solid fa-comments"></i> ${escapeHtml(parts[0])} ↔ ${escapeHtml(parts[1])}</div><div style="font-size:.65rem;color:var(--text-secondary);">${conv.length} ${currentLang==='tr'?'mesaj':'msg'}</div>`;block.appendChild(header);const msgsWrap=document.createElement('div');msgsWrap.style.cssText='max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;';conv.slice(-30).forEach(m=>{const isRead=m.read?'✓✓':'✓';const body=m.type==='voice'?`🎤 <em>${currentLang==='tr'?'Sesli mesaj':'Voice message'} (${formatDuration(m.duration||0)})</em>`:escapeHtml(m.text||'');const row=document.createElement('div');row.style.cssText='font-size:.7rem;padding:6px 8px;background:var(--box-bg);border-radius:8px;border:1px solid var(--line-color);';row.innerHTML=`<div style="display:flex;justify-content:space-between;gap:6px;margin-bottom:2px;"><strong style="color:#9333ea;font-size:.65rem;">${escapeHtml(m.fromName||m.from)}${m.fromUserId?' • '+escapeHtml(m.fromUserId):''}</strong><span style="color:var(--text-secondary);font-size:.6rem;">${new Date(m.timestamp).toLocaleString()} ${isRead}</span></div><div style="color:var(--text-primary);word-break:break-word;">${body}</div>`;msgsWrap.appendChild(row);});block.appendChild(msgsWrap);list.appendChild(block);});}
 
 /* PUBLIC USER PROFILE */
 let publicProfileEmail=null;
 function openPublicUserProfile(email){
-    const lu=localStorage.getItem('logged_user');
-    if(!lu){const t=modalTranslations[currentLang]||modalTranslations.en;showCustomAlert(t.authRequiredAlert);return;}
+    const lu=localStorage.getItem('logged_user');if(!lu){const t=modalTranslations[currentLang]||modalTranslations.en;showCustomAlert(t.authRequiredAlert);return;}
     const allUsers=getAllUsers();
     let u=allUsers.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());
-    if(!u && isAdminUser(email)){u=getAdminUser();}
+    if(!u&&isAdminUser(email)){u=getAdminUser();}
     if(!u){showCustomAlert(currentLang==='tr'?'Kullanıcı bulunamadı!':'User not found!');return;}
     publicProfileEmail=u.email;
     const initial=(u.name||'U').trim().charAt(0).toUpperCase();
     const av=u.profilePhoto?`<img src="${u.profilePhoto}" alt="">`:(u.name?escapeHtml(initial):'?');
     const uname=String(u.username||'').replace(/^@/,'');
     const created=u.createdAt?new Date(u.createdAt).toLocaleDateString():(currentLang==='tr'?'Bilinmiyor':'Unknown');
-    let birth='';
-    if(u.birthDay&&u.birthMonth&&u.birthYear)birth=`${u.birthDay}/${u.birthMonth}/${u.birthYear}`;
+    let birth='';if(u.birthDay&&u.birthMonth&&u.birthYear)birth=`${u.birthDay}/${u.birthMonth}/${u.birthYear}`;
     const myEmail=String((JSON.parse(lu)||{}).email||'').toLowerCase();
     const isSelf=myEmail===String(u.email||'').toLowerCase();
     const isAdm=isAdminUser(u.email);
@@ -2014,87 +1420,14 @@ function openPublicUserProfile(email){
     const idLabel=getUserIdLabelHTML(u.userId,isAdm);
     const msgBtnHTML=isSelf?'':`<button class="pub-btn-msg" onclick="messageFromProfile()"><i class="fa-solid fa-comments"></i> <span>${currentLang==='tr'?'Mesaj Gönder':'Send Message'}</span></button>`;
     document.getElementById('pub-profile-title').innerText=currentLang==='tr'?'Kullanıcı Profili':'User Profile';
-    document.getElementById('publicUserProfileContent').innerHTML=`
-        <div class="pub-profile-view">
-            <div class="pub-profile-avatar" style="${isAdm?'border-color:#1d9bf0;':''}">${av}</div>
-            <div class="pub-profile-name">${escapeHtml(u.name||'User')}${vBadge}${adminTag}</div>
-            ${uname?`<div class="pub-profile-username">@${escapeHtml(uname)}</div>`:''}
-            ${idLabel?`<div class="pub-profile-id${isAdm?' admin-id':''}">${idLabel}</div>`:''}
-            <div class="pub-profile-info">
-                ${u.email?`<div class="pub-profile-info-row"><span><i class="fa-solid fa-envelope"></i>${currentLang==='tr'?'E-posta':'Email'}</span><span>${escapeHtml(u.email)}</span></div>`:''}
-                ${birth?`<div class="pub-profile-info-row"><span><i class="fa-solid fa-cake-candles"></i>${currentLang==='tr'?'Doğum Tarihi':'Birthdate'}</span><span>${escapeHtml(birth)}</span></div>`:''}
-                <div class="pub-profile-info-row"><span><i class="fa-solid fa-calendar-days"></i>${currentLang==='tr'?'Katılım Tarihi':'Joined'}</span><span>${escapeHtml(created)}</span></div>
-            </div>
-            <div class="pub-profile-actions">
-                ${msgBtnHTML}
-                <button class="pub-btn-close" onclick="closePublicUserProfile()"><i class="fa-solid fa-arrow-left"></i> <span>${currentLang==='tr'?'Kapat':'Close'}</span></button>
-            </div>
-        </div>
-    `;
+    document.getElementById('publicUserProfileContent').innerHTML=`<div class="pub-profile-view"><div class="pub-profile-avatar" style="${isAdm?'border-color:#1d9bf0;':''}">${av}</div><div class="pub-profile-name">${escapeHtml(u.name||'User')}${vBadge}${adminTag}</div>${uname?`<div class="pub-profile-username">@${escapeHtml(uname)}</div>`:''}${idLabel?`<div class="pub-profile-id${isAdm?' admin-id':''}">${idLabel}</div>`:''}<div class="pub-profile-info">${u.email?`<div class="pub-profile-info-row"><span><i class="fa-solid fa-envelope"></i>${currentLang==='tr'?'E-posta':'Email'}</span><span>${escapeHtml(u.email)}</span></div>`:''}${birth?`<div class="pub-profile-info-row"><span><i class="fa-solid fa-cake-candles"></i>${currentLang==='tr'?'Doğum Tarihi':'Birthdate'}</span><span>${escapeHtml(birth)}</span></div>`:''}<div class="pub-profile-info-row"><span><i class="fa-solid fa-calendar-days"></i>${currentLang==='tr'?'Katılım Tarihi':'Joined'}</span><span>${escapeHtml(created)}</span></div></div><div class="pub-profile-actions">${msgBtnHTML}<button class="pub-btn-close" onclick="closePublicUserProfile()"><i class="fa-solid fa-arrow-left"></i> <span>${currentLang==='tr'?'Kapat':'Close'}</span></button></div></div>`;
     document.getElementById('publicUserProfileModal').classList.add('active');
 }
-function closePublicUserProfile(){
-    document.getElementById('publicUserProfileModal').classList.remove('active');
-    publicProfileEmail=null;
-}
-function messageFromProfile(){
-    if(!publicProfileEmail)return;
-    const allUsers=getAllUsers();
-    let u=allUsers.find(x=>x.email===publicProfileEmail);
-    if(!u && isAdminUser(publicProfileEmail)){u=getAdminUser();}
-    if(!u){closePublicUserProfile();return;}
-    closePublicUserProfile();
-    document.getElementById('chatPanelModal').classList.add('active');
-    activeChatUser=null;
-    document.getElementById('chatUsersListWrapper').style.display='none';
-    document.getElementById('chatConversation').style.display='none';
-    openConversation(u);
-}
+function closePublicUserProfile(){document.getElementById('publicUserProfileModal').classList.remove('active');publicProfileEmail=null;}
+function messageFromProfile(){if(!publicProfileEmail)return;const allUsers=getAllUsers();let u=allUsers.find(x=>x.email===publicProfileEmail);if(!u&&isAdminUser(publicProfileEmail)){u=getAdminUser();}if(!u){closePublicUserProfile();return;}closePublicUserProfile();document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='none';openConversation(u);}
 
-window.addEventListener('storage',e=>{
-    if(e.key===CHAT_KEY){
-        updateChatBadge();
-        const panel=document.getElementById('chatPanelModal');
-        if(panel&&panel.classList.contains('active')){
-            if(activeChatUser)renderChatMessages();else renderChatUsersList();
-        }
-    }
-    if(e.key==='site_users'){
-        checkUserSession();
-        updateChatBadge();
-        const panel=document.getElementById('chatPanelModal');
-        if(panel&&panel.classList.contains('active')){
-            if(activeChatUser)renderChatMessages();else renderChatUsersList();
-        }
-    }
-});
-
-function startChatPolling(){
-    if(chatPollTimer)clearInterval(chatPollTimer);
-    chatPollTimer=setInterval(()=>{
-        const lu=localStorage.getItem('logged_user');
-        if(!lu){updateChatBadge();return;}
-        updateChatBadge();
-        const panel=document.getElementById('chatPanelModal');
-        if(panel&&panel.classList.contains('active')){
-            if(activeChatUser){
-                let u;try{u=JSON.parse(lu);}catch(e){return;}
-                const msgs=getChatMessages();
-                const convId=getConversationId(u.email,activeChatUser.email);
-                if(msgs[convId]){
-                    let changed=false;
-                    msgs[convId].forEach(m=>{
-                        if(String(m.to).toLowerCase()===String(u.email).toLowerCase()&&!m.read){m.read=true;changed=true;}
-                    });
-                    if(changed)saveChatMessages(msgs);
-                }
-                renderChatMessages();
-            }else{
-                renderChatUsersList();
-            }
-        }
-    },2500);
-}
+window.addEventListener('storage',e=>{if(e.key===CHAT_KEY){updateChatBadge();const panel=document.getElementById('chatPanelModal');if(panel&&panel.classList.contains('active')){if(activeChatUser)renderChatMessages();else renderChatUsersList();}}if(e.key==='site_users'){checkUserSession();updateChatBadge();const panel=document.getElementById('chatPanelModal');if(panel&&panel.classList.contains('active')){if(activeChatUser)renderChatMessages();else renderChatUsersList();}}});
+function startChatPolling(){if(chatPollTimer)clearInterval(chatPollTimer);chatPollTimer=setInterval(()=>{const lu=localStorage.getItem('logged_user');if(!lu){updateChatBadge();return;}updateChatBadge();const panel=document.getElementById('chatPanelModal');if(panel&&panel.classList.contains('active')){if(activeChatUser){let u;try{u=JSON.parse(lu);}catch(e){return;}const msgs=getChatMessages();const convId=getConversationId(u.email,activeChatUser.email);if(msgs[convId]){let changed=false;msgs[convId].forEach(m=>{if(String(m.to).toLowerCase()===String(u.email).toLowerCase()&&!m.read){m.read=true;changed=true;}});if(changed)saveChatMessages(msgs);}renderChatMessages();}else{renderChatUsersList();}}},2500);}
 
 /* ADMIN */
 const ADMIN_MASTER_PASSWORD='Mum1n$ultan1';
@@ -2120,125 +1453,51 @@ function renderAdminUsers(){
         const isAdm=isAdminUser(u.email);
         const vBadge=isAdm?getVerifiedBadgeHTML('sm'):'';
         const adminTag=isAdm?getAdminTagHTML():'';
-        card.innerHTML=`
-            <div class="user-card-avatar" style="${isAdm?'border-color:#1d9bf0;':''}">${avatar}</div>
-            <div class="user-card-info">
-                <div class="user-card-name">${escapeHtml(u.name||'Unknown')}${vBadge}${adminTag}</div>
-                <div class="user-card-detail"><i class="fa-solid fa-hashtag"></i>${escapeHtml(u.userId||'-')} • <i class="fa-solid fa-at"></i>${escapeHtml(u.username||'-')}</div>
-                <div class="user-card-detail"><i class="fa-solid fa-envelope"></i>${escapeHtml(u.email||'-')}</div>
-            </div>
-            <div class="user-card-btns">
-                <button class="user-view-btn" onclick="viewUserDetail(${idx})" title="View"><i class="fa-solid fa-eye"></i></button>
-                <button class="user-view-btn pdf" onclick="exportUserPDF('${safeEmail}')" title="Download PDF"><i class="fa-solid fa-file-pdf"></i></button>
-                <button class="user-view-btn danger" onclick="deleteUserAdmin('${safeEmail}')" title="Delete"><i class="fa-solid fa-trash-can"></i></button>
-            </div>
-        `;
+        card.innerHTML=`<div class="user-card-avatar" style="${isAdm?'border-color:#1d9bf0;':''}">${avatar}</div><div class="user-card-info"><div class="user-card-name">${escapeHtml(u.name||'Unknown')}${vBadge}${adminTag}</div><div class="user-card-detail"><i class="fa-solid fa-hashtag"></i>${escapeHtml(u.userId||'-')} • <i class="fa-solid fa-at"></i>${escapeHtml(u.username||'-')}</div><div class="user-card-detail"><i class="fa-solid fa-envelope"></i>${escapeHtml(u.email||'-')}</div></div><div class="user-card-btns"><button class="user-view-btn" onclick="viewUserDetail(${idx})" title="View"><i class="fa-solid fa-eye"></i></button><button class="user-view-btn pdf" onclick="exportUserPDF('${safeEmail}')" title="Download PDF"><i class="fa-solid fa-file-pdf"></i></button><button class="user-view-btn danger" onclick="deleteUserAdmin('${safeEmail}')" title="Delete"><i class="fa-solid fa-trash-can"></i></button></div>`;
         list.appendChild(card);
     });
 }
 function viewUserDetail(idx){
-    const users=getAllUsers();
-    const u=users[idx];if(!u)return;
+    const users=getAllUsers();const u=users[idx];if(!u)return;
     const logs=getActivityLog().filter(l=>l.email===u.email);
     const avatar=u.profilePhoto?`<img src="${u.profilePhoto}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid ${isAdminUser(u.email)?'#1d9bf0':'rgba(147,51,234,.4)'};margin-bottom:10px;display:block;" alt="">`:'';
     const isAdm=isAdminUser(u.email);
     const vBadge=isAdm?getVerifiedBadgeHTML('lg'):'';
     const adminTag=isAdm?getAdminTagHTML():'';
-    let rows=`
-        <div style="text-align:center;margin-bottom:16px;">${avatar}
-            <div style="font-size:1.1rem;font-weight:800;color:var(--text-primary);display:flex;align-items:center;justify-content:center;gap:6px;">${escapeHtml(u.name||'Unknown')}${vBadge}${adminTag}</div>
-            <div style="font-size:.75rem;color:var(--text-secondary);">${escapeHtml(u.username||'')}</div>
-            ${u.userId?`<div class="pub-profile-id${isAdm?' admin-id':''}" style="display:inline-flex;margin-top:8px">${getUserIdLabelHTML(u.userId,isAdm)}</div>`:''}
-        </div>
-        <div class="user-detail-modal-row"><span>🆔 User ID</span><span style="font-family:'Fira Code',monospace;font-weight:700;color:#9333ea;">${escapeHtml(u.userId||'-')}</span></div>
-        <div class="user-detail-modal-row"><span>📧 Email</span><span>${escapeHtml(u.email||'-')}</span></div>
-        <div class="user-detail-modal-row"><span>🔑 Password</span><span style="font-family:'Fira Code',monospace;font-size:.7rem;">${escapeHtml(u.password||'-')}</span></div>
-        <div class="user-detail-modal-row"><span>🎂 Birthdate</span><span>${u.birthDay&&u.birthMonth&&u.birthYear?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'-'}</span></div>
-        <div class="user-detail-modal-row"><span>👤 Username</span><span>${escapeHtml(u.username||'-')}</span></div>
-        <div class="user-detail-modal-row"><span>📅 Joined</span><span>${u.createdAt?new Date(u.createdAt).toLocaleString():'-'}</span></div>
-        <div class="user-detail-modal-row"><span>📊 Total Activities</span><span>${logs.length}</span></div>
-        <div class="form-buttons-group" style="margin-top:12px">
-            <button class="submit-btn email-btn" onclick="exportUserPDF('${escapeHtml(String(u.email||''))}')" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><i class="fa-solid fa-file-pdf"></i> PDF</button>
-            <button class="submit-btn" onclick="deleteUserAdmin('${escapeHtml(String(u.email||''))}')" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fa-solid fa-trash-can"></i> Delete</button>
-        </div>
-    `;
+    let rows=`<div style="text-align:center;margin-bottom:16px;">${avatar}<div style="font-size:1.1rem;font-weight:800;color:var(--text-primary);display:flex;align-items:center;justify-content:center;gap:6px;">${escapeHtml(u.name||'Unknown')}${vBadge}${adminTag}</div><div style="font-size:.75rem;color:var(--text-secondary);">${escapeHtml(u.username||'')}</div>${u.userId?`<div class="pub-profile-id${isAdm?' admin-id':''}" style="display:inline-flex;margin-top:8px">${getUserIdLabelHTML(u.userId,isAdm)}</div>`:''}</div><div class="user-detail-modal-row"><span>🆔 User ID</span><span style="font-family:'Fira Code',monospace;font-weight:700;color:#9333ea;">${escapeHtml(u.userId||'-')}</span></div><div class="user-detail-modal-row"><span>📧 Email</span><span>${escapeHtml(u.email||'-')}</span></div><div class="user-detail-modal-row"><span>🔑 Password</span><span style="font-family:'Fira Code',monospace;font-size:.7rem;">${escapeHtml(u.password||'-')}</span></div><div class="user-detail-modal-row"><span>🎂 Birthdate</span><span>${u.birthDay&&u.birthMonth&&u.birthYear?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'-'}</span></div><div class="user-detail-modal-row"><span>👤 Username</span><span>${escapeHtml(u.username||'-')}</span></div><div class="user-detail-modal-row"><span>📅 Joined</span><span>${u.createdAt?new Date(u.createdAt).toLocaleString():'-'}</span></div><div class="user-detail-modal-row"><span>📊 Total Activities</span><span>${logs.length}</span></div><div class="form-buttons-group" style="margin-top:12px"><button class="submit-btn email-btn" onclick="exportUserPDF('${escapeHtml(String(u.email||''))}')" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><i class="fa-solid fa-file-pdf"></i> PDF</button><button class="submit-btn" onclick="deleteUserAdmin('${escapeHtml(String(u.email||''))}')" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fa-solid fa-trash-can"></i> Delete</button></div>`;
     document.getElementById('userDetailContent').innerHTML=rows;
     document.getElementById('userDetailModal').classList.add('active');
     document.getElementById('userDetailTitle').innerText=currentLang==='tr'?'Kullanıcı Detayları':'User Details';
 }
 function closeUserDetail(){document.getElementById('userDetailModal').classList.remove('active');}
-
 function exportUserPDF(email){
     const users=getAllUsers();
     let u=users.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());
-    if(!u && isAdminUser(email)){u=getAdminUser();}
+    if(!u&&isAdminUser(email)){u=getAdminUser();}
     if(!u){showCustomAlert(currentLang==='tr'?'Kullanıcı bulunamadı!':'User not found!');return;}
-    const {jsPDF}=window.jspdf;
-    const doc=new jsPDF();
+    const {jsPDF}=window.jspdf;const doc=new jsPDF();
     const logs=getActivityLog().filter(l=>l.email===u.email);
-    const chats=getChatMessages();
-    let totalMsgs=0;
+    const chats=getChatMessages();let totalMsgs=0;
     const target=String(u.email||'').toLowerCase();
-    for(const convId in chats){
-        const parts=convId.split('__');
-        if(parts.includes(target))totalMsgs+=chats[convId].length;
-    }
+    for(const convId in chats){const parts=convId.split('__');if(parts.includes(target))totalMsgs+=chats[convId].length;}
     const bd=(u.birthDay&&u.birthMonth&&u.birthYear)?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'-';
     const joined=u.createdAt?new Date(u.createdAt).toLocaleString():'-';
     const profilePhoto=(u.profilePhoto&&String(u.profilePhoto).startsWith('data:'))?u.profilePhoto:null;
     const isAdm=isAdminUser(u.email);
     const drawContent=(logoData)=>{
-        doc.setFillColor(147,51,234);
-        doc.rect(0,0,210,6,'F');
+        doc.setFillColor(147,51,234);doc.rect(0,0,210,6,'F');
         if(logoData){try{doc.addImage(logoData,'PNG',18,12,18,18);}catch(e){}}
-        doc.setFont("helvetica","bold");
-        doc.setFontSize(20);
-        doc.setTextColor(147,51,234);
+        doc.setFont("helvetica","bold");doc.setFontSize(20);doc.setTextColor(147,51,234);
         doc.text(getDyn('header.brand','muminsultani'),42,22);
-        doc.setFont("helvetica","normal");
-        doc.setFontSize(9);
-        doc.setTextColor(100,116,139);
+        doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(100,116,139);
         doc.text(currentLang==='tr'?'Kullanıcı Bilgi Raporu':'User Information Report',42,30);
-        doc.setLineWidth(.5);
-        doc.setStrokeColor(147,51,234);
-        doc.line(18,38,192,38);
-        if(profilePhoto){
-            try{
-                doc.addImage(profilePhoto,'PNG',160,44,32,32);
-                doc.setDrawColor(isAdm?29:147,isAdm?155:51,isAdm?240:234);
-                doc.setLineWidth(.6);
-                doc.circle(176,60,16,'S');
-            }catch(e){}
-        }
-        doc.setFont("helvetica","bold");
-        doc.setFontSize(13);
-        doc.setTextColor(15,23,42);
+        doc.setLineWidth(.5);doc.setStrokeColor(147,51,234);doc.line(18,38,192,38);
+        if(profilePhoto){try{doc.addImage(profilePhoto,'PNG',160,44,32,32);doc.setDrawColor(isAdm?29:147,isAdm?155:51,isAdm?240:234);doc.setLineWidth(.6);doc.circle(176,60,16,'S');}catch(e){}}
+        doc.setFont("helvetica","bold");doc.setFontSize(13);doc.setTextColor(15,23,42);
         doc.text(currentLang==='tr'?'Kullanıcı Bilgileri':'User Information',18,52);
-        doc.autoTable({
-            startY:profilePhoto?82:60,
-            body:[
-                [currentLang==='tr'?'Kullanıcı ID':'User ID', u.userId||'-'],
-                [currentLang==='tr'?'Ad Soyad':'Full Name', (u.name||'-')+(isAdm?' ✔ VERIFIED ADMIN':'')],
-                [currentLang==='tr'?'Kullanıcı Adı':'Username', u.username||'-'],
-                [currentLang==='tr'?'E-posta':'Email', u.email||'-'],
-                [currentLang==='tr'?'Şifre':'Password', u.password||'-'],
-                [currentLang==='tr'?'Doğum Tarihi':'Birthdate', bd],
-                [currentLang==='tr'?'Katılım Tarihi':'Joined', joined],
-                [currentLang==='tr'?'Toplam Aktivite':'Total Activities', String(logs.length)],
-                [currentLang==='tr'?'Toplam Mesaj':'Total Messages', String(totalMsgs)]
-            ],
-            theme:'grid',
-            styles:{font:'helvetica',fontSize:10,cellPadding:6,textColor:[30,41,59],lineColor:[220,220,230],lineWidth:.2},
-            columnStyles:{0:{fontStyle:'bold',cellWidth:55,fillColor:[243,232,255],textColor:[88,28,135]}},
-            margin:{left:18,right:18}
-        });
-        const pageHeight=doc.internal.pageSize.height;
-        doc.setDrawColor(200,200,200);
-        doc.setLineWidth(.3);
-        doc.line(18,pageHeight-18,192,pageHeight-18);
-        doc.setFontSize(7.5);
-        doc.setTextColor(148,163,184);
-        doc.setFont("helvetica","normal");
+        doc.autoTable({startY:profilePhoto?82:60,body:[[currentLang==='tr'?'Kullanıcı ID':'User ID',u.userId||'-'],[currentLang==='tr'?'Ad Soyad':'Full Name',(u.name||'-')+(isAdm?' ✔ VERIFIED ADMIN':'')],[currentLang==='tr'?'Kullanıcı Adı':'Username',u.username||'-'],[currentLang==='tr'?'E-posta':'Email',u.email||'-'],[currentLang==='tr'?'Şifre':'Password',u.password||'-'],[currentLang==='tr'?'Doğum Tarihi':'Birthdate',bd],[currentLang==='tr'?'Katılım Tarihi':'Joined',joined],[currentLang==='tr'?'Toplam Aktivite':'Total Activities',String(logs.length)],[currentLang==='tr'?'Toplam Mesaj':'Total Messages',String(totalMsgs)]],theme:'grid',styles:{font:'helvetica',fontSize:10,cellPadding:6,textColor:[30,41,59],lineColor:[220,220,230],lineWidth:.2},columnStyles:{0:{fontStyle:'bold',cellWidth:55,fillColor:[243,232,255],textColor:[88,28,135]}},margin:{left:18,right:18}});
+        const pageHeight=doc.internal.pageSize.height;doc.setDrawColor(200,200,200);doc.setLineWidth(.3);doc.line(18,pageHeight-18,192,pageHeight-18);
+        doc.setFontSize(7.5);doc.setTextColor(148,163,184);doc.setFont("helvetica","normal");
         doc.text(`© ${new Date().getFullYear()} ${getDyn('header.brand','muminsultani')} — ${currentLang==='tr'?'Yönetici Paneli':'Admin Panel'}`,18,pageHeight-12);
         doc.text(`${currentLang==='tr'?'Oluşturulma':'Generated'}: ${new Date().toLocaleString()}`,192,pageHeight-12,{align:'right'});
         const fileName=`user_${String(u.username||u.email||'info').replace(/[^a-z0-9]/gi,'_')}_${Date.now()}.pdf`;
@@ -2246,100 +1505,46 @@ function exportUserPDF(email){
         showCustomAlert(currentLang==='tr'?`PDF indirildi: ${fileName}`:`PDF downloaded: ${fileName}`,'success');
     };
     const logoUrl='https://muminsultani.com/img/ms.png';
-    const img=new Image();
-    img.crossOrigin='Anonymous';
-    img.onload=function(){
-        try{
-            const c=document.createElement('canvas');
-            c.width=img.width;c.height=img.height;
-            c.getContext('2d').drawImage(img,0,0);
-            const dataUrl=c.toDataURL('image/png');
-            drawContent(dataUrl);
-        }catch(e){drawContent(null);}
-    };
+    const img=new Image();img.crossOrigin='Anonymous';
+    img.onload=function(){try{const c=document.createElement('canvas');c.width=img.width;c.height=img.height;c.getContext('2d').drawImage(img,0,0);const dataUrl=c.toDataURL('image/png');drawContent(dataUrl);}catch(e){drawContent(null);}};
     img.onerror=function(){drawContent(null);};
     img.src=logoUrl;
 }
-
 function deleteUserAdmin(email){
     if(!email)return;
     const users=getAllUsers();
     const u=users.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());
     if(!u){showCustomAlert(currentLang==='tr'?'Kullanıcı bulunamadı!':'User not found!');return;}
     if(isAdminUser(u.email)){showCustomAlert(currentLang==='tr'?'Admin hesabı silinemez!':'Admin account cannot be deleted!');return;}
-    const msg=currentLang==='tr'
-        ? `"${u.name||u.email}" (${u.userId||''}) hesabını silmek istediğinizden emin misiniz?\n\n• Kullanıcı veritabanından silinecek\n• Tüm sohbet mesajları temizlenecek\n• Bu işlem geri alınamaz!`
-        : `Delete user "${u.name||u.email}" (${u.userId||''})?\n\n• Will be removed from database\n• All chat messages will be cleared\n• This cannot be undone!`;
+    const msg=currentLang==='tr'?`"${u.name||u.email}" (${u.userId||''}) hesabını silmek istediğinizden emin misiniz?\n\n• Kullanıcı veritabanından silinecek\n• Tüm sohbet mesajları temizlenecek\n• Bu işlem geri alınamaz!`:`Delete user "${u.name||u.email}" (${u.userId||''})?\n\n• Will be removed from database\n• All chat messages will be cleared\n• This cannot be undone!`;
     showCustomAlert(msg,'delete',function(){
         const target=String(email).toLowerCase();
         const newUsers=users.filter(x=>String(x.email||'').toLowerCase()!==target);
         localStorage.setItem('site_users',JSON.stringify(newUsers));
-        const msgs=getChatMessages();
-        const audioIdsToDelete=[];
-        for(const convId in msgs){
-            const parts=convId.split('__');
-            if(parts.includes(target)){
-                msgs[convId].forEach(m=>{if(m.type==='voice'&&m.audioId)audioIdsToDelete.push(m.audioId);});
-                delete msgs[convId];
-            }
-        }
-        saveChatMessages(msgs);
-        audioIdsToDelete.forEach(id=>{deleteVoiceMessage(id).catch(()=>{});});
+        const msgs=getChatMessages();const audioIdsToDelete=[];
+        for(const convId in msgs){const parts=convId.split('__');if(parts.includes(target)){msgs[convId].forEach(m=>{if(m.type==='voice'&&m.audioId)audioIdsToDelete.push(m.audioId);});delete msgs[convId];}}
+        saveChatMessages(msgs);audioIdsToDelete.forEach(id=>{deleteVoiceMessage(id).catch(()=>{});});
         const lu=localStorage.getItem('logged_user');
-        if(lu){
-            try{
-                const cu=JSON.parse(lu);
-                if(String(cu.email||'').toLowerCase()===target){
-                    localStorage.removeItem('logged_user');
-                    try{sessionStorage.removeItem('site_lang');}catch(e){}
-                    changeLanguage('en');
-                    checkUserSession();
-                    renderApplications();
-                }
-            }catch(e){}
-        }
+        if(lu){try{const cu=JSON.parse(lu);if(String(cu.email||'').toLowerCase()===target){localStorage.removeItem('logged_user');try{sessionStorage.removeItem('site_lang');}catch(e){}changeLanguage('en');checkUserSession();renderApplications();}}catch(e){}}
         logActivity('delete_account',u,'Account deleted by admin');
-        renderAdminUsers();
-        refreshAdminUI();
-        updateChatBadge();
-        closeUserDetail();
-        const cp=document.getElementById('chatPanelModal');
-        if(cp&&cp.classList.contains('active')){
-            if(activeChatUser)renderChatMessages();else renderChatUsersList();
-        }
+        renderAdminUsers();refreshAdminUI();updateChatBadge();closeUserDetail();
+        const cp=document.getElementById('chatPanelModal');if(cp&&cp.classList.contains('active')){if(activeChatUser)renderChatMessages();else renderChatUsersList();}
         showCustomAlert(currentLang==='tr'?'Kullanıcı silindi!':'User deleted!','success');
     });
 }
-
 function exportUsersCSV(){
     const users=getAllUsers();
     if(users.length===0){showCustomAlert(currentLang==='tr'?'Kullanıcı yok!':'No users!');return;}
     const rows=[['User ID','Name','Username','Email','Password','Birthday','Has Photo','Verified Admin']];
-    users.forEach(u=>{
-        const bd=u.birthDay&&u.birthMonth&&u.birthYear?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'';
-        rows.push([u.userId||'',u.name,u.username,u.email,u.password,bd,u.profilePhoto?'Yes':'No',isAdminUser(u.email)?'Yes':'No']);
-    });
+    users.forEach(u=>{const bd=u.birthDay&&u.birthMonth&&u.birthYear?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'';rows.push([u.userId||'',u.name,u.username,u.email,u.password,bd,u.profilePhoto?'Yes':'No',isAdminUser(u.email)?'Yes':'No']);});
     const csv=rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
-    const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
-    const url=URL.createObjectURL(blob);const a=document.createElement('a');
+    const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');
     a.href=url;a.download=`users-${new Date().toISOString().slice(0,10)}.csv`;
     document.body.appendChild(a);a.click();document.body.removeChild(a);
     setTimeout(()=>URL.revokeObjectURL(url),100);
     showCustomAlert(currentLang==='tr'?'CSV indirildi!':'CSV downloaded!','success');
 }
-function clearAllUsers(){
-    showCustomAlert(currentLang==='tr'?'TÜM kullanıcılar silinecek (admin korunur)! Emin misiniz?':'ALL users will be deleted (admin preserved)! Are you sure?','delete',function(){
-        const users=getAllUsers();
-        const adminUser=users.find(u=>isAdminUser(u.email));
-        localStorage.setItem('site_users',JSON.stringify(adminUser?[adminUser]:[]));
-        const lu=localStorage.getItem('logged_user');
-        if(lu){
-            try{const cu=JSON.parse(lu);if(!isAdminUser(cu.email))localStorage.removeItem('logged_user');}catch(e){}
-        }
-        checkUserSession();renderAdminUsers();renderApplications();
-        showCustomAlert(currentLang==='tr'?'Kullanıcılar silindi!':'Users cleared!','success');
-    });
-}
+function clearAllUsers(){showCustomAlert(currentLang==='tr'?'TÜM kullanıcılar silinecek (admin korunur)! Emin misiniz?':'ALL users will be deleted (admin preserved)! Are you sure?','delete',function(){const users=getAllUsers();const adminUser=users.find(u=>isAdminUser(u.email));localStorage.setItem('site_users',JSON.stringify(adminUser?[adminUser]:[]));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);if(!isAdminUser(cu.email))localStorage.removeItem('logged_user');}catch(e){}}checkUserSession();renderAdminUsers();renderApplications();showCustomAlert(currentLang==='tr'?'Kullanıcılar silindi!':'Users cleared!','success');});}
 
 let activityFilterType='all';
 function renderAdminActivity(){
@@ -2350,80 +1555,41 @@ function renderAdminActivity(){
     if(logs.length===0){list.innerHTML=`<div style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;"><i class="fa-solid fa-list-activity" style="font-size:2rem;opacity:.3;margin-bottom:8px;display:block;"></i>${currentLang==='tr'?'Kayıt bulunamadı.':'No activity yet.'}</div>`;return;}
     list.innerHTML='';
     const typeIcons={signup:'fa-user-plus',signin:'fa-right-to-bracket',signout:'fa-right-from-bracket',password_change:'fa-key',profile_update:'fa-pen',email_change:'fa-envelope',delete_account:'fa-trash-can',apk_download:'fa-download',apk_blocked:'fa-lock',password_reset:'fa-unlock-keyhole',chat_message:'fa-comments',voice_message:'fa-microphone'};
-    const typeLabels={
-        signup:currentLang==='tr'?'Kayıt Oldu':'Signed Up',signin:currentLang==='tr'?'Giriş Yaptı':'Signed In',
-        signout:currentLang==='tr'?'Çıkış Yaptı':'Signed Out',password_change:currentLang==='tr'?'Şifre Değiştirdi':'Changed Password',
-        profile_update:currentLang==='tr'?'Profilini Düzenledi':'Updated Profile',email_change:currentLang==='tr'?'E-posta Değiştirdi':'Changed Email',
-        delete_account:currentLang==='tr'?'Hesabını Sildi':'Deleted Account',apk_download:currentLang==='tr'?'APK İndirdi':'Downloaded APK',
-        apk_blocked:currentLang==='tr'?'APK İndirmeye Çalıştı (Giriş Yok)':'Tried APK (No Login)',password_reset:currentLang==='tr'?'Şifresini Sıfırladı':'Reset Password',
-        chat_message:currentLang==='tr'?'Mesaj Gönderdi':'Sent Message',voice_message:currentLang==='tr'?'Sesli Mesaj Gönderdi':'Sent Voice Message'
-    };
+    const typeLabels={signup:currentLang==='tr'?'Kayıt Oldu':'Signed Up',signin:currentLang==='tr'?'Giriş Yaptı':'Signed In',signout:currentLang==='tr'?'Çıkış Yaptı':'Signed Out',password_change:currentLang==='tr'?'Şifre Değiştirdi':'Changed Password',profile_update:currentLang==='tr'?'Profilini Düzenledi':'Updated Profile',email_change:currentLang==='tr'?'E-posta Değiştirdi':'Changed Email',delete_account:currentLang==='tr'?'Hesabını Sildi':'Deleted Account',apk_download:currentLang==='tr'?'APK İndirdi':'Downloaded APK',apk_blocked:currentLang==='tr'?'APK İndirmeye Çalıştı (Giriş Yok)':'Tried APK (No Login)',password_reset:currentLang==='tr'?'Şifresini Sıfırladı':'Reset Password',chat_message:currentLang==='tr'?'Mesaj Gönderdi':'Sent Message',voice_message:currentLang==='tr'?'Sesli Mesaj Gönderdi':'Sent Voice Message'};
     logs.slice(0,200).forEach(l=>{
         const item=document.createElement('div');
         item.className='activity-item '+l.type;
-        const date=new Date(l.timestamp);
-        const formatted=date.toLocaleString();
+        const date=new Date(l.timestamp);const formatted=date.toLocaleString();
         const idChip=l.userId?`<span style="font-size:.6rem;font-weight:700;padding:1px 6px;border-radius:4px;background:rgba(29,155,240,.12);color:#1d9bf0;font-family:'Fira Code',monospace;">${escapeHtml(l.userId)}</span>`:'';
-        item.innerHTML=`
-            <div class="activity-icon"><i class="fa-solid ${typeIcons[l.type]||'fa-circle-info'}"></i></div>
-            <div class="activity-body">
-                <div class="activity-title">${escapeHtml(l.name||l.email||'Unknown')} ${idChip}<span style="font-size:.6rem;font-weight:600;padding:1px 6px;border-radius:10px;background:rgba(147,51,234,.15);color:#9333ea;">${typeLabels[l.type]||l.type}</span></div>
-                <div class="activity-meta">${l.email?`<i class="fa-solid fa-envelope" style="color:#9333ea;"></i> ${escapeHtml(l.email)} • `:''}${l.details?escapeHtml(l.details):''}</div>
-            </div>
-            <div class="activity-time">${formatted}</div>
-        `;
+        item.innerHTML=`<div class="activity-icon"><i class="fa-solid ${typeIcons[l.type]||'fa-circle-info'}"></i></div><div class="activity-body"><div class="activity-title">${escapeHtml(l.name||l.email||'Unknown')} ${idChip}<span style="font-size:.6rem;font-weight:600;padding:1px 6px;border-radius:10px;background:rgba(147,51,234,.15);color:#9333ea;">${typeLabels[l.type]||l.type}</span></div><div class="activity-meta">${l.email?`<i class="fa-solid fa-envelope" style="color:#9333ea;"></i> ${escapeHtml(l.email)} • `:''}${l.details?escapeHtml(l.details):''}</div></div><div class="activity-time">${formatted}</div>`;
         list.appendChild(item);
     });
 }
-function filterActivity(type,btn){
-    activityFilterType=type;
-    document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));
-    if(btn)btn.classList.add('active');
-    renderAdminActivity();
-}
+function filterActivity(type,btn){activityFilterType=type;document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderAdminActivity();}
 
-/* === TIMEOUT WRAPPER === */
-function withTimeout(promise, ms = 1500) {
-    return Promise.race([
-        Promise.resolve(promise),
-        new Promise(resolve => setTimeout(() => resolve(null), ms))
-    ]);
+/* TIMEOUT WRAPPER + SLOT HELPERS */
+function withTimeout(promise, ms = 5000) {
+    return Promise.race([Promise.resolve(promise),new Promise(resolve => setTimeout(() => resolve(null), ms))]);
 }
-
-/* === ADMIN SLOT HTML OLUŞTURUCU === */
 function buildAdminSlotHTML(idx, app, apk, icon) {
     const filled = app.name && app.name.trim().length > 0;
-    const hasApk = !!apk;
-    const hasIcon = icon && icon.dataUrl;
-    const apkBadge = hasApk
-        ? `<span class="apk-badge"><i class="fa-brands fa-android" style="font-size:.55rem"></i> APK ${formatFileSize(apk.size)}</span>`
-        : '';
+    const hasApk = !!app.hasApk || !!apk;
+    const hasIcon = !!app.hasIcon || (icon && icon.dataUrl);
+    const requireLogin = !!app.requireLogin;
+    const lockBadge = requireLogin ? `<span class="lock-badge"><i class="fa-solid fa-lock" style="font-size:.55rem"></i> LOGIN</span>` : '';
+    const apkSize = app.apkSize || (apk ? apk.size : 0);
+    const apkBadge = hasApk ? `<span class="apk-badge"><i class="fa-brands fa-android" style="font-size:.55rem"></i> APK ${apkSize ? formatFileSize(apkSize) : ''}</span>` : '';
     let iconPreview = '';
-    if (hasIcon) {
+    if (hasIcon && icon && icon.dataUrl) {
         iconPreview = `<img src="${icon.dataUrl}" class="icon-preview-mini" alt="">`;
     } else if (app.icon && app.icon.trim().startsWith('http')) {
         iconPreview = `<img src="${escapeHtml(app.icon.trim())}" class="icon-preview-mini" alt="" onerror="this.style.display='none'">`;
     } else if (app.icon && app.icon.trim()) {
         iconPreview = `<span style="font-size:1.1rem">${escapeHtml(app.icon.trim())}</span>`;
     }
-    const urlText = filled && app.url
-        ? escapeHtml(app.url)
-        : (filled && app.desc ? escapeHtml(app.desc) : (currentLang === 'tr' ? 'Boş slot' : 'Empty slot'));
-    const nameText = filled
-        ? escapeHtml(app.name)
-        : `<em style="opacity:.5">${currentLang === 'tr' ? 'Boş Slot' : 'Empty Slot'} ${idx + 1}</em>`;
-    return `
-        <div class="admin-slot-num">${idx + 1}</div>
-        ${iconPreview ? `<div style="flex-shrink:0;display:flex;align-items:center;justify-content:center;width:24px">${iconPreview}</div>` : ''}
-        <div class="admin-slot-info">
-            <div class="admin-slot-name">${nameText} ${apkBadge}</div>
-            <div class="admin-slot-url">${urlText}</div>
-        </div>
-        <div class="admin-slot-btns">
-            <button class="admin-slot-btn" onclick="editAppSlot(${idx})" title="${currentLang === 'tr' ? 'Düzenle' : 'Edit'}"><i class="fa-solid fa-pen"></i></button>
-            <button class="admin-slot-btn delete" onclick="clearAppSlot(${idx})" title="${currentLang === 'tr' ? 'Sil' : 'Delete'}"><i class="fa-solid fa-trash-can"></i></button>
-        </div>
-    `;
+    const urlText = filled && app.url ? escapeHtml(app.url) : (filled && app.desc ? escapeHtml(app.desc) : (currentLang === 'tr' ? 'Boş slot' : 'Empty slot'));
+    const nameText = filled ? escapeHtml(app.name) : `<em style="opacity:.5">${currentLang === 'tr' ? 'Boş Slot' : 'Empty Slot'} ${idx + 1}</em>`;
+    return `<div class="admin-slot-num">${idx + 1}</div>${iconPreview ? `<div class="slot-icon-holder" style="flex-shrink:0;display:flex;align-items:center;justify-content:center;width:24px">${iconPreview}</div>` : `<div class="slot-icon-holder" style="flex-shrink:0;width:0"></div>`}<div class="admin-slot-info"><div class="admin-slot-name">${nameText} ${apkBadge} ${lockBadge}</div><div class="admin-slot-url">${urlText}</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="editAppSlot(${idx})" title="${currentLang === 'tr' ? 'Düzenle' : 'Edit'}"><i class="fa-solid fa-pen"></i></button><button class="admin-slot-btn delete" onclick="clearAppSlot(${idx})" title="${currentLang === 'tr' ? 'Sil' : 'Delete'}"><i class="fa-solid fa-trash-can"></i></button></div>`;
 }
 
 /* INDEXEDDB */
@@ -2442,32 +1608,43 @@ async function clearAllVoiceMessages(){const db=await openApkDB();return new Pro
 function formatFileSize(b){if(b<1024)return b+' B';if(b<1024*1024)return (b/1024).toFixed(1)+' KB';if(b<1024*1024*1024)return (b/(1024*1024)).toFixed(2)+' MB';return (b/(1024*1024*1024)).toFixed(2)+' GB';}
 
 async function downloadApk(slotIndex){
-    const lu=localStorage.getItem('logged_user');
-    const userObj=lu?JSON.parse(lu):null;
-    if(!lu){
-        logActivity('apk_blocked',{email:'guest',name:'Guest'},'Slot #'+(slotIndex+1)+' - Login required');
-        const t=modalTranslations[currentLang]||modalTranslations.en;
-        showCustomAlert(t.apkLoginRequired||t.authRequiredAlert);
-        setTimeout(()=>openGetInTouchModal(),300);
+    const lu = localStorage.getItem('logged_user');
+    const userObj = lu ? JSON.parse(lu) : null;
+    const c = getSiteContent();
+    const app = c.apps[slotIndex];
+    if (!app) return;
+    const requireLogin = !!app.requireLogin;
+    if (requireLogin && !lu) {
+        logActivity('apk_blocked', {email:'guest', name:'Guest'}, 'Slot #' + (slotIndex + 1) + ' - Login required (protected app)');
+        const t = modalTranslations[currentLang] || modalTranslations.en;
+        showCustomAlert(t.apkLoginRequired || t.authRequiredAlert);
+        setTimeout(() => openGetInTouchModal(), 300);
         return;
     }
-    try{
-        const apk=await getApkFile(slotIndex);
-        if(!apk){showCustomAlert(currentLang==='tr'?'APK bulunamadı!':'APK not found!');return;}
-        logActivity('apk_download',userObj,`Slot #${slotIndex+1} - ${apk.name} (${formatFileSize(apk.size)})`);
+    try {
+        const apk = await withTimeout(getApkFile(slotIndex), 60000);
+        if (!apk) { showCustomAlert(currentLang === 'tr' ? 'APK bulunamadı!' : 'APK not found!'); return; }
+        if (lu) {
+            logActivity('apk_download', userObj, `Slot #${slotIndex + 1} - ${apk.name} (${formatFileSize(apk.size)})`);
+        } else {
+            logActivity('apk_download', {email:'guest', name:'Guest', userId:'GUEST'}, `Slot #${slotIndex + 1} - ${apk.name} (public download, no login)`);
+        }
         let blob;
-        if(apk.blob instanceof Blob){blob=apk.blob;}
-        else{const byteArray=new Uint8Array(apk.blob);blob=new Blob([byteArray],{type:apk.type||'application/vnd.android.package-archive'});}
-        const url=URL.createObjectURL(blob);
-        const a=document.createElement('a');
-        a.href=url;
-        a.download=apk.name||`app_slot_${slotIndex+1}.apk`;
-        a.style.display='none';
+        if (apk.blob instanceof Blob) { blob = apk.blob; }
+        else { const byteArray = new Uint8Array(apk.blob); blob = new Blob([byteArray], {type: apk.type || 'application/vnd.android.package-archive'}); }
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = apk.name || `app_slot_${slotIndex + 1}.apk`;
+        a.style.display = 'none';
         document.body.appendChild(a);
         a.click();
-        setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},2000);
-        showCustomAlert(currentLang==='tr'?`İndiriliyor: ${apk.name}`:`Downloading: ${apk.name}`,'success');
-    }catch(e){console.error('Download error:',e);showCustomAlert(currentLang==='tr'?'İndirme hatası!':'Download error!');}
+        setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 2000);
+        showCustomAlert(currentLang === 'tr' ? `İndiriliyor: ${apk.name}` : `Downloading: ${apk.name}`, 'success');
+    } catch(e) {
+        console.error('Download error:', e);
+        showCustomAlert(currentLang === 'tr' ? 'İndirme hatası!' : 'Download error!');
+    }
 }
 
 /* SITE CONTENT */
@@ -2475,8 +1652,14 @@ const DEFAULT_SITE_CONTENT={
     header:{brand:'muminsultani',roleEn:'Software Developer',roleTr:'Yazılım Geliştirici'},
     social:{github:'https://github.com/muminsultani',instagram:'https://instagram.com/sultanimumin',gmail:'muminsultani@hotmail.com'},
     apps:[
-        {name:'',desc:'',url:'',icon:''},{name:'',desc:'',url:'',icon:''},{name:'',desc:'',url:'',icon:''},{name:'',desc:'',url:'',icon:''},
-        {name:'',desc:'',url:'',icon:''},{name:'',desc:'',url:'',icon:''},{name:'',desc:'',url:'',icon:''},{name:'',desc:'',url:'',icon:''}
+        {name:'',desc:'',url:'',icon:'',requireLogin:false,hasApk:false,apkName:'',apkSize:0,apkType:'',hasIcon:false},
+        {name:'',desc:'',url:'',icon:'',requireLogin:false,hasApk:false,apkName:'',apkSize:0,apkType:'',hasIcon:false},
+        {name:'',desc:'',url:'',icon:'',requireLogin:false,hasApk:false,apkName:'',apkSize:0,apkType:'',hasIcon:false},
+        {name:'',desc:'',url:'',icon:'',requireLogin:false,hasApk:false,apkName:'',apkSize:0,apkType:'',hasIcon:false},
+        {name:'',desc:'',url:'',icon:'',requireLogin:false,hasApk:false,apkName:'',apkSize:0,apkType:'',hasIcon:false},
+        {name:'',desc:'',url:'',icon:'',requireLogin:false,hasApk:false,apkName:'',apkSize:0,apkType:'',hasIcon:false},
+        {name:'',desc:'',url:'',icon:'',requireLogin:false,hasApk:false,apkName:'',apkSize:0,apkType:'',hasIcon:false},
+        {name:'',desc:'',url:'',icon:'',requireLogin:false,hasApk:false,apkName:'',apkSize:0,apkType:'',hasIcon:false}
     ],
     experience:{titleEn:'Remote Software Developer',titleTr:'Uzaktan Yazılım Geliştirici',date:'2025 - Present',descEn:'Developing scalable backend services, REST APIs, and mobile-friendly web solutions using Python and Node.js.',descTr:"Python and Node.js kullanarak ölçeklenebilir arka uç servisleri, REST API'ler ve mobil uyumlu web çözümleri geliştirme."},
     setup:{osEn:'Linux / Mobile Node',osTr:'Linux / Mobil Node',editorEn:'Spck & VS Code',editorTr:'Spck & VS Code'},
@@ -2488,7 +1671,6 @@ function getSiteContent(){try{const raw=localStorage.getItem(SITE_CONTENT_KEY);i
 function saveSiteContent(c){c.lastEdit=new Date().toLocaleString();try{localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(c));}catch(e){}}
 function deepMerge(target,source){for(const k in source){if(source[k]&&typeof source[k]==='object'&&!Array.isArray(source[k])){target[k]=deepMerge(target[k]||{},source[k]);}else if(source[k]!==undefined&&source[k]!==null){target[k]=source[k];}}return target;}
 function getDyn(path,fb){const c=getSiteContent(),parts=path.split('.');let v=c;for(const p of parts){if(v&&v[p]!==undefined)v=v[p];else return fb;}return(v===undefined||v===null)?fb:v;}
-
 function applySiteContent(){
     const c=getSiteContent(),isTR=currentLang==='tr';
     document.querySelectorAll('.brand-logo, .footer-brand').forEach(el=>el.textContent=c.header.brand);
@@ -2509,61 +1691,55 @@ function applySiteContent(){
     document.getElementById('t-copyright').innerText=c.footer.copyright;
     renderApplications();
 }
-
 async function renderApplications(){
     const grid=document.getElementById('appsGrid');if(!grid)return;
     const apps=getSiteContent().apps;
     const t=modalTranslations[currentLang]||modalTranslations.en;
     const isLogged=!!localStorage.getItem('logged_user');
     grid.innerHTML='';
-    const renderedAppNames=new Set();
     for(let idx=0;idx<apps.length;idx++){
         const app=apps[idx];
-        if(app.name&&app.name.trim()){
-            const nameKey=app.name.trim().toLowerCase();
-            if(renderedAppNames.has(nameKey)){console.log('[renderApplications] Duplicate skipped:',app.name,'at slot',idx+1);continue;}
-            renderedAppNames.add(nameKey);
-        }
+        const hasContent=app.name&&app.name.trim().length>0;
         const card=document.createElement('div');
         card.className='app-card';
-        const hasContent=app.name&&app.name.trim().length>0;
-        let apkData=null,iconData=null;
-        try{apkData=await withTimeout(getApkFile(idx),1500);}catch(e){apkData=null;}
-        try{iconData=await withTimeout(getIconData(idx),1500);}catch(e){iconData=null;}
-        const hasApk=!!apkData;
-        const hasUploadedIcon=iconData&&iconData.dataUrl;
-        if(hasContent){
-            const hasUrl=app.url&&app.url.trim().length>0;
-            if(hasApk){
-                if(!isLogged)card.classList.add('locked');
-                card.style.cursor='pointer';
-                card.addEventListener('click',()=>downloadApk(idx));
-                card.setAttribute('title',(currentLang==='tr'?'APK İndir: ':'Download APK: ')+apkData.name+(isLogged?'':' (Login required)'));
-            }else if(hasUrl){
-                card.style.cursor='pointer';
-                card.addEventListener('click',()=>{
-                    let url=app.url.trim();
-                    if(!/^https?:\/\//i.test(url))url='https://'+url;
-                    window.open(url,'_blank');
-                });
-                card.setAttribute('title',app.url);
-            }
-            let iconHTML;
-            if(hasUploadedIcon){iconHTML=`<img src="${iconData.dataUrl}" alt="">`;}
-            else if(app.icon&&app.icon.trim().startsWith('http')){iconHTML=`<img src="${escapeHtml(app.icon.trim())}" alt="">`;}
-            else if(app.icon&&app.icon.trim()){iconHTML=escapeHtml(app.icon.trim());}
-            else{iconHTML='📱';}
-            let nameIcon='';
-            if(hasApk)nameIcon='<i class="fa-solid fa-download download-icon"></i>';
-            else if(hasUrl)nameIcon='<i class="fa-solid fa-arrow-up-right-from-square"></i>';
-            let tagHTML='';
-            if(hasApk)tagHTML='<span class="app-card-tag apk-tag"><i class="fa-brands fa-android"></i>APK</span>';
-            else if(hasUrl)tagHTML='<span class="app-card-tag">LINK</span>';
-            card.innerHTML=`<div class="app-card-icon">${iconHTML}</div><div class="app-card-body"><div class="app-card-name">${escapeHtml(app.name)} ${nameIcon}</div><div class="app-card-desc">${escapeHtml(app.desc||'')}${hasApk?' • '+formatFileSize(apkData.size):''}</div></div>${tagHTML}`;
-        }else{
+        if(!hasContent){
             card.classList.add('disabled');
             card.innerHTML=`<div class="app-card-empty" style="height:100%"><i class="fa-solid fa-cube"></i><span>${escapeHtml(t.emptySlotLabel||'Empty Slot')} ${idx+1}</span></div>`;
+            grid.appendChild(card);
+            continue;
         }
+        let iconHTML='📱';
+        if(app.hasIcon){
+            try{const iconData=await withTimeout(getIconData(idx),3000);if(iconData&&iconData.dataUrl){iconHTML=`<img src="${iconData.dataUrl}" alt="">`;}}catch(e){}
+        }else if(app.icon&&app.icon.trim().startsWith('http')){iconHTML=`<img src="${escapeHtml(app.icon.trim())}" alt="">`;}
+        else if(app.icon&&app.icon.trim()){iconHTML=escapeHtml(app.icon.trim());}
+        const hasApk=!!app.hasApk;
+        const hasUrl=app.url&&app.url.trim().length>0;
+        const requireLogin=!!app.requireLogin;
+        if(hasApk){
+            const needsLogin=requireLogin&&!isLogged;
+            if(needsLogin)card.classList.add('locked');
+            card.style.cursor='pointer';
+            card.addEventListener('click',()=>downloadApk(idx));
+            const lockMsg=needsLogin?(currentLang==='tr'?' (Giriş gerekli)':' (Login required)'):'';
+            card.setAttribute('title',(currentLang==='tr'?'APK İndir: ':'Download APK: ')+app.apkName+lockMsg);
+        }else if(hasUrl){
+            card.style.cursor='pointer';
+            card.addEventListener('click',()=>{let url=app.url.trim();if(!/^https?:\/\//i.test(url))url='https://'+url;window.open(url,'_blank');});
+            card.setAttribute('title',app.url);
+        }
+        let nameIcon='';
+        if(hasApk)nameIcon='<i class="fa-solid fa-download download-icon"></i>';
+        else if(hasUrl)nameIcon='<i class="fa-solid fa-arrow-up-right-from-square"></i>';
+        let tagHTML='';
+        if(hasApk){
+            const isLocked=requireLogin&&!isLogged;
+            const lockCls=isLocked?' locked-tag':'';
+            const lockIco=requireLogin?'<i class="fa-solid fa-lock" style="margin-left:3px;font-size:.5rem"></i>':'';
+            tagHTML=`<span class="app-card-tag apk-tag${lockCls}"><i class="fa-brands fa-android"></i>APK${lockIco}</span>`;
+        }else if(hasUrl){tagHTML='<span class="app-card-tag">LINK</span>';}
+        const apkSizeText=hasApk&&app.apkSize?' • '+formatFileSize(app.apkSize):'';
+        card.innerHTML=`<div class="app-card-icon">${iconHTML}</div><div class="app-card-body"><div class="app-card-name">${escapeHtml(app.name)} ${nameIcon}</div><div class="app-card-desc">${escapeHtml(app.desc||'')}${apkSizeText}</div></div>${tagHTML}`;
         grid.appendChild(card);
     }
 }
@@ -2572,21 +1748,9 @@ function escapeHtml(s){if(s===null||s===undefined)return '';return String(s).rep
 /* ADMIN PANEL */
 function openAdminPanel(){refreshAdminUI();document.getElementById('adminPanelModal').classList.add('active');}
 function closeAdminPanel(){document.getElementById('adminPanelModal').classList.remove('active');applySiteContent();}
-function switchAdminTab(name,btn){
-    document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
-    document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
-    if(btn)btn.classList.add('active');
-    const sec=document.querySelector(`.admin-section[data-section="${name}"]`);
-    if(sec)sec.classList.add('active');
-    if(name==='users')renderAdminUsers();
-    if(name==='activity')renderAdminActivity();
-    if(name==='chats')renderAdminChats();
-}
+function switchAdminTab(name,btn){document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));if(btn)btn.classList.add('active');const sec=document.querySelector(`.admin-section[data-section="${name}"]`);if(sec)sec.classList.add('active');if(name==='users')renderAdminUsers();if(name==='activity')renderAdminActivity();if(name==='chats')renderAdminChats();if(name==='apps')renderAdminSlots();}
 function refreshAdminUI(){
-    const c=getSiteContent();
-    const users=getAllUsers();
-    const logs=getActivityLog();
-    const chats=getChatMessages();
+    const c=getSiteContent();const users=getAllUsers();const logs=getActivityLog();const chats=getChatMessages();
     let totalChats=0;for(const k in chats)totalChats+=chats[k].length;
     const appsCount=c.apps.filter(a=>a.name&&a.name.trim()).length;
     const dac=document.getElementById('dash-apps-count');if(dac)dac.textContent=(currentLang==='tr'?`Uygulamalar: ${appsCount} / 8`:`Apps: ${appsCount} / 8`);
@@ -2626,31 +1790,36 @@ function renderAdminSlots(){
     apps.forEach((app,idx)=>{
         const item=document.createElement('div');
         item.className='admin-slot';
-        /* 1. HEMEN temel yapıyı çiz — boş slotlar hemen görünsün */
         item.innerHTML=buildAdminSlotHTML(idx,app,null,null);
         list.appendChild(item);
-        /* 2. Arka planda ikon ve APK bilgisini çek — timeout ile */
-        Promise.all([
-            withTimeout(getApkFile(idx),1500).catch(()=>null),
-            withTimeout(getIconData(idx),1500).catch(()=>null)
-        ]).then(([apk,icon])=>{
-            item.innerHTML=buildAdminSlotHTML(idx,app,apk,icon);
-        }).catch(err=>console.warn('[Slot] Hydrate error:',err));
+        if(app.hasIcon){
+            withTimeout(getIconData(idx),3000).then(icon=>{
+                if(icon&&icon.dataUrl){
+                    const holder=item.querySelector('.slot-icon-holder');
+                    if(holder){
+                        holder.style.width='24px';
+                        holder.innerHTML=`<img src="${icon.dataUrl}" class="icon-preview-mini" alt="">`;
+                    }
+                }
+            }).catch(()=>{});
+        }
     });
 }
 async function editAppSlot(idx){
     const c=getSiteContent();
-    const app=c.apps[idx]||{name:'',desc:'',url:'',icon:''};
+    const app=c.apps[idx]||{name:'',desc:'',url:'',icon:'',requireLogin:false};
     pendingApkFile=null;pendingApkDelete=false;pendingIconDataUrl=null;pendingIconDelete=false;
     document.getElementById('editSlotIndex').value=idx;
     document.getElementById('editAppName').value=app.name||'';
     document.getElementById('editAppDesc').value=app.desc||'';
     document.getElementById('editAppUrl').value=app.url||'';
+    document.getElementById('editAppRequireLogin').checked=!!app.requireLogin;
     document.getElementById('editAppApkFile').value='';
     document.getElementById('editAppIconFile').value='';
-    const existingApk=await withTimeout(getApkFile(idx),1500).catch(()=>null);
-    const existingIcon=await withTimeout(getIconData(idx),1500).catch(()=>null);
-    updateApkUI(existingApk?{name:existingApk.name,size:existingApk.size,existing:true}:null);
+    let existingApk=null,existingIcon=null;
+    if(app.hasApk){try{existingApk=await withTimeout(getApkFile(idx),5000);}catch(e){}}
+    if(app.hasIcon){try{existingIcon=await withTimeout(getIconData(idx),5000);}catch(e){}}
+    updateApkUI(existingApk?{name:existingApk.name,size:existingApk.size,existing:true}:(app.hasApk?{name:app.apkName||'APK',size:app.apkSize||0,existing:true}:null));
     if(existingIcon&&existingIcon.dataUrl){updateIconUI({dataUrl:existingIcon.dataUrl,existing:true});}
     else if(app.icon&&app.icon.trim().startsWith('http')){updateIconUI({dataUrl:app.icon.trim(),existing:true,isUrl:true});}
     else{updateIconUI(null);}
@@ -2708,26 +1877,54 @@ async function saveAppSlot(e){
     e.preventDefault();
     const idx=parseInt(document.getElementById('editSlotIndex').value)||0;
     const c=getSiteContent();
-    let iconValue=c.apps[idx].icon||'';
-    if(pendingIconDataUrl||pendingIconDelete){iconValue='';}
-    c.apps[idx]={icon:iconValue,name:document.getElementById('editAppName').value.trim(),desc:document.getElementById('editAppDesc').value.trim(),url:document.getElementById('editAppUrl').value.trim()};
+    const requireLogin=document.getElementById('editAppRequireLogin').checked;
+    let newApp={
+        name:document.getElementById('editAppName').value.trim(),
+        desc:document.getElementById('editAppDesc').value.trim(),
+        url:document.getElementById('editAppUrl').value.trim(),
+        icon:c.apps[idx].icon||'',
+        requireLogin:requireLogin,
+        hasApk:c.apps[idx].hasApk||false,
+        apkName:c.apps[idx].apkName||'',
+        apkSize:c.apps[idx].apkSize||0,
+        apkType:c.apps[idx].apkType||'',
+        hasIcon:c.apps[idx].hasIcon||false
+    };
+    if(pendingApkFile){
+        try{
+            await withTimeout(storeApkFile(idx,pendingApkFile),120000);
+            newApp.hasApk=true;
+            newApp.apkName=pendingApkFile.name;
+            newApp.apkSize=pendingApkFile.size;
+            newApp.apkType=pendingApkFile.type||'application/vnd.android.package-archive';
+        }catch(err){
+            console.error('APK save error:',err);
+            showCustomAlert(currentLang==='tr'?'APK yüklenemedi! Dosya çok büyük olabilir.':'APK upload failed! File may be too large.');
+            return;
+        }
+    }else if(pendingApkDelete){
+        try{await withTimeout(deleteApkFile(idx),15000);}catch(e){}
+        newApp.hasApk=false;newApp.apkName='';newApp.apkSize=0;newApp.apkType='';
+    }
+    if(pendingIconDataUrl){
+        try{await withTimeout(storeIconData(idx,pendingIconDataUrl),30000);newApp.hasIcon=true;}
+        catch(err){console.error('Icon save error:',err);showCustomAlert(currentLang==='tr'?'İkon yüklenemedi!':'Icon upload failed!');return;}
+    }else if(pendingIconDelete){
+        try{await withTimeout(deleteIconData(idx),15000);}catch(e){}
+        newApp.hasIcon=false;
+    }
+    c.apps[idx]=newApp;
     saveSiteContent(c);
-    try{
-        if(pendingApkFile){await withTimeout(storeApkFile(idx,pendingApkFile),5000);}
-        else if(pendingApkDelete){await withTimeout(deleteApkFile(idx),5000);}
-        if(pendingIconDataUrl){await withTimeout(storeIconData(idx,pendingIconDataUrl),5000);}
-        else if(pendingIconDelete){await withTimeout(deleteIconData(idx),5000);}
-    }catch(err){console.error(err);showCustomAlert(currentLang==='tr'?'Kaydedilemedi!':'Save failed!');}
     pendingApkFile=null;pendingApkDelete=false;pendingIconDataUrl=null;pendingIconDelete=false;
     closeAdminEdit();renderAdminSlots();renderApplications();
     const dle=document.getElementById('dash-last-edit');if(dle)dle.textContent=(currentLang==='tr'?`Son düzenleme: ${c.lastEdit}`:`Last edit: ${c.lastEdit}`);
 }
 async function clearAppSlot(idx){
     const c=getSiteContent();
-    c.apps[idx]={name:'',desc:'',url:'',icon:''};
+    c.apps[idx]={name:'',desc:'',url:'',icon:'',requireLogin:false,hasApk:false,apkName:'',apkSize:0,apkType:'',hasIcon:false};
     saveSiteContent(c);
-    try{await withTimeout(deleteApkFile(idx),3000);}catch(e){}
-    try{await withTimeout(deleteIconData(idx),3000);}catch(e){}
+    try{await withTimeout(deleteApkFile(idx),15000);}catch(e){}
+    try{await withTimeout(deleteIconData(idx),15000);}catch(e){}
     renderAdminSlots();renderApplications();
 }
 function saveAdminHeader(e){e.preventDefault();const c=getSiteContent();c.header.brand=document.getElementById('ah-brand').value.trim()||'muminsultani';c.header.roleEn=document.getElementById('ah-role-en').value.trim()||'Software Developer';c.header.roleTr=document.getElementById('ah-role-tr').value.trim()||'Yazılım Geliştirici';saveSiteContent(c);applySiteContent();showCustomAlert(currentLang==='tr'?'Kaydedildi!':'Saved!');}
@@ -2768,7 +1965,7 @@ function changeLanguage(lang){
     const clt=document.getElementById('currentLangText');if(clt)clt.innerText=data.code;
     st('t-apps-title',data.appsTitle);st('t-exp-title',data.expTitle);st('t-setup-title',data.setupTitle);st('t-os-label',data.osLabel);st('t-editor-label',data.editorLabel);st('t-stack-title',data.stackTitle);st('t-backend-label',data.backendLabel);st('t-frontend-label',data.frontendLabel);st('t-contact-title',data.contactTitle);st('t-contact-sub',data.contactSub);st('t-contact-main',data.contactMain);st('t-profile-title',data.profileTitle);st('t-forgot-link',data.forgotLink);st('pp-title',data.photoPanelTitle);st('pp-back-text',data.btnBack);st('pp-change-text',data.btnChange);st('pp-reset-text',data.btnReset);st('gitModalTitle',data.contactTitle);st('gitActionText',data.gitText);st('gitBackText',data.backText);st('crop-title',data.cropTitle);st('crop-cancel-text',data.cropCancel);st('crop-apply-text',data.cropApply);
     changeModalLanguage(lang);applySiteContent();checkUserSession();
-    if(document.getElementById('adminPanelModal').classList.contains('active')){refreshAdminUI();if(document.querySelector('.admin-tab.active[data-tab="users"]'))renderAdminUsers();if(document.querySelector('.admin-tab.active[data-tab="activity"]'))renderAdminActivity();if(document.querySelector('.admin-tab.active[data-tab="chats"]'))renderAdminChats();}
+    if(document.getElementById('adminPanelModal').classList.contains('active')){refreshAdminUI();if(document.querySelector('.admin-tab.active[data-tab="users"]'))renderAdminUsers();if(document.querySelector('.admin-tab.active[data-tab="activity"]'))renderAdminActivity();if(document.querySelector('.admin-tab.active[data-tab="chats"]'))renderAdminChats();if(document.querySelector('.admin-tab.active[data-tab="apps"]'))renderAdminSlots();}
     const lm=document.getElementById('langMenu');if(lm)lm.classList.remove('show');
 }
 
@@ -2828,13 +2025,13 @@ function changeModalLanguage(lang){
         s('hint-users','Tüm kayıtlı kullanıcılar (ID ile). 👁 görüntüle · 📄 PDF · 🗑 sil');
         s('hint-activity','Kullanıcıların sitede yaptığı her şey sadece sizin için kaydedilir.');
         s('hint-chats','Kullanıcılar arası tüm sohbet mesajları. Sadece admin görebilir.');
+        s('hint-apps','8 slot. Telefondan ikon resmi ve APK yükleyebilirsiniz. Kilit ikonu ile "Giriş zorunlu" seçeneğini açabilirsiniz.');
         s('users-export','Kullanıcıları CSV İndir');s('users-clear','Tüm Kullanıcıları Sil');
         s('activity-export','Aktivite CSV İndir');s('activity-clear','Aktivite Kayıtlarını Temizle');
         s('chats-export','Sohbetleri CSV İndir');s('chats-clear','Tüm Sohbetleri Sil');
         s('user-detail-title','Kullanıcı Detayları');
         s('ah-save','Kaydet');s('as-save','Kaydet');s('ae-exp-save','Kaydet');s('au-save','Kaydet');s('ak-save','Kaydet');s('af-save','Kaydet');
         s('hint-header','Marka ve rol.');s('hint-social','Sosyal bağlantılar.');
-        s('hint-apps','8 slot. Telefondan ikon resmi ve APK yükleyebilirsiniz.');
         s('hint-exp','İş deneyimi.');s('hint-setup','Kurulum.');s('hint-stack','Stack.');s('hint-footer','Footer.');s('hint-backup','Yedek al / geri yükle.');
         s('bk-export','JSON İndir');s('bk-import','JSON Yükle');s('bk-reset','Varsayılanlara Sıfırla');
         s('admin-logout-text','Yöneticiden Çıkış');s('admin-edit-title','Slotu Düzenle');
@@ -2842,6 +2039,7 @@ function changeModalLanguage(lang){
         s('ae-apk-label','📦 APK Dosyası Yükle (İsteğe bağlı)');s('apkUploadText','APK dosyası seç');s('ae-apk-clear-text','APK\'yı Kaldır');
         s('iconUploadText','İkon resmi seç (telefondan)');s('ae-icon-clear-text','İkonu Kaldır');
         s('recordingHint','Kayıt yapılıyor... Göndermek için yeşil butona, iptal için kırmızı butona bas.');
+        s('ae-lock-title','İndirme için giriş zorunlu');s('ae-lock-sub','Kullanıcılar bu APK\'yı indirmek için önce giriş yapmalı');
     }else{
         s('admin-login-title','Admin Access');s('admin-pass-label','Master Password');s('admin-login-btn','Unlock');
         s('admin-panel-title','Full Site Control');s('admin-hint-title','Full Control Mode');s('admin-hint-text','Editing entire site.');
@@ -2862,13 +2060,13 @@ function changeModalLanguage(lang){
         s('hint-users','All registered users (with ID). 👁 view · 📄 PDF · 🗑 delete');
         s('hint-activity','Everything users do on the site is logged here for your eyes only.');
         s('hint-chats','All user-to-user chat messages. Only visible to admin.');
+        s('hint-apps','8 slots. Upload icon image + APK from phone, or paste URL. Use the lock toggle to require login before download.');
         s('users-export','Export Users CSV');s('users-clear','Delete All Users');
         s('activity-export','Export Activity CSV');s('activity-clear','Clear Activity Log');
         s('chats-export','Export Chats CSV');s('chats-clear','Delete All Chats');
         s('user-detail-title','User Details');
         s('ah-save','Save');s('as-save','Save');s('ae-exp-save','Save');s('au-save','Save');s('ak-save','Save');s('af-save','Save');
         s('hint-header','Brand and role.');s('hint-social','Social links.');
-        s('hint-apps','8 slots. Upload icon image + APK from phone.');
         s('hint-exp','Experience.');s('hint-setup','Setup.');s('hint-stack','Stack.');s('hint-footer','Footer.');s('hint-backup','Backup/restore.');
         s('bk-export','Export JSON');s('bk-import','Import JSON');s('bk-reset','Reset to Defaults');
         s('admin-logout-text','Log Out from Admin');s('admin-edit-title','Edit App Slot');
@@ -2876,6 +2074,7 @@ function changeModalLanguage(lang){
         s('ae-apk-label','📦 Upload APK File (Optional)');s('apkUploadText','Tap to choose APK file');s('ae-apk-clear-text','Remove APK');
         s('iconUploadText','Tap to choose icon image');s('ae-icon-clear-text','Remove Icon');
         s('recordingHint','Recording... Tap green to send, red to cancel.');
+        s('ae-lock-title','Require Login to Download');s('ae-lock-sub','Users must sign in or register before downloading this APK');
     }
     document.getElementById('modalLangMenu').classList.remove('show');
     document.getElementById('contactModalLangMenu').classList.remove('show');
@@ -2920,7 +2119,6 @@ function openDeleteAccountModal(){if(!localStorage.getItem('logged_user'))return
 function closeDeleteAccountModal(){document.getElementById('deleteAccountModal').classList.remove('active');}
 function openDeletePasswordModal(){document.getElementById('deleteConfirmPassword').value='';document.getElementById('confirmDeletePasswordModal').classList.add('active');}
 function closeDeletePasswordModal(){document.getElementById('confirmDeletePasswordModal').classList.remove('active');}
-
 function handleProfileUpdate(e){
     e.preventDefault();
     const lu=localStorage.getItem('logged_user');if(!lu)return;
@@ -2935,11 +2133,7 @@ function handleProfileUpdate(e){
     try{
         let u=JSON.parse(lu);let users=JSON.parse(localStorage.getItem('site_users')||'[]');
         if(users.some(x=>x.email===ne&&x.email!==u.email)){showCustomAlert(t.emailAlreadyRegistered);return;}
-        if(ne!==u.email){
-            const code=generateVerificationCode();
-            pendingEmailChange={code,oldEmail:u.email,newEmail:ne,userObj:u,newName:nn,newUsername:nu,birthDay:bd,birthMonth:bm,birthYear:by};
-            closeEditProfileModal();openEmailChangeMockModal(ne,code);return;
-        }
+        if(ne!==u.email){const code=generateVerificationCode();pendingEmailChange={code,oldEmail:u.email,newEmail:ne,userObj:u,newName:nn,newUsername:nu,birthDay:bd,birthMonth:bm,birthYear:by};closeEditProfileModal();openEmailChangeMockModal(ne,code);return;}
         const oldData=JSON.parse(JSON.stringify(u));
         u.name=nn;u.username=nu;u.birthDay=bd;u.birthMonth=bm;u.birthYear=by;
         users=users.map(x=>x.email===u.email?u:x);
@@ -2995,23 +2189,13 @@ function handleDeletePasswordSubmit(e){
         users=users.filter(x=>x.email!==u.email);
         localStorage.setItem('site_users',JSON.stringify(users));
         localStorage.removeItem('logged_user');
-        const msgs=getChatMessages();
-        const target=String(u.email||'').toLowerCase();
-        const audioIdsToDelete=[];
-        for(const convId in msgs){
-            const parts=convId.split('__');
-            if(parts.includes(target)){
-                msgs[convId].forEach(m=>{if(m.type==='voice'&&m.audioId)audioIdsToDelete.push(m.audioId);});
-                delete msgs[convId];
-            }
-        }
-        saveChatMessages(msgs);
-        audioIdsToDelete.forEach(id=>{deleteVoiceMessage(id).catch(()=>{});});
+        const msgs=getChatMessages();const target=String(u.email||'').toLowerCase();const audioIdsToDelete=[];
+        for(const convId in msgs){const parts=convId.split('__');if(parts.includes(target)){msgs[convId].forEach(m=>{if(m.type==='voice'&&m.audioId)audioIdsToDelete.push(m.audioId);});delete msgs[convId];}}
+        saveChatMessages(msgs);audioIdsToDelete.forEach(id=>{deleteVoiceMessage(id).catch(()=>{});});
         closeDeletePasswordModal();showCustomAlert(t.successDelete,'success');
         window._pendingLangReset=true;checkUserSession();renderApplications();updateChatBadge();
     }catch(err){}
 }
-
 function openForgotPasswordModal(e){if(e)e.preventDefault();closeDirectContactModal();document.getElementById('forgotPasswordForm').reset();document.getElementById('forgotPasswordModal').classList.add('active');}
 function closeForgotPasswordModal(){document.getElementById('forgotPasswordModal').classList.remove('active');}
 function handleForgotPasswordSubmit(e){
@@ -3049,21 +2233,15 @@ function handleResetPasswordSubmit(e){
     let users=JSON.parse(localStorage.getItem('site_users')||'[]');
     let ok=false,userObj=null;
     users=users.map(u=>{if(u.email===email){u.password=np;ok=true;userObj=u;}return u;});
-    if(ok){
-        localStorage.setItem('site_users',JSON.stringify(users));
-        delete rc[email];__ORIG_SET_ITEM__('reset_codes',JSON.stringify(rc));
-        logActivity('password_reset',userObj,'Password reset via recovery');
-        closeResetPasswordModal();showCustomAlert(t.rpSuccess,'success');
-    }else showCustomAlert(t.rpEmailNotFound);
+    if(ok){localStorage.setItem('site_users',JSON.stringify(users));delete rc[email];__ORIG_SET_ITEM__('reset_codes',JSON.stringify(rc));logActivity('password_reset',userObj,'Password reset via recovery');closeResetPasswordModal();showCustomAlert(t.rpSuccess,'success');}
+    else showCustomAlert(t.rpEmailNotFound);
 }
-
 let activeNoticeEmail="muminsultani@hotmail.com";
 function openGmailNoticeModal(email){const lu=localStorage.getItem('logged_user');if(!lu){const t=modalTranslations[currentLang]||modalTranslations.en;showCustomAlert(t.authRequiredAlert);openGetInTouchModal();return;}activeNoticeEmail=email;const t=modalTranslations[currentLang]||modalTranslations.en;document.getElementById('gmailNoticeMessage').innerText=t.gmailNoticeText;document.getElementById('gmailNoticeEmailBtnText').innerText=t.emailBtn;document.getElementById('gmailNoticeBackText').innerText=t.backText;document.getElementById('gmailNoticeModal').classList.add('active');const am=document.getElementById('appointmentModal');if(am.classList.contains('active'))am.classList.add('light-blue-bg');}
 function closeGmailNoticeModal(){document.getElementById('gmailNoticeModal').classList.remove('active');document.getElementById('appointmentModal').classList.remove('light-blue-bg');}
 function confirmOpenGmail(){closeGmailNoticeModal();openAppointmentModalWithEmail(activeNoticeEmail);}
 function openAppointmentModalWithEmail(email){const lu=localStorage.getItem('logged_user');if(!lu){const t=modalTranslations[currentLang]||modalTranslations.en;showCustomAlert(t.authRequiredAlert);openGetInTouchModal();return;}document.getElementById('targetRecipientEmail').value=email;try{const u=JSON.parse(lu);if(document.getElementById('clientName'))document.getElementById('clientName').value=u.name||'';if(document.getElementById('clientEmail'))document.getElementById('clientEmail').value=u.email||'';}catch(e){}document.getElementById('appointmentModal').classList.add('active');}
 function closeAppointmentModal(){const m=document.getElementById('appointmentModal');m.classList.remove('active');m.classList.remove('light-blue-bg');}
-
 function showCustomAlert(message,type='info',onConfirm=null){
     const ab=document.getElementById('customAlertModal');
     const ai=document.getElementById('customAlertIcon');
@@ -3096,13 +2274,10 @@ function confirmLogout(){
         if(lu){try{const u=JSON.parse(lu);logActivity('signout',u,'User logged out');}catch(e){}}
         localStorage.removeItem('logged_user');
         try{sessionStorage.removeItem('site_lang');}catch(e){}
-        changeLanguage('en');checkUserSession();renderApplications();
-        updateChatBadge();
+        changeLanguage('en');checkUserSession();renderApplications();updateChatBadge();
         setTimeout(()=>{showCustomAlert(t.logoutSuccess,'success');},300);
     });
 }
-
-/* SIGNUP */
 let pendingSignup=null;
 function generateSignupCode(){return String(Math.floor(100000+Math.random()*900000));}
 function openSignupMockModal(email,code){const t=modalTranslations[currentLang]||modalTranslations.en;document.getElementById('signupMockTitle').innerText=t.signupMockTitle;document.getElementById('signupMockGreeting').innerText=t.signupMockGreeting;document.getElementById('signupMockDesc').innerText=t.signupMockDesc;document.getElementById('signupMockEmailLabel').innerText=t.emailLabel;document.getElementById('signupMockEmailValue').innerText=email;document.getElementById('signupMockCodeLabel').innerText=t.signupMockCodeLabel;document.getElementById('signupMockCodeValue').innerText=code;document.getElementById('signupMockAdminLabel').innerText=t.mockEmailAdminLabel;document.getElementById('signupMockEnterBtn').innerText=t.signupEnterCodeBtn;const i=document.getElementById('signupCopyIcon'),b=document.getElementById('signupCopyBtn');if(i)i.className='fa-regular fa-copy';if(b)b.classList.remove('copied');document.getElementById('signupMockModal').classList.add('active');}
@@ -3120,8 +2295,7 @@ function verifySignupCode(e){
         const usersBefore=JSON.parse(localStorage.getItem('site_users')||'[]');
         const newUserId=generateNextUserId(usersBefore);
         const nu={userId:newUserId,name:pendingSignup.name,username:pendingSignup.username,email:pendingSignup.email,password:pendingSignup.password,birthDay:'',birthMonth:'',birthYear:'',profilePhoto:'',createdAt:new Date().toISOString()};
-        let users=usersBefore;
-        users.push(nu);
+        let users=usersBefore;users.push(nu);
         localStorage.setItem('site_users',JSON.stringify(users));
         __ORIG_SET_ITEM__('logged_user',JSON.stringify(nu));
         logActivity('signup',nu,'New account created — ID: '+newUserId);
@@ -3129,13 +2303,10 @@ function verifySignupCode(e){
         document.getElementById('signupCodeModal').classList.remove('active');
         document.getElementById('signupMockModal').classList.remove('active');
         closeDirectContactModal();resetContactForm();checkUserSession();renderApplications();
-        playApplauseSound();
-        fireConfettiBurst(1.2);
+        playApplauseSound();fireConfettiBurst(1.2);
         showCustomAlert(t.successSignup+' 🆔 '+newUserId,'success');
     }catch(err){}
 }
-
-/* EMAIL CHANGE */
 let pendingEmailChange=null;
 function generateVerificationCode(){return String(Math.floor(100000+Math.random()*900000));}
 function openEmailChangeMockModal(email,code){const t=modalTranslations[currentLang]||modalTranslations.en;document.getElementById('email-change-mock-title').innerText=t.emailChangeMockTitle;document.getElementById('email-change-mock-greeting').innerText=t.emailChangeMockGreeting;document.getElementById('email-change-mock-desc').innerText=t.emailChangeMockDesc;document.getElementById('email-change-mock-user-label').innerText=t.emailChangeMockUserLabel;document.getElementById('email-change-user-value').innerText=email;document.getElementById('email-change-mock-code-label').innerText=t.emailChangeMockCodeLabel;document.getElementById('email-change-code-value').innerText=code;document.getElementById('email-change-mock-admin-label').innerText=t.mockEmailAdminLabel;document.getElementById('email-change-enter-code-btn').innerText=t.emailChangeEnterCodeBtn;const i=document.getElementById('copyEmailChangeIcon'),b=document.getElementById('copyEmailChangeBtn');if(i)i.className='fa-regular fa-copy';if(b)b.classList.remove('copied');document.getElementById('emailChangeMockModal').classList.add('active');}
@@ -3166,7 +2337,6 @@ function verifyEmailChangeCode(e){
         checkUserSession();showCustomAlert(t.successUpdate,'success');
     }catch(err){}
 }
-
 function handleAuthSubmit(e){
     e.preventDefault();
     const email=document.getElementById('contactClientEmail').value.trim();
@@ -3194,35 +2364,19 @@ function handleAuthSubmit(e){
             if(!user.userId){const allU=JSON.parse(localStorage.getItem('site_users')||'[]');const newId=generateNextUserId(allU);user.userId=isAdminUser(user.email)?ADMIN_USER_ID:newId;let us=allU.map(x=>x.email===user.email?user:x);localStorage.setItem('site_users',JSON.stringify(us));}
             __ORIG_SET_ITEM__('logged_user',JSON.stringify(user));
             logActivity('signin',user,'User signed in');
-            showCustomAlert(t.successSignin,'success');closeDirectContactModal();checkUserSession();renderApplications();
-            updateChatBadge();
+            showCustomAlert(t.successSignin,'success');closeDirectContactModal();checkUserSession();renderApplications();updateChatBadge();
         }else showCustomAlert(t.errorSignin);
     }
 }
-
 function checkUserSession(){
     const lu=localStorage.getItem('logged_user');
-    if(lu){
-        try{
-            const cu=JSON.parse(lu);
-            const allUsers=getAllUsers();
-            const stillExists=allUsers.some(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());
-            if(!stillExists && String(cu.email||'').toLowerCase()!=='admin@muminsultani.com'){
-                localStorage.removeItem('logged_user');
-                try{sessionStorage.removeItem('site_lang');}catch(e){}
-                currentLang='en';
-                return checkUserSession();
-            }
-        }catch(e){}
-    }
+    if(lu){try{const cu=JSON.parse(lu);const allUsers=getAllUsers();const stillExists=allUsers.some(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());if(!stillExists && String(cu.email||'').toLowerCase()!=='admin@muminsultani.com'){localStorage.removeItem('logged_user');try{sessionStorage.removeItem('site_lang');}catch(e){}currentLang='en';return checkUserSession();}}catch(e){}}
     const ps=document.getElementById('userProfileSection');
     const cte=document.getElementById('t-contact-title'),cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');
     const abi=document.getElementById('authBoxIcon');
     if(lu){try{const u=JSON.parse(lu);if(ps)ps.style.display='block';const pd=(id,v)=>{const el=document.getElementById(id);if(el)el.innerText=v;};pd('profileDisplayName',u.name||'User');pd('profileDisplayUsernameDesktop',u.username||'@username');pd('profileDisplayEmailDesktop',u.email||'-');pd('profileDisplayBirthdateDesktop',(u.birthDay&&u.birthMonth&&u.birthYear)?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'--/--/----');pd('profileDisplayUsernameMobile',u.username||'@username');pd('profileDisplayEmail',u.email||'-');pd('profileDisplayId',u.userId||'-');const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const ppd=document.getElementById('profilePhotoDisplay');if(ppd)ppd.src=p;const ppl=document.getElementById('profilePhotoLarge');if(ppl)ppl.src=p;const br=document.getElementById('profileBirthdateRow'),bd=document.getElementById('profileDisplayBirthdate');if(u.birthDay&&u.birthMonth&&u.birthYear){if(br)br.style.display='flex';if(bd)bd.innerText=`${u.birthDay}/${u.birthMonth}/${u.birthYear}`;}else if(br)br.style.display='none';const sT=modalTranslations[currentLang]||modalTranslations.en;if(cte)cte.innerText=sT.userAccount;if(cse)cse.innerText=sT.activeSession;if(cme)cme.innerText=u.name?`${sT.welcomeUser} ${u.name}`:sT.sessionActive;if(abi)abi.className='fa-solid fa-user-check';const pdc=document.getElementById('profileDetailsContainer');if(pdc)pdc.style.display='none';const pi=document.getElementById('privacyIcon');if(pi)pi.className='fa-solid fa-eye-slash';const dn=document.getElementById('profileDisplayName');if(dn){dn.querySelectorAll('.verified-badge,.admin-tag').forEach(b=>b.remove());if(isAdminUser(u.email)){dn.insertAdjacentHTML('beforeend',getVerifiedBadgeHTML('lg'));dn.insertAdjacentHTML('beforeend',getAdminTagHTML());}}}catch(e){}}else{const sT=modalTranslations[currentLang]||modalTranslations.en;if(ps)ps.style.display='none';if(cte)cte.innerText=sT.signInSignUp;if(cse)cse.innerText=sT.signInSignUp;if(cme)cme.innerText=sT.signInToJoin;if(abi)abi.className='fa-solid fa-right-to-bracket';}
     updateChatBadge();
 }
-
-/* HELPERS */
 function togglePasswordVisibility(i,ic){const p=document.getElementById(i),t=document.getElementById(ic);if(p.type==='password'){p.type='text';t.className='fa-solid fa-eye-slash';}else{p.type='password';t.className='fa-solid fa-eye';}}
 function updatePasswordHint(i,h){const inp=document.getElementById(i),hc=document.getElementById(h);if(!inp||!hc)return;const p=inp.value;const r={length:p.length>=8,upper:/[A-Z]/.test(p),lower:/[a-z]/.test(p),digit:/[0-9]/.test(p),special:/[€$@#&!*]/.test(p)};hc.querySelectorAll('li').forEach(li=>{const rl=li.getAttribute('data-rule');if(r[rl]){li.classList.remove('invalid');li.classList.add('valid');}else{li.classList.remove('valid');li.classList.add('invalid');}});}
 function isValidPassword(p){return p.length>=8&&/[A-Z]/.test(p)&&/[a-z]/.test(p)&&/[0-9]/.test(p)&&/[€$@#&!*]/.test(p);}
@@ -3245,56 +2399,59 @@ function toggleModalLangMenu(){document.getElementById('modalLangMenu').classLis
 function toggleContactModalLangMenu(){document.getElementById('contactModalLangMenu').classList.toggle('show');}
 window.addEventListener('click',function(e){const ld=document.getElementById('langDropdownBtn'),lm=document.getElementById('langMenu');if(ld&&lm&&!ld.contains(e.target)&&!lm.contains(e.target))lm.classList.remove('show');const mb=document.getElementById('modalLangDropdownBtn'),mm=document.getElementById('modalLangMenu');if(mb&&mm&&!mb.contains(e.target)&&!mm.contains(e.target))mm.classList.remove('show');const cb=document.getElementById('contactModalLangDropdownBtn'),cm=document.getElementById('contactModalLangMenu');if(cb&&cm&&!cb.contains(e.target)&&!cm.contains(e.target))cm.classList.remove('show');});
 function updateFileName(input){const t=document.getElementById('fileUploadText');if(input.files&&input.files.length>0){t.innerText=input.files[0].name;t.style.color='var(--text-primary)';}else{const tr=modalTranslations[currentLang]||modalTranslations.en;t.innerText=tr.filePlaceholder;t.style.color='#94a3b8';}}
-
-/* CROPPER */
 let cropperInstance=null;
 function handleProfilePhotoUpload(event){const f=event.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(e){openCropModal(e.target.result);};r.readAsDataURL(f);event.target.value='';}
 function openCropModal(src){const ci=document.getElementById('cropImage');ci.src=src;document.querySelectorAll('.ratio-btn').forEach(b=>b.classList.remove('active'));const db=document.querySelector('.ratio-btn[data-ratio="1"]');if(db)db.classList.add('active');document.getElementById('cropModal').classList.add('active');if(cropperInstance){try{cropperInstance.destroy();}catch(e){}cropperInstance=null;}const ic=()=>{try{cropperInstance=new Cropper(ci,{aspectRatio:1,viewMode:1,autoCropArea:.9,background:false,responsive:true,guides:true,center:true,highlight:false,movable:true,zoomable:true,rotatable:false,scalable:false,dragMode:'move'});}catch(e){}};if(ci.complete&&ci.naturalWidth>0)setTimeout(ic,50);else ci.onload=()=>setTimeout(ic,50);}
 function closeCropModal(){if(cropperInstance){try{cropperInstance.destroy();}catch(e){}cropperInstance=null;}document.getElementById('cropModal').classList.remove('active');}
 function setCropRatio(ratio,btn){document.querySelectorAll('.ratio-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');if(cropperInstance){try{cropperInstance.setAspectRatio(isNaN(ratio)?NaN:ratio);}catch(e){}}}
 function applyCrop(){if(!cropperInstance)return;try{const c=cropperInstance.getCroppedCanvas({width:400,height:400,imageSmoothingEnabled:true,imageSmoothingQuality:'high',fillColor:'#ffffff'});if(!c)return;const d=c.toDataURL('image/png');document.getElementById('profilePhotoDisplay').src=d;document.getElementById('profilePhotoLarge').src=d;const lu=localStorage.getItem('logged_user');if(lu){try{let u=JSON.parse(lu);u.profilePhoto=d;let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));__ORIG_SET_ITEM__('logged_user',JSON.stringify(u));}catch(e){}}closeCropModal();}catch(e){}}
-
-/* COPY */
 function fallbackCopy(t){const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);}
 function copyTempPassword(){const p=document.getElementById('mock-email-pass-value'),ci=document.getElementById('copyPassIcon'),cb=document.getElementById('copyPassBtn');if(!p)return;const v=p.innerText.trim();if(!v)return;const sc=()=>{if(ci)ci.className='fa-solid fa-check';if(cb)cb.classList.add('copied');setTimeout(()=>{if(ci)ci.className='fa-regular fa-copy';if(cb)cb.classList.remove('copied');},1500);};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(v).then(sc).catch(()=>{fallbackCopy(v);sc();});else{fallbackCopy(v);sc();}}
 function copyEmailChangeCode(){const p=document.getElementById('email-change-code-value'),ci=document.getElementById('copyEmailChangeIcon'),cb=document.getElementById('copyEmailChangeBtn');if(!p)return;const v=p.innerText.trim();if(!v)return;const sc=()=>{if(ci)ci.className='fa-solid fa-check';if(cb)cb.classList.add('copied');setTimeout(()=>{if(ci)ci.className='fa-regular fa-copy';if(cb)cb.classList.remove('copied');},1500);};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(v).then(sc).catch(()=>{fallbackCopy(v);sc();});else{fallbackCopy(v);sc();}}
 function copySignupCode(){const p=document.getElementById('signupMockCodeValue'),ci=document.getElementById('signupCopyIcon'),cb=document.getElementById('signupCopyBtn');if(!p)return;const v=p.innerText.trim();if(!v)return;const sc=()=>{if(ci)ci.className='fa-solid fa-check';if(cb)cb.classList.add('copied');setTimeout(()=>{if(ci)ci.className='fa-regular fa-copy';if(cb)cb.classList.remove('copied');},1500);};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(v).then(sc).catch(()=>{fallbackCopy(v);sc();});else{fallbackCopy(v);sc();}}
-
-/* PDF & CONTACT */
 function getBase64ImageFromURL(url,cb){const i=new Image();i.crossOrigin='Anonymous';i.onload=function(){const c=document.createElement('canvas');c.width=i.width;c.height=i.height;c.getContext('2d').drawImage(i,0,0);cb(c.toDataURL('image/png'));};i.onerror=()=>cb(null);i.src=url;}
 function generatePDF(name,email,fileName,desc,date){const{jsPDF}=window.jspdf;const doc=new jsPDF();getBase64ImageFromURL('https://muminsultani.com/img/ms.png',function(logo){if(logo)doc.addImage(logo,'PNG',20,15,14,14);doc.setFont("helvetica","bold");doc.setFontSize(16);doc.setTextColor(147,51,234);doc.text(getDyn('header.brand','muminsultani'),38,25);doc.setFontSize(13);doc.setTextColor(30,41,59);doc.text("Project Request",20,42);doc.setLineWidth(.4);doc.setStrokeColor(200,200,200);doc.line(20,46,190,46);doc.autoTable({startY:52,body:[["Name",name],["Email",email],["File",fileName],["Time",date],["Details",desc]],theme:'grid',styles:{font:'helvetica',fontSize:9.5,cellPadding:6,textColor:[30,41,59]},columnStyles:{0:{fontStyle:'bold',cellWidth:45}},margin:{left:20,right:20,bottom:50}});const blob=doc.output('blob');const url=URL.createObjectURL(blob);window.open(url,'_blank');const a=document.createElement('a');a.href=url;a.download=`ProjectRequest_${name.replace(/\s+/g,'_')}.pdf`;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),100);});}
 function validateForm(){const lu=localStorage.getItem('logged_user');const t=modalTranslations[currentLang]||modalTranslations.en;if(!lu){showCustomAlert(t.authRequiredAlert);closeAppointmentModal();openGetInTouchModal();return false;}const n=document.getElementById('clientName').value.trim();const e=document.getElementById('clientEmail').value.trim();const fi=document.getElementById('clientFile');const d=document.getElementById('clientDesc').value.trim();if(!n||!e||!d){showCustomAlert(t.alertText);return false;}const fn=(fi.files&&fi.files.length>0)?fi.files[0].name:t.noFile;return{name:n,email:e,fileName:fn,desc:d};}
 function sendToEmail(e){e.preventDefault();const d=validateForm();if(!d)return;const now=new Date();const fd=now.toLocaleString();const t=modalTranslations[currentLang]||modalTranslations.en;generatePDF(d.name,d.email,d.fileName,d.desc,fd);const r=document.getElementById('targetRecipientEmail').value;const s=encodeURIComponent(`${t.waProjectRequest} - ${d.name}`);const b=encodeURIComponent(`*${d.name}*\n\n*${t.waProjectRequest}*\n\n*${t.lblContactName}:* ${d.name}\n*${t.lblEmail}:* ${d.email}\n*${t.lblFile}:* ${d.fileName}\n*${t.lblTime}:* ${fd}\n\n*${t.lblDetails}:*\n${d.desc}\n\nmuminsultani.com`);window.location.href=`mailto:${r}?subject=${s}&body=${b}`;closeAppointmentModal();}
 function sendToWhatsApp(e){e.preventDefault();const d=validateForm();if(!d)return;const now=new Date();const fd=now.toLocaleString();const t=modalTranslations[currentLang]||modalTranslations.en;const m=`*${d.name}*\n\n*${t.waProjectRequest}*\n\n*• ${t.lblContactName}:* ${d.name}\n*• ${t.lblEmail}:* ${d.email}\n*• ${t.lblFile}:* ${d.fileName}\n*• ${t.lblTime}:* ${fd}\n\n*• ${t.lblDetails}:*\n${d.desc}\n\n*muminsultani.com*`;window.open(`https://wa.me/905389480137?text=${encodeURIComponent(m)}`,'_blank');closeAppointmentModal();}
-
-/* CONSTELLATION */
 function createConstellationSystem(canvasId,options={}){const c=document.getElementById(canvasId);if(!c)return{stop:()=>{}};const ctx=c.getContext('2d');const np=options.numberOfParticles||55,mr=options.mouseRadius||130,ld=options.lineDistance||110;let pa=[],mouse={x:null,y:null,radius:mr},running=true;function rc(){c.width=window.innerWidth;c.height=window.innerHeight;}class P{constructor(){this.x=Math.random()*c.width;this.y=Math.random()*c.height;this.vx=(Math.random()-.5)*.8;this.vy=(Math.random()-.5)*.8;this.size=Math.random()*1.8+1;}update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>c.width)this.vx=-this.vx;if(this.y<0||this.y>c.height)this.vy=-this.vy;}draw(){const il=document.body.classList.contains('light-mode');ctx.fillStyle=il?'rgba(147,51,234,.45)':'rgba(168,85,247,.55)';ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.closePath();ctx.fill();}}function ip(){pa=[];for(let i=0;i<np;i++)pa.push(new P());}function an(){if(!running)return;ctx.clearRect(0,0,c.width,c.height);const il=document.body.classList.contains('light-mode');for(let i=0;i<pa.length;i++){pa[i].update();pa[i].draw();for(let j=i+1;j<pa.length;j++){const dx=pa[i].x-pa[j].x,dy=pa[i].y-pa[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<ld){const o=1-(dist/ld);ctx.strokeStyle=il?`rgba(147,51,234,${o*.18})`:`rgba(168,85,247,${o*.22})`;ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(pa[i].x,pa[i].y);ctx.lineTo(pa[j].x,pa[j].y);ctx.stroke();}}if(mouse.x!==null&&mouse.y!==null){const mdx=pa[i].x-mouse.x,mdy=pa[i].y-mouse.y,md=Math.sqrt(mdx*mdx+mdy*mdy);if(md<mouse.radius){const o=1-(md/mouse.radius);ctx.strokeStyle=il?`rgba(147,51,234,${o*.35})`:`rgba(192,132,252,${o*.45})`;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pa[i].x,pa[i].y);ctx.lineTo(mouse.x,mouse.y);ctx.stroke();}}}requestAnimationFrame(an);}window.addEventListener('resize',()=>{rc();ip();});window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});window.addEventListener('mouseout',()=>{mouse.x=null;mouse.y=null;});rc();ip();an();return{stop:()=>{running=false;}};}
 const mainConstellation=createConstellationSystem('constellation-canvas',{numberOfParticles:55,mouseRadius:130,lineDistance:110});
 window.introConstellation=createConstellationSystem('intro-canvas',{numberOfParticles:50,mouseRadius:150,lineDistance:120});
 
-/* INIT */
-window.addEventListener('DOMContentLoaded',()=>{
-    /* 1. INTRO EKRANINI HEMEN KAPAT (Firebase bekleme!) */
-    setTimeout(()=>{
-        const intro=document.getElementById('intro-screen');
-        if(intro){
-            intro.style.opacity='0';
-            intro.style.visibility='hidden';
-            setTimeout(()=>{
-                intro.style.display='none';
-                if(window.introConstellation&&window.introConstellation.stop)window.introConstellation.stop();
-            },600);
+/* METADATA MIGRATION (eski app slotları için) */
+async function migrateAppsMetadata(){
+    try{
+        const c=getSiteContent();
+        let changed=false;
+        for(let i=0;i<c.apps.length;i++){
+            const app=c.apps[i];
+            if(app.hasApk===undefined){
+                try{
+                    const apk=await withTimeout(getApkFile(i),3000);
+                    if(apk){app.hasApk=true;app.apkName=apk.name||'';app.apkSize=apk.size||0;app.apkType=apk.type||'';}
+                    else{app.hasApk=false;app.apkName='';app.apkSize=0;app.apkType='';}
+                }catch(e){app.hasApk=false;app.apkName='';app.apkSize=0;app.apkType='';}
+                changed=true;
+            }
+            if(app.hasIcon===undefined){
+                try{const icon=await withTimeout(getIconData(i),3000);app.hasIcon=!!(icon&&icon.dataUrl);}catch(e){app.hasIcon=false;}
+                changed=true;
+            }
+            if(app.requireLogin===undefined){app.requireLogin=false;changed=true;}
         }
-    },1500);
+        if(changed)saveSiteContent(c);
+    }catch(e){console.warn('Migration error:',e);}
+}
 
-    /* 2. Yerel veriyle UI'ı hemen hazırla */
+window.addEventListener('DOMContentLoaded',async ()=>{
+    setTimeout(()=>{const intro=document.getElementById('intro-screen');if(intro){intro.style.opacity='0';intro.style.visibility='hidden';setTimeout(()=>{intro.style.display='none';if(window.introConstellation&&window.introConstellation.stop)window.introConstellation.stop();},600);}},1500);
+    try{await migrateAppsMetadata();}catch(e){}
     ensureUserIdsAndAdmin();
     initTheme();
     checkUserSession();
     applySiteContent();
     const sl=sessionStorage.getItem('site_lang')||'en';
     changeLanguage(sl);
-
     const nf=document.getElementById('contactClientName');
     if(nf){nf.addEventListener('input',function(){const uf=document.getElementById('contactClientUsername');if(!uf)return;const g=generateUsernameFromName(this.value);if(uf.value===''||uf.value===lastAutoUsername){uf.value=g;lastAutoUsername=g;checkUsernameAvailability();}});}
     window.addEventListener('resize',()=>{if(confettiCanvas&&confettiCanvas.style.display!=='none'){confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;}});
@@ -3302,8 +2459,6 @@ window.addEventListener('DOMContentLoaded',()=>{
     openApkDB().catch(e=>console.warn('IndexedDB init failed:',e));
     updateChatBadge();
     startChatPolling();
-
-    /* 3. Firebase bağlantısını ARKA PLANDA başlat (UI'yı bloklamaz) */
     cloudInitSync().catch(e => console.warn('[Cloud] Sync failed:', e));
 });
 </script>
