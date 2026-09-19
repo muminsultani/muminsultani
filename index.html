@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en" id="htmlRoot">
 <head>
 <meta charset="UTF-8">
@@ -252,6 +253,41 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .apk-badge{display:inline-flex;align-items:center;gap:3px;font-size:.6rem;font-weight:800;letter-spacing:.5px;padding:2px 6px;border-radius:4px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;text-transform:uppercase}
 .icon-preview-mini{width:24px;height:24px;border-radius:6px;object-fit:cover;border:1px solid var(--line-color);flex-shrink:0;pointer-events:auto}
 .icon-preview-big{width:64px;height:64px;border-radius:12px;object-fit:cover;border:2px solid rgba(147,51,234,.4);margin:0 auto 8px;display:block;background:var(--box-bg);pointer-events:auto}
+/* USER & ACTIVITY CARDS */
+.user-card{background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.user-card-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,rgba(147,51,234,.15),rgba(192,132,252,.08));border:1px solid rgba(147,51,234,.3);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;color:#9333ea;flex-shrink:0;overflow:hidden}
+.user-card-avatar img{width:100%;height:100%;object-fit:cover}
+.user-card-info{flex:1;min-width:0}
+.user-card-name{font-size:.85rem;font-weight:800;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.user-card-detail{font-size:.68rem;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.user-card-detail i{color:#9333ea;margin-right:3px;width:10px;text-align:center}
+.user-card-btns{display:flex;gap:5px;flex-shrink:0}
+.user-view-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--line-color);background:var(--box-bg);color:#9333ea;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.75rem}
+.user-view-btn:hover{border-color:rgba(147,51,234,.5);background:var(--box-hover-bg)}
+.activity-item{background:var(--box-bg);border:1px solid var(--line-color);border-radius:10px;padding:10px 12px;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start;border-left-width:3px}
+.activity-item.signup{border-left-color:#22c55e}
+.activity-item.signin{border-left-color:#3b82f6}
+.activity-item.signout{border-left-color:#94a3b8}
+.activity-item.password_change{border-left-color:#f59e0b}
+.activity-item.profile_update{border-left-color:#9333ea}
+.activity-item.email_change{border-left-color:#a855f7}
+.activity-item.delete_account{border-left-color:#ef4444}
+.activity-item.apk_download{border-left-color:#0ea5e9}
+.activity-item.password_reset{border-left-color:#eab308}
+.activity-item.apk_blocked{border-left-color:#ef4444}
+.activity-icon{width:30px;height:30px;border-radius:50%;background:rgba(147,51,234,.1);display:flex;align-items:center;justify-content:center;color:#9333ea;font-size:.75rem;flex-shrink:0}
+.activity-body{flex:1;min-width:0}
+.activity-title{font-size:.8rem;font-weight:800;color:var(--text-primary);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.activity-meta{font-size:.68rem;color:var(--text-secondary);margin-top:3px;line-height:1.4;word-break:break-word}
+.activity-time{font-size:.62rem;color:var(--text-secondary);opacity:.8;white-space:nowrap;flex-shrink:0}
+.activity-filter{display:flex;gap:5px;margin-bottom:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.activity-filter::-webkit-scrollbar{display:none}
+.filter-chip{flex-shrink:0;padding:5px 10px;border-radius:20px;background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-secondary);font-size:.68rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.filter-chip.active{background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;border-color:transparent}
+.user-detail-modal-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line-color);font-size:.8rem;gap:10px}
+.user-detail-modal-row:last-child{border-bottom:none}
+.user-detail-modal-row span:first-child{color:var(--text-secondary);font-weight:600}
+.user-detail-modal-row span:last-child{color:var(--text-primary);font-weight:500;text-align:right;word-break:break-all}
 </style>
 <script>(function(){const t=localStorage.getItem('theme');const h=new Date().getHours();let th=t||((h>=6&&h<18)?'light':'dark');if(th==='light'){document.documentElement.classList.add('light-mode-init');document.addEventListener('DOMContentLoaded',()=>{document.body.classList.add('light-mode');['themeIcon','modalThemeIcon','contactModalThemeIcon'].forEach(id=>{const e=document.getElementById(id);if(e)e.className='fa-solid fa-sun';});});}})();</script>
 </head>
@@ -407,30 +443,64 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 
 <!-- ADMIN PANEL -->
 <div class="modal-overlay admin-z" id="adminPanelModal">
-<div class="modal-container" style="max-width:600px">
+<div class="modal-container" style="max-width:620px">
 <div class="modal-header">
 <div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="admin-panel-title">Full Site Control</div></div>
 <div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminPanel()"><i class="fa-solid fa-xmark"></i></button></div>
 </div>
 <div class="admin-tabs">
-<button class="admin-tab active" data-tab="dashboard" onclick="switchAdminTab('dashboard',this)"><i class="fa-solid fa-gauge-high"></i> Dashboard</button>
-<button class="admin-tab" data-tab="header" onclick="switchAdminTab('header',this)"><i class="fa-solid fa-heading"></i> Header</button>
-<button class="admin-tab" data-tab="social" onclick="switchAdminTab('social',this)"><i class="fa-solid fa-share-nodes"></i> Social</button>
-<button class="admin-tab" data-tab="apps" onclick="switchAdminTab('apps',this)"><i class="fa-solid fa-cubes"></i> Apps</button>
-<button class="admin-tab" data-tab="experience" onclick="switchAdminTab('experience',this)"><i class="fa-solid fa-briefcase"></i> Experience</button>
-<button class="admin-tab" data-tab="setup" onclick="switchAdminTab('setup',this)"><i class="fa-solid fa-laptop-code"></i> Setup</button>
-<button class="admin-tab" data-tab="stack" onclick="switchAdminTab('stack',this)"><i class="fa-solid fa-layer-group"></i> Stack</button>
-<button class="admin-tab" data-tab="footer" onclick="switchAdminTab('footer',this)"><i class="fa-solid fa-shoe-prints"></i> Footer</button>
-<button class="admin-tab" data-tab="backup" onclick="switchAdminTab('backup',this)"><i class="fa-solid fa-database"></i> Backup</button>
+<button class="admin-tab active" data-tab="dashboard" onclick="switchAdminTab('dashboard',this)"><i class="fa-solid fa-gauge-high"></i> <span data-t="dash">Dashboard</span></button>
+<button class="admin-tab" data-tab="users" onclick="switchAdminTab('users',this)"><i class="fa-solid fa-users"></i> <span data-t="users">Users</span></button>
+<button class="admin-tab" data-tab="activity" onclick="switchAdminTab('activity',this)"><i class="fa-solid fa-list-activity"></i> <span data-t="activity">Activity</span></button>
+<button class="admin-tab" data-tab="header" onclick="switchAdminTab('header',this)"><i class="fa-solid fa-heading"></i> <span data-t="header">Header</span></button>
+<button class="admin-tab" data-tab="social" onclick="switchAdminTab('social',this)"><i class="fa-solid fa-share-nodes"></i> <span data-t="social">Social</span></button>
+<button class="admin-tab" data-tab="apps" onclick="switchAdminTab('apps',this)"><i class="fa-solid fa-cubes"></i> <span data-t="apps">Apps</span></button>
+<button class="admin-tab" data-tab="experience" onclick="switchAdminTab('experience',this)"><i class="fa-solid fa-briefcase"></i> <span data-t="experience">Experience</span></button>
+<button class="admin-tab" data-tab="setup" onclick="switchAdminTab('setup',this)"><i class="fa-solid fa-laptop-code"></i> <span data-t="setup">Setup</span></button>
+<button class="admin-tab" data-tab="stack" onclick="switchAdminTab('stack',this)"><i class="fa-solid fa-layer-group"></i> <span data-t="stack">Stack</span></button>
+<button class="admin-tab" data-tab="footer" onclick="switchAdminTab('footer',this)"><i class="fa-solid fa-shoe-prints"></i> <span data-t="footer">Footer</span></button>
+<button class="admin-tab" data-tab="backup" onclick="switchAdminTab('backup',this)"><i class="fa-solid fa-database"></i> <span data-t="backup">Backup</span></button>
 </div>
 <div class="admin-panel-content">
 <div class="admin-section active" data-section="dashboard">
 <div class="admin-hint"><i class="fa-solid fa-shield-halved" style="color:#9333ea"></i> <strong id="admin-hint-title">Full Control Mode</strong> — <span id="admin-hint-text">You are editing the entire site content.</span></div>
 <div class="admin-stat"><i class="fa-solid fa-cubes"></i> <span id="dash-apps-count">Apps: 0 / 8</span></div>
+<div class="admin-stat"><i class="fa-solid fa-users"></i> <span id="dash-users-count">Users: 0</span></div>
+<div class="admin-stat"><i class="fa-solid fa-list-activity"></i> <span id="dash-activity-count">Activities: 0</span></div>
 <div class="admin-stat"><i class="fa-solid fa-clock"></i> <span id="dash-last-edit">Last edit: —</span></div>
 <div class="admin-actions-grid">
-<button class="admin-action-btn primary" onclick="switchAdminTab('apps',document.querySelector('.admin-tab[data-tab=\'apps\']'))"><i class="fa-solid fa-cubes"></i> <span id="dash-btn-apps">Manage Apps</span></button>
+<button class="admin-action-btn primary" onclick="switchAdminTab('users',document.querySelector('.admin-tab[data-tab=\'users\']'))"><i class="fa-solid fa-users"></i> <span id="dash-btn-users">Users</span></button>
+<button class="admin-action-btn primary" onclick="switchAdminTab('activity',document.querySelector('.admin-tab[data-tab=\'activity\']'))"><i class="fa-solid fa-list-activity"></i> <span id="dash-btn-activity">Activity</span></button>
+<button class="admin-action-btn ghost" onclick="switchAdminTab('apps',document.querySelector('.admin-tab[data-tab=\'apps\']'))"><i class="fa-solid fa-cubes"></i> <span id="dash-btn-apps">Manage Apps</span></button>
 <button class="admin-action-btn ghost" onclick="switchAdminTab('backup',document.querySelector('.admin-tab[data-tab=\'backup\']'))"><i class="fa-solid fa-database"></i> <span id="dash-btn-backup">Backup</span></button>
+</div>
+</div>
+<!-- USERS TAB -->
+<div class="admin-section" data-section="users">
+<div class="admin-hint"><i class="fa-solid fa-users" style="color:#9333ea"></i> <span id="hint-users">All registered users. Click the eye icon to see full details.</span></div>
+<div id="adminUsersList"></div>
+<div class="admin-actions-grid" style="margin-top:12px">
+<button class="admin-action-btn ghost" onclick="exportUsersCSV()"><i class="fa-solid fa-file-csv"></i> <span id="users-export">Export Users CSV</span></button>
+<button class="admin-action-btn danger" onclick="clearAllUsers()"><i class="fa-solid fa-trash"></i> <span id="users-clear">Delete All Users</span></button>
+</div>
+</div>
+<!-- ACTIVITY TAB -->
+<div class="admin-section" data-section="activity">
+<div class="admin-hint"><i class="fa-solid fa-list-activity" style="color:#9333ea"></i> <span id="hint-activity">Every action users do on the site is logged here for your eyes only.</span></div>
+<div class="activity-filter" id="activityFilter">
+<button class="filter-chip active" data-type="all" onclick="filterActivity('all',this)"><span data-t="all">All</span></button>
+<button class="filter-chip" data-type="signup" onclick="filterActivity('signup',this)">Sign Up</button>
+<button class="filter-chip" data-type="signin" onclick="filterActivity('signin',this)">Sign In</button>
+<button class="filter-chip" data-type="signout" onclick="filterActivity('signout',this)">Sign Out</button>
+<button class="filter-chip" data-type="apk_download" onclick="filterActivity('apk_download',this)">APK</button>
+<button class="filter-chip" data-type="apk_blocked" onclick="filterActivity('apk_blocked',this)">APK Blocked</button>
+<button class="filter-chip" data-type="password_change" onclick="filterActivity('password_change',this)">Pass</button>
+<button class="filter-chip" data-type="profile_update" onclick="filterActivity('profile_update',this)">Profile</button>
+</div>
+<div id="adminActivityList"></div>
+<div class="admin-actions-grid" style="margin-top:12px">
+<button class="admin-action-btn ghost" onclick="exportActivityCSV()"><i class="fa-solid fa-file-csv"></i> <span id="activity-export">Export Activity CSV</span></button>
+<button class="admin-action-btn danger" onclick="clearActivityLog()"><i class="fa-solid fa-trash"></i> <span id="activity-clear">Clear Activity Log</span></button>
 </div>
 </div>
 <div class="admin-section" data-section="header">
@@ -512,7 +582,18 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 </div>
 
-<!-- APP EDIT — ICON UPLOAD + APK UPLOAD -->
+<!-- USER DETAIL MODAL -->
+<div class="modal-overlay admin-z" id="userDetailModal">
+<div class="modal-container" style="max-width:420px">
+<div class="modal-header">
+<div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="user-detail-title">User Details</div></div>
+<div class="modal-header-actions"><button class="modal-close-btn" onclick="closeUserDetail()"><i class="fa-solid fa-xmark"></i></button></div>
+</div>
+<div id="userDetailContent"></div>
+</div>
+</div>
+
+<!-- APP EDIT -->
 <div class="modal-overlay admin-z" id="adminEditModal">
 <div class="modal-container" style="max-width:440px">
 <div class="modal-header">
@@ -881,10 +962,9 @@ let confettiParticles=[],confettiRunning=false,confettiCanvas=null,confettiCtx=n
 const CONFETTI_COLORS=['#9333ea','#c084fc','#e879f9','#a855f7','#22c55e','#16a34a','#f59e0b','#eab308','#ef4444','#dc2626','#3b82f6','#0ea5e9','#ec4899','#f472b6','#fbbf24','#ffffff'];
 function initConfettiCanvas(){if(confettiCanvas&&confettiCtx)return true;confettiCanvas=document.getElementById('confetti-canvas');if(!confettiCanvas)return false;confettiCtx=confettiCanvas.getContext('2d');return true;}
 function fireConfettiBurst(i=1){if(!initConfettiCanvas())return;confettiCanvas.style.display='block';confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;const n=Math.floor(160*i),cx=window.innerWidth/2,cy=window.innerHeight/2;for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*16+8;confettiParticles.push({x:cx,y:cy,vx:Math.cos(a)*s,vy:Math.sin(a)*s-3,size:Math.random()*10+5,color:CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.32+Math.random()*.15,drag:.985,life:1,shape:Math.random()>.5?'rect':(Math.random()>.5?'circle':'triangle')});}if(!confettiRunning){confettiRunning=true;animateConfetti();}if(confettiStopTimer)clearTimeout(confettiStopTimer);confettiStopTimer=setTimeout(()=>{confettiRunning=false;},5000);}
-function fireConfettiDoubleBurst(){fireConfettiBurst(1);setTimeout(()=>fireConfettiBurst(1),750);}
 function animateConfetti(){if(!confettiCanvas||!confettiCtx)return;confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);let a=false;for(let i=0;i<confettiParticles.length;i++){const p=confettiParticles[i];if(p.life<=0)continue;a=true;p.vy+=p.gravity;p.vx*=p.drag;p.vy*=p.drag;p.x+=p.vx;p.y+=p.vy;p.rotation+=p.rotationSpeed;p.life-=.006;if(p.y>confettiCanvas.height+100)p.life=0;if(p.x<-100||p.x>confettiCanvas.width+100)p.life=0;confettiCtx.save();confettiCtx.translate(p.x,p.y);confettiCtx.rotate(p.rotation);confettiCtx.globalAlpha=Math.max(0,Math.min(1,p.life));confettiCtx.fillStyle=p.color;if(p.shape==='rect'){confettiCtx.fillRect(-p.size/2,-p.size/4,p.size,p.size/2);}else if(p.shape==='circle'){confettiCtx.beginPath();confettiCtx.arc(0,0,p.size/2,0,Math.PI*2);confettiCtx.fill();}else{confettiCtx.beginPath();confettiCtx.moveTo(0,-p.size/2);confettiCtx.lineTo(p.size/2,p.size/2);confettiCtx.lineTo(-p.size/2,p.size/2);confettiCtx.closePath();confettiCtx.fill();}confettiCtx.restore();}if(confettiParticles.length>500)confettiParticles=confettiParticles.filter(p=>p.life>0);if(a||confettiRunning)requestAnimationFrame(animateConfetti);else{confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);confettiCanvas.style.display='none';confettiParticles=[];}}
 
-document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.scroll-down-action-btn,.modal-close-btn,.profile-action-btn,.auth-tab-btn,.ratio-btn,.btn-crop-cancel,.btn-crop-apply,.photo-action-buttons button,.social-btn,.lightbox-close-btn,.copy-pass-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn');if(b)playTickSound();},true);
+document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.scroll-down-action-btn,.modal-close-btn,.profile-action-btn,.auth-tab-btn,.ratio-btn,.btn-crop-cancel,.btn-crop-apply,.photo-action-buttons button,.social-btn,.lightbox-close-btn,.copy-pass-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip');if(b)playTickSound();},true);
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('keydown',e=>{
     const cropOpen=document.getElementById('cropModal').classList.contains('active');if(cropOpen)return;
@@ -896,8 +976,49 @@ function showSecurityCurtain(){curtain.style.opacity='1';curtain.style.visibilit
 window.addEventListener('blur',()=>{if(document.getElementById('cropModal').classList.contains('active'))return;curtain.style.opacity='1';curtain.style.visibility='visible';});
 window.addEventListener('focus',()=>{curtain.style.opacity='0';curtain.style.visibility='hidden';});
 
+/* ============================================================
+   🔐 ACTIVITY LOG SYSTEM — Logs everything users do
+   ============================================================ */
+const ACTIVITY_LOG_KEY='site_activity_log_v1';
+function logActivity(type,userData,details){
+    try{
+        let logs=JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');
+        const u=userData||{};
+        logs.push({
+            type:type,
+            timestamp:new Date().toISOString(),
+            name:u.name||'',
+            username:u.username||'',
+            email:u.email||'',
+            details:details||'',
+            ip:'local',
+            userAgent:navigator.userAgent,
+            language:navigator.language,
+            screen:window.innerWidth+'x'+window.innerHeight,
+            timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||''
+        });
+        if(logs.length>1000)logs=logs.slice(-1000);
+        localStorage.setItem(ACTIVITY_LOG_KEY,JSON.stringify(logs));
+    }catch(e){console.warn('Activity log error:',e);}
+}
+function getActivityLog(){try{return JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');}catch(e){return[];}}
+function clearActivityLog(){showCustomAlert(currentLang==='tr'?'Tüm aktivite kayıtları silinecek!':'All activity logs will be deleted!','delete',function(){localStorage.removeItem(ACTIVITY_LOG_KEY);renderAdminActivity();refreshAdminUI();showCustomAlert(currentLang==='tr'?'Silindi!':'Cleared!','success');});}
+function exportActivityCSV(){
+    const logs=getActivityLog();
+    if(logs.length===0){showCustomAlert(currentLang==='tr'?'Kayıt yok!':'No logs!');return;}
+    const rows=[['Timestamp','Type','Name','Username','Email','Details','Language','Screen','Timezone','User Agent']];
+    logs.forEach(l=>rows.push([l.timestamp,l.type,l.name,l.username,l.email,l.details,l.language,l.screen,l.timezone,l.userAgent]));
+    const csv=rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+    const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
+    const url=URL.createObjectURL(blob);const a=document.createElement('a');
+    a.href=url;a.download=`activity-log-${new Date().toISOString().slice(0,10)}.csv`;
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url),100);
+    showCustomAlert(currentLang==='tr'?'CSV indirildi!':'CSV downloaded!','success');
+}
+
 /* ADMIN */
-const ADMIN_MASTER_PASSWORD='Mum1n$ultan1';
+const ADMIN_MASTER_PASSWORD='Mum1n$ultan1_Adm1n_M@ster_2026!xK9#pQ7&Secure';
 const ADMIN_SESSION_KEY='admin_session_active_v2';
 const SITE_CONTENT_KEY='site_content_v1';
 function isAdminLoggedIn(){try{return sessionStorage.getItem(ADMIN_SESSION_KEY)==='yes';}catch(e){return false;}}
@@ -906,7 +1027,116 @@ function closeAdminLogin(){document.getElementById('adminLoginModal').classList.
 function verifyAdminPassword(e){e.preventDefault();const v=document.getElementById('adminPasswordInput').value;if(v===ADMIN_MASTER_PASSWORD){try{sessionStorage.setItem(ADMIN_SESSION_KEY,'yes');}catch(err){}closeAdminLogin();openAdminPanel();fireConfettiBurst(.6);}else{showCustomAlert((currentLang==='tr')?'Yanlış şifre!':'Incorrect password!');document.getElementById('adminPasswordInput').value='';}}
 function logoutAdmin(){try{sessionStorage.removeItem(ADMIN_SESSION_KEY);}catch(e){}closeAdminPanel();}
 
-/* INDEXEDDB — APK + ICON storage */
+/* USERS MANAGEMENT */
+function getAllUsers(){try{return JSON.parse(localStorage.getItem('site_users')||'[]');}catch(e){return[];}}
+function renderAdminUsers(){
+    const list=document.getElementById('adminUsersList');if(!list)return;
+    const users=getAllUsers();
+    if(users.length===0){list.innerHTML=`<div style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;"><i class="fa-solid fa-users" style="font-size:2rem;opacity:.3;margin-bottom:8px;display:block;"></i>${currentLang==='tr'?'Henüz kayıtlı kullanıcı yok.':'No registered users yet.'}</div>`;return;}
+    list.innerHTML='';
+    users.forEach((u,idx)=>{
+        const card=document.createElement('div');
+        card.className='user-card';
+        const avatar=u.profilePhoto?`<img src="${u.profilePhoto}" alt="">`:(u.name?u.name.trim().charAt(0).toUpperCase():'?');
+        card.innerHTML=`
+            <div class="user-card-avatar">${avatar}</div>
+            <div class="user-card-info">
+                <div class="user-card-name">${escapeHtml(u.name||'Unknown')}</div>
+                <div class="user-card-detail"><i class="fa-solid fa-at"></i>${escapeHtml(u.username||'-')}</div>
+                <div class="user-card-detail"><i class="fa-solid fa-envelope"></i>${escapeHtml(u.email||'-')}</div>
+            </div>
+            <div class="user-card-btns">
+                <button class="user-view-btn" onclick="viewUserDetail(${idx})" title="View Details"><i class="fa-solid fa-eye"></i></button>
+            </div>
+        `;
+        list.appendChild(card);
+    });
+}
+function viewUserDetail(idx){
+    const users=getAllUsers();
+    const u=users[idx];if(!u)return;
+    const logs=getActivityLog().filter(l=>l.email===u.email);
+    const avatar=u.profilePhoto?`<img src="${u.profilePhoto}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid rgba(147,51,234,.4);margin-bottom:10px;display:block;" alt="">`:'';
+    let rows=`
+        <div style="text-align:center;margin-bottom:16px;">${avatar}
+            <div style="font-size:1.1rem;font-weight:800;color:var(--text-primary);">${escapeHtml(u.name||'Unknown')}</div>
+            <div style="font-size:.75rem;color:var(--text-secondary);">${escapeHtml(u.username||'')}</div>
+        </div>
+        <div class="user-detail-modal-row"><span>📧 Email</span><span>${escapeHtml(u.email||'-')}</span></div>
+        <div class="user-detail-modal-row"><span>🔑 Password</span><span style="font-family:'Fira Code',monospace;font-size:.7rem;">${escapeHtml(u.password||'-')}</span></div>
+        <div class="user-detail-modal-row"><span>🎂 Birthdate</span><span>${u.birthDay&&u.birthMonth&&u.birthYear?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'-'}</span></div>
+        <div class="user-detail-modal-row"><span>👤 Username</span><span>${escapeHtml(u.username||'-')}</span></div>
+        <div class="user-detail-modal-row"><span>📊 Total Activities</span><span>${logs.length}</span></div>
+    `;
+    document.getElementById('userDetailContent').innerHTML=rows;
+    document.getElementById('userDetailModal').classList.add('active');
+    document.getElementById('userDetailTitle').innerText=currentLang==='tr'?'Kullanıcı Detayları':'User Details';
+}
+function closeUserDetail(){document.getElementById('userDetailModal').classList.remove('active');}
+function exportUsersCSV(){
+    const users=getAllUsers();
+    if(users.length===0){showCustomAlert(currentLang==='tr'?'Kullanıcı yok!':'No users!');return;}
+    const rows=[['Name','Username','Email','Password','Birthday','Has Photo']];
+    users.forEach(u=>{
+        const bd=u.birthDay&&u.birthMonth&&u.birthYear?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'';
+        rows.push([u.name,u.username,u.email,u.password,bd,u.profilePhoto?'Yes':'No']);
+    });
+    const csv=rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+    const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
+    const url=URL.createObjectURL(blob);const a=document.createElement('a');
+    a.href=url;a.download=`users-${new Date().toISOString().slice(0,10)}.csv`;
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url),100);
+    showCustomAlert(currentLang==='tr'?'CSV indirildi!':'CSV downloaded!','success');
+}
+function clearAllUsers(){showCustomAlert(currentLang==='tr'?'TÜM kullanıcılar silinecek! Emin misiniz?':'ALL users will be deleted! Are you sure?','delete',function(){localStorage.setItem('site_users','[]');localStorage.removeItem('logged_user');checkUserSession();renderAdminUsers();renderApplications();showCustomAlert(currentLang==='tr'?'Kullanıcılar silindi!':'Users cleared!','success');});}
+
+/* ACTIVITY RENDER */
+let activityFilterType='all';
+function renderAdminActivity(){
+    const list=document.getElementById('adminActivityList');if(!list)return;
+    let logs=getActivityLog();
+    if(activityFilterType!=='all')logs=logs.filter(l=>l.type===activityFilterType);
+    logs=logs.reverse();
+    if(logs.length===0){list.innerHTML=`<div style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;"><i class="fa-solid fa-list-activity" style="font-size:2rem;opacity:.3;margin-bottom:8px;display:block;"></i>${currentLang==='tr'?'Kayıt bulunamadı.':'No activity yet.'}</div>`;return;}
+    list.innerHTML='';
+    const typeIcons={signup:'fa-user-plus',signin:'fa-right-to-bracket',signout:'fa-right-from-bracket',password_change:'fa-key',profile_update:'fa-pen',email_change:'fa-envelope',delete_account:'fa-trash-can',apk_download:'fa-download',apk_blocked:'fa-lock',password_reset:'fa-unlock-keyhole'};
+    const typeLabels={
+        signup:currentLang==='tr'?'Kayıt Oldu':'Signed Up',
+        signin:currentLang==='tr'?'Giriş Yaptı':'Signed In',
+        signout:currentLang==='tr'?'Çıkış Yaptı':'Signed Out',
+        password_change:currentLang==='tr'?'Şifre Değiştirdi':'Changed Password',
+        profile_update:currentLang==='tr'?'Profilini Düzenledi':'Updated Profile',
+        email_change:currentLang==='tr'?'E-posta Değiştirdi':'Changed Email',
+        delete_account:currentLang==='tr'?'Hesabını Sildi':'Deleted Account',
+        apk_download:currentLang==='tr'?'APK İndirdi':'Downloaded APK',
+        apk_blocked:currentLang==='tr'?'APK İndirmeye Çalıştı (Giriş Yok)':'Tried APK (No Login)',
+        password_reset:currentLang==='tr'?'Şifresini Sıfırladı':'Reset Password'
+    };
+    logs.slice(0,200).forEach(l=>{
+        const item=document.createElement('div');
+        item.className='activity-item '+l.type;
+        const date=new Date(l.timestamp);
+        const formatted=date.toLocaleString();
+        item.innerHTML=`
+            <div class="activity-icon"><i class="fa-solid ${typeIcons[l.type]||'fa-circle-info'}"></i></div>
+            <div class="activity-body">
+                <div class="activity-title">${escapeHtml(l.name||l.email||'Unknown')} <span style="font-size:.6rem;font-weight:600;padding:1px 6px;border-radius:10px;background:rgba(147,51,234,.15);color:#9333ea;">${typeLabels[l.type]||l.type}</span></div>
+                <div class="activity-meta">${l.email?`<i class="fa-solid fa-envelope" style="color:#9333ea;"></i> ${escapeHtml(l.email)} • `:''}${l.details?escapeHtml(l.details):''}</div>
+            </div>
+            <div class="activity-time">${formatted}</div>
+        `;
+        list.appendChild(item);
+    });
+}
+function filterActivity(type,btn){
+    activityFilterType=type;
+    document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));
+    if(btn)btn.classList.add('active');
+    renderAdminActivity();
+}
+
+/* INDEXEDDB */
 let apkDB=null,pendingApkFile=null,pendingApkDelete=false,pendingIconDataUrl=null,pendingIconDelete=false;
 function openApkDB(){return new Promise((resolve,reject)=>{if(apkDB)return resolve(apkDB);try{const req=indexedDB.open('muminsultani_apk_db_v2',1);req.onupgradeneeded=(e)=>{const db=e.target.result;if(!db.objectStoreNames.contains('apks')){db.createObjectStore('apks');}if(!db.objectStoreNames.contains('icons')){db.createObjectStore('icons');}};req.onsuccess=(e)=>{apkDB=e.target.result;resolve(apkDB);};req.onerror=(e)=>reject(e.target.error);}catch(e){reject(e);}});}
 async function storeApkFile(idx,file){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['apks'],'readwrite'),st=tx.objectStore('apks');const data={blob:file,name:file.name,size:file.size,type:file.type||'application/vnd.android.package-archive',storedAt:Date.now()};const req=st.put(data,'slot_'+idx);req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
@@ -917,10 +1147,11 @@ async function getIconData(idx){const db=await openApkDB();return new Promise((r
 async function deleteIconData(idx){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['icons'],'readwrite'),st=tx.objectStore('icons');const req=st.delete('icon_'+idx);req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
 function formatFileSize(b){if(b<1024)return b+' B';if(b<1024*1024)return (b/1024).toFixed(1)+' KB';if(b<1024*1024*1024)return (b/(1024*1024)).toFixed(2)+' MB';return (b/(1024*1024*1024)).toFixed(2)+' GB';}
 
-/* DOWNLOAD APK — requires login */
 async function downloadApk(slotIndex){
     const lu=localStorage.getItem('logged_user');
+    const userObj=lu?JSON.parse(lu):null;
     if(!lu){
+        logActivity('apk_blocked',{email:'guest',name:'Guest'},'Slot #'+(slotIndex+1)+' - Login required');
         const t=modalTranslations[currentLang]||modalTranslations.en;
         showCustomAlert(t.apkLoginRequired||t.authRequiredAlert);
         setTimeout(()=>openGetInTouchModal(),300);
@@ -929,6 +1160,7 @@ async function downloadApk(slotIndex){
     try{
         const apk=await getApkFile(slotIndex);
         if(!apk){showCustomAlert(currentLang==='tr'?'APK bulunamadı!':'APK not found!');return;}
+        logActivity('apk_download',userObj,`Slot #${slotIndex+1} - ${apk.name} (${formatFileSize(apk.size)})`);
         let blob;
         if(apk.blob instanceof Blob){blob=apk.blob;}
         else{const byteArray=new Uint8Array(apk.blob);blob=new Blob([byteArray],{type:apk.type||'application/vnd.android.package-archive'});}
@@ -944,7 +1176,7 @@ async function downloadApk(slotIndex){
     }catch(e){console.error('Download error:',e);showCustomAlert(currentLang==='tr'?'İndirme hatası!':'Download error!');}
 }
 
-/* SITE CONTENT — 8 SLOTS */
+/* SITE CONTENT */
 const DEFAULT_SITE_CONTENT={
     header:{brand:'muminsultani',roleEn:'Software Developer',roleTr:'Yazılım Geliştirici'},
     social:{github:'https://github.com/muminsultani',instagram:'https://instagram.com/sultanimumin',gmail:'muminsultani@hotmail.com'},
@@ -984,11 +1216,6 @@ function applySiteContent(){
     renderApplications();
 }
 
-/* ============================================================
-   RENDER APPLICATIONS
-   - Icon priority: uploaded image (IndexedDB) > URL > emoji
-   - APK download: requires login
-   ============================================================ */
 async function renderApplications(){
     const grid=document.getElementById('appsGrid');if(!grid)return;
     const apps=getSiteContent().apps;
@@ -1021,17 +1248,11 @@ async function renderApplications(){
                 });
                 card.setAttribute('title',app.url);
             }
-            /* Icon priority: uploaded image > URL > emoji */
             let iconHTML;
-            if(hasUploadedIcon){
-                iconHTML=`<img src="${iconData.dataUrl}" alt="">`;
-            }else if(app.icon&&app.icon.trim().startsWith('http')){
-                iconHTML=`<img src="${escapeHtml(app.icon.trim())}" alt="">`;
-            }else if(app.icon&&app.icon.trim()){
-                iconHTML=escapeHtml(app.icon.trim());
-            }else{
-                iconHTML='📱';
-            }
+            if(hasUploadedIcon){iconHTML=`<img src="${iconData.dataUrl}" alt="">`;}
+            else if(app.icon&&app.icon.trim().startsWith('http')){iconHTML=`<img src="${escapeHtml(app.icon.trim())}" alt="">`;}
+            else if(app.icon&&app.icon.trim()){iconHTML=escapeHtml(app.icon.trim());}
+            else{iconHTML='📱';}
             let nameIcon='';
             if(hasApk)nameIcon='<i class="fa-solid fa-download download-icon"></i>';
             else if(hasUrl)nameIcon='<i class="fa-solid fa-arrow-up-right-from-square"></i>';
@@ -1057,11 +1278,17 @@ function switchAdminTab(name,btn){
     if(btn)btn.classList.add('active');
     const sec=document.querySelector(`.admin-section[data-section="${name}"]`);
     if(sec)sec.classList.add('active');
+    if(name==='users')renderAdminUsers();
+    if(name==='activity')renderAdminActivity();
 }
 function refreshAdminUI(){
     const c=getSiteContent();
+    const users=getAllUsers();
+    const logs=getActivityLog();
     const appsCount=c.apps.filter(a=>a.name&&a.name.trim()).length;
     const dac=document.getElementById('dash-apps-count');if(dac)dac.textContent=(currentLang==='tr'?`Uygulamalar: ${appsCount} / 8`:`Apps: ${appsCount} / 8`);
+    const duc=document.getElementById('dash-users-count');if(duc)duc.textContent=(currentLang==='tr'?`Kullanıcılar: ${users.length}`:`Users: ${users.length}`);
+    const dac2=document.getElementById('dash-activity-count');if(dac2)dac2.textContent=(currentLang==='tr'?`Aktiviteler: ${logs.length}`:`Activities: ${logs.length}`);
     const dle=document.getElementById('dash-last-edit');if(dle)dle.textContent=(currentLang==='tr'?`Son düzenleme: ${c.lastEdit}`:`Last edit: ${c.lastEdit}`);
     document.getElementById('ah-brand').value=c.header.brand;
     document.getElementById('ah-role-en').value=c.header.roleEn;
@@ -1099,13 +1326,9 @@ function renderAdminSlots(){
             const hasIcon=icon&&icon.dataUrl;
             const apkBadge=hasApk?`<span class="apk-badge"><i class="fa-brands fa-android" style="font-size:.55rem"></i> APK ${formatFileSize(apk.size)}</span>`:'';
             let iconPreview='';
-            if(hasIcon){
-                iconPreview=`<img src="${icon.dataUrl}" class="icon-preview-mini" alt="">`;
-            }else if(app.icon&&app.icon.trim().startsWith('http')){
-                iconPreview=`<img src="${escapeHtml(app.icon.trim())}" class="icon-preview-mini" alt="" onerror="this.style.display='none'">`;
-            }else if(app.icon&&app.icon.trim()){
-                iconPreview=`<span style="font-size:1.1rem">${escapeHtml(app.icon.trim())}</span>`;
-            }
+            if(hasIcon){iconPreview=`<img src="${icon.dataUrl}" class="icon-preview-mini" alt="">`;}
+            else if(app.icon&&app.icon.trim().startsWith('http')){iconPreview=`<img src="${escapeHtml(app.icon.trim())}" class="icon-preview-mini" alt="" onerror="this.style.display='none'">`;}
+            else if(app.icon&&app.icon.trim()){iconPreview=`<span style="font-size:1.1rem">${escapeHtml(app.icon.trim())}</span>`;}
             item.innerHTML=`<div class="admin-slot-num">${idx+1}</div>${iconPreview?`<div style="flex-shrink:0;display:flex;align-items:center;justify-content:center;width:24px">${iconPreview}</div>`:''}<div class="admin-slot-info"><div class="admin-slot-name">${filled?escapeHtml(app.name):`<em style="opacity:.5">${currentLang==='tr'?'Boş Slot':'Empty Slot'}</em>`} ${apkBadge}</div><div class="admin-slot-url">${filled&&app.url?escapeHtml(app.url):(filled&&app.desc?escapeHtml(app.desc):(currentLang==='tr'?'Boş slot':'Empty slot'))}</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="editAppSlot(${idx})"><i class="fa-solid fa-pen"></i></button><button class="admin-slot-btn delete" onclick="clearAppSlot(${idx})"><i class="fa-solid fa-trash-can"></i></button></div>`;
         });
         list.appendChild(item);
@@ -1125,95 +1348,54 @@ async function editAppSlot(idx){
     try{existingApk=await getApkFile(idx);}catch(e){}
     try{existingIcon=await getIconData(idx);}catch(e){}
     updateApkUI(existingApk?{name:existingApk.name,size:existingApk.size,existing:true}:null);
-    if(existingIcon&&existingIcon.dataUrl){
-        updateIconUI({dataUrl:existingIcon.dataUrl,existing:true});
-    }else if(app.icon&&app.icon.trim().startsWith('http')){
-        updateIconUI({dataUrl:app.icon.trim(),existing:true,isUrl:true});
-    }else{
-        updateIconUI(null);
-    }
+    if(existingIcon&&existingIcon.dataUrl){updateIconUI({dataUrl:existingIcon.dataUrl,existing:true});}
+    else if(app.icon&&app.icon.trim().startsWith('http')){updateIconUI({dataUrl:app.icon.trim(),existing:true,isUrl:true});}
+    else{updateIconUI(null);}
     document.getElementById('adminEditModal').classList.add('active');
     setTimeout(()=>document.getElementById('editAppName').focus(),250);
 }
 function closeAdminEdit(){document.getElementById('adminEditModal').classList.remove('active');}
-
-/* ICON UPLOAD */
 function handleIconUpload(e){
-    const f=e.target.files[0];
-    if(!f)return;
-    if(!f.type.startsWith('image/')){
-        showCustomAlert(currentLang==='tr'?'Lütfen bir resim dosyası seçin!':'Please choose an image file!');
-        e.target.value='';
-        return;
-    }
-    if(f.size>5*1024*1024){
-        showCustomAlert(currentLang==='tr'?'Resim 5 MB\'dan küçük olmalı!':'Image must be under 5 MB!');
-        e.target.value='';
-        return;
-    }
+    const f=e.target.files[0];if(!f)return;
+    if(!f.type.startsWith('image/')){showCustomAlert(currentLang==='tr'?'Lütfen bir resim dosyası seçin!':'Please choose an image file!');e.target.value='';return;}
+    if(f.size>5*1024*1024){showCustomAlert(currentLang==='tr'?'Resim 5 MB\'dan küçük olmalı!':'Image must be under 5 MB!');e.target.value='';return;}
     const reader=new FileReader();
-    reader.onload=function(ev){
-        pendingIconDataUrl=ev.target.result;
-        pendingIconDelete=false;
-        updateIconUI({dataUrl:ev.target.result,name:f.name,size:f.size,isNew:true});
-    };
+    reader.onload=function(ev){pendingIconDataUrl=ev.target.result;pendingIconDelete=false;updateIconUI({dataUrl:ev.target.result,name:f.name,size:f.size,isNew:true});};
     reader.readAsDataURL(f);
 }
-function clearIconFile(){
-    pendingIconDataUrl=null;
-    pendingIconDelete=true;
-    document.getElementById('editAppIconFile').value='';
-    updateIconUI(null);
-}
+function clearIconFile(){pendingIconDataUrl=null;pendingIconDelete=true;document.getElementById('editAppIconFile').value='';updateIconUI(null);}
 function updateIconUI(file){
-    const w=document.getElementById('iconUploadWrapper');
-    const i=document.getElementById('iconUploadInfo');
-    const t=document.getElementById('iconUploadText');
-    const b=document.getElementById('iconClearBtn');
-    const ico=document.getElementById('iconUploadIcon');
-    const prev=document.getElementById('iconPreviewBig');
+    const w=document.getElementById('iconUploadWrapper'),i=document.getElementById('iconUploadInfo'),t=document.getElementById('iconUploadText'),b=document.getElementById('iconClearBtn'),ico=document.getElementById('iconUploadIcon'),prev=document.getElementById('iconPreviewBig');
     if(file&&file.dataUrl){
-        w.classList.add('has-icon');
-        i.style.display='block';
+        w.classList.add('has-icon');i.style.display='block';
         const badge=file.isNew?'🆕 ':(file.existing?(file.isUrl?'🔗 ':'📷 '):'');
         const label=file.name?`${badge}${file.name}${file.size?' ('+formatFileSize(file.size)+')':''}`:(file.isUrl?`${badge}Linked image`:`${badge}Uploaded icon`);
-        i.textContent=label;
-        i.style.color='#9333ea';
+        i.textContent=label;i.style.color='#9333ea';
         t.textContent=currentLang==='tr'?'Değiştirmek için tıkla':'Tap to change';
         b.style.display='inline-flex';
         if(ico)ico.style.display='none';
         if(prev){prev.src=file.dataUrl;prev.style.display='block';}
     }else{
-        w.classList.remove('has-icon');
-        i.style.display='none';
+        w.classList.remove('has-icon');i.style.display='none';
         t.textContent=currentLang==='tr'?'İkon resmi seç (telefondan)':'Tap to choose icon image';
         b.style.display='none';
         if(ico)ico.style.display='block';
         if(prev){prev.style.display='none';prev.src='';}
     }
 }
-
-/* APK UPLOAD */
 function handleApkUpload(e){const f=e.target.files[0];if(!f)return;if(!f.name.toLowerCase().endsWith('.apk')){showCustomAlert(currentLang==='tr'?'Lütfen bir APK dosyası seçin!':'Please choose an APK file!');e.target.value='';return;}pendingApkFile=f;pendingApkDelete=false;updateApkUI({name:f.name,size:f.size,isNew:true});}
 function clearApkFile(){pendingApkFile=null;pendingApkDelete=true;document.getElementById('editAppApkFile').value='';updateApkUI(null);}
 function updateApkUI(file){
-    const w=document.getElementById('apkUploadWrapper');
-    const i=document.getElementById('apkUploadInfo');
-    const t=document.getElementById('apkUploadText');
-    const b=document.getElementById('apkClearBtn');
-    const ico=document.getElementById('apkUploadIcon');
+    const w=document.getElementById('apkUploadWrapper'),i=document.getElementById('apkUploadInfo'),t=document.getElementById('apkUploadText'),b=document.getElementById('apkClearBtn'),ico=document.getElementById('apkUploadIcon');
     if(file){
-        w.classList.add('has-file');
-        i.style.display='block';
+        w.classList.add('has-file');i.style.display='block';
         const badge=file.isNew?'🆕 ':(file.existing?'📦 ':'');
-        i.textContent=`${badge}${file.name} (${formatFileSize(file.size)})`;
-        i.style.color='#22c55e';
+        i.textContent=`${badge}${file.name} (${formatFileSize(file.size)})`;i.style.color='#22c55e';
         t.textContent=currentLang==='tr'?'Değiştirmek için tıkla':'Tap to change';
         b.style.display='inline-flex';
         if(ico)ico.className='fa-solid fa-circle-check upload-icon';
     }else{
-        w.classList.remove('has-file');
-        i.style.display='none';
+        w.classList.remove('has-file');i.style.display='none';
         t.textContent=currentLang==='tr'?'APK dosyası seç (isteğe bağlı)':'Tap to choose APK file (optional)';
         b.style.display='none';
         if(ico)ico.className='fa-solid fa-file-arrow-up upload-icon';
@@ -1223,7 +1405,6 @@ async function saveAppSlot(e){
     e.preventDefault();
     const idx=parseInt(document.getElementById('editSlotIndex').value)||0;
     const c=getSiteContent();
-    /* Preserve existing URL icon if user uploaded an image — clear url icon */
     let iconValue=c.apps[idx].icon||'';
     if(pendingIconDataUrl||pendingIconDelete){iconValue='';}
     c.apps[idx]={icon:iconValue,name:document.getElementById('editAppName').value.trim(),desc:document.getElementById('editAppDesc').value.trim(),url:document.getElementById('editAppUrl').value.trim()};
@@ -1278,7 +1459,7 @@ function changeLanguage(lang){
     const clt=document.getElementById('currentLangText');if(clt)clt.innerText=data.code;
     st('t-apps-title',data.appsTitle);st('t-exp-title',data.expTitle);st('t-setup-title',data.setupTitle);st('t-os-label',data.osLabel);st('t-editor-label',data.editorLabel);st('t-stack-title',data.stackTitle);st('t-backend-label',data.backendLabel);st('t-frontend-label',data.frontendLabel);st('t-contact-title',data.contactTitle);st('t-contact-sub',data.contactSub);st('t-contact-main',data.contactMain);st('t-profile-title',data.profileTitle);st('t-forgot-link',data.forgotLink);st('pp-title',data.photoPanelTitle);st('pp-back-text',data.btnBack);st('pp-change-text',data.btnChange);st('pp-reset-text',data.btnReset);st('gitModalTitle',data.contactTitle);st('gitActionText',data.gitText);st('gitBackText',data.backText);st('crop-title',data.cropTitle);st('crop-cancel-text',data.cropCancel);st('crop-apply-text',data.cropApply);
     changeModalLanguage(lang);applySiteContent();checkUserSession();
-    if(document.getElementById('adminPanelModal').classList.contains('active'))refreshAdminUI();
+    if(document.getElementById('adminPanelModal').classList.contains('active')){refreshAdminUI();if(document.querySelector('.admin-tab.active[data-tab="users"]'))renderAdminUsers();if(document.querySelector('.admin-tab.active[data-tab="activity"]'))renderAdminActivity();}
     const lm=document.getElementById('langMenu');if(lm)lm.classList.remove('show');
 }
 
@@ -1318,43 +1499,63 @@ function changeModalLanguage(lang){
     if(isTR){
         s('admin-login-title','Yönetici Girişi');s('admin-pass-label','Yönetici Şifresi');s('admin-login-btn','Kilidi Aç');
         s('admin-panel-title','Tam Site Kontrolü');s('admin-hint-title','Tam Kontrol Modu');s('admin-hint-text','Tüm siteyi düzenliyorsunuz.');
-        s('dash-btn-apps','Uygulamaları Yönet');s('dash-btn-backup','Yedek');
-        s('hint-header','Marka ve rol.');s('ah-save','Kaydet');
-        s('hint-social','Sosyal bağlantılar.');s('as-save','Kaydet');
-        s('hint-apps','8 slot. Telefondan ikon resmi ve APK yükleyebilirsiniz. APK indirmek için giriş gerekir.');
-        s('hint-exp','İş deneyimi.');s('ae-exp-save','Kaydet');
-        s('hint-setup','Kurulum.');s('au-save','Kaydet');
-        s('hint-stack','Stack.');s('ak-save','Kaydet');
-        s('hint-footer','Footer.');s('af-save','Kaydet');
-        s('hint-backup','Yedek al / geri yükle.');
+        document.querySelectorAll('[data-t="dash"]').forEach(e=>e.textContent='Panel');
+        document.querySelectorAll('[data-t="users"]').forEach(e=>e.textContent='Kullanıcılar');
+        document.querySelectorAll('[data-t="activity"]').forEach(e=>e.textContent='Aktivite');
+        document.querySelectorAll('[data-t="header"]').forEach(e=>e.textContent='Başlık');
+        document.querySelectorAll('[data-t="social"]').forEach(e=>e.textContent='Sosyal');
+        document.querySelectorAll('[data-t="apps"]').forEach(e=>e.textContent='Uygulamalar');
+        document.querySelectorAll('[data-t="experience"]').forEach(e=>e.textContent='Deneyim');
+        document.querySelectorAll('[data-t="setup"]').forEach(e=>e.textContent='Kurulum');
+        document.querySelectorAll('[data-t="stack"]').forEach(e=>e.textContent='Stack');
+        document.querySelectorAll('[data-t="footer"]').forEach(e=>e.textContent='Footer');
+        document.querySelectorAll('[data-t="backup"]').forEach(e=>e.textContent='Yedek');
+        document.querySelectorAll('[data-t="all"]').forEach(e=>e.textContent='Tümü');
+        s('dash-btn-users','Kullanıcılar');s('dash-btn-activity','Aktivite');s('dash-btn-apps','Uygulamalar');s('dash-btn-backup','Yedek');
+        s('hint-users','Tüm kayıtlı kullanıcılar. Detay için göz ikonuna tıklayın.');
+        s('hint-activity','Kullanıcıların sitede yaptığı her şey sadece sizin için kaydedilir.');
+        s('users-export','Kullanıcıları CSV İndir');s('users-clear','Tüm Kullanıcıları Sil');
+        s('activity-export','Aktivite CSV İndir');s('activity-clear','Aktivite Kayıtlarını Temizle');
+        s('user-detail-title','Kullanıcı Detayları');
+        s('ah-save','Kaydet');s('as-save','Kaydet');s('ae-exp-save','Kaydet');s('au-save','Kaydet');s('ak-save','Kaydet');s('af-save','Kaydet');
+        s('hint-header','Marka ve rol.');s('hint-social','Sosyal bağlantılar.');
+        s('hint-apps','8 slot. Telefondan ikon resmi ve APK yükleyebilirsiniz.');
+        s('hint-exp','İş deneyimi.');s('hint-setup','Kurulum.');s('hint-stack','Stack.');s('hint-footer','Footer.');s('hint-backup','Yedek al / geri yükle.');
         s('bk-export','JSON İndir');s('bk-import','JSON Yükle');s('bk-reset','Varsayılanlara Sıfırla');
         s('admin-logout-text','Yöneticiden Çıkış');s('admin-edit-title','Slotu Düzenle');
         s('ae-icon-label','📷 Uygulama İkonu (Telefondan resim yükle)');s('ae-name-label','Uygulama Adı');s('ae-desc-label','Açıklama');s('ae-url-label','Bağlantı (APK yoksa)');s('ae-save-text','Kaydet');
-        s('ae-apk-label','📦 APK Dosyası Yükle (İsteğe bağlı - direkt telefondan)');
-        s('apkUploadText','APK dosyası seç (isteğe bağlı)');
-        s('ae-apk-clear-text','APK\'yı Kaldır');
-        s('iconUploadText','İkon resmi seç (telefondan)');
-        s('ae-icon-clear-text','İkonu Kaldır');
+        s('ae-apk-label','📦 APK Dosyası Yükle (İsteğe bağlı)');s('apkUploadText','APK dosyası seç');s('ae-apk-clear-text','APK\'yı Kaldır');
+        s('iconUploadText','İkon resmi seç (telefondan)');s('ae-icon-clear-text','İkonu Kaldır');
     }else{
         s('admin-login-title','Admin Access');s('admin-pass-label','Master Password');s('admin-login-btn','Unlock');
         s('admin-panel-title','Full Site Control');s('admin-hint-title','Full Control Mode');s('admin-hint-text','Editing entire site.');
-        s('dash-btn-apps','Manage Apps');s('dash-btn-backup','Backup');
-        s('hint-header','Brand and role.');s('ah-save','Save');
-        s('hint-social','Social links.');s('as-save','Save');
-        s('hint-apps','8 slots. Upload icon image + APK from phone, or paste URL. APK requires login.');
-        s('hint-exp','Experience.');s('ae-exp-save','Save');
-        s('hint-setup','Setup.');s('au-save','Save');
-        s('hint-stack','Stack.');s('ak-save','Save');
-        s('hint-footer','Footer.');s('af-save','Save');
-        s('hint-backup','Backup/restore.');
+        document.querySelectorAll('[data-t="dash"]').forEach(e=>e.textContent='Dashboard');
+        document.querySelectorAll('[data-t="users"]').forEach(e=>e.textContent='Users');
+        document.querySelectorAll('[data-t="activity"]').forEach(e=>e.textContent='Activity');
+        document.querySelectorAll('[data-t="header"]').forEach(e=>e.textContent='Header');
+        document.querySelectorAll('[data-t="social"]').forEach(e=>e.textContent='Social');
+        document.querySelectorAll('[data-t="apps"]').forEach(e=>e.textContent='Apps');
+        document.querySelectorAll('[data-t="experience"]').forEach(e=>e.textContent='Experience');
+        document.querySelectorAll('[data-t="setup"]').forEach(e=>e.textContent='Setup');
+        document.querySelectorAll('[data-t="stack"]').forEach(e=>e.textContent='Stack');
+        document.querySelectorAll('[data-t="footer"]').forEach(e=>e.textContent='Footer');
+        document.querySelectorAll('[data-t="backup"]').forEach(e=>e.textContent='Backup');
+        document.querySelectorAll('[data-t="all"]').forEach(e=>e.textContent='All');
+        s('dash-btn-users','Users');s('dash-btn-activity','Activity');s('dash-btn-apps','Manage Apps');s('dash-btn-backup','Backup');
+        s('hint-users','All registered users. Click eye icon for full details.');
+        s('hint-activity','Everything users do on the site is logged here for your eyes only.');
+        s('users-export','Export Users CSV');s('users-clear','Delete All Users');
+        s('activity-export','Export Activity CSV');s('activity-clear','Clear Activity Log');
+        s('user-detail-title','User Details');
+        s('ah-save','Save');s('as-save','Save');s('ae-exp-save','Save');s('au-save','Save');s('ak-save','Save');s('af-save','Save');
+        s('hint-header','Brand and role.');s('hint-social','Social links.');
+        s('hint-apps','8 slots. Upload icon image + APK from phone.');
+        s('hint-exp','Experience.');s('hint-setup','Setup.');s('hint-stack','Stack.');s('hint-footer','Footer.');s('hint-backup','Backup/restore.');
         s('bk-export','Export JSON');s('bk-import','Import JSON');s('bk-reset','Reset to Defaults');
         s('admin-logout-text','Log Out from Admin');s('admin-edit-title','Edit App Slot');
         s('ae-icon-label','📷 App Icon (Upload image from phone)');s('ae-name-label','App Name');s('ae-desc-label','Description');s('ae-url-label','Link (if no APK)');s('ae-save-text','Save');
-        s('ae-apk-label','📦 Upload APK File (Optional - directly from phone)');
-        s('apkUploadText','Tap to choose APK file (optional)');
-        s('ae-apk-clear-text','Remove APK');
-        s('iconUploadText','Tap to choose icon image');
-        s('ae-icon-clear-text','Remove Icon');
+        s('ae-apk-label','📦 Upload APK File (Optional)');s('apkUploadText','Tap to choose APK file');s('ae-apk-clear-text','Remove APK');
+        s('iconUploadText','Tap to choose icon image');s('ae-icon-clear-text','Remove Icon');
     }
     document.getElementById('modalLangMenu').classList.remove('show');
     document.getElementById('contactModalLangMenu').classList.remove('show');
@@ -1397,18 +1598,129 @@ function closeDeleteAccountModal(){document.getElementById('deleteAccountModal')
 function openDeletePasswordModal(){document.getElementById('deleteConfirmPassword').value='';document.getElementById('confirmDeletePasswordModal').classList.add('active');}
 function closeDeletePasswordModal(){document.getElementById('confirmDeletePasswordModal').classList.remove('active');}
 
-function handleProfileUpdate(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const nn=document.getElementById('editClientName').value.trim();const nu=document.getElementById('editClientUsername').value.trim();const ne=document.getElementById('editClientEmail').value.trim();const bd=document.getElementById('editClientDay').value.trim();const bm=document.getElementById('editClientMonth').value.trim();const by=document.getElementById('editClientYear').value.trim();const t=modalTranslations[currentLang]||modalTranslations.en;if(!nn||!nu||!ne){showCustomAlert(t.alertText);return;}try{let u=JSON.parse(lu);let users=JSON.parse(localStorage.getItem('site_users')||'[]');if(users.some(x=>x.email===ne&&x.email!==u.email)){showCustomAlert(t.emailAlreadyRegistered);return;}if(ne!==u.email){const code=generateVerificationCode();pendingEmailChange={code,oldEmail:u.email,newEmail:ne,userObj:u,newName:nn,newUsername:nu,birthDay:bd,birthMonth:bm,birthYear:by};closeEditProfileModal();openEmailChangeMockModal(ne,code);return;}u.name=nn;u.username=nu;u.birthDay=bd;u.birthMonth=bm;u.birthYear=by;users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));closeEditProfileModal();checkUserSession();renderApplications();showCustomAlert(t.successUpdate,'success');}catch(err){}}
-function handleChangePassword(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const op=document.getElementById('changeOldPassword').value.trim();const np=document.getElementById('changeNewPassword').value.trim();const cp=document.getElementById('changeConfirmPassword').value.trim();const t=modalTranslations[currentLang]||modalTranslations.en;if(!op||!np||!cp){showCustomAlert(t.alertText);return;}if(!isValidPassword(np)){showCustomAlert(t.passwordStrengthError);return;}try{let u=JSON.parse(lu);let users=JSON.parse(localStorage.getItem('site_users')||'[]');if(u.password!==op){showCustomAlert(t.cpErrorOld);return;}if(np!==cp){showCustomAlert(t.cpErrorMatch);return;}u.password=np;users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));closeChangePasswordModal();showCustomAlert(t.cpSuccess,'success');}catch(err){}}
-function handleDeleteAccount(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const iu=document.getElementById('deleteConfirmUsername').value.trim();const t=modalTranslations[currentLang]||modalTranslations.en;try{const u=JSON.parse(lu);const au=u.username||'';const ci=iu.startsWith('@')?iu.substring(1):iu;const ca=au.startsWith('@')?au.substring(1):au;if(ci.toLowerCase()!==ca.toLowerCase()){showCustomAlert(t.delConfirmError);return;}showCustomAlert(t.delConfirmAlert,'delete',function(){document.getElementById('deleteAccountModal').classList.remove('active');openDeletePasswordModal();});}catch(err){}}
-function handleDeletePasswordSubmit(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const ep=document.getElementById('deleteConfirmPassword').value.trim();const t=modalTranslations[currentLang]||modalTranslations.en;try{const u=JSON.parse(lu);if(u.password!==ep){showCustomAlert(t.delPassError);return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.filter(x=>x.email!==u.email);localStorage.setItem('site_users',JSON.stringify(users));localStorage.removeItem('logged_user');closeDeletePasswordModal();showCustomAlert(t.successDelete,'success');window._pendingLangReset=true;checkUserSession();renderApplications();}catch(err){}}
+function handleProfileUpdate(e){
+    e.preventDefault();
+    const lu=localStorage.getItem('logged_user');if(!lu)return;
+    const nn=document.getElementById('editClientName').value.trim();
+    const nu=document.getElementById('editClientUsername').value.trim();
+    const ne=document.getElementById('editClientEmail').value.trim();
+    const bd=document.getElementById('editClientDay').value.trim();
+    const bm=document.getElementById('editClientMonth').value.trim();
+    const by=document.getElementById('editClientYear').value.trim();
+    const t=modalTranslations[currentLang]||modalTranslations.en;
+    if(!nn||!nu||!ne){showCustomAlert(t.alertText);return;}
+    try{
+        let u=JSON.parse(lu);let users=JSON.parse(localStorage.getItem('site_users')||'[]');
+        if(users.some(x=>x.email===ne&&x.email!==u.email)){showCustomAlert(t.emailAlreadyRegistered);return;}
+        if(ne!==u.email){
+            const code=generateVerificationCode();
+            pendingEmailChange={code,oldEmail:u.email,newEmail:ne,userObj:u,newName:nn,newUsername:nu,birthDay:bd,birthMonth:bm,birthYear:by};
+            closeEditProfileModal();openEmailChangeMockModal(ne,code);return;
+        }
+        const oldData=JSON.parse(JSON.stringify(u));
+        u.name=nn;u.username=nu;u.birthDay=bd;u.birthMonth=bm;u.birthYear=by;
+        users=users.map(x=>x.email===u.email?u:x);
+        localStorage.setItem('site_users',JSON.stringify(users));
+        localStorage.setItem('logged_user',JSON.stringify(u));
+        logActivity('profile_update',u,'Old: '+oldData.name+' (@'+oldData.username+') → New: '+nn+' (@'+nu+')');
+        closeEditProfileModal();checkUserSession();renderApplications();showCustomAlert(t.successUpdate,'success');
+    }catch(err){}
+}
+function handleChangePassword(e){
+    e.preventDefault();
+    const lu=localStorage.getItem('logged_user');if(!lu)return;
+    const op=document.getElementById('changeOldPassword').value.trim();
+    const np=document.getElementById('changeNewPassword').value.trim();
+    const cp=document.getElementById('changeConfirmPassword').value.trim();
+    const t=modalTranslations[currentLang]||modalTranslations.en;
+    if(!op||!np||!cp){showCustomAlert(t.alertText);return;}
+    if(!isValidPassword(np)){showCustomAlert(t.passwordStrengthError);return;}
+    try{
+        let u=JSON.parse(lu);let users=JSON.parse(localStorage.getItem('site_users')||'[]');
+        if(u.password!==op){showCustomAlert(t.cpErrorOld);return;}
+        if(np!==cp){showCustomAlert(t.cpErrorMatch);return;}
+        u.password=np;users=users.map(x=>x.email===u.email?u:x);
+        localStorage.setItem('site_users',JSON.stringify(users));
+        localStorage.setItem('logged_user',JSON.stringify(u));
+        logActivity('password_change',u,'Password updated');
+        closeChangePasswordModal();showCustomAlert(t.cpSuccess,'success');
+    }catch(err){}
+}
+function handleDeleteAccount(e){
+    e.preventDefault();
+    const lu=localStorage.getItem('logged_user');if(!lu)return;
+    const iu=document.getElementById('deleteConfirmUsername').value.trim();
+    const t=modalTranslations[currentLang]||modalTranslations.en;
+    try{
+        const u=JSON.parse(lu);const au=u.username||'';
+        const ci=iu.startsWith('@')?iu.substring(1):iu;
+        const ca=au.startsWith('@')?au.substring(1):au;
+        if(ci.toLowerCase()!==ca.toLowerCase()){showCustomAlert(t.delConfirmError);return;}
+        showCustomAlert(t.delConfirmAlert,'delete',function(){document.getElementById('deleteAccountModal').classList.remove('active');openDeletePasswordModal();});
+    }catch(err){}
+}
+function handleDeletePasswordSubmit(e){
+    e.preventDefault();
+    const lu=localStorage.getItem('logged_user');if(!lu)return;
+    const ep=document.getElementById('deleteConfirmPassword').value.trim();
+    const t=modalTranslations[currentLang]||modalTranslations.en;
+    try{
+        const u=JSON.parse(lu);
+        if(u.password!==ep){showCustomAlert(t.delPassError);return;}
+        logActivity('delete_account',u,'Account deleted');
+        let users=JSON.parse(localStorage.getItem('site_users')||'[]');
+        users=users.filter(x=>x.email!==u.email);
+        localStorage.setItem('site_users',JSON.stringify(users));
+        localStorage.removeItem('logged_user');
+        closeDeletePasswordModal();showCustomAlert(t.successDelete,'success');
+        window._pendingLangReset=true;checkUserSession();renderApplications();
+    }catch(err){}
+}
 
 function openForgotPasswordModal(e){if(e)e.preventDefault();closeDirectContactModal();document.getElementById('forgotPasswordForm').reset();document.getElementById('forgotPasswordModal').classList.add('active');}
 function closeForgotPasswordModal(){document.getElementById('forgotPasswordModal').classList.remove('active');}
-function handleForgotPasswordSubmit(e){e.preventDefault();const email=document.getElementById('forgotClientEmail').value.trim();const t=modalTranslations[currentLang]||modalTranslations.en;if(!email){showCustomAlert(t.alertText);return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');if(!users.find(u=>u.email===email)){showCustomAlert(t.rpEmailNotFound);return;}const tp="Temp"+Math.floor(1000+Math.random()*9000)+"!";let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');rc[email]=tp;localStorage.setItem('reset_codes',JSON.stringify(rc));currentResetEmail=email;closeForgotPasswordModal();document.getElementById('mock-email-user-value').innerText=email;document.getElementById('mock-email-pass-value').innerText=tp;const ci=document.getElementById('copyPassIcon'),cb=document.getElementById('copyPassBtn');if(ci)ci.className='fa-regular fa-copy';if(cb)cb.classList.remove('copied');document.getElementById('mockEmailModal').classList.add('active');}
+function handleForgotPasswordSubmit(e){
+    e.preventDefault();
+    const email=document.getElementById('forgotClientEmail').value.trim();
+    const t=modalTranslations[currentLang]||modalTranslations.en;
+    if(!email){showCustomAlert(t.alertText);return;}
+    let users=JSON.parse(localStorage.getItem('site_users')||'[]');
+    const u=users.find(x=>x.email===email);
+    if(!u){showCustomAlert(t.rpEmailNotFound);return;}
+    const tp="Temp"+Math.floor(1000+Math.random()*9000)+"!";
+    let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');
+    rc[email]=tp;localStorage.setItem('reset_codes',JSON.stringify(rc));
+    currentResetEmail=email;
+    closeForgotPasswordModal();
+    document.getElementById('mock-email-user-value').innerText=email;
+    document.getElementById('mock-email-pass-value').innerText=tp;
+    const ci=document.getElementById('copyPassIcon'),cb=document.getElementById('copyPassBtn');
+    if(ci)ci.className='fa-regular fa-copy';if(cb)cb.classList.remove('copied');
+    document.getElementById('mockEmailModal').classList.add('active');
+}
 function closeMockEmailModal(){document.getElementById('mockEmailModal').classList.remove('active');}
 function openResetPasswordModal(){closeMockEmailModal();document.getElementById('resetClientEmail').value=currentResetEmail;document.getElementById('resetPasswordForm').reset();document.getElementById('resetClientEmail').value=currentResetEmail;document.getElementById('resetPasswordModal').classList.add('active');}
 function closeResetPasswordModal(){document.getElementById('resetPasswordModal').classList.remove('active');}
-function handleResetPasswordSubmit(e){e.preventDefault();const email=document.getElementById('resetClientEmail').value;const code=document.getElementById('resetClientCode').value.trim();const np=document.getElementById('resetClientNewPassword').value.trim();const t=modalTranslations[currentLang]||modalTranslations.en;if(!code||!np){showCustomAlert(t.alertText);return;}if(!isValidPassword(np)){showCustomAlert(t.passwordStrengthError);return;}let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');if(!rc[email]||rc[email]!==code){showCustomAlert(t.rpErrorCode);return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');let ok=false;users=users.map(u=>{if(u.email===email){u.password=np;ok=true;}return u;});if(ok){localStorage.setItem('site_users',JSON.stringify(users));delete rc[email];localStorage.setItem('reset_codes',JSON.stringify(rc));closeResetPasswordModal();showCustomAlert(t.rpSuccess,'success');}else showCustomAlert(t.rpEmailNotFound);}
+function handleResetPasswordSubmit(e){
+    e.preventDefault();
+    const email=document.getElementById('resetClientEmail').value;
+    const code=document.getElementById('resetClientCode').value.trim();
+    const np=document.getElementById('resetClientNewPassword').value.trim();
+    const t=modalTranslations[currentLang]||modalTranslations.en;
+    if(!code||!np){showCustomAlert(t.alertText);return;}
+    if(!isValidPassword(np)){showCustomAlert(t.passwordStrengthError);return;}
+    let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');
+    if(!rc[email]||rc[email]!==code){showCustomAlert(t.rpErrorCode);return;}
+    let users=JSON.parse(localStorage.getItem('site_users')||'[]');
+    let ok=false,userObj=null;
+    users=users.map(u=>{if(u.email===email){u.password=np;ok=true;userObj=u;}return u;});
+    if(ok){
+        localStorage.setItem('site_users',JSON.stringify(users));
+        delete rc[email];localStorage.setItem('reset_codes',JSON.stringify(rc));
+        logActivity('password_reset',userObj,'Password reset via recovery');
+        closeResetPasswordModal();showCustomAlert(t.rpSuccess,'success');
+    }else showCustomAlert(t.rpEmailNotFound);
+}
 
 let activeNoticeEmail="muminsultani@hotmail.com";
 function openGmailNoticeModal(email){const lu=localStorage.getItem('logged_user');if(!lu){const t=modalTranslations[currentLang]||modalTranslations.en;showCustomAlert(t.authRequiredAlert);openGetInTouchModal();return;}activeNoticeEmail=email;const t=modalTranslations[currentLang]||modalTranslations.en;document.getElementById('gmailNoticeMessage').innerText=t.gmailNoticeText;document.getElementById('gmailNoticeEmailBtnText').innerText=t.emailBtn;document.getElementById('gmailNoticeBackText').innerText=t.backText;document.getElementById('gmailNoticeModal').classList.add('active');const am=document.getElementById('appointmentModal');if(am.classList.contains('active'))am.classList.add('light-blue-bg');}
@@ -1442,7 +1754,17 @@ function showCustomAlert(message,type='info',onConfirm=null){
 }
 function closeCustomAlert(){document.getElementById('customAlertModal').classList.remove('active');window._confirmActionCallback=null;if(window._pendingLangReset){window._pendingLangReset=false;try{sessionStorage.removeItem('site_lang');}catch(e){}changeLanguage('en');}}
 function confirmAction(){if(window._confirmActionCallback){const c=window._confirmActionCallback;closeCustomAlert();c();}else closeCustomAlert();}
-function confirmLogout(){const t=modalTranslations[currentLang]||modalTranslations.en;showCustomAlert(t.logoutConfirm,'logout',function(){localStorage.removeItem('logged_user');try{sessionStorage.removeItem('site_lang');}catch(e){}changeLanguage('en');checkUserSession();renderApplications();setTimeout(()=>{showCustomAlert(t.logoutSuccess,'success');},300);});}
+function confirmLogout(){
+    const t=modalTranslations[currentLang]||modalTranslations.en;
+    showCustomAlert(t.logoutConfirm,'logout',function(){
+        const lu=localStorage.getItem('logged_user');
+        if(lu){try{const u=JSON.parse(lu);logActivity('signout',u,'User logged out');}catch(e){}}
+        localStorage.removeItem('logged_user');
+        try{sessionStorage.removeItem('site_lang');}catch(e){}
+        changeLanguage('en');checkUserSession();renderApplications();
+        setTimeout(()=>{showCustomAlert(t.logoutSuccess,'success');},300);
+    });
+}
 
 /* SIGNUP */
 let pendingSignup=null;
@@ -1451,7 +1773,31 @@ function openSignupMockModal(email,code){const t=modalTranslations[currentLang]|
 function openSignupCodeModal(){document.getElementById('signupMockModal').classList.remove('active');const t=modalTranslations[currentLang]||modalTranslations.en;document.getElementById('signupCodeTitle').innerText=t.signupCodeTitle;document.getElementById('signupCodeDesc').innerText=t.signupCodeDesc;document.getElementById('signupCodeLabel').innerText=t.signupCodeLabel;document.getElementById('signupCodeVerifyText').innerText=t.signupVerifyBtn;document.getElementById('signupCodeInput').value='';document.getElementById('signupCodeModal').classList.add('active');setTimeout(()=>document.getElementById('signupCodeInput').focus(),300);}
 function backToSignupMock(){document.getElementById('signupCodeModal').classList.remove('active');if(pendingSignup)openSignupMockModal(pendingSignup.email,pendingSignup.code);}
 function cancelSignup(){pendingSignup=null;document.getElementById('signupMockModal').classList.remove('active');document.getElementById('signupCodeModal').classList.remove('active');}
-function verifySignupCode(e){e.preventDefault();const t=modalTranslations[currentLang]||modalTranslations.en;const ec=document.getElementById('signupCodeInput').value.trim();if(!pendingSignup){document.getElementById('signupCodeModal').classList.remove('active');return;}if(!ec||ec.length!==6){showCustomAlert(t.signupCodeError);return;}if(ec!==pendingSignup.code){showCustomAlert(t.signupCodeError);return;}try{const nu={name:pendingSignup.name,username:pendingSignup.username,email:pendingSignup.email,password:pendingSignup.password,birthDay:'',birthMonth:'',birthYear:'',profilePhoto:''};let users=JSON.parse(localStorage.getItem('site_users')||'[]');users.push(nu);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(nu));pendingSignup=null;document.getElementById('signupCodeModal').classList.remove('active');document.getElementById('signupMockModal').classList.remove('active');closeDirectContactModal();resetContactForm();checkUserSession();renderApplications();playApplauseSound();fireConfettiBurst(1.2);setTimeout(()=>fireConfettiBurst(1),600);showCustomAlert(t.successSignup,'success');}catch(err){}}
+function verifySignupCode(e){
+    e.preventDefault();
+    const t=modalTranslations[currentLang]||modalTranslations.en;
+    const ec=document.getElementById('signupCodeInput').value.trim();
+    if(!pendingSignup){document.getElementById('signupCodeModal').classList.remove('active');return;}
+    if(!ec||ec.length!==6){showCustomAlert(t.signupCodeError);return;}
+    if(ec!==pendingSignup.code){showCustomAlert(t.signupCodeError);return;}
+    try{
+        const nu={name:pendingSignup.name,username:pendingSignup.username,email:pendingSignup.email,password:pendingSignup.password,birthDay:'',birthMonth:'',birthYear:'',profilePhoto:'',createdAt:new Date().toISOString()};
+        let users=JSON.parse(localStorage.getItem('site_users')||'[]');
+        users.push(nu);
+        localStorage.setItem('site_users',JSON.stringify(users));
+        localStorage.setItem('logged_user',JSON.stringify(nu));
+        /* LOG ACTIVITY */
+        logActivity('signup',nu,'New account created');
+        pendingSignup=null;
+        document.getElementById('signupCodeModal').classList.remove('active');
+        document.getElementById('signupMockModal').classList.remove('active');
+        closeDirectContactModal();resetContactForm();checkUserSession();renderApplications();
+        /* ✅ SINGLE confetti burst + sound when account is created */
+        playApplauseSound();
+        fireConfettiBurst(1.2);
+        showCustomAlert(t.successSignup,'success');
+    }catch(err){}
+}
 
 /* EMAIL CHANGE */
 let pendingEmailChange=null;
@@ -1462,9 +1808,59 @@ function openEmailChangeCodeModal(){closeEmailChangeMockModal();const t=modalTra
 function closeEmailChangeCodeModal(){document.getElementById('emailChangeCodeModal').classList.remove('active');}
 function backToEmailChangeMock(){closeEmailChangeCodeModal();if(pendingEmailChange)openEmailChangeMockModal(pendingEmailChange.newEmail,pendingEmailChange.code);}
 function cancelEmailChange(){pendingEmailChange=null;closeEmailChangeMockModal();closeEmailChangeCodeModal();}
-function verifyEmailChangeCode(e){e.preventDefault();const t=modalTranslations[currentLang]||modalTranslations.en;const ec=document.getElementById('emailChangeCodeInput').value.trim();if(!pendingEmailChange){closeEmailChangeCodeModal();return;}if(!ec||ec.length!==6){showCustomAlert(t.emailChangeCodeError);return;}if(ec!==pendingEmailChange.code){showCustomAlert(t.emailChangeCodeError);return;}try{const u=pendingEmailChange.userObj;u.name=pendingEmailChange.newName;u.username=pendingEmailChange.newUsername;u.email=pendingEmailChange.newEmail;u.birthDay=pendingEmailChange.birthDay;u.birthMonth=pendingEmailChange.birthMonth;u.birthYear=pendingEmailChange.birthYear;let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.map(x=>x.email===pendingEmailChange.oldEmail?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));pendingEmailChange=null;closeEmailChangeCodeModal();closeEmailChangeMockModal();closeEditProfileModal();checkUserSession();showCustomAlert(t.successUpdate,'success');}catch(err){}}
+function verifyEmailChangeCode(e){
+    e.preventDefault();
+    const t=modalTranslations[currentLang]||modalTranslations.en;
+    const ec=document.getElementById('emailChangeCodeInput').value.trim();
+    if(!pendingEmailChange){closeEmailChangeCodeModal();return;}
+    if(!ec||ec.length!==6){showCustomAlert(t.emailChangeCodeError);return;}
+    if(ec!==pendingEmailChange.code){showCustomAlert(t.emailChangeCodeError);return;}
+    try{
+        const u=pendingEmailChange.userObj;
+        const oldEmail=pendingEmailChange.oldEmail;
+        u.name=pendingEmailChange.newName;u.username=pendingEmailChange.newUsername;u.email=pendingEmailChange.newEmail;
+        u.birthDay=pendingEmailChange.birthDay;u.birthMonth=pendingEmailChange.birthMonth;u.birthYear=pendingEmailChange.birthYear;
+        let users=JSON.parse(localStorage.getItem('site_users')||'[]');
+        users=users.map(x=>x.email===oldEmail?u:x);
+        localStorage.setItem('site_users',JSON.stringify(users));
+        localStorage.setItem('logged_user',JSON.stringify(u));
+        logActivity('email_change',u,`${oldEmail} → ${u.email}`);
+        pendingEmailChange=null;
+        closeEmailChangeCodeModal();closeEmailChangeMockModal();closeEditProfileModal();
+        checkUserSession();showCustomAlert(t.successUpdate,'success');
+    }catch(err){}
+}
 
-function handleAuthSubmit(e){e.preventDefault();const email=document.getElementById('contactClientEmail').value.trim();const password=document.getElementById('contactClientPassword').value.trim();const t=modalTranslations[currentLang]||modalTranslations.en;if(!email||!password){showCustomAlert(t.alertText);return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');if(currentAuthMode==='signup'){const name=document.getElementById('contactClientName').value.trim();let username=document.getElementById('contactClientUsername').value.trim();if(username.startsWith('@'))username=username.substring(1);if(!name||!username){showCustomAlert(t.alertText);return;}const ex=users.some(u=>{let un=u.username||'';if(un.startsWith('@'))un=un.substring(1);return un.toLowerCase()===username.toLowerCase();});if(ex){showCustomAlert(t.usernameTaken);return;}if(!isValidPassword(password)){showCustomAlert(t.passwordStrengthError);return;}if(users.find(u=>u.email===email)){showCustomAlert(t.emailAlreadyRegistered);return;}const code=generateSignupCode();pendingSignup={code,name,username,email,password};openSignupMockModal(email,code);return;}else{const ic=email.toLowerCase().trim();let inputName=ic;if(inputName.startsWith('@'))inputName=inputName.substring(1);let user=users.find(u=>{const em=(u.email||'').toLowerCase()===ic;let un=(u.username||'').toLowerCase();if(un.startsWith('@'))un=un.substring(1);const um=un===inputName;return(em||um)&&u.password===password;});if(!user&&(ic==='admin@muminsultani.com'||inputName==='admin')&&password==='admin123'){user={name:'Admin User',username:'@Admin',email:'admin@muminsultani.com',password:'admin123',birthDay:'',birthMonth:'',birthYear:'',profilePhoto:''};}if(user){localStorage.setItem('logged_user',JSON.stringify(user));showCustomAlert(t.successSignin,'success');closeDirectContactModal();checkUserSession();renderApplications();}else showCustomAlert(t.errorSignin);}}
+function handleAuthSubmit(e){
+    e.preventDefault();
+    const email=document.getElementById('contactClientEmail').value.trim();
+    const password=document.getElementById('contactClientPassword').value.trim();
+    const t=modalTranslations[currentLang]||modalTranslations.en;
+    if(!email||!password){showCustomAlert(t.alertText);return;}
+    let users=JSON.parse(localStorage.getItem('site_users')||'[]');
+    if(currentAuthMode==='signup'){
+        const name=document.getElementById('contactClientName').value.trim();
+        let username=document.getElementById('contactClientUsername').value.trim();
+        if(username.startsWith('@'))username=username.substring(1);
+        if(!name||!username){showCustomAlert(t.alertText);return;}
+        const ex=users.some(u=>{let un=u.username||'';if(un.startsWith('@'))un=un.substring(1);return un.toLowerCase()===username.toLowerCase();});
+        if(ex){showCustomAlert(t.usernameTaken);return;}
+        if(!isValidPassword(password)){showCustomAlert(t.passwordStrengthError);return;}
+        if(users.find(u=>u.email===email)){showCustomAlert(t.emailAlreadyRegistered);return;}
+        const code=generateSignupCode();
+        pendingSignup={code,name,username,email,password};
+        openSignupMockModal(email,code);return;
+    }else{
+        const ic=email.toLowerCase().trim();let inputName=ic;if(inputName.startsWith('@'))inputName=inputName.substring(1);
+        let user=users.find(u=>{const em=(u.email||'').toLowerCase()===ic;let un=(u.username||'').toLowerCase();if(un.startsWith('@'))un=un.substring(1);const um=un===inputName;return(em||um)&&u.password===password;});
+        if(!user&&(ic==='admin@muminsultani.com'||inputName==='admin')&&password==='admin123'){user={name:'Admin User',username:'@Admin',email:'admin@muminsultani.com',password:'admin123',birthDay:'',birthMonth:'',birthYear:'',profilePhoto:''};}
+        if(user){
+            localStorage.setItem('logged_user',JSON.stringify(user));
+            logActivity('signin',user,'User signed in');
+            showCustomAlert(t.successSignin,'success');closeDirectContactModal();checkUserSession();renderApplications();
+        }else showCustomAlert(t.errorSignin);
+    }
+}
 
 function checkUserSession(){const lu=localStorage.getItem('logged_user');const ps=document.getElementById('userProfileSection');const cte=document.getElementById('t-contact-title'),cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');const abi=document.getElementById('authBoxIcon');if(lu){try{const u=JSON.parse(lu);if(ps)ps.style.display='block';const pd=(id,v)=>{const el=document.getElementById(id);if(el)el.innerText=v;};pd('profileDisplayName',u.name||'User');pd('profileDisplayUsernameDesktop',u.username||'@username');pd('profileDisplayEmailDesktop',u.email||'-');pd('profileDisplayBirthdateDesktop',(u.birthDay&&u.birthMonth&&u.birthYear)?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'--/--/----');pd('profileDisplayUsernameMobile',u.username||'@username');pd('profileDisplayEmail',u.email||'-');const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const ppd=document.getElementById('profilePhotoDisplay');if(ppd)ppd.src=p;const ppl=document.getElementById('profilePhotoLarge');if(ppl)ppl.src=p;const br=document.getElementById('profileBirthdateRow'),bd=document.getElementById('profileDisplayBirthdate');if(u.birthDay&&u.birthMonth&&u.birthYear){if(br)br.style.display='flex';if(bd)bd.innerText=`${u.birthDay}/${u.birthMonth}/${u.birthYear}`;}else if(br)br.style.display='none';const sT=modalTranslations[currentLang]||modalTranslations.en;if(cte)cte.innerText=sT.userAccount;if(cse)cse.innerText=sT.activeSession;if(cme)cme.innerText=u.name?`${sT.welcomeUser} ${u.name}`:sT.sessionActive;if(abi)abi.className='fa-solid fa-user-check';const pdc=document.getElementById('profileDetailsContainer');if(pdc)pdc.style.display='none';const pi=document.getElementById('privacyIcon');if(pi)pi.className='fa-solid fa-eye-slash';}catch(e){}}else{const sT=modalTranslations[currentLang]||modalTranslations.en;if(ps)ps.style.display='none';if(cte)cte.innerText=sT.signInSignUp;if(cse)cse.innerText=sT.signInSignUp;if(cme)cme.innerText=sT.signInToJoin;if(abi)abi.className='fa-solid fa-right-to-bracket';}}
 
@@ -1520,10 +1916,8 @@ window.introConstellation=createConstellationSystem('intro-canvas',{numberOfPart
 
 /* INIT */
 window.addEventListener('DOMContentLoaded',()=>{
-    setTimeout(()=>{const intro=document.getElementById('intro-screen');if(intro){intro.style.opacity='0';intro.style.visibility='hidden';setTimeout(()=>{intro.style.display='none';if(window.introConstellation&&window.introConstellation.stop)window.introConstellation.stop();fireConfettiDoubleBurst();},600);}},1500);
-    initTheme();
-    checkUserSession();
-    applySiteContent();
+    setTimeout(()=>{const intro=document.getElementById('intro-screen');if(intro){intro.style.opacity='0';intro.style.visibility='hidden';setTimeout(()=>{intro.style.display='none';if(window.introConstellation&&window.introConstellation.stop)window.introConstellation.stop();fireConfettiBurst(1);},600);}},1500);
+    initTheme();checkUserSession();applySiteContent();
     const sl=sessionStorage.getItem('site_lang')||'en';
     changeLanguage(sl);
     const nf=document.getElementById('contactClientName');
