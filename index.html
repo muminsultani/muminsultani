@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en" id="htmlRoot">
 <head>
 <meta charset="UTF-8">
@@ -73,22 +72,9 @@ section{border-top:1px solid var(--line-color);padding-top:24px}
 .contact-text span{display:block;font-size:.8rem;color:var(--text-secondary)}
 .contact-text strong{font-size:1rem;color:var(--text-primary);word-break:break-word}
 .contact-box i{color:#9333ea;font-size:1.1rem;flex-shrink:0}
-
-/* ============================================================
-   ✅ RESPONSIVE APPS GRID — 8 SLOTS
-   Mobile: 2 columns | Tablet: 4 columns | Desktop: 6 columns
-   ============================================================ */
-.apps-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-}
-@media (min-width:640px){
-    .apps-grid{grid-template-columns:repeat(4,1fr);gap:14px;}
-}
-@media (min-width:1025px){
-    .apps-grid{grid-template-columns:repeat(6,1fr);gap:16px;}
-}
+.apps-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (min-width:640px){.apps-grid{grid-template-columns:repeat(4,1fr);gap:14px}}
+@media (min-width:1025px){.apps-grid{grid-template-columns:repeat(6,1fr);gap:16px}}
 .app-card{background:var(--box-bg);border:1px solid var(--line-color);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px;transition:all .3s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden;min-height:120px;text-decoration:none;color:inherit}
 .app-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(147,51,234,.1) 0%,transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none}
 .app-card:hover{border-color:rgba(147,51,234,.45);background:var(--box-hover-bg);transform:translateY(-3px);box-shadow:0 12px 32px rgba(147,51,234,.15)}
@@ -97,7 +83,7 @@ section{border-top:1px solid var(--line-color);padding-top:24px}
 .app-card.locked{cursor:pointer}
 .app-card.locked .app-card-icon{position:relative}
 .app-card.locked .app-card-icon::after{content:'\f023';font-family:'Font Awesome 6 Free';font-weight:900;position:absolute;right:-3px;bottom:-3px;font-size:.55rem;background:#ef4444;color:#fff;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(239,68,68,.4)}
-.app-card-icon{font-size:1.8rem;line-height:1;width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(147,51,234,.15),rgba(192,132,252,.08));border:1px solid rgba(147,51,234,.25);border-radius:10px;flex-shrink:0}
+.app-card-icon{font-size:1.8rem;line-height:1;width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(147,51,234,.15),rgba(192,132,252,.08));border:1px solid rgba(147,51,234,.25);border-radius:10px;flex-shrink:0;overflow:hidden}
 .app-card-icon img{width:100%;height:100%;object-fit:cover;border-radius:10px}
 .app-card-body{display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
 .app-card-name{font-size:.88rem;font-weight:700;color:var(--text-primary);display:flex;align-items:center;gap:5px;letter-spacing:-.1px;word-break:break-word;line-height:1.25}
@@ -106,11 +92,10 @@ section{border-top:1px solid var(--line-color);padding-top:24px}
 .app-card-desc{font-size:.72rem;color:var(--text-secondary);font-weight:300;line-height:1.4;word-break:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .app-card-empty{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;color:var(--text-secondary);opacity:.4;text-align:center;padding:8px 4px}
 .app-card-empty i{font-size:1.6rem;color:#9333ea}
-.app-card-empty span{font-size:.68rem;font-weight:500;letter-spacing:.2px}
+.app-card-empty span{font-size:.68rem;font-weight:500}
 .app-card-tag{position:absolute;top:9px;right:9px;font-size:.5rem;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:3px 6px;border-radius:5px;background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;box-shadow:0 2px 8px rgba(147,51,234,.3);display:inline-flex;align-items:center;gap:3px}
 .app-card-tag.apk-tag{background:linear-gradient(135deg,#22c55e,#16a34a);box-shadow:0 2px 8px rgba(34,197,94,.35)}
 .app-card-tag i{font-size:.55rem}
-
 .modal-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(5,5,8,.5);backdrop-filter:blur(4px);z-index:10000;display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;padding:16px;pointer-events:none}
 .modal-overlay.active{opacity:1;visibility:visible;pointer-events:auto}
 .modal-overlay.high-z{z-index:15000}
@@ -241,7 +226,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .admin-slot{background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;padding:10px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
 .admin-slot-num{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;flex-shrink:0}
 .admin-slot-info{flex:1;min-width:0}
-.admin-slot-name{font-size:.82rem;font-weight:700;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.admin-slot-name{font-size:.82rem;font-weight:700;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:5px}
 .admin-slot-url{font-size:.68rem;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .admin-slot-btns{display:flex;gap:5px}
 .admin-slot-btn{width:28px;height:28px;border-radius:7px;border:1px solid var(--line-color);background:var(--box-bg);color:var(--text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.72rem}
@@ -254,15 +239,19 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .admin-action-btn.ghost{background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-primary)}
 .admin-stat{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--box-bg);border:1px solid var(--line-color);border-radius:8px;margin-bottom:6px;font-size:.78rem}
 .admin-stat i{color:#9333ea;width:16px;text-align:center}
-.apk-upload-wrapper{position:relative;background:var(--box-bg);border:2px dashed var(--line-color);border-radius:10px;padding:16px;text-align:center;cursor:pointer;transition:all .2s}
-.apk-upload-wrapper:hover{border-color:rgba(147,51,234,.5);background:var(--box-hover-bg)}
-.apk-upload-wrapper.has-file{border-style:solid;border-color:#22c55e;background:rgba(34,197,94,.05);border-width:1px}
-.apk-upload-icon{font-size:1.5rem;color:#9333ea;margin-bottom:6px;display:block}
-.apk-upload-text{font-size:.78rem;color:var(--text-secondary);display:block;font-weight:600}
-.apk-upload-info{font-size:.75rem;color:#22c55e;font-weight:700;margin-top:6px;word-break:break-all;line-height:1.4}
-.apk-upload-wrapper.has-file .apk-upload-icon{color:#22c55e}
-.apk-clear-btn{background:rgba(239,68,68,.1);color:#ef4444;border:1px solid rgba(239,68,68,.3);padding:6px 12px;border-radius:8px;font-size:.72rem;font-weight:700;cursor:pointer;margin-top:8px;display:inline-flex;align-items:center;gap:5px}
+/* ICON + APK UPLOAD */
+.upload-wrapper{position:relative;background:var(--box-bg);border:2px dashed var(--line-color);border-radius:10px;padding:16px;text-align:center;cursor:pointer;transition:all .2s}
+.upload-wrapper:hover{border-color:rgba(147,51,234,.5);background:var(--box-hover-bg)}
+.upload-wrapper.has-file{border-style:solid;border-color:#22c55e;background:rgba(34,197,94,.05);border-width:1px}
+.upload-wrapper.has-icon{border-style:solid;border-color:#9333ea;background:rgba(147,51,234,.05);border-width:1px}
+.upload-icon{font-size:1.5rem;color:#9333ea;margin-bottom:6px;display:block}
+.upload-text{font-size:.78rem;color:var(--text-secondary);display:block;font-weight:600}
+.upload-info{font-size:.75rem;color:#22c55e;font-weight:700;margin-top:6px;word-break:break-all;line-height:1.4}
+.upload-wrapper.has-file .upload-icon{color:#22c55e}
+.upload-wrapper.has-icon .upload-icon{color:#9333ea}
 .apk-badge{display:inline-flex;align-items:center;gap:3px;font-size:.6rem;font-weight:800;letter-spacing:.5px;padding:2px 6px;border-radius:4px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;text-transform:uppercase}
+.icon-preview-mini{width:24px;height:24px;border-radius:6px;object-fit:cover;border:1px solid var(--line-color);flex-shrink:0;pointer-events:auto}
+.icon-preview-big{width:64px;height:64px;border-radius:12px;object-fit:cover;border:2px solid rgba(147,51,234,.4);margin:0 auto 8px;display:block;background:var(--box-bg);pointer-events:auto}
 </style>
 <script>(function(){const t=localStorage.getItem('theme');const h=new Date().getHours();let th=t||((h>=6&&h<18)?'light':'dark');if(th==='light'){document.documentElement.classList.add('light-mode-init');document.addEventListener('DOMContentLoaded',()=>{document.body.classList.add('light-mode');['themeIcon','modalThemeIcon','contactModalThemeIcon'].forEach(id=>{const e=document.getElementById(id);if(e)e.className='fa-solid fa-sun';});});}})();</script>
 </head>
@@ -463,7 +452,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </form>
 </div>
 <div class="admin-section" data-section="apps">
-<div class="admin-hint"><i class="fa-solid fa-circle-info" style="color:#9333ea"></i> <span id="hint-apps">8 slots. Click pencil to edit. Upload APK (login required) or paste URL.</span></div>
+<div class="admin-hint"><i class="fa-solid fa-circle-info" style="color:#9333ea"></i> <span id="hint-apps">8 slots. Upload icon image + APK from phone, or paste URL.</span></div>
 <div id="adminSlotsList"></div>
 </div>
 <div class="admin-section" data-section="experience">
@@ -523,7 +512,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 </div>
 
-<!-- APP EDIT -->
+<!-- APP EDIT — ICON UPLOAD + APK UPLOAD -->
 <div class="modal-overlay admin-z" id="adminEditModal">
 <div class="modal-container" style="max-width:440px">
 <div class="modal-header">
@@ -532,16 +521,28 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 <form id="adminEditForm" onsubmit="saveAppSlot(event)">
 <input type="hidden" id="editSlotIndex" value="0">
-<div class="form-group"><label class="form-label" id="ae-icon-label">Icon (Emoji or Image URL)</label><input type="text" class="form-input" id="editAppIcon" maxlength="200" placeholder="📱 or https://..."></div>
+<div class="form-group">
+<label class="form-label" id="ae-icon-label">📷 App Icon (Upload image from phone)</label>
+<div class="upload-wrapper" id="iconUploadWrapper" onclick="document.getElementById('editAppIconFile').click()">
+<img id="iconPreviewBig" class="icon-preview-big" style="display:none" alt="">
+<i class="fa-solid fa-image upload-icon" id="iconUploadIcon"></i>
+<span class="upload-text" id="iconUploadText">Tap to choose icon image</span>
+<div class="upload-info" id="iconUploadInfo" style="display:none"></div>
+<input type="file" id="editAppIconFile" accept="image/*" style="display:none" onchange="handleIconUpload(event)">
+</div>
+<button type="button" class="apk-clear-btn" id="iconClearBtn" onclick="clearIconFile();event.stopPropagation();" style="display:none">
+<i class="fa-solid fa-trash-can"></i> <span id="ae-icon-clear-text">Remove Icon</span>
+</button>
+</div>
 <div class="form-group"><label class="form-label" id="ae-name-label">App Name</label><input type="text" class="form-input" id="editAppName" required maxlength="40" placeholder="My App"></div>
 <div class="form-group"><label class="form-label" id="ae-desc-label">Description</label><textarea class="form-textarea" id="editAppDesc" required maxlength="200" style="min-height:60px"></textarea></div>
 <div class="form-group"><label class="form-label" id="ae-url-label">Link (optional - if no APK)</label><input type="text" class="form-input" id="editAppUrl" maxlength="300" placeholder="https://..."></div>
 <div class="form-group">
 <label class="form-label" id="ae-apk-label">📦 Upload APK File (Optional - directly from phone)</label>
-<div class="apk-upload-wrapper" id="apkUploadWrapper" onclick="document.getElementById('editAppApkFile').click()">
-<i class="fa-solid fa-file-arrow-up apk-upload-icon" id="apkUploadIcon"></i>
-<span class="apk-upload-text" id="apkUploadText">Tap to choose APK file</span>
-<div class="apk-upload-info" id="apkUploadInfo" style="display:none"></div>
+<div class="upload-wrapper" id="apkUploadWrapper" onclick="document.getElementById('editAppApkFile').click()">
+<i class="fa-solid fa-file-arrow-up upload-icon" id="apkUploadIcon"></i>
+<span class="upload-text" id="apkUploadText">Tap to choose APK file</span>
+<div class="upload-info" id="apkUploadInfo" style="display:none"></div>
 <input type="file" id="editAppApkFile" accept=".apk,application/vnd.android.package-archive" style="display:none" onchange="handleApkUpload(event)">
 </div>
 <button type="button" class="apk-clear-btn" id="apkClearBtn" onclick="clearApkFile();event.stopPropagation();" style="display:none">
@@ -896,7 +897,7 @@ window.addEventListener('blur',()=>{if(document.getElementById('cropModal').clas
 window.addEventListener('focus',()=>{curtain.style.opacity='0';curtain.style.visibility='hidden';});
 
 /* ADMIN */
-const ADMIN_MASTER_PASSWORD='Mum1n$ultan1';
+const ADMIN_MASTER_PASSWORD='Mum1n$ultan1_Adm1n_M@ster_2026!xK9#pQ7&Secure';
 const ADMIN_SESSION_KEY='admin_session_active_v2';
 const SITE_CONTENT_KEY='site_content_v1';
 function isAdminLoggedIn(){try{return sessionStorage.getItem(ADMIN_SESSION_KEY)==='yes';}catch(e){return false;}}
@@ -905,15 +906,18 @@ function closeAdminLogin(){document.getElementById('adminLoginModal').classList.
 function verifyAdminPassword(e){e.preventDefault();const v=document.getElementById('adminPasswordInput').value;if(v===ADMIN_MASTER_PASSWORD){try{sessionStorage.setItem(ADMIN_SESSION_KEY,'yes');}catch(err){}closeAdminLogin();openAdminPanel();fireConfettiBurst(.6);}else{showCustomAlert((currentLang==='tr')?'Yanlış şifre!':'Incorrect password!');document.getElementById('adminPasswordInput').value='';}}
 function logoutAdmin(){try{sessionStorage.removeItem(ADMIN_SESSION_KEY);}catch(e){}closeAdminPanel();}
 
-/* INDEXEDDB APK */
-let apkDB=null,pendingApkFile=null,pendingApkDelete=false;
-function openApkDB(){return new Promise((resolve,reject)=>{if(apkDB)return resolve(apkDB);try{const req=indexedDB.open('muminsultani_apk_db_v1',1);req.onupgradeneeded=(e)=>{const db=e.target.result;if(!db.objectStoreNames.contains('apks')){db.createObjectStore('apks');}};req.onsuccess=(e)=>{apkDB=e.target.result;resolve(apkDB);};req.onerror=(e)=>reject(e.target.error);}catch(e){reject(e);}});}
+/* INDEXEDDB — APK + ICON storage */
+let apkDB=null,pendingApkFile=null,pendingApkDelete=false,pendingIconDataUrl=null,pendingIconDelete=false;
+function openApkDB(){return new Promise((resolve,reject)=>{if(apkDB)return resolve(apkDB);try{const req=indexedDB.open('muminsultani_apk_db_v2',1);req.onupgradeneeded=(e)=>{const db=e.target.result;if(!db.objectStoreNames.contains('apks')){db.createObjectStore('apks');}if(!db.objectStoreNames.contains('icons')){db.createObjectStore('icons');}};req.onsuccess=(e)=>{apkDB=e.target.result;resolve(apkDB);};req.onerror=(e)=>reject(e.target.error);}catch(e){reject(e);}});}
 async function storeApkFile(idx,file){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['apks'],'readwrite'),st=tx.objectStore('apks');const data={blob:file,name:file.name,size:file.size,type:file.type||'application/vnd.android.package-archive',storedAt:Date.now()};const req=st.put(data,'slot_'+idx);req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
 async function getApkFile(idx){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['apks'],'readonly'),st=tx.objectStore('apks');const req=st.get('slot_'+idx);req.onsuccess=(e)=>resolve(e.target.result||null);req.onerror=(e)=>reject(e.target.error);});}
 async function deleteApkFile(idx){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['apks'],'readwrite'),st=tx.objectStore('apks');const req=st.delete('slot_'+idx);req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
+async function storeIconData(idx,dataUrl){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['icons'],'readwrite'),st=tx.objectStore('icons');const data={dataUrl,storedAt:Date.now()};const req=st.put(data,'icon_'+idx);req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
+async function getIconData(idx){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['icons'],'readonly'),st=tx.objectStore('icons');const req=st.get('icon_'+idx);req.onsuccess=(e)=>resolve(e.target.result||null);req.onerror=(e)=>reject(e.target.error);});}
+async function deleteIconData(idx){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['icons'],'readwrite'),st=tx.objectStore('icons');const req=st.delete('icon_'+idx);req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
 function formatFileSize(b){if(b<1024)return b+' B';if(b<1024*1024)return (b/1024).toFixed(1)+' KB';if(b<1024*1024*1024)return (b/(1024*1024)).toFixed(2)+' MB';return (b/(1024*1024*1024)).toFixed(2)+' GB';}
 
-/* ⚠️ APK DOWNLOAD WITH LOGIN REQUIRED */
+/* DOWNLOAD APK — requires login */
 async function downloadApk(slotIndex){
     const lu=localStorage.getItem('logged_user');
     if(!lu){
@@ -925,17 +929,19 @@ async function downloadApk(slotIndex){
     try{
         const apk=await getApkFile(slotIndex);
         if(!apk){showCustomAlert(currentLang==='tr'?'APK bulunamadı!':'APK not found!');return;}
-        const blob=apk.blob instanceof Blob?apk.blob:new Blob([apk.blob],{type:apk.type||'application/vnd.android.package-archive'});
+        let blob;
+        if(apk.blob instanceof Blob){blob=apk.blob;}
+        else{const byteArray=new Uint8Array(apk.blob);blob=new Blob([byteArray],{type:apk.type||'application/vnd.android.package-archive'});}
         const url=URL.createObjectURL(blob);
         const a=document.createElement('a');
         a.href=url;
         a.download=apk.name||`app_slot_${slotIndex+1}.apk`;
+        a.style.display='none';
         document.body.appendChild(a);
         a.click();
-        document.body.removeChild(a);
-        setTimeout(()=>URL.revokeObjectURL(url),1000);
+        setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},2000);
         showCustomAlert(currentLang==='tr'?`İndiriliyor: ${apk.name}`:`Downloading: ${apk.name}`,'success');
-    }catch(e){console.error(e);showCustomAlert(currentLang==='tr'?'İndirme hatası!':'Download error!');}
+    }catch(e){console.error('Download error:',e);showCustomAlert(currentLang==='tr'?'İndirme hatası!':'Download error!');}
 }
 
 /* SITE CONTENT — 8 SLOTS */
@@ -943,14 +949,8 @@ const DEFAULT_SITE_CONTENT={
     header:{brand:'muminsultani',roleEn:'Software Developer',roleTr:'Yazılım Geliştirici'},
     social:{github:'https://github.com/muminsultani',instagram:'https://instagram.com/sultanimumin',gmail:'muminsultani@hotmail.com'},
     apps:[
-        {name:'',desc:'',url:'',icon:''},
-        {name:'',desc:'',url:'',icon:''},
-        {name:'',desc:'',url:'',icon:''},
-        {name:'',desc:'',url:'',icon:''},
-        {name:'',desc:'',url:'',icon:''},
-        {name:'',desc:'',url:'',icon:''},
-        {name:'',desc:'',url:'',icon:''},
-        {name:'',desc:'',url:'',icon:''}
+        {name:'',desc:'',url:'',icon:''},{name:'',desc:'',url:'',icon:''},{name:'',desc:'',url:'',icon:''},{name:'',desc:'',url:'',icon:''},
+        {name:'',desc:'',url:'',icon:''},{name:'',desc:'',url:'',icon:''},{name:'',desc:'',url:'',icon:''},{name:'',desc:'',url:'',icon:''}
     ],
     experience:{titleEn:'Remote Software Developer',titleTr:'Uzaktan Yazılım Geliştirici',date:'2025 - Present',descEn:'Developing scalable backend services, REST APIs, and mobile-friendly web solutions using Python and Node.js.',descTr:"Python and Node.js kullanarak ölçeklenebilir arka uç servisleri, REST API'ler ve mobil uyumlu web çözümleri geliştirme."},
     setup:{osEn:'Linux / Mobile Node',osTr:'Linux / Mobil Node',editorEn:'Spck & VS Code',editorTr:'Spck & VS Code'},
@@ -985,7 +985,9 @@ function applySiteContent(){
 }
 
 /* ============================================================
-   RENDER APPLICATIONS — APK needs login, download icon
+   RENDER APPLICATIONS
+   - Icon priority: uploaded image (IndexedDB) > URL > emoji
+   - APK download: requires login
    ============================================================ */
 async function renderApplications(){
     const grid=document.getElementById('appsGrid');if(!grid)return;
@@ -998,9 +1000,11 @@ async function renderApplications(){
         const card=document.createElement('div');
         card.className='app-card';
         const hasContent=app.name&&app.name.trim().length>0;
-        let apkData=null;
+        let apkData=null,iconData=null;
         try{apkData=await getApkFile(idx);}catch(e){apkData=null;}
+        try{iconData=await getIconData(idx);}catch(e){iconData=null;}
         const hasApk=!!apkData;
+        const hasUploadedIcon=iconData&&iconData.dataUrl;
         if(hasContent){
             const hasUrl=app.url&&app.url.trim().length>0;
             if(hasApk){
@@ -1017,12 +1021,20 @@ async function renderApplications(){
                 });
                 card.setAttribute('title',app.url);
             }
-            const iconHTML=(app.icon&&app.icon.trim().startsWith('http'))?`<img src="${escapeHtml(app.icon.trim())}" alt="">`:(app.icon&&app.icon.trim()?escapeHtml(app.icon.trim()):'📱');
-            /* ✅ NEW: download icon for APK, external link icon for URL */
+            /* Icon priority: uploaded image > URL > emoji */
+            let iconHTML;
+            if(hasUploadedIcon){
+                iconHTML=`<img src="${iconData.dataUrl}" alt="">`;
+            }else if(app.icon&&app.icon.trim().startsWith('http')){
+                iconHTML=`<img src="${escapeHtml(app.icon.trim())}" alt="">`;
+            }else if(app.icon&&app.icon.trim()){
+                iconHTML=escapeHtml(app.icon.trim());
+            }else{
+                iconHTML='📱';
+            }
             let nameIcon='';
             if(hasApk)nameIcon='<i class="fa-solid fa-download download-icon"></i>';
             else if(hasUrl)nameIcon='<i class="fa-solid fa-arrow-up-right-from-square"></i>';
-            /* ✅ NEW: APK badge with Android robot icon */
             let tagHTML='';
             if(hasApk)tagHTML='<span class="app-card-tag apk-tag"><i class="fa-brands fa-android"></i>APK</span>';
             else if(hasUrl)tagHTML='<span class="app-card-tag">LINK</span>';
@@ -1082,12 +1094,19 @@ function renderAdminSlots(){
         const item=document.createElement('div');
         item.className='admin-slot';
         const filled=app.name&&app.name.trim().length>0;
-        getApkFile(idx).then(apk=>{
+        Promise.all([getApkFile(idx).catch(()=>null),getIconData(idx).catch(()=>null)]).then(([apk,icon])=>{
             const hasApk=!!apk;
+            const hasIcon=icon&&icon.dataUrl;
             const apkBadge=hasApk?`<span class="apk-badge"><i class="fa-brands fa-android" style="font-size:.55rem"></i> APK ${formatFileSize(apk.size)}</span>`:'';
-            item.innerHTML=`<div class="admin-slot-num">${idx+1}</div><div class="admin-slot-info"><div class="admin-slot-name">${filled?escapeHtml(app.name):`<em style="opacity:.5">${currentLang==='tr'?'Boş Slot':'Empty Slot'}</em>`} ${apkBadge}</div><div class="admin-slot-url">${filled&&app.url?escapeHtml(app.url):(filled&&app.desc?escapeHtml(app.desc):(currentLang==='tr'?'Boş slot':'Empty slot'))}</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="editAppSlot(${idx})"><i class="fa-solid fa-pen"></i></button><button class="admin-slot-btn delete" onclick="clearAppSlot(${idx})"><i class="fa-solid fa-trash-can"></i></button></div>`;
-        }).catch(()=>{
-            item.innerHTML=`<div class="admin-slot-num">${idx+1}</div><div class="admin-slot-info"><div class="admin-slot-name">${filled?escapeHtml(app.name):`<em style="opacity:.5">Empty</em>`}</div><div class="admin-slot-url">${filled&&app.url?escapeHtml(app.url):''}</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="editAppSlot(${idx})"><i class="fa-solid fa-pen"></i></button><button class="admin-slot-btn delete" onclick="clearAppSlot(${idx})"><i class="fa-solid fa-trash-can"></i></button></div>`;
+            let iconPreview='';
+            if(hasIcon){
+                iconPreview=`<img src="${icon.dataUrl}" class="icon-preview-mini" alt="">`;
+            }else if(app.icon&&app.icon.trim().startsWith('http')){
+                iconPreview=`<img src="${escapeHtml(app.icon.trim())}" class="icon-preview-mini" alt="" onerror="this.style.display='none'">`;
+            }else if(app.icon&&app.icon.trim()){
+                iconPreview=`<span style="font-size:1.1rem">${escapeHtml(app.icon.trim())}</span>`;
+            }
+            item.innerHTML=`<div class="admin-slot-num">${idx+1}</div>${iconPreview?`<div style="flex-shrink:0;display:flex;align-items:center;justify-content:center;width:24px">${iconPreview}</div>`:''}<div class="admin-slot-info"><div class="admin-slot-name">${filled?escapeHtml(app.name):`<em style="opacity:.5">${currentLang==='tr'?'Boş Slot':'Empty Slot'}</em>`} ${apkBadge}</div><div class="admin-slot-url">${filled&&app.url?escapeHtml(app.url):(filled&&app.desc?escapeHtml(app.desc):(currentLang==='tr'?'Boş slot':'Empty slot'))}</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="editAppSlot(${idx})"><i class="fa-solid fa-pen"></i></button><button class="admin-slot-btn delete" onclick="clearAppSlot(${idx})"><i class="fa-solid fa-trash-can"></i></button></div>`;
         });
         list.appendChild(item);
     });
@@ -1095,20 +1114,86 @@ function renderAdminSlots(){
 async function editAppSlot(idx){
     const c=getSiteContent();
     const app=c.apps[idx]||{name:'',desc:'',url:'',icon:''};
-    pendingApkFile=null;pendingApkDelete=false;
+    pendingApkFile=null;pendingApkDelete=false;pendingIconDataUrl=null;pendingIconDelete=false;
     document.getElementById('editSlotIndex').value=idx;
-    document.getElementById('editAppIcon').value=app.icon||'';
     document.getElementById('editAppName').value=app.name||'';
     document.getElementById('editAppDesc').value=app.desc||'';
     document.getElementById('editAppUrl').value=app.url||'';
     document.getElementById('editAppApkFile').value='';
-    let existingApk=null;
+    document.getElementById('editAppIconFile').value='';
+    let existingApk=null,existingIcon=null;
     try{existingApk=await getApkFile(idx);}catch(e){}
-    if(existingApk){updateApkUI({name:existingApk.name,size:existingApk.size,existing:true});}else{updateApkUI(null);}
+    try{existingIcon=await getIconData(idx);}catch(e){}
+    updateApkUI(existingApk?{name:existingApk.name,size:existingApk.size,existing:true}:null);
+    if(existingIcon&&existingIcon.dataUrl){
+        updateIconUI({dataUrl:existingIcon.dataUrl,existing:true});
+    }else if(app.icon&&app.icon.trim().startsWith('http')){
+        updateIconUI({dataUrl:app.icon.trim(),existing:true,isUrl:true});
+    }else{
+        updateIconUI(null);
+    }
     document.getElementById('adminEditModal').classList.add('active');
     setTimeout(()=>document.getElementById('editAppName').focus(),250);
 }
 function closeAdminEdit(){document.getElementById('adminEditModal').classList.remove('active');}
+
+/* ICON UPLOAD */
+function handleIconUpload(e){
+    const f=e.target.files[0];
+    if(!f)return;
+    if(!f.type.startsWith('image/')){
+        showCustomAlert(currentLang==='tr'?'Lütfen bir resim dosyası seçin!':'Please choose an image file!');
+        e.target.value='';
+        return;
+    }
+    if(f.size>5*1024*1024){
+        showCustomAlert(currentLang==='tr'?'Resim 5 MB\'dan küçük olmalı!':'Image must be under 5 MB!');
+        e.target.value='';
+        return;
+    }
+    const reader=new FileReader();
+    reader.onload=function(ev){
+        pendingIconDataUrl=ev.target.result;
+        pendingIconDelete=false;
+        updateIconUI({dataUrl:ev.target.result,name:f.name,size:f.size,isNew:true});
+    };
+    reader.readAsDataURL(f);
+}
+function clearIconFile(){
+    pendingIconDataUrl=null;
+    pendingIconDelete=true;
+    document.getElementById('editAppIconFile').value='';
+    updateIconUI(null);
+}
+function updateIconUI(file){
+    const w=document.getElementById('iconUploadWrapper');
+    const i=document.getElementById('iconUploadInfo');
+    const t=document.getElementById('iconUploadText');
+    const b=document.getElementById('iconClearBtn');
+    const ico=document.getElementById('iconUploadIcon');
+    const prev=document.getElementById('iconPreviewBig');
+    if(file&&file.dataUrl){
+        w.classList.add('has-icon');
+        i.style.display='block';
+        const badge=file.isNew?'🆕 ':(file.existing?(file.isUrl?'🔗 ':'📷 '):'');
+        const label=file.name?`${badge}${file.name}${file.size?' ('+formatFileSize(file.size)+')':''}`:(file.isUrl?`${badge}Linked image`:`${badge}Uploaded icon`);
+        i.textContent=label;
+        i.style.color='#9333ea';
+        t.textContent=currentLang==='tr'?'Değiştirmek için tıkla':'Tap to change';
+        b.style.display='inline-flex';
+        if(ico)ico.style.display='none';
+        if(prev){prev.src=file.dataUrl;prev.style.display='block';}
+    }else{
+        w.classList.remove('has-icon');
+        i.style.display='none';
+        t.textContent=currentLang==='tr'?'İkon resmi seç (telefondan)':'Tap to choose icon image';
+        b.style.display='none';
+        if(ico)ico.style.display='block';
+        if(prev){prev.style.display='none';prev.src='';}
+    }
+}
+
+/* APK UPLOAD */
 function handleApkUpload(e){const f=e.target.files[0];if(!f)return;if(!f.name.toLowerCase().endsWith('.apk')){showCustomAlert(currentLang==='tr'?'Lütfen bir APK dosyası seçin!':'Please choose an APK file!');e.target.value='';return;}pendingApkFile=f;pendingApkDelete=false;updateApkUI({name:f.name,size:f.size,isNew:true});}
 function clearApkFile(){pendingApkFile=null;pendingApkDelete=true;document.getElementById('editAppApkFile').value='';updateApkUI(null);}
 function updateApkUI(file){
@@ -1122,28 +1207,34 @@ function updateApkUI(file){
         i.style.display='block';
         const badge=file.isNew?'🆕 ':(file.existing?'📦 ':'');
         i.textContent=`${badge}${file.name} (${formatFileSize(file.size)})`;
+        i.style.color='#22c55e';
         t.textContent=currentLang==='tr'?'Değiştirmek için tıkla':'Tap to change';
         b.style.display='inline-flex';
-        if(ico)ico.className='fa-solid fa-circle-check apk-upload-icon';
+        if(ico)ico.className='fa-solid fa-circle-check upload-icon';
     }else{
         w.classList.remove('has-file');
         i.style.display='none';
         t.textContent=currentLang==='tr'?'APK dosyası seç (isteğe bağlı)':'Tap to choose APK file (optional)';
         b.style.display='none';
-        if(ico)ico.className='fa-solid fa-file-arrow-up apk-upload-icon';
+        if(ico)ico.className='fa-solid fa-file-arrow-up upload-icon';
     }
 }
 async function saveAppSlot(e){
     e.preventDefault();
     const idx=parseInt(document.getElementById('editSlotIndex').value)||0;
     const c=getSiteContent();
-    c.apps[idx]={icon:document.getElementById('editAppIcon').value.trim(),name:document.getElementById('editAppName').value.trim(),desc:document.getElementById('editAppDesc').value.trim(),url:document.getElementById('editAppUrl').value.trim()};
+    /* Preserve existing URL icon if user uploaded an image — clear url icon */
+    let iconValue=c.apps[idx].icon||'';
+    if(pendingIconDataUrl||pendingIconDelete){iconValue='';}
+    c.apps[idx]={icon:iconValue,name:document.getElementById('editAppName').value.trim(),desc:document.getElementById('editAppDesc').value.trim(),url:document.getElementById('editAppUrl').value.trim()};
     saveSiteContent(c);
     try{
         if(pendingApkFile){await storeApkFile(idx,pendingApkFile);}
         else if(pendingApkDelete){await deleteApkFile(idx);}
-    }catch(err){console.error(err);showCustomAlert(currentLang==='tr'?'APK kaydedilemedi!':'APK save failed!');}
-    pendingApkFile=null;pendingApkDelete=false;
+        if(pendingIconDataUrl){await storeIconData(idx,pendingIconDataUrl);}
+        else if(pendingIconDelete){await deleteIconData(idx);}
+    }catch(err){console.error(err);showCustomAlert(currentLang==='tr'?'Kaydedilemedi!':'Save failed!');}
+    pendingApkFile=null;pendingApkDelete=false;pendingIconDataUrl=null;pendingIconDelete=false;
     closeAdminEdit();renderAdminSlots();renderApplications();
     const dle=document.getElementById('dash-last-edit');if(dle)dle.textContent=(currentLang==='tr'?`Son düzenleme: ${c.lastEdit}`:`Last edit: ${c.lastEdit}`);
 }
@@ -1152,6 +1243,7 @@ async function clearAppSlot(idx){
     c.apps[idx]={name:'',desc:'',url:'',icon:''};
     saveSiteContent(c);
     try{await deleteApkFile(idx);}catch(e){}
+    try{await deleteIconData(idx);}catch(e){}
     renderAdminSlots();renderApplications();
 }
 function saveAdminHeader(e){e.preventDefault();const c=getSiteContent();c.header.brand=document.getElementById('ah-brand').value.trim()||'muminsultani';c.header.roleEn=document.getElementById('ah-role-en').value.trim()||'Software Developer';c.header.roleTr=document.getElementById('ah-role-tr').value.trim()||'Yazılım Geliştirici';saveSiteContent(c);applySiteContent();showCustomAlert(currentLang==='tr'?'Kaydedildi!':'Saved!');}
@@ -1162,7 +1254,7 @@ function saveAdminStack(e){e.preventDefault();const c=getSiteContent();c.stack.b
 function saveAdminFooter(e){e.preventDefault();const c=getSiteContent();c.footer.brand=document.getElementById('af-brand').value.trim()||'muminsultani';c.footer.scanEn=document.getElementById('af-scan-en').value.trim();c.footer.scanTr=document.getElementById('af-scan-tr').value.trim();c.footer.copyright=document.getElementById('af-copy').value.trim();saveSiteContent(c);applySiteContent();showCustomAlert(currentLang==='tr'?'Kaydedildi!':'Saved!');}
 function exportSiteBackup(){const c=getSiteContent();const data=JSON.stringify(c,null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`muminsultani-backup-${new Date().toISOString().slice(0,10)}.json`;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),100);showCustomAlert(currentLang==='tr'?'Yedek indirildi!':'Backup downloaded!');}
 function importSiteBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){try{const d=JSON.parse(ev.target.result);if(!d||typeof d!=='object')throw new Error('Invalid');saveSiteContent(deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),d));applySiteContent();refreshAdminUI();showCustomAlert(currentLang==='tr'?'Yedek yüklendi!':'Backup imported!');}catch(err){showCustomAlert(currentLang==='tr'?'Geçersiz dosya!':'Invalid file!');}e.target.value='';};r.readAsText(f);}
-function confirmResetSite(){showCustomAlert(currentLang==='tr'?'Tüm site içeriği sıfırlanacak. Emin misiniz?':'All site content will be reset. Are you sure?','delete',async function(){localStorage.removeItem(SITE_CONTENT_KEY);try{for(let i=0;i<8;i++){await deleteApkFile(i);}}catch(e){}applySiteContent();refreshAdminUI();showCustomAlert(currentLang==='tr'?'Sıfırlandı!':'Reset complete!');});}
+function confirmResetSite(){showCustomAlert(currentLang==='tr'?'Tüm site içeriği sıfırlanacak. Emin misiniz?':'All site content will be reset. Are you sure?','delete',async function(){localStorage.removeItem(SITE_CONTENT_KEY);try{for(let i=0;i<8;i++){await deleteApkFile(i);await deleteIconData(i);}}catch(e){}applySiteContent();refreshAdminUI();showCustomAlert(currentLang==='tr'?'Sıfırlandı!':'Reset complete!');});}
 function checkAdminHash(){if(window.location.hash==='#manage-muminsultani'||window.location.hash==='#admin'){triggerAdminAccess();history.replaceState(null,'',window.location.pathname+window.location.search);}}
 window.addEventListener('hashchange',checkAdminHash);
 
@@ -1229,7 +1321,7 @@ function changeModalLanguage(lang){
         s('dash-btn-apps','Uygulamaları Yönet');s('dash-btn-backup','Yedek');
         s('hint-header','Marka ve rol.');s('ah-save','Kaydet');
         s('hint-social','Sosyal bağlantılar.');s('as-save','Kaydet');
-        s('hint-apps','8 slot. Kalem=düzenle, çöp=temizle. APK veya URL ekleyebilirsiniz. APK indirmek için giriş gerekir.');
+        s('hint-apps','8 slot. Telefondan ikon resmi ve APK yükleyebilirsiniz. APK indirmek için giriş gerekir.');
         s('hint-exp','İş deneyimi.');s('ae-exp-save','Kaydet');
         s('hint-setup','Kurulum.');s('au-save','Kaydet');
         s('hint-stack','Stack.');s('ak-save','Kaydet');
@@ -1237,17 +1329,19 @@ function changeModalLanguage(lang){
         s('hint-backup','Yedek al / geri yükle.');
         s('bk-export','JSON İndir');s('bk-import','JSON Yükle');s('bk-reset','Varsayılanlara Sıfırla');
         s('admin-logout-text','Yöneticiden Çıkış');s('admin-edit-title','Slotu Düzenle');
-        s('ae-icon-label','İkon (Emoji veya URL)');s('ae-name-label','Uygulama Adı');s('ae-desc-label','Açıklama');s('ae-url-label','Bağlantı (APK yoksa)');s('ae-save-text','Kaydet');
+        s('ae-icon-label','📷 Uygulama İkonu (Telefondan resim yükle)');s('ae-name-label','Uygulama Adı');s('ae-desc-label','Açıklama');s('ae-url-label','Bağlantı (APK yoksa)');s('ae-save-text','Kaydet');
         s('ae-apk-label','📦 APK Dosyası Yükle (İsteğe bağlı - direkt telefondan)');
         s('apkUploadText','APK dosyası seç (isteğe bağlı)');
         s('ae-apk-clear-text','APK\'yı Kaldır');
+        s('iconUploadText','İkon resmi seç (telefondan)');
+        s('ae-icon-clear-text','İkonu Kaldır');
     }else{
         s('admin-login-title','Admin Access');s('admin-pass-label','Master Password');s('admin-login-btn','Unlock');
         s('admin-panel-title','Full Site Control');s('admin-hint-title','Full Control Mode');s('admin-hint-text','Editing entire site.');
         s('dash-btn-apps','Manage Apps');s('dash-btn-backup','Backup');
         s('hint-header','Brand and role.');s('ah-save','Save');
         s('hint-social','Social links.');s('as-save','Save');
-        s('hint-apps','8 slots. Pencil=edit, trash=clear. Upload APK or URL. APK requires login to download.');
+        s('hint-apps','8 slots. Upload icon image + APK from phone, or paste URL. APK requires login.');
         s('hint-exp','Experience.');s('ae-exp-save','Save');
         s('hint-setup','Setup.');s('au-save','Save');
         s('hint-stack','Stack.');s('ak-save','Save');
@@ -1255,10 +1349,12 @@ function changeModalLanguage(lang){
         s('hint-backup','Backup/restore.');
         s('bk-export','Export JSON');s('bk-import','Import JSON');s('bk-reset','Reset to Defaults');
         s('admin-logout-text','Log Out from Admin');s('admin-edit-title','Edit App Slot');
-        s('ae-icon-label','Icon (Emoji or Image URL)');s('ae-name-label','App Name');s('ae-desc-label','Description');s('ae-url-label','Link (if no APK)');s('ae-save-text','Save');
+        s('ae-icon-label','📷 App Icon (Upload image from phone)');s('ae-name-label','App Name');s('ae-desc-label','Description');s('ae-url-label','Link (if no APK)');s('ae-save-text','Save');
         s('ae-apk-label','📦 Upload APK File (Optional - directly from phone)');
         s('apkUploadText','Tap to choose APK file (optional)');
         s('ae-apk-clear-text','Remove APK');
+        s('iconUploadText','Tap to choose icon image');
+        s('ae-icon-clear-text','Remove Icon');
     }
     document.getElementById('modalLangMenu').classList.remove('show');
     document.getElementById('contactModalLangMenu').classList.remove('show');
