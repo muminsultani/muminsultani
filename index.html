@@ -1233,6 +1233,7 @@ async function renderApplications(){
         if(app.name && app.name.trim()){
             const nameKey = app.name.trim().toLowerCase();
             if(renderedAppNames.has(nameKey)) {
+                console.log("Duplicate app skipped:", app.name); // Geliştirici konsoluna bilgi verir
                 continue;
             }
             renderedAppNames.add(nameKey);
