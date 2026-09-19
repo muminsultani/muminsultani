@@ -41,6 +41,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
         body { background-color: var(--bg-color); color: var(--text-primary); min-height: 100vh; padding: 24px 16px; display: block; position: relative; overflow-x: hidden; transition: background-color 0.3s ease, color 0.3s ease; }
         #constellation-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none; }
+        #confetti-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 99998; display: none; }
         #intro-screen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #050508; display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.6s ease, visibility 0.6s ease; overflow: hidden; }
         #intro-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         .intro-content { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 0 16px; animation: introFadeIn 0.8s ease forwards; position: relative; z-index: 1; }
@@ -96,7 +97,6 @@
         .contact-box i { color: #9333ea; font-size: 1.1rem; flex-shrink: 0; }
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(5,5,8,0.5); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 10000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease; padding: 16px; pointer-events: none; }
         .modal-overlay.active { opacity: 1; visibility: visible; pointer-events: auto; }
-        /* ✅ YENİ: Yüksek z-index ile doğrulama modalları form üzerinde gözüksün */
         .modal-overlay.high-z { z-index: 15000; }
         .modal-overlay.light-blue-bg { background: rgba(135,206,250,0.25) !important; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
         .modal-container { background: var(--modal-container-bg); border: 1px solid var(--line-color); border-radius: 20px; width: 100%; max-width: 540px; padding: 32px; box-shadow: 0 25px 60px rgba(0,0,0,0.6); position: relative; transform: scale(0.95) translateY(15px); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease; opacity: 0; max-height: 90vh; overflow-y: auto; }
@@ -260,6 +260,7 @@
 <body>
 
     <canvas id="constellation-canvas"></canvas>
+    <canvas id="confetti-canvas"></canvas>
     <div id="security-curtain"></div>
 
     <div id="intro-screen">
@@ -481,7 +482,7 @@
         </div>
     </div>
 
-    <!-- ✅ SIGNUP VERIFICATION - Mock Email (YÜKSEK Z-INDEX) -->
+    <!-- SIGNUP VERIFICATION - Mock Email -->
     <div class="modal-overlay high-z" id="signupMockModal">
         <div class="modal-container" style="max-width: 420px;">
             <div class="modal-header">
@@ -515,7 +516,7 @@
         </div>
     </div>
 
-    <!-- ✅ SIGNUP VERIFICATION - Code Input (YÜKSEK Z-INDEX) -->
+    <!-- SIGNUP VERIFICATION - Code Input -->
     <div class="modal-overlay high-z" id="signupCodeModal">
         <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
@@ -543,7 +544,7 @@
         </div>
     </div>
 
-    <!-- EMAIL CHANGE - Mock Email (YÜKSEK Z-INDEX) -->
+    <!-- EMAIL CHANGE - Mock Email -->
     <div class="modal-overlay high-z" id="emailChangeMockModal">
         <div class="modal-container" style="max-width: 420px;">
             <div class="modal-header">
@@ -577,7 +578,7 @@
         </div>
     </div>
 
-    <!-- EMAIL CHANGE - Code Input (YÜKSEK Z-INDEX) -->
+    <!-- EMAIL CHANGE - Code Input -->
     <div class="modal-overlay high-z" id="emailChangeCodeModal">
         <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
@@ -761,7 +762,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label" id="dc-label-email">Email Address</label>
-                    <input type="email" class="form-input" id="contactClientEmail" required placeholder="name@sample.com">
+                    <input type="text" class="form-input" id="contactClientEmail" required placeholder="name@sample.com" autocomplete="username">
                 </div>
                 <div class="form-group" id="groupPassword">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
@@ -769,7 +770,7 @@
                         <a href="#" onclick="openForgotPasswordModal(event)" id="t-forgot-link" style="font-size: 0.7rem; color: #9333ea; text-decoration: none; font-weight: 600;">Forgot Password?</a>
                     </div>
                     <div class="password-wrapper">
-                        <input type="password" class="form-input" id="contactClientPassword" placeholder="••••••••" oninput="updatePasswordHint('contactClientPassword', 'signupPasswordHint')">
+                        <input type="password" class="form-input" id="contactClientPassword" placeholder="••••••••" oninput="updatePasswordHint('contactClientPassword', 'signupPasswordHint')" autocomplete="current-password">
                         <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('contactClientPassword', 'passwordToggleIcon')"><i class="fa-solid fa-eye" id="passwordToggleIcon"></i></button>
                     </div>
                     <div id="signupPasswordHint" class="password-hint" style="display: none;">
@@ -953,12 +954,221 @@
     </div>
 
     <script>
+        // ============================================================
+        // 🔊 AUDIO SİSTEMİ (Web Audio API)
+        // ============================================================
+        let audioCtx = null;
+        
+        function getAudioContext() {
+            if (!audioCtx) {
+                try {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                } catch(e) { return null; }
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume().catch(() => {});
+            }
+            return audioCtx;
+        }
+
+        function playTickSound() {
+            try {
+                const ctx = getAudioContext();
+                if (!ctx) return;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(2000, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(900, ctx.currentTime + 0.05);
+                gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.05, ctx.currentTime + 0.005);
+                gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.07);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(ctx.currentTime);
+                osc.stop(ctx.currentTime + 0.08);
+            } catch(e) {}
+        }
+
+        function playApplauseSound() {
+            try {
+                const ctx = getAudioContext();
+                if (!ctx) return;
+                const duration = 2.0;
+                const sampleRate = ctx.sampleRate;
+                const buffer = ctx.createBuffer(1, sampleRate * duration, sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < data.length; i++) {
+                    const t = i / sampleRate;
+                    const decay = Math.exp(-t * 1.2);
+                    const clapPhase = (t * 10) % 1;
+                    const clapEnvelope = clapPhase < 0.15 ? Math.exp(-clapPhase * 20) : 0;
+                    const noise = Math.random() * 2 - 1;
+                    data[i] = noise * (clapEnvelope * 0.6 + 0.15) * decay * 0.5;
+                }
+                const source = ctx.createBufferSource();
+                source.buffer = buffer;
+                const filter = ctx.createBiquadFilter();
+                filter.type = 'bandpass';
+                filter.frequency.value = 1800;
+                filter.Q.value = 0.8;
+                const gain = ctx.createGain();
+                gain.gain.setValueAtTime(0.5, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+                source.connect(filter);
+                filter.connect(gain);
+                gain.connect(ctx.destination);
+                source.start();
+            } catch(e) {}
+        }
+
+        // ============================================================
+        // 🎉 KONFETİ SİSTEMİ
+        // ============================================================
+        let confettiParticles = [];
+        let confettiRunning = false;
+        let confettiCanvas = null;
+        let confettiCtx = null;
+        let confettiStopTimer = null;
+
+        const CONFETTI_COLORS = [
+            '#9333ea', '#c084fc', '#e879f9', '#a855f7',
+            '#22c55e', '#16a34a', '#f59e0b', '#eab308',
+            '#ef4444', '#dc2626', '#3b82f6', '#0ea5e9',
+            '#ec4899', '#f472b6', '#fbbf24', '#ffffff'
+        ];
+
+        function initConfettiCanvas() {
+            if (confettiCanvas && confettiCtx) return true;
+            confettiCanvas = document.getElementById('confetti-canvas');
+            if (!confettiCanvas) return false;
+            confettiCtx = confettiCanvas.getContext('2d');
+            return true;
+        }
+
+        // 💥 Tek patlama - merkezden radyal fışkırma
+        function fireConfettiBurst(intensity = 1) {
+            if (!initConfettiCanvas()) return;
+            
+            confettiCanvas.style.display = 'block';
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+            
+            const count = Math.floor(160 * intensity);
+            const cx = window.innerWidth / 2;
+            const cy = window.innerHeight / 2;
+            
+            for (let i = 0; i < count; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 16 + 8;
+                confettiParticles.push({
+                    x: cx,
+                    y: cy,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed - 3,
+                    size: Math.random() * 10 + 5,
+                    color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+                    rotation: Math.random() * Math.PI * 2,
+                    rotationSpeed: (Math.random() - 0.5) * 0.4,
+                    gravity: 0.32 + Math.random() * 0.15,
+                    drag: 0.985,
+                    life: 1,
+                    shape: Math.random() > 0.5 ? 'rect' : (Math.random() > 0.5 ? 'circle' : 'triangle')
+                });
+            }
+            
+            if (!confettiRunning) {
+                confettiRunning = true;
+                animateConfetti();
+            }
+            
+            if (confettiStopTimer) clearTimeout(confettiStopTimer);
+            confettiStopTimer = setTimeout(() => { confettiRunning = false; }, 5000);
+        }
+
+        // 🎆 İki patlama - ana sayfa için
+        function fireConfettiDoubleBurst() {
+            fireConfettiBurst(1);
+            setTimeout(() => fireConfettiBurst(1), 750);
+        }
+
+        function animateConfetti() {
+            if (!confettiCanvas || !confettiCtx) return;
+            confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            
+            let anyAlive = false;
+            for (let i = 0; i < confettiParticles.length; i++) {
+                const p = confettiParticles[i];
+                if (p.life <= 0) continue;
+                anyAlive = true;
+                
+                p.vy += p.gravity;
+                p.vx *= p.drag;
+                p.vy *= p.drag;
+                p.x += p.vx;
+                p.y += p.vy;
+                p.rotation += p.rotationSpeed;
+                p.life -= 0.006;
+                
+                if (p.y > confettiCanvas.height + 100) p.life = 0;
+                if (p.x < -100 || p.x > confettiCanvas.width + 100) p.life = 0;
+                
+                confettiCtx.save();
+                confettiCtx.translate(p.x, p.y);
+                confettiCtx.rotate(p.rotation);
+                confettiCtx.globalAlpha = Math.max(0, Math.min(1, p.life));
+                confettiCtx.fillStyle = p.color;
+                
+                if (p.shape === 'rect') {
+                    confettiCtx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+                } else if (p.shape === 'circle') {
+                    confettiCtx.beginPath();
+                    confettiCtx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+                    confettiCtx.fill();
+                } else {
+                    confettiCtx.beginPath();
+                    confettiCtx.moveTo(0, -p.size / 2);
+                    confettiCtx.lineTo(p.size / 2, p.size / 2);
+                    confettiCtx.lineTo(-p.size / 2, p.size / 2);
+                    confettiCtx.closePath();
+                    confettiCtx.fill();
+                }
+                
+                confettiCtx.restore();
+            }
+            
+            // Ölü parçacıkları temizle (performans)
+            if (confettiParticles.length > 500) {
+                confettiParticles = confettiParticles.filter(p => p.life > 0);
+            }
+            
+            if (anyAlive || confettiRunning) {
+                requestAnimationFrame(animateConfetti);
+            } else {
+                confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                confettiCanvas.style.display = 'none';
+                confettiParticles = [];
+            }
+        }
+
+        // 🔊 Global tık sesi dinleyicisi
+        document.addEventListener('click', function(e) {
+            getAudioContext();
+            const btn = e.target.closest(
+                'button, .lang-option, .custom-alert-btn, .submit-btn, ' +
+                '.theme-toggle-btn, .scroll-down-action-btn, .modal-close-btn, ' +
+                '.profile-action-btn, .auth-tab-btn, .ratio-btn, ' +
+                '.btn-crop-cancel, .btn-crop-apply, .photo-action-buttons button, ' +
+                '.social-btn, .lightbox-close-btn, .copy-pass-btn'
+            );
+            if (btn) playTickSound();
+        }, true);
+
         document.addEventListener('contextmenu', event => event.preventDefault());
 
         document.addEventListener('keydown', (e) => {
             const cropOpen = document.getElementById('cropModal').classList.contains('active');
             if (cropOpen) return;
-            
             if (
                 e.key === 'PrintScreen' || 
                 (e.ctrlKey && (e.key === 's' || e.key === 'u' || e.key === 'c' || e.key === 'p')) ||
@@ -1028,6 +1238,8 @@
                         if (window.introConstellation && window.introConstellation.stop) {
                             window.introConstellation.stop();
                         }
+                        // 🎉 ANA SAYFA KUTLAMASI - İKİ PATLAMA
+                        fireConfettiDoubleBurst();
                     }, 600);
                 }
             }, 1500);
@@ -1038,7 +1250,6 @@
             const savedLang = sessionStorage.getItem('site_lang') || 'en';
             changeLanguage(savedLang);
 
-            // ✅ İsim girildiğinde kullanıcı adı otomatik doldur
             const nameField = document.getElementById('contactClientName');
             if (nameField) {
                 nameField.addEventListener('input', function() {
@@ -1052,6 +1263,13 @@
                     }
                 });
             }
+            
+            window.addEventListener('resize', () => {
+                if (confettiCanvas && confettiCanvas.style.display !== 'none') {
+                    confettiCanvas.width = window.innerWidth;
+                    confettiCanvas.height = window.innerHeight;
+                }
+            });
         });
 
         function toggleTheme() {
@@ -1466,6 +1684,12 @@
                 closeDirectContactModal();
                 resetContactForm();
                 checkUserSession();
+                
+                // 🎉🎊 KUTLAMA: Alkış sesi + iki konfeti patlaması
+                playApplauseSound();
+                fireConfettiBurst(1.2);
+                setTimeout(() => fireConfettiBurst(1), 600);
+                
                 showCustomAlert(t.successSignup, 'success');
             } catch(err) { console.error(err); }
         }
@@ -1658,6 +1882,7 @@
                 nameLabel: "Name & Surname", namePlaceholder: "Name & Surname",
                 usernameLabel: "Username", usernamePlaceholder: "@Username",
                 emailLabel: "Email Address", emailPlaceholder: "name@sample.com",
+                emailOrUsernameLabel: "Email or Username", emailOrUsernamePlaceholder: "name@sample.com or @username",
                 passwordLabel: "Password", passwordPlaceholder: "••••••••",
                 fileLabel: "Attach File (JPG, PNG, PDF, Video)", filePlaceholder: "Choose file or media...",
                 descLabel: "Description / Project Details", descPlaceholder: "Tell me about your project...",
@@ -1668,7 +1893,7 @@
                 gmailNoticeText: "Personal Email Address", backText: "Back",
                 contactTitle: "Sign In / Sign Up", gitText: "Sign In",
                 successSignup: "Account created successfully! You can now sign in.",
-                successSignin: "Signed in successfully!", errorSignin: "Invalid email or password!",
+                successSignin: "Signed in successfully!", errorSignin: "Invalid email, username, or password!",
                 authRequiredAlert: "You must sign in or register before sending messages via Email or WhatsApp!",
                 fpTitle: "Password Recovery", fpDesc: "Enter your registered email address. We will send a temporary password to your email and notify the administrator.",
                 fpSubmitText: "Send Recovery Email", fpSuccess: "Recovery email successfully sent! Please check your inbox.",
@@ -1728,6 +1953,7 @@
                 nameLabel: "Ad Soyad", namePlaceholder: "Ad Soyad",
                 usernameLabel: "Kullanıcı Adı", usernamePlaceholder: "@Kullaniciadi",
                 emailLabel: "E-posta Adresi", emailPlaceholder: "ornek@mail.com",
+                emailOrUsernameLabel: "E-posta veya Kullanıcı Adı", emailOrUsernamePlaceholder: "ornek@mail.com veya @kullaniciadi",
                 passwordLabel: "Şifre", passwordPlaceholder: "••••••••",
                 fileLabel: "Dosya Ekle (JPG, PNG, PDF, Video)", filePlaceholder: "Dosya veya medya seçin...",
                 descLabel: "Açıklama / Proje Detayları", descPlaceholder: "Projeden bahsedin...",
@@ -1738,7 +1964,7 @@
                 gmailNoticeText: "Kişisel E-posta Adresi", backText: "Geri Dön",
                 contactTitle: "Giriş Yap / Kayıt Ol", gitText: "Giriş Yap",
                 successSignup: "Hesap başarıyla oluşturuldu! Şimdi giriş yapabilirsiniz.",
-                successSignin: "Başarıyla giriş yapıldı!", errorSignin: "Geçersiz e-posta veya şifre!",
+                successSignin: "Başarıyla giriş yapıldı!", errorSignin: "Geçersiz e-posta, kullanıcı adı veya şifre!",
                 authRequiredAlert: "E-posta veya WhatsApp üzerinden mesaj gönderebilmek için önce giriş yapmalı veya kayıt olmalısınız!",
                 fpTitle: "Şifre Sıfırlama / Kurtarma", fpDesc: "Kayıtlı e-posta adresinizi girin. E-postanıza geçici bir şifre gönderilecek ve yönetici bilgilendirilecektir.",
                 fpSubmitText: "Kurtarma E-postası Gönder", fpSuccess: "Kurtarma e-postası başarıyla gönderildi! Lütfen gelen kutunuzu kontrol edin.",
@@ -1807,6 +2033,8 @@
             const submitBtnText = document.getElementById('dc-submit-btn-text');
             const signupHint = document.getElementById('signupPasswordHint');
             const usernameMsg = document.getElementById('usernameAvailabilityMsg');
+            const emailInput = document.getElementById('contactClientEmail');
+            const emailLabel = document.getElementById('dc-label-email');
             const t = modalTranslations[currentLang] || modalTranslations.en;
 
             if (mode === 'signin') {
@@ -1818,6 +2046,9 @@
                 if(signupHint) signupHint.style.display = 'none';
                 if(usernameMsg) usernameMsg.style.display = 'none';
                 submitBtnText.innerText = t.signinBtn;
+                // ✅ Signin: email veya username
+                if (emailLabel) emailLabel.innerText = t.emailOrUsernameLabel;
+                if (emailInput) emailInput.placeholder = t.emailOrUsernamePlaceholder;
             } else {
                 tabSignup.classList.add('active');
                 tabSignin.classList.remove('active');
@@ -1826,6 +2057,9 @@
                 if(groupPassword) groupPassword.style.display = 'block';
                 if(signupHint) signupHint.style.display = 'block';
                 submitBtnText.innerText = t.signupBtn;
+                // Signup: sadece email
+                if (emailLabel) emailLabel.innerText = t.emailLabel;
+                if (emailInput) emailInput.placeholder = t.emailPlaceholder;
             }
             const forgotLinkEl = document.getElementById('t-forgot-link');
             if (forgotLinkEl) { forgotLinkEl.style.display = (mode === 'signup') ? 'none' : 'inline'; }
@@ -2190,8 +2424,18 @@
             if(document.getElementById('contactClientName')) document.getElementById('contactClientName').placeholder = data.namePlaceholder;
             if(document.getElementById('dc-label-username')) document.getElementById('dc-label-username').innerText = data.usernameLabel;
             if(document.getElementById('contactClientUsername')) document.getElementById('contactClientUsername').placeholder = data.usernamePlaceholder;
-            document.getElementById('dc-label-email').innerText = data.emailLabel;
-            document.getElementById('contactClientEmail').placeholder = data.emailPlaceholder;
+            
+            // ✅ Email alanı - signin/signup moduna göre
+            const emailLabel = document.getElementById('dc-label-email');
+            const emailInput = document.getElementById('contactClientEmail');
+            if (currentAuthMode === 'signin') {
+                if (emailLabel) emailLabel.innerText = data.emailOrUsernameLabel;
+                if (emailInput) emailInput.placeholder = data.emailOrUsernamePlaceholder;
+            } else {
+                if (emailLabel) emailLabel.innerText = data.emailLabel;
+                if (emailInput) emailInput.placeholder = data.emailPlaceholder;
+            }
+            
             document.getElementById('dc-label-password').innerText = data.passwordLabel;
             document.getElementById('contactClientPassword').placeholder = data.passwordPlaceholder;
             document.getElementById('dc-submit-btn-text').innerText = (currentAuthMode === 'signin') ? data.signinBtn : data.signupBtn;
@@ -2298,16 +2542,29 @@
                 const existing = users.find(u => u.email === email);
                 if (existing) { showCustomAlert(t.emailAlreadyRegistered); return; }
 
-                // ✅ Email doğrulama kodu akışı
                 const code = generateSignupCode();
                 pendingSignup = { code, name, username, email, password };
                 openSignupMockModal(email, code);
                 return;
             } else {
-                let user = users.find(u => u.email === email && u.password === password);
-                if (!user && email === "admin@muminsultani.com" && password === "admin123") {
+                // ✅ SIGN IN: E-posta VEYA kullanıcı adı ile giriş yapabilir
+                const inputClean = email.toLowerCase().trim();
+                let inputName = inputClean;
+                if (inputName.startsWith('@')) inputName = inputName.substring(1);
+                
+                let user = users.find(u => {
+                    const emailMatch = (u.email || '').toLowerCase() === inputClean;
+                    let uName = (u.username || '').toLowerCase();
+                    if (uName.startsWith('@')) uName = uName.substring(1);
+                    const usernameMatch = uName === inputName;
+                    return (emailMatch || usernameMatch) && u.password === password;
+                });
+                
+                // Admin override
+                if (!user && (inputClean === "admin@muminsultani.com" || inputName === "admin") && password === "admin123") {
                     user = { name: "Admin User", username: "@Admin", email: "admin@muminsultani.com", password: "admin123", birthDay: '', birthMonth: '', birthYear: '', profilePhoto: '' };
                 }
+                
                 if (user) {
                     localStorage.setItem('logged_user', JSON.stringify(user));
                     showCustomAlert(t.successSignin, 'success');
