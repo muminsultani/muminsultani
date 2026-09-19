@@ -230,15 +230,15 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .admin-section{display:none}
 .admin-section.active{display:block}
 .admin-hint{font-size:.72rem;color:var(--text-secondary);margin-bottom:12px;padding:8px 10px;background:rgba(147,51,234,.06);border:1px solid rgba(147,51,234,.15);border-radius:8px;line-height:1.5}
-.admin-slot{background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;padding:10px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.admin-slot{background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;padding:10px;margin-bottom:10px;display:flex;align-items:center;gap:10px;min-height:56px}
 .admin-slot-num{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;flex-shrink:0}
 .admin-slot-info{flex:1;min-width:0}
 .admin-slot-name{font-size:.82rem;font-weight:700;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:5px}
 .admin-slot-url{font-size:.68rem;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .admin-slot-btns{display:flex;gap:5px}
-.admin-slot-btn{width:28px;height:28px;border-radius:7px;border:1px solid var(--line-color);background:var(--box-bg);color:var(--text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.72rem}
-.admin-slot-btn:hover{border-color:rgba(147,51,234,.5);color:#9333ea}
-.admin-slot-btn.delete:hover{border-color:rgba(239,68,68,.5);color:#ef4444}
+.admin-slot-btn{width:28px;height:28px;border-radius:7px;border:1px solid var(--line-color);background:var(--box-bg);color:var(--text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.72rem;transition:all .2s}
+.admin-slot-btn:hover{border-color:rgba(147,51,234,.5);color:#9333ea;background:var(--box-hover-bg)}
+.admin-slot-btn.delete:hover{border-color:rgba(239,68,68,.5);color:#ef4444;background:rgba(239,68,68,.06)}
 .admin-actions-grid{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .admin-action-btn{flex:1;min-width:120px;padding:10px;border-radius:10px;border:none;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
 .admin-action-btn.primary{background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff}
@@ -255,6 +255,8 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .upload-info{font-size:.75rem;color:#22c55e;font-weight:700;margin-top:6px;word-break:break-all;line-height:1.4}
 .upload-wrapper.has-file .upload-icon{color:#22c55e}
 .upload-wrapper.has-icon .upload-icon{color:#9333ea}
+.apk-clear-btn{display:inline-flex;align-items:center;gap:5px;margin-top:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:6px 10px;border-radius:8px;font-size:.7rem;font-weight:700;cursor:pointer}
+.apk-clear-btn:hover{background:rgba(239,68,68,.15)}
 .apk-badge{display:inline-flex;align-items:center;gap:3px;font-size:.6rem;font-weight:800;letter-spacing:.5px;padding:2px 6px;border-radius:4px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;text-transform:uppercase}
 .icon-preview-mini{width:24px;height:24px;border-radius:6px;object-fit:cover;border:1px solid var(--line-color);flex-shrink:0;pointer-events:auto}
 .icon-preview-big{width:64px;height:64px;border-radius:12px;object-fit:cover;border:2px solid rgba(147,51,234,.4);margin:0 auto 8px;display:block;background:var(--box-bg);pointer-events:auto}
@@ -1299,7 +1301,6 @@ async function cloudInitSync() {
     }
   }
 
-  /* Veri geldikten sonra UI'ı yenile */
   try {
     if (typeof checkUserSession === 'function') checkUserSession();
     if (typeof updateChatBadge === 'function') updateChatBadge();
@@ -2381,6 +2382,50 @@ function filterActivity(type,btn){
     renderAdminActivity();
 }
 
+/* === TIMEOUT WRAPPER === */
+function withTimeout(promise, ms = 1500) {
+    return Promise.race([
+        Promise.resolve(promise),
+        new Promise(resolve => setTimeout(() => resolve(null), ms))
+    ]);
+}
+
+/* === ADMIN SLOT HTML OLUŞTURUCU === */
+function buildAdminSlotHTML(idx, app, apk, icon) {
+    const filled = app.name && app.name.trim().length > 0;
+    const hasApk = !!apk;
+    const hasIcon = icon && icon.dataUrl;
+    const apkBadge = hasApk
+        ? `<span class="apk-badge"><i class="fa-brands fa-android" style="font-size:.55rem"></i> APK ${formatFileSize(apk.size)}</span>`
+        : '';
+    let iconPreview = '';
+    if (hasIcon) {
+        iconPreview = `<img src="${icon.dataUrl}" class="icon-preview-mini" alt="">`;
+    } else if (app.icon && app.icon.trim().startsWith('http')) {
+        iconPreview = `<img src="${escapeHtml(app.icon.trim())}" class="icon-preview-mini" alt="" onerror="this.style.display='none'">`;
+    } else if (app.icon && app.icon.trim()) {
+        iconPreview = `<span style="font-size:1.1rem">${escapeHtml(app.icon.trim())}</span>`;
+    }
+    const urlText = filled && app.url
+        ? escapeHtml(app.url)
+        : (filled && app.desc ? escapeHtml(app.desc) : (currentLang === 'tr' ? 'Boş slot' : 'Empty slot'));
+    const nameText = filled
+        ? escapeHtml(app.name)
+        : `<em style="opacity:.5">${currentLang === 'tr' ? 'Boş Slot' : 'Empty Slot'} ${idx + 1}</em>`;
+    return `
+        <div class="admin-slot-num">${idx + 1}</div>
+        ${iconPreview ? `<div style="flex-shrink:0;display:flex;align-items:center;justify-content:center;width:24px">${iconPreview}</div>` : ''}
+        <div class="admin-slot-info">
+            <div class="admin-slot-name">${nameText} ${apkBadge}</div>
+            <div class="admin-slot-url">${urlText}</div>
+        </div>
+        <div class="admin-slot-btns">
+            <button class="admin-slot-btn" onclick="editAppSlot(${idx})" title="${currentLang === 'tr' ? 'Düzenle' : 'Edit'}"><i class="fa-solid fa-pen"></i></button>
+            <button class="admin-slot-btn delete" onclick="clearAppSlot(${idx})" title="${currentLang === 'tr' ? 'Sil' : 'Delete'}"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+    `;
+}
+
 /* INDEXEDDB */
 let apkDB=null,pendingApkFile=null,pendingApkDelete=false,pendingIconDataUrl=null,pendingIconDelete=false;
 function openApkDB(){return new Promise((resolve,reject)=>{if(apkDB)return resolve(apkDB);try{const req=indexedDB.open('muminsultani_apk_db_v2',3);req.onupgradeneeded=(e)=>{const db=e.target.result;if(!db.objectStoreNames.contains('apks')){db.createObjectStore('apks');}if(!db.objectStoreNames.contains('icons')){db.createObjectStore('icons');}if(!db.objectStoreNames.contains('voice_messages')){db.createObjectStore('voice_messages');}};req.onsuccess=(e)=>{apkDB=e.target.result;resolve(apkDB);};req.onerror=(e)=>reject(e.target.error);}catch(e){reject(e);}});}
@@ -2483,8 +2528,8 @@ async function renderApplications(){
         card.className='app-card';
         const hasContent=app.name&&app.name.trim().length>0;
         let apkData=null,iconData=null;
-        try{apkData=await getApkFile(idx);}catch(e){apkData=null;}
-        try{iconData=await getIconData(idx);}catch(e){iconData=null;}
+        try{apkData=await withTimeout(getApkFile(idx),1500);}catch(e){apkData=null;}
+        try{iconData=await withTimeout(getIconData(idx),1500);}catch(e){iconData=null;}
         const hasApk=!!apkData;
         const hasUploadedIcon=iconData&&iconData.dataUrl;
         if(hasContent){
@@ -2574,24 +2619,23 @@ function refreshAdminUI(){
     renderAdminSlots();
 }
 function renderAdminSlots(){
-    const list=document.getElementById('adminSlotsList');if(!list)return;
+    const list=document.getElementById('adminSlotsList');
+    if(!list)return;
     const apps=getSiteContent().apps;
     list.innerHTML='';
     apps.forEach((app,idx)=>{
         const item=document.createElement('div');
         item.className='admin-slot';
-        const filled=app.name&&app.name.trim().length>0;
-        Promise.all([getApkFile(idx).catch(()=>null),getIconData(idx).catch(()=>null)]).then(([apk,icon])=>{
-            const hasApk=!!apk;
-            const hasIcon=icon&&icon.dataUrl;
-            const apkBadge=hasApk?`<span class="apk-badge"><i class="fa-brands fa-android" style="font-size:.55rem"></i> APK ${formatFileSize(apk.size)}</span>`:'';
-            let iconPreview='';
-            if(hasIcon){iconPreview=`<img src="${icon.dataUrl}" class="icon-preview-mini" alt="">`;}
-            else if(app.icon&&app.icon.trim().startsWith('http')){iconPreview=`<img src="${escapeHtml(app.icon.trim())}" class="icon-preview-mini" alt="" onerror="this.style.display='none'">`;}
-            else if(app.icon&&app.icon.trim()){iconPreview=`<span style="font-size:1.1rem">${escapeHtml(app.icon.trim())}</span>`;}
-            item.innerHTML=`<div class="admin-slot-num">${idx+1}</div>${iconPreview?`<div style="flex-shrink:0;display:flex;align-items:center;justify-content:center;width:24px">${iconPreview}</div>`:''}<div class="admin-slot-info"><div class="admin-slot-name">${filled?escapeHtml(app.name):`<em style="opacity:.5">${currentLang==='tr'?'Boş Slot':'Empty Slot'}</em>`} ${apkBadge}</div><div class="admin-slot-url">${filled&&app.url?escapeHtml(app.url):(filled&&app.desc?escapeHtml(app.desc):(currentLang==='tr'?'Boş slot':'Empty slot'))}</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="editAppSlot(${idx})"><i class="fa-solid fa-pen"></i></button><button class="admin-slot-btn delete" onclick="clearAppSlot(${idx})"><i class="fa-solid fa-trash-can"></i></button></div>`;
-        });
+        /* 1. HEMEN temel yapıyı çiz — boş slotlar hemen görünsün */
+        item.innerHTML=buildAdminSlotHTML(idx,app,null,null);
         list.appendChild(item);
+        /* 2. Arka planda ikon ve APK bilgisini çek — timeout ile */
+        Promise.all([
+            withTimeout(getApkFile(idx),1500).catch(()=>null),
+            withTimeout(getIconData(idx),1500).catch(()=>null)
+        ]).then(([apk,icon])=>{
+            item.innerHTML=buildAdminSlotHTML(idx,app,apk,icon);
+        }).catch(err=>console.warn('[Slot] Hydrate error:',err));
     });
 }
 async function editAppSlot(idx){
@@ -2604,9 +2648,8 @@ async function editAppSlot(idx){
     document.getElementById('editAppUrl').value=app.url||'';
     document.getElementById('editAppApkFile').value='';
     document.getElementById('editAppIconFile').value='';
-    let existingApk=null,existingIcon=null;
-    try{existingApk=await getApkFile(idx);}catch(e){}
-    try{existingIcon=await getIconData(idx);}catch(e){}
+    const existingApk=await withTimeout(getApkFile(idx),1500).catch(()=>null);
+    const existingIcon=await withTimeout(getIconData(idx),1500).catch(()=>null);
     updateApkUI(existingApk?{name:existingApk.name,size:existingApk.size,existing:true}:null);
     if(existingIcon&&existingIcon.dataUrl){updateIconUI({dataUrl:existingIcon.dataUrl,existing:true});}
     else if(app.icon&&app.icon.trim().startsWith('http')){updateIconUI({dataUrl:app.icon.trim(),existing:true,isUrl:true});}
@@ -2670,10 +2713,10 @@ async function saveAppSlot(e){
     c.apps[idx]={icon:iconValue,name:document.getElementById('editAppName').value.trim(),desc:document.getElementById('editAppDesc').value.trim(),url:document.getElementById('editAppUrl').value.trim()};
     saveSiteContent(c);
     try{
-        if(pendingApkFile){await storeApkFile(idx,pendingApkFile);}
-        else if(pendingApkDelete){await deleteApkFile(idx);}
-        if(pendingIconDataUrl){await storeIconData(idx,pendingIconDataUrl);}
-        else if(pendingIconDelete){await deleteIconData(idx);}
+        if(pendingApkFile){await withTimeout(storeApkFile(idx,pendingApkFile),5000);}
+        else if(pendingApkDelete){await withTimeout(deleteApkFile(idx),5000);}
+        if(pendingIconDataUrl){await withTimeout(storeIconData(idx,pendingIconDataUrl),5000);}
+        else if(pendingIconDelete){await withTimeout(deleteIconData(idx),5000);}
     }catch(err){console.error(err);showCustomAlert(currentLang==='tr'?'Kaydedilemedi!':'Save failed!');}
     pendingApkFile=null;pendingApkDelete=false;pendingIconDataUrl=null;pendingIconDelete=false;
     closeAdminEdit();renderAdminSlots();renderApplications();
@@ -2683,8 +2726,8 @@ async function clearAppSlot(idx){
     const c=getSiteContent();
     c.apps[idx]={name:'',desc:'',url:'',icon:''};
     saveSiteContent(c);
-    try{await deleteApkFile(idx);}catch(e){}
-    try{await deleteIconData(idx);}catch(e){}
+    try{await withTimeout(deleteApkFile(idx),3000);}catch(e){}
+    try{await withTimeout(deleteIconData(idx),3000);}catch(e){}
     renderAdminSlots();renderApplications();
 }
 function saveAdminHeader(e){e.preventDefault();const c=getSiteContent();c.header.brand=document.getElementById('ah-brand').value.trim()||'muminsultani';c.header.roleEn=document.getElementById('ah-role-en').value.trim()||'Software Developer';c.header.roleTr=document.getElementById('ah-role-tr').value.trim()||'Yazılım Geliştirici';saveSiteContent(c);applySiteContent();showCustomAlert(currentLang==='tr'?'Kaydedildi!':'Saved!');}
@@ -2695,7 +2738,7 @@ function saveAdminStack(e){e.preventDefault();const c=getSiteContent();c.stack.b
 function saveAdminFooter(e){e.preventDefault();const c=getSiteContent();c.footer.brand=document.getElementById('af-brand').value.trim()||'muminsultani';c.footer.scanEn=document.getElementById('af-scan-en').value.trim();c.footer.scanTr=document.getElementById('af-scan-tr').value.trim();c.footer.copyright=document.getElementById('af-copy').value.trim();saveSiteContent(c);applySiteContent();showCustomAlert(currentLang==='tr'?'Kaydedildi!':'Saved!');}
 function exportSiteBackup(){const c=getSiteContent();const data=JSON.stringify(c,null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`muminsultani-backup-${new Date().toISOString().slice(0,10)}.json`;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),100);showCustomAlert(currentLang==='tr'?'Yedek indirildi!':'Backup downloaded!');}
 function importSiteBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){try{const d=JSON.parse(ev.target.result);if(!d||typeof d!=='object')throw new Error('Invalid');saveSiteContent(deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),d));applySiteContent();refreshAdminUI();showCustomAlert(currentLang==='tr'?'Yedek yüklendi!':'Backup imported!');}catch(err){showCustomAlert(currentLang==='tr'?'Geçersiz dosya!':'Invalid file!');}e.target.value='';};r.readAsText(f);}
-function confirmResetSite(){showCustomAlert(currentLang==='tr'?'Tüm site içeriği sıfırlanacak. Emin misiniz?':'All site content will be reset. Are you sure?','delete',async function(){localStorage.removeItem(SITE_CONTENT_KEY);try{for(let i=0;i<8;i++){await deleteApkFile(i);await deleteIconData(i);}await clearAllVoiceMessages();}catch(e){}applySiteContent();refreshAdminUI();showCustomAlert(currentLang==='tr'?'Sıfırlandı!':'Reset complete!');});}
+function confirmResetSite(){showCustomAlert(currentLang==='tr'?'Tüm site içeriği sıfırlanacak. Emin misiniz?':'All site content will be reset. Are you sure?','delete',async function(){localStorage.removeItem(SITE_CONTENT_KEY);try{for(let i=0;i<8;i++){await withTimeout(deleteApkFile(i),3000);await withTimeout(deleteIconData(i),3000);}await withTimeout(clearAllVoiceMessages(),3000);}catch(e){}applySiteContent();refreshAdminUI();showCustomAlert(currentLang==='tr'?'Sıfırlandı!':'Reset complete!');});}
 function checkAdminHash(){if(window.location.hash==='#manage-muminsultani'||window.location.hash==='#admin'){triggerAdminAccess();history.replaceState(null,'',window.location.pathname+window.location.search);}}
 window.addEventListener('hashchange',checkAdminHash);
 
