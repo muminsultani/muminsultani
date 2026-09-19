@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <meta name="description" content="muminsultani's official personal website. Find out about software projects, contact channels,  the digital portfolio.">
+    <meta name="description" content="muminsultani's official personal website. Find out about software projects, contact channels, the digital portfolio.">
 
     <title id="pageTitle">muminsultani</title>
     
@@ -95,9 +95,230 @@
         .contact-text span { display: block; font-size: 0.8rem; color: var(--text-secondary); }
         .contact-text strong { font-size: 1rem; color: var(--text-primary); word-break: break-word; }
         .contact-box i { color: #9333ea; font-size: 1.1rem; flex-shrink: 0; }
+
+        /* ============================================================
+           ✅ YENİ: APPLICATIONS GRID
+           ============================================================ */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        @media (max-width: 640px) {
+            .apps-grid { grid-template-columns: 1fr; gap: 12px; }
+        }
+        .app-card {
+            background: var(--box-bg);
+            border: 1px solid var(--line-color);
+            border-radius: 16px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            min-height: 130px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(147,51,234,0.10) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        .app-card:hover {
+            border-color: rgba(147,51,234,0.45);
+            background: var(--box-hover-bg);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(147,51,234,0.15);
+        }
+        .app-card:hover::before { opacity: 1; }
+        .app-card.disabled {
+            opacity: 0.55;
+            pointer-events: none;
+        }
+        .app-card-icon {
+            font-size: 2rem;
+            line-height: 1;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(147,51,234,0.15), rgba(192,132,252,0.08));
+            border: 1px solid rgba(147,51,234,0.25);
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+        .app-card-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            pointer-events: none;
+        }
+        .app-card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+        .app-card-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: -0.2px;
+        }
+        .app-card-name i {
+            font-size: 0.7rem;
+            color: #9333ea;
+            opacity: 0.7;
+        }
+        .app-card-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.55;
+            word-break: break-word;
+        }
+        .app-card-empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 8px;
+            color: var(--text-secondary);
+            opacity: 0.45;
+            pointer-events: none;
+        }
+        .app-card-empty i {
+            font-size: 1.8rem;
+            color: #9333ea;
+        }
+        .app-card-empty span {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+        .app-card-tag {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 0.55rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 3px 7px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #9333ea, #c084fc);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(147,51,234,0.3);
+        }
+
+        /* Admin Panel Styles */
+        .admin-slot {
+            background: var(--box-bg);
+            border: 1px solid var(--line-color);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .admin-slot-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #9333ea, #c084fc);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+        .admin-slot-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .admin-slot-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .admin-slot-url {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .admin-slot-btns {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .admin-slot-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--line-color);
+            background: var(--box-bg);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+        }
+        .admin-slot-btn:hover {
+            border-color: rgba(147,51,234,0.5);
+            color: #9333ea;
+            background: var(--box-hover-bg);
+        }
+        .admin-slot-btn.delete:hover {
+            border-color: rgba(239,68,68,0.5);
+            color: #ef4444;
+            background: rgba(239,68,68,0.05);
+        }
+        .admin-hint {
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            padding: 8px 10px;
+            background: rgba(147,51,234,0.06);
+            border: 1px solid rgba(147,51,234,0.15);
+            border-radius: 8px;
+            line-height: 1.5;
+        }
+        .admin-hint code {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            background: rgba(147,51,234,0.15);
+            padding: 1px 5px;
+            border-radius: 3px;
+            color: #9333ea;
+        }
+
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(5,5,8,0.5); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 10000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease; padding: 16px; pointer-events: none; }
         .modal-overlay.active { opacity: 1; visibility: visible; pointer-events: auto; }
         .modal-overlay.high-z { z-index: 15000; }
+        .modal-overlay.admin-z { z-index: 18000; }
         .modal-overlay.light-blue-bg { background: rgba(135,206,250,0.25) !important; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
         .modal-container { background: var(--modal-container-bg); border: 1px solid var(--line-color); border-radius: 20px; width: 100%; max-width: 540px; padding: 32px; box-shadow: 0 25px 60px rgba(0,0,0,0.6); position: relative; transform: scale(0.95) translateY(15px); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease; opacity: 0; max-height: 90vh; overflow-y: auto; }
         .modal-overlay.active .modal-container { transform: scale(1) translateY(0); opacity: 1; }
@@ -349,15 +570,14 @@
             </div>
         </section>
 
-        <section>
-            <div class="section-title"><i class="fa-solid fa-rocket"></i> <span id="t-projects-title">Featured Projects</span></div>
-            <div class="item-row">
-                <div class="item-header"><a href="#" class="item-title">Project Alpha <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
-                <p class="item-desc" id="t-proj1-desc">A high-performance backend architecture built with Django and modern microservices.</p>
+        <!-- ✅ YENİ: APPLICATIONS SECTION -->
+        <section id="applicationsSection">
+            <div class="section-title">
+                <i class="fa-solid fa-cubes"></i> 
+                <span id="t-apps-title">My Applications</span>
             </div>
-            <div class="item-row" style="margin-top: 16px;">
-                <div class="item-header"><a href="#" class="item-title">Minimalist CLI Tool <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
-                <p class="item-desc" id="t-proj2-desc">Fast workflow automation utility written for developer productivity.</p>
+            <div class="apps-grid" id="appsGrid">
+                <!-- JavaScript tarafından doldurulacak -->
             </div>
         </section>
 
@@ -407,6 +627,101 @@
                 <div class="footer-copy-text">© 2026 muminsultani • <span id="footerRightsText">All Rights Reserved.</span></div>
             </div>
         </footer>
+    </div>
+
+    <!-- ============================================================
+         🔐 GİZLİ ADMIN PANEL
+         ============================================================ -->
+    <div class="modal-overlay admin-z" id="adminLoginModal">
+        <div class="modal-container" style="max-width: 380px;">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div class="modal-brand">muminsultani</div>
+                    <div class="modal-title" id="admin-login-title">Admin Access</div>
+                </div>
+                <div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminLogin()"><i class="fa-solid fa-xmark"></i></button></div>
+            </div>
+            <form id="adminLoginForm" onsubmit="verifyAdminPassword(event)">
+                <p class="item-desc" style="margin-bottom: 12px; font-size: 0.8rem; color: var(--text-secondary);">Restricted area. Enter the master password to manage site applications.</p>
+                <div class="form-group">
+                    <label class="form-label" id="admin-pass-label">Master Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" class="form-input" id="adminPasswordInput" required placeholder="••••••••••">
+                        <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('adminPasswordInput', 'adminPassToggleIcon')"><i class="fa-solid fa-eye" id="adminPassToggleIcon"></i></button>
+                    </div>
+                </div>
+                <div class="form-buttons-group">
+                    <button type="submit" class="submit-btn email-btn" style="background: linear-gradient(135deg, #9333ea, #c084fc);">
+                        <i class="fa-solid fa-unlock"></i> <span id="admin-login-btn">Unlock</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="modal-overlay admin-z" id="adminPanelModal">
+        <div class="modal-container" style="max-width: 520px;">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div class="modal-brand">muminsultani</div>
+                    <div class="modal-title" id="admin-panel-title">Manage Applications</div>
+                </div>
+                <div class="modal-header-actions">
+                    <button class="modal-close-btn" onclick="closeAdminPanel()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <div class="admin-hint">
+                <i class="fa-solid fa-shield-halved" style="color:#9333ea;"></i>
+                <strong id="admin-hint-title">Admin Mode</strong> — 
+                <span id="admin-hint-text">You are editing the site applications. Changes are stored locally and appear immediately.</span>
+            </div>
+            <div id="adminSlotsList">
+                <!-- JS ile doldurulacak -->
+            </div>
+            <div class="form-buttons-group" style="margin-top: 12px;">
+                <button type="button" class="submit-btn" onclick="logoutAdmin()" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                    <i class="fa-solid fa-right-from-bracket"></i> <span id="admin-logout-text">Log Out from Admin</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Edit Modal -->
+    <div class="modal-overlay admin-z" id="adminEditModal">
+        <div class="modal-container" style="max-width: 420px;">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div class="modal-brand">muminsultani</div>
+                    <div class="modal-title" id="admin-edit-title">Edit App Slot</div>
+                </div>
+                <div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminEdit()"><i class="fa-solid fa-xmark"></i></button></div>
+            </div>
+            <form id="adminEditForm" onsubmit="saveAppSlot(event)">
+                <input type="hidden" id="editSlotIndex" value="0">
+                <div class="form-group">
+                    <label class="form-label" id="ae-icon-label">Icon (Emoji or Image URL)</label>
+                    <input type="text" class="form-input" id="editAppIcon" maxlength="200" placeholder="📱  or  https://...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="ae-name-label">App Name</label>
+                    <input type="text" class="form-input" id="editAppName" required maxlength="40" placeholder="My App">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="ae-desc-label">Description</label>
+                    <textarea class="form-textarea" id="editAppDesc" required maxlength="200" style="min-height:60px;" placeholder="Short description..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="ae-url-label">Link (optional)</label>
+                    <input type="text" class="form-input" id="editAppUrl" maxlength="300" placeholder="https://...">
+                </div>
+                <div class="form-buttons-group" style="flex-direction: column; gap: 8px;">
+                    <button type="submit" class="submit-btn email-btn" style="background: linear-gradient(135deg, #22c55e, #16a34a); width: 100%;">
+                        <i class="fa-solid fa-floppy-disk"></i> <span id="ae-save-text">Save</span>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- PROFİL FOTOĞRAFI PANELİ -->
@@ -482,7 +797,7 @@
         </div>
     </div>
 
-    <!-- SIGNUP VERIFICATION - Mock Email -->
+    <!-- SIGNUP VERIFICATION -->
     <div class="modal-overlay high-z" id="signupMockModal">
         <div class="modal-container" style="max-width: 420px;">
             <div class="modal-header">
@@ -516,7 +831,6 @@
         </div>
     </div>
 
-    <!-- SIGNUP VERIFICATION - Code Input -->
     <div class="modal-overlay high-z" id="signupCodeModal">
         <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
@@ -544,7 +858,7 @@
         </div>
     </div>
 
-    <!-- EMAIL CHANGE - Mock Email -->
+    <!-- EMAIL CHANGE -->
     <div class="modal-overlay high-z" id="emailChangeMockModal">
         <div class="modal-container" style="max-width: 420px;">
             <div class="modal-header">
@@ -578,7 +892,6 @@
         </div>
     </div>
 
-    <!-- EMAIL CHANGE - Code Input -->
     <div class="modal-overlay high-z" id="emailChangeCodeModal">
         <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
@@ -649,7 +962,7 @@
         </div>
     </div>
 
-    <!-- HESAP SİLME 1 -->
+    <!-- HESAP SİLME -->
     <div class="modal-overlay" id="deleteAccountModal">
         <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
@@ -670,7 +983,6 @@
         </div>
     </div>
 
-    <!-- HESAP SİLME 2 -->
     <div class="modal-overlay" id="confirmDeletePasswordModal">
         <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
@@ -718,7 +1030,6 @@
         </div>
     </div>
 
-    <!-- DIRECT CONTACT -->
     <div class="modal-overlay" id="directContactModal">
         <div class="modal-container">
             <div class="modal-header">
@@ -786,7 +1097,6 @@
         </div>
     </div>
 
-    <!-- FORGOT PASSWORD -->
     <div class="modal-overlay" id="forgotPasswordModal">
         <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
@@ -810,7 +1120,6 @@
         </div>
     </div>
 
-    <!-- MOCK EMAIL (Password Recovery) -->
     <div class="modal-overlay" id="mockEmailModal">
         <div class="modal-container" style="max-width: 420px;">
             <div class="modal-header">
@@ -840,7 +1149,6 @@
         </div>
     </div>
 
-    <!-- RESET PASSWORD -->
     <div class="modal-overlay" id="resetPasswordModal">
         <div class="modal-container" style="max-width: 400px;">
             <div class="modal-header">
@@ -871,7 +1179,6 @@
         </div>
     </div>
 
-    <!-- APPOINTMENT -->
     <div class="modal-overlay" id="appointmentModal">
         <div class="modal-container">
             <div class="modal-header">
@@ -921,7 +1228,6 @@
         </div>
     </div>
 
-    <!-- GMAIL NOTICE -->
     <div class="custom-alert-overlay" id="gmailNoticeModal">
         <div class="custom-alert-box" style="max-width: 380px; text-align: center;">
             <div style="display: flex; justify-content: center; margin-bottom: 12px;">
@@ -942,7 +1248,6 @@
         </div>
     </div>
 
-    <!-- CUSTOM ALERT -->
     <div class="custom-alert-overlay" id="customAlertModal">
         <div class="custom-alert-box">
             <div class="custom-alert-icon" id="customAlertIcon"><i class="fa-solid fa-circle-exclamation"></i></div>
@@ -955,19 +1260,15 @@
 
     <script>
         // ============================================================
-        // 🔊 AUDIO SİSTEMİ (Web Audio API)
+        // 🔊 AUDIO SİSTEMİ
         // ============================================================
         let audioCtx = null;
         
         function getAudioContext() {
             if (!audioCtx) {
-                try {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                } catch(e) { return null; }
+                try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) { return null; }
             }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume().catch(() => {});
-            }
+            if (audioCtx.state === 'suspended') { audioCtx.resume().catch(() => {}); }
             return audioCtx;
         }
 
@@ -983,10 +1284,8 @@
                 gain.gain.setValueAtTime(0.0001, ctx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.05, ctx.currentTime + 0.005);
                 gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.07);
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.start(ctx.currentTime);
-                osc.stop(ctx.currentTime + 0.08);
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.08);
             } catch(e) {}
         }
 
@@ -1009,15 +1308,11 @@
                 const source = ctx.createBufferSource();
                 source.buffer = buffer;
                 const filter = ctx.createBiquadFilter();
-                filter.type = 'bandpass';
-                filter.frequency.value = 1800;
-                filter.Q.value = 0.8;
+                filter.type = 'bandpass'; filter.frequency.value = 1800; filter.Q.value = 0.8;
                 const gain = ctx.createGain();
                 gain.gain.setValueAtTime(0.5, ctx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
-                source.connect(filter);
-                filter.connect(gain);
-                gain.connect(ctx.destination);
+                source.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
                 source.start();
             } catch(e) {}
         }
@@ -1031,12 +1326,7 @@
         let confettiCtx = null;
         let confettiStopTimer = null;
 
-        const CONFETTI_COLORS = [
-            '#9333ea', '#c084fc', '#e879f9', '#a855f7',
-            '#22c55e', '#16a34a', '#f59e0b', '#eab308',
-            '#ef4444', '#dc2626', '#3b82f6', '#0ea5e9',
-            '#ec4899', '#f472b6', '#fbbf24', '#ffffff'
-        ];
+        const CONFETTI_COLORS = ['#9333ea', '#c084fc', '#e879f9', '#a855f7', '#22c55e', '#16a34a', '#f59e0b', '#eab308', '#ef4444', '#dc2626', '#3b82f6', '#0ea5e9', '#ec4899', '#f472b6', '#fbbf24', '#ffffff'];
 
         function initConfettiCanvas() {
             if (confettiCanvas && confettiCtx) return true;
@@ -1046,24 +1336,19 @@
             return true;
         }
 
-        // 💥 Tek patlama - merkezden radyal fışkırma
         function fireConfettiBurst(intensity = 1) {
             if (!initConfettiCanvas()) return;
-            
             confettiCanvas.style.display = 'block';
             confettiCanvas.width = window.innerWidth;
             confettiCanvas.height = window.innerHeight;
-            
             const count = Math.floor(160 * intensity);
             const cx = window.innerWidth / 2;
             const cy = window.innerHeight / 2;
-            
             for (let i = 0; i < count; i++) {
                 const angle = Math.random() * Math.PI * 2;
                 const speed = Math.random() * 16 + 8;
                 confettiParticles.push({
-                    x: cx,
-                    y: cy,
+                    x: cx, y: cy,
                     vx: Math.cos(angle) * speed,
                     vy: Math.sin(angle) * speed - 3,
                     size: Math.random() * 10 + 5,
@@ -1071,22 +1356,15 @@
                     rotation: Math.random() * Math.PI * 2,
                     rotationSpeed: (Math.random() - 0.5) * 0.4,
                     gravity: 0.32 + Math.random() * 0.15,
-                    drag: 0.985,
-                    life: 1,
+                    drag: 0.985, life: 1,
                     shape: Math.random() > 0.5 ? 'rect' : (Math.random() > 0.5 ? 'circle' : 'triangle')
                 });
             }
-            
-            if (!confettiRunning) {
-                confettiRunning = true;
-                animateConfetti();
-            }
-            
+            if (!confettiRunning) { confettiRunning = true; animateConfetti(); }
             if (confettiStopTimer) clearTimeout(confettiStopTimer);
             confettiStopTimer = setTimeout(() => { confettiRunning = false; }, 5000);
         }
 
-        // 🎆 İki patlama - ana sayfa için
         function fireConfettiDoubleBurst() {
             fireConfettiBurst(1);
             setTimeout(() => fireConfettiBurst(1), 750);
@@ -1095,72 +1373,35 @@
         function animateConfetti() {
             if (!confettiCanvas || !confettiCtx) return;
             confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-            
             let anyAlive = false;
             for (let i = 0; i < confettiParticles.length; i++) {
                 const p = confettiParticles[i];
                 if (p.life <= 0) continue;
                 anyAlive = true;
-                
-                p.vy += p.gravity;
-                p.vx *= p.drag;
-                p.vy *= p.drag;
-                p.x += p.vx;
-                p.y += p.vy;
-                p.rotation += p.rotationSpeed;
+                p.vy += p.gravity; p.vx *= p.drag; p.vy *= p.drag;
+                p.x += p.vx; p.y += p.vy; p.rotation += p.rotationSpeed;
                 p.life -= 0.006;
-                
                 if (p.y > confettiCanvas.height + 100) p.life = 0;
                 if (p.x < -100 || p.x > confettiCanvas.width + 100) p.life = 0;
-                
                 confettiCtx.save();
                 confettiCtx.translate(p.x, p.y);
                 confettiCtx.rotate(p.rotation);
                 confettiCtx.globalAlpha = Math.max(0, Math.min(1, p.life));
                 confettiCtx.fillStyle = p.color;
-                
-                if (p.shape === 'rect') {
-                    confettiCtx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
-                } else if (p.shape === 'circle') {
-                    confettiCtx.beginPath();
-                    confettiCtx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
-                    confettiCtx.fill();
-                } else {
-                    confettiCtx.beginPath();
-                    confettiCtx.moveTo(0, -p.size / 2);
-                    confettiCtx.lineTo(p.size / 2, p.size / 2);
-                    confettiCtx.lineTo(-p.size / 2, p.size / 2);
-                    confettiCtx.closePath();
-                    confettiCtx.fill();
-                }
-                
+                if (p.shape === 'rect') { confettiCtx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2); }
+                else if (p.shape === 'circle') { confettiCtx.beginPath(); confettiCtx.arc(0, 0, p.size / 2, 0, Math.PI * 2); confettiCtx.fill(); }
+                else { confettiCtx.beginPath(); confettiCtx.moveTo(0, -p.size / 2); confettiCtx.lineTo(p.size / 2, p.size / 2); confettiCtx.lineTo(-p.size / 2, p.size / 2); confettiCtx.closePath(); confettiCtx.fill(); }
                 confettiCtx.restore();
             }
-            
-            // Ölü parçacıkları temizle (performans)
-            if (confettiParticles.length > 500) {
-                confettiParticles = confettiParticles.filter(p => p.life > 0);
-            }
-            
-            if (anyAlive || confettiRunning) {
-                requestAnimationFrame(animateConfetti);
-            } else {
-                confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-                confettiCanvas.style.display = 'none';
-                confettiParticles = [];
-            }
+            if (confettiParticles.length > 500) confettiParticles = confettiParticles.filter(p => p.life > 0);
+            if (anyAlive || confettiRunning) { requestAnimationFrame(animateConfetti); }
+            else { confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height); confettiCanvas.style.display = 'none'; confettiParticles = []; }
         }
 
-        // 🔊 Global tık sesi dinleyicisi
+        // Global tık sesi
         document.addEventListener('click', function(e) {
             getAudioContext();
-            const btn = e.target.closest(
-                'button, .lang-option, .custom-alert-btn, .submit-btn, ' +
-                '.theme-toggle-btn, .scroll-down-action-btn, .modal-close-btn, ' +
-                '.profile-action-btn, .auth-tab-btn, .ratio-btn, ' +
-                '.btn-crop-cancel, .btn-crop-apply, .photo-action-buttons button, ' +
-                '.social-btn, .lightbox-close-btn, .copy-pass-btn'
-            );
+            const btn = e.target.closest('button, .lang-option, .custom-alert-btn, .submit-btn, .theme-toggle-btn, .scroll-down-action-btn, .modal-close-btn, .profile-action-btn, .auth-tab-btn, .ratio-btn, .btn-crop-cancel, .btn-crop-apply, .photo-action-buttons button, .social-btn, .lightbox-close-btn, .copy-pass-btn, .app-card, .admin-slot-btn');
             if (btn) playTickSound();
         }, true);
 
@@ -1169,12 +1410,13 @@
         document.addEventListener('keydown', (e) => {
             const cropOpen = document.getElementById('cropModal').classList.contains('active');
             if (cropOpen) return;
-            if (
-                e.key === 'PrintScreen' || 
-                (e.ctrlKey && (e.key === 's' || e.key === 'u' || e.key === 'c' || e.key === 'p')) ||
-                e.key === 'F12' ||
-                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'C' || e.key === 'J'))
-            ) {
+            // 🔐 Gizli admin kısayolu: Ctrl + Shift + M
+            if (e.ctrlKey && e.shiftKey && (e.key === 'M' || e.key === 'm')) {
+                e.preventDefault();
+                triggerAdminAccess();
+                return;
+            }
+            if (e.key === 'PrintScreen' || (e.ctrlKey && (e.key === 's' || e.key === 'u' || e.key === 'c' || e.key === 'p')) || e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'C' || e.key === 'J'))) {
                 e.preventDefault();
                 showSecurityCurtain();
                 return false;
@@ -1185,10 +1427,7 @@
         function showSecurityCurtain() {
             curtain.style.opacity = '1';
             curtain.style.visibility = 'visible';
-            setTimeout(() => {
-                curtain.style.opacity = '0';
-                curtain.style.visibility = 'hidden';
-            }, 1000);
+            setTimeout(() => { curtain.style.opacity = '0'; curtain.style.visibility = 'hidden'; }, 1000);
             document.activeElement?.blur();
         }
 
@@ -1197,24 +1436,235 @@
             curtain.style.opacity = '1';
             curtain.style.visibility = 'visible';
         });
+        window.addEventListener('focus', () => { curtain.style.opacity = '0'; curtain.style.visibility = 'hidden'; });
 
-        window.addEventListener('focus', () => {
-            curtain.style.opacity = '0';
-            curtain.style.visibility = 'hidden';
-        });
+        // ============================================================
+        // 🔐 ADMIN SYSTEM
+        // ============================================================
+        // ⚠️ ADMIN MASTER PASSWORD — buradan değiştirebilirsiniz
+        const ADMIN_MASTER_PASSWORD = 'muminsultani.admin.2026';
+        const ADMIN_SESSION_KEY = 'admin_session_active';
 
+        function isAdminLoggedIn() {
+            try { return sessionStorage.getItem(ADMIN_SESSION_KEY) === 'yes'; } catch(e) { return false; }
+        }
+
+        function triggerAdminAccess() {
+            if (isAdminLoggedIn()) {
+                openAdminPanel();
+            } else {
+                document.getElementById('adminLoginModal').classList.add('active');
+                setTimeout(() => {
+                    const inp = document.getElementById('adminPasswordInput');
+                    if (inp) { inp.value = ''; inp.focus(); }
+                }, 200);
+            }
+        }
+
+        function closeAdminLogin() {
+            document.getElementById('adminLoginModal').classList.remove('active');
+        }
+
+        function verifyAdminPassword(e) {
+            e.preventDefault();
+            const entered = document.getElementById('adminPasswordInput').value;
+            if (entered === ADMIN_MASTER_PASSWORD) {
+                try { sessionStorage.setItem(ADMIN_SESSION_KEY, 'yes'); } catch(err) {}
+                closeAdminLogin();
+                openAdminPanel();
+                playConfettiBurst(0.5);
+            } else {
+                const t = modalTranslations[currentLang] || modalTranslations.en;
+                showCustomAlert((currentLang === 'tr') ? 'Yanlış şifre!' : 'Incorrect password!');
+                document.getElementById('adminPasswordInput').value = '';
+            }
+        }
+
+        function logoutAdmin() {
+            try { sessionStorage.removeItem(ADMIN_SESSION_KEY); } catch(e) {}
+            closeAdminPanel();
+        }
+
+        function openAdminPanel() {
+            renderAdminSlots();
+            document.getElementById('adminPanelModal').classList.add('active');
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('adminPanelModal').classList.remove('active');
+            renderApplications();
+        }
+
+        // ============================================================
+        // 📱 APPLICATIONS DATA & RENDER
+        // ============================================================
+        const APPLICATIONS_STORAGE_KEY = 'site_applications_v1';
+        const DEFAULT_SLOTS = 4;
+
+        function getApplications() {
+            try {
+                const raw = localStorage.getItem(APPLICATIONS_STORAGE_KEY);
+                if (raw) {
+                    const arr = JSON.parse(raw);
+                    if (Array.isArray(arr)) {
+                        // Eksik slot varsa doldur
+                        while (arr.length < DEFAULT_SLOTS) arr.push({ name: '', desc: '', url: '', icon: '' });
+                        return arr;
+                    }
+                }
+            } catch(e) {}
+            return Array.from({ length: DEFAULT_SLOTS }, () => ({ name: '', desc: '', url: '', icon: '' }));
+        }
+
+        function saveApplications(apps) {
+            try { localStorage.setItem(APPLICATIONS_STORAGE_KEY, JSON.stringify(apps)); } catch(e) {}
+        }
+
+        function renderApplications() {
+            const grid = document.getElementById('appsGrid');
+            if (!grid) return;
+            const apps = getApplications();
+            const t = modalTranslations[currentLang] || modalTranslations.en;
+            grid.innerHTML = '';
+
+            apps.forEach((app, idx) => {
+                const card = document.createElement('div');
+                card.className = 'app-card';
+                const hasContent = app.name && app.name.trim().length > 0;
+
+                if (hasContent) {
+                    if (app.url && app.url.trim().length > 0) {
+                        card.style.cursor = 'pointer';
+                        card.addEventListener('click', () => {
+                            let url = app.url.trim();
+                            if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+                            window.open(url, '_blank');
+                        });
+                        card.setAttribute('role', 'link');
+                        card.setAttribute('title', app.url);
+                    }
+                    const iconHTML = (app.icon && app.icon.trim().startsWith('http'))
+                        ? `<img src="${escapeHtml(app.icon.trim())}" alt="">`
+                        : (app.icon && app.icon.trim() ? escapeHtml(app.icon.trim()) : '📱');
+                    card.innerHTML = `
+                        <div class="app-card-icon">${iconHTML}</div>
+                        <div class="app-card-body">
+                            <div class="app-card-name">${escapeHtml(app.name)} ${app.url ? '<i class="fa-solid fa-arrow-up-right-from-square"></i>' : ''}</div>
+                            <div class="app-card-desc">${escapeHtml(app.desc || '')}</div>
+                        </div>
+                        ${isAdminLoggedIn() ? '<span class="app-card-tag">ADMIN</span>' : ''}
+                    `;
+                } else {
+                    card.classList.add('disabled');
+                    card.innerHTML = `
+                        <div class="app-card-empty" style="height:100%;">
+                            <i class="fa-solid fa-cube"></i>
+                            <span>${escapeHtml(t.emptySlotLabel || 'Empty Slot')} ${idx + 1}</span>
+                        </div>
+                        ${isAdminLoggedIn() ? '<span class="app-card-tag">ADMIN</span>' : ''}
+                    `;
+                }
+                grid.appendChild(card);
+            });
+        }
+
+        function escapeHtml(str) {
+            if (str === null || str === undefined) return '';
+            return String(str).replace(/[&<>"']/g, function(m) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+            });
+        }
+
+        // ============================================================
+        // 🔧 ADMIN SLOTS UI
+        // ============================================================
+        function renderAdminSlots() {
+            const list = document.getElementById('adminSlotsList');
+            if (!list) return;
+            const apps = getApplications();
+            list.innerHTML = '';
+
+            apps.forEach((app, idx) => {
+                const item = document.createElement('div');
+                item.className = 'admin-slot';
+                const filled = app.name && app.name.trim().length > 0;
+                item.innerHTML = `
+                    <div class="admin-slot-num">${idx + 1}</div>
+                    <div class="admin-slot-info">
+                        <div class="admin-slot-name">${filled ? escapeHtml(app.name) : '<em style="opacity:0.5;">Empty Slot</em>'}</div>
+                        <div class="admin-slot-url">${filled && app.url ? escapeHtml(app.url) : (filled && app.desc ? escapeHtml(app.desc) : (currentLang === 'tr' ? 'Boş slot - düzenlemek için kalem ikonuna tıklayın' : 'Empty slot - click pencil icon to edit'))}</div>
+                    </div>
+                    <div class="admin-slot-btns">
+                        <button class="admin-slot-btn" onclick="editAppSlot(${idx})" title="Edit"><i class="fa-solid fa-pen"></i></button>
+                        <button class="admin-slot-btn delete" onclick="clearAppSlot(${idx})" title="Clear"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function editAppSlot(idx) {
+            const apps = getApplications();
+            const app = apps[idx] || { name: '', desc: '', url: '', icon: '' };
+            document.getElementById('editSlotIndex').value = idx;
+            document.getElementById('editAppIcon').value = app.icon || '';
+            document.getElementById('editAppName').value = app.name || '';
+            document.getElementById('editAppDesc').value = app.desc || '';
+            document.getElementById('editAppUrl').value = app.url || '';
+            document.getElementById('adminEditModal').classList.add('active');
+            setTimeout(() => document.getElementById('editAppName').focus(), 250);
+        }
+
+        function closeAdminEdit() {
+            document.getElementById('adminEditModal').classList.remove('active');
+        }
+
+        function saveAppSlot(e) {
+            e.preventDefault();
+            const idx = parseInt(document.getElementById('editSlotIndex').value) || 0;
+            const apps = getApplications();
+            apps[idx] = {
+                icon: document.getElementById('editAppIcon').value.trim(),
+                name: document.getElementById('editAppName').value.trim(),
+                desc: document.getElementById('editAppDesc').value.trim(),
+                url: document.getElementById('editAppUrl').value.trim()
+            };
+            saveApplications(apps);
+            closeAdminEdit();
+            renderAdminSlots();
+            renderApplications();
+        }
+
+        function clearAppSlot(idx) {
+            const apps = getApplications();
+            apps[idx] = { name: '', desc: '', url: '', icon: '' };
+            saveApplications(apps);
+            renderAdminSlots();
+            renderApplications();
+        }
+
+        // ============================================================
+        // URL HASH ile admin tetikleme (#manage-muminsultani)
+        // ============================================================
+        function checkAdminHash() {
+            if (window.location.hash === '#manage-muminsultani' || window.location.hash === '#admin') {
+                triggerAdminAccess();
+                // URL'i temizle
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+            }
+        }
+        window.addEventListener('hashchange', checkAdminHash);
+
+        // ============================================================
+        // THEME
+        // ============================================================
         function initTheme() {
             const savedTheme = localStorage.getItem('theme');
             const hour = new Date().getHours();
             let theme = savedTheme;
             if (!theme) { theme = (hour >= 6 && hour < 18) ? 'light' : 'dark'; }
-            if (theme === 'light') {
-                document.body.classList.add('light-mode');
-                updateThemeIcons('sun');
-            } else {
-                document.body.classList.remove('light-mode');
-                updateThemeIcons('moon');
-            }
+            if (theme === 'light') { document.body.classList.add('light-mode'); updateThemeIcons('sun'); }
+            else { document.body.classList.remove('light-mode'); updateThemeIcons('moon'); }
         }
 
         function updateThemeIcons(type) {
@@ -1235,10 +1685,7 @@
                     intro.style.visibility = 'hidden';
                     setTimeout(() => { 
                         intro.style.display = 'none';
-                        if (window.introConstellation && window.introConstellation.stop) {
-                            window.introConstellation.stop();
-                        }
-                        // 🎉 ANA SAYFA KUTLAMASI - İKİ PATLAMA
+                        if (window.introConstellation && window.introConstellation.stop) window.introConstellation.stop();
                         fireConfettiDoubleBurst();
                     }, 600);
                 }
@@ -1246,6 +1693,7 @@
 
             initTheme();
             checkUserSession();
+            renderApplications();
             
             const savedLang = sessionStorage.getItem('site_lang') || 'en';
             changeLanguage(savedLang);
@@ -1270,30 +1718,23 @@
                     confettiCanvas.height = window.innerHeight;
                 }
             });
+
+            // Admin hash kontrolü
+            checkAdminHash();
         });
 
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
             const isLight = document.body.classList.contains('light-mode');
-            if (isLight) {
-                updateThemeIcons('sun');
-                localStorage.setItem('theme', 'light');
-            } else {
-                updateThemeIcons('moon');
-                localStorage.setItem('theme', 'dark');
-            }
+            if (isLight) { updateThemeIcons('sun'); localStorage.setItem('theme', 'light'); }
+            else { updateThemeIcons('moon'); localStorage.setItem('theme', 'dark'); }
         }
 
         function togglePasswordVisibility(inputId, iconId) {
             const passwordInput = document.getElementById(inputId);
             const toggleIcon = document.getElementById(iconId);
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                toggleIcon.className = 'fa-solid fa-eye-slash';
-            } else {
-                passwordInput.type = 'password';
-                toggleIcon.className = 'fa-solid fa-eye';
-            }
+            if (passwordInput.type === 'password') { passwordInput.type = 'text'; toggleIcon.className = 'fa-solid fa-eye-slash'; }
+            else { passwordInput.type = 'password'; toggleIcon.className = 'fa-solid fa-eye'; }
         }
 
         function updatePasswordHint(inputId, hintId) {
@@ -1308,8 +1749,7 @@
                 digit: /[0-9]/.test(password),
                 special: /[€$@#&!*]/.test(password)
             };
-            const listItems = hintContainer.querySelectorAll('li');
-            listItems.forEach(li => {
+            hintContainer.querySelectorAll('li').forEach(li => {
                 const rule = li.getAttribute('data-rule');
                 if (rules[rule]) { li.classList.remove('invalid'); li.classList.add('valid'); }
                 else { li.classList.remove('valid'); li.classList.add('invalid'); }
@@ -1317,19 +1757,12 @@
         }
 
         function isValidPassword(password) {
-            return password.length >= 8 &&
-                   /[A-Z]/.test(password) &&
-                   /[a-z]/.test(password) &&
-                   /[0-9]/.test(password) &&
-                   /[€$@#&!*]/.test(password);
+            return password.length >= 8 && /[A-Z]/.test(password) && /[a-z]/.test(password) && /[0-9]/.test(password) && /[€$@#&!*]/.test(password);
         }
 
         let lastAutoUsername = '';
         function generateUsernameFromName(name) {
-            return name.trim().toLowerCase()
-                .replace(/ç/g, 'c').replace(/ğ/g, 'g').replace(/ı/g, 'i')
-                .replace(/İ/g, 'i').replace(/ö/g, 'o').replace(/ş/g, 's').replace(/ü/g, 'u')
-                .replace(/[^a-z0-9]/g, '');
+            return name.trim().toLowerCase().replace(/ç/g, 'c').replace(/ğ/g, 'g').replace(/ı/g, 'i').replace(/İ/g, 'i').replace(/ö/g, 'o').replace(/ş/g, 's').replace(/ü/g, 'u').replace(/[^a-z0-9]/g, '');
         }
 
         function checkUsernameAvailability() {
@@ -1347,25 +1780,15 @@
             });
             const t = modalTranslations[currentLang] || modalTranslations.en;
             msgDiv.style.display = 'block';
-            if (exists) {
-                msgDiv.style.color = '#ef4444';
-                msgDiv.innerText = t.usernameTaken;
-            } else {
-                msgDiv.style.color = '#22c55e';
-                msgDiv.innerText = t.usernameAvailable;
-            }
+            if (exists) { msgDiv.style.color = '#ef4444'; msgDiv.innerText = t.usernameTaken; }
+            else { msgDiv.style.color = '#22c55e'; msgDiv.innerText = t.usernameAvailable; }
         }
 
         function toggleProfilePrivacy() {
             const detailsContainer = document.getElementById('profileDetailsContainer');
             const privacyIcon = document.getElementById('privacyIcon');
-            if (detailsContainer.style.display === 'none') {
-                detailsContainer.style.display = 'flex';
-                privacyIcon.className = 'fa-solid fa-eye';
-            } else {
-                detailsContainer.style.display = 'none';
-                privacyIcon.className = 'fa-solid fa-eye-slash';
-            }
+            if (detailsContainer.style.display === 'none') { detailsContainer.style.display = 'flex'; privacyIcon.className = 'fa-solid fa-eye'; }
+            else { detailsContainer.style.display = 'none'; privacyIcon.className = 'fa-solid fa-eye-slash'; }
         }
 
         function openProfilePhotoPanel() {
@@ -1422,8 +1845,7 @@
             const pwdIcon = document.getElementById('passwordToggleIcon');
             if(pwdInput) pwdInput.type = 'password';
             if(pwdIcon) pwdIcon.className = 'fa-solid fa-eye';
-            const hints = document.querySelectorAll('.password-hint li');
-            hints.forEach(li => { li.classList.remove('valid', 'invalid'); });
+            document.querySelectorAll('.password-hint li').forEach(li => { li.classList.remove('valid', 'invalid'); });
             const msgDiv = document.getElementById('usernameAvailabilityMsg');
             if (msgDiv) msgDiv.style.display = 'none';
             lastAutoUsername = '';
@@ -1435,31 +1857,17 @@
         function toggleContactModalLangMenu() { document.getElementById('contactModalLangMenu').classList.toggle('show'); }
 
         window.addEventListener('click', function(e) {
-            if (!document.getElementById('langDropdownBtn').contains(e.target) && !document.getElementById('langMenu').contains(e.target)) {
-                document.getElementById('langMenu').classList.remove('show');
-            }
-            const modalBtn = document.getElementById('modalLangDropdownBtn');
-            const modalMenu = document.getElementById('modalLangMenu');
-            if (modalBtn && modalMenu && !modalBtn.contains(e.target) && !modalMenu.contains(e.target)) {
-                modalMenu.classList.remove('show');
-            }
-            const contactModalBtn = document.getElementById('contactModalLangDropdownBtn');
-            const contactModalMenu = document.getElementById('contactModalLangMenu');
-            if (contactModalBtn && contactModalMenu && !contactModalBtn.contains(e.target) && !contactModalMenu.contains(e.target)) {
-                contactModalMenu.classList.remove('show');
-            }
+            if (!document.getElementById('langDropdownBtn').contains(e.target) && !document.getElementById('langMenu').contains(e.target)) document.getElementById('langMenu').classList.remove('show');
+            const modalBtn = document.getElementById('modalLangDropdownBtn'); const modalMenu = document.getElementById('modalLangMenu');
+            if (modalBtn && modalMenu && !modalBtn.contains(e.target) && !modalMenu.contains(e.target)) modalMenu.classList.remove('show');
+            const contactModalBtn = document.getElementById('contactModalLangDropdownBtn'); const contactModalMenu = document.getElementById('contactModalLangMenu');
+            if (contactModalBtn && contactModalMenu && !contactModalBtn.contains(e.target) && !contactModalMenu.contains(e.target)) contactModalMenu.classList.remove('show');
         });
 
         function updateFileName(input) {
             const textSpan = document.getElementById('fileUploadText');
-            if (input.files && input.files.length > 0) {
-                textSpan.innerText = input.files[0].name;
-                textSpan.style.color = 'var(--text-primary)';
-            } else {
-                const t = modalTranslations[currentLang] || modalTranslations.en;
-                textSpan.innerText = t.filePlaceholder;
-                textSpan.style.color = '#94a3b8';
-            }
+            if (input.files && input.files.length > 0) { textSpan.innerText = input.files[0].name; textSpan.style.color = 'var(--text-primary)'; }
+            else { const t = modalTranslations[currentLang] || modalTranslations.en; textSpan.innerText = t.filePlaceholder; textSpan.style.color = '#94a3b8'; }
         }
 
         let cropperInstance = null;
@@ -1483,36 +1891,25 @@
             if (cropperInstance) { try { cropperInstance.destroy(); } catch(e) {} cropperInstance = null; }
             const initCropper = () => {
                 try {
-                    cropperInstance = new Cropper(cropImg, {
-                        aspectRatio: 1, viewMode: 1, autoCropArea: 0.9, background: false,
-                        responsive: true, guides: true, center: true, highlight: false,
-                        movable: true, zoomable: true, rotatable: false, scalable: false, dragMode: 'move'
-                    });
-                } catch(e) { console.error('Cropper init error:', e); }
+                    cropperInstance = new Cropper(cropImg, { aspectRatio: 1, viewMode: 1, autoCropArea: 0.9, background: false, responsive: true, guides: true, center: true, highlight: false, movable: true, zoomable: true, rotatable: false, scalable: false, dragMode: 'move' });
+                } catch(e) {}
             };
             if (cropImg.complete && cropImg.naturalWidth > 0) { setTimeout(initCropper, 50); }
             else { cropImg.onload = () => setTimeout(initCropper, 50); }
         }
 
-        function closeCropModal() {
-            if (cropperInstance) { try { cropperInstance.destroy(); } catch(e) {} cropperInstance = null; }
-            document.getElementById('cropModal').classList.remove('active');
-        }
+        function closeCropModal() { if (cropperInstance) { try { cropperInstance.destroy(); } catch(e) {} cropperInstance = null; } document.getElementById('cropModal').classList.remove('active'); }
 
         function setCropRatio(ratio, btn) {
             document.querySelectorAll('.ratio-btn').forEach(b => b.classList.remove('active'));
             if (btn) btn.classList.add('active');
-            if (cropperInstance) {
-                try { cropperInstance.setAspectRatio(isNaN(ratio) ? NaN : ratio); } catch(e) {}
-            }
+            if (cropperInstance) { try { cropperInstance.setAspectRatio(isNaN(ratio) ? NaN : ratio); } catch(e) {} }
         }
 
         function applyCrop() {
             if (!cropperInstance) return;
             try {
-                const canvas = cropperInstance.getCroppedCanvas({
-                    width: 400, height: 400, imageSmoothingEnabled: true, imageSmoothingQuality: 'high', fillColor: '#ffffff'
-                });
+                const canvas = cropperInstance.getCroppedCanvas({ width: 400, height: 400, imageSmoothingEnabled: true, imageSmoothingQuality: 'high', fillColor: '#ffffff' });
                 if (!canvas) return;
                 const croppedDataUrl = canvas.toDataURL('image/png');
                 document.getElementById('profilePhotoDisplay').src = croppedDataUrl;
@@ -1529,16 +1926,13 @@
                     } catch(err) {}
                 }
                 closeCropModal();
-            } catch(err) { console.error('Crop apply error:', err); }
+            } catch(err) {}
         }
 
         function fallbackCopy(text) {
             const tempInput = document.createElement('textarea');
-            tempInput.value = text;
-            tempInput.style.position = 'fixed';
-            tempInput.style.opacity = '0';
-            document.body.appendChild(tempInput);
-            tempInput.select();
+            tempInput.value = text; tempInput.style.position = 'fixed'; tempInput.style.opacity = '0';
+            document.body.appendChild(tempInput); tempInput.select();
             try { document.execCommand('copy'); } catch(e) {}
             document.body.removeChild(tempInput);
         }
@@ -1558,9 +1952,8 @@
                     if (copyBtn) { copyBtn.classList.remove('copied'); copyBtn.title = (currentLang === 'tr') ? 'Şifreyi Kopyala' : 'Copy Password'; }
                 }, 1500);
             };
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(passValue).then(showCopied).catch(() => { fallbackCopy(passValue); showCopied(); });
-            } else { fallbackCopy(passValue); showCopied(); }
+            if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(passValue).then(showCopied).catch(() => { fallbackCopy(passValue); showCopied(); }); }
+            else { fallbackCopy(passValue); showCopied(); }
         }
 
         function copyEmailChangeCode() {
@@ -1578,9 +1971,8 @@
                     if (copyBtn) { copyBtn.classList.remove('copied'); copyBtn.title = (currentLang === 'tr') ? 'Kodu Kopyala' : 'Copy Code'; }
                 }, 1500);
             };
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(codeValue).then(showCopied).catch(() => { fallbackCopy(codeValue); showCopied(); });
-            } else { fallbackCopy(codeValue); showCopied(); }
+            if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(codeValue).then(showCopied).catch(() => { fallbackCopy(codeValue); showCopied(); }); }
+            else { fallbackCopy(codeValue); showCopied(); }
         }
 
         function copySignupCode() {
@@ -1598,19 +1990,15 @@
                     if (copyBtn) { copyBtn.classList.remove('copied'); copyBtn.title = (currentLang === 'tr') ? 'Kodu Kopyala' : 'Copy Code'; }
                 }, 1500);
             };
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(codeValue).then(showCopied).catch(() => { fallbackCopy(codeValue); showCopied(); });
-            } else { fallbackCopy(codeValue); showCopied(); }
+            if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(codeValue).then(showCopied).catch(() => { fallbackCopy(codeValue); showCopied(); }); }
+            else { fallbackCopy(codeValue); showCopied(); }
         }
 
         // ============================================================
         // SIGNUP VERIFICATION
         // ============================================================
         let pendingSignup = null;
-
-        function generateSignupCode() {
-            return String(Math.floor(100000 + Math.random() * 900000));
-        }
+        function generateSignupCode() { return String(Math.floor(100000 + Math.random() * 900000)); }
 
         function openSignupMockModal(email, code) {
             const t = modalTranslations[currentLang] || modalTranslations.en;
@@ -1623,12 +2011,9 @@
             document.getElementById('signupMockCodeValue').innerText = code;
             document.getElementById('signupMockAdminLabel').innerText = t.mockEmailAdminLabel;
             document.getElementById('signupMockEnterBtn').innerText = t.signupEnterCodeBtn;
-            
-            const icon = document.getElementById('signupCopyIcon');
-            const btn = document.getElementById('signupCopyBtn');
+            const icon = document.getElementById('signupCopyIcon'); const btn = document.getElementById('signupCopyBtn');
             if (icon) icon.className = 'fa-regular fa-copy';
             if (btn) { btn.classList.remove('copied'); btn.title = (currentLang === 'tr') ? 'Kodu Kopyala' : 'Copy Code'; }
-            
             document.getElementById('signupMockModal').classList.add('active');
         }
 
@@ -1641,67 +2026,43 @@
             document.getElementById('signupCodeVerifyText').innerText = t.signupVerifyBtn;
             document.getElementById('signupCodeInput').value = '';
             document.getElementById('signupCodeModal').classList.add('active');
-            setTimeout(() => { document.getElementById('signupCodeInput').focus(); }, 300);
+            setTimeout(() => document.getElementById('signupCodeInput').focus(), 300);
         }
 
-        function backToSignupMock() {
-            document.getElementById('signupCodeModal').classList.remove('active');
-            if (pendingSignup) { openSignupMockModal(pendingSignup.email, pendingSignup.code); }
-        }
-
-        function cancelSignup() {
-            pendingSignup = null;
-            document.getElementById('signupMockModal').classList.remove('active');
-            document.getElementById('signupCodeModal').classList.remove('active');
-        }
+        function backToSignupMock() { document.getElementById('signupCodeModal').classList.remove('active'); if (pendingSignup) openSignupMockModal(pendingSignup.email, pendingSignup.code); }
+        function cancelSignup() { pendingSignup = null; document.getElementById('signupMockModal').classList.remove('active'); document.getElementById('signupCodeModal').classList.remove('active'); }
 
         function verifySignupCode(e) {
             e.preventDefault();
             const t = modalTranslations[currentLang] || modalTranslations.en;
             const enteredCode = document.getElementById('signupCodeInput').value.trim();
-            
             if (!pendingSignup) { document.getElementById('signupCodeModal').classList.remove('active'); return; }
             if (!enteredCode || enteredCode.length !== 6) { showCustomAlert(t.signupCodeError); return; }
             if (enteredCode !== pendingSignup.code) { showCustomAlert(t.signupCodeError); return; }
-            
             try {
-                const newUser = {
-                    name: pendingSignup.name,
-                    username: pendingSignup.username,
-                    email: pendingSignup.email,
-                    password: pendingSignup.password,
-                    birthDay: '', birthMonth: '', birthYear: '', profilePhoto: ''
-                };
-                
+                const newUser = { name: pendingSignup.name, username: pendingSignup.username, email: pendingSignup.email, password: pendingSignup.password, birthDay: '', birthMonth: '', birthYear: '', profilePhoto: '' };
                 let users = JSON.parse(localStorage.getItem('site_users') || '[]');
                 users.push(newUser);
                 localStorage.setItem('site_users', JSON.stringify(users));
                 localStorage.setItem('logged_user', JSON.stringify(newUser));
-                
                 pendingSignup = null;
                 document.getElementById('signupCodeModal').classList.remove('active');
                 document.getElementById('signupMockModal').classList.remove('active');
                 closeDirectContactModal();
                 resetContactForm();
                 checkUserSession();
-                
-                // 🎉🎊 KUTLAMA: Alkış sesi + iki konfeti patlaması
                 playApplauseSound();
                 fireConfettiBurst(1.2);
                 setTimeout(() => fireConfettiBurst(1), 600);
-                
                 showCustomAlert(t.successSignup, 'success');
-            } catch(err) { console.error(err); }
+            } catch(err) {}
         }
 
         // ============================================================
         // EMAIL CHANGE VERIFICATION
         // ============================================================
         let pendingEmailChange = null;
-
-        function generateVerificationCode() {
-            return String(Math.floor(100000 + Math.random() * 900000));
-        }
+        function generateVerificationCode() { return String(Math.floor(100000 + Math.random() * 900000)); }
 
         function openEmailChangeMockModal(newEmail, code) {
             const t = modalTranslations[currentLang] || modalTranslations.en;
@@ -1714,12 +2075,9 @@
             document.getElementById('email-change-code-value').innerText = code;
             document.getElementById('email-change-mock-admin-label').innerText = t.mockEmailAdminLabel;
             document.getElementById('email-change-enter-code-btn').innerText = t.emailChangeEnterCodeBtn;
-            
-            const copyIcon = document.getElementById('copyEmailChangeIcon');
-            const copyBtn = document.getElementById('copyEmailChangeBtn');
+            const copyIcon = document.getElementById('copyEmailChangeIcon'); const copyBtn = document.getElementById('copyEmailChangeBtn');
             if (copyIcon) copyIcon.className = 'fa-regular fa-copy';
             if (copyBtn) { copyBtn.classList.remove('copied'); copyBtn.title = (currentLang === 'tr') ? 'Kodu Kopyala' : 'Copy Code'; }
-            
             document.getElementById('emailChangeMockModal').classList.add('active');
         }
 
@@ -1734,31 +2092,20 @@
             document.getElementById('email-change-verify-text').innerText = t.emailChangeVerifyBtn;
             document.getElementById('emailChangeCodeInput').value = '';
             document.getElementById('emailChangeCodeModal').classList.add('active');
-            setTimeout(() => { document.getElementById('emailChangeCodeInput').focus(); }, 300);
+            setTimeout(() => document.getElementById('emailChangeCodeInput').focus(), 300);
         }
 
         function closeEmailChangeCodeModal() { document.getElementById('emailChangeCodeModal').classList.remove('active'); }
-
-        function backToEmailChangeMock() {
-            closeEmailChangeCodeModal();
-            if (pendingEmailChange) { openEmailChangeMockModal(pendingEmailChange.newEmail, pendingEmailChange.code); }
-        }
-
-        function cancelEmailChange() {
-            pendingEmailChange = null;
-            closeEmailChangeMockModal();
-            closeEmailChangeCodeModal();
-        }
+        function backToEmailChangeMock() { closeEmailChangeCodeModal(); if (pendingEmailChange) openEmailChangeMockModal(pendingEmailChange.newEmail, pendingEmailChange.code); }
+        function cancelEmailChange() { pendingEmailChange = null; closeEmailChangeMockModal(); closeEmailChangeCodeModal(); }
 
         function verifyEmailChangeCode(e) {
             e.preventDefault();
             const t = modalTranslations[currentLang] || modalTranslations.en;
             const enteredCode = document.getElementById('emailChangeCodeInput').value.trim();
-            
             if (!pendingEmailChange) { closeEmailChangeCodeModal(); return; }
             if (!enteredCode || enteredCode.length !== 6) { showCustomAlert(t.emailChangeCodeError); return; }
             if (enteredCode !== pendingEmailChange.code) { showCustomAlert(t.emailChangeCodeError); return; }
-            
             try {
                 const oldEmail = pendingEmailChange.oldEmail;
                 const newEmail = pendingEmailChange.newEmail;
@@ -1769,24 +2116,23 @@
                 userObj.birthDay = pendingEmailChange.birthDay;
                 userObj.birthMonth = pendingEmailChange.birthMonth;
                 userObj.birthYear = pendingEmailChange.birthYear;
-                
                 let users = JSON.parse(localStorage.getItem('site_users') || '[]');
                 users = users.map(u => u.email === oldEmail ? userObj : u);
                 localStorage.setItem('site_users', JSON.stringify(users));
                 localStorage.setItem('logged_user', JSON.stringify(userObj));
-                
                 pendingEmailChange = null;
                 closeEmailChangeCodeModal();
                 closeEmailChangeMockModal();
                 closeEditProfileModal();
                 checkUserSession();
                 showCustomAlert(t.successUpdate, 'success');
-            } catch(err) { console.error(err); }
+            } catch(err) {}
         }
 
         const translations = {
             en: {
                 code: "EN", role: "Software Developer",
+                appsTitle: "My Applications",
                 projectsTitle: "Featured Projects",
                 proj1Desc: "A high-performance backend architecture built with Django and modern microservices.",
                 proj2Desc: "Fast workflow automation utility written for developer productivity.",
@@ -1806,6 +2152,7 @@
             },
             tr: {
                 code: "TR", role: "Yazılım Geliştirici",
+                appsTitle: "Uygulamalarım",
                 projectsTitle: "Öne Çıkan Projeler",
                 proj1Desc: "Django ve modern mikroservislerle kurulmuş yüksek performanslı bir arka uç mimarisi.",
                 proj2Desc: "Geliştirici verimliliği için yazılmış hızlı iş akışı otomasyon aracı.",
@@ -1839,6 +2186,7 @@
             if (currentLangTextEl) currentLangTextEl.innerText = data.code;
             setText('t-role', data.role);
             setText('introSub', data.role);
+            setText('t-apps-title', data.appsTitle);
             setText('t-projects-title', data.projectsTitle);
             setText('t-proj1-desc', data.proj1Desc);
             setText('t-proj2-desc', data.proj2Desc);
@@ -1873,6 +2221,8 @@
             const copySignupBtn = document.getElementById('signupCopyBtn'); if (copySignupBtn) copySignupBtn.title = (lang === 'tr') ? 'Kodu Kopyala' : 'Copy Code';
             changeModalLanguage(lang);
             checkUserSession();
+            renderApplications();
+            if (document.getElementById('adminPanelModal').classList.contains('active')) renderAdminSlots();
             const langMenu = document.getElementById('langMenu'); if (langMenu) langMenu.classList.remove('show');
         }
 
@@ -1946,7 +2296,8 @@
                 signupCodeDesc: "Enter the 6-digit verification code sent to your email address.",
                 signupCodeLabel: "Verification Code",
                 signupVerifyBtn: "Verify & Create Account",
-                signupCodeError: "Invalid verification code! Please try again."
+                signupCodeError: "Invalid verification code! Please try again.",
+                emptySlotLabel: "Empty Slot"
             },
             tr: {
                 code: "TR", title: "Konuşalım", contactHeaderTitle: "Hesap İşlemleri",
@@ -2017,7 +2368,8 @@
                 signupCodeDesc: "E-posta adresinize gönderilen 6 haneli doğrulama kodunu girin.",
                 signupCodeLabel: "Doğrulama Kodu",
                 signupVerifyBtn: "Doğrula ve Hesap Oluştur",
-                signupCodeError: "Geçersiz doğrulama kodu! Lütfen tekrar deneyin."
+                signupCodeError: "Geçersiz doğrulama kodu! Lütfen tekrar deneyin.",
+                emptySlotLabel: "Boş Slot"
             }
         };
 
@@ -2038,31 +2390,25 @@
             const t = modalTranslations[currentLang] || modalTranslations.en;
 
             if (mode === 'signin') {
-                tabSignin.classList.add('active');
-                tabSignup.classList.remove('active');
-                groupName.style.display = 'none';
-                groupUsername.style.display = 'none';
+                tabSignin.classList.add('active'); tabSignup.classList.remove('active');
+                groupName.style.display = 'none'; groupUsername.style.display = 'none';
                 if(groupPassword) groupPassword.style.display = 'block';
                 if(signupHint) signupHint.style.display = 'none';
                 if(usernameMsg) usernameMsg.style.display = 'none';
                 submitBtnText.innerText = t.signinBtn;
-                // ✅ Signin: email veya username
                 if (emailLabel) emailLabel.innerText = t.emailOrUsernameLabel;
                 if (emailInput) emailInput.placeholder = t.emailOrUsernamePlaceholder;
             } else {
-                tabSignup.classList.add('active');
-                tabSignin.classList.remove('active');
-                groupName.style.display = 'block';
-                groupUsername.style.display = 'block';
+                tabSignup.classList.add('active'); tabSignin.classList.remove('active');
+                groupName.style.display = 'block'; groupUsername.style.display = 'block';
                 if(groupPassword) groupPassword.style.display = 'block';
                 if(signupHint) signupHint.style.display = 'block';
                 submitBtnText.innerText = t.signupBtn;
-                // Signup: sadece email
                 if (emailLabel) emailLabel.innerText = t.emailLabel;
                 if (emailInput) emailInput.placeholder = t.emailPlaceholder;
             }
             const forgotLinkEl = document.getElementById('t-forgot-link');
-            if (forgotLinkEl) { forgotLinkEl.style.display = (mode === 'signup') ? 'none' : 'inline'; }
+            if (forgotLinkEl) forgotLinkEl.style.display = (mode === 'signup') ? 'none' : 'inline';
         }
 
         function openGetInTouchModal() {
@@ -2089,19 +2435,9 @@
             document.getElementById('editProfileModal').classList.add('active');
         }
         function closeEditProfileModal() { document.getElementById('editProfileModal').classList.remove('active'); }
-        function openChangePasswordModal() {
-            const loggedUser = localStorage.getItem('logged_user');
-            if (!loggedUser) return;
-            document.getElementById('changePasswordForm').reset();
-            document.getElementById('changePasswordModal').classList.add('active');
-        }
+        function openChangePasswordModal() { if (!localStorage.getItem('logged_user')) return; document.getElementById('changePasswordForm').reset(); document.getElementById('changePasswordModal').classList.add('active'); }
         function closeChangePasswordModal() { document.getElementById('changePasswordModal').classList.remove('active'); }
-        function openDeleteAccountModal() {
-            const loggedUser = localStorage.getItem('logged_user');
-            if (!loggedUser) return;
-            document.getElementById('deleteConfirmUsername').value = '';
-            document.getElementById('deleteAccountModal').classList.add('active');
-        }
+        function openDeleteAccountModal() { if (!localStorage.getItem('logged_user')) return; document.getElementById('deleteConfirmUsername').value = ''; document.getElementById('deleteAccountModal').classList.add('active'); }
         function closeDeleteAccountModal() { document.getElementById('deleteAccountModal').classList.remove('active'); }
         function openDeletePasswordModal() { document.getElementById('deleteConfirmPassword').value = ''; document.getElementById('confirmDeletePasswordModal').classList.add('active'); }
         function closeDeletePasswordModal() { document.getElementById('confirmDeletePasswordModal').classList.remove('active'); }
@@ -2117,40 +2453,32 @@
             const birthMonth = document.getElementById('editClientMonth').value.trim();
             const birthYear = document.getElementById('editClientYear').value.trim();
             const t = modalTranslations[currentLang] || modalTranslations.en;
-
             if (!newName || !newUsername || !newEmail) { showCustomAlert(t.alertText); return; }
-
             try {
                 let userObj = JSON.parse(loggedUser);
                 let users = JSON.parse(localStorage.getItem('site_users') || '[]');
                 const emailExists = users.some(u => u.email === newEmail && u.email !== userObj.email);
                 if (emailExists) { showCustomAlert(t.emailAlreadyRegistered); return; }
                 const emailChanged = (newEmail !== userObj.email);
-
                 if (emailChanged) {
                     const code = generateVerificationCode();
-                    pendingEmailChange = {
-                        code, oldEmail: userObj.email, newEmail, userObj,
-                        newName, newUsername, birthDay, birthMonth, birthYear
-                    };
+                    pendingEmailChange = { code, oldEmail: userObj.email, newEmail, userObj, newName, newUsername, birthDay, birthMonth, birthYear };
                     closeEditProfileModal();
                     openEmailChangeMockModal(newEmail, code);
                     return;
                 }
-
                 userObj.name = newName;
                 userObj.username = newUsername;
                 userObj.birthDay = birthDay;
                 userObj.birthMonth = birthMonth;
                 userObj.birthYear = birthYear;
-
                 users = users.map(u => u.email === userObj.email ? userObj : u);
                 localStorage.setItem('site_users', JSON.stringify(users));
                 localStorage.setItem('logged_user', JSON.stringify(userObj));
                 closeEditProfileModal();
                 checkUserSession();
                 showCustomAlert(t.successUpdate, 'success');
-            } catch(err) { console.error(err); }
+            } catch(err) {}
         }
 
         function handleChangePassword(e) {
@@ -2241,8 +2569,7 @@
             const mockModal = document.getElementById('mockEmailModal');
             document.getElementById('mock-email-user-value').innerText = email;
             document.getElementById('mock-email-pass-value').innerText = tempPass;
-            const copyIcon = document.getElementById('copyPassIcon');
-            const copyBtn = document.getElementById('copyPassBtn');
+            const copyIcon = document.getElementById('copyPassIcon'); const copyBtn = document.getElementById('copyPassBtn');
             if (copyIcon) copyIcon.className = 'fa-regular fa-copy';
             if (copyBtn) { copyBtn.classList.remove('copied'); copyBtn.title = (currentLang === 'tr') ? 'Şifreyi Kopyala' : 'Copy Password'; }
             mockModal.classList.add('active');
@@ -2299,7 +2626,7 @@
             document.getElementById('gmailNoticeBackText').innerText = t.backText;
             document.getElementById('gmailNoticeModal').classList.add('active');
             const appointmentModal = document.getElementById('appointmentModal');
-            if (appointmentModal.classList.contains('active')) { appointmentModal.classList.add('light-blue-bg'); }
+            if (appointmentModal.classList.contains('active')) appointmentModal.classList.add('light-blue-bg');
         }
         function closeGmailNoticeModal() {
             document.getElementById('gmailNoticeModal').classList.remove('active');
@@ -2386,7 +2713,7 @@
                 const callback = window._confirmActionCallback;
                 closeCustomAlert();
                 callback();
-            } else { closeCustomAlert(); }
+            } else closeCustomAlert();
         }
 
         function confirmLogout() {
@@ -2411,7 +2738,7 @@
             document.getElementById('clientEmail').placeholder = data.emailPlaceholder;
             document.getElementById('m-label-file').innerText = data.fileLabel;
             const fileInput = document.getElementById('clientFile');
-            if (!fileInput.files || fileInput.files.length === 0) { document.getElementById('fileUploadText').innerText = data.filePlaceholder; }
+            if (!fileInput.files || fileInput.files.length === 0) document.getElementById('fileUploadText').innerText = data.filePlaceholder;
             document.getElementById('m-label-desc').innerText = data.descLabel;
             document.getElementById('clientDesc').placeholder = data.descPlaceholder;
             document.getElementById('m-email-btn').innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" style="width: 1.1rem; height: 1.1rem; display: block;"> ${data.emailBtn}`;
@@ -2424,8 +2751,6 @@
             if(document.getElementById('contactClientName')) document.getElementById('contactClientName').placeholder = data.namePlaceholder;
             if(document.getElementById('dc-label-username')) document.getElementById('dc-label-username').innerText = data.usernameLabel;
             if(document.getElementById('contactClientUsername')) document.getElementById('contactClientUsername').placeholder = data.usernamePlaceholder;
-            
-            // ✅ Email alanı - signin/signup moduna göre
             const emailLabel = document.getElementById('dc-label-email');
             const emailInput = document.getElementById('contactClientEmail');
             if (currentAuthMode === 'signin') {
@@ -2435,7 +2760,6 @@
                 if (emailLabel) emailLabel.innerText = data.emailLabel;
                 if (emailInput) emailInput.placeholder = data.emailPlaceholder;
             }
-            
             document.getElementById('dc-label-password').innerText = data.passwordLabel;
             document.getElementById('contactClientPassword').placeholder = data.passwordPlaceholder;
             document.getElementById('dc-submit-btn-text').innerText = (currentAuthMode === 'signin') ? data.signinBtn : data.signupBtn;
@@ -2504,6 +2828,20 @@
             if(document.getElementById('signupCodeDesc')) document.getElementById('signupCodeDesc').innerText = data.signupCodeDesc;
             if(document.getElementById('signupCodeLabel')) document.getElementById('signupCodeLabel').innerText = data.signupCodeLabel;
             if(document.getElementById('signupCodeVerifyText')) document.getElementById('signupCodeVerifyText').innerText = data.signupVerifyBtn;
+            // Admin panel çevirileri
+            if(document.getElementById('admin-login-title')) document.getElementById('admin-login-title').innerText = (lang === 'tr') ? 'Yönetici Girişi' : 'Admin Access';
+            if(document.getElementById('admin-pass-label')) document.getElementById('admin-pass-label').innerText = (lang === 'tr') ? 'Yönetici Şifresi' : 'Master Password';
+            if(document.getElementById('admin-login-btn')) document.getElementById('admin-login-btn').innerText = (lang === 'tr') ? 'Kilidi Aç' : 'Unlock';
+            if(document.getElementById('admin-panel-title')) document.getElementById('admin-panel-title').innerText = (lang === 'tr') ? 'Uygulamaları Yönet' : 'Manage Applications';
+            if(document.getElementById('admin-hint-title')) document.getElementById('admin-hint-title').innerText = (lang === 'tr') ? 'Yönetici Modu' : 'Admin Mode';
+            if(document.getElementById('admin-hint-text')) document.getElementById('admin-hint-text').innerText = (lang === 'tr') ? 'Site uygulamalarını düzenliyorsunuz. Değişiklikler yerel olarak saklanır ve anında görünür.' : 'You are editing the site applications. Changes are stored locally and appear immediately.';
+            if(document.getElementById('admin-logout-text')) document.getElementById('admin-logout-text').innerText = (lang === 'tr') ? 'Yöneticiden Çıkış Yap' : 'Log Out from Admin';
+            if(document.getElementById('admin-edit-title')) document.getElementById('admin-edit-title').innerText = (lang === 'tr') ? 'Uygulama Slotunu Düzenle' : 'Edit App Slot';
+            if(document.getElementById('ae-icon-label')) document.getElementById('ae-icon-label').innerText = (lang === 'tr') ? 'İkon (Emoji veya Resim URL)' : 'Icon (Emoji or Image URL)';
+            if(document.getElementById('ae-name-label')) document.getElementById('ae-name-label').innerText = (lang === 'tr') ? 'Uygulama Adı' : 'App Name';
+            if(document.getElementById('ae-desc-label')) document.getElementById('ae-desc-label').innerText = (lang === 'tr') ? 'Açıklama' : 'Description';
+            if(document.getElementById('ae-url-label')) document.getElementById('ae-url-label').innerText = (lang === 'tr') ? 'Bağlantı (isteğe bağlı)' : 'Link (optional)';
+            if(document.getElementById('ae-save-text')) document.getElementById('ae-save-text').innerText = (lang === 'tr') ? 'Kaydet' : 'Save';
 
             document.getElementById('gitModalTitle').innerText = data.contactTitle;
             document.getElementById('gitActionText').innerText = data.gitText;
@@ -2520,17 +2858,13 @@
             const email = document.getElementById('contactClientEmail').value.trim();
             const password = document.getElementById('contactClientPassword').value.trim();
             const t = modalTranslations[currentLang] || modalTranslations.en;
-
             if (!email || !password) { showCustomAlert(t.alertText); return; }
-
             let users = JSON.parse(localStorage.getItem('site_users') || '[]');
-
             if (currentAuthMode === 'signup') {
                 const name = document.getElementById('contactClientName').value.trim();
                 let username = document.getElementById('contactClientUsername').value.trim();
                 if (username.startsWith('@')) username = username.substring(1);
                 if (!name || !username) { showCustomAlert(t.alertText); return; }
-
                 const usernameExists = users.some(u => {
                     let uName = u.username || '';
                     if (uName.startsWith('@')) uName = uName.substring(1);
@@ -2538,20 +2872,16 @@
                 });
                 if (usernameExists) { showCustomAlert(t.usernameTaken); return; }
                 if (!isValidPassword(password)) { showCustomAlert(t.passwordStrengthError); return; }
-
                 const existing = users.find(u => u.email === email);
                 if (existing) { showCustomAlert(t.emailAlreadyRegistered); return; }
-
                 const code = generateSignupCode();
                 pendingSignup = { code, name, username, email, password };
                 openSignupMockModal(email, code);
                 return;
             } else {
-                // ✅ SIGN IN: E-posta VEYA kullanıcı adı ile giriş yapabilir
                 const inputClean = email.toLowerCase().trim();
                 let inputName = inputClean;
                 if (inputName.startsWith('@')) inputName = inputName.substring(1);
-                
                 let user = users.find(u => {
                     const emailMatch = (u.email || '').toLowerCase() === inputClean;
                     let uName = (u.username || '').toLowerCase();
@@ -2559,12 +2889,9 @@
                     const usernameMatch = uName === inputName;
                     return (emailMatch || usernameMatch) && u.password === password;
                 });
-                
-                // Admin override
                 if (!user && (inputClean === "admin@muminsultani.com" || inputName === "admin") && password === "admin123") {
                     user = { name: "Admin User", username: "@Admin", email: "admin@muminsultani.com", password: "admin123", birthDay: '', birthMonth: '', birthYear: '', profilePhoto: '' };
                 }
-                
                 if (user) {
                     localStorage.setItem('logged_user', JSON.stringify(user));
                     showCustomAlert(t.successSignin, 'success');
@@ -2581,7 +2908,6 @@
             const contactSubEl = document.getElementById('t-contact-sub');
             const contactMainEl = document.getElementById('t-contact-main');
             const authBoxIcon = document.getElementById('authBoxIcon');
-
             if (loggedUser) {
                 try {
                     const userObj = JSON.parse(loggedUser);
@@ -2590,9 +2916,8 @@
                     if (document.getElementById('profileDisplayUsernameDesktop')) document.getElementById('profileDisplayUsernameDesktop').innerText = userObj.username || '@username';
                     if (document.getElementById('profileDisplayEmailDesktop')) document.getElementById('profileDisplayEmailDesktop').innerText = userObj.email || '-';
                     if (document.getElementById('profileDisplayBirthdateDesktop')) {
-                        if (userObj.birthDay && userObj.birthMonth && userObj.birthYear) {
-                            document.getElementById('profileDisplayBirthdateDesktop').innerText = `${userObj.birthDay}/${userObj.birthMonth}/${userObj.birthYear}`;
-                        } else { document.getElementById('profileDisplayBirthdateDesktop').innerText = '--/--/----'; }
+                        if (userObj.birthDay && userObj.birthMonth && userObj.birthYear) document.getElementById('profileDisplayBirthdateDesktop').innerText = `${userObj.birthDay}/${userObj.birthMonth}/${userObj.birthYear}`;
+                        else document.getElementById('profileDisplayBirthdateDesktop').innerText = '--/--/----';
                     }
                     if (document.getElementById('profileDisplayUsernameMobile')) document.getElementById('profileDisplayUsernameMobile').innerText = userObj.username || '@username';
                     if (document.getElementById('profileDisplayEmail')) document.getElementById('profileDisplayEmail').innerText = userObj.email || '-';
@@ -2604,7 +2929,7 @@
                     if (userObj.birthDay && userObj.birthMonth && userObj.birthYear) {
                         if (birthRow) birthRow.style.display = 'flex';
                         if (birthDisplay) birthDisplay.innerText = `${userObj.birthDay}/${userObj.birthMonth}/${userObj.birthYear}`;
-                    } else { if (birthRow) birthRow.style.display = 'none'; }
+                    } else if (birthRow) birthRow.style.display = 'none';
                     const sessionT = modalTranslations[currentLang] || modalTranslations.en;
                     if (contactTitleEl) contactTitleEl.innerText = sessionT.userAccount;
                     if (contactSubEl) contactSubEl.innerText = sessionT.activeSession;
@@ -2641,48 +2966,28 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             getBase64ImageFromURL('https://muminsultani.com/img/ms.png', function(base64Logo) {
-                if (base64Logo) { doc.addImage(base64Logo, 'PNG', 20, 15, 14, 14); }
-                doc.setFont("helvetica", "bold");
-                doc.setFontSize(16);
-                doc.setTextColor(147, 51, 234);
+                if (base64Logo) doc.addImage(base64Logo, 'PNG', 20, 15, 14, 14);
+                doc.setFont("helvetica", "bold"); doc.setFontSize(16); doc.setTextColor(147, 51, 234);
                 doc.text("muminsultani", 38, 25);
-                doc.setFontSize(13);
-                doc.setTextColor(30, 41, 59);
-                doc.text("Project Request", 20, 42);
-                doc.setLineWidth(0.4);
-                doc.setStrokeColor(200, 200, 200);
-                doc.line(20, 46, 190, 46);
-                const tableData = [
-                    ["Name & Surname", name], ["Email Address", email], ["Attached File", fileName], ["Request Time", formattedDate], ["Project Details", desc]
-                ];
-                doc.autoTable({
-                    startY: 52, body: tableData, theme: 'grid',
-                    styles: { font: 'helvetica', fontSize: 9.5, cellPadding: 6, textColor: [30,41,59], lineColor: [226,232,240], lineWidth: 0.3 },
-                    columnStyles: { 0: { fontStyle: 'bold', cellWidth: 45, fillColor: [248,250,252] }, 1: { cellWidth: 'auto' } },
-                    margin: { left: 20, right: 20, bottom: 50 }
-                });
+                doc.setFontSize(13); doc.setTextColor(30, 41, 59); doc.text("Project Request", 20, 42);
+                doc.setLineWidth(0.4); doc.setStrokeColor(200, 200, 200); doc.line(20, 46, 190, 46);
+                const tableData = [["Name & Surname", name], ["Email Address", email], ["Attached File", fileName], ["Request Time", formattedDate], ["Project Details", desc]];
+                doc.autoTable({ startY: 52, body: tableData, theme: 'grid', styles: { font: 'helvetica', fontSize: 9.5, cellPadding: 6, textColor: [30,41,59], lineColor: [226,232,240], lineWidth: 0.3 }, columnStyles: { 0: { fontStyle: 'bold', cellWidth: 45, fillColor: [248,250,252] }, 1: { cellWidth: 'auto' } }, margin: { left: 20, right: 20, bottom: 50 } });
                 const pdfBlob = doc.output('blob');
                 const blobUrl = URL.createObjectURL(pdfBlob);
                 window.open(blobUrl, '_blank');
                 const downloadLink = document.createElement('a');
                 downloadLink.href = blobUrl;
                 downloadLink.download = `ProjectRequest_${name.replace(/\s+/g, '_')}.pdf`;
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
-                setTimeout(() => { URL.revokeObjectURL(blobUrl); }, 100);
+                document.body.appendChild(downloadLink); downloadLink.click(); document.body.removeChild(downloadLink);
+                setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
             });
         }
 
         function validateForm() {
             const loggedUser = localStorage.getItem('logged_user');
             const t = modalTranslations[currentLang] || modalTranslations.en;
-            if (!loggedUser) {
-                showCustomAlert(t.authRequiredAlert);
-                closeAppointmentModal();
-                openGetInTouchModal();
-                return false;
-            }
+            if (!loggedUser) { showCustomAlert(t.authRequiredAlert); closeAppointmentModal(); openGetInTouchModal(); return false; }
             const name = document.getElementById('clientName').value.trim();
             const email = document.getElementById('clientEmail').value.trim();
             const fileInput = document.getElementById('clientFile');
@@ -2696,20 +3001,13 @@
             e.preventDefault();
             const data = validateForm();
             if (!data) return;
-            const now = new Date();
-            const formattedDate = now.toLocaleString();
+            const now = new Date(); const formattedDate = now.toLocaleString();
             const t = modalTranslations[currentLang] || modalTranslations.en;
             generatePDF(data.name, data.email, data.fileName, data.desc, formattedDate);
             const recipient = document.getElementById('targetRecipientEmail').value;
             const subject = encodeURIComponent(`${t.waProjectRequest} - ` + data.name);
-            const body = encodeURIComponent(
-                `*${data.name}*\n\n*${t.waProjectRequest}*\n\n` +
-                `*${t.lblContactName}:* ${data.name}\n*${t.lblEmail}:* ${data.email}\n` +
-                `*${t.lblFile}:* ${data.fileName}\n*${t.lblTime}:* ${formattedDate}\n\n` +
-                `*${t.lblDetails}:*\n${data.desc}\n\nmuminsultani.com`
-            );
-            const mailtoUrl = `mailto:${recipient}?subject=${subject}&body=${body}`;
-            window.location.href = mailtoUrl;
+            const body = encodeURIComponent(`*${data.name}*\n\n*${t.waProjectRequest}*\n\n*${t.lblContactName}:* ${data.name}\n*${t.lblEmail}:* ${data.email}\n*${t.lblFile}:* ${data.fileName}\n*${t.lblTime}:* ${formattedDate}\n\n*${t.lblDetails}:*\n${data.desc}\n\nmuminsultani.com`);
+            window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
             closeAppointmentModal();
         }
 
@@ -2717,17 +3015,10 @@
             e.preventDefault();
             const data = validateForm();
             if (!data) return;
-            const now = new Date();
-            const formattedDate = now.toLocaleString();
+            const now = new Date(); const formattedDate = now.toLocaleString();
             const t = modalTranslations[currentLang] || modalTranslations.en;
-            const message = 
-                `*${data.name}*\n\n*${t.waProjectRequest}*\n\n` +
-                `*• ${t.lblContactName}:* ${data.name}\n*• ${t.lblEmail}:* ${data.email}\n` +
-                `*• ${t.lblFile}:* ${data.fileName}\n*• ${t.lblTime}:* ${formattedDate}\n\n` +
-                `*• ${t.lblDetails}:*\n${data.desc}\n\n*muminsultani.com*`;
-            const whatsappNumber = "905389480137";
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+            const message = `*${data.name}*\n\n*${t.waProjectRequest}*\n\n*• ${t.lblContactName}:* ${data.name}\n*• ${t.lblEmail}:* ${data.email}\n*• ${t.lblFile}:* ${data.fileName}\n*• ${t.lblTime}:* ${formattedDate}\n\n*• ${t.lblDetails}:*\n${data.desc}\n\n*muminsultani.com*`;
+            window.open(`https://wa.me/905389480137?text=${encodeURIComponent(message)}`, '_blank');
             closeAppointmentModal();
         }
 
@@ -2761,10 +3052,7 @@
                     ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.closePath(); ctx.fill();
                 }
             }
-            function initParticles() {
-                particlesArray = [];
-                for (let i = 0; i < numberOfParticles; i++) { particlesArray.push(new Particle()); }
-            }
+            function initParticles() { particlesArray = []; for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle()); }
             function animate() {
                 if (!running) return;
                 ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
@@ -2806,9 +3094,7 @@
             window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
             window.addEventListener('mousemove', (event) => { mouse.x = event.clientX; mouse.y = event.clientY; });
             window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
-            resizeCanvas();
-            initParticles();
-            animate();
+            resizeCanvas(); initParticles(); animate();
             return { stop: () => { running = false; } };
         }
         
