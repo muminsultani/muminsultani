@@ -266,11 +266,13 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .user-card-name{font-size:.85rem;font-weight:800;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .user-card-detail{font-size:.68rem;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
 .user-card-detail i{color:#9333ea;margin-right:3px;width:10px;text-align:center}
-.user-card-btns{display:flex;gap:5px;flex-shrink:0}
-.user-view-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--line-color);background:var(--box-bg);color:#9333ea;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.75rem}
+.user-card-btns{display:flex;gap:4px;flex-shrink:0}
+.user-view-btn{width:30px;height:30px;border-radius:8px;border:1px solid var(--line-color);background:var(--box-bg);color:#9333ea;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.72rem;transition:all .2s}
 .user-view-btn:hover{border-color:rgba(147,51,234,.5);background:var(--box-hover-bg)}
+.user-view-btn.pdf{color:#f59e0b;border-color:rgba(245,158,11,.25)}
+.user-view-btn.pdf:hover{border-color:rgba(245,158,11,.6);background:rgba(245,158,11,.08)}
 .user-view-btn.danger{color:#ef4444;border-color:rgba(239,68,68,.25)}
-.user-view-btn.danger:hover{border-color:rgba(239,68,68,.6);background:rgba(239,68,68,.08);color:#ef4444}
+.user-view-btn.danger:hover{border-color:rgba(239,68,68,.6);background:rgba(239,68,68,.08)}
 .activity-item{background:var(--box-bg);border:1px solid var(--line-color);border-radius:10px;padding:10px 12px;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start;border-left-width:3px}
 .activity-item.signup{border-left-color:#22c55e}
 .activity-item.signin{border-left-color:#3b82f6}
@@ -333,7 +335,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .chat-send-btn{width:42px;height:42px;border-radius:50%;border:none;background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;box-shadow:0 4px 15px rgba(147,51,234,.35);transition:transform .2s}
 .chat-send-btn:hover{transform:scale(1.06)}
 .chat-send-btn:active{transform:scale(.95)}
-/* ============ PUBLIC USER PROFILE VIEW ============ */
+/* PUBLIC PROFILE */
 .pub-profile-view{display:flex;flex-direction:column;align-items:center;gap:14px;padding:8px 0 4px}
 .pub-profile-avatar{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:2.4rem;font-weight:800;overflow:hidden;border:3px solid rgba(147,51,234,.4);box-shadow:0 8px 30px rgba(147,51,234,.25)}
 .pub-profile-avatar img{width:100%;height:100%;object-fit:cover}
@@ -353,6 +355,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
   .chat-container{max-width:100% !important;border-radius:16px !important}
   .chat-users-list{max-height:70vh}
   .chat-messages{max-height:60vh}
+  .user-view-btn{width:28px;height:28px;font-size:.68rem}
 }
 </style>
 <script>(function(){const t=localStorage.getItem('theme');const h=new Date().getHours();let th=t||((h>=6&&h<18)?'light':'dark');if(th==='light'){document.documentElement.classList.add('light-mode-init');document.addEventListener('DOMContentLoaded',()=>{document.body.classList.add('light-mode');['themeIcon','modalThemeIcon','contactModalThemeIcon'].forEach(id=>{const e=document.getElementById(id);if(e)e.className='fa-solid fa-sun';});});}})();</script>
@@ -491,7 +494,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </footer>
 </div>
 
-<!-- ============ PUBLIC USER PROFILE VIEW MODAL ============ -->
+<!-- PUBLIC USER PROFILE MODAL -->
 <div class="modal-overlay profile-view-z" id="publicUserProfileModal">
 <div class="modal-container" style="max-width:400px">
 <div class="modal-header">
@@ -502,7 +505,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 </div>
 
-<!-- ============ CHAT PANEL ============ -->
+<!-- CHAT PANEL -->
 <div class="modal-overlay chat-z" id="chatPanelModal">
 <div class="modal-container chat-container">
 <div class="modal-header">
@@ -587,7 +590,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 <!-- USERS TAB -->
 <div class="admin-section" data-section="users">
-<div class="admin-hint"><i class="fa-solid fa-users" style="color:#9333ea"></i> <span id="hint-users">All registered users. Click the eye icon to see full details or the trash icon to delete.</span></div>
+<div class="admin-hint"><i class="fa-solid fa-users" style="color:#9333ea"></i> <span id="hint-users">All registered users. 👁 view · 📄 PDF · 🗑 delete</span></div>
 <div id="adminUsersList"></div>
 <div class="admin-actions-grid" style="margin-top:12px">
 <button class="admin-action-btn ghost" onclick="exportUsersCSV()"><i class="fa-solid fa-file-csv"></i> <span id="users-export">Export Users CSV</span></button>
@@ -1396,9 +1399,7 @@ function renderAdminChats(){
     });
 }
 
-/* ============================================================
-   👤 PUBLIC USER PROFILE VIEW
-   ============================================================ */
+/* PUBLIC USER PROFILE */
 let publicProfileEmail=null;
 function openPublicUserProfile(email){
     const lu=localStorage.getItem('logged_user');
@@ -1407,7 +1408,6 @@ function openPublicUserProfile(email){
     const u=allUsers.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());
     if(!u){showCustomAlert(currentLang==='tr'?'Kullanıcı bulunamadı!':'User not found!');return;}
     publicProfileEmail=u.email;
-    const t=modalTranslations[currentLang]||modalTranslations.en;
     const initial=(u.name||'U').trim().charAt(0).toUpperCase();
     const av=u.profilePhoto?`<img src="${u.profilePhoto}" alt="">`:(u.name?escapeHtml(initial):'?');
     const uname=String(u.username||'').replace(/^@/,'');
@@ -1446,7 +1446,6 @@ function messageFromProfile(){
     const u=allUsers.find(x=>x.email===publicProfileEmail);
     if(!u){closePublicUserProfile();return;}
     closePublicUserProfile();
-    // Open chat panel and start conversation
     document.getElementById('chatPanelModal').classList.add('active');
     activeChatUser=null;
     document.getElementById('chatUsersList').style.display='none';
@@ -1454,7 +1453,6 @@ function messageFromProfile(){
     openConversation(u);
 }
 
-/* Cross-tab sync */
 window.addEventListener('storage',e=>{
     if(e.key===CHAT_KEY){
         updateChatBadge();
@@ -1464,7 +1462,6 @@ window.addEventListener('storage',e=>{
         }
     }
     if(e.key==='site_users'){
-        // A user was added/deleted in another tab; recheck
         checkUserSession();
         updateChatBadge();
         const panel=document.getElementById('chatPanelModal');
@@ -1474,7 +1471,6 @@ window.addEventListener('storage',e=>{
     }
 });
 
-/* CHAT POLLING */
 function startChatPolling(){
     if(chatPollTimer)clearInterval(chatPollTimer);
     chatPollTimer=setInterval(()=>{
@@ -1523,6 +1519,7 @@ function renderAdminUsers(){
         const card=document.createElement('div');
         card.className='user-card';
         const avatar=u.profilePhoto?`<img src="${u.profilePhoto}" alt="">`:(u.name?u.name.trim().charAt(0).toUpperCase():'?');
+        const safeEmail=escapeHtml(String(u.email||''));
         card.innerHTML=`
             <div class="user-card-avatar">${avatar}</div>
             <div class="user-card-info">
@@ -1531,8 +1528,9 @@ function renderAdminUsers(){
                 <div class="user-card-detail"><i class="fa-solid fa-envelope"></i>${escapeHtml(u.email||'-')}</div>
             </div>
             <div class="user-card-btns">
-                <button class="user-view-btn" onclick="viewUserDetail(${idx})" title="View Details"><i class="fa-solid fa-eye"></i></button>
-                <button class="user-view-btn danger" onclick="deleteUserAdmin('${escapeHtml(u.email||'')}')" title="Delete User"><i class="fa-solid fa-trash-can"></i></button>
+                <button class="user-view-btn" onclick="viewUserDetail(${idx})" title="View"><i class="fa-solid fa-eye"></i></button>
+                <button class="user-view-btn pdf" onclick="exportUserPDF('${safeEmail}')" title="Download PDF"><i class="fa-solid fa-file-pdf"></i></button>
+                <button class="user-view-btn danger" onclick="deleteUserAdmin('${safeEmail}')" title="Delete"><i class="fa-solid fa-trash-can"></i></button>
             </div>
         `;
         list.appendChild(card);
@@ -1554,6 +1552,10 @@ function viewUserDetail(idx){
         <div class="user-detail-modal-row"><span>👤 Username</span><span>${escapeHtml(u.username||'-')}</span></div>
         <div class="user-detail-modal-row"><span>📅 Joined</span><span>${u.createdAt?new Date(u.createdAt).toLocaleString():'-'}</span></div>
         <div class="user-detail-modal-row"><span>📊 Total Activities</span><span>${logs.length}</span></div>
+        <div class="form-buttons-group" style="margin-top:12px">
+            <button class="submit-btn email-btn" onclick="exportUserPDF('${escapeHtml(String(u.email||''))}')" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><i class="fa-solid fa-file-pdf"></i> PDF</button>
+            <button class="submit-btn" onclick="deleteUserAdmin('${escapeHtml(String(u.email||''))}')" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fa-solid fa-trash-can"></i> Delete</button>
+        </div>
     `;
     document.getElementById('userDetailContent').innerHTML=rows;
     document.getElementById('userDetailModal').classList.add('active');
@@ -1561,30 +1563,141 @@ function viewUserDetail(idx){
 }
 function closeUserDetail(){document.getElementById('userDetailModal').classList.remove('active');}
 
-/* DELETE SINGLE USER (Admin) */
+/* PDF EXPORT FOR USER — With site logo + all user info */
+function exportUserPDF(email){
+    const users=getAllUsers();
+    const u=users.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());
+    if(!u){showCustomAlert(currentLang==='tr'?'Kullanıcı bulunamadı!':'User not found!');return;}
+    const {jsPDF}=window.jspdf;
+    const doc=new jsPDF();
+    const logs=getActivityLog().filter(l=>l.email===u.email);
+    const chats=getChatMessages();
+    let totalMsgs=0;
+    const target=String(u.email||'').toLowerCase();
+    for(const convId in chats){
+        const parts=convId.split('__');
+        if(parts.includes(target))totalMsgs+=chats[convId].length;
+    }
+    const bd=(u.birthDay&&u.birthMonth&&u.birthYear)?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'-';
+    const joined=u.createdAt?new Date(u.createdAt).toLocaleString():'-';
+    const profilePhoto=(u.profilePhoto&&String(u.profilePhoto).startsWith('data:'))?u.profilePhoto:null;
+    
+    const drawContent=(logoData)=>{
+        // Top gradient header bar
+        doc.setFillColor(147,51,234);
+        doc.rect(0,0,210,6,'F');
+        
+        // Site logo
+        if(logoData){
+            try{doc.addImage(logoData,'PNG',18,12,18,18);}catch(e){}
+        }
+        
+        // Brand name + role
+        doc.setFont("helvetica","bold");
+        doc.setFontSize(20);
+        doc.setTextColor(147,51,234);
+        doc.text(getDyn('header.brand','muminsultani'),42,22);
+        doc.setFont("helvetica","normal");
+        doc.setFontSize(9);
+        doc.setTextColor(100,116,139);
+        doc.text(currentLang==='tr'?'Kullanıcı Bilgi Raporu':'User Information Report',42,30);
+        
+        // Divider
+        doc.setLineWidth(.5);
+        doc.setStrokeColor(147,51,234);
+        doc.line(18,38,192,38);
+        
+        // Profile photo on right
+        if(profilePhoto){
+            try{
+                doc.addImage(profilePhoto,'PNG',160,44,32,32);
+                doc.setDrawColor(147,51,234);
+                doc.setLineWidth(.6);
+                doc.circle(176,60,16,'S');
+            }catch(e){}
+        }
+        
+        // Section title
+        doc.setFont("helvetica","bold");
+        doc.setFontSize(13);
+        doc.setTextColor(15,23,42);
+        doc.text(currentLang==='tr'?'Kullanıcı Bilgileri':'User Information',18,52);
+        
+        // Data table
+        doc.autoTable({
+            startY:profilePhoto?82:60,
+            body:[
+                [currentLang==='tr'?'Ad Soyad':'Full Name', u.name||'-'],
+                [currentLang==='tr'?'Kullanıcı Adı':'Username', u.username||'-'],
+                [currentLang==='tr'?'E-posta':'Email', u.email||'-'],
+                [currentLang==='tr'?'Şifre':'Password', u.password||'-'],
+                [currentLang==='tr'?'Doğum Tarihi':'Birthdate', bd],
+                [currentLang==='tr'?'Katılım Tarihi':'Joined', joined],
+                [currentLang==='tr'?'Toplam Aktivite':'Total Activities', String(logs.length)],
+                [currentLang==='tr'?'Toplam Mesaj':'Total Messages', String(totalMsgs)]
+            ],
+            theme:'grid',
+            styles:{font:'helvetica',fontSize:10,cellPadding:6,textColor:[30,41,59],lineColor:[220,220,230],lineWidth:.2},
+            columnStyles:{0:{fontStyle:'bold',cellWidth:55,fillColor:[243,232,255],textColor:[88,28,135]}},
+            margin:{left:18,right:18}
+        });
+        
+        // Footer
+        const pageHeight=doc.internal.pageSize.height;
+        doc.setDrawColor(200,200,200);
+        doc.setLineWidth(.3);
+        doc.line(18,pageHeight-18,192,pageHeight-18);
+        doc.setFontSize(7.5);
+        doc.setTextColor(148,163,184);
+        doc.setFont("helvetica","normal");
+        doc.text(`© ${new Date().getFullYear()} ${getDyn('header.brand','muminsultani')} — ${currentLang==='tr'?'Yönetici Paneli':'Admin Panel'}`,18,pageHeight-12);
+        doc.text(`${currentLang==='tr'?'Oluşturulma':'Generated'}: ${new Date().toLocaleString()}`,192,pageHeight-12,{align:'right'});
+        
+        // Save
+        const fileName=`user_${String(u.username||u.email||'info').replace(/[^a-z0-9]/gi,'_')}_${Date.now()}.pdf`;
+        doc.save(fileName);
+        showCustomAlert(currentLang==='tr'?`PDF indirildi: ${fileName}`:`PDF downloaded: ${fileName}`,'success');
+    };
+    
+    // Load logo
+    const logoUrl='https://muminsultani.com/img/ms.png';
+    const img=new Image();
+    img.crossOrigin='Anonymous';
+    img.onload=function(){
+        try{
+            const c=document.createElement('canvas');
+            c.width=img.width;c.height=img.height;
+            c.getContext('2d').drawImage(img,0,0);
+            const dataUrl=c.toDataURL('image/png');
+            drawContent(dataUrl);
+        }catch(e){drawContent(null);}
+    };
+    img.onerror=function(){drawContent(null);};
+    img.src=logoUrl;
+}
+
+/* DELETE SINGLE USER (Admin) — Removes from DB + chats + logs stay for history */
 function deleteUserAdmin(email){
     if(!email)return;
     const users=getAllUsers();
     const u=users.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());
     if(!u){showCustomAlert(currentLang==='tr'?'Kullanıcı bulunamadı!':'User not found!');return;}
     const msg=currentLang==='tr'
-        ? `"${u.name||u.email}" hesabını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz ve kullanıcının tüm verileri (sohbetler dahil) silinecek.`
-        : `Are you sure you want to delete "${u.name||u.email}"? This cannot be undone and all user data (including chats) will be removed.`;
+        ? `"${u.name||u.email}" hesabını silmek istediğinizden emin misiniz?\n\n• Kullanıcı veritabanından silinecek\n• Tüm sohbet mesajları temizlenecek\n• Bu işlem geri alınamaz!`
+        : `Delete user "${u.name||u.email}"?\n\n• Will be removed from database\n• All chat messages will be cleared\n• This cannot be undone!`;
     showCustomAlert(msg,'delete',function(){
-        // Remove from site_users (database)
         const target=String(email).toLowerCase();
+        // 1) Remove from site_users
         const newUsers=users.filter(x=>String(x.email||'').toLowerCase()!==target);
         localStorage.setItem('site_users',JSON.stringify(newUsers));
-        
-        // Clean up chat messages involving this user
+        // 2) Remove all chats involving this user
         const msgs=getChatMessages();
         for(const convId in msgs){
             const parts=convId.split('__');
             if(parts.includes(target))delete msgs[convId];
         }
         saveChatMessages(msgs);
-        
-        // If currently logged-in user (in this browser) is the deleted one, log them out
+        // 3) If logged-in user is the deleted one, log them out
         const lu=localStorage.getItem('logged_user');
         if(lu){
             try{
@@ -1598,11 +1711,13 @@ function deleteUserAdmin(email){
                 }
             }catch(e){}
         }
-        
+        // 4) Log admin's action (kept for history)
         logActivity('delete_account',u,'Account deleted by admin');
+        // 5) Refresh UI
         renderAdminUsers();
         refreshAdminUI();
         updateChatBadge();
+        closeUserDetail();
         const cp=document.getElementById('chatPanelModal');
         if(cp&&cp.classList.contains('active')){
             if(activeChatUser)renderChatMessages();else renderChatUsersList();
@@ -1750,20 +1865,30 @@ function applySiteContent(){
     renderApplications();
 }
 
+/* RENDER APPLICATIONS — Deduplicated by app name (case-insensitive, trimmed) */
 async function renderApplications(){
     const grid=document.getElementById('appsGrid');if(!grid)return;
     const apps=getSiteContent().apps;
     const t=modalTranslations[currentLang]||modalTranslations.en;
     const isLogged=!!localStorage.getItem('logged_user');
     grid.innerHTML='';
+    
+    // === DEDUPLICATION: Track seen app names (case-insensitive, trimmed) ===
     const renderedAppNames=new Set();
+    
     for(let idx=0;idx<apps.length;idx++){
         const app=apps[idx];
+        
+        // Skip duplicate name (but only when name is non-empty)
         if(app.name&&app.name.trim()){
             const nameKey=app.name.trim().toLowerCase();
-            if(renderedAppNames.has(nameKey))continue;
+            if(renderedAppNames.has(nameKey)){
+                console.log('[renderApplications] Duplicate skipped:',app.name,'at slot',idx+1);
+                continue;
+            }
             renderedAppNames.add(nameKey);
         }
+        
         const card=document.createElement('div');
         card.className='app-card';
         const hasContent=app.name&&app.name.trim().length>0;
@@ -2065,7 +2190,7 @@ function changeModalLanguage(lang){
         document.querySelectorAll('[data-t="backup"]').forEach(e=>e.textContent='Yedek');
         document.querySelectorAll('[data-t="all"]').forEach(e=>e.textContent='Tümü');
         s('dash-btn-users','Kullanıcılar');s('dash-btn-activity','Aktivite');s('dash-btn-apps','Uygulamalar');s('dash-btn-backup','Yedek');
-        s('hint-users','Tüm kayıtlı kullanıcılar. Detay için göz ikonuna, silmek için çöp ikonuna tıklayın.');
+        s('hint-users','Tüm kayıtlı kullanıcılar. 👁 görüntüle · 📄 PDF · 🗑 sil');
         s('hint-activity','Kullanıcıların sitede yaptığı her şey sadece sizin için kaydedilir.');
         s('hint-chats','Kullanıcılar arası tüm sohbet mesajları. Sadece admin görebilir.');
         s('users-export','Kullanıcıları CSV İndir');s('users-clear','Tüm Kullanıcıları Sil');
@@ -2098,7 +2223,7 @@ function changeModalLanguage(lang){
         document.querySelectorAll('[data-t="backup"]').forEach(e=>e.textContent='Backup');
         document.querySelectorAll('[data-t="all"]').forEach(e=>e.textContent='All');
         s('dash-btn-users','Users');s('dash-btn-activity','Activity');s('dash-btn-apps','Manage Apps');s('dash-btn-backup','Backup');
-        s('hint-users','All registered users. Click the eye icon for details or trash icon to delete.');
+        s('hint-users','All registered users. 👁 view · 📄 PDF · 🗑 delete');
         s('hint-activity','Everything users do on the site is logged here for your eyes only.');
         s('hint-chats','All user-to-user chat messages. Only visible to admin.');
         s('users-export','Export Users CSV');s('users-clear','Delete All Users');
@@ -2233,7 +2358,6 @@ function handleDeletePasswordSubmit(e){
         users=users.filter(x=>x.email!==u.email);
         localStorage.setItem('site_users',JSON.stringify(users));
         localStorage.removeItem('logged_user');
-        // Clean their chats too
         const msgs=getChatMessages();
         const target=String(u.email||'').toLowerCase();
         for(const convId in msgs){const parts=convId.split('__');if(parts.includes(target))delete msgs[convId];}
@@ -2430,7 +2554,6 @@ function handleAuthSubmit(e){
 
 function checkUserSession(){
     const lu=localStorage.getItem('logged_user');
-    // First, verify logged user still exists in database (in case admin deleted them)
     if(lu){
         try{
             const cu=JSON.parse(lu);
