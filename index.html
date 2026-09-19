@@ -13,6 +13,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <style>
 html{color-scheme:light dark}
 body{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none}
@@ -220,7 +222,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .btn-crop-cancel{background:var(--box-bg);color:var(--text-primary);border:1px solid var(--line-color) !important}
 .btn-crop-apply{background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff}
 .code-input{text-align:center !important;font-family:'Fira Code',monospace !important;font-size:1.3rem !important;letter-spacing:6px !important;font-weight:700 !important;color:#9333ea !important}
-/* ADMIN */
 .admin-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:6px;border-bottom:1px solid var(--line-color);scrollbar-width:none}
 .admin-tabs::-webkit-scrollbar{display:none}
 .admin-tab{flex-shrink:0;padding:7px 12px;border-radius:8px;background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-secondary);font-size:.72rem;font-weight:700;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:5px}
@@ -245,7 +246,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .admin-action-btn.ghost{background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-primary)}
 .admin-stat{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--box-bg);border:1px solid var(--line-color);border-radius:8px;margin-bottom:6px;font-size:.78rem}
 .admin-stat i{color:#9333ea;width:16px;text-align:center}
-/* ICON + APK UPLOAD */
 .upload-wrapper{position:relative;background:var(--box-bg);border:2px dashed var(--line-color);border-radius:10px;padding:16px;text-align:center;cursor:pointer;transition:all .2s}
 .upload-wrapper:hover{border-color:rgba(147,51,234,.5);background:var(--box-hover-bg)}
 .upload-wrapper.has-file{border-style:solid;border-color:#22c55e;background:rgba(34,197,94,.05);border-width:1px}
@@ -258,7 +258,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .apk-badge{display:inline-flex;align-items:center;gap:3px;font-size:.6rem;font-weight:800;letter-spacing:.5px;padding:2px 6px;border-radius:4px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;text-transform:uppercase}
 .icon-preview-mini{width:24px;height:24px;border-radius:6px;object-fit:cover;border:1px solid var(--line-color);flex-shrink:0;pointer-events:auto}
 .icon-preview-big{width:64px;height:64px;border-radius:12px;object-fit:cover;border:2px solid rgba(147,51,234,.4);margin:0 auto 8px;display:block;background:var(--box-bg);pointer-events:auto}
-/* USER & ACTIVITY CARDS */
 .user-card{background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
 .user-card-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,rgba(147,51,234,.15),rgba(192,132,252,.08));border:1px solid rgba(147,51,234,.3);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;color:#9333ea;flex-shrink:0;overflow:hidden}
 .user-card-avatar img{width:100%;height:100%;object-fit:cover}
@@ -299,7 +298,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .user-detail-modal-row:last-child{border-bottom:none}
 .user-detail-modal-row span:first-child{color:var(--text-secondary);font-weight:600}
 .user-detail-modal-row span:last-child{color:var(--text-primary);font-weight:500;text-align:right;word-break:break-all}
-/* ============ CHAT ============ */
 .chat-container{max-width:640px !important;padding:0 !important;overflow:hidden;display:flex;flex-direction:column;max-height:88vh !important}
 .chat-container .modal-header{padding:16px 20px 12px;margin-bottom:0;border-bottom:1px solid var(--line-color)}
 .chat-body{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
@@ -351,7 +349,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .chat-send-btn{width:42px;height:42px;border-radius:50%;border:none;background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;box-shadow:0 4px 15px rgba(147,51,234,.35);transition:transform .2s}
 .chat-send-btn:hover{transform:scale(1.06)}
 .chat-send-btn:active{transform:scale(.95)}
-/* VOICE MESSAGE */
 .chat-mic-btn{width:42px;height:42px;border-radius:50%;background:var(--box-bg);border:1px solid var(--line-color);color:#9333ea;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;transition:all .2s}
 .chat-mic-btn:hover{border-color:rgba(147,51,234,.5);background:var(--box-hover-bg);transform:scale(1.05)}
 .chat-mic-btn:disabled{opacity:.4;cursor:not-allowed}
@@ -361,7 +358,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .chat-msg.theirs .chat-voice-msg{background:var(--box-bg);border:1px solid var(--line-color);border-radius:16px;border-bottom-left-radius:4px}
 .voice-duration{font-size:.68rem;color:var(--text-secondary);flex-shrink:0;font-family:'Fira Code',monospace}
 .chat-msg.mine .voice-duration{color:rgba(255,255,255,.85)}
-/* RECORDING OVERLAY */
 .recording-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(5,5,8,.82);backdrop-filter:blur(10px);z-index:26000;display:none;flex-direction:column;justify-content:center;align-items:center;gap:22px;padding:20px}
 .recording-overlay.active{display:flex}
 .recording-pulse{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#ef4444,#dc2626);display:flex;align-items:center;justify-content:center;color:#fff;font-size:2.6rem;position:relative;box-shadow:0 10px 40px rgba(239,68,68,.5)}
@@ -376,7 +372,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .recording-btn:active{transform:scale(.95)}
 .recording-btn.cancel{background:var(--modal-container-bg);border:1px solid rgba(239,68,68,.4);color:#ef4444}
 .recording-btn.send{background:linear-gradient(135deg,#22c55e,#16a34a)}
-/* PUBLIC PROFILE */
 .pub-profile-view{display:flex;flex-direction:column;align-items:center;gap:14px;padding:8px 0 4px}
 .pub-profile-avatar{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:2.4rem;font-weight:800;overflow:hidden;border:3px solid rgba(147,51,234,.4);box-shadow:0 8px 30px rgba(147,51,234,.25);position:relative}
 .pub-profile-avatar img{width:100%;height:100%;object-fit:cover}
@@ -394,7 +389,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .pub-profile-actions button{flex:1;padding:11px;border-radius:10px;font-weight:700;font-size:.8rem;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:6px}
 .pub-btn-msg{background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff}
 .pub-btn-close{background:var(--box-bg);color:var(--text-primary);border:1px solid var(--line-color) !important}
-/* VERIFIED BADGE */
 .verified-badge{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:linear-gradient(135deg,#1d9bf0,#1a8cd8);color:#fff;font-size:.5rem;flex-shrink:0;box-shadow:0 2px 6px rgba(29,155,240,.45);vertical-align:middle;line-height:1;position:relative}
 .verified-badge i{color:#fff;font-size:.5rem;line-height:1}
 .verified-badge.lg{width:20px;height:20px}
@@ -402,9 +396,15 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .verified-badge.sm{width:13px;height:13px}
 .verified-badge.sm i{font-size:.42rem}
 .verified-badge::after{content:'';position:absolute;inset:-1px;border-radius:50%;border:1px solid rgba(255,255,255,.35);pointer-events:none}
-/* ADMIN BADGE (chat list için) */
 .admin-tag{font-size:.5rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:1px 5px;border-radius:4px;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#fff;box-shadow:0 2px 5px rgba(251,191,36,.35);display:inline-flex;align-items:center;gap:2px;flex-shrink:0}
 .admin-tag i{font-size:.5rem}
+.cloud-status{position:fixed;bottom:14px;left:14px;font-size:.65rem;font-weight:700;padding:5px 10px;border-radius:20px;background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-secondary);z-index:50;display:flex;align-items:center;gap:5px;opacity:0;transition:opacity .3s;pointer-events:none}
+.cloud-status.show{opacity:1}
+.cloud-status i{font-size:.7rem}
+.cloud-status.online{color:#22c55e;border-color:rgba(34,197,94,.3)}
+.cloud-status.offline{color:#f59e0b;border-color:rgba(245,158,11,.3)}
+.cloud-status .dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:cloudPulse 1.5s infinite}
+@keyframes cloudPulse{0%,100%{opacity:1}50%{opacity:.4}}
 @media (max-width:640px){
   .chat-container{max-width:100% !important;border-radius:16px !important}
   .chat-users-list{max-height:70vh}
@@ -421,6 +421,8 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <canvas id="constellation-canvas"></canvas>
 <canvas id="confetti-canvas"></canvas>
 <div id="security-curtain"></div>
+
+<div class="cloud-status" id="cloudStatus"><span class="dot"></span><i class="fa-solid fa-cloud"></i><span id="cloudStatusText">...</span></div>
 
 <div id="intro-screen">
 <canvas id="intro-canvas"></canvas>
@@ -552,7 +554,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </footer>
 </div>
 
-<!-- PUBLIC USER PROFILE MODAL -->
 <div class="modal-overlay profile-view-z" id="publicUserProfileModal">
 <div class="modal-container" style="max-width:400px">
 <div class="modal-header">
@@ -563,7 +564,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 </div>
 
-<!-- CHAT PANEL -->
 <div class="modal-overlay chat-z" id="chatPanelModal">
 <div class="modal-container chat-container">
 <div class="modal-header">
@@ -597,7 +597,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 </div>
 
-<!-- VOICE RECORDING OVERLAY -->
 <div class="recording-overlay" id="recordingOverlay">
 <div class="recording-pulse"><i class="fa-solid fa-microphone"></i></div>
 <div class="recording-timer" id="recordingTimer">00:00</div>
@@ -608,7 +607,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 </div>
 
-<!-- ADMIN LOGIN -->
 <div class="modal-overlay admin-z" id="adminLoginModal">
 <div class="modal-container" style="max-width:380px">
 <div class="modal-header">
@@ -629,7 +627,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 </div>
 
-<!-- ADMIN PANEL -->
 <div class="modal-overlay admin-z" id="adminPanelModal">
 <div class="modal-container" style="max-width:620px">
 <div class="modal-header">
@@ -657,6 +654,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="admin-stat"><i class="fa-solid fa-users"></i> <span id="dash-users-count">Users: 0</span></div>
 <div class="admin-stat"><i class="fa-solid fa-list-activity"></i> <span id="dash-activity-count">Activities: 0</span></div>
 <div class="admin-stat"><i class="fa-solid fa-comments"></i> <span id="dash-chats-count">Chat messages: 0</span></div>
+<div class="admin-stat"><i class="fa-solid fa-cloud"></i> <span id="dash-cloud-status">Cloud: —</span></div>
 <div class="admin-stat"><i class="fa-solid fa-clock"></i> <span id="dash-last-edit">Last edit: —</span></div>
 <div class="admin-actions-grid">
 <button class="admin-action-btn primary" onclick="switchAdminTab('users',document.querySelector('.admin-tab[data-tab=\'users\']'))"><i class="fa-solid fa-users"></i> <span id="dash-btn-users">Users</span></button>
@@ -665,7 +663,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <button class="admin-action-btn ghost" onclick="switchAdminTab('backup',document.querySelector('.admin-tab[data-tab=\'backup\']'))"><i class="fa-solid fa-database"></i> <span id="dash-btn-backup">Backup</span></button>
 </div>
 </div>
-<!-- USERS TAB -->
 <div class="admin-section" data-section="users">
 <div class="admin-hint"><i class="fa-solid fa-users" style="color:#9333ea"></i> <span id="hint-users">All registered users. 👁 view · 📄 PDF · 🗑 delete</span></div>
 <div id="adminUsersList"></div>
@@ -674,7 +671,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <button class="admin-action-btn danger" onclick="clearAllUsers()"><i class="fa-solid fa-trash"></i> <span id="users-clear">Delete All Users</span></button>
 </div>
 </div>
-<!-- ACTIVITY TAB -->
 <div class="admin-section" data-section="activity">
 <div class="admin-hint"><i class="fa-solid fa-list-activity" style="color:#9333ea"></i> <span id="hint-activity">Every action users do on the site is logged here for your eyes only.</span></div>
 <div class="activity-filter" id="activityFilter">
@@ -695,7 +691,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <button class="admin-action-btn danger" onclick="clearActivityLog()"><i class="fa-solid fa-trash"></i> <span id="activity-clear">Clear Activity Log</span></button>
 </div>
 </div>
-<!-- CHATS TAB -->
 <div class="admin-section" data-section="chats">
 <div class="admin-hint"><i class="fa-solid fa-comments" style="color:#9333ea"></i> <span id="hint-chats">All user-to-user chat messages. Only visible to admin.</span></div>
 <div id="adminChatsList"></div>
@@ -783,7 +778,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 </div>
 
-<!-- USER DETAIL MODAL -->
 <div class="modal-overlay admin-z" id="userDetailModal">
 <div class="modal-container" style="max-width:420px">
 <div class="modal-header">
@@ -794,7 +788,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 </div>
 
-<!-- APP EDIT -->
 <div class="modal-overlay admin-z" id="adminEditModal">
 <div class="modal-container" style="max-width:440px">
 <div class="modal-header">
@@ -838,7 +831,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 </div>
 
-<!-- PROFILE PHOTO PANEL -->
 <div class="modal-overlay" id="profilePhotoPanelModal">
 <div class="modal-container" style="max-width:420px !important">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="pp-title">Profile Photo</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeProfilePhotoPanel()"><i class="fa-solid fa-xmark"></i></button></div></div>
@@ -1152,6 +1144,212 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 
 <script>
+/* ============================================================
+   ☁️ FIREBASE CLOUD SYNC — Cihazlar arası senkronizasyon
+   ⚠️ AŞAĞIDAKİ DEĞERLERİ KENDİ FIREBASE PROJENDEN AL!
+   ============================================================ */
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyC3Pi88DP7K_4IG-R81LeDaGdhCTmHpo-c",
+  authDomain: "muminsultani-497b5.firebaseapp.com",
+  databaseURL: "https://muminsultani-497b5-default-rtdb.firebaseio.com",
+  projectId: "muminsultani-497b5",
+  storageBucket: "muminsultani-497b5.firebasestorage.app",
+  messagingSenderId: "929484224535",
+  appId: "1:929484224535:web:5e2b05f0b852357212c452"
+};
+
+const CLOUD_SYNC_KEYS = ['site_users', 'site_chat_v1', 'site_activity_log_v1'];
+let cloudDB = null;
+let cloudEnabled = false;
+let cloudSubscribed = false;
+
+const __ORIG_SET_ITEM__ = localStorage.setItem.bind(localStorage);
+
+function getDeviceId() {
+  let id = localStorage.getItem('_cloud_device_id');
+  if (!id) {
+    id = 'dev_' + Math.random().toString(36).substring(2, 12) + '_' + Date.now();
+    __ORIG_SET_ITEM__('_cloud_device_id', id);
+  }
+  return id;
+}
+
+function updateCloudStatusUI(state, text) {
+  const el = document.getElementById('cloudStatus');
+  const tx = document.getElementById('cloudStatusText');
+  if (el) { el.classList.add('show'); el.classList.remove('online','offline'); el.classList.add(state); }
+  if (tx) tx.textContent = text;
+  const dash = document.getElementById('dash-cloud-status');
+  if (dash) dash.textContent = 'Cloud: ' + text;
+}
+
+function cloudInit() {
+  try {
+    if (!FIREBASE_CONFIG.apiKey || FIREBASE_CONFIG.apiKey === 'BURAYA_API_KEY') {
+      console.warn('[Cloud] Firebase config boş — sadece yerel mod.');
+      updateCloudStatusUI('offline', 'Yerel mod');
+      return false;
+    }
+    if (typeof firebase === 'undefined') {
+      console.warn('[Cloud] Firebase SDK yüklenmedi.');
+      updateCloudStatusUI('offline', 'SDK yok');
+      return false;
+    }
+    if (!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
+    cloudDB = firebase.database();
+    cloudEnabled = true;
+    console.log('[Cloud] ✅ Firebase bağlandı. Cihaz:', getDeviceId());
+    updateCloudStatusUI('online', 'Bağlı');
+    setTimeout(() => { const el = document.getElementById('cloudStatus'); if (el) el.classList.remove('show'); }, 2500);
+    return true;
+  } catch (e) {
+    console.error('[Cloud] Başlatma hatası:', e);
+    cloudEnabled = false;
+    updateCloudStatusUI('offline', 'Hata');
+    return false;
+  }
+}
+
+function cloudPush(key, value) {
+  if (!cloudEnabled || !cloudDB) return;
+  try {
+    cloudDB.ref('muminsultani/' + key).set({
+      data: value,
+      updatedAt: Date.now(),
+      source: getDeviceId()
+    }).catch(e => console.warn('[Cloud] Push hatası:', e));
+  } catch (e) { console.warn(e); }
+}
+
+async function cloudPull(key) {
+  if (!cloudEnabled || !cloudDB) return null;
+  try {
+    const snap = await cloudDB.ref('muminsultani/' + key).once('value');
+    const v = snap.val();
+    return v && v.data !== undefined ? v.data : null;
+  } catch (e) { return null; }
+}
+
+function mergeUsers(localJson, cloudJson) {
+  try {
+    const local = JSON.parse(localJson || '[]');
+    const cloud = JSON.parse(cloudJson || '[]');
+    const map = new Map();
+    cloud.forEach(u => { if (u && u.email) map.set(String(u.email).toLowerCase(), u); });
+    local.forEach(u => { if (u && u.email && !map.has(String(u.email).toLowerCase())) map.set(String(u.email).toLowerCase(), u); });
+    return JSON.stringify(Array.from(map.values()));
+  } catch (e) { return cloudJson || localJson; }
+}
+
+function mergeChats(localJson, cloudJson) {
+  try {
+    const local = JSON.parse(localJson || '{}');
+    const cloud = JSON.parse(cloudJson || '{}');
+    const merged = {};
+    const allConvs = new Set([...Object.keys(local), ...Object.keys(cloud)]);
+    allConvs.forEach(convId => {
+      const a = local[convId] || [];
+      const b = cloud[convId] || [];
+      const seen = new Set();
+      const combined = [];
+      [...a, ...b].forEach(m => {
+        if (!m) return;
+        const k = String(m.timestamp) + '|' + String(m.from) + '|' + String(m.to) + '|' + String(m.text || m.audioId || '');
+        if (!seen.has(k)) { seen.add(k); combined.push(m); }
+      });
+      combined.sort((x, y) => new Date(x.timestamp) - new Date(y.timestamp));
+      merged[convId] = combined;
+    });
+    return JSON.stringify(merged);
+  } catch (e) { return cloudJson || localJson; }
+}
+
+function mergeActivity(localJson, cloudJson) {
+  try {
+    const local = JSON.parse(localJson || '[]');
+    const cloud = JSON.parse(cloudJson || '[]');
+    const seen = new Set();
+    const combined = [];
+    [...local, ...cloud].forEach(l => {
+      if (!l) return;
+      const k = String(l.timestamp) + '|' + String(l.type) + '|' + String(l.email);
+      if (!seen.has(k)) { seen.add(k); combined.push(l); }
+    });
+    combined.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+    return JSON.stringify(combined.slice(-2000));
+  } catch (e) { return cloudJson || localJson; }
+}
+
+async function cloudInitSync() {
+  if (!cloudInit()) return;
+
+  for (const key of CLOUD_SYNC_KEYS) {
+    const cloudVal = await cloudPull(key);
+    const localVal = localStorage.getItem(key);
+    if (!cloudVal && !localVal) continue;
+
+    let merged;
+    if (key === 'site_users') merged = mergeUsers(localVal, cloudVal);
+    else if (key === 'site_chat_v1') merged = mergeChats(localVal, cloudVal);
+    else if (key === 'site_activity_log_v1') merged = mergeActivity(localVal, cloudVal);
+    else merged = cloudVal || localVal;
+
+    if (merged && merged !== localVal) {
+      __ORIG_SET_ITEM__(key, merged);
+      if (merged !== cloudVal) cloudPush(key, merged);
+    }
+  }
+
+  if (!cloudSubscribed) {
+    cloudSubscribed = true;
+    CLOUD_SYNC_KEYS.forEach(key => {
+      cloudDB.ref('muminsultani/' + key).on('value', snap => {
+        const v = snap.val();
+        if (!v || v.data === undefined) return;
+        if (v.source === getDeviceId()) return;
+        if (localStorage.getItem(key) === v.data) return;
+
+        __ORIG_SET_ITEM__(key, v.data);
+        console.log('[Cloud] 🔄 Uzak güncelleme alındı:', key);
+
+        try {
+          if (key === 'site_users') {
+            if (typeof checkUserSession === 'function') checkUserSession();
+            if (typeof updateChatBadge === 'function') updateChatBadge();
+            if (typeof renderApplications === 'function') renderApplications();
+            const cp = document.getElementById('chatPanelModal');
+            if (cp && cp.classList.contains('active')) {
+              if (typeof activeChatUser !== 'undefined' && activeChatUser) renderChatMessages();
+              else renderChatUsersList();
+            }
+            const ap = document.getElementById('adminPanelModal');
+            if (ap && ap.classList.contains('active') && typeof renderAdminUsers === 'function') renderAdminUsers();
+          } else if (key === 'site_chat_v1') {
+            if (typeof updateChatBadge === 'function') updateChatBadge();
+            const cp = document.getElementById('chatPanelModal');
+            if (cp && cp.classList.contains('active')) {
+              if (typeof activeChatUser !== 'undefined' && activeChatUser) renderChatMessages();
+              else renderChatUsersList();
+            }
+          } else if (key === 'site_activity_log_v1') {
+            const ap = document.getElementById('adminPanelModal');
+            if (ap && ap.classList.contains('active') && typeof renderAdminActivity === 'function') renderAdminActivity();
+          }
+        } catch (e) { console.warn('[Cloud] Re-render hatası:', e); }
+      });
+    });
+  }
+}
+
+(function() {
+  localStorage.setItem = function(key, value) {
+    __ORIG_SET_ITEM__(key, value);
+    if (CLOUD_SYNC_KEYS.includes(key)) {
+      cloudPush(key, value);
+    }
+  };
+})();
+
 /* AUDIO */
 let audioCtx=null;
 function getAudioContext(){if(!audioCtx){try{audioCtx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){return null;}}if(audioCtx.state==='suspended'){audioCtx.resume().catch(()=>{});}return audioCtx;}
@@ -1177,29 +1375,16 @@ function showSecurityCurtain(){curtain.style.opacity='1';curtain.style.visibilit
 window.addEventListener('blur',()=>{if(document.getElementById('cropModal').classList.contains('active'))return;if(document.getElementById('recordingOverlay').classList.contains('active'))return;curtain.style.opacity='1';curtain.style.visibility='visible';});
 window.addEventListener('focus',()=>{curtain.style.opacity='0';curtain.style.visibility='hidden';});
 
-/* ============================================================
-   ⭐ VERIFIED BADGE HELPERS
-   ============================================================ */
+/* VERIFIED BADGE */
 const ADMIN_EMAIL='admin@muminsultani.com';
 const ADMIN_USER_ID='U0000';
 const USER_ID_START=1000;
 function isAdminUser(email){return String(email||'').toLowerCase().trim()===ADMIN_EMAIL;}
-function getVerifiedBadgeHTML(size){
-    const cls='verified-badge'+(size?(' '+size):'');
-    return `<span class="${cls}" title="Verified" aria-label="Verified"><i class="fa-solid fa-check"></i></span>`;
-}
-function getAdminTagHTML(){
-    return `<span class="admin-tag" title="Admin"><i class="fa-solid fa-crown"></i>ADMIN</span>`;
-}
-function getUserIdLabelHTML(userId,isAdmin){
-    if(!userId)return '';
-    const cls='chat-user-id'+(isAdmin?' admin-id':'');
-    return `<span class="${cls}" title="User ID"><i class="fa-solid fa-hashtag" style="font-size:.5rem"></i>${escapeHtml(userId)}</span>`;
-}
+function getVerifiedBadgeHTML(size){const cls='verified-badge'+(size?(' '+size):'');return `<span class="${cls}" title="Verified" aria-label="Verified"><i class="fa-solid fa-check"></i></span>`;}
+function getAdminTagHTML(){return `<span class="admin-tag" title="Admin"><i class="fa-solid fa-crown"></i>ADMIN</span>`;}
+function getUserIdLabelHTML(userId,isAdmin){if(!userId)return '';const cls='chat-user-id'+(isAdmin?' admin-id':'');return `<span class="${cls}" title="User ID"><i class="fa-solid fa-hashtag" style="font-size:.5rem"></i>${escapeHtml(userId)}</span>`;}
 
-/* ============================================================
-   🆔 USER ID SYSTEM
-   ============================================================ */
+/* USER ID SYSTEM */
 function generateNextUserId(existingUsers){
     let maxId=USER_ID_START;
     (existingUsers||[]).forEach(u=>{
@@ -1209,12 +1394,10 @@ function generateNextUserId(existingUsers){
     return 'U'+String(maxId).padStart(4,'0');
 }
 
-/* Ensure all users have a userId + admin exists in site_users */
 function ensureUserIdsAndAdmin(){
     try{
         let users=JSON.parse(localStorage.getItem('site_users')||'[]');
         let changed=false;
-        // 1) Ensure admin exists
         const adminIdx=users.findIndex(u=>isAdminUser(u.email));
         if(adminIdx===-1){
             users.unshift({
@@ -1233,7 +1416,6 @@ function ensureUserIdsAndAdmin(){
             users[adminIdx].userId=ADMIN_USER_ID;
             changed=true;
         }
-        // 2) Assign IDs to users missing them
         let maxId=USER_ID_START;
         users.forEach(u=>{
             const m=String(u.userId||'').match(/^U(\d+)$/);
@@ -1248,13 +1430,12 @@ function ensureUserIdsAndAdmin(){
         });
         if(changed){
             localStorage.setItem('site_users',JSON.stringify(users));
-            // Sync logged_user with fresh data
             const lu=localStorage.getItem('logged_user');
             if(lu){
                 try{
                     const cu=JSON.parse(lu);
                     const fresh=users.find(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());
-                    if(fresh)localStorage.setItem('logged_user',JSON.stringify(fresh));
+                    if(fresh)__ORIG_SET_ITEM__('logged_user',JSON.stringify(fresh));
                 }catch(e){}
             }
         }
@@ -1278,16 +1459,13 @@ function getAdminUser(){
     };
 }
 
-/* Get list of chat-able users for current user (includes admin always) */
 function getChatUsersFor(currentEmail){
     const allUsers=getAllUsers();
     const curLower=String(currentEmail||'').toLowerCase();
     let list=allUsers.filter(x=>String(x.email||'').toLowerCase()!==curLower);
-    // Ensure admin is present (if current user is not admin)
     if(!isAdminUser(currentEmail) && !list.some(x=>isAdminUser(x.email))){
         list.unshift(getAdminUser());
     }
-    // Sort: admin first, then by latest activity / name
     list.sort((a,b)=>{
         const aAdmin=isAdminUser(a.email)?0:1;
         const bAdmin=isAdminUser(b.email)?0:1;
@@ -1297,9 +1475,7 @@ function getChatUsersFor(currentEmail){
     return list;
 }
 
-/* ============================================================
-   🔐 ACTIVITY LOG SYSTEM
-   ============================================================ */
+/* ACTIVITY LOG */
 const ACTIVITY_LOG_KEY='site_activity_log_v1';
 function logActivity(type,userData,details){
     try{
@@ -1317,7 +1493,7 @@ function logActivity(type,userData,details){
     }catch(e){console.warn('Activity log error:',e);}
 }
 function getActivityLog(){try{return JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');}catch(e){return[];}}
-function clearActivityLog(){showCustomAlert(currentLang==='tr'?'Tüm aktivite kayıtları silinecek!':'All activity logs will be deleted!','delete',function(){localStorage.removeItem(ACTIVITY_LOG_KEY);renderAdminActivity();refreshAdminUI();showCustomAlert(currentLang==='tr'?'Silindi!':'Cleared!','success');});}
+function clearActivityLog(){showCustomAlert(currentLang==='tr'?'Tüm aktivite kayıtları silinecek!':'All activity logs will be deleted!','delete',function(){localStorage.removeItem(ACTIVITY_LOG_KEY);cloudPush(ACTIVITY_LOG_KEY,'[]');renderAdminActivity();refreshAdminUI();showCustomAlert(currentLang==='tr'?'Silindi!':'Cleared!','success');});}
 function exportActivityCSV(){
     const logs=getActivityLog();
     if(logs.length===0){showCustomAlert(currentLang==='tr'?'Kayıt yok!':'No logs!');return;}
@@ -1332,9 +1508,7 @@ function exportActivityCSV(){
     showCustomAlert(currentLang==='tr'?'CSV indirildi!':'CSV downloaded!','success');
 }
 
-/* ============================================================
-   💬 CHAT SYSTEM
-   ============================================================ */
+/* CHAT */
 const CHAT_KEY='site_chat_v1';
 let activeChatUser=null;
 let chatPollTimer=null;
@@ -1376,7 +1550,6 @@ function openChatPanel(){
     activeChatUser=null;
     document.getElementById('chatUsersListWrapper').style.display='flex';
     document.getElementById('chatConversation').style.display='none';
-    // Clear search on open
     chatSearchQuery='';
     const si=document.getElementById('chatSearchInput');if(si)si.value='';
     const sc=document.getElementById('chatSearchClear');if(sc)sc.classList.remove('show');
@@ -1416,7 +1589,6 @@ function renderChatUsersList(){
     const lu=localStorage.getItem('logged_user');if(!lu)return;
     let u;try{u=JSON.parse(lu);}catch(e){return;}
     let others=getChatUsersFor(u.email);
-    // Apply search filter
     if(chatSearchQuery){
         others=others.filter(x=>matchUserQuery(x,chatSearchQuery));
     }
@@ -1429,7 +1601,6 @@ function renderChatUsersList(){
         return;
     }
     const msgs=getChatMessages();
-    // Sort by last message timestamp (admin always on top comes from getChatUsersFor sorting, but we re-sort here)
     others.sort((a,b)=>{
         const aAdmin=isAdminUser(a.email)?0:1;
         const bAdmin=isAdminUser(b.email)?0:1;
@@ -1602,9 +1773,7 @@ function sendChatMessage(){
     logActivity('chat_message',u,`To @${String(activeChatUser.username||'').replace(/^@/,'')||activeChatUser.email}: ${text.substring(0,60)}`);
 }
 
-/* ============================================================
-   🎤 VOICE MESSAGE RECORDING
-   ============================================================ */
+/* VOICE MESSAGE RECORDING */
 let mediaRecorder=null;
 let recordingChunks=[];
 let recordingStream=null;
@@ -1736,6 +1905,7 @@ async function loadVoiceMessageAudio(audioId){
 function clearAllChats(){
     showCustomAlert(currentLang==='tr'?'Tüm sohbet mesajları silinecek! Emin misiniz?':'All chat messages will be deleted! Are you sure?','delete',function(){
         localStorage.removeItem(CHAT_KEY);
+        cloudPush(CHAT_KEY,'{}');
         clearAllVoiceMessages().catch(()=>{});
         updateChatBadge();
         renderAdminChats();
@@ -1922,7 +2092,6 @@ function closeAdminLogin(){document.getElementById('adminLoginModal').classList.
 function verifyAdminPassword(e){e.preventDefault();const v=document.getElementById('adminPasswordInput').value;if(v===ADMIN_MASTER_PASSWORD){try{sessionStorage.setItem(ADMIN_SESSION_KEY,'yes');}catch(err){}closeAdminLogin();openAdminPanel();fireConfettiBurst(.6);}else{showCustomAlert((currentLang==='tr')?'Yanlış şifre!':'Incorrect password!');document.getElementById('adminPasswordInput').value='';}}
 function logoutAdmin(){try{sessionStorage.removeItem(ADMIN_SESSION_KEY);}catch(e){}closeAdminPanel();}
 
-/* USERS MANAGEMENT */
 function getAllUsers(){try{return JSON.parse(localStorage.getItem('site_users')||'[]');}catch(e){return[];}}
 function renderAdminUsers(){
     const list=document.getElementById('adminUsersList');if(!list)return;
@@ -1986,7 +2155,6 @@ function viewUserDetail(idx){
 }
 function closeUserDetail(){document.getElementById('userDetailModal').classList.remove('active');}
 
-/* PDF EXPORT FOR USER */
 function exportUserPDF(email){
     const users=getAllUsers();
     let u=users.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());
@@ -2080,7 +2248,6 @@ function exportUserPDF(email){
     img.src=logoUrl;
 }
 
-/* DELETE SINGLE USER (Admin) */
 function deleteUserAdmin(email){
     if(!email)return;
     const users=getAllUsers();
@@ -2161,7 +2328,6 @@ function clearAllUsers(){
     });
 }
 
-/* ACTIVITY RENDER */
 let activityFilterType='all';
 function renderAdminActivity(){
     const list=document.getElementById('adminActivityList');if(!list)return;
@@ -2212,7 +2378,6 @@ async function deleteApkFile(idx){const db=await openApkDB();return new Promise(
 async function storeIconData(idx,dataUrl){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['icons'],'readwrite'),st=tx.objectStore('icons');const data={dataUrl,storedAt:Date.now()};const req=st.put(data,'icon_'+idx);req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
 async function getIconData(idx){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['icons'],'readonly'),st=tx.objectStore('icons');const req=st.get('icon_'+idx);req.onsuccess=(e)=>resolve(e.target.result||null);req.onerror=(e)=>reject(e.target.error);});}
 async function deleteIconData(idx){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['icons'],'readwrite'),st=tx.objectStore('icons');const req=st.delete('icon_'+idx);req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
-/* Voice message storage */
 async function storeVoiceMessage(audioId,blob){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['voice_messages'],'readwrite'),st=tx.objectStore('voice_messages');const data={blob,name:'voice_'+audioId,size:blob.size,type:blob.type||'audio/webm',storedAt:Date.now()};const req=st.put(data,audioId);req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
 async function getVoiceMessage(audioId){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['voice_messages'],'readonly'),st=tx.objectStore('voice_messages');const req=st.get(audioId);req.onsuccess=(e)=>resolve(e.target.result||null);req.onerror=(e)=>reject(e.target.error);});}
 async function deleteVoiceMessage(audioId){const db=await openApkDB();return new Promise((resolve,reject)=>{const tx=db.transaction(['voice_messages'],'readwrite'),st=tx.objectStore('voice_messages');const req=st.delete(audioId);req.onsuccess=()=>resolve(true);req.onerror=(e)=>reject(e.target.error);});}
@@ -2288,7 +2453,6 @@ function applySiteContent(){
     renderApplications();
 }
 
-/* RENDER APPLICATIONS */
 async function renderApplications(){
     const grid=document.getElementById('appsGrid');if(!grid)return;
     const apps=getSiteContent().apps;
@@ -2300,10 +2464,7 @@ async function renderApplications(){
         const app=apps[idx];
         if(app.name&&app.name.trim()){
             const nameKey=app.name.trim().toLowerCase();
-            if(renderedAppNames.has(nameKey)){
-                console.log('[renderApplications] Duplicate skipped:',app.name,'at slot',idx+1);
-                continue;
-            }
+            if(renderedAppNames.has(nameKey)){console.log('[renderApplications] Duplicate skipped:',app.name,'at slot',idx+1);continue;}
             renderedAppNames.add(nameKey);
         }
         const card=document.createElement('div');
@@ -2375,6 +2536,7 @@ function refreshAdminUI(){
     const duc=document.getElementById('dash-users-count');if(duc)duc.textContent=(currentLang==='tr'?`Kullanıcılar: ${users.length}`:`Users: ${users.length}`);
     const dac2=document.getElementById('dash-activity-count');if(dac2)dac2.textContent=(currentLang==='tr'?`Aktiviteler: ${logs.length}`:`Activities: ${logs.length}`);
     const dcc=document.getElementById('dash-chats-count');if(dcc)dcc.textContent=(currentLang==='tr'?`Sohbet mesajları: ${totalChats}`:`Chat messages: ${totalChats}`);
+    const dcs=document.getElementById('dash-cloud-status');if(dcs)dcs.textContent='Cloud: '+(cloudEnabled?'Bağlı ✅':'Yerel mod');
     const dle=document.getElementById('dash-last-edit');if(dle)dle.textContent=(currentLang==='tr'?`Son düzenleme: ${c.lastEdit}`:`Last edit: ${c.lastEdit}`);
     document.getElementById('ah-brand').value=c.header.brand;
     document.getElementById('ah-role-en').value=c.header.roleEn;
@@ -2727,7 +2889,7 @@ function handleProfileUpdate(e){
         u.name=nn;u.username=nu;u.birthDay=bd;u.birthMonth=bm;u.birthYear=by;
         users=users.map(x=>x.email===u.email?u:x);
         localStorage.setItem('site_users',JSON.stringify(users));
-        localStorage.setItem('logged_user',JSON.stringify(u));
+        __ORIG_SET_ITEM__('logged_user',JSON.stringify(u));
         logActivity('profile_update',u,'Old: '+oldData.name+' (@'+oldData.username+') → New: '+nn+' (@'+nu+')');
         closeEditProfileModal();checkUserSession();renderApplications();showCustomAlert(t.successUpdate,'success');
     }catch(err){}
@@ -2747,7 +2909,7 @@ function handleChangePassword(e){
         if(np!==cp){showCustomAlert(t.cpErrorMatch);return;}
         u.password=np;users=users.map(x=>x.email===u.email?u:x);
         localStorage.setItem('site_users',JSON.stringify(users));
-        localStorage.setItem('logged_user',JSON.stringify(u));
+        __ORIG_SET_ITEM__('logged_user',JSON.stringify(u));
         logActivity('password_change',u,'Password updated');
         closeChangePasswordModal();showCustomAlert(t.cpSuccess,'success');
     }catch(err){}
@@ -2807,7 +2969,7 @@ function handleForgotPasswordSubmit(e){
     if(!u){showCustomAlert(t.rpEmailNotFound);return;}
     const tp="Temp"+Math.floor(1000+Math.random()*9000)+"!";
     let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');
-    rc[email]=tp;localStorage.setItem('reset_codes',JSON.stringify(rc));
+    rc[email]=tp;__ORIG_SET_ITEM__('reset_codes',JSON.stringify(rc));
     currentResetEmail=email;
     closeForgotPasswordModal();
     document.getElementById('mock-email-user-value').innerText=email;
@@ -2834,7 +2996,7 @@ function handleResetPasswordSubmit(e){
     users=users.map(u=>{if(u.email===email){u.password=np;ok=true;userObj=u;}return u;});
     if(ok){
         localStorage.setItem('site_users',JSON.stringify(users));
-        delete rc[email];localStorage.setItem('reset_codes',JSON.stringify(rc));
+        delete rc[email];__ORIG_SET_ITEM__('reset_codes',JSON.stringify(rc));
         logActivity('password_reset',userObj,'Password reset via recovery');
         closeResetPasswordModal();showCustomAlert(t.rpSuccess,'success');
     }else showCustomAlert(t.rpEmailNotFound);
@@ -2906,7 +3068,7 @@ function verifySignupCode(e){
         let users=usersBefore;
         users.push(nu);
         localStorage.setItem('site_users',JSON.stringify(users));
-        localStorage.setItem('logged_user',JSON.stringify(nu));
+        __ORIG_SET_ITEM__('logged_user',JSON.stringify(nu));
         logActivity('signup',nu,'New account created — ID: '+newUserId);
         pendingSignup=null;
         document.getElementById('signupCodeModal').classList.remove('active');
@@ -2942,7 +3104,7 @@ function verifyEmailChangeCode(e){
         let users=JSON.parse(localStorage.getItem('site_users')||'[]');
         users=users.map(x=>x.email===oldEmail?u:x);
         localStorage.setItem('site_users',JSON.stringify(users));
-        localStorage.setItem('logged_user',JSON.stringify(u));
+        __ORIG_SET_ITEM__('logged_user',JSON.stringify(u));
         logActivity('email_change',u,`${oldEmail} → ${u.email}`);
         pendingEmailChange=null;
         closeEmailChangeCodeModal();closeEmailChangeMockModal();closeEditProfileModal();
@@ -2974,8 +3136,8 @@ function handleAuthSubmit(e){
         let user=users.find(u=>{const em=(u.email||'').toLowerCase()===ic;let un=(u.username||'').toLowerCase();if(un.startsWith('@'))un=un.substring(1);const um=un===inputName;return(em||um)&&u.password===password;});
         if(!user&&(ic==='admin@muminsultani.com'||inputName==='admin')&&password==='admin123'){user={userId:ADMIN_USER_ID,name:'Admin User',username:'@Admin',email:'admin@muminsultani.com',password:'admin123',birthDay:'',birthMonth:'',birthYear:'',profilePhoto:'',isAdmin:true};}
         if(user){
-            if(!user.userId){/* ensure id */ const allU=JSON.parse(localStorage.getItem('site_users')||'[]');const newId=generateNextUserId(allU);user.userId=isAdminUser(user.email)?ADMIN_USER_ID:newId;let us=allU.map(x=>x.email===user.email?user:x);localStorage.setItem('site_users',JSON.stringify(us));}
-            localStorage.setItem('logged_user',JSON.stringify(user));
+            if(!user.userId){const allU=JSON.parse(localStorage.getItem('site_users')||'[]');const newId=generateNextUserId(allU);user.userId=isAdminUser(user.email)?ADMIN_USER_ID:newId;let us=allU.map(x=>x.email===user.email?user:x);localStorage.setItem('site_users',JSON.stringify(us));}
+            __ORIG_SET_ITEM__('logged_user',JSON.stringify(user));
             logActivity('signin',user,'User signed in');
             showCustomAlert(t.successSignin,'success');closeDirectContactModal();checkUserSession();renderApplications();
             updateChatBadge();
@@ -3001,7 +3163,7 @@ function checkUserSession(){
     const ps=document.getElementById('userProfileSection');
     const cte=document.getElementById('t-contact-title'),cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');
     const abi=document.getElementById('authBoxIcon');
-    if(lu){try{const u=JSON.parse(lu);if(ps)ps.style.display='block';const pd=(id,v)=>{const el=document.getElementById(id);if(el)el.innerText=v;};pd('profileDisplayName',u.name||'User');pd('profileDisplayUsernameDesktop',u.username||'@username');pd('profileDisplayEmailDesktop',u.email||'-');pd('profileDisplayBirthdateDesktop',(u.birthDay&&u.birthMonth&&u.birthYear)?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'--/--/----');pd('profileDisplayUsernameMobile',u.username||'@username');pd('profileDisplayEmail',u.email||'-');pd('profileDisplayId',u.userId||'-');const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const ppd=document.getElementById('profilePhotoDisplay');if(ppd)ppd.src=p;const ppl=document.getElementById('profilePhotoLarge');if(ppl)ppl.src=p;const br=document.getElementById('profileBirthdateRow'),bd=document.getElementById('profileDisplayBirthdate');if(u.birthDay&&u.birthMonth&&u.birthYear){if(br)br.style.display='flex';if(bd)bd.innerText=`${u.birthDay}/${u.birthMonth}/${u.birthYear}`;}else if(br)br.style.display='none';const sT=modalTranslations[currentLang]||modalTranslations.en;if(cte)cte.innerText=sT.userAccount;if(cse)cse.innerText=sT.activeSession;if(cme)cme.innerText=u.name?`${sT.welcomeUser} ${u.name}`:sT.sessionActive;if(abi)abi.className='fa-solid fa-user-check';const pdc=document.getElementById('profileDetailsContainer');if(pdc)pdc.style.display='none';const pi=document.getElementById('privacyIcon');if(pi)pi.className='fa-solid fa-eye-slash';/* verified badge */const dn=document.getElementById('profileDisplayName');if(dn){dn.querySelectorAll('.verified-badge,.admin-tag').forEach(b=>b.remove());if(isAdminUser(u.email)){dn.insertAdjacentHTML('beforeend',getVerifiedBadgeHTML('lg'));dn.insertAdjacentHTML('beforeend',getAdminTagHTML());}}}catch(e){}}else{const sT=modalTranslations[currentLang]||modalTranslations.en;if(ps)ps.style.display='none';if(cte)cte.innerText=sT.signInSignUp;if(cse)cse.innerText=sT.signInSignUp;if(cme)cme.innerText=sT.signInToJoin;if(abi)abi.className='fa-solid fa-right-to-bracket';}
+    if(lu){try{const u=JSON.parse(lu);if(ps)ps.style.display='block';const pd=(id,v)=>{const el=document.getElementById(id);if(el)el.innerText=v;};pd('profileDisplayName',u.name||'User');pd('profileDisplayUsernameDesktop',u.username||'@username');pd('profileDisplayEmailDesktop',u.email||'-');pd('profileDisplayBirthdateDesktop',(u.birthDay&&u.birthMonth&&u.birthYear)?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'--/--/----');pd('profileDisplayUsernameMobile',u.username||'@username');pd('profileDisplayEmail',u.email||'-');pd('profileDisplayId',u.userId||'-');const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const ppd=document.getElementById('profilePhotoDisplay');if(ppd)ppd.src=p;const ppl=document.getElementById('profilePhotoLarge');if(ppl)ppl.src=p;const br=document.getElementById('profileBirthdateRow'),bd=document.getElementById('profileDisplayBirthdate');if(u.birthDay&&u.birthMonth&&u.birthYear){if(br)br.style.display='flex';if(bd)bd.innerText=`${u.birthDay}/${u.birthMonth}/${u.birthYear}`;}else if(br)br.style.display='none';const sT=modalTranslations[currentLang]||modalTranslations.en;if(cte)cte.innerText=sT.userAccount;if(cse)cse.innerText=sT.activeSession;if(cme)cme.innerText=u.name?`${sT.welcomeUser} ${u.name}`:sT.sessionActive;if(abi)abi.className='fa-solid fa-user-check';const pdc=document.getElementById('profileDetailsContainer');if(pdc)pdc.style.display='none';const pi=document.getElementById('privacyIcon');if(pi)pi.className='fa-solid fa-eye-slash';const dn=document.getElementById('profileDisplayName');if(dn){dn.querySelectorAll('.verified-badge,.admin-tag').forEach(b=>b.remove());if(isAdminUser(u.email)){dn.insertAdjacentHTML('beforeend',getVerifiedBadgeHTML('lg'));dn.insertAdjacentHTML('beforeend',getAdminTagHTML());}}}catch(e){}}else{const sT=modalTranslations[currentLang]||modalTranslations.en;if(ps)ps.style.display='none';if(cte)cte.innerText=sT.signInSignUp;if(cse)cse.innerText=sT.signInSignUp;if(cme)cme.innerText=sT.signInToJoin;if(abi)abi.className='fa-solid fa-right-to-bracket';}
     updateChatBadge();
 }
 
@@ -3014,7 +3176,7 @@ function checkUsernameAvailability(){const i=document.getElementById('contactCli
 function toggleProfilePrivacy(){const dc=document.getElementById('profileDetailsContainer'),pi=document.getElementById('privacyIcon');if(dc.style.display==='none'){dc.style.display='flex';pi.className='fa-solid fa-eye';}else{dc.style.display='none';pi.className='fa-solid fa-eye-slash';}}
 function openProfilePhotoPanel(){const lu=localStorage.getItem('logged_user');if(!lu)return;try{const u=JSON.parse(lu);const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');document.getElementById('profilePhotoLarge').src=p;}catch(e){}document.getElementById('profilePhotoPanelModal').classList.add('active');}
 function closeProfilePhotoPanel(){document.getElementById('profilePhotoPanelModal').classList.remove('active');}
-function resetProfilePhoto(){const lu=localStorage.getItem('logged_user');if(!lu)return;const da='https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent('muminsultani');document.getElementById('profilePhotoDisplay').src=da;document.getElementById('profilePhotoLarge').src=da;try{let u=JSON.parse(lu);u.profilePhoto='';let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));}catch(e){}}
+function resetProfilePhoto(){const lu=localStorage.getItem('logged_user');if(!lu)return;const da='https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent('muminsultani');document.getElementById('profilePhotoDisplay').src=da;document.getElementById('profilePhotoLarge').src=da;try{let u=JSON.parse(lu);u.profilePhoto='';let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));__ORIG_SET_ITEM__('logged_user',JSON.stringify(u));}catch(e){}}
 function openLightbox(){document.getElementById('lightboxImage').src=document.getElementById('profilePhotoLarge').src;document.getElementById('lightboxOverlay').classList.add('active');}
 function closeLightbox(){document.getElementById('lightboxOverlay').classList.remove('active');}
 function scrollPageDown(){window.scrollBy({top:450,behavior:'smooth'});}
@@ -3035,7 +3197,7 @@ function handleProfilePhotoUpload(event){const f=event.target.files[0];if(!f)ret
 function openCropModal(src){const ci=document.getElementById('cropImage');ci.src=src;document.querySelectorAll('.ratio-btn').forEach(b=>b.classList.remove('active'));const db=document.querySelector('.ratio-btn[data-ratio="1"]');if(db)db.classList.add('active');document.getElementById('cropModal').classList.add('active');if(cropperInstance){try{cropperInstance.destroy();}catch(e){}cropperInstance=null;}const ic=()=>{try{cropperInstance=new Cropper(ci,{aspectRatio:1,viewMode:1,autoCropArea:.9,background:false,responsive:true,guides:true,center:true,highlight:false,movable:true,zoomable:true,rotatable:false,scalable:false,dragMode:'move'});}catch(e){}};if(ci.complete&&ci.naturalWidth>0)setTimeout(ic,50);else ci.onload=()=>setTimeout(ic,50);}
 function closeCropModal(){if(cropperInstance){try{cropperInstance.destroy();}catch(e){}cropperInstance=null;}document.getElementById('cropModal').classList.remove('active');}
 function setCropRatio(ratio,btn){document.querySelectorAll('.ratio-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');if(cropperInstance){try{cropperInstance.setAspectRatio(isNaN(ratio)?NaN:ratio);}catch(e){}}}
-function applyCrop(){if(!cropperInstance)return;try{const c=cropperInstance.getCroppedCanvas({width:400,height:400,imageSmoothingEnabled:true,imageSmoothingQuality:'high',fillColor:'#ffffff'});if(!c)return;const d=c.toDataURL('image/png');document.getElementById('profilePhotoDisplay').src=d;document.getElementById('profilePhotoLarge').src=d;const lu=localStorage.getItem('logged_user');if(lu){try{let u=JSON.parse(lu);u.profilePhoto=d;let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));}catch(e){}}closeCropModal();}catch(e){}}
+function applyCrop(){if(!cropperInstance)return;try{const c=cropperInstance.getCroppedCanvas({width:400,height:400,imageSmoothingEnabled:true,imageSmoothingQuality:'high',fillColor:'#ffffff'});if(!c)return;const d=c.toDataURL('image/png');document.getElementById('profilePhotoDisplay').src=d;document.getElementById('profilePhotoLarge').src=d;const lu=localStorage.getItem('logged_user');if(lu){try{let u=JSON.parse(lu);u.profilePhoto=d;let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));__ORIG_SET_ITEM__('logged_user',JSON.stringify(u));}catch(e){}}closeCropModal();}catch(e){}}
 
 /* COPY */
 function fallbackCopy(t){const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);}
@@ -3056,11 +3218,14 @@ const mainConstellation=createConstellationSystem('constellation-canvas',{number
 window.introConstellation=createConstellationSystem('intro-canvas',{numberOfParticles:50,mouseRadius:150,lineDistance:120});
 
 /* INIT */
-window.addEventListener('DOMContentLoaded',()=>{
+window.addEventListener('DOMContentLoaded',async ()=>{
+    try { await cloudInitSync(); } catch(e) { console.warn('[Cloud] Sync failed:', e); }
+
     setTimeout(()=>{const intro=document.getElementById('intro-screen');if(intro){intro.style.opacity='0';intro.style.visibility='hidden';setTimeout(()=>{intro.style.display='none';if(window.introConstellation&&window.introConstellation.stop)window.introConstellation.stop();},600);}},1500);
-    // Ensure users have IDs + admin exists BEFORE anything else
+
     ensureUserIdsAndAdmin();
-    initTheme();checkUserSession();applySiteContent();
+    checkUserSession();
+    applySiteContent();
     const sl=sessionStorage.getItem('site_lang')||'en';
     changeLanguage(sl);
     const nf=document.getElementById('contactClientName');
