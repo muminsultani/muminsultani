@@ -15,6 +15,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 html{color-scheme:light dark}
 body{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none}
@@ -213,6 +214,11 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 #mock-email-pass-value,#email-change-code-value,#signupMockCodeValue{flex-shrink:0;font-size:.82rem;padding:2px 6px;color:#9333ea;font-family:'Fira Code',monospace;font-weight:700;background:rgba(147,51,234,.1);border-radius:4px}
 .copy-pass-btn{flex-shrink:0;background:transparent;border:1px solid rgba(147,51,234,.35);color:#9333ea;cursor:pointer;padding:4px 7px;font-size:.72rem;border-radius:6px;display:inline-flex;align-items:center;justify-content:center}
 .copy-pass-btn.copied{color:#22c55e;border-color:#22c55e;background:rgba(34,197,94,.12)}
+.email-sent-icon{font-size:3rem;color:#22c55e;margin-bottom:14px}
+.email-sent-icon i{animation:mailPop .6s cubic-bezier(.16,1,.3,1)}
+@keyframes mailPop{0%{transform:scale(0)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+.email-sent-to{font-size:.85rem;color:var(--text-primary);font-weight:700;word-break:break-all;margin-bottom:6px;padding:8px 12px;background:rgba(147,51,234,.08);border-radius:8px;border:1px solid rgba(147,51,234,.2)}
+.email-sent-note{font-size:.72rem;color:var(--text-secondary);line-height:1.5;margin-bottom:16px}
 .crop-container-wrapper{width:100%;height:300px;background:#000;border-radius:12px;overflow:hidden;margin-bottom:12px;display:flex;align-items:center;justify-content:center}
 .crop-container-wrapper img{max-width:100%;max-height:100%;pointer-events:auto !important}
 .crop-ratio-buttons{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;justify-content:center}
@@ -223,7 +229,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .btn-crop-cancel{background:var(--box-bg);color:var(--text-primary);border:1px solid var(--line-color) !important}
 .btn-crop-apply{background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff}
 .code-input{text-align:center !important;font-family:'Fira Code',monospace !important;font-size:1.3rem !important;letter-spacing:6px !important;font-weight:700 !important;color:#9333ea !important}
-/* ADMIN */
 .admin-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:6px;border-bottom:1px solid var(--line-color);scrollbar-width:none}
 .admin-tabs::-webkit-scrollbar{display:none}
 .admin-tab{flex-shrink:0;padding:7px 12px;border-radius:8px;background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-secondary);font-size:.72rem;font-weight:700;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:5px}
@@ -249,7 +254,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .admin-action-btn.ghost{background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-primary)}
 .admin-stat{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--box-bg);border:1px solid var(--line-color);border-radius:8px;margin-bottom:6px;font-size:.78rem}
 .admin-stat i{color:#9333ea;width:16px;text-align:center}
-/* Upload & Toggle */
 .upload-wrapper{position:relative;background:var(--box-bg);border:2px dashed var(--line-color);border-radius:10px;padding:16px;text-align:center;cursor:pointer;transition:all .2s}
 .upload-wrapper:hover{border-color:rgba(147,51,234,.5);background:var(--box-hover-bg)}
 .upload-wrapper.has-file{border-style:solid;border-color:#22c55e;background:rgba(34,197,94,.05);border-width:1px}
@@ -636,6 +640,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="admin-stat"><i class="fa-solid fa-users"></i> <span id="dash-users-count">Users: 0</span></div>
 <div class="admin-stat"><i class="fa-solid fa-list-activity"></i> <span id="dash-activity-count">Activities: 0</span></div>
 <div class="admin-stat"><i class="fa-solid fa-comments"></i> <span id="dash-chats-count">Chat messages: 0</span></div>
+<div class="admin-stat"><i class="fa-solid fa-envelope"></i> <span id="dash-email-status">Email Service: —</span></div>
 <div class="admin-stat"><i class="fa-solid fa-cloud"></i> <span id="dash-cloud-status">Cloud: —</span></div>
 <div class="admin-stat"><i class="fa-solid fa-clock"></i> <span id="dash-last-edit">Last edit: —</span></div>
 <div class="admin-actions-grid">
@@ -666,6 +671,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <button class="filter-chip" data-type="voice_message" onclick="filterActivity('voice_message',this)">Voice</button>
 <button class="filter-chip" data-type="password_change" onclick="filterActivity('password_change',this)">Pass</button>
 <button class="filter-chip" data-type="profile_update" onclick="filterActivity('profile_update',this)">Profile</button>
+<button class="filter-chip" data-type="email_sent" onclick="filterActivity('email_sent',this)">Email</button>
 </div>
 <div id="adminActivityList"></div>
 <div class="admin-actions-grid" style="margin-top:12px">
@@ -876,18 +882,21 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 
 <div class="modal-overlay high-z" id="signupMockModal">
-<div class="modal-container" style="max-width:420px">
-<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="signupMockTitle">Verify Your Email</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelSignup()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<div class="modal-container" style="max-width:440px">
+<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="signupMockTitle">Check Your Email</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelSignup()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <div class="mock-email-container">
-<div class="mock-email-logo">muminsultani</div>
-<div class="mock-email-body">
-<p id="signupMockGreeting">Welcome!</p>
-<p id="signupMockDesc">Thank you for signing up.</p>
-<p><strong id="signupMockEmailLabel">Your Email:</strong> <span id="signupMockEmailValue"></span></p>
+<div class="email-sent-icon"><i class="fa-solid fa-envelope-circle-check"></i></div>
+<h3 style="font-size:1rem;font-weight:800;color:var(--text-primary);margin-bottom:10px" id="signupMockGreeting">Email Gönderildi!</h3>
+<p class="email-sent-note" id="signupMockDesc">Doğrulama kodu e-posta adresinize gönderildi.</p>
+<div class="email-sent-to" id="signupMockEmailValue">user@example.com</div>
+<div id="signupFallbackCode" style="display:none;margin-top:12px">
 <div class="mock-pass-row"><strong id="signupMockCodeLabel">Code:</strong><span id="signupMockCodeValue"></span><button type="button" class="copy-pass-btn" id="signupCopyBtn" onclick="copySignupCode()"><i class="fa-regular fa-copy" id="signupCopyIcon"></i></button></div>
+</div>
 <div class="mock-email-footer"><span id="signupMockAdminLabel">Admin:</span><span>admin@muminsultani.com</span></div>
 </div>
-<div class="form-buttons-group" style="width:100%"><button class="submit-btn email-btn" onclick="openSignupCodeModal()" style="width:100%"><i class="fa-solid fa-key"></i> <span id="signupMockEnterBtn">Enter Code</span></button></div>
+<div class="form-buttons-group" style="width:100%;flex-direction:column;gap:8px">
+<button class="submit-btn email-btn" onclick="openSignupCodeModal()" style="width:100%;background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-key"></i> <span id="signupMockEnterBtn">Kodu Gir</span></button>
+<button class="submit-btn" onclick="resendSignupEmail()" style="width:100%;background:var(--box-bg);color:var(--text-primary);border:1px solid var(--line-color)"><i class="fa-solid fa-rotate-right"></i> <span id="signupResendBtn">Kodu Tekrar Gönder</span></button>
 </div>
 </div>
 </div>
@@ -896,7 +905,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="modal-container" style="max-width:400px">
 <div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="backToSignupMock()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="signupCodeTitle">Verify Email</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelSignup()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <form id="signupCodeForm" onsubmit="verifySignupCode(event)">
-<p class="item-desc" id="signupCodeDesc" style="margin-bottom:12px;font-size:.8rem">Enter the 6-digit code.</p>
+<p class="item-desc" id="signupCodeDesc" style="margin-bottom:12px;font-size:.8rem">E-postanıza gelen 6 haneli kodu girin.</p>
 <div class="form-group"><label class="form-label" id="signupCodeLabel">Code</label><input type="text" class="form-input code-input" id="signupCodeInput" required maxlength="6" inputmode="numeric" pattern="[0-9]{6}" placeholder="000000"></div>
 <div class="form-buttons-group"><button type="submit" class="submit-btn email-btn" id="signupCodeVerifyBtn" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-circle-check"></i> <span id="signupCodeVerifyText">Verify</span></button></div>
 </form>
@@ -904,18 +913,21 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 
 <div class="modal-overlay high-z" id="emailChangeMockModal">
-<div class="modal-container" style="max-width:420px">
+<div class="modal-container" style="max-width:440px">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="email-change-mock-title">Email Verification</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelEmailChange()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <div class="mock-email-container">
-<div class="mock-email-logo">muminsultani</div>
-<div class="mock-email-body">
-<p id="email-change-mock-greeting">Hello,</p>
-<p id="email-change-mock-desc">Email change request.</p>
-<p><strong id="email-change-mock-user-label">New Email:</strong> <span id="email-change-user-value"></span></p>
+<div class="email-sent-icon"><i class="fa-solid fa-envelope-circle-check"></i></div>
+<h3 style="font-size:1rem;font-weight:800;color:var(--text-primary);margin-bottom:10px" id="email-change-mock-greeting">Email Gönderildi!</h3>
+<p class="email-sent-note" id="email-change-mock-desc">Doğrulama kodu YENİ e-posta adresinize gönderildi.</p>
+<div class="email-sent-to" id="email-change-user-value">new@example.com</div>
+<div id="emailChangeFallbackCode" style="display:none;margin-top:12px">
 <div class="mock-pass-row"><strong id="email-change-mock-code-label">Code:</strong><span id="email-change-code-value"></span><button type="button" class="copy-pass-btn" id="copyEmailChangeBtn" onclick="copyEmailChangeCode()"><i class="fa-regular fa-copy" id="copyEmailChangeIcon"></i></button></div>
+</div>
 <div class="mock-email-footer"><span id="email-change-mock-admin-label">Admin:</span><span>admin@muminsultani.com</span></div>
 </div>
-<div class="form-buttons-group" style="width:100%"><button class="submit-btn email-btn" onclick="openEmailChangeCodeModal()" style="width:100%"><i class="fa-solid fa-key"></i> <span id="email-change-enter-code-btn">Enter Code</span></button></div>
+<div class="form-buttons-group" style="width:100%;flex-direction:column;gap:8px">
+<button class="submit-btn email-btn" onclick="openEmailChangeCodeModal()" style="width:100%;background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-key"></i> <span id="email-change-enter-code-btn">Kodu Gir</span></button>
+<button class="submit-btn" onclick="resendEmailChangeEmail()" style="width:100%;background:var(--box-bg);color:var(--text-primary);border:1px solid var(--line-color)"><i class="fa-solid fa-rotate-right"></i> <span>Kodu Tekrar Gönder</span></button>
 </div>
 </div>
 </div>
@@ -924,7 +936,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="modal-container" style="max-width:400px">
 <div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="backToEmailChangeMock()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="email-change-code-title">Verify Code</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelEmailChange()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <form id="emailChangeCodeForm" onsubmit="verifyEmailChangeCode(event)">
-<p class="item-desc" id="email-change-code-desc" style="margin-bottom:12px;font-size:.8rem">Enter the code.</p>
+<p class="item-desc" id="email-change-code-desc" style="margin-bottom:12px;font-size:.8rem">Yeni e-postanıza gelen kodu girin.</p>
 <div class="form-group"><label class="form-label" id="email-change-code-label">Code</label><input type="text" class="form-input code-input" id="emailChangeCodeInput" required maxlength="6" inputmode="numeric" pattern="[0-9]{6}" placeholder="000000"></div>
 <div class="form-buttons-group"><button type="submit" class="submit-btn email-btn" id="email-change-verify-btn" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-circle-check"></i> <span id="email-change-verify-text">Verify</span></button></div>
 </form>
@@ -1019,7 +1031,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="modal-container" style="max-width:400px">
 <div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeForgotPasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="fp-title">Password Recovery</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeForgotPasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <form id="forgotPasswordForm" onsubmit="handleForgotPasswordSubmit(event)">
-<p class="item-desc" id="fp-desc" style="margin-bottom:12px;font-size:.8rem">Enter registered email.</p>
+<p class="item-desc" id="fp-desc" style="margin-bottom:12px;font-size:.8rem">Kayıtlı e-posta adresinizi girin. Sıfırlama kodu e-postanıza gönderilecek.</p>
 <div class="form-group"><label class="form-label" id="fp-label-email">Email</label><input type="email" class="form-input" id="forgotClientEmail" required placeholder="name@sample.com"></div>
 <div class="form-buttons-group"><button type="submit" class="submit-btn email-btn" id="fp-submit-btn"><i class="fa-solid fa-paper-plane"></i> <span id="fp-submit-text">Send Recovery</span></button></div>
 </form>
@@ -1027,18 +1039,21 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 
 <div class="modal-overlay" id="mockEmailModal">
-<div class="modal-container" style="max-width:420px">
-<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="mock-email-title">Recovery Email</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeMockEmailModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<div class="modal-container" style="max-width:440px">
+<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="mock-email-title">Check Your Email</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeMockEmailModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <div class="mock-email-container">
-<div class="mock-email-logo">muminsultani</div>
-<div class="mock-email-body">
-<p id="mock-email-greeting">Hello,</p>
-<p id="mock-email-desc">Temporary password generated.</p>
-<p><strong id="mock-email-user-label">Email:</strong> <span id="mock-email-user-value"></span></p>
+<div class="email-sent-icon"><i class="fa-solid fa-envelope-circle-check"></i></div>
+<h3 style="font-size:1rem;font-weight:800;color:var(--text-primary);margin-bottom:10px" id="mock-email-greeting">Email Gönderildi!</h3>
+<p class="email-sent-note" id="mock-email-desc">Şifre sıfırlama kodu e-posta adresinize gönderildi.</p>
+<div class="email-sent-to" id="mock-email-user-value">user@example.com</div>
+<div id="resetFallbackCode" style="display:none;margin-top:12px">
 <div class="mock-pass-row"><strong id="mock-email-pass-label">Password:</strong><span id="mock-email-pass-value"></span><button type="button" class="copy-pass-btn" id="copyPassBtn" onclick="copyTempPassword()"><i class="fa-regular fa-copy" id="copyPassIcon"></i></button></div>
+</div>
 <div class="mock-email-footer"><span id="mock-email-admin-label">Admin:</span><span>admin@muminsultani.com</span></div>
 </div>
-<div class="form-buttons-group" style="width:100%"><button class="submit-btn email-btn" onclick="openResetPasswordModal()" style="width:100%"><i class="fa-solid fa-key"></i> <span id="mock-email-reset-btn">Reset Password</span></button></div>
+<div class="form-buttons-group" style="width:100%;flex-direction:column;gap:8px">
+<button class="submit-btn email-btn" onclick="openResetPasswordModal()" style="width:100%"><i class="fa-solid fa-key"></i> <span id="mock-email-reset-btn">Reset Password</span></button>
+</div>
 </div>
 </div>
 </div>
@@ -1124,6 +1139,63 @@ const FIREBASE_CONFIG = {
   appId: "1:929484224535:web:5e2b05f0b852357212c452"
 };
 
+/* ============================================================
+   📧 EMAILJS CONFIG — GERÇEK E-POSTA GÖNDERME
+   ⚠️ Bu değerleri EmailJS hesabından al ve doldur!
+   ============================================================ */
+const EMAILJS_CONFIG = {
+  serviceId: 'service_synjcul',
+  templateId: 'template_r1ii8ua',
+  publicKey: 'B4QKEakw6lpk2YKCh',
+  enabled: false
+};
+
+if (EMAILJS_CONFIG.serviceId && EMAILJS_CONFIG.serviceId !== 'BURAYA_SERVICE_ID' &&
+    EMAILJS_CONFIG.templateId && EMAILJS_CONFIG.templateId !== 'BURAYA_TEMPLATE_ID' &&
+    EMAILJS_CONFIG.publicKey && EMAILJS_CONFIG.publicKey !== 'BURAYA_PUBLIC_KEY') {
+  EMAILJS_CONFIG.enabled = true;
+}
+
+function initEmailJS(){
+  if(!EMAILJS_CONFIG.enabled)return;
+  try{ if(typeof emailjs!=='undefined'){ emailjs.init({publicKey: EMAILJS_CONFIG.publicKey}); console.log('[Email] ✅ EmailJS hazır'); } }
+  catch(e){ console.warn('[Email] Init failed:', e); }
+}
+
+async function sendVerificationEmail(toEmail, code, type){
+  if(!EMAILJS_CONFIG.enabled || typeof emailjs === 'undefined'){
+    console.warn('[Email] EmailJS yapılandırılmamış, kod ekranda gösteriliyor.');
+    return { success: false, reason: 'not_configured' };
+  }
+  const typeLabels = {
+    signup: 'Kayıt Doğrulama',
+    reset: 'Şifre Sıfırlama',
+    email_change: 'E-posta Değiştirme'
+  };
+  const brand = getDyn('header.brand', 'muminsultani');
+  try {
+    const params = {
+      to_email: toEmail,
+      email: toEmail,
+      code: code,
+      type: typeLabels[type] || 'Doğrulama',
+      brand: brand,
+      year: new Date().getFullYear(),
+      subject: `${brand} - ${typeLabels[type] || 'Doğrulama Kodu'}`,
+      message: `Merhaba,\n\n${brand} sitesi için ${typeLabels[type] || 'doğrulama'} kodunuz:\n\n${code}\n\nBu kodu kimseyle paylaşmayın.\n\n© ${new Date().getFullYear()} ${brand}`
+    };
+    await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, params, { publicKey: EMAILJS_CONFIG.publicKey });
+    logActivity('email_sent', {email: toEmail, name: typeLabels[type]}, `Verification code sent to ${toEmail} (${type})`);
+    return { success: true };
+  } catch(e) {
+    console.error('[Email] Send failed:', e);
+    return { success: false, reason: e.text || e.message || 'send_failed' };
+  }
+}
+
+/* ============================================================
+   CLOUD SYNC
+   ============================================================ */
 const CLOUD_SYNC_KEYS = ['site_users', 'site_chat_v1', 'site_activity_log_v1'];
 let cloudDB = null;
 let cloudEnabled = false;
@@ -1224,8 +1296,6 @@ function isAdminUser(email){return String(email||'').toLowerCase().trim()===ADMI
 function getVerifiedBadgeHTML(size){const cls='verified-badge'+(size?(' '+size):'');return `<span class="${cls}" title="Verified" aria-label="Verified"><i class="fa-solid fa-check"></i></span>`;}
 function getAdminTagHTML(){return `<span class="admin-tag" title="Admin"><i class="fa-solid fa-crown"></i>ADMIN</span>`;}
 function getUserIdLabelHTML(userId,isAdmin){if(!userId)return '';const cls='chat-user-id'+(isAdmin?' admin-id':'');return `<span class="${cls}" title="User ID"><i class="fa-solid fa-hashtag" style="font-size:.5rem"></i>${escapeHtml(userId)}</span>`;}
-
-/* USER ID SYSTEM */
 function generateNextUserId(existingUsers){let maxId=USER_ID_START;(existingUsers||[]).forEach(u=>{const m=String(u.userId||'').match(/^U(\d+)$/);if(m){const n=parseInt(m[1],10);if(n>=maxId)maxId=n+1;}});return 'U'+String(maxId).padStart(4,'0');}
 function ensureUserIdsAndAdmin(){try{let users=JSON.parse(localStorage.getItem('site_users')||'[]');let changed=false;const adminIdx=users.findIndex(u=>isAdminUser(u.email));if(adminIdx===-1){users.unshift({userId:ADMIN_USER_ID,name:'Admin',username:'@admin',email:ADMIN_EMAIL,password:'admin123',birthDay:'',birthMonth:'',birthYear:'',profilePhoto:'',createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true});changed=true;}else if(!users[adminIdx].userId){users[adminIdx].userId=ADMIN_USER_ID;changed=true;}let maxId=USER_ID_START;users.forEach(u=>{const m=String(u.userId||'').match(/^U(\d+)$/);if(m){const n=parseInt(m[1],10);if(n>=maxId)maxId=n+1;}});users.forEach(u=>{if(!u.userId){u.userId='U'+String(maxId).padStart(4,'0');maxId++;changed=true;}});if(changed){localStorage.setItem('site_users',JSON.stringify(users));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);const fresh=users.find(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());if(fresh)__ORIG_SET_ITEM__('logged_user',JSON.stringify(fresh));}catch(e){}}}}catch(e){console.warn('ensureUserIdsAndAdmin error:',e);}}
 function getAdminUser(){const users=getAllUsers();const found=users.find(u=>isAdminUser(u.email));if(found)return Object.assign({},found,{userId:found.userId||ADMIN_USER_ID,isAdmin:true});return {userId:ADMIN_USER_ID,name:'Admin',username:'@admin',email:ADMIN_EMAIL,password:'',birthDay:'',birthMonth:'',birthYear:'',profilePhoto:'',createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true};}
@@ -1425,7 +1495,6 @@ function openPublicUserProfile(email){
 }
 function closePublicUserProfile(){document.getElementById('publicUserProfileModal').classList.remove('active');publicProfileEmail=null;}
 function messageFromProfile(){if(!publicProfileEmail)return;const allUsers=getAllUsers();let u=allUsers.find(x=>x.email===publicProfileEmail);if(!u&&isAdminUser(publicProfileEmail)){u=getAdminUser();}if(!u){closePublicUserProfile();return;}closePublicUserProfile();document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='none';openConversation(u);}
-
 window.addEventListener('storage',e=>{if(e.key===CHAT_KEY){updateChatBadge();const panel=document.getElementById('chatPanelModal');if(panel&&panel.classList.contains('active')){if(activeChatUser)renderChatMessages();else renderChatUsersList();}}if(e.key==='site_users'){checkUserSession();updateChatBadge();const panel=document.getElementById('chatPanelModal');if(panel&&panel.classList.contains('active')){if(activeChatUser)renderChatMessages();else renderChatUsersList();}}});
 function startChatPolling(){if(chatPollTimer)clearInterval(chatPollTimer);chatPollTimer=setInterval(()=>{const lu=localStorage.getItem('logged_user');if(!lu){updateChatBadge();return;}updateChatBadge();const panel=document.getElementById('chatPanelModal');if(panel&&panel.classList.contains('active')){if(activeChatUser){let u;try{u=JSON.parse(lu);}catch(e){return;}const msgs=getChatMessages();const convId=getConversationId(u.email,activeChatUser.email);if(msgs[convId]){let changed=false;msgs[convId].forEach(m=>{if(String(m.to).toLowerCase()===String(u.email).toLowerCase()&&!m.read){m.read=true;changed=true;}});if(changed)saveChatMessages(msgs);}renderChatMessages();}else{renderChatUsersList();}}},2500);}
 
@@ -1438,7 +1507,6 @@ function triggerAdminAccess(){if(isAdminLoggedIn()){openAdminPanel();}else{docum
 function closeAdminLogin(){document.getElementById('adminLoginModal').classList.remove('active');}
 function verifyAdminPassword(e){e.preventDefault();const v=document.getElementById('adminPasswordInput').value;if(v===ADMIN_MASTER_PASSWORD){try{sessionStorage.setItem(ADMIN_SESSION_KEY,'yes');}catch(err){}closeAdminLogin();openAdminPanel();fireConfettiBurst(.6);}else{showCustomAlert((currentLang==='tr')?'Yanlış şifre!':'Incorrect password!');document.getElementById('adminPasswordInput').value='';}}
 function logoutAdmin(){try{sessionStorage.removeItem(ADMIN_SESSION_KEY);}catch(e){}closeAdminPanel();}
-
 function getAllUsers(){try{return JSON.parse(localStorage.getItem('site_users')||'[]');}catch(e){return[];}}
 function renderAdminUsers(){
     const list=document.getElementById('adminUsersList');if(!list)return;
@@ -1554,8 +1622,8 @@ function renderAdminActivity(){
     logs=logs.reverse();
     if(logs.length===0){list.innerHTML=`<div style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;"><i class="fa-solid fa-list-activity" style="font-size:2rem;opacity:.3;margin-bottom:8px;display:block;"></i>${currentLang==='tr'?'Kayıt bulunamadı.':'No activity yet.'}</div>`;return;}
     list.innerHTML='';
-    const typeIcons={signup:'fa-user-plus',signin:'fa-right-to-bracket',signout:'fa-right-from-bracket',password_change:'fa-key',profile_update:'fa-pen',email_change:'fa-envelope',delete_account:'fa-trash-can',apk_download:'fa-download',apk_blocked:'fa-lock',password_reset:'fa-unlock-keyhole',chat_message:'fa-comments',voice_message:'fa-microphone'};
-    const typeLabels={signup:currentLang==='tr'?'Kayıt Oldu':'Signed Up',signin:currentLang==='tr'?'Giriş Yaptı':'Signed In',signout:currentLang==='tr'?'Çıkış Yaptı':'Signed Out',password_change:currentLang==='tr'?'Şifre Değiştirdi':'Changed Password',profile_update:currentLang==='tr'?'Profilini Düzenledi':'Updated Profile',email_change:currentLang==='tr'?'E-posta Değiştirdi':'Changed Email',delete_account:currentLang==='tr'?'Hesabını Sildi':'Deleted Account',apk_download:currentLang==='tr'?'APK İndirdi':'Downloaded APK',apk_blocked:currentLang==='tr'?'APK İndirmeye Çalıştı (Giriş Yok)':'Tried APK (No Login)',password_reset:currentLang==='tr'?'Şifresini Sıfırladı':'Reset Password',chat_message:currentLang==='tr'?'Mesaj Gönderdi':'Sent Message',voice_message:currentLang==='tr'?'Sesli Mesaj Gönderdi':'Sent Voice Message'};
+    const typeIcons={signup:'fa-user-plus',signin:'fa-right-to-bracket',signout:'fa-right-from-bracket',password_change:'fa-key',profile_update:'fa-pen',email_change:'fa-envelope',delete_account:'fa-trash-can',apk_download:'fa-download',apk_blocked:'fa-lock',password_reset:'fa-unlock-keyhole',chat_message:'fa-comments',voice_message:'fa-microphone',email_sent:'fa-paper-plane'};
+    const typeLabels={signup:currentLang==='tr'?'Kayıt Oldu':'Signed Up',signin:currentLang==='tr'?'Giriş Yaptı':'Signed In',signout:currentLang==='tr'?'Çıkış Yaptı':'Signed Out',password_change:currentLang==='tr'?'Şifre Değiştirdi':'Changed Password',profile_update:currentLang==='tr'?'Profilini Düzenledi':'Updated Profile',email_change:currentLang==='tr'?'E-posta Değiştirdi':'Changed Email',delete_account:currentLang==='tr'?'Hesabını Sildi':'Deleted Account',apk_download:currentLang==='tr'?'APK İndirdi':'Downloaded APK',apk_blocked:currentLang==='tr'?'APK İndirmeye Çalıştı (Giriş Yok)':'Tried APK (No Login)',password_reset:currentLang==='tr'?'Şifresini Sıfırladı':'Reset Password',chat_message:currentLang==='tr'?'Mesaj Gönderdi':'Sent Message',voice_message:currentLang==='tr'?'Sesli Mesaj Gönderdi':'Sent Voice Message',email_sent:currentLang==='tr'?'E-posta Gönderildi':'Email Sent'};
     logs.slice(0,200).forEach(l=>{
         const item=document.createElement('div');
         item.className='activity-item '+l.type;
@@ -1567,10 +1635,8 @@ function renderAdminActivity(){
 }
 function filterActivity(type,btn){activityFilterType=type;document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderAdminActivity();}
 
-/* TIMEOUT WRAPPER + SLOT HELPERS */
-function withTimeout(promise, ms = 5000) {
-    return Promise.race([Promise.resolve(promise),new Promise(resolve => setTimeout(() => resolve(null), ms))]);
-}
+/* TIMEOUT + SLOT HELPERS */
+function withTimeout(promise, ms = 5000) {return Promise.race([Promise.resolve(promise),new Promise(resolve => setTimeout(() => resolve(null), ms))]);}
 function buildAdminSlotHTML(idx, app, apk, icon) {
     const filled = app.name && app.name.trim().length > 0;
     const hasApk = !!app.hasApk || !!apk;
@@ -1580,13 +1646,9 @@ function buildAdminSlotHTML(idx, app, apk, icon) {
     const apkSize = app.apkSize || (apk ? apk.size : 0);
     const apkBadge = hasApk ? `<span class="apk-badge"><i class="fa-brands fa-android" style="font-size:.55rem"></i> APK ${apkSize ? formatFileSize(apkSize) : ''}</span>` : '';
     let iconPreview = '';
-    if (hasIcon && icon && icon.dataUrl) {
-        iconPreview = `<img src="${icon.dataUrl}" class="icon-preview-mini" alt="">`;
-    } else if (app.icon && app.icon.trim().startsWith('http')) {
-        iconPreview = `<img src="${escapeHtml(app.icon.trim())}" class="icon-preview-mini" alt="" onerror="this.style.display='none'">`;
-    } else if (app.icon && app.icon.trim()) {
-        iconPreview = `<span style="font-size:1.1rem">${escapeHtml(app.icon.trim())}</span>`;
-    }
+    if (hasIcon && icon && icon.dataUrl) {iconPreview = `<img src="${icon.dataUrl}" class="icon-preview-mini" alt="">`;}
+    else if (app.icon && app.icon.trim().startsWith('http')) {iconPreview = `<img src="${escapeHtml(app.icon.trim())}" class="icon-preview-mini" alt="" onerror="this.style.display='none'">`;}
+    else if (app.icon && app.icon.trim()) {iconPreview = `<span style="font-size:1.1rem">${escapeHtml(app.icon.trim())}</span>`;}
     const urlText = filled && app.url ? escapeHtml(app.url) : (filled && app.desc ? escapeHtml(app.desc) : (currentLang === 'tr' ? 'Boş slot' : 'Empty slot'));
     const nameText = filled ? escapeHtml(app.name) : `<em style="opacity:.5">${currentLang === 'tr' ? 'Boş Slot' : 'Empty Slot'} ${idx + 1}</em>`;
     return `<div class="admin-slot-num">${idx + 1}</div>${iconPreview ? `<div class="slot-icon-holder" style="flex-shrink:0;display:flex;align-items:center;justify-content:center;width:24px">${iconPreview}</div>` : `<div class="slot-icon-holder" style="flex-shrink:0;width:0"></div>`}<div class="admin-slot-info"><div class="admin-slot-name">${nameText} ${apkBadge} ${lockBadge}</div><div class="admin-slot-url">${urlText}</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="editAppSlot(${idx})" title="${currentLang === 'tr' ? 'Düzenle' : 'Edit'}"><i class="fa-solid fa-pen"></i></button><button class="admin-slot-btn delete" onclick="clearAppSlot(${idx})" title="${currentLang === 'tr' ? 'Sil' : 'Delete'}"><i class="fa-solid fa-trash-can"></i></button></div>`;
@@ -1624,11 +1686,8 @@ async function downloadApk(slotIndex){
     try {
         const apk = await withTimeout(getApkFile(slotIndex), 60000);
         if (!apk) { showCustomAlert(currentLang === 'tr' ? 'APK bulunamadı!' : 'APK not found!'); return; }
-        if (lu) {
-            logActivity('apk_download', userObj, `Slot #${slotIndex + 1} - ${apk.name} (${formatFileSize(apk.size)})`);
-        } else {
-            logActivity('apk_download', {email:'guest', name:'Guest', userId:'GUEST'}, `Slot #${slotIndex + 1} - ${apk.name} (public download, no login)`);
-        }
+        if (lu) {logActivity('apk_download', userObj, `Slot #${slotIndex + 1} - ${apk.name} (${formatFileSize(apk.size)})`);}
+        else {logActivity('apk_download', {email:'guest', name:'Guest', userId:'GUEST'}, `Slot #${slotIndex + 1} - ${apk.name} (public download, no login)`);}
         let blob;
         if (apk.blob instanceof Blob) { blob = apk.blob; }
         else { const byteArray = new Uint8Array(apk.blob); blob = new Blob([byteArray], {type: apk.type || 'application/vnd.android.package-archive'}); }
@@ -1641,10 +1700,7 @@ async function downloadApk(slotIndex){
         a.click();
         setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 2000);
         showCustomAlert(currentLang === 'tr' ? `İndiriliyor: ${apk.name}` : `Downloading: ${apk.name}`, 'success');
-    } catch(e) {
-        console.error('Download error:', e);
-        showCustomAlert(currentLang === 'tr' ? 'İndirme hatası!' : 'Download error!');
-    }
+    } catch(e) { console.error('Download error:', e); showCustomAlert(currentLang === 'tr' ? 'İndirme hatası!' : 'Download error!'); }
 }
 
 /* SITE CONTENT */
@@ -1702,16 +1758,10 @@ async function renderApplications(){
         const hasContent=app.name&&app.name.trim().length>0;
         const card=document.createElement('div');
         card.className='app-card';
-        if(!hasContent){
-            card.classList.add('disabled');
-            card.innerHTML=`<div class="app-card-empty" style="height:100%"><i class="fa-solid fa-cube"></i><span>${escapeHtml(t.emptySlotLabel||'Empty Slot')} ${idx+1}</span></div>`;
-            grid.appendChild(card);
-            continue;
-        }
+        if(!hasContent){card.classList.add('disabled');card.innerHTML=`<div class="app-card-empty" style="height:100%"><i class="fa-solid fa-cube"></i><span>${escapeHtml(t.emptySlotLabel||'Empty Slot')} ${idx+1}</span></div>`;grid.appendChild(card);continue;}
         let iconHTML='📱';
-        if(app.hasIcon){
-            try{const iconData=await withTimeout(getIconData(idx),3000);if(iconData&&iconData.dataUrl){iconHTML=`<img src="${iconData.dataUrl}" alt="">`;}}catch(e){}
-        }else if(app.icon&&app.icon.trim().startsWith('http')){iconHTML=`<img src="${escapeHtml(app.icon.trim())}" alt="">`;}
+        if(app.hasIcon){try{const iconData=await withTimeout(getIconData(idx),3000);if(iconData&&iconData.dataUrl){iconHTML=`<img src="${iconData.dataUrl}" alt="">`;}}catch(e){}}
+        else if(app.icon&&app.icon.trim().startsWith('http')){iconHTML=`<img src="${escapeHtml(app.icon.trim())}" alt="">`;}
         else if(app.icon&&app.icon.trim()){iconHTML=escapeHtml(app.icon.trim());}
         const hasApk=!!app.hasApk;
         const hasUrl=app.url&&app.url.trim().length>0;
@@ -1758,6 +1808,7 @@ function refreshAdminUI(){
     const dac2=document.getElementById('dash-activity-count');if(dac2)dac2.textContent=(currentLang==='tr'?`Aktiviteler: ${logs.length}`:`Activities: ${logs.length}`);
     const dcc=document.getElementById('dash-chats-count');if(dcc)dcc.textContent=(currentLang==='tr'?`Sohbet mesajları: ${totalChats}`:`Chat messages: ${totalChats}`);
     const dcs=document.getElementById('dash-cloud-status');if(dcs)dcs.textContent='Cloud: '+(cloudEnabled?'Bağlı ✅':'Yerel mod');
+    const des=document.getElementById('dash-email-status');if(des)des.textContent=(currentLang==='tr'?'E-posta Servisi: ':'Email Service: ')+(EMAILJS_CONFIG.enabled?'Aktif ✅':'Kapalı ⚠️');
     const dle=document.getElementById('dash-last-edit');if(dle)dle.textContent=(currentLang==='tr'?`Son düzenleme: ${c.lastEdit}`:`Last edit: ${c.lastEdit}`);
     document.getElementById('ah-brand').value=c.header.brand;
     document.getElementById('ah-role-en').value=c.header.roleEn;
@@ -1783,8 +1834,7 @@ function refreshAdminUI(){
     renderAdminSlots();
 }
 function renderAdminSlots(){
-    const list=document.getElementById('adminSlotsList');
-    if(!list)return;
+    const list=document.getElementById('adminSlotsList');if(!list)return;
     const apps=getSiteContent().apps;
     list.innerHTML='';
     apps.forEach((app,idx)=>{
@@ -1793,15 +1843,7 @@ function renderAdminSlots(){
         item.innerHTML=buildAdminSlotHTML(idx,app,null,null);
         list.appendChild(item);
         if(app.hasIcon){
-            withTimeout(getIconData(idx),3000).then(icon=>{
-                if(icon&&icon.dataUrl){
-                    const holder=item.querySelector('.slot-icon-holder');
-                    if(holder){
-                        holder.style.width='24px';
-                        holder.innerHTML=`<img src="${icon.dataUrl}" class="icon-preview-mini" alt="">`;
-                    }
-                }
-            }).catch(()=>{});
+            withTimeout(getIconData(idx),3000).then(icon=>{if(icon&&icon.dataUrl){const holder=item.querySelector('.slot-icon-holder');if(holder){holder.style.width='24px';holder.innerHTML=`<img src="${icon.dataUrl}" class="icon-preview-mini" alt="">`;}}}).catch(()=>{});
         }
     });
 }
@@ -1878,41 +1920,15 @@ async function saveAppSlot(e){
     const idx=parseInt(document.getElementById('editSlotIndex').value)||0;
     const c=getSiteContent();
     const requireLogin=document.getElementById('editAppRequireLogin').checked;
-    let newApp={
-        name:document.getElementById('editAppName').value.trim(),
-        desc:document.getElementById('editAppDesc').value.trim(),
-        url:document.getElementById('editAppUrl').value.trim(),
-        icon:c.apps[idx].icon||'',
-        requireLogin:requireLogin,
-        hasApk:c.apps[idx].hasApk||false,
-        apkName:c.apps[idx].apkName||'',
-        apkSize:c.apps[idx].apkSize||0,
-        apkType:c.apps[idx].apkType||'',
-        hasIcon:c.apps[idx].hasIcon||false
-    };
+    let newApp={name:document.getElementById('editAppName').value.trim(),desc:document.getElementById('editAppDesc').value.trim(),url:document.getElementById('editAppUrl').value.trim(),icon:c.apps[idx].icon||'',requireLogin:requireLogin,hasApk:c.apps[idx].hasApk||false,apkName:c.apps[idx].apkName||'',apkSize:c.apps[idx].apkSize||0,apkType:c.apps[idx].apkType||'',hasIcon:c.apps[idx].hasIcon||false};
     if(pendingApkFile){
-        try{
-            await withTimeout(storeApkFile(idx,pendingApkFile),120000);
-            newApp.hasApk=true;
-            newApp.apkName=pendingApkFile.name;
-            newApp.apkSize=pendingApkFile.size;
-            newApp.apkType=pendingApkFile.type||'application/vnd.android.package-archive';
-        }catch(err){
-            console.error('APK save error:',err);
-            showCustomAlert(currentLang==='tr'?'APK yüklenemedi! Dosya çok büyük olabilir.':'APK upload failed! File may be too large.');
-            return;
-        }
-    }else if(pendingApkDelete){
-        try{await withTimeout(deleteApkFile(idx),15000);}catch(e){}
-        newApp.hasApk=false;newApp.apkName='';newApp.apkSize=0;newApp.apkType='';
-    }
+        try{await withTimeout(storeApkFile(idx,pendingApkFile),120000);newApp.hasApk=true;newApp.apkName=pendingApkFile.name;newApp.apkSize=pendingApkFile.size;newApp.apkType=pendingApkFile.type||'application/vnd.android.package-archive';}
+        catch(err){console.error('APK save error:',err);showCustomAlert(currentLang==='tr'?'APK yüklenemedi! Dosya çok büyük olabilir.':'APK upload failed! File may be too large.');return;}
+    }else if(pendingApkDelete){try{await withTimeout(deleteApkFile(idx),15000);}catch(e){}newApp.hasApk=false;newApp.apkName='';newApp.apkSize=0;newApp.apkType='';}
     if(pendingIconDataUrl){
         try{await withTimeout(storeIconData(idx,pendingIconDataUrl),30000);newApp.hasIcon=true;}
         catch(err){console.error('Icon save error:',err);showCustomAlert(currentLang==='tr'?'İkon yüklenemedi!':'Icon upload failed!');return;}
-    }else if(pendingIconDelete){
-        try{await withTimeout(deleteIconData(idx),15000);}catch(e){}
-        newApp.hasIcon=false;
-    }
+    }else if(pendingIconDelete){try{await withTimeout(deleteIconData(idx),15000);}catch(e){}newApp.hasIcon=false;}
     c.apps[idx]=newApp;
     saveSiteContent(c);
     pendingApkFile=null;pendingApkDelete=false;pendingIconDataUrl=null;pendingIconDelete=false;
@@ -1948,10 +1964,10 @@ function toggleTheme(){document.body.classList.toggle('light-mode');const il=doc
 const translations={en:{code:"EN",appsTitle:"My Applications",expTitle:"Experience",setupTitle:"Setup & Environment",osLabel:"OS Environment",editorLabel:"Editor Stack",stackTitle:"Core Stack",backendLabel:"Backend",frontendLabel:"Frontend",contactTitle:"Sign In / Sign Up",contactSub:"Sign In / Sign Up",contactMain:"Sign in to join us",scanText:"SCAN TO CONNECT",gitText:"Sign In",backText:"Back",profileTitle:"User Profile & Session",forgotLink:"Forgot Password?",photoPanelTitle:"Profile Photo",btnChange:"Change",btnBack:"Back",btnReset:"Reset",cropTitle:"Crop Photo",cropCancel:"Cancel",cropApply:"Apply"},tr:{code:"TR",appsTitle:"Uygulamalarım",expTitle:"Deneyim",setupTitle:"Kurulum & Ortam",osLabel:"İşletim Sistemi",editorLabel:"Editör Yığını",stackTitle:"Temel Yığın",backendLabel:"Arka Uç",frontendLabel:"Ön Uç",contactTitle:"Giriş Yap / Kayıt Ol",contactSub:"Giriş Yap / Kayıt Ol",contactMain:"Bize Katılmak İçin Giriş Yapın",scanText:"BAĞLANMAK İÇİN TARAYIN",gitText:"Giriş Yap",backText:"Geri Dön",profileTitle:"Kullanıcı Profili & Oturum",forgotLink:"Şifremi Unuttum?",photoPanelTitle:"Profil Fotoğrafı",btnChange:"Değiştir",btnBack:"Geri Dön",btnReset:"Sıfırla",cropTitle:"Fotoğrafı Kırp",cropCancel:"İptal",cropApply:"Uygula"}};
 
 const modalTranslations={en:{
-    code:"EN",title:"Let's talk",contactHeaderTitle:"Account Access",nameLabel:"Name & Surname",namePlaceholder:"Name & Surname",usernameLabel:"Username",usernamePlaceholder:"@Username",emailLabel:"Email Address",emailPlaceholder:"name@sample.com",emailOrUsernameLabel:"Email or Username",emailOrUsernamePlaceholder:"name@sample.com or @username",passwordLabel:"Password",passwordPlaceholder:"••••••••",fileLabel:"Attach File",filePlaceholder:"Choose file...",descLabel:"Description",descPlaceholder:"Tell me about your project...",emailBtn:"Email",whatsappBtn:"WhatsApp",signinBtn:"Sign In",signupBtn:"Sign Up",alertText:"Please fill in all required fields.",waProjectRequest:"Project Request",lblContactName:"Name",lblEmail:"Email",lblFile:"File",lblTime:"Time",lblDetails:"Details",noFile:"No file attached",gmailNoticeText:"Personal Email Address",backText:"Back",contactTitle:"Sign In / Sign Up",gitText:"Sign In",successSignup:"Account created successfully!",successSignin:"Signed in successfully!",errorSignin:"Invalid credentials!",authRequiredAlert:"You must sign in or register first!",apkLoginRequired:"⚠️ Sign in required to download APK. Please create an account or log in.",fpTitle:"Password Recovery",fpDesc:"Enter your registered email to receive a temporary password.",fpSubmitText:"Send Recovery Email",successUpdate:"Profile updated successfully!",successDelete:"Account deleted successfully.",delConfirmAlert:"Are you sure you want to delete your account?",delConfirmYes:"Yes, Delete",delConfirmNo:"Cancel",delPassTitle:"Confirm Deletion",delPassDesc:"Please enter your password to confirm.",delPassLabel:"Password",delPassBtn:"Delete Account",delPassError:"Incorrect password!",delConfirmError:"Username does not match.",cpTitle:"Change Password",cpOldLabel:"Current Password",cpNewLabel:"New Password",cpConfirmLabel:"Confirm New Password",cpBtn:"Update Password",cpSuccess:"Password changed successfully!",cpErrorOld:"Current password is incorrect!",cpErrorMatch:"New passwords do not match!",birthdateLabel:"Date of Birth (DD/MM/YYYY)",photoPanelTitle:"Profile Photo",btnChange:"Change",btnBack:"Back",btnReset:"Reset",logoutTitle:"Log Out",logoutConfirm:"Are you sure you want to log out?",logoutYes:"Log Out",logoutNo:"Back",logoutSuccess:"Session closed.",passwordStrengthError:"Password must be at least 8 characters with upper, lower, digit, and special char.",usernameAvailable:"Username is available.",usernameTaken:"This username is already taken.",successBtn:"OK",mockEmailTitle:"Recovery Email",mockEmailGreeting:"Hello,",mockEmailDesc:"Password reset request received.",mockEmailUserLabel:"Email:",mockEmailPassLabel:"Password:",mockEmailAdminLabel:"Admin:",mockEmailResetBtn:"Reset Password",rpTitle:"Reset Password",rpEmailLabel:"Email",rpCodeLabel:"Code",rpCodePlaceholder:"Paste code",rpNewLabel:"New Password",rpSubmitText:"Update Password",rpSuccess:"Password reset successfully!",rpErrorCode:"Invalid code!",rpEmailNotFound:"Email not registered!",emailAlreadyRegistered:"Email already registered!",userAccount:"User Account",activeSession:"Active Session",welcomeUser:"Welcome,",sessionActive:"Session Active",signInSignUp:"Sign In / Sign Up",signInToJoin:"Sign in to join us",emailChangeMockTitle:"Email Verification",emailChangeMockGreeting:"Hello,",emailChangeMockDesc:"Email change request.",emailChangeMockUserLabel:"New Email:",emailChangeMockCodeLabel:"Code:",emailChangeEnterCodeBtn:"Enter Code",emailChangeCodeTitle:"Verify Code",emailChangeCodeDesc:"Enter the code.",emailChangeCodeLabel:"Code",emailChangeVerifyBtn:"Verify",emailChangeCodeError:"Invalid code!",signupMockTitle:"Verify Your Email",signupMockGreeting:"Welcome!",signupMockDesc:"Thank you for signing up.",signupMockCodeLabel:"Code:",signupEnterCodeBtn:"Enter Code",signupCodeTitle:"Verify Email",signupCodeDesc:"Enter the code.",signupCodeLabel:"Code",signupVerifyBtn:"Verify & Create Account",signupCodeError:"Invalid code!",emptySlotLabel:"Empty Slot",
+    code:"EN",title:"Let's talk",contactHeaderTitle:"Account Access",nameLabel:"Name & Surname",namePlaceholder:"Name & Surname",usernameLabel:"Username",usernamePlaceholder:"@Username",emailLabel:"Email Address",emailPlaceholder:"name@sample.com",emailOrUsernameLabel:"Email or Username",emailOrUsernamePlaceholder:"name@sample.com or @username",passwordLabel:"Password",passwordPlaceholder:"••••••••",fileLabel:"Attach File",filePlaceholder:"Choose file...",descLabel:"Description",descPlaceholder:"Tell me about your project...",emailBtn:"Email",whatsappBtn:"WhatsApp",signinBtn:"Sign In",signupBtn:"Sign Up",alertText:"Please fill in all required fields.",waProjectRequest:"Project Request",lblContactName:"Name",lblEmail:"Email",lblFile:"File",lblTime:"Time",lblDetails:"Details",noFile:"No file attached",gmailNoticeText:"Personal Email Address",backText:"Back",contactTitle:"Sign In / Sign Up",gitText:"Sign In",successSignup:"Account created successfully!",successSignin:"Signed in successfully!",errorSignin:"Invalid credentials!",authRequiredAlert:"You must sign in or register first!",apkLoginRequired:"⚠️ Sign in required to download APK. Please create an account or log in.",fpTitle:"Password Recovery",fpDesc:"Enter your registered email to receive a temporary password.",fpSubmitText:"Send Recovery Email",successUpdate:"Profile updated successfully!",successDelete:"Account deleted successfully.",delConfirmAlert:"Are you sure you want to delete your account?",delConfirmYes:"Yes, Delete",delConfirmNo:"Cancel",delPassTitle:"Confirm Deletion",delPassDesc:"Please enter your password to confirm.",delPassLabel:"Password",delPassBtn:"Delete Account",delPassError:"Incorrect password!",delConfirmError:"Username does not match.",cpTitle:"Change Password",cpOldLabel:"Current Password",cpNewLabel:"New Password",cpConfirmLabel:"Confirm New Password",cpBtn:"Update Password",cpSuccess:"Password changed successfully!",cpErrorOld:"Current password is incorrect!",cpErrorMatch:"New passwords do not match!",birthdateLabel:"Date of Birth (DD/MM/YYYY)",photoPanelTitle:"Profile Photo",btnChange:"Change",btnBack:"Back",btnReset:"Reset",logoutTitle:"Log Out",logoutConfirm:"Are you sure you want to log out?",logoutYes:"Log Out",logoutNo:"Back",logoutSuccess:"Session closed.",passwordStrengthError:"Password must be at least 8 characters with upper, lower, digit, and special char.",usernameAvailable:"Username is available.",usernameTaken:"This username is already taken.",successBtn:"OK",mockEmailTitle:"Check Your Email",mockEmailGreeting:"Email Sent!",mockEmailDesc:"Verification code sent to your email.",mockEmailUserLabel:"Email:",mockEmailPassLabel:"Password:",mockEmailAdminLabel:"Admin:",mockEmailResetBtn:"Reset Password",rpTitle:"Reset Password",rpEmailLabel:"Email",rpCodeLabel:"Code",rpCodePlaceholder:"Paste code",rpNewLabel:"New Password",rpSubmitText:"Update Password",rpSuccess:"Password reset successfully!",rpErrorCode:"Invalid code!",rpEmailNotFound:"Email not registered!",emailAlreadyRegistered:"Email already registered!",userAccount:"User Account",activeSession:"Active Session",welcomeUser:"Welcome,",sessionActive:"Session Active",signInSignUp:"Sign In / Sign Up",signInToJoin:"Sign in to join us",emailChangeMockTitle:"Email Verification",emailChangeMockGreeting:"Email Sent!",emailChangeMockDesc:"Verification code sent to your NEW email.",emailChangeMockUserLabel:"New Email:",emailChangeMockCodeLabel:"Code:",emailChangeEnterCodeBtn:"Enter Code",emailChangeCodeTitle:"Verify Code",emailChangeCodeDesc:"Enter the code from your new email.",emailChangeCodeLabel:"Code",emailChangeVerifyBtn:"Verify",emailChangeCodeError:"Invalid code!",signupMockTitle:"Check Your Email",signupMockGreeting:"Email Sent!",signupMockDesc:"Verification code sent to your email.",signupMockCodeLabel:"Code:",signupEnterCodeBtn:"Enter Code",signupCodeTitle:"Verify Email",signupCodeDesc:"Enter the 6-digit code from your email.",signupCodeLabel:"Code",signupVerifyBtn:"Verify & Create Account",signupCodeError:"Invalid code!",emptySlotLabel:"Empty Slot",emailNotConfigured:"Email service not configured. Code shown below for testing.",
     chatPanelTitle:"Messages",chatNoUsers:"No other users to chat with yet.",chatNoMessages:"No messages yet",chatStartConversation:"Start the conversation 👋",chatYou:"You",chatPlaceholder:"Type a message...",chatSend:"Send",chatWith:"Chat",chatSearchPlaceholder:"Search by user ID / name / @username / email..."
 },tr:{
-    code:"TR",title:"Konuşalım",contactHeaderTitle:"Hesap İşlemleri",nameLabel:"Ad Soyad",namePlaceholder:"Ad Soyad",usernameLabel:"Kullanıcı Adı",usernamePlaceholder:"@Kullaniciadi",emailLabel:"E-posta Adresi",emailPlaceholder:"ornek@mail.com",emailOrUsernameLabel:"E-posta veya Kullanıcı Adı",emailOrUsernamePlaceholder:"ornek@mail.com veya @kullaniciadi",passwordLabel:"Şifre",passwordPlaceholder:"••••••••",fileLabel:"Dosya Ekle",filePlaceholder:"Dosya seçin...",descLabel:"Açıklama",descPlaceholder:"Projeden bahsedin...",emailBtn:"E-posta",whatsappBtn:"WhatsApp",signinBtn:"Giriş Yap",signupBtn:"Kayıt Ol",alertText:"Lütfen gerekli alanları doldurun.",waProjectRequest:"Proje Talebi",lblContactName:"Ad Soyad",lblEmail:"E-posta",lblFile:"Dosya",lblTime:"Zaman",lblDetails:"Detaylar",noFile:"Dosya eklenmedi",gmailNoticeText:"Kişisel E-posta Adresi",backText:"Geri Dön",contactTitle:"Giriş Yap / Kayıt Ol",gitText:"Giriş Yap",successSignup:"Hesap başarıyla oluşturuldu!",successSignin:"Başarıyla giriş yapıldı!",errorSignin:"Geçersiz bilgiler!",authRequiredAlert:"Önce giriş yapmalısınız!",apkLoginRequired:"⚠️ APK indirmek için giriş yapmalısınız. Lütfen hesap oluşturun veya giriş yapın.",fpTitle:"Şifre Kurtarma",fpDesc:"Kayıtlı e-postanızı girin.",fpSubmitText:"Kurtarma E-postası Gönder",successUpdate:"Profil güncellendi!",successDelete:"Hesap silindi.",delConfirmAlert:"Hesabınızı silmek istediğinizden emin misiniz?",delConfirmYes:"Evet, Sil",delConfirmNo:"İptal",delPassTitle:"Silmeyi Onayla",delPassDesc:"Onaylamak için şifrenizi girin.",delPassLabel:"Şifre",delPassBtn:"Hesabı Sil",delPassError:"Şifre yanlış!",delConfirmError:"Kullanıcı adı eşleşmiyor.",cpTitle:"Şifre Değiştir",cpOldLabel:"Mevcut Şifre",cpNewLabel:"Yeni Şifre",cpConfirmLabel:"Yeni Şifreyi Onayla",cpBtn:"Şifreyi Güncelle",cpSuccess:"Şifre değiştirildi!",cpErrorOld:"Mevcut şifre yanlış!",cpErrorMatch:"Yeni şifreler eşleşmiyor!",birthdateLabel:"Doğum Tarihi",photoPanelTitle:"Profil Fotoğrafı",btnChange:"Değiştir",btnBack:"Geri Dön",btnReset:"Sıfırla",logoutTitle:"Çıkış Yap",logoutConfirm:"Çıkış yapmak istiyor musunuz?",logoutYes:"Çıkış Yap",logoutNo:"Geri Dön",logoutSuccess:"Oturum kapatıldı.",passwordStrengthError:"Şifre en az 8 karakter olmalı ve büyük/küçük harf, rakam ve özel karakter içermelidir.",usernameAvailable:"Kullanıcı adı kullanılabilir.",usernameTaken:"Bu kullanıcı adı alınmış.",successBtn:"Tamam",mockEmailTitle:"Kurtarma E-postası",mockEmailGreeting:"Merhaba,",mockEmailDesc:"Şifre sıfırlama talebi alındı.",mockEmailUserLabel:"E-posta:",mockEmailPassLabel:"Şifre:",mockEmailAdminLabel:"Yönetici:",mockEmailResetBtn:"Şifreyi Sıfırla",rpTitle:"Şifreyi Sıfırla",rpEmailLabel:"E-posta",rpCodeLabel:"Kod",rpCodePlaceholder:"Kodu yapıştırın",rpNewLabel:"Yeni Şifre",rpSubmitText:"Şifreyi Güncelle",rpSuccess:"Şifre sıfırlandı!",rpErrorCode:"Geçersiz kod!",rpEmailNotFound:"E-posta kayıtlı değil!",emailAlreadyRegistered:"Bu e-posta zaten kayıtlı!",userAccount:"Kullanıcı Hesabı",activeSession:"Aktif Oturum",welcomeUser:"Hoş geldiniz,",sessionActive:"Oturum Açık",signInSignUp:"Giriş Yap / Kayıt Ol",signInToJoin:"Bize katılmak için giriş yapın",emailChangeMockTitle:"E-posta Doğrulama",emailChangeMockGreeting:"Merhaba,",emailChangeMockDesc:"E-posta değişikliği talebi.",emailChangeMockUserLabel:"Yeni E-posta:",emailChangeMockCodeLabel:"Kod:",emailChangeEnterCodeBtn:"Kodu Gir",emailChangeCodeTitle:"Kodu Doğrula",emailChangeCodeDesc:"Kodu girin.",emailChangeCodeLabel:"Kod",emailChangeVerifyBtn:"Doğrula",emailChangeCodeError:"Geçersiz kod!",signupMockTitle:"E-postanızı Doğrulayın",signupMockGreeting:"Hoş geldiniz!",signupMockDesc:"Kayıt için teşekkürler.",signupMockCodeLabel:"Kod:",signupEnterCodeBtn:"Kodu Gir",signupCodeTitle:"E-postayı Doğrula",signupCodeDesc:"Kodu girin.",signupCodeLabel:"Kod",signupVerifyBtn:"Doğrula ve Hesap Oluştur",signupCodeError:"Geçersiz kod!",emptySlotLabel:"Boş Slot",
+    code:"TR",title:"Konuşalım",contactHeaderTitle:"Hesap İşlemleri",nameLabel:"Ad Soyad",namePlaceholder:"Ad Soyad",usernameLabel:"Kullanıcı Adı",usernamePlaceholder:"@Kullaniciadi",emailLabel:"E-posta Adresi",emailPlaceholder:"ornek@mail.com",emailOrUsernameLabel:"E-posta veya Kullanıcı Adı",emailOrUsernamePlaceholder:"ornek@mail.com veya @kullaniciadi",passwordLabel:"Şifre",passwordPlaceholder:"••••••••",fileLabel:"Dosya Ekle",filePlaceholder:"Dosya seçin...",descLabel:"Açıklama",descPlaceholder:"Projeden bahsedin...",emailBtn:"E-posta",whatsappBtn:"WhatsApp",signinBtn:"Giriş Yap",signupBtn:"Kayıt Ol",alertText:"Lütfen gerekli alanları doldurun.",waProjectRequest:"Proje Talebi",lblContactName:"Ad Soyad",lblEmail:"E-posta",lblFile:"Dosya",lblTime:"Zaman",lblDetails:"Detaylar",noFile:"Dosya eklenmedi",gmailNoticeText:"Kişisel E-posta Adresi",backText:"Geri Dön",contactTitle:"Giriş Yap / Kayıt Ol",gitText:"Giriş Yap",successSignup:"Hesap başarıyla oluşturuldu!",successSignin:"Başarıyla giriş yapıldı!",errorSignin:"Geçersiz bilgiler!",authRequiredAlert:"Önce giriş yapmalısınız!",apkLoginRequired:"⚠️ APK indirmek için giriş yapmalısınız. Lütfen hesap oluşturun veya giriş yapın.",fpTitle:"Şifre Kurtarma",fpDesc:"Kayıtlı e-postanızı girin.",fpSubmitText:"Kurtarma E-postası Gönder",successUpdate:"Profil güncellendi!",successDelete:"Hesap silindi.",delConfirmAlert:"Hesabınızı silmek istediğinizden emin misiniz?",delConfirmYes:"Evet, Sil",delConfirmNo:"İptal",delPassTitle:"Silmeyi Onayla",delPassDesc:"Onaylamak için şifrenizi girin.",delPassLabel:"Şifre",delPassBtn:"Hesabı Sil",delPassError:"Şifre yanlış!",delConfirmError:"Kullanıcı adı eşleşmiyor.",cpTitle:"Şifre Değiştir",cpOldLabel:"Mevcut Şifre",cpNewLabel:"Yeni Şifre",cpConfirmLabel:"Yeni Şifreyi Onayla",cpBtn:"Şifreyi Güncelle",cpSuccess:"Şifre değiştirildi!",cpErrorOld:"Mevcut şifre yanlış!",cpErrorMatch:"Yeni şifreler eşleşmiyor!",birthdateLabel:"Doğum Tarihi",photoPanelTitle:"Profil Fotoğrafı",btnChange:"Değiştir",btnBack:"Geri Dön",btnReset:"Sıfırla",logoutTitle:"Çıkış Yap",logoutConfirm:"Çıkış yapmak istiyor musunuz?",logoutYes:"Çıkış Yap",logoutNo:"Geri Dön",logoutSuccess:"Oturum kapatıldı.",passwordStrengthError:"Şifre en az 8 karakter olmalı ve büyük/küçük harf, rakam ve özel karakter içermelidir.",usernameAvailable:"Kullanıcı adı kullanılabilir.",usernameTaken:"Bu kullanıcı adı alınmış.",successBtn:"Tamam",mockEmailTitle:"E-postanızı Kontrol Edin",mockEmailGreeting:"E-posta Gönderildi!",mockEmailDesc:"Doğrulama kodu e-posta adresinize gönderildi.",mockEmailUserLabel:"E-posta:",mockEmailPassLabel:"Şifre:",mockEmailAdminLabel:"Yönetici:",mockEmailResetBtn:"Şifreyi Sıfırla",rpTitle:"Şifreyi Sıfırla",rpEmailLabel:"E-posta",rpCodeLabel:"Kod",rpCodePlaceholder:"Kodu yapıştırın",rpNewLabel:"Yeni Şifre",rpSubmitText:"Şifreyi Güncelle",rpSuccess:"Şifre sıfırlandı!",rpErrorCode:"Geçersiz kod!",rpEmailNotFound:"E-posta kayıtlı değil!",emailAlreadyRegistered:"Bu e-posta zaten kayıtlı!",userAccount:"Kullanıcı Hesabı",activeSession:"Aktif Oturum",welcomeUser:"Hoş geldiniz,",sessionActive:"Oturum Açık",signInSignUp:"Giriş Yap / Kayıt Ol",signInToJoin:"Bize katılmak için giriş yapın",emailChangeMockTitle:"E-posta Doğrulama",emailChangeMockGreeting:"E-posta Gönderildi!",emailChangeMockDesc:"Doğrulama kodu YENİ e-posta adresinize gönderildi.",emailChangeMockUserLabel:"Yeni E-posta:",emailChangeMockCodeLabel:"Kod:",emailChangeEnterCodeBtn:"Kodu Gir",emailChangeCodeTitle:"Kodu Doğrula",emailChangeCodeDesc:"Yeni e-postanıza gelen kodu girin.",emailChangeCodeLabel:"Kod",emailChangeVerifyBtn:"Doğrula",emailChangeCodeError:"Geçersiz kod!",signupMockTitle:"E-postanızı Kontrol Edin",signupMockGreeting:"E-posta Gönderildi!",signupMockDesc:"Doğrulama kodu e-posta adresinize gönderildi.",signupMockCodeLabel:"Kod:",signupEnterCodeBtn:"Kodu Gir",signupCodeTitle:"E-postayı Doğrula",signupCodeDesc:"E-postanıza gelen 6 haneli kodu girin.",signupCodeLabel:"Kod",signupVerifyBtn:"Doğrula ve Hesap Oluştur",signupCodeError:"Geçersiz kod!",emptySlotLabel:"Boş Slot",emailNotConfigured:"E-posta servisi yapılandırılmadı. Test için kod aşağıda gösteriliyor.",
     chatPanelTitle:"Mesajlar",chatNoUsers:"Henüz sohbet edecek başka kullanıcı yok.",chatNoMessages:"Henüz mesaj yok",chatStartConversation:"Sohbete başla 👋",chatYou:"Sen",chatPlaceholder:"Bir mesaj yaz...",chatSend:"Gönder",chatWith:"Sohbet",chatSearchPlaceholder:"Kullanıcı ID / Ad / @kullanıcıadı / E-posta ara..."
 }};
 
@@ -1968,7 +1984,6 @@ function changeLanguage(lang){
     if(document.getElementById('adminPanelModal').classList.contains('active')){refreshAdminUI();if(document.querySelector('.admin-tab.active[data-tab="users"]'))renderAdminUsers();if(document.querySelector('.admin-tab.active[data-tab="activity"]'))renderAdminActivity();if(document.querySelector('.admin-tab.active[data-tab="chats"]'))renderAdminChats();if(document.querySelector('.admin-tab.active[data-tab="apps"]'))renderAdminSlots();}
     const lm=document.getElementById('langMenu');if(lm)lm.classList.remove('show');
 }
-
 function changeModalLanguage(lang){
     const data=modalTranslations[lang];if(!data)return;
     const s=(id,v)=>{const e=document.getElementById(id);if(e)e.innerText=v;};
@@ -2133,7 +2148,13 @@ function handleProfileUpdate(e){
     try{
         let u=JSON.parse(lu);let users=JSON.parse(localStorage.getItem('site_users')||'[]');
         if(users.some(x=>x.email===ne&&x.email!==u.email)){showCustomAlert(t.emailAlreadyRegistered);return;}
-        if(ne!==u.email){const code=generateVerificationCode();pendingEmailChange={code,oldEmail:u.email,newEmail:ne,userObj:u,newName:nn,newUsername:nu,birthDay:bd,birthMonth:bm,birthYear:by};closeEditProfileModal();openEmailChangeMockModal(ne,code);return;}
+        if(ne!==u.email){
+            const code=generateVerificationCode();
+            pendingEmailChange={code,oldEmail:u.email,newEmail:ne,userObj:u,newName:nn,newUsername:nu,birthDay:bd,birthMonth:bm,birthYear:by};
+            closeEditProfileModal();
+            openEmailChangeMockModal(ne,code);
+            return;
+        }
         const oldData=JSON.parse(JSON.stringify(u));
         u.name=nn;u.username=nu;u.birthDay=bd;u.birthMonth=bm;u.birthYear=by;
         users=users.map(x=>x.email===u.email?u:x);
@@ -2198,7 +2219,7 @@ function handleDeletePasswordSubmit(e){
 }
 function openForgotPasswordModal(e){if(e)e.preventDefault();closeDirectContactModal();document.getElementById('forgotPasswordForm').reset();document.getElementById('forgotPasswordModal').classList.add('active');}
 function closeForgotPasswordModal(){document.getElementById('forgotPasswordModal').classList.remove('active');}
-function handleForgotPasswordSubmit(e){
+async function handleForgotPasswordSubmit(e){
     e.preventDefault();
     const email=document.getElementById('forgotClientEmail').value.trim();
     const t=modalTranslations[currentLang]||modalTranslations.en;
@@ -2206,16 +2227,24 @@ function handleForgotPasswordSubmit(e){
     let users=JSON.parse(localStorage.getItem('site_users')||'[]');
     const u=users.find(x=>x.email===email);
     if(!u){showCustomAlert(t.rpEmailNotFound);return;}
-    const tp="Temp"+Math.floor(1000+Math.random()*9000)+"!";
+    const tp=String(Math.floor(100000+Math.random()*900000));
     let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');
     rc[email]=tp;__ORIG_SET_ITEM__('reset_codes',JSON.stringify(rc));
     currentResetEmail=email;
     closeForgotPasswordModal();
+    /* Send email */
+    const result = await sendVerificationEmail(email, tp, 'reset');
     document.getElementById('mock-email-user-value').innerText=email;
-    document.getElementById('mock-email-pass-value').innerText=tp;
+    /* Fallback: show code if email not configured */
+    const fbBox=document.getElementById('resetFallbackCode');
+    if(result.success){fbBox.style.display='none';}
+    else{document.getElementById('mock-email-pass-value').innerText=tp;fbBox.style.display='block';}
     const ci=document.getElementById('copyPassIcon'),cb=document.getElementById('copyPassBtn');
     if(ci)ci.className='fa-regular fa-copy';if(cb)cb.classList.remove('copied');
     document.getElementById('mockEmailModal').classList.add('active');
+    if(!result.success && result.reason!=='not_configured'){
+        showCustomAlert(currentLang==='tr'?'E-posta gönderilemedi ama kod ekranda gösteriliyor.':'Email failed but code shown on screen.','info');
+    }
 }
 function closeMockEmailModal(){document.getElementById('mockEmailModal').classList.remove('active');}
 function openResetPasswordModal(){closeMockEmailModal();document.getElementById('resetClientEmail').value=currentResetEmail;document.getElementById('resetPasswordForm').reset();document.getElementById('resetClientEmail').value=currentResetEmail;document.getElementById('resetPasswordModal').classList.add('active');}
@@ -2280,7 +2309,43 @@ function confirmLogout(){
 }
 let pendingSignup=null;
 function generateSignupCode(){return String(Math.floor(100000+Math.random()*900000));}
-function openSignupMockModal(email,code){const t=modalTranslations[currentLang]||modalTranslations.en;document.getElementById('signupMockTitle').innerText=t.signupMockTitle;document.getElementById('signupMockGreeting').innerText=t.signupMockGreeting;document.getElementById('signupMockDesc').innerText=t.signupMockDesc;document.getElementById('signupMockEmailLabel').innerText=t.emailLabel;document.getElementById('signupMockEmailValue').innerText=email;document.getElementById('signupMockCodeLabel').innerText=t.signupMockCodeLabel;document.getElementById('signupMockCodeValue').innerText=code;document.getElementById('signupMockAdminLabel').innerText=t.mockEmailAdminLabel;document.getElementById('signupMockEnterBtn').innerText=t.signupEnterCodeBtn;const i=document.getElementById('signupCopyIcon'),b=document.getElementById('signupCopyBtn');if(i)i.className='fa-regular fa-copy';if(b)b.classList.remove('copied');document.getElementById('signupMockModal').classList.add('active');}
+async function openSignupMockModal(email,code){
+    const t=modalTranslations[currentLang]||modalTranslations.en;
+    document.getElementById('signupMockTitle').innerText=t.signupMockTitle;
+    document.getElementById('signupMockGreeting').innerText=t.signupMockGreeting;
+    document.getElementById('signupMockDesc').innerText=t.signupMockDesc;
+    document.getElementById('signupMockEmailLabel').innerText=t.emailLabel;
+    document.getElementById('signupMockEmailValue').innerText=email;
+    document.getElementById('signupMockCodeLabel').innerText=t.signupMockCodeLabel;
+    document.getElementById('signupMockCodeValue').innerText=code;
+    document.getElementById('signupMockAdminLabel').innerText=t.mockEmailAdminLabel;
+    document.getElementById('signupMockEnterBtn').innerText=t.signupEnterCodeBtn;
+    const i=document.getElementById('signupCopyIcon'),b=document.getElementById('signupCopyBtn');
+    if(i)i.className='fa-regular fa-copy';if(b)b.classList.remove('copied');
+    document.getElementById('signupMockModal').classList.add('active');
+    /* Try send email */
+    const result = await sendVerificationEmail(email, code, 'signup');
+    const fbBox = document.getElementById('signupFallbackCode');
+    if(result.success){fbBox.style.display='none';}
+    else{
+        /* Email yoksa kod ekranda */
+        fbBox.style.display='block';
+    }
+}
+async function resendSignupEmail(){
+    if(!pendingSignup){return;}
+    const newCode = generateSignupCode();
+    pendingSignup.code = newCode;
+    document.getElementById('signupMockCodeValue').innerText = newCode;
+    const result = await sendVerificationEmail(pendingSignup.email, newCode, 'signup');
+    if(result.success){
+        document.getElementById('signupFallbackCode').style.display='none';
+        showCustomAlert(currentLang==='tr'?'Kod tekrar gönderildi! E-postanızı kontrol edin.':'Code resent! Check your email.','success');
+    }else{
+        document.getElementById('signupFallbackCode').style.display='block';
+        showCustomAlert(currentLang==='tr'?'E-posta gönderilemedi. Kod ekranda.':'Email failed. Code shown on screen.','info');
+    }
+}
 function openSignupCodeModal(){document.getElementById('signupMockModal').classList.remove('active');const t=modalTranslations[currentLang]||modalTranslations.en;document.getElementById('signupCodeTitle').innerText=t.signupCodeTitle;document.getElementById('signupCodeDesc').innerText=t.signupCodeDesc;document.getElementById('signupCodeLabel').innerText=t.signupCodeLabel;document.getElementById('signupCodeVerifyText').innerText=t.signupVerifyBtn;document.getElementById('signupCodeInput').value='';document.getElementById('signupCodeModal').classList.add('active');setTimeout(()=>document.getElementById('signupCodeInput').focus(),300);}
 function backToSignupMock(){document.getElementById('signupCodeModal').classList.remove('active');if(pendingSignup)openSignupMockModal(pendingSignup.email,pendingSignup.code);}
 function cancelSignup(){pendingSignup=null;document.getElementById('signupMockModal').classList.remove('active');document.getElementById('signupCodeModal').classList.remove('active');}
@@ -2309,7 +2374,40 @@ function verifySignupCode(e){
 }
 let pendingEmailChange=null;
 function generateVerificationCode(){return String(Math.floor(100000+Math.random()*900000));}
-function openEmailChangeMockModal(email,code){const t=modalTranslations[currentLang]||modalTranslations.en;document.getElementById('email-change-mock-title').innerText=t.emailChangeMockTitle;document.getElementById('email-change-mock-greeting').innerText=t.emailChangeMockGreeting;document.getElementById('email-change-mock-desc').innerText=t.emailChangeMockDesc;document.getElementById('email-change-mock-user-label').innerText=t.emailChangeMockUserLabel;document.getElementById('email-change-user-value').innerText=email;document.getElementById('email-change-mock-code-label').innerText=t.emailChangeMockCodeLabel;document.getElementById('email-change-code-value').innerText=code;document.getElementById('email-change-mock-admin-label').innerText=t.mockEmailAdminLabel;document.getElementById('email-change-enter-code-btn').innerText=t.emailChangeEnterCodeBtn;const i=document.getElementById('copyEmailChangeIcon'),b=document.getElementById('copyEmailChangeBtn');if(i)i.className='fa-regular fa-copy';if(b)b.classList.remove('copied');document.getElementById('emailChangeMockModal').classList.add('active');}
+async function openEmailChangeMockModal(email,code){
+    const t=modalTranslations[currentLang]||modalTranslations.en;
+    document.getElementById('email-change-mock-title').innerText=t.emailChangeMockTitle;
+    document.getElementById('email-change-mock-greeting').innerText=t.emailChangeMockGreeting;
+    document.getElementById('email-change-mock-desc').innerText=t.emailChangeMockDesc;
+    document.getElementById('email-change-mock-user-label').innerText=t.emailChangeMockUserLabel;
+    document.getElementById('email-change-user-value').innerText=email;
+    document.getElementById('email-change-mock-code-label').innerText=t.emailChangeMockCodeLabel;
+    document.getElementById('email-change-code-value').innerText=code;
+    document.getElementById('email-change-mock-admin-label').innerText=t.mockEmailAdminLabel;
+    document.getElementById('email-change-enter-code-btn').innerText=t.emailChangeEnterCodeBtn;
+    const i=document.getElementById('copyEmailChangeIcon'),b=document.getElementById('copyEmailChangeBtn');
+    if(i)i.className='fa-regular fa-copy';if(b)b.classList.remove('copied');
+    document.getElementById('emailChangeMockModal').classList.add('active');
+    /* Send email to NEW email */
+    const result = await sendVerificationEmail(email, code, 'email_change');
+    const fbBox = document.getElementById('emailChangeFallbackCode');
+    if(result.success){fbBox.style.display='none';}
+    else{fbBox.style.display='block';}
+}
+async function resendEmailChangeEmail(){
+    if(!pendingEmailChange){return;}
+    const newCode = generateVerificationCode();
+    pendingEmailChange.code = newCode;
+    document.getElementById('email-change-code-value').innerText = newCode;
+    const result = await sendVerificationEmail(pendingEmailChange.newEmail, newCode, 'email_change');
+    if(result.success){
+        document.getElementById('emailChangeFallbackCode').style.display='none';
+        showCustomAlert(currentLang==='tr'?'Kod tekrar gönderildi! Yeni e-postanızı kontrol edin.':'Code resent! Check your new email.','success');
+    }else{
+        document.getElementById('emailChangeFallbackCode').style.display='block';
+        showCustomAlert(currentLang==='tr'?'E-posta gönderilemedi. Kod ekranda.':'Email failed. Code shown on screen.','info');
+    }
+}
 function closeEmailChangeMockModal(){document.getElementById('emailChangeMockModal').classList.remove('active');}
 function openEmailChangeCodeModal(){closeEmailChangeMockModal();const t=modalTranslations[currentLang]||modalTranslations.en;document.getElementById('email-change-code-title').innerText=t.emailChangeCodeTitle;document.getElementById('email-change-code-desc').innerText=t.emailChangeCodeDesc;document.getElementById('email-change-code-label').innerText=t.emailChangeCodeLabel;document.getElementById('email-change-verify-text').innerText=t.emailChangeVerifyBtn;document.getElementById('emailChangeCodeInput').value='';document.getElementById('emailChangeCodeModal').classList.add('active');setTimeout(()=>document.getElementById('emailChangeCodeInput').focus(),300);}
 function closeEmailChangeCodeModal(){document.getElementById('emailChangeCodeModal').classList.remove('active');}
@@ -2337,7 +2435,7 @@ function verifyEmailChangeCode(e){
         checkUserSession();showCustomAlert(t.successUpdate,'success');
     }catch(err){}
 }
-function handleAuthSubmit(e){
+async function handleAuthSubmit(e){
     e.preventDefault();
     const email=document.getElementById('contactClientEmail').value.trim();
     const password=document.getElementById('contactClientPassword').value.trim();
@@ -2355,7 +2453,8 @@ function handleAuthSubmit(e){
         if(users.find(u=>u.email===email)){showCustomAlert(t.emailAlreadyRegistered);return;}
         const code=generateSignupCode();
         pendingSignup={code,name,username,email,password};
-        openSignupMockModal(email,code);return;
+        await openSignupMockModal(email,code);
+        return;
     }else{
         const ic=email.toLowerCase().trim();let inputName=ic;if(inputName.startsWith('@'))inputName=inputName.substring(1);
         let user=users.find(u=>{const em=(u.email||'').toLowerCase()===ic;let un=(u.username||'').toLowerCase();if(un.startsWith('@'))un=un.substring(1);const um=un===inputName;return(em||um)&&u.password===password;});
@@ -2417,37 +2516,25 @@ function sendToWhatsApp(e){e.preventDefault();const d=validateForm();if(!d)retur
 function createConstellationSystem(canvasId,options={}){const c=document.getElementById(canvasId);if(!c)return{stop:()=>{}};const ctx=c.getContext('2d');const np=options.numberOfParticles||55,mr=options.mouseRadius||130,ld=options.lineDistance||110;let pa=[],mouse={x:null,y:null,radius:mr},running=true;function rc(){c.width=window.innerWidth;c.height=window.innerHeight;}class P{constructor(){this.x=Math.random()*c.width;this.y=Math.random()*c.height;this.vx=(Math.random()-.5)*.8;this.vy=(Math.random()-.5)*.8;this.size=Math.random()*1.8+1;}update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>c.width)this.vx=-this.vx;if(this.y<0||this.y>c.height)this.vy=-this.vy;}draw(){const il=document.body.classList.contains('light-mode');ctx.fillStyle=il?'rgba(147,51,234,.45)':'rgba(168,85,247,.55)';ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.closePath();ctx.fill();}}function ip(){pa=[];for(let i=0;i<np;i++)pa.push(new P());}function an(){if(!running)return;ctx.clearRect(0,0,c.width,c.height);const il=document.body.classList.contains('light-mode');for(let i=0;i<pa.length;i++){pa[i].update();pa[i].draw();for(let j=i+1;j<pa.length;j++){const dx=pa[i].x-pa[j].x,dy=pa[i].y-pa[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<ld){const o=1-(dist/ld);ctx.strokeStyle=il?`rgba(147,51,234,${o*.18})`:`rgba(168,85,247,${o*.22})`;ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(pa[i].x,pa[i].y);ctx.lineTo(pa[j].x,pa[j].y);ctx.stroke();}}if(mouse.x!==null&&mouse.y!==null){const mdx=pa[i].x-mouse.x,mdy=pa[i].y-mouse.y,md=Math.sqrt(mdx*mdx+mdy*mdy);if(md<mouse.radius){const o=1-(md/mouse.radius);ctx.strokeStyle=il?`rgba(147,51,234,${o*.35})`:`rgba(192,132,252,${o*.45})`;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pa[i].x,pa[i].y);ctx.lineTo(mouse.x,mouse.y);ctx.stroke();}}}requestAnimationFrame(an);}window.addEventListener('resize',()=>{rc();ip();});window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});window.addEventListener('mouseout',()=>{mouse.x=null;mouse.y=null;});rc();ip();an();return{stop:()=>{running=false;}};}
 const mainConstellation=createConstellationSystem('constellation-canvas',{numberOfParticles:55,mouseRadius:130,lineDistance:110});
 window.introConstellation=createConstellationSystem('intro-canvas',{numberOfParticles:50,mouseRadius:150,lineDistance:120});
-
-/* METADATA MIGRATION (eski app slotları için) */
 async function migrateAppsMetadata(){
     try{
         const c=getSiteContent();
         let changed=false;
         for(let i=0;i<c.apps.length;i++){
             const app=c.apps[i];
-            if(app.hasApk===undefined){
-                try{
-                    const apk=await withTimeout(getApkFile(i),3000);
-                    if(apk){app.hasApk=true;app.apkName=apk.name||'';app.apkSize=apk.size||0;app.apkType=apk.type||'';}
-                    else{app.hasApk=false;app.apkName='';app.apkSize=0;app.apkType='';}
-                }catch(e){app.hasApk=false;app.apkName='';app.apkSize=0;app.apkType='';}
-                changed=true;
-            }
-            if(app.hasIcon===undefined){
-                try{const icon=await withTimeout(getIconData(i),3000);app.hasIcon=!!(icon&&icon.dataUrl);}catch(e){app.hasIcon=false;}
-                changed=true;
-            }
+            if(app.hasApk===undefined){try{const apk=await withTimeout(getApkFile(i),3000);if(apk){app.hasApk=true;app.apkName=apk.name||'';app.apkSize=apk.size||0;app.apkType=apk.type||'';}else{app.hasApk=false;app.apkName='';app.apkSize=0;app.apkType='';}}catch(e){app.hasApk=false;app.apkName='';app.apkSize=0;app.apkType='';}changed=true;}
+            if(app.hasIcon===undefined){try{const icon=await withTimeout(getIconData(i),3000);app.hasIcon=!!(icon&&icon.dataUrl);}catch(e){app.hasIcon=false;}changed=true;}
             if(app.requireLogin===undefined){app.requireLogin=false;changed=true;}
         }
         if(changed)saveSiteContent(c);
     }catch(e){console.warn('Migration error:',e);}
 }
-
 window.addEventListener('DOMContentLoaded',async ()=>{
     setTimeout(()=>{const intro=document.getElementById('intro-screen');if(intro){intro.style.opacity='0';intro.style.visibility='hidden';setTimeout(()=>{intro.style.display='none';if(window.introConstellation&&window.introConstellation.stop)window.introConstellation.stop();},600);}},1500);
     try{await migrateAppsMetadata();}catch(e){}
     ensureUserIdsAndAdmin();
     initTheme();
+    initEmailJS();
     checkUserSession();
     applySiteContent();
     const sl=sessionStorage.getItem('site_lang')||'en';
