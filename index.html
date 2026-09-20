@@ -181,7 +181,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .mobile-email-row,.mobile-birthdate-row{display:flex;align-items:center;gap:8px}
 .desktop-info-row{display:none}
 
-/* BASE (phone) */
+/* === BASE (phone) === */
 .modal-container{max-width:480px !important;padding:22px !important}
 .custom-alert-box{max-width:360px !important;padding:24px !important}
 .contact-box{padding:14px 16px !important}
@@ -198,7 +198,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .modal-close-btn{width:28px !important;height:28px !important;font-size:.8rem !important}
 @media (max-width:640px){body{padding:16px 12px}.wrapper{gap:24px}.specs-grid{grid-template-columns:1fr}.brand-logo{font-size:1.5rem}.footer-qr-container img{width:80px;height:80px}.intro-logo{font-size:1.9rem}.footer-main{flex-direction:row;align-items:center}}
 
-/* BIGGER TABLET & DESKTOP */
+/* === TABLET & DESKTOP === */
 @media (min-width:768px){
   .modal-container{max-width:600px !important;padding:30px !important}
   .chat-container{max-width:760px !important}
@@ -249,6 +249,64 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 @media (min-width:1441px){
   .modal-container{max-width:760px !important}
   .chat-container{max-width:1000px !important}
+}
+
+/* === ADMIN PANEL RESPONSIVE (bigger on tablet/desktop) === */
+@media (min-width:768px){
+  #adminPanelModal .modal-container{max-width:820px !important;padding:34px !important}
+  #adminPanelModal .admin-tab{padding:11px 18px !important;font-size:.82rem !important;gap:6px !important}
+  #adminPanelModal .admin-panel-content{max-height:68vh}
+  #adminPanelModal .admin-stat{font-size:.9rem !important;padding:13px 16px !important;gap:10px !important}
+  #adminPanelModal .admin-stat i{width:20px;font-size:1rem}
+  #adminPanelModal .admin-hint{font-size:.82rem;padding:13px 16px}
+  #adminPanelModal .admin-slot{padding:16px !important;min-height:74px;gap:12px}
+  #adminPanelModal .admin-slot-num{width:38px;height:38px;font-size:.88rem}
+  #adminPanelModal .admin-slot-name{font-size:.94rem !important;gap:6px}
+  #adminPanelModal .admin-slot-url{font-size:.78rem !important}
+  #adminPanelModal .admin-slot-btn{width:36px;height:36px;font-size:.85rem;border-radius:10px}
+  #adminPanelModal .admin-action-btn{padding:14px !important;font-size:.86rem !important}
+  #adminPanelModal .user-card{padding:16px !important;gap:12px}
+  #adminPanelModal .user-card-avatar{width:52px;height:52px;font-size:1.25rem}
+  #adminPanelModal .user-card-name{font-size:.95rem}
+  #adminPanelModal .user-card-detail{font-size:.76rem;margin-top:3px}
+  #adminPanelModal .user-view-btn{width:36px;height:36px;font-size:.86rem}
+  #adminPanelModal .form-input,#adminPanelModal .form-textarea{padding:12px 16px !important;font-size:.92rem !important}
+  #adminPanelModal .form-label{font-size:.82rem !important}
+  #adminPanelModal .submit-btn{padding:13px !important;font-size:.86rem !important}
+  #adminPanelModal .activity-item{padding:14px;gap:12px}
+  #adminPanelModal .activity-title{font-size:.88rem}
+  #adminPanelModal .activity-meta{font-size:.75rem;margin-top:4px}
+  #adminPanelModal .activity-time{font-size:.68rem}
+  #adminPanelModal .activity-icon{width:38px;height:38px;font-size:.9rem}
+  #adminPanelModal .filter-chip{padding:8px 16px;font-size:.78rem}
+  #adminPanelModal .modal-brand{font-size:1.55rem !important}
+  #adminPanelModal .modal-title{font-size:.98rem !important}
+}
+@media (min-width:1025px){
+  #adminPanelModal .modal-container{max-width:940px !important;padding:40px !important}
+  #adminPanelModal .admin-tab{padding:12px 22px !important;font-size:.88rem !important}
+  #adminPanelModal .admin-stat{font-size:.96rem !important;padding:14px 18px !important}
+  #adminPanelModal .admin-panel-content{max-height:72vh}
+  #adminPanelModal .admin-slot{padding:18px !important;min-height:82px}
+  #adminPanelModal .admin-slot-num{width:42px;height:42px;font-size:.95rem}
+  #adminPanelModal .admin-slot-name{font-size:1rem !important}
+  #adminPanelModal .user-card{padding:18px !important}
+  #adminPanelModal .user-card-avatar{width:60px;height:60px;font-size:1.45rem}
+  #adminPanelModal .user-card-name{font-size:1.02rem}
+  #adminPanelModal .user-card-detail{font-size:.82rem}
+  #adminPanelModal .user-view-btn{width:40px;height:40px;font-size:.95rem;border-radius:11px}
+  #adminPanelModal .form-input,#adminPanelModal .form-textarea{padding:13px 18px !important;font-size:.96rem !important}
+  #adminPanelModal .form-label{font-size:.86rem !important}
+  #adminPanelModal .submit-btn{padding:15px !important;font-size:.9rem !important}
+  #adminPanelModal .admin-action-btn{padding:15px !important;font-size:.9rem !important}
+  #adminPanelModal .admin-hint{font-size:.88rem;padding:15px 18px}
+  #adminPanelModal .activity-item{padding:16px}
+  #adminPanelModal .activity-title{font-size:.94rem}
+  #adminPanelModal .activity-meta{font-size:.8rem}
+  #adminPanelModal .activity-icon{width:42px;height:42px;font-size:1rem}
+}
+@media (min-width:1441px){
+  #adminPanelModal .modal-container{max-width:1080px !important;padding:44px !important}
 }
 
 .profile-photo-large-view{display:flex;flex-direction:column;align-items:center;gap:20px;padding:10px 0}
@@ -490,12 +548,24 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .pub-btn-msg{background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff}
 .pub-btn-verify{background:linear-gradient(135deg,#1d9bf0,#1a8cd8);color:#fff}
 .pub-btn-close{background:var(--box-bg);color:var(--text-primary);border:1px solid var(--line-color) !important}
-.verified-badge{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:linear-gradient(135deg,#1d9bf0,#1a8cd8);color:#fff;font-size:.5rem;flex-shrink:0;vertical-align:middle;line-height:1;position:relative}
-.verified-badge i{color:#fff;font-size:.5rem;line-height:1}
-.verified-badge.lg{width:20px;height:20px}
-.verified-badge.lg i{font-size:.7rem}
-.verified-badge.sm{width:13px;height:13px}
-.verified-badge.sm i{font-size:.42rem}
+
+/* === Prettier verified badge (Instagram/Facebook style) === */
+.verified-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:16px;height:16px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #4dabf7 0%, #1d9bf0 55%, #1a8cd8 100%);
+  color:#fff;flex-shrink:0;vertical-align:middle;line-height:1;
+  position:relative;margin-left:1px;
+  box-shadow:0 1px 3px rgba(29,155,240,.45), inset 0 0 0 1px rgba(255,255,255,.18);
+  transition:transform .2s ease;
+}
+.verified-badge:hover{transform:scale(1.08)}
+.verified-badge i{color:#fff;font-size:.55rem;line-height:1;font-weight:900;text-shadow:0 0 1px rgba(0,0,0,.15)}
+.verified-badge.lg{width:22px;height:22px;box-shadow:0 2px 6px rgba(29,155,240,.5), inset 0 0 0 1.5px rgba(255,255,255,.2)}
+.verified-badge.lg i{font-size:.78rem}
+.verified-badge.sm{width:13px;height:13px;box-shadow:0 1px 2px rgba(29,155,240,.4)}
+.verified-badge.sm i{font-size:.44rem}
+
 .admin-tag{font-size:.5rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:2px 6px;border-radius:5px;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#fff;display:inline-flex;align-items:center;gap:2px;flex-shrink:0}
 .cloud-status{position:fixed;bottom:14px;left:14px;font-size:.65rem;font-weight:700;padding:6px 12px;border-radius:20px;background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-secondary);z-index:50;display:flex;align-items:center;gap:5px;opacity:0;transition:opacity .3s;pointer-events:none}
 .cloud-status.show{opacity:1}
@@ -554,8 +624,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 <div class="header-bottom-row"><div class="role-text" id="t-role">Software Developer</div></div>
 
-<!-- Contact box moved here (was social-row position) -->
-<div class="contact-box" onclick="openGetInTouchModal()" style="margin-top:6px">
+<div class="contact-box" id="mainAuthBox" onclick="openGetInTouchModal()" style="margin-top:6px">
 <div class="contact-text"><span id="t-contact-sub">Sign In / Sign Up</span><strong id="t-contact-main">Sign In To Join Us</strong></div>
 <i class="fa-solid fa-right-to-bracket" id="authBoxIcon"></i>
 </div>
@@ -584,7 +653,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 <div class="mobile-email-row"><i class="fa-solid fa-at"></i><strong id="profileDisplayUsernameMobile">@username</strong></div>
 <div class="mobile-email-row"><i class="fa-solid fa-envelope"></i><strong id="profileDisplayEmail">email</strong></div>
-<div class="mobile-email-row"><i class="fa-solid fa-id-badge"></i><strong id="profileDisplayId" class="chat-user-id" style="font-size:.8rem">U00000001</strong></div>
+<div class="mobile-email-row"><i class="fa-solid fa-id-badge"></i><strong id="profileDisplayId" class="chat-user-id" style="font-size:.8rem">123456789</strong></div>
 <div id="profileBirthdateRow" class="mobile-birthdate-row" style="display:none"><i class="fa-solid fa-cake-candles"></i><strong id="profileDisplayBirthdate"></strong></div>
 <div id="profileBioRow" class="bio-row" style="display:none"><i class="fa-solid fa-quote-left"></i><span id="profileDisplayBio"></span></div>
 </div>
@@ -629,7 +698,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="footer-copy-text" id="t-copyright">© 2026 muminsultani • All Rights Reserved.</div>
 </div>
 </div>
-<!-- Social icons moved to footer -->
 <div class="footer-socials">
 <a href="https://github.com/muminsultani" id="socialGithub" target="_blank" class="social-btn github" title="GitHub"><svg viewBox="0 0 24 24" width="100%" height="100%"><defs><linearGradient id="gh" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ef4444"/><stop offset="100%" stop-color="#22c55e"/></linearGradient></defs><path fill="url(#gh)" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></a>
 <a href="https://instagram.com/sultanimumin" id="socialInstagram" target="_blank" class="social-btn instagram" title="Instagram"><svg viewBox="0 0 24 24" width="100%" height="100%"><defs><radialGradient id="ig" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="5%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><path fill="url(#ig)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
@@ -698,6 +766,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="admin-panel-title">Full Site Control</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminPanel()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <div class="admin-tabs">
 <button class="admin-tab active" data-tab="dashboard" onclick="switchAdminTab('dashboard',this)"><i class="fa-solid fa-gauge-high"></i> <span id="tab-dash">dash</span></button>
+<button class="admin-tab" data-tab="account" onclick="switchAdminTab('account',this)"><i class="fa-solid fa-user-shield"></i> <span id="tab-account">my account</span></button>
 <button class="admin-tab" data-tab="general" onclick="switchAdminTab('general',this)"><i class="fa-solid fa-globe"></i> <span id="tab-general">general</span></button>
 <button class="admin-tab" data-tab="users" onclick="switchAdminTab('users',this)"><i class="fa-solid fa-users"></i> <span id="tab-users">users</span></button>
 <button class="admin-tab" data-tab="verify" onclick="switchAdminTab('verify',this)"><i class="fa-solid fa-circle-check"></i> <span id="tab-verify">verify</span></button>
@@ -726,6 +795,28 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="admin-actions-grid" style="margin-top:12px">
 <button class="admin-action-btn primary" onclick="testEmailSend()" style="width:100%"><i class="fa-solid fa-paper-plane"></i> <span id="dash-test-email">test email</span></button>
 </div>
+</div>
+
+<div class="admin-section" data-section="account">
+<div class="admin-hint"><i class="fa-solid fa-user-shield" style="color:#9333ea"></i> <span id="account-hint">admin profile — all fields editable.</span></div>
+<form onsubmit="saveAdminAccount(event)">
+<div class="form-group">
+<label class="form-label" id="aa-photo-label">profile photo</label>
+<div class="upload-wrapper" id="adminPhotoUploadWrapper" onclick="document.getElementById('adminPhotoInput').click()">
+<img id="adminPhotoPreview" class="icon-preview-big" style="display:none" alt="">
+<i class="fa-solid fa-user-circle upload-icon" id="adminPhotoUploadIcon"></i>
+<span class="upload-text" id="adminPhotoUploadText">tap to change admin photo</span>
+<input type="file" id="adminPhotoInput" accept="image/*" style="display:none" onchange="handleAdminPhotoUpload(event)">
+</div>
+<button type="button" class="apk-clear-btn" id="adminPhotoClearBtn" onclick="clearAdminPhoto();event.stopPropagation();" style="display:none"><i class="fa-solid fa-trash-can"></i> <span id="admin-photo-remove">remove</span></button>
+</div>
+<div class="form-group"><label class="form-label" id="aa-name-label">name</label><input type="text" class="form-input" id="adminAccName" maxlength="60" placeholder="name"></div>
+<div class="form-group"><label class="form-label" id="aa-username-label">username</label><input type="text" class="form-input" id="adminAccUsername" maxlength="60" placeholder="username" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9_.\-]/g,'').replace(/^@/,'')"></div>
+<div class="form-group"><label class="form-label" id="aa-email-label">email</label><input type="email" class="form-input" id="adminAccEmail" maxlength="100" placeholder="email"></div>
+<div class="form-group"><label class="form-label" id="aa-id-label">user id — 9 digits (admin only)</label><input type="text" class="form-input" id="adminAccId" maxlength="9" placeholder="9 digits" inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,9)"></div>
+<div class="form-group"><label class="form-label" id="aa-bio-label">bio (max 163)</label><textarea class="form-textarea" id="adminAccBio" maxlength="163" style="min-height:60px" placeholder="bio"></textarea><div class="bio-counter"><span id="adminBioCount">0</span>/163</div></div>
+<div class="form-buttons-group"><button type="submit" class="submit-btn email-btn"><i class="fa-solid fa-floppy-disk"></i> <span id="account-save">save</span></button></div>
+</form>
 </div>
 
 <div class="admin-section" data-section="general">
@@ -1109,7 +1200,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 </div>
 
-<!-- Restructured auth modal header: back near brand, theme near close, remove refresh/home/lang -->
 <div class="modal-overlay" id="directContactModal">
 <div class="modal-container">
 <div class="modal-header">
@@ -1148,7 +1238,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="form-buttons-group" id="dc-submit-group" style="flex-direction:column;gap:8px;display:none">
 <button type="button" class="submit-btn email-btn" onclick="handleAuthSubmit(event)" id="dc-submit-btn" style="width:100%"><i class="fa-solid fa-right-to-bracket"></i> <span id="dc-submit-btn-text">go</span></button>
 </div>
-<!-- Google Sign In -->
 <div class="form-buttons-group" id="dc-google-group" style="flex-direction:column;gap:8px;margin-top:10px">
 <button type="button" class="submit-btn google-btn" onclick="signInWithGoogle()" style="width:100%">
 <svg class="google-icon-svg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
@@ -1249,7 +1338,7 @@ async function sendVerificationEmail(toEmail,code,type){
 /* ================== LANGUAGE ================== */
 const LANG = {
   en: {
-    role:"Software Developer", lang_label:"English",
+    role:"Software Developer",
     sec_profile:"User Profile & Session", sec_apps:"My Applications", sec_exp:"Experience",
     sec_setup:"Setup & Environment", sec_stack:"Core Stack", sec_contact:"Sign In / Sign Up",
     lbl_os:"OS Environment", lbl_editor:"Editor Stack", lbl_backend:"Backend", lbl_frontend:"Frontend",
@@ -1298,10 +1387,14 @@ const LANG = {
     admin_title:"Admin Access", admin_restricted:"restricted area.",
     admin_pass_label:"master password", admin_pass_ph:"master password", admin_unlock:"unlock",
     admin_panel_title:"Full Site Control",
-    tab_dash:"dash", tab_general:"general", tab_users:"users", tab_verify:"verify", tab_activity:"activity",
+    tab_dash:"dash", tab_account:"my account", tab_general:"general", tab_users:"users", tab_verify:"verify", tab_activity:"activity",
     tab_chats:"chats", tab_header:"header", tab_social:"social", tab_apps:"apps",
     tab_exp:"exp", tab_setup:"setup", tab_stack:"stack", tab_footer:"footer", tab_backup:"backup",
     dash_hint:"full control mode", dash_test_email:"test email",
+    account_hint:"admin profile — all fields editable.",
+    aa_photo:"profile photo", aa_name:"name", aa_username:"username", aa_email:"email",
+    aa_id:"user id — 9 digits (admin only)", aa_bio:"bio (max 163)",
+    admin_photo_upload:"tap to change admin photo", admin_photo_remove:"remove", account_save:"save",
     users_hint:"all users.", users_delete_all:"Delete All",
     verify_hint:"blue check requests.",
     activity_hint:"all activities.", activity_clear:"Clear",
@@ -1392,6 +1485,8 @@ const LANG = {
     alert_next_first:"please enter your email or username first!",
     alert_google_enter:"enter your Gmail address",
     alert_google_success:"signed in with Google!",
+    alert_id_invalid:"ID must be exactly 9 digits!",
+    alert_id_used:"this ID is already used!",
     pw_very_weak:"very weak", pw_weak:"weak", pw_medium:"medium", pw_strong:"strong",
     pw_very_strong:"very strong", pw_enter:"password",
     rec_hint:"recording...",
@@ -1405,11 +1500,10 @@ const LANG = {
     ag_favicon_label:"site icon (favicon)",
     ag_favicon_url_label:"or paste favicon URL",
     general_hint:"site-wide settings.",
-    general_save:"save",
-    tab_general:"general"
+    general_save:"save"
   },
   tr: {
-    role:"Yazılım Geliştirici", lang_label:"Türkçe",
+    role:"Yazılım Geliştirici",
     sec_profile:"Kullanıcı Profili & Oturum", sec_apps:"Uygulamalarım", sec_exp:"Deneyim",
     sec_setup:"Kurulum & Ortam", sec_stack:"Temel Yığın", sec_contact:"Giriş Yap / Kayıt Ol",
     lbl_os:"İşletim Sistemi", lbl_editor:"Editör Yığını", lbl_backend:"Arka Uç", lbl_frontend:"Ön Uç",
@@ -1458,10 +1552,14 @@ const LANG = {
     admin_title:"Yönetici Girişi", admin_restricted:"kısıtlı alan.",
     admin_pass_label:"ana şifre", admin_pass_ph:"ana şifre", admin_unlock:"kilidi aç",
     admin_panel_title:"Tam Site Kontrolü",
-    tab_dash:"kontrol", tab_general:"genel", tab_users:"kullanıcılar", tab_verify:"onay", tab_activity:"aktivite",
+    tab_dash:"kontrol", tab_account:"hesabım", tab_general:"genel", tab_users:"kullanıcılar", tab_verify:"onay", tab_activity:"aktivite",
     tab_chats:"sohbetler", tab_header:"başlık", tab_social:"sosyal", tab_apps:"uygulamalar",
     tab_exp:"deneyim", tab_setup:"kurulum", tab_stack:"yığın", tab_footer:"altbilgi", tab_backup:"yedek",
     dash_hint:"tam kontrol modu", dash_test_email:"test e-postası",
+    account_hint:"yönetici profili — tüm alanlar düzenlenebilir.",
+    aa_photo:"profil fotoğrafı", aa_name:"ad", aa_username:"kullanıcı adı", aa_email:"e-posta",
+    aa_id:"kullanıcı id — 9 rakam (sadece admin)", aa_bio:"hakkında (max 163)",
+    admin_photo_upload:"yönetici fotoğrafını değiştir", admin_photo_remove:"kaldır", account_save:"kaydet",
     users_hint:"tüm kullanıcılar.", users_delete_all:"Tümünü Sil",
     verify_hint:"mavi tik istekleri.",
     activity_hint:"tüm aktiviteler.", activity_clear:"Temizle",
@@ -1552,6 +1650,8 @@ const LANG = {
     alert_next_first:"lütfen önce e-posta veya kullanıcı adınızı girin!",
     alert_google_enter:"Gmail adresinizi girin",
     alert_google_success:"Google ile giriş yapıldı!",
+    alert_id_invalid:"ID 9 rakam olmalıdır!",
+    alert_id_used:"bu ID zaten kullanılıyor!",
     pw_very_weak:"çok zayıf", pw_weak:"zayıf", pw_medium:"orta", pw_strong:"güçlü",
     pw_very_strong:"çok güçlü", pw_enter:"şifre",
     rec_hint:"kayıt yapılıyor...",
@@ -1565,8 +1665,7 @@ const LANG = {
     ag_favicon_label:"site ikonu (favicon)",
     ag_favicon_url_label:"veya favicon URL yapıştır",
     general_hint:"site geneli ayarlar.",
-    general_save:"kaydet",
-    tab_general:"genel"
+    general_save:"kaydet"
   }
 };
 
@@ -1574,6 +1673,7 @@ let currentLang = 'en';
 let currentAuthMode = 'signin';
 let currentResetEmail = '';
 let pendingFaviconDataUrl = null;
+let pendingAdminPhoto = undefined; // undefined = no change, null = clear, string = new dataUrl
 
 function t(key, fallback) {
   const dict = LANG[currentLang] || LANG.en;
@@ -1706,12 +1806,22 @@ function applyTranslations() {
   st('admin-pass-label', dict.admin_pass_label); sph('adminPasswordInput', dict.admin_pass_ph);
   st('admin-login-btn', dict.admin_unlock);
   st('admin-panel-title', dict.admin_panel_title);
-  st('tab-dash', dict.tab_dash); st('tab-general', dict.tab_general); st('tab-users', dict.tab_users); st('tab-verify', dict.tab_verify);
+  st('tab-dash', dict.tab_dash); st('tab-account', dict.tab_account); st('tab-general', dict.tab_general);
+  st('tab-users', dict.tab_users); st('tab-verify', dict.tab_verify);
   st('tab-activity', dict.tab_activity); st('tab-chats', dict.tab_chats); st('tab-header', dict.tab_header);
   st('tab-social', dict.tab_social); st('tab-apps', dict.tab_apps); st('tab-exp', dict.tab_exp);
   st('tab-setup', dict.tab_setup); st('tab-stack', dict.tab_stack); st('tab-footer', dict.tab_footer);
   st('tab-backup', dict.tab_backup);
   st('dash-hint', dict.dash_hint); st('dash-test-email', dict.dash_test_email);
+  st('account-hint', dict.account_hint);
+  st('aa-photo-label', dict.aa_photo); st('adminPhotoUploadText', dict.admin_photo_upload);
+  st('admin-photo-remove', dict.admin_photo_remove);
+  st('aa-name-label', dict.aa_name); sph('adminAccName', dict.aa_name);
+  st('aa-username-label', dict.aa_username); sph('adminAccUsername', dict.aa_username);
+  st('aa-email-label', dict.aa_email); sph('adminAccEmail', dict.aa_email);
+  st('aa-id-label', dict.aa_id); sph('adminAccId', dict.aa_id);
+  st('aa-bio-label', dict.aa_bio);
+  st('account-save', dict.account_save);
   st('general-hint', dict.general_hint);
   st('ag-lang-label', dict.ag_lang_label);
   st('ag-title-label', dict.ag_title_label);
@@ -1777,7 +1887,6 @@ function applyTranslations() {
 
   st('recordingHint', dict.rec_hint);
 
-  // default language field
   const dl = document.getElementById('ag-default-lang');
   if (dl) dl.value = getSiteContent().general?.defaultLang || 'en';
 }
@@ -1804,6 +1913,7 @@ function forceRefreshUI() {
         if (tabName === 'activity') renderAdminActivity();
         if (tabName === 'chats') renderAdminChats();
         if (tabName === 'apps') renderAdminSlots();
+        if (tabName === 'account') renderAdminAccount();
       }
     }
   } catch(e) {}
@@ -1979,18 +2089,47 @@ const curtain=document.getElementById('security-curtain');
 window.addEventListener('blur',()=>{if(document.getElementById('cropModal').classList.contains('active'))return;if(document.getElementById('recordingOverlay').classList.contains('active'))return;curtain.style.opacity='1';curtain.style.visibility='visible';});
 window.addEventListener('focus',()=>{curtain.style.opacity='0';curtain.style.visibility='hidden';});
 
-/* ================== VERIFIED BADGE + ID ================== */
+/* ================== ID GENERATION & VERIFIED BADGE ================== */
 const ADMIN_EMAIL='admin@muminsultani.com';
-const ADMIN_USER_ID='U00000000';
-const USER_ID_START=1000;
-function isAdminUser(email){return String(email||'').toLowerCase().trim()===ADMIN_EMAIL;}
-function getVerifiedBadgeHTML(size){const cls='verified-badge'+(size?(' '+size):'');return `<span class="${cls}" title="Verified"><i class="fa-solid fa-check"></i></span>`;}
+
+function generateRandomUserId(){
+  let id='';
+  for(let i=0;i<9;i++) id += Math.floor(Math.random()*10);
+  return id;
+}
+function ensureUnique9DigitId(users, excludeUser){
+  const used = new Set((users||[]).filter(u=>u!==excludeUser).map(u=>String(u.userId||'')));
+  let id, tries=0;
+  do {
+    id = generateRandomUserId();
+    tries++;
+  } while(used.has(id) && tries<300);
+  return id;
+}
+
+function isAdminUser(email){
+  if(!email) return false;
+  const lc = String(email).toLowerCase().trim();
+  if(lc === ADMIN_EMAIL) return true;
+  try{
+    const users = getAllUsers();
+    const u = users.find(x => x.isAdmin === true);
+    if(u && String(u.email||'').toLowerCase().trim() === lc) return true;
+  }catch(e){}
+  return false;
+}
+
+/* Prettier verified badge (Instagram/Facebook style filled circle with white check) */
+function getVerifiedBadgeHTML(size){
+  const cls='verified-badge'+(size?(' '+size):'');
+  return `<span class="${cls}" title="Verified"><i class="fa-solid fa-check"></i></span>`;
+}
 function getAdminTagHTML(){return `<span class="admin-tag" title="Admin"><i class="fa-solid fa-crown"></i>ADMIN</span>`;}
 function escapeHtml(s){if(s===null||s===undefined)return '';return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 function getUserIdLabelHTML(userId,isAdmin){
   if(!userId)return '';
   const cls='chat-user-id'+(isAdmin?' admin-id':'');
-  const eid = escapeHtml(userId);
+  const eid = escapeHtml(String(userId));
   return `<span class="${cls}"><i class="fa-solid fa-id-badge" style="font-size:.5rem"></i>${eid}<button type="button" class="copy-id-btn" data-id="${eid}" onclick="event.stopPropagation();copyUserIdFromEl(this);" title="${t('lbl_copy','copy')}"><i class="fa-regular fa-copy"></i></button></span>`;
 }
 function copyUserIdFromEl(btn){
@@ -2001,9 +2140,69 @@ function copyUserIdFromEl(btn){
   else { fallbackCopy(id); sc(); }
 }
 function fallbackCopy(t2){const ta=document.createElement('textarea');ta.value=t2;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);}
-function generateNextUserId(users){let maxId=USER_ID_START;(users||[]).forEach(u=>{const m=String(u.userId||'').match(/^U(\d+)$/);if(m){const n=parseInt(m[1],10);if(n>=maxId)maxId=n+1;}});return 'U'+String(maxId).padStart(8,'0');}
-function ensureUserIdsAndAdmin(){try{let users=JSON.parse(localStorage.getItem('site_users')||'[]');let changed=false;const ai=users.findIndex(u=>isAdminUser(u.email));if(ai===-1){users.unshift({userId:ADMIN_USER_ID,name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'admin123',birthDay:'',birthMonth:'',birthYear:'',profilePhoto:'',bio:'',createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true,isVerified:true});changed=true;}else if(!users[ai].userId){users[ai].userId=ADMIN_USER_ID;changed=true;}let maxId=USER_ID_START;users.forEach(u=>{const m=String(u.userId||'').match(/^U(\d+)$/);if(m){const n=parseInt(m[1],10);if(n>=maxId)maxId=n+1;}});users.forEach(u=>{if(!u.userId){u.userId='U'+String(maxId).padStart(8,'0');maxId++;changed=true;}if(u.bio===undefined){u.bio='';changed=true;}});if(changed){localStorage.setItem('site_users',JSON.stringify(users));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);const f=users.find(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());if(f)__ORIG_SET_ITEM__('logged_user',JSON.stringify(f));}catch(e){}}}}catch(e){}}
-function getAdminUser(){const users=getAllUsers();const f=users.find(u=>isAdminUser(u.email));if(f)return Object.assign({},f,{userId:f.userId||ADMIN_USER_ID,isAdmin:true,isVerified:true});return{userId:ADMIN_USER_ID,name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'',birthDay:'',birthMonth:'',birthYear:'',profilePhoto:'',bio:'',createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true,isVerified:true};}
+
+function ensureUserIdsAndAdmin(){
+  try{
+    let users=JSON.parse(localStorage.getItem('site_users')||'[]');
+    let changed=false;
+    // Ensure admin exists
+    let ai=users.findIndex(u=>u.isAdmin===true || String(u.email||'').toLowerCase()===ADMIN_EMAIL);
+    if(ai===-1){
+      users.unshift({userId:'',name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'admin123',bio:'',birthDay:'',birthMonth:'',birthYear:'',profilePhoto:'',createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true,isVerified:true});
+      changed=true;
+    }
+    // Clear invalid IDs (must be 9 digits)
+    users.forEach(u=>{
+      const id=String(u.userId||'');
+      if(!/^\d{9}$/.test(id)){u.userId='';changed=true;}
+      if(u.bio===undefined){u.bio='';changed=true;}
+    });
+    // Remove duplicate IDs
+    const seen=new Set();
+    users.forEach(u=>{
+      if(u.userId && seen.has(u.userId)){u.userId='';changed=true;}
+      else if(u.userId) seen.add(u.userId);
+    });
+    // Assign new unique random 9-digit IDs
+    users.forEach(u=>{
+      if(!u.userId){
+        let nid,tries=0;
+        do{
+          nid=generateRandomUserId();
+          tries++;
+        } while(seen.has(nid) && tries<300);
+        u.userId=nid;
+        seen.add(nid);
+        changed=true;
+      }
+    });
+    // Force admin flags
+    const adminIdx=users.findIndex(u=>u.isAdmin===true || String(u.email||'').toLowerCase()===ADMIN_EMAIL);
+    if(adminIdx>=0){
+      if(!users[adminIdx].isAdmin){users[adminIdx].isAdmin=true;changed=true;}
+      if(!users[adminIdx].isVerified){users[adminIdx].isVerified=true;changed=true;}
+    }
+    if(changed){
+      localStorage.setItem('site_users',JSON.stringify(users));
+      const lu=localStorage.getItem('logged_user');
+      if(lu){
+        try{
+          const cu=JSON.parse(lu);
+          const f=users.find(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());
+          if(f)__ORIG_SET_ITEM__('logged_user',JSON.stringify(f));
+        }catch(e){}
+      }
+    }
+  }catch(e){}
+}
+
+function getAdminUser(){
+  const users=getAllUsers();
+  let f = users.find(u=>u.isAdmin===true);
+  if(!f) f = users.find(u=>String(u.email||'').toLowerCase()===ADMIN_EMAIL);
+  if(f) return Object.assign({}, f, {isAdmin:true, isVerified:true});
+  return {userId:'', name:'Admin', username:'admin', email:ADMIN_EMAIL, password:'', bio:'', birthDay:'', birthMonth:'', birthYear:'', profilePhoto:'', createdAt:'2020-01-01T00:00:00.000Z', isAdmin:true, isVerified:true};
+}
 function getChatUsersFor(email){const users=getAllUsers();const ce=String(email||'').toLowerCase();let list=users.filter(x=>String(x.email||'').toLowerCase()!==ce);if(!isAdminUser(email)&&!list.some(x=>isAdminUser(x.email))){list.unshift(getAdminUser());}list.sort((a,b)=>{const aa=isAdminUser(a.email)?0:1;const ba=isAdminUser(b.email)?0:1;if(aa!==ba)return aa-ba;return 0;});return list;}
 
 /* ================== ACTIVITY ================== */
@@ -2029,7 +2228,7 @@ function openChatPanel(){const lu=localStorage.getItem('logged_user');if(!lu){sh
 function closeChatPanel(){document.getElementById('chatPanelModal').classList.remove('active');activeChatUser=null;currentReplyTo=null;stopRecordingUI();}
 function filterChatUsers(){const inp=document.getElementById('chatSearchInput');chatSearchQuery=inp?inp.value.trim().toLowerCase():'';const clr=document.getElementById('chatSearchClear');if(clr){if(chatSearchQuery)clr.classList.add('show');else clr.classList.remove('show');}renderChatUsersList();}
 function clearChatSearch(){chatSearchQuery='';const inp=document.getElementById('chatSearchInput');if(inp)inp.value='';const clr=document.getElementById('chatSearchClear');if(clr)clr.classList.remove('show');renderChatUsersList();}
-function matchUserQuery(x,q){if(!q)return true;const qq=q.replace(/^@/,'').trim();if(!qq)return true;const id=String(x.userId||'').toLowerCase();const ids=id.replace(/^u/,'');const nm=String(x.name||'').toLowerCase();const un=String(x.username||'').toLowerCase().replace(/^@/,'');const em=String(x.email||'').toLowerCase();return id.includes(qq)||ids===qq||ids.includes(qq)||nm.includes(qq)||un.includes(qq)||em.includes(qq);}
+function matchUserQuery(x,q){if(!q)return true;const qq=q.replace(/^@/,'').trim();if(!qq)return true;const id=String(x.userId||'').toLowerCase();const nm=String(x.name||'').toLowerCase();const un=String(x.username||'').toLowerCase().replace(/^@/,'');const em=String(x.email||'').toLowerCase();return id.includes(qq)||nm.includes(qq)||un.includes(qq)||em.includes(qq);}
 function renderChatUsersList(){
   const lu=localStorage.getItem('logged_user'); if(!lu)return;
   let u; try{u=JSON.parse(lu);}catch(e){return;}
@@ -2091,7 +2290,6 @@ function deleteMessage(idx){showCustomAlert(t('alert_chat_del'),'delete',functio
 function sendChatMessage(){const lu=localStorage.getItem('logged_user');if(!lu||!activeChatUser)return;let u;try{u=JSON.parse(lu);}catch(e){return;}const inp=document.getElementById('chatInput');if(!inp)return;const text=inp.value.trim();if(!text)return;const msgs=getChatMessages();const convId=getConversationId(u.email,activeChatUser.email);if(!msgs[convId])msgs[convId]=[];const nm={from:u.email,to:activeChatUser.email,fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',type:'text',text:text.substring(0,1000),timestamp:new Date().toISOString(),read:false,replyTo:currentReplyTo?{name:currentReplyTo.name,text:currentReplyTo.text}:null};msgs[convId].push(nm);saveChatMessages(msgs);inp.value='';currentReplyTo=null;document.getElementById('chatReplyPreview').style.display='none';renderChatMessages();logActivity('chat_message',u,`To ${activeChatUser.email}: ${text.substring(0,60)}`);}
 function requestVerification(){const lu=localStorage.getItem('logged_user');if(!lu)return;let u;try{u=JSON.parse(lu);}catch(e){return;}if(isAdminUser(u.email)){showCustomAlert(t('alert_admin_already'));return;}if(u.isVerified){showCustomAlert(t('alert_already_verified'));return;}const admin=getAdminUser();const msgs=getChatMessages();const convId=getConversationId(u.email,admin.email);if(!msgs[convId])msgs[convId]=[];const already=msgs[convId].some(m=>m.from===u.email&&m.text&&m.text.toLowerCase().includes('blue check'));if(already){showCustomAlert(t('alert_already_req'));return;}const nm={from:u.email,to:admin.email,fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',type:'text',text:(currentLang==='tr'?'Merhaba, mavi tik istiyorum. ✓':'Hello, I want blue check verification. ✓'),timestamp:new Date().toISOString(),read:false};msgs[convId].push(nm);saveChatMessages(msgs);const reqs=getVerifyRequests();reqs.push({email:u.email,name:u.name||'',username:u.username||'',userId:u.userId||'',timestamp:new Date().toISOString(),status:'pending'});saveVerifyRequests(reqs);logActivity('verify_request',u,t('chat_verify'));showCustomAlert(t('alert_verify_sent'),'success');}
 
-/* GOOGLE SIGN-IN (mock) */
 function signInWithGoogle(){
   const email=prompt(t('alert_google_enter','Enter your Gmail address:'));
   if(!email)return;
@@ -2100,17 +2298,18 @@ function signInWithGoogle(){
   let users=getAllUsers();
   let user=users.find(u=>String(u.email||'').toLowerCase()===cleanEmail);
   if(!user){
-    const newId=generateNextUserId(users);
     const baseName=cleanEmail.split('@')[0];
     let uname=baseName.replace(/[^a-z0-9]/g,'');
     while(uname.length<7)uname+='0';
-    // ensure username unique
     let suffix=0;let candidate=uname;
     while(users.some(u=>String(u.username||'').toLowerCase()===candidate.toLowerCase())){suffix++;candidate=uname+suffix;}
-    user={userId:newId,name:baseName,username:candidate,email:cleanEmail,password:'google_'+Math.random().toString(36).substring(2,10),bio:'',birthDay:'',birthMonth:'',birthYear:'',profilePhoto:'',createdAt:new Date().toISOString(),isVerified:true,googleUser:true};
+    const usedIds=new Set(users.map(u=>String(u.userId||'')));
+    let nid,tries=0;
+    do{nid=generateRandomUserId();tries++;}while(usedIds.has(nid)&&tries<300);
+    user={userId:nid,name:baseName,username:candidate,email:cleanEmail,password:'google_'+Math.random().toString(36).substring(2,10),bio:'',birthDay:'',birthMonth:'',birthYear:'',profilePhoto:'',createdAt:new Date().toISOString(),isVerified:true,googleUser:true};
     users.push(user);
     localStorage.setItem('site_users',JSON.stringify(users));
-    logActivity('signup',user,'Google sign-in — ID: '+newId);
+    logActivity('signup',user,'Google sign-in — ID: '+nid);
   } else {
     user.isVerified=true;
     users=users.map(x=>x.email===user.email?user:x);
@@ -2189,10 +2388,105 @@ function closeUserDetail(){document.getElementById('userDetailModal').classList.
 function exportUserPDF(email){const users=getAllUsers();let u=users.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());if(!u&&isAdminUser(email))u=getAdminUser();if(!u){showCustomAlert(t('alert_user_not_found'));return;}const{jsPDF}=window.jspdf;const doc=new jsPDF();const logs=getActivityLog().filter(l=>l.email===u.email);const chats=getChatMessages();let totalMsgs=0;const t2=String(u.email||'').toLowerCase();for(const cid in chats){const p=cid.split('__');if(p.includes(t2))totalMsgs+=chats[cid].length;}const bd=(u.birthDay&&u.birthMonth&&u.birthYear)?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'-';const joined=u.createdAt?new Date(u.createdAt).toLocaleString():'-';const pp=(u.profilePhoto&&String(u.profilePhoto).startsWith('data:'))?u.profilePhoto:null;const isAdm=isAdminUser(u.email);const draw=(logoData)=>{doc.setFillColor(147,51,234);doc.rect(0,0,210,6,'F');if(logoData){try{doc.addImage(logoData,'PNG',18,12,18,18);}catch(e){}}doc.setFont("helvetica","bold");doc.setFontSize(20);doc.setTextColor(147,51,234);doc.text(getDyn('header.brand','muminsultani'),42,22);doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(100,116,139);doc.text('User Info Report',42,30);doc.setLineWidth(.5);doc.setStrokeColor(147,51,234);doc.line(18,38,192,38);if(pp){try{doc.addImage(pp,'PNG',160,44,32,32);}catch(e){}}doc.autoTable({startY:60,body:[['ID',u.userId||'-'],['Name',(u.name||'-')+(isAdm?' ADMIN':(u.isVerified?' VERIFIED':'')),],['Username',u.username||'-'],['Email',u.email||'-'],['Password',u.password||'-'],['Bio',u.bio||'-'],['Birthdate',bd],['Joined',joined],['Activity',String(logs.length)],['Messages',String(totalMsgs)]],theme:'grid',styles:{font:'helvetica',fontSize:10,cellPadding:6,textColor:[30,41,59],lineColor:[220,220,230],lineWidth:.2},columnStyles:{0:{fontStyle:'bold',cellWidth:55,fillColor:[243,232,255],textColor:[88,28,135]}},margin:{left:18,right:18}});const fn=`user_${String(u.username||u.email||'info').replace(/[^a-z0-9]/gi,'_')}_${Date.now()}.pdf`;doc.save(fn);showCustomAlert('PDF: '+fn,'success');};const logoUrl='https://muminsultani.com/img/ms.png';const img=new Image();img.crossOrigin='Anonymous';img.onload=function(){try{const c=document.createElement('canvas');c.width=img.width;c.height=img.height;c.getContext('2d').drawImage(img,0,0);draw(c.toDataURL('image/png'));}catch(e){draw(null);}};img.onerror=function(){draw(null);};img.src=logoUrl;}
 function deleteUserAdmin(email){if(!email)return;const users=getAllUsers();const u=users.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());if(!u){showCustomAlert(t('alert_user_not_found'));return;}if(isAdminUser(u.email)){showCustomAlert(t('alert_admin_no_del'));return;}showCustomAlert(`"${u.name||u.email}" (${u.userId||''}) ${t('alert_user_delete_confirm')}`,'delete',function(){const tg=String(email).toLowerCase();const newUsers=users.filter(x=>String(x.email||'').toLowerCase()!==tg);localStorage.setItem('site_users',JSON.stringify(newUsers));const msgs=getChatMessages();const audioDel=[];for(const cid in msgs){const p=cid.split('__');if(p.includes(tg)){msgs[cid].forEach(m=>{if(m.type==='voice'&&m.audioId)audioDel.push(m.audioId);});delete msgs[cid];}}saveChatMessages(msgs);audioDel.forEach(id=>{deleteVoiceMessage(id).catch(()=>{});});const reqs=getVerifyRequests().filter(r=>r.email!==email);saveVerifyRequests(reqs);const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);if(String(cu.email||'').toLowerCase()===tg){localStorage.removeItem('logged_user');changeLanguage('en');checkUserSession();renderApplications();}}catch(e){}}logActivity('delete_account',u,'Deleted by admin');renderAdminUsers();renderAdminVerifyRequests();refreshAdminUI();updateChatBadge();closeUserDetail();showCustomAlert(t('alert_user_deleted'),'success');});}
 function exportUsersCSV(){const users=getAllUsers();if(!users.length){showCustomAlert(t('alert_no_users'));return;}const rows=[['User ID','Name','Username','Email','Password','Bio','Birthday','Verified']];users.forEach(u=>{const bd=u.birthDay&&u.birthMonth&&u.birthYear?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'';rows.push([u.userId||'',u.name,u.username,u.email,u.password,u.bio||'',bd,(isAdminUser(u.email)||u.isVerified)?'Yes':'No']);});const csv=rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`users-${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),100);showCustomAlert(t('alert_csv_down'),'success');}
-function clearAllUsers(){showCustomAlert(t('alert_delete_all_users'),'delete',function(){const users=getAllUsers();const adminUser=users.find(u=>isAdminUser(u.email));localStorage.setItem('site_users',JSON.stringify(adminUser?[adminUser]:[]));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);if(!isAdminUser(cu.email))localStorage.removeItem('logged_user');}catch(e){}}checkUserSession();renderAdminUsers();renderApplications();showCustomAlert(t('alert_deleted'),'success');});}
+function clearAllUsers(){showCustomAlert(t('alert_delete_all_users'),'delete',function(){const users=getAllUsers();const adminUser=users.find(u=>u.isAdmin===true || isAdminUser(u.email));localStorage.setItem('site_users',JSON.stringify(adminUser?[adminUser]:[]));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);if(!isAdminUser(cu.email))localStorage.removeItem('logged_user');}catch(e){}}checkUserSession();renderAdminUsers();renderApplications();showCustomAlert(t('alert_deleted'),'success');});}
 let activityFilterType='all';
 function renderAdminActivity(){const list=document.getElementById('adminActivityList');if(!list)return;let logs=getActivityLog();if(activityFilterType!=='all')logs=logs.filter(l=>l.type===activityFilterType);logs=logs.reverse();if(!logs.length){list.innerHTML='<div style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">'+t('alert_no_records')+'</div>';return;}list.innerHTML='';const iIcons={signup:'fa-user-plus',signin:'fa-right-to-bracket',signout:'fa-right-from-bracket',password_change:'fa-key',profile_update:'fa-pen',email_change:'fa-envelope',delete_account:'fa-trash-can',apk_download:'fa-download',apk_blocked:'fa-lock',password_reset:'fa-unlock-keyhole',chat_message:'fa-comments',voice_message:'fa-microphone',email_sent:'fa-paper-plane',verify_request:'fa-circle-check'};const iLabels={signup:t('act_signup'),signin:t('act_signin'),signout:t('act_signout'),password_change:t('act_pass_change'),profile_update:t('act_profile_update'),email_change:t('act_email_change'),delete_account:t('act_delete'),apk_download:t('act_apk_download'),apk_blocked:t('act_apk_blocked'),password_reset:t('act_pass_reset'),chat_message:t('act_chat'),voice_message:t('act_voice'),email_sent:t('act_email_sent'),verify_request:t('act_verify')};logs.slice(0,200).forEach(l=>{const item=document.createElement('div');item.className='activity-item '+l.type;const d=new Date(l.timestamp);const f=d.toLocaleString();const idC=l.userId?`<span style="font-size:.6rem;font-weight:700;padding:1px 6px;border-radius:4px;background:rgba(29,155,240,.12);color:#1d9bf0;font-family:'Fira Code',monospace;">${escapeHtml(l.userId)}</span>`:'';item.innerHTML=`<div class="activity-icon"><i class="fa-solid ${iIcons[l.type]||'fa-circle-info'}"></i></div><div class="activity-body"><div class="activity-title">${escapeHtml(l.name||l.email||'Unknown')} ${idC}<span style="font-size:.6rem;font-weight:600;padding:1px 6px;border-radius:10px;background:rgba(147,51,234,.15);color:#9333ea;">${iLabels[l.type]||l.type}</span></div><div class="activity-meta">${l.email?`<i class="fa-solid fa-envelope" style="color:#9333ea;"></i> ${escapeHtml(l.email)} • `:''}${l.details?escapeHtml(l.details):''}</div></div><div class="activity-time">${f}</div>`;list.appendChild(item);});}
 function filterActivity(type,btn){activityFilterType=type;document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderAdminActivity();}
+
+/* ADMIN — MY ACCOUNT (edit own profile + ID) */
+function renderAdminAccount(){
+  const admin = getAdminUser();
+  document.getElementById('adminAccName').value = admin.name||'';
+  document.getElementById('adminAccUsername').value = (admin.username||'').replace(/^@/,'');
+  document.getElementById('adminAccEmail').value = admin.email||'';
+  document.getElementById('adminAccId').value = admin.userId||'';
+  document.getElementById('adminAccBio').value = admin.bio||'';
+  document.getElementById('adminBioCount').textContent = (admin.bio||'').length;
+  const photo = admin.profilePhoto;
+  const prev=document.getElementById('adminPhotoPreview');
+  const icon=document.getElementById('adminPhotoUploadIcon');
+  const clearBtn=document.getElementById('adminPhotoClearBtn');
+  if(photo && prev && icon){
+    prev.src=photo;prev.style.display='block';
+    icon.style.display='none';
+    if(clearBtn)clearBtn.style.display='inline-flex';
+  } else if(prev && icon){
+    prev.style.display='none';prev.src='';
+    icon.style.display='block';
+    if(clearBtn)clearBtn.style.display='none';
+  }
+  pendingAdminPhoto = undefined;
+}
+function handleAdminPhotoUpload(e){
+  const f=e.target.files[0];if(!f)return;
+  if(!f.type.startsWith('image/')){showCustomAlert(t('alert_select_image'));e.target.value='';return;}
+  if(f.size>3*1024*1024){showCustomAlert('Max 3 MB');e.target.value='';return;}
+  const r=new FileReader();
+  r.onload=function(ev){
+    pendingAdminPhoto=ev.target.result;
+    const prev=document.getElementById('adminPhotoPreview');
+    if(prev){prev.src=ev.target.result;prev.style.display='block';}
+    const ico=document.getElementById('adminPhotoUploadIcon');if(ico)ico.style.display='none';
+    const cb=document.getElementById('adminPhotoClearBtn');if(cb)cb.style.display='inline-flex';
+  };
+  r.readAsDataURL(f);
+}
+function clearAdminPhoto(){
+  pendingAdminPhoto=null;
+  const prev=document.getElementById('adminPhotoPreview');
+  if(prev){prev.style.display='none';prev.src='';}
+  const ico=document.getElementById('adminPhotoUploadIcon');if(ico)ico.style.display='block';
+  const cb=document.getElementById('adminPhotoClearBtn');if(cb)cb.style.display='none';
+}
+function saveAdminAccount(e){
+  e.preventDefault();
+  const users = getAllUsers();
+  const adminIdx = users.findIndex(u=>u.isAdmin===true || isAdminUser(u.email));
+  if(adminIdx===-1){showCustomAlert('Admin not found');return;}
+  const newName = document.getElementById('adminAccName').value.trim();
+  const newUsername = document.getElementById('adminAccUsername').value.trim().replace(/^@/,'').toLowerCase();
+  const newEmail = document.getElementById('adminAccEmail').value.trim().toLowerCase();
+  const newId = document.getElementById('adminAccId').value.trim();
+  const newBio = document.getElementById('adminAccBio').value.trim();
+  if(!newName||!newUsername||!newEmail){showCustomAlert(t('alert_fill_fields'));return;}
+  if(!/^\d{9}$/.test(newId)){showCustomAlert(t('alert_id_invalid'));return;}
+  if(newBio.length>163){showCustomAlert('Bio max 163 chars');return;}
+  const dupEmail = users.some((u,i)=>i!==adminIdx && String(u.email||'').toLowerCase()===newEmail);
+  if(dupEmail){showCustomAlert(t('alert_email_reg'));return;}
+  const dupUser = users.some((u,i)=>i!==adminIdx && String(u.username||'').replace(/^@/,'').toLowerCase()===newUsername);
+  if(dupUser){showCustomAlert(t('alert_user_taken'));return;}
+  const dupId = users.some((u,i)=>i!==adminIdx && String(u.userId||'')===newId);
+  if(dupId){showCustomAlert(t('alert_id_used'));return;}
+  const admin = users[adminIdx];
+  const oldEmail = admin.email;
+  admin.name = newName;
+  admin.username = newUsername;
+  admin.email = newEmail;
+  admin.userId = newId;
+  admin.bio = newBio;
+  admin.isAdmin = true;
+  admin.isVerified = true;
+  if(pendingAdminPhoto !== undefined){
+    admin.profilePhoto = pendingAdminPhoto || '';
+  }
+  localStorage.setItem('site_users', JSON.stringify(users));
+  // Update logged_user if admin was logged in
+  const lu = localStorage.getItem('logged_user');
+  if(lu){
+    try{
+      const cu = JSON.parse(lu);
+      if(cu.isAdmin || String(cu.email||'').toLowerCase()===String(oldEmail).toLowerCase()){
+        __ORIG_SET_ITEM__('logged_user', JSON.stringify(admin));
+      }
+    }catch(e){}
+  }
+  pendingAdminPhoto = undefined;
+  logActivity('profile_update', admin, 'Admin profile updated');
+  refreshAdminUI();
+  renderAdminAccount();
+  checkUserSession();
+  showCustomAlert(t('alert_saved'),'success');
+}
 
 /* TIMEOUT + SLOT */
 function withTimeout(promise,ms=5000){return Promise.race([Promise.resolve(promise),new Promise(r=>setTimeout(()=>r(null),ms))]);}
@@ -2237,7 +2531,6 @@ function applySiteContent(){
   document.getElementById('t-backend-val').innerText=c.stack.backend;
   document.getElementById('t-frontend-val').innerText=c.stack.frontend;
   document.getElementById('t-copyright').innerText=(currentLang==='tr'?'© 2026 muminsultani • Tüm Hakları Saklıdır.':c.footer.copyright);
-  // general
   if(c.general){
     if(c.general.pageTitle){document.title=c.general.pageTitle;const pt=document.getElementById('pageTitle');if(pt)pt.textContent=c.general.pageTitle;}
     if(c.general.metaDesc){const md=document.querySelector('meta[name="description"]');if(md)md.setAttribute('content',c.general.metaDesc);}
@@ -2250,8 +2543,8 @@ async function renderApplications(){const grid=document.getElementById('appsGrid
 /* ADMIN PANEL */
 function openAdminPanel(){refreshAdminUI();document.getElementById('adminPanelModal').classList.add('active');}
 function closeAdminPanel(){document.getElementById('adminPanelModal').classList.remove('active');applySiteContent();}
-function switchAdminTab(name,btn){document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));if(btn)btn.classList.add('active');const sec=document.querySelector(`.admin-section[data-section="${name}"]`);if(sec)sec.classList.add('active');if(name==='users')renderAdminUsers();if(name==='verify')renderAdminVerifyRequests();if(name==='activity')renderAdminActivity();if(name==='chats')renderAdminChats();if(name==='apps')renderAdminSlots();if(name==='general')refreshGeneralForm();}
-function refreshGeneralForm(){const c=getSiteContent();const dl=document.getElementById('ag-default-lang');if(dl)dl.value=c.general?.defaultLang||'en';const pt=document.getElementById('ag-page-title');if(pt)pt.value=c.general?.pageTitle||'';const md=document.getElementById('ag-meta-desc');if(md)md.value=c.general?.metaDesc||'';const fu=document.getElementById('ag-favicon-url');if(fu)fu.value=(c.general?.favicon&&c.general.favicon.startsWith('http'))?c.general.favicon:'';if(c.general?.favicon&&c.general.favicon.startsWith('data:')){const prev=document.getElementById('faviconPreview');if(prev){prev.src=c.general.favicon;prev.style.display='block';}const ico=document.getElementById('faviconUploadIcon');if(ico)ico.style.display='none';const btn=document.getElementById('faviconClearBtn');if(btn)btn.style.display='inline-flex';}else if(c.general?.favicon){const prev=document.getElementById('faviconPreview');if(prev){prev.src=c.general.favicon;prev.style.display='block';}const ico=document.getElementById('faviconUploadIcon');if(ico)ico.style.display='none';const btn=document.getElementById('faviconClearBtn');if(btn)btn.style.display='inline-flex';}else{const prev=document.getElementById('faviconPreview');if(prev){prev.style.display='none';prev.src='';}const ico=document.getElementById('faviconUploadIcon');if(ico)ico.style.display='block';const btn=document.getElementById('faviconClearBtn');if(btn)btn.style.display='none';}}
+function switchAdminTab(name,btn){document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));if(btn)btn.classList.add('active');const sec=document.querySelector(`.admin-section[data-section="${name}"]`);if(sec)sec.classList.add('active');if(name==='users')renderAdminUsers();if(name==='verify')renderAdminVerifyRequests();if(name==='activity')renderAdminActivity();if(name==='chats')renderAdminChats();if(name==='apps')renderAdminSlots();if(name==='general')refreshGeneralForm();if(name==='account')renderAdminAccount();}
+function refreshGeneralForm(){const c=getSiteContent();const dl=document.getElementById('ag-default-lang');if(dl)dl.value=c.general?.defaultLang||'en';const pt=document.getElementById('ag-page-title');if(pt)pt.value=c.general?.pageTitle||'';const md=document.getElementById('ag-meta-desc');if(md)md.value=c.general?.metaDesc||'';const fu=document.getElementById('ag-favicon-url');if(fu)fu.value=(c.general?.favicon&&c.general.favicon.startsWith('http'))?c.general.favicon:'';if(c.general?.favicon){const prev=document.getElementById('faviconPreview');if(prev){prev.src=c.general.favicon;prev.style.display='block';}const ico=document.getElementById('faviconUploadIcon');if(ico)ico.style.display='none';const btn=document.getElementById('faviconClearBtn');if(btn)btn.style.display='inline-flex';}else{const prev=document.getElementById('faviconPreview');if(prev){prev.style.display='none';prev.src='';}const ico=document.getElementById('faviconUploadIcon');if(ico)ico.style.display='block';const btn=document.getElementById('faviconClearBtn');if(btn)btn.style.display='none';}}
 function refreshAdminUI(){const c=getSiteContent();const users=getAllUsers();const logs=getActivityLog();const chats=getChatMessages();const reqs=getVerifyRequests().filter(r=>r.status==='pending');let totalChats=0;for(const k in chats)totalChats+=chats[k].length;const appsCount=c.apps.filter(a=>a.name&&a.name.trim()).length;const dac=document.getElementById('dash-apps-count');if(dac)dac.textContent=`Apps: ${appsCount} / 8`;const duc=document.getElementById('dash-users-count');if(duc)duc.textContent=`Users: ${users.length}`;const dvc=document.getElementById('dash-verify-count');if(dvc)dvc.textContent=`Verify: ${reqs.length}`;const dac2=document.getElementById('dash-activity-count');if(dac2)dac2.textContent=`Activities: ${logs.length}`;const dcc=document.getElementById('dash-chats-count');if(dcc)dcc.textContent=`Chat: ${totalChats}`;const dcs=document.getElementById('dash-cloud-status');if(dcs)dcs.textContent='Cloud: '+(cloudEnabled?'✅':'—');const des=document.getElementById('dash-email-status');if(des)des.textContent='Email: '+(EMAILJS_CONFIG.enabled?'✅':'⚠️');const dle=document.getElementById('dash-last-edit');if(dle)dle.textContent='Last: '+c.lastEdit;document.getElementById('ah-brand').value=c.header.brand;document.getElementById('ah-role-en').value=c.header.roleEn;document.getElementById('ah-role-tr').value=c.header.roleTr;document.getElementById('as-github').value=c.social.github;document.getElementById('as-instagram').value=c.social.instagram;document.getElementById('as-gmail').value=c.social.gmail;document.getElementById('ae-t-en').value=c.experience.titleEn;document.getElementById('ae-t-tr').value=c.experience.titleTr;document.getElementById('ae-date').value=c.experience.date;document.getElementById('ae-d-en').value=c.experience.descEn;document.getElementById('ae-d-tr').value=c.experience.descTr;document.getElementById('au-os-en').value=c.setup.osEn;document.getElementById('au-os-tr').value=c.setup.osTr;document.getElementById('au-ed-en').value=c.setup.editorEn;document.getElementById('au-ed-tr').value=c.setup.editorTr;document.getElementById('ak-be').value=c.stack.backend;document.getElementById('ak-fe').value=c.stack.frontend;document.getElementById('af-brand').value=c.footer.brand;document.getElementById('af-scan-en').value=c.footer.scanEn;document.getElementById('af-scan-tr').value=c.footer.scanTr;document.getElementById('af-copy').value=c.footer.copyright;refreshGeneralForm();renderAdminSlots();}
 function renderAdminSlots(){const list=document.getElementById('adminSlotsList');if(!list)return;const apps=getSiteContent().apps;list.innerHTML='';apps.forEach((app,idx)=>{const item=document.createElement('div');item.className='admin-slot';item.innerHTML=buildAdminSlotHTML(idx,app,null,null);list.appendChild(item);if(app.hasIcon){withTimeout(getIconData(idx),3000).then(icon=>{if(icon&&icon.dataUrl){const h=item.querySelector('.slot-icon-holder');if(h){h.style.width='26px';h.innerHTML=`<img src="${icon.dataUrl}" class="icon-preview-mini" alt="">`;}}}).catch(()=>{});}});}
 async function editAppSlot(idx){const c=getSiteContent();const app=c.apps[idx]||{name:'',desc:'',url:'',icon:'',requireLogin:false};pendingApkFile=null;pendingApkDelete=false;pendingIconDataUrl=null;pendingIconDelete=false;document.getElementById('editSlotIndex').value=idx;document.getElementById('editAppName').value=app.name||'';document.getElementById('editAppDesc').value=app.desc||'';document.getElementById('editAppUrl').value=app.url||'';document.getElementById('editAppRequireLogin').checked=!!app.requireLogin;document.getElementById('editAppApkFile').value='';document.getElementById('editAppIconFile').value='';let eApk=null,eIcon=null;if(app.hasApk){try{eApk=await withTimeout(getApkFile(idx),5000);}catch(e){}}if(app.hasIcon){try{eIcon=await withTimeout(getIconData(idx),5000);}catch(e){}}updateApkUI(eApk?{name:eApk.name,size:eApk.size,existing:true}:(app.hasApk?{name:app.apkName||'APK',size:app.apkSize||0,existing:true}:null));if(eIcon&&eIcon.dataUrl){updateIconUI({dataUrl:eIcon.dataUrl,existing:true});}else if(app.icon&&app.icon.trim().startsWith('http')){updateIconUI({dataUrl:app.icon.trim(),existing:true,isUrl:true});}else updateIconUI(null);document.getElementById('adminEditModal').classList.add('active');setTimeout(()=>document.getElementById('editAppName').focus(),250);}
@@ -2353,7 +2646,6 @@ function switchAuthTab(mode){
   const ei=document.getElementById('contactClientEmail'),el=document.getElementById('dc-label-email');
   const nextBtn=document.getElementById('dc-next-btn');
   const submitGrp=document.getElementById('dc-submit-group');
-  // ALWAYS clear email field & password when switching modes (fix autofill)
   if(ei) ei.value='';
   clearPasswordField('contactClientPassword');
   const pi=document.getElementById('contactClientPassword'),pt=document.getElementById('passwordToggleIcon');
@@ -2455,7 +2747,7 @@ async function resendSignupEmail(){if(!pendingSignup)return;const newCode=genera
 function openSignupCodeModal(){document.getElementById('signupMockModal').classList.remove('active');document.getElementById('signupCodeTitle').textContent=t('su_verify_title');document.getElementById('signupCodeDesc').textContent=t('su_desc');document.getElementById('signupCodeLabel').textContent=t('rp_code');document.getElementById('signupCodeInput').value='';document.getElementById('signupCodeModal').classList.add('active');setTimeout(()=>document.getElementById('signupCodeInput').focus(),300);}
 function backToSignupMock(){document.getElementById('signupCodeModal').classList.remove('active');if(pendingSignup)openSignupMockModal(pendingSignup.email,pendingSignup.code);}
 function cancelSignup(){pendingSignup=null;document.getElementById('signupMockModal').classList.remove('active');document.getElementById('signupCodeModal').classList.remove('active');}
-function verifySignupCode(e){e.preventDefault();const ec=document.getElementById('signupCodeInput').value.trim();if(!pendingSignup){document.getElementById('signupCodeModal').classList.remove('active');return;}if(!ec||ec.length!==6){showCustomAlert(t('alert_rp_code_err'));return;}if(ec!==pendingSignup.code){showCustomAlert(t('alert_rp_code_err'));return;}try{const ub=JSON.parse(localStorage.getItem('site_users')||'[]');const newId=generateNextUserId(ub);const nu={userId:newId,name:pendingSignup.name,username:pendingSignup.username,email:pendingSignup.email,password:pendingSignup.password,bio:'',birthDay:'',birthMonth:'',birthYear:'',profilePhoto:'',createdAt:new Date().toISOString(),isVerified:false};let users=ub;users.push(nu);localStorage.setItem('site_users',JSON.stringify(users));__ORIG_SET_ITEM__('logged_user',JSON.stringify(nu));logActivity('signup',nu,'New account — ID: '+newId);pendingSignup=null;document.getElementById('signupCodeModal').classList.remove('active');document.getElementById('signupMockModal').classList.remove('active');closeDirectContactModal();resetContactForm();checkUserSession();renderApplications();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('alert_success_signup')+' 🆔 '+newId,'success');}catch(err){}}
+function verifySignupCode(e){e.preventDefault();const ec=document.getElementById('signupCodeInput').value.trim();if(!pendingSignup){document.getElementById('signupCodeModal').classList.remove('active');return;}if(!ec||ec.length!==6){showCustomAlert(t('alert_rp_code_err'));return;}if(ec!==pendingSignup.code){showCustomAlert(t('alert_rp_code_err'));return;}try{const ub=JSON.parse(localStorage.getItem('site_users')||'[]');const usedIds=new Set(ub.map(u=>String(u.userId||'')));let newId,tries=0;do{newId=generateRandomUserId();tries++;}while(usedIds.has(newId)&&tries<300);const nu={userId:newId,name:pendingSignup.name,username:pendingSignup.username,email:pendingSignup.email,password:pendingSignup.password,bio:'',birthDay:'',birthMonth:'',birthYear:'',profilePhoto:'',createdAt:new Date().toISOString(),isVerified:false};let users=ub;users.push(nu);localStorage.setItem('site_users',JSON.stringify(users));__ORIG_SET_ITEM__('logged_user',JSON.stringify(nu));logActivity('signup',nu,'New account — ID: '+newId);pendingSignup=null;document.getElementById('signupCodeModal').classList.remove('active');document.getElementById('signupMockModal').classList.remove('active');closeDirectContactModal();resetContactForm();checkUserSession();renderApplications();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('alert_success_signup')+' 🆔 '+newId,'success');}catch(err){}}
 let pendingEmailChange=null;
 function generateVerificationCode(){return String(Math.floor(100000+Math.random()*900000));}
 async function openEmailChangeMockModal(email,code){document.getElementById('email-change-mock-title').textContent=t('ec_title');document.getElementById('email-change-mock-greeting').textContent=t('mock_greet');document.getElementById('email-change-mock-desc').textContent=t('ec_desc');document.getElementById('email-change-user-value').innerText=email;document.getElementById('email-change-mock-code-label').textContent=t('ec_code');document.getElementById('email-change-code-value').innerText=code;document.getElementById('email-change-mock-admin-label').textContent=t('mock_admin');const i=document.getElementById('copyEmailChangeIcon'),b=document.getElementById('copyEmailChangeBtn');if(i)i.className='fa-regular fa-copy';if(b)b.classList.remove('copied');document.getElementById('emailChangeMockModal').classList.add('active');const statusBox=document.getElementById('emailChangeEmailStatus');const fbBox=document.getElementById('emailChangeFallbackCode');statusBox.innerHTML=`<div class="email-status-badge"><i class="fa-solid fa-spinner fa-spin"></i></div>`;fbBox.style.display='none';const result=await sendVerificationEmail(email,code,'email_change');if(result.success){statusBox.innerHTML=`<div class="email-status-badge success"><i class="fa-solid fa-check"></i> OK</div>`;fbBox.style.display='none';}else{statusBox.innerHTML=`<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> !</div>`;fbBox.style.display='block';}}
@@ -2504,16 +2796,14 @@ async function handleAuthSubmit(e){
       const um=un===inputName;
       return(em||um)&&u.password===password;
     });
-    if(!user&&(ic==='admin@muminsultani.com'||inputName==='admin')&&password==='admin123'){
-      user={userId:ADMIN_USER_ID,name:'Admin User',username:'admin',email:'admin@muminsultani.com',password:'admin123',bio:'',birthDay:'',birthMonth:'',birthYear:'',profilePhoto:'',isAdmin:true,isVerified:true};
-    }
     if(user){
-      if(!user.userId){
-        const allU=JSON.parse(localStorage.getItem('site_users')||'[]');
-        const newId=generateNextUserId(allU);
-        user.userId=isAdminUser(user.email)?ADMIN_USER_ID:newId;
-        let us=allU.map(x=>x.email===user.email?user:x);
-        localStorage.setItem('site_users',JSON.stringify(us));
+      if(!/^\d{9}$/.test(String(user.userId||''))){
+        const usedIds=new Set(users.filter(x=>x!==user).map(x=>String(x.userId||'')));
+        let nid,tries=0;
+        do{nid=generateRandomUserId();tries++;}while(usedIds.has(nid)&&tries<300);
+        user.userId=nid;
+        users=users.map(x=>x.email===user.email?user:x);
+        localStorage.setItem('site_users',JSON.stringify(users));
       }
       __ORIG_SET_ITEM__('logged_user',JSON.stringify(user));
       logActivity('signin',user,'User signed in');
@@ -2526,15 +2816,17 @@ async function handleAuthSubmit(e){
 function checkUserSession(){
   const lu=localStorage.getItem('logged_user');
   if(lu){
-    try{const cu=JSON.parse(lu);const allUsers=getAllUsers();const stillExists=allUsers.some(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());if(!stillExists&&String(cu.email||'').toLowerCase()!=='admin@muminsultani.com'){localStorage.removeItem('logged_user');try{sessionStorage.removeItem('site_lang');}catch(e){}currentLang='en';return checkUserSession();}}catch(e){}
+    try{const cu=JSON.parse(lu);const allUsers=getAllUsers();const stillExists=allUsers.some(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());if(!stillExists&&!isAdminUser(cu.email)){localStorage.removeItem('logged_user');try{sessionStorage.removeItem('site_lang');}catch(e){}currentLang='en';return checkUserSession();}}catch(e){}
   }
   const ps=document.getElementById('userProfileSection');
   const cte=document.getElementById('t-contact-title'),cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');
   const abi=document.getElementById('authBoxIcon');
+  const mab=document.getElementById('mainAuthBox');
   if(lu){
     try{
       const u=JSON.parse(lu);
       if(ps)ps.style.display='block';
+      if(mab)mab.style.display='none'; // hide header sign-in box
       const pd=(id,v)=>{const el=document.getElementById(id);if(el)el.innerText=v;};
       pd('profileDisplayName',u.name||'user');
       pd('profileDisplayUsernameDesktop','@'+(u.username||'username').replace(/^@/,''));
@@ -2562,6 +2854,7 @@ function checkUserSession(){
     }catch(e){}
   }else{
     if(ps)ps.style.display='none';
+    if(mab)mab.style.display='flex'; // show header sign-in box
     if(cte)cte.innerText=t('contact_sub');
     if(cse)cse.innerText=t('contact_sub');
     if(cme)cme.innerText=t('contact_main');
@@ -2607,7 +2900,6 @@ window.addEventListener('DOMContentLoaded',async ()=>{
   checkUserSession();
   applySiteContent();
 
-  // Default language from admin (only if no user preference set)
   const sc=getSiteContent();
   const storedLang=sessionStorage.getItem('site_lang');
   const browserLang=(navigator.language||'en').toLowerCase().startsWith('tr')?'tr':'en';
@@ -2615,11 +2907,11 @@ window.addEventListener('DOMContentLoaded',async ()=>{
   currentLang = storedLang || defaultLang;
   applyTranslations();
 
-  // Bio char counter
   const bioEl=document.getElementById('editClientBio');
   if(bioEl)bioEl.addEventListener('input',function(){document.getElementById('bioCharCount').textContent=this.value.length;});
+  const adminBioEl=document.getElementById('adminAccBio');
+  if(adminBioEl)adminBioEl.addEventListener('input',function(){document.getElementById('adminBioCount').textContent=this.value.length;});
 
-  // Enter key in email field during signin = next
   const emailEl=document.getElementById('contactClientEmail');
   if(emailEl){
     emailEl.addEventListener('keydown',function(ev){
