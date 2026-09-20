@@ -18,7 +18,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 html{color-scheme:light dark;-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-body{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-text-size-adjust:100%;text-size-adjust:100%;touch-action:manipulation;overflow-x:hidden}
+body{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-text-size-adjust:100%;text-size-adjust:100%;touch-action:manipulation;overflow-x:hidden;overscroll-behavior:none}
 img{-webkit-user-drag:none;pointer-events:none}
 input,textarea,select,.form-input,.form-textarea,.chat-input,.chat-search-input,.code-input{font-size:16px !important;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 #security-curtain{position:fixed;top:0;left:0;width:100vw;height:100vh;background:var(--bg-color);z-index:99999;display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:opacity .2s ease;pointer-events:none}
@@ -29,6 +29,26 @@ body.light-mode{--bg-color:#f4f6fb;--bg-elevated:#ffffff;--text-primary:#0f172a;
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(147,51,234,.35);border-radius:10px;border:2px solid transparent;background-clip:content-box}
 body{background-color:var(--bg-color);color:var(--text-primary);min-height:100vh;padding:24px 16px;display:block;position:relative;overflow-x:hidden;transition:background-color .4s,color .4s;background-image:radial-gradient(circle at 20% 10%,rgba(147,51,234,.06),transparent 50%),radial-gradient(circle at 80% 90%,rgba(168,85,247,.05),transparent 50%)}
+/* ==== BG VARIANTS (REQ 4) ==== */
+body.bg-default{}
+body.bg-aurora{background-image:radial-gradient(circle at 15% 20%,rgba(52,211,153,.22),transparent 55%),radial-gradient(circle at 85% 80%,rgba(147,51,234,.22),transparent 55%),radial-gradient(circle at 50% 50%,rgba(59,130,246,.12),transparent 70%)}
+body.bg-sunset{background-image:radial-gradient(circle at 20% 30%,rgba(251,146,60,.28),transparent 55%),radial-gradient(circle at 80% 70%,rgba(236,72,153,.24),transparent 55%),radial-gradient(circle at 50% 100%,rgba(251,191,36,.18),transparent 60%)}
+body.bg-ocean{background-image:radial-gradient(circle at 25% 15%,rgba(56,189,248,.22),transparent 55%),radial-gradient(circle at 75% 85%,rgba(14,165,233,.24),transparent 55%),radial-gradient(circle at 50% 50%,rgba(6,182,212,.14),transparent 70%)}
+body.bg-forest{background-image:radial-gradient(circle at 20% 25%,rgba(34,197,94,.22),transparent 55%),radial-gradient(circle at 80% 75%,rgba(21,128,61,.24),transparent 55%),radial-gradient(circle at 50% 100%,rgba(101,163,13,.14),transparent 60%)}
+body.bg-lava{background-image:radial-gradient(circle at 25% 20%,rgba(239,68,68,.28),transparent 55%),radial-gradient(circle at 75% 80%,rgba(245,158,11,.24),transparent 55%),radial-gradient(circle at 50% 50%,rgba(220,38,38,.14),transparent 70%)}
+body.bg-cosmic{background-image:radial-gradient(circle at 30% 15%,rgba(139,92,246,.32),transparent 55%),radial-gradient(circle at 70% 85%,rgba(236,72,153,.22),transparent 55%),radial-gradient(circle at 50% 50%,rgba(30,27,75,.4),transparent 70%)}
+body.bg-mint{background-image:radial-gradient(circle at 20% 20%,rgba(16,185,129,.22),transparent 55%),radial-gradient(circle at 80% 80%,rgba(45,212,191,.22),transparent 55%),radial-gradient(circle at 50% 50%,rgba(134,239,172,.12),transparent 70%)}
+body.bg-rose{background-image:radial-gradient(circle at 25% 25%,rgba(244,114,182,.26),transparent 55%),radial-gradient(circle at 75% 75%,rgba(251,113,133,.24),transparent 55%),radial-gradient(circle at 50% 50%,rgba(232,121,249,.14),transparent 70%)}
+body.bg-mono{background-image:radial-gradient(circle at 20% 20%,rgba(148,163,184,.18),transparent 55%),radial-gradient(circle at 80% 80%,rgba(100,116,139,.18),transparent 55%),radial-gradient(circle at 50% 50%,rgba(51,65,85,.14),transparent 70%)}
+body.light-mode.bg-aurora{background-image:radial-gradient(circle at 15% 20%,rgba(52,211,153,.32),transparent 55%),radial-gradient(circle at 85% 80%,rgba(147,51,234,.26),transparent 55%)}
+body.light-mode.bg-sunset{background-image:radial-gradient(circle at 20% 30%,rgba(251,146,60,.35),transparent 55%),radial-gradient(circle at 80% 70%,rgba(236,72,153,.3),transparent 55%)}
+body.light-mode.bg-ocean{background-image:radial-gradient(circle at 25% 15%,rgba(56,189,248,.32),transparent 55%),radial-gradient(circle at 75% 85%,rgba(14,165,233,.3),transparent 55%)}
+body.light-mode.bg-forest{background-image:radial-gradient(circle at 20% 25%,rgba(34,197,94,.32),transparent 55%),radial-gradient(circle at 80% 75%,rgba(21,128,61,.28),transparent 55%)}
+body.light-mode.bg-lava{background-image:radial-gradient(circle at 25% 20%,rgba(239,68,68,.35),transparent 55%),radial-gradient(circle at 75% 80%,rgba(245,158,11,.3),transparent 55%)}
+body.light-mode.bg-cosmic{background-image:radial-gradient(circle at 30% 15%,rgba(139,92,246,.38),transparent 55%),radial-gradient(circle at 70% 85%,rgba(236,72,153,.3),transparent 55%)}
+body.light-mode.bg-mint{background-image:radial-gradient(circle at 20% 20%,rgba(16,185,129,.32),transparent 55%),radial-gradient(circle at 80% 80%,rgba(45,212,191,.3),transparent 55%)}
+body.light-mode.bg-rose{background-image:radial-gradient(circle at 25% 25%,rgba(244,114,182,.34),transparent 55%),radial-gradient(circle at 75% 75%,rgba(251,113,133,.3),transparent 55%)}
+body.light-mode.bg-mono{background-image:radial-gradient(circle at 20% 20%,rgba(148,163,184,.28),transparent 55%),radial-gradient(circle at 80% 80%,rgba(100,116,139,.24),transparent 55%)}
 #constellation-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-2;pointer-events:none}
 #confetti-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:99998;display:none}
 #intro-screen{position:fixed;top:0;left:0;width:100vw;height:100vh;background:#05050a;display:flex;justify-content:center;align-items:center;z-index:9999;transition:opacity .6s,visibility .6s;overflow:hidden}
@@ -85,12 +105,12 @@ section{border-top:1px solid var(--line-color);padding-top:24px}
 .contact-box i{color:#9333ea;font-size:1.2rem;flex-shrink:0}
 #userProfileSection .contact-box{background:transparent !important;border:1px solid var(--line-color) !important}
 #userProfileSection .contact-box:hover{background:transparent !important;transform:none !important}
-/* ============ APPS GRID (REQUIREMENT 5) ============ */
-/* Phone: 2 cols (2x2 = 4 shown). Tablet: 4 in one row. Desktop: 6 in one row. */
+/* ============ APPS GRID (REQ 3) ============ */
+/* Always render 8 slots, CSS controls visible count */
 .apps-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-@media (min-width:641px) and (max-width:1024px){.apps-grid{grid-template-columns:repeat(4,1fr);gap:14px}}
-@media (min-width:1025px){.apps-grid{grid-template-columns:repeat(6,1fr);gap:16px}}
-/* ============ APP CARD (REQUIREMENT 6 - centered icon + download badge) ============ */
+.apps-grid .app-card:nth-child(n+5){display:none}
+@media (min-width:641px) and (max-width:1024px){.apps-grid{grid-template-columns:repeat(4,1fr);gap:14px}.apps-grid .app-card:nth-child(n+5){display:none}}
+@media (min-width:1025px){.apps-grid{grid-template-columns:repeat(6,1fr);gap:16px}.apps-grid .app-card:nth-child(n+5){display:flex}.apps-grid .app-card:nth-child(n+7){display:none}}
 .app-card{background:var(--box-bg);border:1px solid var(--line-color);border-radius:16px;padding:16px 10px;display:flex;flex-direction:column;gap:10px;transition:all .4s;position:relative;overflow:hidden;min-height:150px;text-decoration:none;color:inherit;align-items:center;justify-content:center;text-align:center}
 .app-card:hover{border-color:rgba(147,51,234,.5);background:var(--box-hover-bg);transform:translateY(-4px)}
 .app-card.disabled{opacity:.5;pointer-events:none}
@@ -159,7 +179,7 @@ section{border-top:1px solid var(--line-color);padding-top:24px}
 .custom-alert-box{background:var(--modal-container-bg);border:1px solid rgba(147,51,234,.35);border-radius:24px;width:100%;max-width:400px;padding:30px;text-align:center;transform:scale(.88);transition:transform .4s,opacity .3s;opacity:0}
 .custom-alert-overlay.active .custom-alert-box{transform:scale(1);opacity:1}
 .custom-alert-icon{font-size:2.4rem;color:#9333ea;margin-bottom:14px}
-.custom-alert-message{font-size:.95rem;color:var(--text-primary);font-weight:500;margin-bottom:22px;line-height:1.5}
+.custom-alert-message{font-size:.95rem;color:var(--text-primary);font-weight:500;margin-bottom:22px;line-height:1.5;word-break:break-word}
 .custom-alert-btn-group{display:flex;gap:8px;width:100%}
 .custom-alert-btn{background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;border:none;flex:1;padding:12px 8px;border-radius:12px;font-weight:600;font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
 .custom-alert-btn.cancel-btn{background:var(--box-bg);color:var(--text-primary);border:1px solid var(--line-color)}
@@ -375,7 +395,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .chat-user-info{flex:1;min-width:0}
 .chat-user-name{font-size:.9rem;font-weight:600;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:4px}
 .chat-user-preview{font-size:.72rem;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
-/* === REQ 3: username on one line, ID on the next line === */
 .chat-user-username{font-size:.68rem;color:#9333ea;font-weight:600;margin-top:2px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .chat-user-id-row{font-size:.62rem;margin-top:3px;display:block}
 .chat-user-id{font-size:.6rem;color:#9333ea;font-weight:800;font-family:'Fira Code',monospace;background:rgba(147,51,234,.12);padding:1px 7px;border-radius:5px;display:inline-flex;align-items:center;gap:3px}
@@ -408,7 +427,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .chat-input{flex:1;background:var(--bg-color);border:1px solid var(--line-color);border-radius:22px;padding:11px 18px;color:var(--text-primary);font-size:16px !important;outline:none;min-width:0}
 .chat-send-btn{width:44px;height:44px;border-radius:50%;border:none;background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
 .chat-mic-btn{width:44px;height:44px;border-radius:50%;background:var(--box-bg);border:1px solid var(--line-color);color:#9333ea;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;transition:all .2s}
-/* === REQ 2: Make mic button active/prominent === */
 #chatMicBtn{background:linear-gradient(135deg,#9333ea,#c084fc);border:none;color:#fff;box-shadow:0 4px 12px rgba(147,51,234,.35)}
 #chatMicBtn:hover{transform:scale(1.06);box-shadow:0 6px 16px rgba(147,51,234,.5)}
 #chatMicBtn:disabled{opacity:.45;transform:none;box-shadow:none}
@@ -425,7 +443,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 #emojiPicker .emoji-cat-btn.active{background:rgba(147,51,234,.15);color:#9333ea}
 #emojiPicker .emoji-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;overflow-y:auto;max-height:180px}
 #emojiPicker .emoji-item{background:transparent;border:none;font-size:1.35rem;cursor:pointer;padding:5px 0;border-radius:8px;line-height:1}
-/* === REQ 2: WhatsApp/Telegram-style voice message === */
 .chat-voice-msg{display:flex;align-items:center;gap:10px;min-width:200px;max-width:280px;padding:2px 0}
 .voice-play-btn{width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,.22);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:all .2s;backdrop-filter:blur(4px)}
 .voice-play-btn:hover{transform:scale(1.05);background:rgba(255,255,255,.32)}
@@ -446,8 +463,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .recording-btn{width:66px;height:66px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff}
 .recording-btn.cancel{background:var(--modal-container-bg);border:1px solid rgba(239,68,68,.5);color:#ef4444}
 .recording-btn.send{background:linear-gradient(135deg,#22c55e,#16a34a)}
-
-/* ==================== PUBLIC PROFILE ==================== */
 .pub-profile-view{display:flex;flex-direction:column;align-items:center;gap:8px;padding:8px 0 4px}
 .pub-profile-cover{width:100%;height:130px;border-radius:16px;background:linear-gradient(135deg,#9333ea,#c084fc,#e879f9);position:relative;overflow:hidden;margin-bottom:-70px;background-size:cover;background-position:center}
 .pub-profile-avatar{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-weight:800;overflow:hidden;border:4px solid var(--modal-container-bg);position:relative;z-index:1}
@@ -492,20 +507,12 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .follower-item .f-btn.follow{background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff}
 .follower-item .f-btn.unfollow{background:rgba(239,68,68,.1);color:#ef4444;border:1px solid rgba(239,68,68,.3)}
 .follower-item .f-btn.msg{background:var(--box-bg);color:#9333ea;border:1px solid var(--line-color)}
-
-/* ==================== VERIFIED BADGE (REQ 1: smaller) ==================== */
-.verified-badge{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:14px;height:14px;flex-shrink:0;vertical-align:middle;
-  position:relative;margin-left:3px;
-  transition:transform .2s ease;
-}
+.verified-badge{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;flex-shrink:0;vertical-align:middle;position:relative;margin-left:3px;transition:transform .2s ease}
 .verified-badge:hover{transform:scale(1.1)}
 .verified-badge svg{width:100%;height:100%;display:block;filter:drop-shadow(0 1px 2px rgba(29,155,240,.45))}
 .verified-badge.lg{width:18px;height:18px}
 .verified-badge.sm{width:11px;height:11px}
 .verified-badge.sm svg{filter:drop-shadow(0 1px 1px rgba(29,155,240,.4))}
-
 .cloud-status{position:fixed;bottom:14px;left:14px;font-size:.65rem;font-weight:700;padding:6px 12px;border-radius:20px;background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-secondary);z-index:50;display:flex;align-items:center;gap:5px;opacity:0;transition:opacity .3s;pointer-events:none}
 .cloud-status .dot{width:7px;height:7px;border-radius:50%;background:currentColor}
 @media (max-width:640px){
@@ -520,6 +527,16 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .bio-row span{white-space:pre-wrap}
 .bio-counter{text-align:right;font-size:.65rem;color:var(--text-secondary);margin-top:2px}
 .google-icon-svg{width:16px;height:16px}
+/* === Effects panel (REQ 4,6,7) === */
+.effect-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+.effect-chip{background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;padding:12px 8px;cursor:pointer;transition:all .2s;text-align:center;font-size:.72rem;font-weight:600;color:var(--text-primary);display:flex;flex-direction:column;align-items:center;gap:6px}
+.effect-chip:hover{border-color:rgba(147,51,234,.5);background:var(--box-hover-bg)}
+.effect-chip.active{background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;border-color:transparent}
+.effect-chip i{font-size:1.2rem}
+.effect-chip.active i{color:#fff}
+.bg-swatch{width:100%;height:36px;border-radius:8px;margin-bottom:4px;border:1px solid var(--line-color)}
+@media (min-width:641px){.effect-grid{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:1025px){.effect-grid{grid-template-columns:repeat(4,1fr)}}
 </style>
 <script>(function(){const t=localStorage.getItem('theme');const h=new Date().getHours();let th=t||((h>=6&&h<18)?'light':'dark');if(th==='light'){document.documentElement.classList.add('light-mode-init');document.addEventListener('DOMContentLoaded',()=>{document.body.classList.add('light-mode');['themeIcon','modalThemeIcon','contactModalThemeIcon'].forEach(id=>{const e=document.getElementById(id);if(e)e.className='fa-solid fa-sun';});});}})();</script>
 </head>
@@ -592,15 +609,12 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 </section>
 
-<!-- ==================== CONTENT SECTIONS (REORDERABLE) ==================== -->
 <div id="contentSections" style="display:flex;flex-direction:column;gap:32px">
-  <!-- APPLICATIONS (REQ 4: swapped position via JS reorder) -->
   <section id="sectionApps">
   <div class="section-title"><i class="fa-solid fa-cubes"></i> <span id="t-apps-title">My Applications</span></div>
   <div class="apps-grid" id="appsGrid"></div>
   </section>
 
-  <!-- EXPERIENCE -->
   <section id="sectionExperience">
   <div class="section-title"><i class="fa-solid fa-briefcase"></i> <span id="t-exp-title">Experience</span></div>
   <div class="item-row">
@@ -609,7 +623,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
   </div>
   </section>
 
-  <!-- SETUP & ENVIRONMENT -->
   <section id="sectionSetup">
   <div class="section-title"><i class="fa-solid fa-laptop-code"></i> <span id="t-setup-title">Setup & Environment</span></div>
   <div class="specs-grid">
@@ -618,7 +631,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
   </div>
   </section>
 
-  <!-- CORE STACK -->
   <section id="sectionStack">
   <div class="section-title"><i class="fa-solid fa-layer-group"></i> <span id="t-stack-title">Core Stack</span></div>
   <div class="specs-grid">
@@ -645,7 +657,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </footer>
 </div>
 
-<!-- =============== MODALS =============== -->
+<!-- MODALS (abbreviated unchanged ones stay same) -->
 <div class="modal-overlay profile-view-z" id="publicUserProfileModal">
 <div class="modal-container" style="max-width:480px">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="pub-profile-title">User Profile</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closePublicUserProfile()"><i class="fa-solid fa-xmark"></i></button></div></div>
@@ -725,8 +737,9 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <button class="admin-tab" data-tab="experience" onclick="switchAdminTab('experience',this)"><i class="fa-solid fa-briefcase"></i> <span id="tab-exp">exp</span></button>
 <button class="admin-tab" data-tab="setup" onclick="switchAdminTab('setup',this)"><i class="fa-solid fa-laptop-code"></i> <span id="tab-setup">setup</span></button>
 <button class="admin-tab" data-tab="stack" onclick="switchAdminTab('stack',this)"><i class="fa-solid fa-layer-group"></i> <span id="tab-stack">stack</span></button>
-<!-- === REQ 4: New section-order tab === -->
 <button class="admin-tab" data-tab="sections" onclick="switchAdminTab('sections',this)"><i class="fa-solid fa-arrows-up-down"></i> <span id="tab-sections">order</span></button>
+<!-- ==== NEW: EFFECTS TAB ==== -->
+<button class="admin-tab" data-tab="effects" onclick="switchAdminTab('effects',this)"><i class="fa-solid fa-wand-magic-sparkles"></i> <span id="tab-effects">effects</span></button>
 <button class="admin-tab" data-tab="footer" onclick="switchAdminTab('footer',this)"><i class="fa-solid fa-shoe-prints"></i> <span id="tab-footer">footer</span></button>
 <button class="admin-tab" data-tab="backup" onclick="switchAdminTab('backup',this)"><i class="fa-solid fa-database"></i> <span id="tab-backup">backup</span></button>
 </div>
@@ -846,7 +859,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 </div>
 <div class="admin-section" data-section="chats">
-<div class="admin-hint"><i class="fa-solid fa-comments" style="color:#9333ea"></i> <span id="chats-hint">all chat messages. tap to open chat &amp; reply.</span></div>
+<div class="admin-hint"><i class="fa-solid fa-comments" style="color:#9333ea"></i> <span id="chats-hint">all chat messages.</span></div>
 <div id="adminChatsList"></div>
 <div class="admin-actions-grid" style="margin-top:12px">
 <button class="admin-action-btn ghost" onclick="exportChatsCSV()"><i class="fa-solid fa-file-csv"></i> CSV</button>
@@ -873,11 +886,38 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 <div class="admin-hint"><i class="fa-solid fa-circle-info" style="color:#9333ea"></i> <span id="apps-hint">8 slots. upload icon + apk. lock icon = login required.</span></div>
 <div id="adminSlotsList"></div>
 </div>
-<!-- === REQ 4: Section order admin panel === -->
 <div class="admin-section" data-section="sections">
-<div class="admin-hint"><i class="fa-solid fa-arrows-up-down" style="color:#9333ea"></i> <span id="sections-hint">Reorder content sections (move up/down)</span></div>
+<div class="admin-hint"><i class="fa-solid fa-arrows-up-down" style="color:#9333ea"></i> <span id="sections-hint">Reorder content sections</span></div>
 <div id="adminSectionsOrderList"></div>
 </div>
+<!-- ==== NEW: EFFECTS SECTION ==== -->
+<div class="admin-section" data-section="effects">
+<div class="admin-hint"><i class="fa-solid fa-wand-magic-sparkles" style="color:#9333ea"></i> <span id="effects-hint">Background, confetti & tick sounds — ON/OFF anytime.</span></div>
+
+<h4 style="font-size:.8rem;font-weight:800;color:var(--text-primary);margin-bottom:8px;"><i class="fa-solid fa-image" style="color:#9333ea"></i> <span id="effects-bg-title">Background</span></h4>
+<div class="effect-grid" id="bgGrid"></div>
+
+<h4 style="font-size:.8rem;font-weight:800;color:var(--text-primary);margin-bottom:8px;margin-top:18px;"><i class="fa-solid fa-fire" style="color:#9333ea"></i> <span id="effects-confetti-title">Confetti on sign in</span></h4>
+<div class="toggle-row">
+<div class="toggle-label">
+<div class="toggle-label-title"><i class="fa-solid fa-toggle-on"></i> <span id="effects-confetti-toggle-label">Enable confetti</span></div>
+<div class="toggle-label-sub" id="effects-confetti-toggle-sub">Show confetti when user signs in</div>
+</div>
+<label class="toggle-switch"><input type="checkbox" id="confettiEnabledToggle" onchange="setConfettiEnabled(this.checked)"><span class="toggle-slider"></span></label>
+</div>
+<div class="effect-grid" id="confettiGrid"></div>
+
+<h4 style="font-size:.8rem;font-weight:800;color:var(--text-primary);margin-bottom:8px;margin-top:18px;"><i class="fa-solid fa-volume-high" style="color:#9333ea"></i> <span id="effects-tick-title">Tick Sound</span></h4>
+<div class="toggle-row">
+<div class="toggle-label">
+<div class="toggle-label-title"><i class="fa-solid fa-toggle-on"></i> <span id="effects-tick-toggle-label">Enable tick sound</span></div>
+<div class="toggle-label-sub" id="effects-tick-toggle-sub">Play sound on button clicks</div>
+</div>
+<label class="toggle-switch"><input type="checkbox" id="tickSoundEnabledToggle" onchange="setTickSoundEnabled(this.checked)"><span class="toggle-slider"></span></label>
+</div>
+<div class="effect-grid" id="tickGrid"></div>
+</div>
+
 <div class="admin-section" data-section="experience">
 <form onsubmit="saveAdminExperience(event)">
 <div class="form-group"><label class="form-label" id="ae-t-en-label">title (en)</label><input type="text" class="form-input" id="ae-t-en" maxlength="80" placeholder="title (en)"></div>
@@ -1284,14 +1324,29 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 
 <script>
-/* ================== ANTI-ZOOM ================== */
+/* ================== ANTI-ZOOM (REQ 1) ================== */
 (function(){
-  document.addEventListener('gesturestart',function(e){e.preventDefault();},{passive:false});
-  document.addEventListener('gesturechange',function(e){e.preventDefault();},{passive:false});
-  document.addEventListener('gestureend',function(e){e.preventDefault();},{passive:false});
+  function preventAll(e){e.preventDefault();}
+  ['gesturestart','gesturechange','gestureend'].forEach(ev=>document.addEventListener(ev,preventAll,{passive:false}));
   document.addEventListener('touchmove',function(e){if(e.touches.length>1)e.preventDefault();},{passive:false});
+  // Prevent double-tap zoom
   let lastTouchEnd=0;
-  document.addEventListener('touchend',function(e){const now=Date.now();if(now-lastTouchEnd<=300){e.preventDefault();}lastTouchEnd=now;},{passive:false});
+  document.addEventListener('touchend',function(e){
+    const now=Date.now();
+    if(now-lastTouchEnd<=350){
+      e.preventDefault();
+      // Dispatch click on target for buttons/links
+      const t=e.target.closest('button,a,.app-card,.effect-chip,.chat-user-item,.toggle-switch,.emoji-item,.chat-msg-action-btn');
+      if(t){ t.click && t.click(); }
+    }
+    lastTouchEnd=now;
+  },{passive:false});
+  // Prevent ctrl+wheel zoom
+  document.addEventListener('wheel',function(e){if(e.ctrlKey)e.preventDefault();},{passive:false});
+  // Prevent keyboard zoom
+  document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&(e.key==='+'||e.key==='-'||e.key==='='||e.key==='0'))e.preventDefault();});
+  // Prevent pinch on iOS Safari
+  document.addEventListener('dblclick',e=>e.preventDefault());
 })();
 
 /* ================== CONFIG ================== */
@@ -1303,8 +1358,8 @@ async function sendVerificationEmail(toEmail,code,type){if(!EMAILJS_CONFIG.enabl
 
 /* ================== LANGUAGE ================== */
 const LANG = {
-  en: {role:"Software Developer",sec_profile:"User Profile & Session",sec_apps:"My Applications",sec_exp:"Experience",sec_setup:"Setup & Environment",sec_stack:"Core Stack",sec_contact:"Sign In / Sign Up",lbl_os:"OS Environment",lbl_editor:"Editor Stack",lbl_backend:"Backend",lbl_frontend:"Frontend",contact_sub:"Sign In / Sign Up",contact_main:"Sign In To Join Us",contact_sub_logged:"User Account",contact_main_logged:"Welcome,",contact_main_logged2:"Session Active",scan_text:"Scan To Connect",copyright:"© 2026 muminsultani • All Rights Reserved.",tooltip_messages:"Messages",tooltip_privacy:"Hide / Show",tooltip_edit:"Edit Profile",tooltip_cp:"Change Password",tooltip_del:"Delete Account",tooltip_logout:"Log Out",auth_title:"Account Access",tab_signin:"sign in",tab_signup:"sign up",lbl_name:"name & surname",ph_name:"name & surname",lbl_username:"username",ph_username:"@username",lbl_email:"email",ph_email:"email address",lbl_email_or_user:"email or username",ph_email_or_user:"email or username",lbl_password:"password",ph_password:"password",lbl_bio:"bio",ph_bio:"bio (max 163 chars)",link_forgot:"forgot password?",btn_signin:"sign in",btn_signup:"sign up",btn_next:"next",btn_go:"go",btn_google:"Continue with Google",fp_title:"Password Recovery",fp_desc:"enter your registered email.",fp_send:"send",mock_title:"Check Your Email",mock_greet:"email sent!",mock_desc:"verification code sent to your email.",mock_code:"code:",mock_admin:"admin:",reset_btn:"reset password",rp_title:"Reset Password",rp_email:"email",rp_code:"code",rp_code_ph:"paste code",rp_new:"new password",rp_update:"update",su_title:"Check Your Email",su_desc:"enter the 6-digit code from your email.",su_enter:"enter code",su_resend:"resend",su_verify_title:"Verify Email",su_verify:"verify",ec_title:"Email Verification",ec_desc:"verification code sent to your new email.",ec_code:"code:",ec_enter:"enter code",ec_verify_title:"Verify Code",ec_verify_desc:"enter the code from your new email.",ec_verify:"verify",cp_title:"Change Password",cp_old:"current password",cp_new:"new password",cp_confirm:"confirm password",cp_update:"update",da_title:"Delete Account",da_warning:"warning: cannot be undone.",dp_title:"Confirm Deletion",ep_title:"Edit Profile",ep_birthdate:"date of birth",ep_save:"save",pp_title:"Profile Photo",pp_back:"back",pp_change:"change",pp_reset:"reset",crop_title:"crop photo",crop_cancel:"cancel",crop_apply:"apply",crop_free:"free",git_title:"sign in / sign up",git_signin:"sign in",git_back:"back",chat_title:"Messages",chat_search_ph:"search by user id / name / @username...",chat_no_users:"no other users.",chat_no_search:"no search results.",chat_no_msgs:"no messages yet",chat_start:"start the conversation 👋",chat_you:"you",chat_voice:"🎤 voice message",chat_verify:"🔵 blue check request",chat_voice_fail:"voice could not be loaded",chat_ph:"type a message...",admin_title:"Admin Access",admin_restricted:"restricted area.",admin_pass_label:"master password",admin_pass_ph:"master password",admin_unlock:"unlock",admin_panel_title:"Full Site Control",tab_dash:"dash",tab_account:"my account",tab_general:"general",tab_users:"users",tab_verify:"verify",tab_activity:"activity",tab_chats:"chats",tab_header:"header",tab_social:"social",tab_apps:"apps",tab_exp:"exp",tab_setup:"setup",tab_stack:"stack",tab_sections:"order",tab_footer:"footer",tab_backup:"backup",dash_hint:"full control mode",dash_test_email:"test email",account_hint:"admin profile — all fields editable.",aa_photo:"profile photo",aa_cover:"cover photo",aa_name:"name",aa_username:"username",aa_email:"email",aa_id:"user id — 9 digits (admin only)",aa_website:"website link",aa_bio:"bio (max 163)",admin_photo_upload:"tap to change admin photo",admin_photo_remove:"remove",admin_cover_upload:"tap to change admin cover",admin_cover_remove:"remove",account_save:"save",users_hint:"all users.",users_delete_all:"Delete All",verify_hint:"blue check requests.",activity_hint:"all activities.",activity_clear:"Clear",filter_all:"All",filter_signup:"Sign Up",filter_signin:"Sign In",filter_apk:"APK",filter_chat:"Chat",filter_verify:"Verify",filter_email:"Email",chats_hint:"all chat messages.",chats_delete_all:"Delete All",apps_hint:"8 slots. upload icon + apk. lock icon = login required.",sections_hint:"Reorder content sections (move up/down)",backup_export:"Export JSON",backup_import:"Import JSON",backup_reset:"Reset",backup_logout:"Log Out",header_save:"save",social_save:"save",exp_save:"save",setup_save:"save",stack_save:"save",footer_save:"save",app_save:"save",ep_save_btn:"save",general_save:"save",ah_brand:"brand name",ah_role_en:"role (en)",ah_role_tr:"role (tr)",as_github:"github url",as_instagram:"instagram url",as_gmail:"gmail address",ae_t_en:"title (en)",ae_t_tr:"title (tr)",ae_date:"date",ae_d_en:"desc (en)",ae_d_tr:"desc (tr)",au_os_en:"os (en)",au_os_tr:"os (tr)",au_ed_en:"editor (en)",au_ed_tr:"editor (tr)",ak_be:"backend",ak_fe:"frontend",af_brand:"footer brand",af_scan_en:"scan (en)",af_scan_tr:"scan (tr)",af_copy:"copyright",ae_icon:"app icon",ae_name:"app name",ae_desc:"description",ae_url:"link (optional)",ae_apk:"apk file (optional)",ae_lock:"require login",ae_lock_sub:"users must sign in first",icon_upload:"tap to choose icon image",apk_upload:"tap to choose apk file",icon_remove:"remove",apk_remove:"remove",user_detail_title:"User Details",edit_app_title:"Edit App Slot",app_slot_empty:"empty slot",act_signup:"Signed Up",act_signin:"Signed In",act_signout:"Signed Out",act_pass_change:"Changed Password",act_profile_update:"Updated Profile",act_email_change:"Changed Email",act_delete:"Deleted Account",act_apk_download:"Downloaded APK",act_apk_blocked:"APK Blocked",act_pass_reset:"Reset Password",act_chat:"Message",act_voice:"Voice Message",act_email_sent:"Email",act_verify:"Blue Check Request",pub_title:"User Profile",pub_send_msg:"Send Message",pub_request_verify:"request blue check",pub_close:"close",pub_admin:"Site Admin",pub_verified:"Verified User",pub_member:"Member",pub_email:"email",pub_birthdate:"birthdate",pub_joined:"joined",pub_msgs:"messages",pub_activity:"activity",pub_days:"days",pub_bio:"bio",pub_follow:"Follow",pub_following:"Following",pub_followers:"Followers",pub_followers_list:"Followers",pub_following_list:"Following",pub_website:"Website",ud_id:"🆔 ID",ud_email:"📧 Email",ud_pass:"🔑 Password",ud_birth:"🎂 Birthdate",ud_user:"👤 Username",ud_verified:"✅ Verified",ud_joined:"📅 Joined",ud_activity:"📊 Activity",ud_approve:"Approve",ud_remove:"Remove Verify",ud_yes:"yes",ud_no:"no",alert_fill_fields:"please fill in all required fields.",alert_success_signup:"account created successfully!",alert_success_signin:"signed in successfully!",alert_error_signin:"invalid credentials!",alert_auth_required:"you must sign in or register first!",alert_apk_login:"⚠️ sign in required to download APK.",alert_success_update:"profile updated successfully!",alert_success_delete:"account deleted successfully.",alert_del_confirm:"are you sure you want to delete your account?",alert_del_yes:"yes, delete",alert_del_no:"cancel",alert_del_pass_err:"incorrect password!",alert_del_user_err:"username does not match.",alert_cp_success:"password changed successfully!",alert_cp_old_err:"current password is incorrect!",alert_cp_match_err:"new passwords do not match!",alert_logout_confirm:"are you sure you want to log out?",alert_logout_yes:"log out",alert_logout_no:"back",alert_logout_ok:"session closed.",alert_pass_short:"password must be at least 8 characters.",alert_user_avail:"username is available.",alert_user_taken:"this username is already taken.",alert_ok:"OK",alert_rp_success:"password reset successfully!",alert_rp_code_err:"invalid code!",alert_rp_email_err:"email not registered!",alert_email_reg:"email already registered!",alert_admin_already:"admin is already verified!",alert_already_verified:"you are already verified!",alert_already_req:"you already requested!",alert_verify_sent:"✅ your blue check request has been sent to admin!",alert_chat_del:"are you sure you want to delete this message?",alert_chats_clear:"all chat messages will be deleted!",alert_deleted:"deleted!",alert_csv_down:"CSV downloaded!",alert_no_msgs:"no messages yet.",alert_no_records:"no records.",alert_no_users:"no registered users.",alert_no_req:"no pending requests.",alert_wrong_pass:"wrong password!",alert_admin_no_del:"admin account cannot be deleted!",alert_user_deleted:"user deleted!",alert_user_not_found:"user not found!",alert_delete_all_users:"all users will be deleted (admin preserved)!",alert_approved:"✅ approved!",alert_rejected:"request rejected",alert_blue_granted:"✅ blue check granted!",alert_blue_removed:"blue check removed",alert_must_signin:"you must sign in.",alert_select_image:"choose an image!",alert_image_large:"image must be under 5 MB!",alert_icon_err:"icon upload failed!",alert_app_saved:"app saved!",alert_saved:"saved!",alert_backup_down:"backup downloaded!",alert_backup_load:"backup loaded!",alert_invalid_file:"invalid file!",alert_reset_confirm:"all site content will be reset?",alert_reset_ok:"reset!",alert_clear_activity:"all activity logs will be deleted!",alert_login_chat:"sign in and open a chat first.",alert_browser_unsup:"browser not supported.",alert_mic_denied:"microphone permission denied.",alert_rec_fail:"recording failed to start.",alert_rec_short:"recording too short!",alert_apk_not_found:"APK not found!",alert_downloading:"Downloading",alert_down_err:"Download error!",alert_user_delete_confirm:"will be deleted?",alert_apk_upload_err:"APK upload error: ",alert_image_5mb:"image must be under 5 MB!",alert_choose_apk:"Choose APK File",alert_choose_icon:"Choose Icon Image",alert_copied:"copied!",alert_admin_required:"please sign in as admin first!",alert_next_first:"please enter your email or username first!",alert_google_enter:"enter your Gmail address",alert_google_success:"signed in with Google!",alert_id_invalid:"ID must be exactly 9 digits!",alert_id_used:"this ID is already used!",alert_followed:"you now follow this user!",alert_unfollowed:"unfollowed.",alert_cannot_follow_self:"you cannot follow yourself.",pw_very_weak:"very weak",pw_weak:"weak",pw_medium:"medium",pw_strong:"strong",pw_very_strong:"very strong",pw_enter:"password",rec_hint:"recording...",lbl_copy:"copy",favicon_upload:"tap to choose favicon",favicon_remove:"remove",ag_lang_label:"default site language",ag_title_label:"page title",ag_desc_label:"meta description",ag_favicon_label:"site icon (favicon)",ag_favicon_url_label:"or paste favicon URL",general_hint:"site-wide settings.",general_save:"save",ep_cover:"cover photo",cover_upload:"tap to choose cover image",cover_remove:"remove",ep_website:"website link",chat_open:"open chat",chat_reply:"reply"},
-  tr: {role:"Yazılım Geliştirici",sec_profile:"Kullanıcı Profili & Oturum",sec_apps:"Uygulamalarım",sec_exp:"Deneyim",sec_setup:"Kurulum & Ortam",sec_stack:"Temel Yığın",sec_contact:"Giriş Yap / Kayıt Ol",lbl_os:"İşletim Sistemi",lbl_editor:"Editör Yığını",lbl_backend:"Arka Uç",lbl_frontend:"Ön Uç",contact_sub:"Giriş Yap / Kayıt Ol",contact_main:"Bize Katılmak İçin Giriş Yapın",contact_sub_logged:"Kullanıcı Hesabı",contact_main_logged:"Hoş geldiniz,",contact_main_logged2:"Oturum Açık",scan_text:"Bağlanmak İçin Tarayın",copyright:"© 2026 muminsultani • Tüm Hakları Saklıdır.",tooltip_messages:"Mesajlar",tooltip_privacy:"Gizle / Göster",tooltip_edit:"Profili Düzenle",tooltip_cp:"Şifre Değiştir",tooltip_del:"Hesabı Sil",tooltip_logout:"Çıkış Yap",auth_title:"Hesap İşlemleri",tab_signin:"giriş yap",tab_signup:"kayıt ol",lbl_name:"ad soyad",ph_name:"ad soyad",lbl_username:"kullanıcı adı",ph_username:"@kullanıcıadı",lbl_email:"e-posta adresi",ph_email:"e-posta adresi",lbl_email_or_user:"e-posta veya kullanıcı adı",ph_email_or_user:"e-posta veya kullanıcı adı",lbl_password:"şifre",ph_password:"şifre",lbl_bio:"hakkında",ph_bio:"hakkında (max 163 karakter)",link_forgot:"şifremi unuttum?",btn_signin:"giriş yap",btn_signup:"kayıt ol",btn_next:"ileri",btn_go:"git",btn_google:"Google ile devam et",fp_title:"Şifre Kurtarma",fp_desc:"kayıtlı e-postanızı girin.",fp_send:"gönder",mock_title:"E-Postanızı Kontrol Edin",mock_greet:"e-posta gönderildi!",mock_desc:"doğrulama kodu e-posta adresinize gönderildi.",mock_code:"kod:",mock_admin:"yönetici:",reset_btn:"şifreyi sıfırla",rp_title:"Şifreyi Sıfırla",rp_email:"e-posta",rp_code:"kod",rp_code_ph:"kodu yapıştırın",rp_new:"yeni şifre",rp_update:"güncelle",su_title:"E-Postanızı Kontrol Edin",su_desc:"e-postanıza gelen 6 haneli kodu girin.",su_enter:"kodu gir",su_resend:"tekrar gönder",su_verify_title:"E-Postayı Doğrula",su_verify:"doğrula",ec_title:"E-Posta Doğrulama",ec_desc:"doğrulama kodu yeni e-posta adresinize gönderildi.",ec_code:"kod:",ec_enter:"kodu gir",ec_verify_title:"Kodu Doğrula",ec_verify_desc:"yeni e-postanıza gelen kodu girin.",ec_verify:"doğrula",cp_title:"Şifre Değiştir",cp_old:"mevcut şifre",cp_new:"yeni şifre",cp_confirm:"şifreyi onayla",cp_update:"güncelle",da_title:"Hesabı Sil",da_warning:"uyarı: geri alınamaz.",dp_title:"Silmeyi Onayla",ep_title:"Profili Düzenle",ep_birthdate:"doğum tarihi",ep_save:"kaydet",pp_title:"Profil Fotoğrafı",pp_back:"geri",pp_change:"değiştir",pp_reset:"sıfırla",crop_title:"fotoğrafı kırp",crop_cancel:"iptal",crop_apply:"uygula",crop_free:"serbest",git_title:"giriş yap / kayıt ol",git_signin:"giriş yap",git_back:"geri",chat_title:"Mesajlar",chat_search_ph:"kullanıcı id / ad / @kullanıcıadı ara...",chat_no_users:"başka kullanıcı yok.",chat_no_search:"arama sonucu yok.",chat_no_msgs:"henüz mesaj yok",chat_start:"sohbete başla 👋",chat_you:"sen",chat_voice:"🎤 sesli mesaj",chat_verify:"🔵 mavi tik isteği",chat_voice_fail:"ses yüklenemedi",chat_ph:"bir mesaj yaz...",admin_title:"Yönetici Girişi",admin_restricted:"kısıtlı alan.",admin_pass_label:"ana şifre",admin_pass_ph:"ana şifre",admin_unlock:"kilidi aç",admin_panel_title:"Tam Site Kontrolü",tab_dash:"kontrol",tab_account:"hesabım",tab_general:"genel",tab_users:"kullanıcılar",tab_verify:"onay",tab_activity:"aktivite",tab_chats:"sohbetler",tab_header:"başlık",tab_social:"sosyal",tab_apps:"uygulamalar",tab_exp:"deneyim",tab_setup:"kurulum",tab_stack:"yığın",tab_sections:"sıralama",tab_footer:"altbilgi",tab_backup:"yedek",dash_hint:"tam kontrol modu",dash_test_email:"test e-postası",account_hint:"yönetici profili — tüm alanlar düzenlenebilir.",aa_photo:"profil fotoğrafı",aa_cover:"kapak fotoğrafı",aa_name:"ad",aa_username:"kullanıcı adı",aa_email:"e-posta",aa_id:"kullanıcı id — 9 rakam (sadece admin)",aa_website:"web sitesi bağlantısı",aa_bio:"hakkında (max 163)",admin_photo_upload:"yönetici fotoğrafını değiştir",admin_photo_remove:"kaldır",admin_cover_upload:"yönetici kapağını değiştir",admin_cover_remove:"kaldır",account_save:"kaydet",users_hint:"tüm kullanıcılar.",users_delete_all:"Tümünü Sil",verify_hint:"mavi tik istekleri.",activity_hint:"tüm aktiviteler.",activity_clear:"Temizle",filter_all:"Tümü",filter_signup:"Kayıt",filter_signin:"Giriş",filter_apk:"APK",filter_chat:"Mesaj",filter_verify:"Mavi Tik",filter_email:"E-Posta",chats_hint:"tüm sohbet mesajları.",chats_delete_all:"Tümünü Sil",apps_hint:"8 slot. ikon + apk yükle. kilit ikonu = giriş gerekli.",sections_hint:"İçerik bölümlerini sırala (yukarı/aşağı taşı)",backup_export:"JSON Dışa Aktar",backup_import:"JSON İçe Aktar",backup_reset:"Sıfırla",backup_logout:"Çıkış Yap",header_save:"kaydet",social_save:"kaydet",exp_save:"kaydet",setup_save:"kaydet",stack_save:"kaydet",footer_save:"kaydet",app_save:"kaydet",ep_save_btn:"kaydet",general_save:"kaydet",ah_brand:"marka adı",ah_role_en:"rol (en)",ah_role_tr:"rol (tr)",as_github:"github url",as_instagram:"instagram url",as_gmail:"gmail adresi",ae_t_en:"başlık (en)",ae_t_tr:"başlık (tr)",ae_date:"tarih",ae_d_en:"açıklama (en)",ae_d_tr:"açıklama (tr)",au_os_en:"os (en)",au_os_tr:"os (tr)",au_ed_en:"editör (en)",au_ed_tr:"editör (tr)",ak_be:"backend",ak_fe:"frontend",af_brand:"alt marka",af_scan_en:"tarama (en)",af_scan_tr:"tarama (tr)",af_copy:"telif hakkı",ae_icon:"uygulama ikonu",ae_name:"uygulama adı",ae_desc:"açıklama",ae_url:"bağlantı (isteğe bağlı)",ae_apk:"apk dosyası (isteğe bağlı)",ae_lock:"giriş gerekli",ae_lock_sub:"kullanıcılar önce giriş yapmalı",icon_upload:"ikon resmi seç",apk_upload:"apk dosyası seç",icon_remove:"kaldır",apk_remove:"kaldır",user_detail_title:"Kullanıcı Detayları",edit_app_title:"Uygulama Slotunu Düzenle",app_slot_empty:"boş slot",act_signup:"Kayıt Oldu",act_signin:"Giriş Yaptı",act_signout:"Çıkış Yaptı",act_pass_change:"Şifre Değiştirdi",act_profile_update:"Profil Güncelledi",act_email_change:"E-Posta Değiştirdi",act_delete:"Hesap Sildi",act_apk_download:"APK İndirdi",act_apk_blocked:"APK Engellendi",act_pass_reset:"Şifre Sıfırladı",act_chat:"Mesaj",act_voice:"Sesli Mesaj",act_email_sent:"E-Posta",act_verify:"Mavi Tik İsteği",pub_title:"Kullanıcı Profili",pub_send_msg:"Mesaj Gönder",pub_request_verify:"mavi tik iste",pub_close:"kapat",pub_admin:"Site Yöneticisi",pub_verified:"Onaylı Kullanıcı",pub_member:"Üye",pub_email:"e-posta",pub_birthdate:"doğum",pub_joined:"katılım",pub_msgs:"mesaj",pub_activity:"aktivite",pub_days:"gün",pub_bio:"hakkında",pub_follow:"Takip Et",pub_following:"Takipten Çık",pub_followers:"Takipçi",pub_followers_list:"Takipçiler",pub_following_list:"Takip Edilenler",pub_website:"Web Sitesi",ud_id:"🆔 ID",ud_email:"📧 E-Posta",ud_pass:"🔑 Şifre",ud_birth:"🎂 Doğum",ud_user:"👤 Kullanıcı Adı",ud_verified:"✅ Onaylı",ud_joined:"📅 Katılım",ud_activity:"📊 Aktivite",ud_approve:"Onayla",ud_remove:"Onayı Kaldır",ud_yes:"evet",ud_no:"hayır",alert_fill_fields:"lütfen gerekli alanları doldurun.",alert_success_signup:"hesap başarıyla oluşturuldu!",alert_success_signin:"başarıyla giriş yapıldı!",alert_error_signin:"geçersiz bilgiler!",alert_auth_required:"önce giriş yapmalısınız!",alert_apk_login:"⚠️ APK indirmek için giriş yapmalısınız.",alert_success_update:"profil güncellendi!",alert_success_delete:"hesap silindi.",alert_del_confirm:"hesabınızı silmek istediğinizden emin misiniz?",alert_del_yes:"evet, sil",alert_del_no:"iptal",alert_del_pass_err:"şifre yanlış!",alert_del_user_err:"kullanıcı adı eşleşmiyor.",alert_cp_success:"şifre değiştirildi!",alert_cp_old_err:"mevcut şifre yanlış!",alert_cp_match_err:"yeni şifreler eşleşmiyor!",alert_logout_confirm:"çıkış yapmak istiyor musunuz?",alert_logout_yes:"çıkış yap",alert_logout_no:"geri",alert_logout_ok:"oturum kapatıldı.",alert_pass_short:"şifre en az 8 karakter olmalıdır.",alert_user_avail:"kullanıcı adı kullanılabilir.",alert_user_taken:"bu kullanıcı adı alınmış.",alert_ok:"Tamam",alert_rp_success:"şifre sıfırlandı!",alert_rp_code_err:"geçersiz kod!",alert_rp_email_err:"e-posta kayıtlı değil!",alert_email_reg:"bu e-posta zaten kayıtlı!",alert_admin_already:"admin zaten onaylı!",alert_already_verified:"zaten onaylısınız!",alert_already_req:"zaten istek gönderdiniz!",alert_verify_sent:"✅ mavi tik isteğiniz admin'e gönderildi!",alert_chat_del:"bu mesajı silmek istediğinize emin misiniz?",alert_chats_clear:"tüm sohbet mesajları silinecek!",alert_deleted:"silindi!",alert_csv_down:"CSV indirildi!",alert_no_msgs:"henüz mesaj yok.",alert_no_records:"kayıt yok.",alert_no_users:"kayıtlı kullanıcı yok.",alert_no_req:"bekleyen istek yok.",alert_wrong_pass:"yanlış şifre!",alert_admin_no_del:"admin hesabı silinemez!",alert_user_deleted:"kullanıcı silindi!",alert_user_not_found:"kullanıcı bulunamadı!",alert_delete_all_users:"tüm kullanıcılar silinecek (admin korunur)!",alert_approved:"✅ onaylandı!",alert_rejected:"istek reddedildi",alert_blue_granted:"✅ mavi tik verildi!",alert_blue_removed:"mavi tik kaldırıldı",alert_must_signin:"giriş yapmalısınız.",alert_select_image:"bir resim seçin!",alert_image_large:"resim 5 MB altı olmalı!",alert_icon_err:"ikon yüklenemedi!",alert_app_saved:"uygulama kaydedildi!",alert_saved:"kaydedildi!",alert_backup_down:"yedek indirildi!",alert_backup_load:"yedek yüklendi!",alert_invalid_file:"geçersiz dosya!",alert_reset_confirm:"tüm site içeriği sıfırlanacak?",alert_reset_ok:"sıfırlandı!",alert_clear_activity:"tüm aktivite kayıtları silinecek!",alert_login_chat:"önce giriş yapın ve sohbet açın.",alert_browser_unsup:"tarayıcı desteklemiyor.",alert_mic_denied:"mikrofon izni reddedildi.",alert_rec_fail:"kayıt başlatılamadı.",alert_rec_short:"kayıt çok kısa!",alert_apk_not_found:"APK bulunamadı!",alert_downloading:"İndiriliyor",alert_down_err:"İndirme hatası!",alert_user_delete_confirm:"silinsin mi?",alert_apk_upload_err:"APK yükleme hatası: ",alert_image_5mb:"resim 5 MB altı olmalı!",alert_choose_apk:"APK Dosyası Seç",alert_choose_icon:"İkon Resmi Seç",alert_copied:"kopyalandı!",alert_admin_required:"önce admin olarak giriş yapın!",alert_next_first:"lütfen önce e-posta veya kullanıcı adınızı girin!",alert_google_enter:"Gmail adresinizi girin",alert_google_success:"Google ile giriş yapıldı!",alert_id_invalid:"ID 9 rakam olmalıdır!",alert_id_used:"bu ID zaten kullanılıyor!",alert_followed:"artık bu kullanıcıyı takip ediyorsunuz!",alert_unfollowed:"takipten çıkıldı.",alert_cannot_follow_self:"kendinizi takip edemezsiniz.",pw_very_weak:"çok zayıf",pw_weak:"zayıf",pw_medium:"orta",pw_strong:"güçlü",pw_very_strong:"çok güçlü",pw_enter:"şifre",rec_hint:"kayıt yapılıyor...",lbl_copy:"kopyala",favicon_upload:"favicon seç",favicon_remove:"kaldır",ag_lang_label:"varsayılan site dili",ag_title_label:"sayfa başlığı",ag_desc_label:"meta açıklama",ag_favicon_label:"site ikonu (favicon)",ag_favicon_url_label:"veya favicon URL yapıştır",general_hint:"site geneli ayarlar.",general_save:"kaydet",ep_cover:"kapak fotoğrafı",cover_upload:"kapak resmi seç",cover_remove:"kaldır",ep_website:"web sitesi bağlantısı",chat_open:"sohbet aç",chat_reply:"cevapla"}
+  en: {role:"Software Developer",sec_profile:"User Profile & Session",sec_apps:"My Applications",sec_exp:"Experience",sec_setup:"Setup & Environment",sec_stack:"Core Stack",contact_sub:"Sign In / Sign Up",contact_main:"Sign In To Join Us",contact_sub_logged:"User Account",contact_main_logged:"Welcome,",contact_main_logged2:"Session Active",scan_text:"Scan To Connect",copyright:"© 2026 muminsultani • All Rights Reserved.",tooltip_messages:"Messages",tooltip_privacy:"Hide / Show",tooltip_edit:"Edit Profile",tooltip_cp:"Change Password",tooltip_del:"Delete Account",tooltip_logout:"Log Out",auth_title:"Account Access",tab_signin:"sign in",tab_signup:"sign up",lbl_name:"name & surname",ph_name:"name & surname",lbl_username:"username",ph_username:"@username",lbl_email:"email",ph_email:"email address",lbl_email_or_user:"email or username",ph_email_or_user:"email or username",lbl_password:"password",ph_password:"password",lbl_bio:"bio",ph_bio:"bio (max 163 chars)",link_forgot:"forgot password?",btn_signin:"sign in",btn_signup:"sign up",btn_next:"next",btn_go:"go",btn_google:"Continue with Google",fp_title:"Password Recovery",fp_desc:"enter your registered email.",fp_send:"send",mock_title:"Check Your Email",mock_greet:"email sent!",mock_desc:"verification code sent to your email.",mock_code:"code:",mock_admin:"admin:",reset_btn:"reset password",rp_title:"Reset Password",rp_email:"email",rp_code:"code",rp_code_ph:"paste code",rp_new:"new password",rp_update:"update",su_title:"Check Your Email",su_desc:"enter the 6-digit code from your email.",su_enter:"enter code",su_resend:"resend",su_verify_title:"Verify Email",su_verify:"verify",ec_title:"Email Verification",ec_desc:"verification code sent to your new email.",ec_code:"code:",ec_enter:"enter code",ec_verify_title:"Verify Code",ec_verify_desc:"enter the code from your new email.",ec_verify:"verify",cp_title:"Change Password",cp_old:"current password",cp_new:"new password",cp_confirm:"confirm password",cp_update:"update",da_title:"Delete Account",da_warning:"warning: cannot be undone.",dp_title:"Confirm Deletion",ep_title:"Edit Profile",ep_birthdate:"date of birth",ep_save:"save",pp_title:"Profile Photo",pp_back:"back",pp_change:"change",pp_reset:"reset",crop_title:"crop photo",crop_cancel:"cancel",crop_apply:"apply",crop_free:"free",git_title:"sign in / sign up",git_signin:"sign in",git_back:"back",chat_title:"Messages",chat_search_ph:"search by user id / name / @username...",chat_no_users:"no other users.",chat_no_search:"no search results.",chat_no_msgs:"no messages yet",chat_start:"start the conversation 👋",chat_you:"you",chat_voice:"🎤 voice message",chat_verify:"🔵 blue check request",chat_voice_fail:"voice could not be loaded",chat_ph:"type a message...",admin_title:"Admin Access",admin_restricted:"restricted area.",admin_pass_label:"master password",admin_pass_ph:"master password",admin_unlock:"unlock",admin_panel_title:"Full Site Control",tab_dash:"dash",tab_account:"my account",tab_general:"general",tab_users:"users",tab_verify:"verify",tab_activity:"activity",tab_chats:"chats",tab_header:"header",tab_social:"social",tab_apps:"apps",tab_exp:"exp",tab_setup:"setup",tab_stack:"stack",tab_sections:"order",tab_effects:"effects",tab_footer:"footer",tab_backup:"backup",dash_hint:"full control mode",dash_test_email:"test email",account_hint:"admin profile — all fields editable.",aa_photo:"profile photo",aa_cover:"cover photo",aa_name:"name",aa_username:"username",aa_email:"email",aa_id:"user id — 9 digits (admin only)",aa_website:"website link",aa_bio:"bio (max 163)",admin_photo_upload:"tap to change admin photo",admin_photo_remove:"remove",admin_cover_upload:"tap to change admin cover",admin_cover_remove:"remove",account_save:"save",users_hint:"all users.",users_delete_all:"Delete All",verify_hint:"blue check requests.",activity_hint:"all activities.",activity_clear:"Clear",filter_all:"All",filter_signup:"Sign Up",filter_signin:"Sign In",filter_apk:"APK",filter_chat:"Chat",filter_verify:"Verify",filter_email:"Email",chats_hint:"all chat messages.",chats_delete_all:"Delete All",apps_hint:"8 slots. upload icon + apk. lock icon = login required.",sections_hint:"Reorder content sections",effects_hint:"Background, confetti & tick sounds — ON/OFF anytime.",backup_export:"Export JSON",backup_import:"Import JSON",backup_reset:"Reset",backup_logout:"Log Out",header_save:"save",social_save:"save",exp_save:"save",setup_save:"save",stack_save:"save",footer_save:"save",app_save:"save",ep_save_btn:"save",general_save:"save",ah_brand:"brand name",ah_role_en:"role (en)",ah_role_tr:"role (tr)",as_github:"github url",as_instagram:"instagram url",as_gmail:"gmail address",ae_t_en:"title (en)",ae_t_tr:"title (tr)",ae_date:"date",ae_d_en:"desc (en)",ae_d_tr:"desc (tr)",au_os_en:"os (en)",au_os_tr:"os (tr)",au_ed_en:"editor (en)",au_ed_tr:"editor (tr)",ak_be:"backend",ak_fe:"frontend",af_brand:"footer brand",af_scan_en:"scan (en)",af_scan_tr:"scan (tr)",af_copy:"copyright",ae_icon:"app icon",ae_name:"app name",ae_desc:"description",ae_url:"link (optional)",ae_apk:"apk file (optional)",ae_lock:"require login",ae_lock_sub:"users must sign in first",icon_upload:"tap to choose icon image",apk_upload:"tap to choose apk file",icon_remove:"remove",apk_remove:"remove",user_detail_title:"User Details",edit_app_title:"Edit App Slot",app_slot_empty:"empty slot",act_signup:"Signed Up",act_signin:"Signed In",act_signout:"Signed Out",act_pass_change:"Changed Password",act_profile_update:"Updated Profile",act_email_change:"Changed Email",act_delete:"Deleted Account",act_apk_download:"Downloaded APK",act_apk_blocked:"APK Blocked",act_pass_reset:"Reset Password",act_chat:"Message",act_voice:"Voice Message",act_email_sent:"Email",act_verify:"Blue Check Request",pub_title:"User Profile",pub_send_msg:"Send Message",pub_close:"close",pub_birthdate:"birthdate",pub_joined:"joined",pub_msgs:"messages",pub_follow:"Follow",pub_following:"Following",pub_followers:"Followers",pub_followers_list:"Followers",pub_following_list:"Following",ud_id:"🆔 ID",ud_email:"📧 Email",ud_pass:"🔑 Password",ud_birth:"🎂 Birthdate",ud_user:"👤 Username",ud_verified:"✅ Verified",ud_joined:"📅 Joined",ud_activity:"📊 Activity",ud_approve:"Approve",ud_remove:"Remove Verify",ud_yes:"yes",ud_no:"no",alert_fill_fields:"please fill in all required fields.",alert_success_signup:"account created successfully!",alert_success_signin:"signed in successfully!",alert_error_signin:"invalid credentials!",alert_auth_required:"you must sign in or register first!",alert_apk_login:"⚠️ sign in required to download APK.",alert_success_update:"profile updated successfully!",alert_success_delete:"account deleted successfully.",alert_del_confirm:"are you sure you want to delete your account?",alert_del_yes:"yes, delete",alert_del_no:"cancel",alert_del_pass_err:"incorrect password!",alert_del_user_err:"username does not match.",alert_cp_success:"password changed successfully!",alert_cp_old_err:"current password is incorrect!",alert_cp_match_err:"new passwords do not match!",alert_logout_confirm:"are you sure you want to log out?",alert_logout_yes:"log out",alert_logout_no:"back",alert_logout_ok:"session closed.",alert_pass_short:"password must be at least 8 characters.",alert_user_avail:"username is available.",alert_user_taken:"this username is already taken.",alert_ok:"OK",alert_rp_success:"password reset successfully!",alert_rp_code_err:"invalid code!",alert_rp_email_err:"email not registered!",alert_email_reg:"email already registered!",alert_admin_already:"admin is already verified!",alert_already_verified:"you are already verified!",alert_already_req:"you already requested!",alert_verify_sent:"✅ your blue check request has been sent to admin!",alert_chat_del:"are you sure you want to delete this message?",alert_chats_clear:"all chat messages will be deleted!",alert_deleted:"deleted!",alert_csv_down:"CSV downloaded!",alert_no_msgs:"no messages yet.",alert_no_records:"no records.",alert_no_users:"no registered users.",alert_no_req:"no pending requests.",alert_wrong_pass:"wrong password!",alert_admin_no_del:"admin account cannot be deleted!",alert_user_deleted:"user deleted!",alert_user_not_found:"user not found!",alert_delete_all_users:"all users will be deleted (admin preserved)!",alert_approved:"✅ approved!",alert_rejected:"request rejected",alert_blue_granted:"✅ blue check granted!",alert_blue_removed:"blue check removed",alert_must_signin:"you must sign in.",alert_select_image:"choose an image!",alert_image_large:"image must be under 5 MB!",alert_icon_err:"icon upload failed!",alert_app_saved:"app saved!",alert_saved:"saved!",alert_backup_down:"backup downloaded!",alert_backup_load:"backup loaded!",alert_invalid_file:"invalid file!",alert_reset_confirm:"all site content will be reset?",alert_reset_ok:"reset!",alert_clear_activity:"all activity logs will be deleted!",alert_login_chat:"sign in and open a chat first.",alert_browser_unsup:"browser not supported.",alert_mic_denied:"microphone permission denied.",alert_rec_fail:"recording failed to start.",alert_rec_short:"recording too short!",alert_apk_not_found:"APK not found!",alert_downloading:"Downloading...",alert_down_err:"Download error!",alert_user_delete_confirm:"will be deleted?",alert_apk_upload_err:"APK upload error: ",alert_image_5mb:"image must be under 5 MB!",alert_choose_apk:"Choose APK File",alert_choose_icon:"Choose Icon Image",alert_copied:"copied!",alert_admin_required:"please sign in as admin first!",alert_next_first:"please enter your email or username first!",alert_google_enter:"enter your Gmail address",alert_google_success:"signed in with Google!",alert_id_invalid:"ID must be exactly 9 digits!",alert_id_used:"this ID is already used!",alert_followed:"you now follow this user!",alert_unfollowed:"unfollowed.",alert_cannot_follow_self:"you cannot follow yourself.",pw_very_weak:"very weak",pw_weak:"weak",pw_medium:"medium",pw_strong:"strong",pw_very_strong:"very strong",pw_enter:"password",rec_hint:"recording...",lbl_copy:"copy",favicon_upload:"tap to choose favicon",favicon_remove:"remove",ag_lang_label:"default site language",ag_title_label:"page title",ag_desc_label:"meta description",ag_favicon_label:"site icon (favicon)",ag_favicon_url_label:"or paste favicon URL",general_hint:"site-wide settings.",general_save:"save",ep_cover:"cover photo",cover_upload:"tap to choose cover image",cover_remove:"remove",ep_website:"website link",chat_open:"open chat",chat_reply:"reply",effects_bg_title:"Background",effects_confetti_title:"Confetti on sign in",effects_confetti_toggle_label:"Enable confetti",effects_confetti_toggle_sub:"Show confetti when user signs in",effects_tick_title:"Tick Sound",effects_tick_toggle_label:"Enable tick sound",effects_tick_toggle_sub:"Play sound on button clicks"},
+  tr: {role:"Yazılım Geliştirici",sec_profile:"Kullanıcı Profili & Oturum",sec_apps:"Uygulamalarım",sec_exp:"Deneyim",sec_setup:"Kurulum & Ortam",sec_stack:"Temel Yığın",contact_sub:"Giriş Yap / Kayıt Ol",contact_main:"Bize Katılmak İçin Giriş Yapın",contact_sub_logged:"Kullanıcı Hesabı",contact_main_logged:"Hoş geldiniz,",contact_main_logged2:"Oturum Açık",scan_text:"Bağlanmak İçin Tarayın",copyright:"© 2026 muminsultani • Tüm Hakları Saklıdır.",tooltip_messages:"Mesajlar",tooltip_privacy:"Gizle / Göster",tooltip_edit:"Profili Düzenle",tooltip_cp:"Şifre Değiştir",tooltip_del:"Hesabı Sil",tooltip_logout:"Çıkış Yap",auth_title:"Hesap İşlemleri",tab_signin:"giriş yap",tab_signup:"kayıt ol",lbl_name:"ad soyad",ph_name:"ad soyad",lbl_username:"kullanıcı adı",ph_username:"@kullanıcıadı",lbl_email:"e-posta adresi",ph_email:"e-posta adresi",lbl_email_or_user:"e-posta veya kullanıcı adı",ph_email_or_user:"e-posta veya kullanıcı adı",lbl_password:"şifre",ph_password:"şifre",lbl_bio:"hakkında",ph_bio:"hakkında (max 163 karakter)",link_forgot:"şifremi unuttum?",btn_signin:"giriş yap",btn_signup:"kayıt ol",btn_next:"ileri",btn_go:"git",btn_google:"Google ile devam et",fp_title:"Şifre Kurtarma",fp_desc:"kayıtlı e-postanızı girin.",fp_send:"gönder",mock_title:"E-Postanızı Kontrol Edin",mock_greet:"e-posta gönderildi!",mock_desc:"doğrulama kodu e-posta adresinize gönderildi.",mock_code:"kod:",mock_admin:"yönetici:",reset_btn:"şifreyi sıfırla",rp_title:"Şifreyi Sıfırla",rp_email:"e-posta",rp_code:"kod",rp_code_ph:"kodu yapıştırın",rp_new:"yeni şifre",rp_update:"güncelle",su_title:"E-Postanızı Kontrol Edin",su_desc:"e-postanıza gelen 6 haneli kodu girin.",su_enter:"kodu gir",su_resend:"tekrar gönder",su_verify_title:"E-Postayı Doğrula",su_verify:"doğrula",ec_title:"E-Posta Doğrulama",ec_desc:"doğrulama kodu yeni e-posta adresinize gönderildi.",ec_code:"kod:",ec_enter:"kodu gir",ec_verify_title:"Kodu Doğrula",ec_verify_desc:"yeni e-postanıza gelen kodu girin.",ec_verify:"doğrula",cp_title:"Şifre Değiştir",cp_old:"mevcut şifre",cp_new:"yeni şifre",cp_confirm:"şifreyi onayla",cp_update:"güncelle",da_title:"Hesabı Sil",da_warning:"uyarı: geri alınamaz.",dp_title:"Silmeyi Onayla",ep_title:"Profili Düzenle",ep_birthdate:"doğum tarihi",ep_save:"kaydet",pp_title:"Profil Fotoğrafı",pp_back:"geri",pp_change:"değiştir",pp_reset:"sıfırla",crop_title:"fotoğrafı kırp",crop_cancel:"iptal",crop_apply:"uygula",crop_free:"serbest",git_title:"giriş yap / kayıt ol",git_signin:"giriş yap",git_back:"geri",chat_title:"Mesajlar",chat_search_ph:"kullanıcı id / ad / @kullanıcıadı ara...",chat_no_users:"başka kullanıcı yok.",chat_no_search:"arama sonucu yok.",chat_no_msgs:"henüz mesaj yok",chat_start:"sohbete başla 👋",chat_you:"sen",chat_voice:"🎤 sesli mesaj",chat_verify:"🔵 mavi tik isteği",chat_voice_fail:"ses yüklenemedi",chat_ph:"bir mesaj yaz...",admin_title:"Yönetici Girişi",admin_restricted:"kısıtlı alan.",admin_pass_label:"ana şifre",admin_pass_ph:"ana şifre",admin_unlock:"kilidi aç",admin_panel_title:"Tam Site Kontrolü",tab_dash:"kontrol",tab_account:"hesabım",tab_general:"genel",tab_users:"kullanıcılar",tab_verify:"onay",tab_activity:"aktivite",tab_chats:"sohbetler",tab_header:"başlık",tab_social:"sosyal",tab_apps:"uygulamalar",tab_exp:"deneyim",tab_setup:"kurulum",tab_stack:"yığın",tab_sections:"sıralama",tab_effects:"efektler",tab_footer:"altbilgi",tab_backup:"yedek",dash_hint:"tam kontrol modu",dash_test_email:"test e-postası",account_hint:"yönetici profili — tüm alanlar düzenlenebilir.",aa_photo:"profil fotoğrafı",aa_cover:"kapak fotoğrafı",aa_name:"ad",aa_username:"kullanıcı adı",aa_email:"e-posta",aa_id:"kullanıcı id — 9 rakam (sadece admin)",aa_website:"web sitesi bağlantısı",aa_bio:"hakkında (max 163)",admin_photo_upload:"yönetici fotoğrafını değiştir",admin_photo_remove:"kaldır",admin_cover_upload:"yönetici kapağını değiştir",admin_cover_remove:"kaldır",account_save:"kaydet",users_hint:"tüm kullanıcılar.",users_delete_all:"Tümünü Sil",verify_hint:"mavi tik istekleri.",activity_hint:"tüm aktiviteler.",activity_clear:"Temizle",filter_all:"Tümü",filter_signup:"Kayıt",filter_signin:"Giriş",filter_apk:"APK",filter_chat:"Mesaj",filter_verify:"Mavi Tik",filter_email:"E-Posta",chats_hint:"tüm sohbet mesajları.",chats_delete_all:"Tümünü Sil",apps_hint:"8 slot. ikon + apk yükle. kilit ikonu = giriş gerekli.",sections_hint:"İçerik bölümlerini sırala",effects_hint:"Arka plan, konfeti ve tik sesleri — istediğin zaman aç/kapa.",backup_export:"JSON Dışa Aktar",backup_import:"JSON İçe Aktar",backup_reset:"Sıfırla",backup_logout:"Çıkış Yap",header_save:"kaydet",social_save:"kaydet",exp_save:"kaydet",setup_save:"kaydet",stack_save:"kaydet",footer_save:"kaydet",app_save:"kaydet",ep_save_btn:"kaydet",general_save:"kaydet",ah_brand:"marka adı",ah_role_en:"rol (en)",ah_role_tr:"rol (tr)",as_github:"github url",as_instagram:"instagram url",as_gmail:"gmail adresi",ae_t_en:"başlık (en)",ae_t_tr:"başlık (tr)",ae_date:"tarih",ae_d_en:"açıklama (en)",ae_d_tr:"açıklama (tr)",au_os_en:"os (en)",au_os_tr:"os (tr)",au_ed_en:"editör (en)",au_ed_tr:"editör (tr)",ak_be:"backend",ak_fe:"frontend",af_brand:"alt marka",af_scan_en:"tarama (en)",af_scan_tr:"tarama (tr)",af_copy:"telif hakkı",ae_icon:"uygulama ikonu",ae_name:"uygulama adı",ae_desc:"açıklama",ae_url:"bağlantı (isteğe bağlı)",ae_apk:"apk dosyası (isteğe bağlı)",ae_lock:"giriş gerekli",ae_lock_sub:"kullanıcılar önce giriş yapmalı",icon_upload:"ikon resmi seç",apk_upload:"apk dosyası seç",icon_remove:"kaldır",apk_remove:"kaldır",user_detail_title:"Kullanıcı Detayları",edit_app_title:"Uygulama Slotunu Düzenle",app_slot_empty:"boş slot",act_signup:"Kayıt Oldu",act_signin:"Giriş Yaptı",act_signout:"Çıkış Yaptı",act_pass_change:"Şifre Değiştirdi",act_profile_update:"Profil Güncelledi",act_email_change:"E-Posta Değiştirdi",act_delete:"Hesap Sildi",act_apk_download:"APK İndirdi",act_apk_blocked:"APK Engellendi",act_pass_reset:"Şifre Sıfırladı",act_chat:"Mesaj",act_voice:"Sesli Mesaj",act_email_sent:"E-Posta",act_verify:"Mavi Tik İsteği",pub_title:"Kullanıcı Profili",pub_send_msg:"Mesaj Gönder",pub_close:"kapat",pub_birthdate:"doğum",pub_joined:"katılım",pub_msgs:"mesaj",pub_follow:"Takip Et",pub_following:"Takipten Çık",pub_followers:"Takipçi",pub_followers_list:"Takipçiler",pub_following_list:"Takip Edilenler",ud_id:"🆔 ID",ud_email:"📧 E-Posta",ud_pass:"🔑 Şifre",ud_birth:"🎂 Doğum",ud_user:"👤 Kullanıcı Adı",ud_verified:"✅ Onaylı",ud_joined:"📅 Katılım",ud_activity:"📊 Aktivite",ud_approve:"Onayla",ud_remove:"Onayı Kaldır",ud_yes:"evet",ud_no:"hayır",alert_fill_fields:"lütfen gerekli alanları doldurun.",alert_success_signup:"hesap başarıyla oluşturuldu!",alert_success_signin:"başarıyla giriş yapıldı!",alert_error_signin:"geçersiz bilgiler!",alert_auth_required:"önce giriş yapmalısınız!",alert_apk_login:"⚠️ APK indirmek için giriş yapmalısınız.",alert_success_update:"profil güncellendi!",alert_success_delete:"hesap silindi.",alert_del_confirm:"hesabınızı silmek istediğinizden emin misiniz?",alert_del_yes:"evet, sil",alert_del_no:"iptal",alert_del_pass_err:"şifre yanlış!",alert_del_user_err:"kullanıcı adı eşleşmiyor.",alert_cp_success:"şifre değiştirildi!",alert_cp_old_err:"mevcut şifre yanlış!",alert_cp_match_err:"yeni şifreler eşleşmiyor!",alert_logout_confirm:"çıkış yapmak istiyor musunuz?",alert_logout_yes:"çıkış yap",alert_logout_no:"geri",alert_logout_ok:"oturum kapatıldı.",alert_pass_short:"şifre en az 8 karakter olmalıdır.",alert_user_avail:"kullanıcı adı kullanılabilir.",alert_user_taken:"bu kullanıcı adı alınmış.",alert_ok:"Tamam",alert_rp_success:"şifre sıfırlandı!",alert_rp_code_err:"geçersiz kod!",alert_rp_email_err:"e-posta kayıtlı değil!",alert_email_reg:"bu e-posta zaten kayıtlı!",alert_admin_already:"admin zaten onaylı!",alert_already_verified:"zaten onaylısınız!",alert_already_req:"zaten istek gönderdiniz!",alert_verify_sent:"✅ mavi tik isteğiniz admin'e gönderildi!",alert_chat_del:"bu mesajı silmek istediğinize emin misiniz?",alert_chats_clear:"tüm sohbet mesajları silinecek!",alert_deleted:"silindi!",alert_csv_down:"CSV indirildi!",alert_no_msgs:"henüz mesaj yok.",alert_no_records:"kayıt yok.",alert_no_users:"kayıtlı kullanıcı yok.",alert_no_req:"bekleyen istek yok.",alert_wrong_pass:"yanlış şifre!",alert_admin_no_del:"admin hesabı silinemez!",alert_user_deleted:"kullanıcı silindi!",alert_user_not_found:"kullanıcı bulunamadı!",alert_delete_all_users:"tüm kullanıcılar silinecek (admin korunur)!",alert_approved:"✅ onaylandı!",alert_rejected:"istek reddedildi",alert_blue_granted:"✅ mavi tik verildi!",alert_blue_removed:"mavi tik kaldırıldı",alert_must_signin:"giriş yapmalısınız.",alert_select_image:"bir resim seçin!",alert_image_large:"resim 5 MB altı olmalı!",alert_icon_err:"ikon yüklenemedi!",alert_app_saved:"uygulama kaydedildi!",alert_saved:"kaydedildi!",alert_backup_down:"yedek indirildi!",alert_backup_load:"yedek yüklendi!",alert_invalid_file:"geçersiz dosya!",alert_reset_confirm:"tüm site içeriği sıfırlanacak?",alert_reset_ok:"sıfırlandı!",alert_clear_activity:"tüm aktivite kayıtları silinecek!",alert_login_chat:"önce giriş yapın ve sohbet açın.",alert_browser_unsup:"tarayıcı desteklemiyor.",alert_mic_denied:"mikrofon izni reddedildi.",alert_rec_fail:"kayıt başlatılamadı.",alert_rec_short:"kayıt çok kısa!",alert_apk_not_found:"APK bulunamadı!",alert_downloading:"İndiriliyor...",alert_down_err:"İndirme hatası!",alert_user_delete_confirm:"silinsin mi?",alert_apk_upload_err:"APK yükleme hatası: ",alert_image_5mb:"resim 5 MB altı olmalı!",alert_choose_apk:"APK Dosyası Seç",alert_choose_icon:"İkon Resmi Seç",alert_copied:"kopyalandı!",alert_admin_required:"önce admin olarak giriş yapın!",alert_next_first:"lütfen önce e-posta veya kullanıcı adınızı girin!",alert_google_enter:"Gmail adresinizi girin",alert_google_success:"Google ile giriş yapıldı!",alert_id_invalid:"ID 9 rakam olmalıdır!",alert_id_used:"bu ID zaten kullanılıyor!",alert_followed:"artık bu kullanıcıyı takip ediyorsunuz!",alert_unfollowed:"takipten çıkıldı.",alert_cannot_follow_self:"kendinizi takip edemezsiniz.",pw_very_weak:"çok zayıf",pw_weak:"zayıf",pw_medium:"orta",pw_strong:"güçlü",pw_very_strong:"çok güçlü",pw_enter:"şifre",rec_hint:"kayıt yapılıyor...",lbl_copy:"kopyala",favicon_upload:"favicon seç",favicon_remove:"kaldır",ag_lang_label:"varsayılan site dili",ag_title_label:"sayfa başlığı",ag_desc_label:"meta açıklama",ag_favicon_label:"site ikonu (favicon)",ag_favicon_url_label:"veya favicon URL yapıştır",general_hint:"site geneli ayarlar.",general_save:"kaydet",ep_cover:"kapak fotoğrafı",cover_upload:"kapak resmi seç",cover_remove:"kaldır",ep_website:"web sitesi bağlantısı",chat_open:"sohbet aç",chat_reply:"cevapla",effects_bg_title:"Arka Plan",effects_confetti_title:"Giriş Konfetisi",effects_confetti_toggle_label:"Konfeti aç",effects_confetti_toggle_sub:"Giriş yapınca konfeti göster",effects_tick_title:"Tik Sesi",effects_tick_toggle_label:"Tik sesi aç",effects_tick_toggle_sub:"Buton tıklamalarında ses çal"}
 };
 
 let currentLang = 'en';
@@ -1327,7 +1382,7 @@ function applyTranslations() {
   const clt = document.getElementById('currentLangText');
   if (clt) clt.innerHTML = currentLang === 'en' ? '<img src="https://flagcdn.com/gb.svg" class="lang-flag small" alt="EN">' : '<img src="https://flagcdn.com/tr.svg" class="lang-flag small" alt="TR">';
   st('t-profile-title', dict.sec_profile); st('t-apps-title', dict.sec_apps); st('t-exp-title', dict.sec_exp);
-  st('t-setup-title', dict.sec_setup); st('t-stack-title', dict.sec_stack); st('t-contact-title', dict.sec_contact);
+  st('t-setup-title', dict.sec_setup); st('t-stack-title', dict.sec_stack);
   st('t-os-label', dict.lbl_os); st('t-editor-label', dict.lbl_editor); st('t-backend-label', dict.lbl_backend); st('t-frontend-label', dict.lbl_frontend);
   const lu = localStorage.getItem('logged_user');
   if (!lu) { st('t-contact-sub', dict.contact_sub); st('t-contact-main', dict.contact_main); }
@@ -1365,7 +1420,7 @@ function applyTranslations() {
   st('admin-login-title', dict.admin_title); st('admin-restricted-text', dict.admin_restricted); st('admin-pass-label', dict.admin_pass_label); sph('adminPasswordInput', dict.admin_pass_ph); st('admin-login-btn', dict.admin_unlock); st('admin-panel-title', dict.admin_panel_title);
   st('tab-dash', dict.tab_dash); st('tab-account', dict.tab_account); st('tab-general', dict.tab_general);
   st('tab-users', dict.tab_users); st('tab-verify', dict.tab_verify); st('tab-activity', dict.tab_activity); st('tab-chats', dict.tab_chats); st('tab-header', dict.tab_header);
-  st('tab-social', dict.tab_social); st('tab-apps', dict.tab_apps); st('tab-exp', dict.tab_exp); st('tab-setup', dict.tab_setup); st('tab-stack', dict.tab_stack); st('tab-sections', dict.tab_sections); st('tab-footer', dict.tab_footer); st('tab-backup', dict.tab_backup);
+  st('tab-social', dict.tab_social); st('tab-apps', dict.tab_apps); st('tab-exp', dict.tab_exp); st('tab-setup', dict.tab_setup); st('tab-stack', dict.tab_stack); st('tab-sections', dict.tab_sections); st('tab-effects', dict.tab_effects); st('tab-footer', dict.tab_footer); st('tab-backup', dict.tab_backup);
   st('dash-hint', dict.dash_hint); st('dash-test-email', dict.dash_test_email); st('account-hint', dict.account_hint);
   st('aa-photo-label', dict.aa_photo); st('adminPhotoUploadText', dict.admin_photo_upload); st('admin-photo-remove', dict.admin_photo_remove);
   st('aa-cover-label', dict.aa_cover); st('adminCoverUploadText', dict.admin_cover_upload); st('admin-cover-remove', dict.admin_cover_remove);
@@ -1374,7 +1429,10 @@ function applyTranslations() {
   st('general-hint', dict.general_hint); st('ag-lang-label', dict.ag_lang_label); st('ag-title-label', dict.ag_title_label); st('ag-desc-label', dict.ag_desc_label); st('ag-favicon-label', dict.ag_favicon_label); st('ag-favicon-url-label', dict.ag_favicon_url_label); st('faviconUploadText', dict.favicon_upload); st('favicon-remove', dict.favicon_remove); st('general-save', dict.general_save);
   st('users-hint', dict.users_hint); st('users-delete-all', dict.users_delete_all); st('verify-hint', dict.verify_hint); st('activity-hint', dict.activity_hint); st('activity-clear', dict.activity_clear);
   st('filter-all', dict.filter_all); st('filter-signup', dict.filter_signup); st('filter-signin', dict.filter_signin); st('filter-apk', dict.filter_apk); st('filter-chat', dict.filter_chat); st('filter-verify', dict.filter_verify); st('filter-email', dict.filter_email);
-  st('chats-hint', dict.chats_hint); st('chats-delete-all', dict.chats_delete_all); st('apps-hint', dict.apps_hint); st('sections-hint', dict.sections_hint);
+  st('chats-hint', dict.chats_hint); st('chats-delete-all', dict.chats_delete_all); st('apps-hint', dict.apps_hint); st('sections-hint', dict.sections_hint); st('effects-hint', dict.effects_hint);
+  st('effects-bg-title', dict.effects_bg_title); st('effects-confetti-title', dict.effects_confetti_title);
+  st('effects-confetti-toggle-label', dict.effects_confetti_toggle_label); st('effects-confetti-toggle-sub', dict.effects_confetti_toggle_sub);
+  st('effects-tick-title', dict.effects_tick_title); st('effects-tick-toggle-label', dict.effects_tick_toggle_label); st('effects-tick-toggle-sub', dict.effects_tick_toggle_sub);
   st('backup-export', dict.backup_export); st('backup-import', dict.backup_import); st('backup-reset', dict.backup_reset); st('backup-logout', dict.backup_logout);
   st('ah-brand-label', dict.ah_brand); sph('ah-brand', dict.ah_brand); st('ah-role-en-label', dict.ah_role_en); sph('ah-role-en', dict.ah_role_en); st('ah-role-tr-label', dict.ah_role_tr); sph('ah-role-tr', dict.ah_role_tr);
   st('as-github-label', dict.as_github); sph('as-github', dict.as_github); st('as-instagram-label', dict.as_instagram); sph('as-instagram', dict.as_instagram); st('as-gmail-label', dict.as_gmail); sph('as-gmail', dict.as_gmail);
@@ -1389,9 +1447,6 @@ function applyTranslations() {
   st('icon-remove', dict.icon_remove); st('apk-remove', dict.apk_remove);
   st('user-detail-title', dict.user_detail_title); st('pub-profile-title', dict.pub_title);
   st('followersTitle', currentFollowersView==='followers'?dict.pub_followers_list:dict.pub_following_list);
-  const gMsg = document.getElementById('gmailNoticeMessage'); if (gMsg) gMsg.textContent = (currentLang === 'tr' ? 'kişisel e-posta adresi' : 'personal email address');
-  const gEmail = document.getElementById('gmail-email-text'); if (gEmail) gEmail.textContent = dict.rp_email;
-  const gBack = document.getElementById('gmail-back-text'); if (gBack) gBack.textContent = dict.git_back;
   st('recordingHint', dict.rec_hint);
   const dl = document.getElementById('ag-default-lang'); if (dl) dl.value = getSiteContent().general?.defaultLang || 'en';
 }
@@ -1416,6 +1471,7 @@ function forceRefreshUI() {
         if (tabName === 'chats') renderAdminChats();
         if (tabName === 'apps') renderAdminSlots();
         if (tabName === 'sections') renderAdminSectionsOrder();
+        if (tabName === 'effects') renderEffectsPanel();
         if (tabName === 'account') renderAdminAccount();
       }
     }
@@ -1468,21 +1524,105 @@ function getDeviceId(){let id=localStorage.getItem('_cloud_device_id');if(!id){i
 function cloudPush(key,value){if(!cloudEnabled||!cloudDB)return;try{cloudDB.ref('muminsultani/'+key).set({data:value,updatedAt:Date.now(),source:getDeviceId()}).catch(()=>{});}catch(e){}}
 async function cloudPull(key){if(!cloudEnabled||!cloudDB)return null;try{const snap=await cloudDB.ref('muminsultani/'+key).once('value');const v=snap.val();return v&&v.data!==undefined?v.data:null;}catch(e){return null;}}
 function cloudInit(){try{if(!FIREBASE_CONFIG.apiKey)return false;if(typeof firebase==='undefined')return false;if(!firebase.apps.length)firebase.initializeApp(FIREBASE_CONFIG);cloudDB=firebase.database();cloudEnabled=true;return true;}catch(e){cloudEnabled=false;return false;}}
-async function cloudInitSync(){if(!cloudInit())return;for(const key of CLOUD_SYNC_KEYS){const cv=await cloudPull(key);const lv=localStorage.getItem(key);if(!cv&&!lv)continue;let merged=cv||lv;if(merged&&merged!==lv){__ORIG_SET_ITEM__(key,merged);}}try{checkUserSession();updateChatBadge();renderApplications();applySectionOrder();}catch(e){}if(!cloudSubscribed){cloudSubscribed=true;CLOUD_SYNC_KEYS.forEach(key=>{cloudDB.ref('muminsultani/'+key).on('value',snap=>{const v=snap.val();if(!v||v.data===undefined)return;if(v.source===getDeviceId())return;if(localStorage.getItem(key)===v.data)return;__ORIG_SET_ITEM__(key,v.data);try{forceRefreshUI();}catch(e){}});});}}
+async function cloudInitSync(){if(!cloudInit())return;for(const key of CLOUD_SYNC_KEYS){const cv=await cloudPull(key);const lv=localStorage.getItem(key);if(!cv&&!lv)continue;let merged=cv||lv;if(merged&&merged!==lv){__ORIG_SET_ITEM__(key,merged);}}try{checkUserSession();updateChatBadge();renderApplications();applySectionOrder();applyEffectsSettings();}catch(e){}if(!cloudSubscribed){cloudSubscribed=true;CLOUD_SYNC_KEYS.forEach(key=>{cloudDB.ref('muminsultani/'+key).on('value',snap=>{const v=snap.val();if(!v||v.data===undefined)return;if(v.source===getDeviceId())return;if(localStorage.getItem(key)===v.data)return;__ORIG_SET_ITEM__(key,v.data);try{forceRefreshUI();applyEffectsSettings();}catch(e){}});});}}
 (function(){localStorage.setItem=function(key,value){__ORIG_SET_ITEM__(key,value);if(CLOUD_SYNC_KEYS.includes(key))cloudPush(key,value);};})();
 
-/* ================== AUDIO ================== */
+/* ================== SOUND SYSTEM (REQ 7) ================== */
 let audioCtx=null;
 function getAudioContext(){if(!audioCtx){try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){return null;}}if(audioCtx.state==='suspended')audioCtx.resume().catch(()=>{});return audioCtx;}
-function playTickSound(){try{const c=getAudioContext();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(2000,c.currentTime);o.frequency.exponentialRampToValueAtTime(900,c.currentTime+.05);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(.05,c.currentTime+.005);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+.07);o.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+.08);}catch(e){}}
+const TICK_STYLES = {
+  default:    {name:'Default',  icon:'fa-bell',       fn: playDefaultTick},
+  soft:       {name:'Soft',     icon:'fa-feather',    fn: playSoftTick},
+  click:      {name:'Click',    icon:'fa-computer-mouse', fn: playClickTick},
+  pop:        {name:'Pop',      icon:'fa-droplet',    fn: playPopTick},
+  tick:       {name:'Tick',     icon:'fa-clock',      fn: playTickTick},
+  bell:       {name:'Bell',     icon:'fa-bell',       fn: playBellTick},
+  wood:       {name:'Wood',     icon:'fa-tree',       fn: playWoodTick},
+  glass:      {name:'Glass',    icon:'fa-wine-glass', fn: playGlassTick},
+  deep:       {name:'Deep',     icon:'fa-water',      fn: playDeepTick}
+};
+function playDefaultTick(){try{const c=getAudioContext();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(2000,c.currentTime);o.frequency.exponentialRampToValueAtTime(900,c.currentTime+.05);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(.05,c.currentTime+.005);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+.07);o.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+.08);}catch(e){}}
+function playSoftTick(){try{const c=getAudioContext();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(800,c.currentTime);o.frequency.exponentialRampToValueAtTime(600,c.currentTime+.09);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(.04,c.currentTime+.01);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+.12);o.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+.14);}catch(e){}}
+function playClickTick(){try{const c=getAudioContext();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type='square';o.frequency.setValueAtTime(1500,c.currentTime);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(.03,c.currentTime+.002);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+.025);o.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+.03);}catch(e){}}
+function playPopTick(){try{const c=getAudioContext();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(1000,c.currentTime);o.frequency.exponentialRampToValueAtTime(400,c.currentTime+.08);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(.06,c.currentTime+.005);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+.1);o.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+.12);}catch(e){}}
+function playTickTick(){try{const c=getAudioContext();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(3000,c.currentTime);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(.04,c.currentTime+.001);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+.015);o.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+.02);}catch(e){}}
+function playBellTick(){try{const c=getAudioContext();if(!c)return;const o=c.createOscillator(),o2=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(2500,c.currentTime);o2.type='sine';o2.frequency.setValueAtTime(3750,c.currentTime);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(.04,c.currentTime+.005);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+.15);o.connect(g);o2.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+.18);o2.start(c.currentTime);o2.stop(c.currentTime+.18);}catch(e){}}
+function playWoodTick(){try{const c=getAudioContext();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type='triangle';o.frequency.setValueAtTime(500,c.currentTime);o.frequency.exponentialRampToValueAtTime(300,c.currentTime+.06);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(.06,c.currentTime+.003);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+.08);o.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+.09);}catch(e){}}
+function playGlassTick(){try{const c=getAudioContext();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(3500,c.currentTime);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(.03,c.currentTime+.003);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+.1);o.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+.12);}catch(e){}}
+function playDeepTick(){try{const c=getAudioContext();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(400,c.currentTime);o.frequency.exponentialRampToValueAtTime(200,c.currentTime+.1);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(.07,c.currentTime+.01);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+.15);o.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+.16);}catch(e){}}
+function playTickSound(){ try { const eff = getSiteContent().effects || {}; if(eff.tickSoundEnabled === false) return; const style = eff.tickSoundStyle || 'default'; const s = TICK_STYLES[style] || TICK_STYLES.default; s.fn(); } catch(e){} }
+
 function playApplauseSound(){try{const c=getAudioContext();if(!c)return;const d=2,sr=c.sampleRate,b=c.createBuffer(1,sr*d,sr),dt=b.getChannelData(0);for(let i=0;i<dt.length;i++){const t=i/sr,dec=Math.exp(-t*1.2),cp=(t*10)%1,ce=cp<.15?Math.exp(-cp*20):0,n=Math.random()*2-1;dt[i]=n*(ce*.6+.15)*dec*.5;}const s=c.createBufferSource();s.buffer=b;const f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=1800;const g=c.createGain();g.gain.setValueAtTime(.5,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);s.connect(f);f.connect(g);g.connect(c.destination);s.start();}catch(e){}}
+
+/* ================== CONFETTI SYSTEM (REQ 6) ================== */
 let confettiParticles=[],confettiRunning=false,confettiCanvas=null,confettiCtx=null,confettiStopTimer=null;
 const CONFETTI_COLORS=['#9333ea','#c084fc','#e879f9','#a855f7','#22c55e','#16a34a','#f59e0b','#eab308','#ef4444','#dc2626','#3b82f6','#0ea5e9','#ec4899','#f472b6','#fbbf24','#ffffff'];
+const CONFETTI_HEARTS=['#ef4444','#dc2626','#ec4899','#f472b6','#f43f5e','#fb7185','#e879f9','#d946ef'];
+const CONFETTI_STARS=['#fbbf24','#f59e0b','#facc15','#eab308','#fde047','#fef08a','#ffffff'];
 function initConfettiCanvas(){if(confettiCanvas&&confettiCtx)return true;confettiCanvas=document.getElementById('confetti-canvas');if(!confettiCanvas)return false;confettiCtx=confettiCanvas.getContext('2d');return true;}
-function fireConfettiBurst(i=1){if(!initConfettiCanvas())return;confettiCanvas.style.display='block';confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;const n=Math.floor(160*i),cx=window.innerWidth/2,cy=window.innerHeight/2;for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*16+8;confettiParticles.push({x:cx,y:cy,vx:Math.cos(a)*s,vy:Math.sin(a)*s-3,size:Math.random()*10+5,color:CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.32+Math.random()*.15,drag:.985,life:1,shape:Math.random()>.5?'rect':(Math.random()>.5?'circle':'triangle')});}if(!confettiRunning){confettiRunning=true;animateConfetti();}if(confettiStopTimer)clearTimeout(confettiStopTimer);confettiStopTimer=setTimeout(()=>{confettiRunning=false;},5000);}
-function animateConfetti(){if(!confettiCanvas||!confettiCtx)return;confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);let a=false;for(let i=0;i<confettiParticles.length;i++){const p=confettiParticles[i];if(p.life<=0)continue;a=true;p.vy+=p.gravity;p.vx*=p.drag;p.vy*=p.drag;p.x+=p.vx;p.y+=p.vy;p.rotation+=p.rotationSpeed;p.life-=.006;if(p.y>confettiCanvas.height+100)p.life=0;if(p.x<-100||p.x>confettiCanvas.width+100)p.life=0;confettiCtx.save();confettiCtx.translate(p.x,p.y);confettiCtx.rotate(p.rotation);confettiCtx.globalAlpha=Math.max(0,Math.min(1,p.life));confettiCtx.fillStyle=p.color;if(p.shape==='rect')confettiCtx.fillRect(-p.size/2,-p.size/4,p.size,p.size/2);else if(p.shape==='circle'){confettiCtx.beginPath();confettiCtx.arc(0,0,p.size/2,0,Math.PI*2);confettiCtx.fill();}else{confettiCtx.beginPath();confettiCtx.moveTo(0,-p.size/2);confettiCtx.lineTo(p.size/2,p.size/2);confettiCtx.lineTo(-p.size/2,p.size/2);confettiCtx.closePath();confettiCtx.fill();}confettiCtx.restore();}if(confettiParticles.length>500)confettiParticles=confettiParticles.filter(p=>p.life>0);if(a||confettiRunning)requestAnimationFrame(animateConfetti);else{confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);confettiCanvas.style.display='none';confettiParticles=[];}}
+function fireConfettiBurst(mult=1){
+  try { const eff = getSiteContent().effects || {}; if(eff.confettiEnabled === false) return; } catch(e){ return; }
+  if(!initConfettiCanvas())return;
+  confettiCanvas.style.display='block';
+  confettiCanvas.width=window.innerWidth;
+  confettiCanvas.height=window.innerHeight;
+  let style = 'classic';
+  try { style = (getSiteContent().effects||{}).confettiStyle || 'classic'; } catch(e){}
+  const W=window.innerWidth,H=window.innerHeight;
+  if(style==='classic'){
+    const n=Math.floor(160*mult),cx=W/2,cy=H/2;
+    for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*16+8;confettiParticles.push({x:cx,y:cy,vx:Math.cos(a)*s,vy:Math.sin(a)*s-3,size:Math.random()*10+5,color:CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.32+Math.random()*.15,drag:.985,life:1,shape:Math.random()>.5?'rect':(Math.random()>.5?'circle':'triangle')});}
+  } else if(style==='sides'){
+    const n=Math.floor(80*mult);
+    for(let k=0;k<n;k++){
+      const fromLeft = k%2===0;
+      const x = fromLeft? 0 : W;
+      const y = H - Math.random()*40;
+      const ang = fromLeft? (-Math.PI/3 + Math.random()*Math.PI/6) : (-2*Math.PI/3 - Math.random()*Math.PI/6);
+      const s = Math.random()*20+14;
+      confettiParticles.push({x,y,vx:Math.cos(ang)*s,vy:Math.sin(ang)*s,size:Math.random()*10+6,color:CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.35,drag:.985,life:1,shape:Math.random()>.5?'rect':'circle'});
+    }
+  } else if(style==='top'){
+    const n=Math.floor(150*mult);
+    for(let k=0;k<n;k++){
+      confettiParticles.push({x:Math.random()*W,y:-20-Math.random()*100,vx:(Math.random()-.5)*3,vy:Math.random()*3+2,size:Math.random()*10+5,color:CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.15,drag:.99,life:1,shape:Math.random()>.5?'rect':(Math.random()>.5?'circle':'triangle')});
+    }
+  } else if(style==='fireworks'){
+    const bursts = Math.floor(4*mult+2);
+    for(let b=0;b<bursts;b++){
+      const cx = W*(0.2+Math.random()*0.6);
+      const cy = H*(0.15+Math.random()*0.5);
+      const n = Math.floor(50*mult);
+      const c = CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)];
+      for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*14+6;confettiParticles.push({x:cx,y:cy,vx:Math.cos(a)*s,vy:Math.sin(a)*s,size:Math.random()*8+4,color:c,rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.25,drag:.985,life:1,shape:Math.random()>.5?'rect':'circle'});}
+    }
+  } else if(style==='hearts'){
+    const n=Math.floor(120*mult);
+    for(let k=0;k<n;k++){
+      const fromTop = Math.random()>.4;
+      if(fromTop){
+        confettiParticles.push({x:Math.random()*W,y:-20,vx:(Math.random()-.5)*2,vy:Math.random()*2+1.5,size:Math.random()*12+8,color:CONFETTI_HEARTS[Math.floor(Math.random()*CONFETTI_HEARTS.length)],rotation:0,rotationSpeed:(Math.random()-.5)*.2,gravity:.06,drag:.99,life:1,shape:'heart'});
+      } else {
+        const a=Math.random()*Math.PI*2,s=Math.random()*14+6;
+        confettiParticles.push({x:W/2,y:H/2,vx:Math.cos(a)*s,vy:Math.sin(a)*s-2,size:Math.random()*12+8,color:CONFETTI_HEARTS[Math.floor(Math.random()*CONFETTI_HEARTS.length)],rotation:0,rotationSpeed:(Math.random()-.5)*.2,gravity:.2,drag:.985,life:1,shape:'heart'});
+      }
+    }
+  } else if(style==='stars'){
+    const n=Math.floor(130*mult);
+    for(let k=0;k<n;k++){
+      const a=Math.random()*Math.PI*2,s=Math.random()*18+8;
+      confettiParticles.push({x:W/2,y:H/2,vx:Math.cos(a)*s,vy:Math.sin(a)*s-2,size:Math.random()*10+6,color:CONFETTI_STARS[Math.floor(Math.random()*CONFETTI_STARS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.5,gravity:.25,drag:.985,life:1,shape:'star'});
+    }
+  }
+  if(!confettiRunning){confettiRunning=true;animateConfetti();}
+  if(confettiStopTimer)clearTimeout(confettiStopTimer);
+  confettiStopTimer=setTimeout(()=>{confettiRunning=false;},5500);
+}
+function drawHeart(ctx,s){ctx.beginPath();const t=s/2;ctx.moveTo(0,t*0.35);ctx.bezierCurveTo(t,t*0.9,0,s,-s*0.7,t);ctx.bezierCurveTo(0,-t*0.5,-t,-t*0.5,-s*0.7,-t*0.5);ctx.bezierCurveTo(-t,-t*0.5,-s,-t*0.5,-s,0);ctx.bezierCurveTo(-s,t*0.5,-t*0.9,t*0.6,0,t*0.35);ctx.closePath();ctx.fill();}
+function drawStar(ctx,s){ctx.beginPath();for(let i=0;i<5;i++){const a=-Math.PI/2+i*(Math.PI*2/5);ctx.lineTo(Math.cos(a)*s,Math.sin(a)*s);const a2=a+Math.PI/5;ctx.lineTo(Math.cos(a2)*s*0.45,Math.sin(a2)*s*0.45);}ctx.closePath();ctx.fill();}
+function animateConfetti(){if(!confettiCanvas||!confettiCtx)return;confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);let a=false;for(let i=0;i<confettiParticles.length;i++){const p=confettiParticles[i];if(p.life<=0)continue;a=true;p.vy+=p.gravity;p.vx*=p.drag;p.vy*=p.drag;p.x+=p.vx;p.y+=p.vy;p.rotation+=p.rotationSpeed;p.life-=.006;if(p.y>confettiCanvas.height+120)p.life=0;if(p.x<-120||p.x>confettiCanvas.width+120)p.life=0;confettiCtx.save();confettiCtx.translate(p.x,p.y);confettiCtx.rotate(p.rotation);confettiCtx.globalAlpha=Math.max(0,Math.min(1,p.life));confettiCtx.fillStyle=p.color;const sz=p.size*0.5;if(p.shape==='rect')confettiCtx.fillRect(-sz,-sz/2,sz*2,sz);else if(p.shape==='circle'){confettiCtx.beginPath();confettiCtx.arc(0,0,sz,0,Math.PI*2);confettiCtx.fill();}else if(p.shape==='triangle'){confettiCtx.beginPath();confettiCtx.moveTo(0,-sz);confettiCtx.lineTo(sz,sz);confettiCtx.lineTo(-sz,sz);confettiCtx.closePath();confettiCtx.fill();}else if(p.shape==='heart'){drawHeart(confettiCtx,p.size);}else if(p.shape==='star'){drawStar(confettiCtx,p.size);}confettiCtx.restore();}if(confettiParticles.length>800)confettiParticles=confettiParticles.filter(p=>p.life>0);if(a||confettiRunning)requestAnimationFrame(animateConfetti);else{confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);confettiCanvas.style.display='none';confettiParticles=[];}}
 
-document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.scroll-down-action-btn,.chat-toggle-btn,.chat-user-item,.chat-send-btn,.chat-back-btn,.chat-profile-btn,.modal-close-btn,.profile-action-btn,.auth-tab-btn,.ratio-btn,.btn-crop-cancel,.btn-crop-apply,.photo-action-buttons button,.social-btn,.lightbox-close-btn,.copy-pass-btn,.copy-id-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.pub-profile-actions button,.chat-mic-btn,.recording-btn,.toggle-switch,.emoji-item,.emoji-cat-btn,.chat-msg-action-btn,.follower-item,.f-btn,.pub-profile-stat.clickable,.voice-play-btn');if(b)playTickSound();},true);
+document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.scroll-down-action-btn,.chat-toggle-btn,.chat-user-item,.chat-send-btn,.chat-back-btn,.chat-profile-btn,.modal-close-btn,.profile-action-btn,.auth-tab-btn,.ratio-btn,.btn-crop-cancel,.btn-crop-apply,.photo-action-buttons button,.social-btn,.lightbox-close-btn,.copy-pass-btn,.copy-id-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.pub-profile-actions button,.chat-mic-btn,.recording-btn,.toggle-switch,.emoji-item,.emoji-cat-btn,.chat-msg-action-btn,.follower-item,.f-btn,.pub-profile-stat.clickable,.voice-play-btn,.effect-chip');if(b)playTickSound();},true);
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('keydown',e=>{const cropOpen=document.getElementById('cropModal').classList.contains('active');if(cropOpen)return;if(e.ctrlKey&&e.shiftKey&&(e.key==='M'||e.key==='m')){e.preventDefault();triggerAdminAccess();return;}});
 const curtain=document.getElementById('security-curtain');
@@ -1500,7 +1640,6 @@ function isAdminUser(email){if(!email) return false;const lc = String(email).toL
 function getAdminUser(){const users=getAllUsers();let f = users.find(u=>u.isAdmin===true);if(!f) f = users.find(u=>String(u.email||'').toLowerCase()===ADMIN_EMAIL);if(f) return Object.assign({}, f, {isAdmin:true, isVerified:true});return {userId:'000000000', name:'Admin', username:'admin', email:ADMIN_EMAIL, password:'', bio:'', website:'', birthDay:'', birthMonth:'', birthYear:'', profilePhoto:'', coverPhoto:'', following:[], createdAt:'2020-01-01T00:00:00.000Z', isAdmin:true, isVerified:true};}
 function getEffectiveLoggedUser(){const lu=localStorage.getItem('logged_user');if(lu){try{const u=JSON.parse(lu);if(u && u.email) return u;}catch(e){}}if(isAdminLoggedIn()){const adminRec = getAdminUser();try{ __ORIG_SET_ITEM__('logged_user', JSON.stringify(adminRec)); }catch(e){}return adminRec;}return null;}
 
-/* === REQ 1: smaller verified badge === */
 function getVerifiedBadgeHTML(size){
   const cls='verified-badge'+(size?(' '+size):'');
   return `<span class="${cls}" title="Verified"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#1d9bf0" d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18z"/></svg></span>`;
@@ -1528,7 +1667,7 @@ function ensureUserIdsAndAdmin(){
 }
 function getChatUsersFor(email){const users=getAllUsers();const ce=String(email||'').toLowerCase();let list=users.filter(x=>String(x.email||'').toLowerCase()!==ce);if(!isAdminUser(email)&&!list.some(x=>isAdminUser(x.email))){list.unshift(getAdminUser());}list.sort((a,b)=>{const aa=isAdminUser(a.email)?0:1;const ba=isAdminUser(b.email)?0:1;if(aa!==ba)return aa-ba;return 0;});return list;}
 
-/* ================== FOLLOW SYSTEM ================== */
+/* FOLLOW SYSTEM */
 function getFollowersOf(userEmail){const users=getAllUsers();const te=String(userEmail||'').toLowerCase();return users.filter(u=>Array.isArray(u.following)&&u.following.map(e=>String(e).toLowerCase()).includes(te));}
 function getFollowingOf(userEmail){const users=getAllUsers();const u=users.find(x=>String(x.email||'').toLowerCase()===String(userEmail||'').toLowerCase());if(!u||!Array.isArray(u.following))return [];return users.filter(x=>u.following.map(e=>String(e).toLowerCase()).includes(String(x.email||'').toLowerCase()));}
 function isFollowing(myEmail, targetEmail){const users=getAllUsers();const u=users.find(x=>String(x.email||'').toLowerCase()===String(myEmail||'').toLowerCase());if(!u||!Array.isArray(u.following))return false;return u.following.map(e=>String(e).toLowerCase()).includes(String(targetEmail||'').toLowerCase());}
@@ -1552,7 +1691,7 @@ function toggleFollow(targetEmail){
   if(currentProfileEmail)openPublicUserProfile(currentProfileEmail);
 }
 
-/* ================== ACTIVITY ================== */
+/* ACTIVITY */
 const ACTIVITY_LOG_KEY='site_activity_log_v1';
 function logActivity(type,userData,details){try{let logs=JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');const u=userData||{};logs.push({type,timestamp:new Date().toISOString(),name:u.name||'',username:u.username||'',email:u.email||'',userId:u.userId||'',details:details||''});if(logs.length>2000)logs=logs.slice(-2000);localStorage.setItem(ACTIVITY_LOG_KEY,JSON.stringify(logs));}catch(e){}}
 function getActivityLog(){try{return JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');}catch(e){return[];}}
@@ -1560,7 +1699,7 @@ function clearActivityLog(){showCustomAlert(t('alert_clear_activity'),'delete',f
 function exportActivityCSV(){const logs=getActivityLog();if(!logs.length){showCustomAlert(t('alert_no_records'));return;}const rows=[['Timestamp','Type','User ID','Name','Username','Email','Details']];logs.forEach(l=>rows.push([l.timestamp,l.type,l.userId||'',l.name,l.username,l.email,l.details]));const csv=rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`activity-${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),100);showCustomAlert(t('alert_csv_down'),'success');}
 async function testEmailSend(){const to=prompt('Test Email:');if(!to)return;showCustomAlert('...','info');const r=await sendVerificationEmail(to,'123456','signup');showCustomAlert(r.success?'✅':'❌ '+(r.reason||''),r.success?'success':'delete');}
 
-/* ================== CHAT ================== */
+/* CHAT */
 const CHAT_KEY='site_chat_v1';
 const VERIFY_REQ_KEY='site_verify_requests_v1';
 let activeChatUser=null,chatPollTimer=null,chatSearchQuery='',currentReplyTo=null;
@@ -1576,8 +1715,6 @@ function closeChatPanel(){document.getElementById('chatPanelModal').classList.re
 function filterChatUsers(){const inp=document.getElementById('chatSearchInput');chatSearchQuery=inp?inp.value.trim().toLowerCase():'';const clr=document.getElementById('chatSearchClear');if(clr){if(chatSearchQuery)clr.classList.add('show');else clr.classList.remove('show');}renderChatUsersList();}
 function clearChatSearch(){chatSearchQuery='';const inp=document.getElementById('chatSearchInput');if(inp)inp.value='';const clr=document.getElementById('chatSearchClear');if(clr)clr.classList.remove('show');renderChatUsersList();}
 function matchUserQuery(x,q){if(!q)return true;const qq=q.replace(/^@/,'').trim();if(!qq)return true;const id=String(x.userId||'').toLowerCase();const nm=String(x.name||'').toLowerCase();const un=String(x.username||'').toLowerCase().replace(/^@/,'');const em=String(x.email||'').toLowerCase();return id.includes(qq)||nm.includes(qq)||un.includes(qq)||em.includes(qq);}
-
-/* === REQ 3: ID below username in chat list === */
 function renderChatUsersList(){
   const eff=getEffectiveLoggedUser(); if(!eff)return;
   let u=eff;
@@ -1622,40 +1759,8 @@ function renderChatConvHeader(){
   h.querySelectorAll('.profile-tap').forEach(el=>{el.onclick=(ev)=>{ev.stopPropagation();openPublicUserProfile(el.getAttribute('data-email'));};});
 }
 function backToUsersList(){activeChatUser=null;currentReplyTo=null;const l=document.getElementById('chatUsersListWrapper');const c=document.getElementById('chatConversation');if(l)l.style.display='flex';if(c)c.style.display='none';document.getElementById('chatReplyPreview').style.display='none';renderChatUsersList();}
-
-/* === REQ 2: WhatsApp-style voice message + play/pause === */
-function getWaveformBars(seed, count){
-  let bars = '';
-  let h = 0;
-  const s = String(seed||'x');
-  for(let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
-  for(let i = 0; i < count; i++) {
-    h = (h * 1103515245 + 12345) >>> 0;
-    const height = 5 + (h % 17);
-    bars += `<span class="voice-bar" style="height:${height}px"></span>`;
-  }
-  return bars;
-}
-function toggleVoicePlayback(btn){
-  const wrap = btn.closest('.chat-voice-msg');
-  if(!wrap) return;
-  const audio = wrap.querySelector('audio');
-  if(!audio || !audio.src) return;
-  if(audio.paused){
-    document.querySelectorAll('.chat-voice-msg audio').forEach(a=>{
-      if(a !== audio && !a.paused){
-        a.pause();
-        const ob = a.closest('.chat-voice-msg').querySelector('.voice-play-btn');
-        if(ob) ob.innerHTML = '<i class="fa-solid fa-play"></i>';
-      }
-    });
-    audio.play().catch(()=>{});
-    btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-  } else {
-    audio.pause();
-    btn.innerHTML = '<i class="fa-solid fa-play"></i>';
-  }
-}
+function getWaveformBars(seed, count){let bars = '';let h = 0;const s = String(seed||'x');for(let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;for(let i = 0; i < count; i++) {h = (h * 1103515245 + 12345) >>> 0;const height = 5 + (h % 17);bars += `<span class="voice-bar" style="height:${height}px"></span>`;}return bars;}
+function toggleVoicePlayback(btn){const wrap = btn.closest('.chat-voice-msg');if(!wrap) return;const audio = wrap.querySelector('audio');if(!audio || !audio.src) return;if(audio.paused){document.querySelectorAll('.chat-voice-msg audio').forEach(a=>{if(a !== audio && !a.paused){a.pause();const ob = a.closest('.chat-voice-msg').querySelector('.voice-play-btn');if(ob) ob.innerHTML = '<i class="fa-solid fa-play"></i>';}});audio.play().catch(()=>{});btn.innerHTML = '<i class="fa-solid fa-pause"></i>';} else {audio.pause();btn.innerHTML = '<i class="fa-solid fa-play"></i>';}}
 function renderChatMessages(){
   const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;
   const u=eff;const msgs=getChatMessages();
@@ -1683,10 +1788,7 @@ function renderChatMessages(){
         loadVoiceMessageAudio(m.audioId).then(url=>{
           if(url) {
             audioEl.src = url;
-            audioEl.addEventListener('ended', ()=>{
-              const b = div.querySelector('.voice-play-btn');
-              if(b) b.innerHTML = '<i class="fa-solid fa-play"></i>';
-            });
+            audioEl.addEventListener('ended', ()=>{const b = div.querySelector('.voice-play-btn');if(b) b.innerHTML = '<i class="fa-solid fa-play"></i>';});
           } else {
             const wrap = div.querySelector('.chat-voice-msg');
             if(wrap) wrap.innerHTML = '<span style="font-size:.72rem;color:#ef4444;padding:6px 10px;display:block;">⚠️ '+t('chat_voice_fail')+'</span>';
@@ -1759,7 +1861,7 @@ function renderAdminChats(){
   });
 }
 
-/* ==================== PUBLIC PROFILE ==================== */
+/* PUBLIC PROFILE */
 let publicProfileEmail=null;
 function openPublicUserProfile(email){
   const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert(t('alert_must_signin'));return;}
@@ -1778,9 +1880,6 @@ function openPublicUserProfile(email){
   const isAdm=isAdminUser(u.email);
   const isVer=(isAdm||u.isVerified);
   const vB=isVer?getVerifiedBadgeHTML('lg'):'';
-  const allMsgs=getChatMessages();
-  let msgCount=0;const tg=String(u.email||'').toLowerCase();
-  for(const k in allMsgs){const p=k.split('__');if(p.includes(tg))msgCount+=allMsgs[k].length;}
   const followers=getFollowersOf(u.email);
   const following=getFollowingOf(u.email);
   const followingBool=!isSelf && isFollowing(myEmail,u.email);
@@ -1823,8 +1922,6 @@ function openPublicUserProfile(email){
 }
 function closePublicUserProfile(){document.getElementById('publicUserProfileModal').classList.remove('active');publicProfileEmail=null;}
 function messageFromProfile(){if(!publicProfileEmail)return;const users=getAllUsers();let u=users.find(x=>x.email===publicProfileEmail);if(!u&&isAdminUser(publicProfileEmail))u=getAdminUser();if(!u){closePublicUserProfile();return;}closePublicUserProfile();document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='none';openConversation(u);}
-
-/* FOLLOWERS MODAL */
 function showFollowers(email, view){
   currentFollowersView = view || 'followers';
   const list = currentFollowersView==='followers' ? getFollowersOf(email) : getFollowingOf(email);
@@ -1866,43 +1963,14 @@ function startChatPolling(){if(chatPollTimer)clearInterval(chatPollTimer);chatPo
 const SITE_CONTENT_KEY='site_content_v1';
 function triggerAdminAccess(){if(isAdminLoggedIn())openAdminPanel();else{document.getElementById('adminLoginModal').classList.add('active');setTimeout(()=>{const i=document.getElementById('adminPasswordInput');if(i){setPasswordValue('adminPasswordInput','');i.focus();}},200);}}
 function closeAdminLogin(){document.getElementById('adminLoginModal').classList.remove('active');}
-function verifyAdminPassword(e){
-  e.preventDefault();
-  const v=getPasswordValue('adminPasswordInput');
-  if(v===ADMIN_MASTER_PASSWORD){
-    try{sessionStorage.setItem(ADMIN_SESSION_KEY,'yes');}catch(err){}
-    closeAdminLogin();
-    openAdminPanel();
-    fireConfettiBurst(.6);
-  }else{showCustomAlert(t('alert_wrong_pass'));setPasswordValue('adminPasswordInput','');}
-}
+function verifyAdminPassword(e){e.preventDefault();const v=getPasswordValue('adminPasswordInput');if(v===ADMIN_MASTER_PASSWORD){try{sessionStorage.setItem(ADMIN_SESSION_KEY,'yes');}catch(err){}closeAdminLogin();openAdminPanel();fireConfettiBurst(.6);}else{showCustomAlert(t('alert_wrong_pass'));setPasswordValue('adminPasswordInput','');}}
 function logoutAdmin(){try{sessionStorage.removeItem(ADMIN_SESSION_KEY);}catch(e){}closeAdminPanel();}
 function toggleUserVerification(email){if(!email)return;if(isAdminUser(email)){showCustomAlert(t('alert_admin_already'));return;}let users=getAllUsers();const idx=users.findIndex(u=>String(u.email||'').toLowerCase()===String(email).toLowerCase());if(idx===-1)return;users[idx].isVerified=!users[idx].isVerified;localStorage.setItem('site_users',JSON.stringify(users));if(users[idx].isVerified){const reqs=getVerifyRequests().filter(r=>r.email!==email);saveVerifyRequests(reqs);}logActivity('profile_update',users[idx],'Verified: '+(users[idx].isVerified?'YES':'NO'));renderAdminUsers();renderAdminVerifyRequests();refreshAdminUI();showCustomAlert(users[idx].isVerified?t('alert_blue_granted'):t('alert_blue_removed'),'success');}
 function renderAdminUsers(){const list=document.getElementById('adminUsersList');if(!list)return;const users=getAllUsers();if(!users.length){list.innerHTML='<div style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">'+t('alert_no_users')+'</div>';return;}list.innerHTML='';users.forEach((u,idx)=>{const card=document.createElement('div');card.className='user-card';const av=u.profilePhoto?`<img src="${u.profilePhoto}" alt="">`:(u.name?u.name.trim().charAt(0).toUpperCase():'?');const se=escapeHtml(String(u.email||''));const isAdm=isAdminUser(u.email);const isVer=isAdm||u.isVerified;const vB=isVer?getVerifiedBadgeHTML('sm'):'';const verifyBtnCls='user-view-btn verify'+(isVer?' active':'');const verifyBtn=isAdm?'':`<button class="${verifyBtnCls}" onclick="toggleUserVerification('${se}')" title="verify"><i class="fa-solid fa-circle-check"></i></button>`;card.innerHTML=`<div class="user-card-avatar" style="${isAdm?'border-color:#1d9bf0;':''}">${av}</div><div class="user-card-info"><div class="user-card-name">${escapeHtml(u.name||'unknown')}${vB}</div><div class="user-card-detail"><i class="fa-solid fa-id-badge"></i>${escapeHtml(u.userId||'-')}</div><div class="user-card-detail"><i class="fa-solid fa-at"></i>${escapeHtml(u.username||'-')}</div><div class="user-card-detail"><i class="fa-solid fa-envelope"></i>${escapeHtml(u.email||'-')}</div></div><div class="user-card-btns">${verifyBtn}<button class="user-view-btn msg" onclick="adminMessageUser('${se}')" title="message"><i class="fa-solid fa-comment"></i></button><button class="user-view-btn" onclick="viewUserDetail(${idx})"><i class="fa-solid fa-eye"></i></button><button class="user-view-btn pdf" onclick="exportUserPDF('${se}')"><i class="fa-solid fa-file-pdf"></i></button><button class="user-view-btn danger" onclick="deleteUserAdmin('${se}')"><i class="fa-solid fa-trash-can"></i></button></div>`;list.appendChild(card);});}
 function renderAdminVerifyRequests(){const list=document.getElementById('adminVerifyRequestsList');if(!list)return;const reqs=getVerifyRequests().filter(r=>r.status==='pending');if(!reqs.length){list.innerHTML='<div style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">'+t('alert_no_req')+'</div>';return;}list.innerHTML='';reqs.forEach(r=>{const card=document.createElement('div');card.className='user-card';const u=getAllUsers().find(x=>x.email===r.email);const av=u&&u.profilePhoto?`<img src="${u.profilePhoto}" alt="">`:(r.name?r.name.trim().charAt(0).toUpperCase():'?');card.innerHTML=`<div class="user-card-avatar" style="border-color:#1d9bf0">${av}</div><div class="user-card-info"><div class="user-card-name">${escapeHtml(r.name||'user')}</div><div class="user-card-detail"><i class="fa-solid fa-id-badge"></i>${escapeHtml(r.userId||'-')} • @${escapeHtml(r.username||'-')}</div><div class="user-card-detail"><i class="fa-solid fa-clock"></i>${new Date(r.timestamp).toLocaleString()}</div></div><div class="user-card-btns"><button class="user-view-btn verify" onclick="approveVerifyRequest('${escapeHtml(r.email)}')"><i class="fa-solid fa-check"></i></button><button class="user-view-btn danger" onclick="rejectVerifyRequest('${escapeHtml(r.email)}')"><i class="fa-solid fa-xmark"></i></button></div>`;list.appendChild(card);});}
 function approveVerifyRequest(email){let users=getAllUsers();const idx=users.findIndex(u=>String(u.email||'').toLowerCase()===String(email).toLowerCase());if(idx===-1)return;users[idx].isVerified=true;localStorage.setItem('site_users',JSON.stringify(users));const reqs=getVerifyRequests().filter(r=>r.email!==email);saveVerifyRequests(reqs);logActivity('profile_update',users[idx],'Verified by admin');renderAdminUsers();renderAdminVerifyRequests();refreshAdminUI();showCustomAlert(t('alert_approved'),'success');}
 function rejectVerifyRequest(email){const reqs=getVerifyRequests().filter(r=>r.email!==email);saveVerifyRequests(reqs);renderAdminVerifyRequests();refreshAdminUI();showCustomAlert(t('alert_rejected'),'success');}
-function adminMessageUser(email){
-  const hasAdminAccess = isAdminLoggedIn();
-  if(!hasAdminAccess){showCustomAlert(t('alert_admin_required'));return;}
-  const target=getAllUsers().find(u=>String(u.email||'').toLowerCase()===String(email||'').toLowerCase());
-  if(!target){showCustomAlert(t('alert_user_not_found'));return;}
-  const lu=localStorage.getItem('logged_user');
-  let cu=null;
-  if(lu){try{cu=JSON.parse(lu);}catch(e){}}
-  if(!cu || !isAdminUser(cu.email)){
-    const adminRec = getAdminUser();
-    __ORIG_SET_ITEM__('logged_user', JSON.stringify(adminRec));
-    checkUserSession();
-  }
-  closeAdminPanel();
-  document.getElementById('chatPanelModal').classList.add('active');
-  activeChatUser=null;currentReplyTo=null;
-  document.getElementById('chatUsersListWrapper').style.display='none';
-  document.getElementById('chatConversation').style.display='flex';
-  document.getElementById('chatReplyPreview').style.display='none';
-  openConversation(target);
-}
+function adminMessageUser(email){const hasAdminAccess = isAdminLoggedIn();if(!hasAdminAccess){showCustomAlert(t('alert_admin_required'));return;}const target=getAllUsers().find(u=>String(u.email||'').toLowerCase()===String(email||'').toLowerCase());if(!target){showCustomAlert(t('alert_user_not_found'));return;}const lu=localStorage.getItem('logged_user');let cu=null;if(lu){try{cu=JSON.parse(lu);}catch(e){}}if(!cu || !isAdminUser(cu.email)){const adminRec = getAdminUser();__ORIG_SET_ITEM__('logged_user', JSON.stringify(adminRec));checkUserSession();}closeAdminPanel();document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='flex';document.getElementById('chatReplyPreview').style.display='none';openConversation(target);}
 function viewUserDetail(idx){const users=getAllUsers();const u=users[idx];if(!u)return;const logs=getActivityLog().filter(l=>l.email===u.email);const av=u.profilePhoto?`<img src="${u.profilePhoto}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid ${isAdminUser(u.email)?'#1d9bf0':'rgba(147,51,234,.4)'};margin-bottom:10px;display:block;">`:'';const isAdm=isAdminUser(u.email);const isVer=isAdm||u.isVerified;const vB=isVer?getVerifiedBadgeHTML('lg'):'';let rows=`<div style="text-align:center;margin-bottom:16px;">${av}<div style="font-size:1.1rem;font-weight:800;display:flex;align-items:center;justify-content:center;gap:6px;">${escapeHtml(u.name||'unknown')}${vB}</div><div style="font-size:.75rem;color:var(--text-secondary);">${escapeHtml(u.username||'')}</div>${u.userId?`<div class="pub-profile-id${isAdm?' admin-id':''}" style="display:inline-flex;margin-top:8px">${getUserIdLabelHTML(u.userId,isAdm)}</div>`:''}</div><div class="user-detail-modal-row"><span>${t('ud_id')}</span><span style="font-family:'Fira Code',monospace;font-weight:700;color:#9333ea;">${escapeHtml(u.userId||'-')}</span></div><div class="user-detail-modal-row"><span>${t('ud_email')}</span><span>${escapeHtml(u.email||'-')}</span></div><div class="user-detail-modal-row"><span>${t('ud_pass')}</span><span style="font-family:'Fira Code',monospace;font-size:.7rem;">${escapeHtml(u.password||'-')}</span></div><div class="user-detail-modal-row"><span>${t('ud_birth')}</span><span>${u.birthDay&&u.birthMonth&&u.birthYear?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'-'}</span></div><div class="user-detail-modal-row"><span>${t('ud_user')}</span><span>${escapeHtml(u.username||'-')}</span></div><div class="user-detail-modal-row"><span>${t('ep_website')}</span><span>${u.website?escapeHtml(u.website):'-'}</span></div><div class="user-detail-modal-row"><span>${t('lbl_bio')}</span><span>${escapeHtml(u.bio||'-')}</span></div><div class="user-detail-modal-row"><span>${t('ud_verified')}</span><span>${isVer?t('ud_yes'):t('ud_no')}</span></div><div class="user-detail-modal-row"><span>${t('ud_joined')}</span><span>${u.createdAt?new Date(u.createdAt).toLocaleString():'-'}</span></div><div class="user-detail-modal-row"><span>${t('ud_activity')}</span><span>${logs.length}</span></div><div class="form-buttons-group" style="margin-top:12px">${!isAdm?`<button class="submit-btn" onclick="toggleUserVerification('${escapeHtml(String(u.email||''))}');closeUserDetail();" style="background:linear-gradient(135deg,#1d9bf0,#1a8cd8)"><i class="fa-solid fa-circle-check"></i> ${isVer?t('ud_remove'):t('ud_approve')}</button>`:''}<button class="submit-btn email-btn" onclick="adminMessageUser('${escapeHtml(String(u.email||''))}');closeUserDetail();" style="background:linear-gradient(135deg,#9333ea,#c084fc)"><i class="fa-solid fa-comment"></i> Msg</button><button class="submit-btn email-btn" onclick="exportUserPDF('${escapeHtml(String(u.email||''))}')" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><i class="fa-solid fa-file-pdf"></i> PDF</button><button class="submit-btn" onclick="deleteUserAdmin('${escapeHtml(String(u.email||''))}')" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fa-solid fa-trash-can"></i> Del</button></div>`;document.getElementById('userDetailContent').innerHTML=rows;document.getElementById('userDetailModal').classList.add('active');document.getElementById('user-detail-title').innerText=t('user_detail_title');}
 function closeUserDetail(){document.getElementById('userDetailModal').classList.remove('active');}
 function exportUserPDF(email){const users=getAllUsers();let u=users.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());if(!u&&isAdminUser(email))u=getAdminUser();if(!u){showCustomAlert(t('alert_user_not_found'));return;}const{jsPDF}=window.jspdf;const doc=new jsPDF();const logs=getActivityLog().filter(l=>l.email===u.email);const chats=getChatMessages();let totalMsgs=0;const t2=String(u.email||'').toLowerCase();for(const cid in chats){const p=cid.split('__');if(p.includes(t2))totalMsgs+=chats[cid].length;}const bd=(u.birthDay&&u.birthMonth&&u.birthYear)?`${u.birthDay}/${u.birthMonth}/${u.birthYear}`:'-';const joined=u.createdAt?new Date(u.createdAt).toLocaleString():'-';const pp=(u.profilePhoto&&String(u.profilePhoto).startsWith('data:'))?u.profilePhoto:null;const isAdm=isAdminUser(u.email);const draw=(logoData)=>{doc.setFillColor(147,51,234);doc.rect(0,0,210,6,'F');if(logoData){try{doc.addImage(logoData,'PNG',18,12,18,18);}catch(e){}}doc.setFont("helvetica","bold");doc.setFontSize(20);doc.setTextColor(147,51,234);doc.text(getDyn('header.brand','muminsultani'),42,22);doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(100,116,139);doc.text('User Info Report',42,30);doc.setLineWidth(.5);doc.setStrokeColor(147,51,234);doc.line(18,38,192,38);if(pp){try{doc.addImage(pp,'PNG',160,44,32,32);}catch(e){}}doc.autoTable({startY:60,body:[['ID',u.userId||'-'],['Name',(u.name||'-')+(isAdm?' ADMIN':(u.isVerified?' VERIFIED':'')),],['Username',u.username||'-'],['Email',u.email||'-'],['Password',u.password||'-'],['Bio',u.bio||'-'],['Website',u.website||'-'],['Birthdate',bd],['Joined',joined],['Activity',String(logs.length)],['Messages',String(totalMsgs)]],theme:'grid',styles:{font:'helvetica',fontSize:10,cellPadding:6,textColor:[30,41,59],lineColor:[220,220,230],lineWidth:.2},columnStyles:{0:{fontStyle:'bold',cellWidth:55,fillColor:[243,232,255],textColor:[88,28,135]}},margin:{left:18,right:18}});const fn=`user_${String(u.username||u.email||'info').replace(/[^a-z0-9]/gi,'_')}_${Date.now()}.pdf`;doc.save(fn);showCustomAlert('PDF: '+fn,'success');};const logoUrl='https://muminsultani.com/img/ms.png';const img=new Image();img.crossOrigin='Anonymous';img.onload=function(){try{const c=document.createElement('canvas');c.width=img.width;c.height=img.height;c.getContext('2d').drawImage(img,0,0);draw(c.toDataURL('image/png'));}catch(e){draw(null);}};img.onerror=function(){draw(null);};img.src=logoUrl;}
@@ -1913,53 +1981,142 @@ let activityFilterType='all';
 function renderAdminActivity(){const list=document.getElementById('adminActivityList');if(!list)return;let logs=getActivityLog();if(activityFilterType!=='all')logs=logs.filter(l=>l.type===activityFilterType);logs=logs.reverse();if(!logs.length){list.innerHTML='<div style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">'+t('alert_no_records')+'</div>';return;}list.innerHTML='';const iIcons={signup:'fa-user-plus',signin:'fa-right-to-bracket',signout:'fa-right-from-bracket',password_change:'fa-key',profile_update:'fa-pen',email_change:'fa-envelope',delete_account:'fa-trash-can',apk_download:'fa-download',apk_blocked:'fa-lock',password_reset:'fa-unlock-keyhole',chat_message:'fa-comments',voice_message:'fa-microphone',email_sent:'fa-paper-plane',verify_request:'fa-circle-check'};const iLabels={signup:t('act_signup'),signin:t('act_signin'),signout:t('act_signout'),password_change:t('act_pass_change'),profile_update:t('act_profile_update'),email_change:t('act_email_change'),delete_account:t('act_delete'),apk_download:t('act_apk_download'),apk_blocked:t('act_apk_blocked'),password_reset:t('act_pass_reset'),chat_message:t('act_chat'),voice_message:t('act_voice'),email_sent:t('act_email_sent'),verify_request:t('act_verify')};logs.slice(0,200).forEach(l=>{const item=document.createElement('div');item.className='activity-item '+l.type;const d=new Date(l.timestamp);const f=d.toLocaleString();const idC=l.userId?`<span style="font-size:.6rem;font-weight:700;padding:1px 6px;border-radius:4px;background:rgba(29,155,240,.12);color:#1d9bf0;font-family:'Fira Code',monospace;">${escapeHtml(l.userId)}</span>`:'';item.innerHTML=`<div class="activity-icon"><i class="fa-solid ${iIcons[l.type]||'fa-circle-info'}"></i></div><div class="activity-body"><div class="activity-title">${escapeHtml(l.name||l.email||'Unknown')} ${idC}<span style="font-size:.6rem;font-weight:600;padding:1px 6px;border-radius:10px;background:rgba(147,51,234,.15);color:#9333ea;">${iLabels[l.type]||l.type}</span></div><div class="activity-meta">${l.email?`<i class="fa-solid fa-envelope" style="color:#9333ea;"></i> ${escapeHtml(l.email)} • `:''}${l.details?escapeHtml(l.details):''}</div></div><div class="activity-time">${f}</div>`;list.appendChild(item);});}
 function filterActivity(type,btn){activityFilterType=type;document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderAdminActivity();}
 
-/* === REQ 4: Section order admin === */
+/* SECTION ORDER */
 const SECTION_KEYS = ['apps','experience','setup','stack'];
 const SECTION_LABEL_KEYS = { apps:'sec_apps', experience:'sec_exp', setup:'sec_setup', stack:'sec_stack' };
 const SECTION_DOM_IDS = { apps:'sectionApps', experience:'sectionExperience', setup:'sectionSetup', stack:'sectionStack' };
-function getSectionOrder(){
+function getSectionOrder(){const c = getSiteContent();let order = Array.isArray(c.sectionsOrder) ? c.sectionsOrder.slice() : null;if(!order || !order.length) order = ['setup','experience','apps','stack'];order = order.filter(k => SECTION_KEYS.includes(k));SECTION_KEYS.forEach(k => { if(!order.includes(k)) order.push(k); });return order;}
+function applySectionOrder(){const order = getSectionOrder();const container = document.getElementById('contentSections');if(!container) return;order.forEach(key => {const el = document.getElementById(SECTION_DOM_IDS[key]);if(el) container.appendChild(el);});}
+function renderAdminSectionsOrder(){const list = document.getElementById('adminSectionsOrderList');if(!list) return;const order = getSectionOrder();list.innerHTML = '';order.forEach((key, i) => {const item = document.createElement('div');item.className = 'admin-slot';const upDisabled = i === 0;const downDisabled = i === order.length - 1;item.innerHTML = `<div class="admin-slot-num">${i+1}</div><div class="admin-slot-info"><div class="admin-slot-name">${escapeHtml(t(SECTION_LABEL_KEYS[key]))}</div><div class="admin-slot-url">${SECTION_DOM_IDS[key]}</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="moveSectionOrder(${i},-1)" ${upDisabled?'disabled':''} title="up"><i class="fa-solid fa-arrow-up"></i></button><button class="admin-slot-btn" onclick="moveSectionOrder(${i},1)" ${downDisabled?'disabled':''} title="down"><i class="fa-solid fa-arrow-down"></i></button></div>`;list.appendChild(item);});}
+function moveSectionOrder(idx, dir){const c = getSiteContent();let order = getSectionOrder();const ni = idx + dir;if(ni < 0 || ni >= order.length) return;const tmp = order[idx]; order[idx] = order[ni]; order[ni] = tmp;c.sectionsOrder = order;saveSiteContent(c);applySectionOrder();renderAdminSectionsOrder();}
+
+/* ==================== EFFECTS PANEL (REQ 4,6,7) ==================== */
+const BG_PRESETS = [
+  {key:'default', name:'Default'},
+  {key:'aurora',  name:'Aurora'},
+  {key:'sunset',  name:'Sunset'},
+  {key:'ocean',   name:'Ocean'},
+  {key:'forest',  name:'Forest'},
+  {key:'lava',    name:'Lava'},
+  {key:'cosmic',  name:'Cosmic'},
+  {key:'mint',    name:'Mint'},
+  {key:'rose',    name:'Rose'},
+  {key:'mono',    name:'Mono'}
+];
+const CONFETTI_PRESETS = [
+  {key:'classic',   name:'Classic',   icon:'fa-star'},
+  {key:'sides',     name:'Sides',     icon:'fa-arrows-left-right'},
+  {key:'top',       name:'Top Rain',  icon:'fa-cloud-arrow-down'},
+  {key:'fireworks', name:'Fireworks', icon:'fa-fire'},
+  {key:'hearts',    name:'Hearts',    icon:'fa-heart'},
+  {key:'stars',     name:'Stars',     icon:'fa-star-of-life'}
+];
+function applyBackground(){
+  const eff = (getSiteContent().effects) || {};
+  const bg = eff.background || 'default';
+  BG_PRESETS.forEach(b=>document.body.classList.remove('bg-'+b.key));
+  if(bg && bg !== 'default') document.body.classList.add('bg-'+bg);
+}
+function applyEffectsSettings(){
+  applyBackground();
+  // Update toggles
+  try {
+    const eff = (getSiteContent().effects) || {};
+    const ct = document.getElementById('confettiEnabledToggle'); if(ct) ct.checked = eff.confettiEnabled !== false;
+    const tt = document.getElementById('tickSoundEnabledToggle'); if(tt) tt.checked = eff.tickSoundEnabled !== false;
+  } catch(e){}
+}
+function renderEffectsPanel(){
+  const eff = (getSiteContent().effects) || {};
+  // Backgrounds
+  const bgGrid = document.getElementById('bgGrid');
+  if(bgGrid){
+    bgGrid.innerHTML = '';
+    BG_PRESETS.forEach(b => {
+      const chip = document.createElement('div');
+      chip.className = 'effect-chip' + ((eff.background||'default') === b.key ? ' active' : '');
+      chip.onclick = () => setBackground(b.key);
+      chip.innerHTML = `<div class="bg-swatch" style="background:${bgSwatchStyle(b.key)}"></div><span>${escapeHtml(b.name)}</span>`;
+      bgGrid.appendChild(chip);
+    });
+  }
+  // Confetti
+  const cGrid = document.getElementById('confettiGrid');
+  if(cGrid){
+    cGrid.innerHTML = '';
+    CONFETTI_PRESETS.forEach(c => {
+      const chip = document.createElement('div');
+      chip.className = 'effect-chip' + ((eff.confettiStyle||'classic') === c.key ? ' active' : '');
+      chip.onclick = () => { setConfettiStyle(c.key); fireConfettiBurst(1); };
+      chip.innerHTML = `<i class="fa-solid ${c.icon}"></i><span>${escapeHtml(c.name)}</span>`;
+      cGrid.appendChild(chip);
+    });
+  }
+  // Ticks
+  const tGrid = document.getElementById('tickGrid');
+  if(tGrid){
+    tGrid.innerHTML = '';
+    Object.keys(TICK_STYLES).forEach(k => {
+      const s = TICK_STYLES[k];
+      const chip = document.createElement('div');
+      chip.className = 'effect-chip' + ((eff.tickSoundStyle||'default') === k ? ' active' : '');
+      chip.onclick = () => { setTickSoundStyle(k); s.fn(); };
+      chip.innerHTML = `<i class="fa-solid ${s.icon}"></i><span>${escapeHtml(s.name)}</span>`;
+      tGrid.appendChild(chip);
+    });
+  }
+  // Toggle states
+  const ct = document.getElementById('confettiEnabledToggle'); if(ct) ct.checked = eff.confettiEnabled !== false;
+  const tt = document.getElementById('tickSoundEnabledToggle'); if(tt) tt.checked = eff.tickSoundEnabled !== false;
+}
+function bgSwatchStyle(key){
+  const map = {
+    default:'linear-gradient(135deg,#05050a,#0d0d15)',
+    aurora:'linear-gradient(135deg,#34d399,#9333ea)',
+    sunset:'linear-gradient(135deg,#fb923c,#ec4899,#fbbf24)',
+    ocean:'linear-gradient(135deg,#38bdf8,#0ea5e9,#06b6d4)',
+    forest:'linear-gradient(135deg,#22c55e,#15803d,#65a30d)',
+    lava:'linear-gradient(135deg,#ef4444,#f59e0b,#dc2626)',
+    cosmic:'linear-gradient(135deg,#8b5cf6,#ec4899,#1e1b4b)',
+    mint:'linear-gradient(135deg,#10b981,#2dd4bf,#86efac)',
+    rose:'linear-gradient(135deg,#f472b6,#fb7185,#e879f9)',
+    mono:'linear-gradient(135deg,#94a3b8,#64748b,#334155)'
+  };
+  return map[key] || map.default;
+}
+function setBackground(key){
   const c = getSiteContent();
-  let order = Array.isArray(c.sectionsOrder) ? c.sectionsOrder.slice() : null;
-  if(!order || !order.length) order = ['setup','experience','apps','stack'];
-  // filter valid
-  order = order.filter(k => SECTION_KEYS.includes(k));
-  // append any missing
-  SECTION_KEYS.forEach(k => { if(!order.includes(k)) order.push(k); });
-  return order;
-}
-function applySectionOrder(){
-  const order = getSectionOrder();
-  const container = document.getElementById('contentSections');
-  if(!container) return;
-  order.forEach(key => {
-    const el = document.getElementById(SECTION_DOM_IDS[key]);
-    if(el) container.appendChild(el);
-  });
-}
-function renderAdminSectionsOrder(){
-  const list = document.getElementById('adminSectionsOrderList');
-  if(!list) return;
-  const order = getSectionOrder();
-  list.innerHTML = '';
-  order.forEach((key, i) => {
-    const item = document.createElement('div');
-    item.className = 'admin-slot';
-    const upDisabled = i === 0;
-    const downDisabled = i === order.length - 1;
-    item.innerHTML = `<div class="admin-slot-num">${i+1}</div><div class="admin-slot-info"><div class="admin-slot-name">${escapeHtml(t(SECTION_LABEL_KEYS[key]))}</div><div class="admin-slot-url">${SECTION_DOM_IDS[key]}</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="moveSectionOrder(${i},-1)" ${upDisabled?'disabled':''} title="up"><i class="fa-solid fa-arrow-up"></i></button><button class="admin-slot-btn" onclick="moveSectionOrder(${i},1)" ${downDisabled?'disabled':''} title="down"><i class="fa-solid fa-arrow-down"></i></button></div>`;
-    list.appendChild(item);
-  });
-}
-function moveSectionOrder(idx, dir){
-  const c = getSiteContent();
-  let order = getSectionOrder();
-  const ni = idx + dir;
-  if(ni < 0 || ni >= order.length) return;
-  const tmp = order[idx]; order[idx] = order[ni]; order[ni] = tmp;
-  c.sectionsOrder = order;
+  if(!c.effects) c.effects = {};
+  c.effects.background = key;
   saveSiteContent(c);
-  applySectionOrder();
-  renderAdminSectionsOrder();
+  applyBackground();
+  renderEffectsPanel();
+}
+function setConfettiEnabled(val){
+  const c = getSiteContent();
+  if(!c.effects) c.effects = {};
+  c.effects.confettiEnabled = !!val;
+  saveSiteContent(c);
+}
+function setConfettiStyle(key){
+  const c = getSiteContent();
+  if(!c.effects) c.effects = {};
+  c.effects.confettiStyle = key;
+  saveSiteContent(c);
+  renderEffectsPanel();
+}
+function setTickSoundEnabled(val){
+  const c = getSiteContent();
+  if(!c.effects) c.effects = {};
+  c.effects.tickSoundEnabled = !!val;
+  saveSiteContent(c);
+}
+function setTickSoundStyle(key){
+  const c = getSiteContent();
+  if(!c.effects) c.effects = {};
+  c.effects.tickSoundStyle = key;
+  saveSiteContent(c);
+  renderEffectsPanel();
 }
 
 /* ADMIN MY ACCOUNT */
@@ -2029,7 +2186,6 @@ function saveAdminAccount(e){
   checkUserSession();
   showCustomAlert(t('alert_saved'),'success');
 }
-
 function withTimeout(promise,ms=5000){return Promise.race([Promise.resolve(promise),new Promise(r=>setTimeout(()=>r(null),ms))]);}
 function buildAdminSlotHTML(idx,app,apk,icon){const filled=app.name&&app.name.trim().length>0;const hasApk=!!app.hasApk||!!apk;const hasIcon=!!app.hasIcon||(icon&&icon.dataUrl);const requireLogin=!!app.requireLogin;const lockBadge=requireLogin?`<span class="lock-badge"><i class="fa-solid fa-lock" style="font-size:.55rem"></i> LOGIN</span>`:'';const apkSize=app.apkSize||(apk?apk.size:0);const apkBadge=hasApk?`<span class="apk-badge"><i class="fa-brands fa-android" style="font-size:.55rem"></i> APK ${apkSize?formatFileSize(apkSize):''}</span>`:'';let iconPreview='';if(hasIcon&&icon&&icon.dataUrl)iconPreview=`<img src="${icon.dataUrl}" class="icon-preview-mini" alt="">`;else if(app.icon&&app.icon.trim().startsWith('http'))iconPreview=`<img src="${escapeHtml(app.icon.trim())}" class="icon-preview-mini" alt="" onerror="this.style.display='none'">`;else if(app.icon&&app.icon.trim())iconPreview=`<span style="font-size:1.1rem">${escapeHtml(app.icon.trim())}</span>`;const urlText=filled&&app.url?escapeHtml(app.url):(filled&&app.desc?escapeHtml(app.desc):t('app_slot_empty'));const nameText=filled?escapeHtml(app.name):`<em style="opacity:.5">${t('app_slot_empty')} ${idx+1}</em>`;return `<div class="admin-slot-num">${idx+1}</div>${iconPreview?`<div class="slot-icon-holder" style="flex-shrink:0;display:flex;align-items:center;justify-content:center;width:26px">${iconPreview}</div>`:`<div class="slot-icon-holder" style="flex-shrink:0;width:0"></div>`}<div class="admin-slot-info"><div class="admin-slot-name">${nameText} ${apkBadge} ${lockBadge}</div><div class="admin-slot-url">${urlText}</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="editAppSlot(${idx})"><i class="fa-solid fa-pen"></i></button><button class="admin-slot-btn delete" onclick="clearAppSlot(${idx})"><i class="fa-solid fa-trash-can"></i></button></div>`;}
 
@@ -2047,29 +2203,85 @@ async function getVoiceMessage(audioId){const db=await openApkDB();return new Pr
 async function deleteVoiceMessage(audioId){const db=await openApkDB();return new Promise((res,rej)=>{const tx=db.transaction(['voice_messages'],'readwrite'),st=tx.objectStore('voice_messages');const r=st.delete(audioId);r.onsuccess=()=>res(true);r.onerror=(e)=>rej(e.target.error);});}
 async function clearAllVoiceMessages(){const db=await openApkDB();return new Promise((res,rej)=>{const tx=db.transaction(['voice_messages'],'readwrite'),st=tx.objectStore('voice_messages');const r=st.clear();r.onsuccess=()=>res(true);r.onerror=(e)=>rej(e.target.error);});}
 function formatFileSize(b){if(b<1024)return b+' B';if(b<1024*1024)return (b/1024).toFixed(1)+' KB';if(b<1024*1024*1024)return (b/(1024*1024)).toFixed(2)+' MB';return (b/(1024*1024*1024)).toFixed(2)+' GB';}
-async function downloadApk(slotIndex){const lu=localStorage.getItem('logged_user');const uo=lu?JSON.parse(lu):null;const c=getSiteContent();const app=c.apps[slotIndex];if(!app)return;const requireLogin=!!app.requireLogin;if(requireLogin&&!lu){logActivity('apk_blocked',{email:'guest',name:'Guest'},'Slot #'+(slotIndex+1));showCustomAlert(t('alert_apk_login'));setTimeout(()=>openGetInTouchModal(),300);return;}try{const apk=await withTimeout(getApkFile(slotIndex),60000);if(!apk){showCustomAlert(t('alert_apk_not_found'));return;}if(lu)logActivity('apk_download',uo,`Slot #${slotIndex+1} - ${apk.name} (${formatFileSize(apk.size)})`);let blob;if(apk.blob instanceof Blob)blob=apk.blob;else{const ba=new Uint8Array(apk.blob);blob=new Blob([ba],{type:apk.type||'application/vnd.android.package-archive'});}const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=apk.name||`app_slot_${slotIndex+1}.apk`;a.style.display='none';document.body.appendChild(a);a.click();setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},2000);showCustomAlert(t('alert_downloading')+': '+apk.name,'success');}catch(e){showCustomAlert(t('alert_down_err'));}}
+
+/* === REQ 2: Download with site-style alert + unique filename === */
+async function downloadApk(slotIndex){
+  const lu=localStorage.getItem('logged_user');
+  const uo=lu?JSON.parse(lu):null;
+  const c=getSiteContent();
+  const app=c.apps[slotIndex];
+  if(!app)return;
+  const requireLogin=!!app.requireLogin;
+  if(requireLogin&&!lu){
+    logActivity('apk_blocked',{email:'guest',name:'Guest'},'Slot #'+(slotIndex+1));
+    showCustomAlert(t('alert_apk_login'),'warning');
+    setTimeout(()=>openGetInTouchModal(),300);
+    return;
+  }
+  // Show site-style "downloading" alert FIRST with icon
+  showCustomAlert(`<i class="fa-solid fa-download" style="color:#22c55e"></i> ${t('alert_downloading')}`, 'downloading');
+  try{
+    const apk=await withTimeout(getApkFile(slotIndex),60000);
+    if(!apk){
+      closeCustomAlert();
+      showCustomAlert(t('alert_apk_not_found'),'error');
+      return;
+    }
+    if(lu)logActivity('apk_download',uo,`Slot #${slotIndex+1} - ${apk.name} (${formatFileSize(apk.size)})`);
+    let blob;
+    if(apk.blob instanceof Blob)blob=apk.blob;
+    else{const ba=new Uint8Array(apk.blob);blob=new Blob([ba],{type:apk.type||'application/vnd.android.package-archive'});}
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    // Unique filename to avoid browser "download again?" prompt
+    const baseName = (apk.name||`app_slot_${slotIndex+1}.apk`).replace(/\.apk$/i,'');
+    a.download = `${baseName}_${Date.now()}.apk`;
+    a.style.display='none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},2500);
+    // Success alert replacing downloading
+    closeCustomAlert();
+    setTimeout(()=>{
+      showCustomAlert(`<i class="fa-solid fa-circle-check" style="color:#22c55e"></i> ${apk.name}`, 'success');
+    }, 150);
+  }catch(e){
+    closeCustomAlert();
+    setTimeout(()=>showCustomAlert(t('alert_down_err'),'error'),150);
+  }
+}
 
 /* SITE CONTENT */
-const DEFAULT_SITE_CONTENT={header:{brand:'muminsultani',roleEn:'Software Developer',roleTr:'Yazılım Geliştirici'},social:{github:'https://github.com/muminsultani',instagram:'https://instagram.com/sultanimumin',gmail:'muminsultani@hotmail.com'},apps:Array(8).fill(null).map(()=>({name:'',desc:'',url:'',icon:'',requireLogin:false,hasApk:false,apkName:'',apkSize:0,apkType:'',hasIcon:false})),experience:{titleEn:'Remote Software Developer',titleTr:'Uzaktan Yazılım Geliştirici',date:'2025 - Present',descEn:'Developing scalable backend services, REST APIs, and mobile-friendly web solutions using Python and Node.js.',descTr:"Python and Node.js kullanarak ölçeklenebilir arka uç servisleri, REST API'ler ve mobil uyumlu web çözümleri geliştirme."},setup:{osEn:'Linux / Mobile Node',osTr:'Linux / Mobil Node',editorEn:'Spck & VS Code',editorTr:'Spck & VS Code'},stack:{backend:'Python, Node.js, Django',frontend:'JavaScript, HTML/CSS'},footer:{brand:'muminsultani',scanEn:'Scan To Connect',scanTr:'Bağlanmak İçin Tarayın',copyright:'© 2026 muminsultani • All Rights Reserved.'},general:{defaultLang:'en',pageTitle:'muminsultani',metaDesc:"muminsultani's official personal website.",favicon:''},sectionsOrder:['setup','experience','apps','stack'],lastEdit:'—'};
+const DEFAULT_SITE_CONTENT={
+  header:{brand:'muminsultani',roleEn:'Software Developer',roleTr:'Yazılım Geliştirici'},
+  social:{github:'https://github.com/muminsultani',instagram:'https://instagram.com/sultanimumin',gmail:'muminsultani@hotmail.com'},
+  apps:Array(8).fill(null).map(()=>({name:'',desc:'',url:'',icon:'',requireLogin:false,hasApk:false,apkName:'',apkSize:0,apkType:'',hasIcon:false})),
+  experience:{titleEn:'Remote Software Developer',titleTr:'Uzaktan Yazılım Geliştirici',date:'2025 - Present',descEn:'Developing scalable backend services, REST APIs, and mobile-friendly web solutions using Python and Node.js.',descTr:"Python and Node.js kullanarak ölçeklenebilir arka uç servisleri, REST API'ler ve mobil uyumlu web çözümleri geliştirme."},
+  setup:{osEn:'Linux / Mobile Node',osTr:'Linux / Mobil Node',editorEn:'Spck & VS Code',editorTr:'Spck & VS Code'},
+  stack:{backend:'Python, Node.js, Django',frontend:'JavaScript, HTML/CSS'},
+  footer:{brand:'muminsultani',scanEn:'Scan To Connect',scanTr:'Bağlanmak İçin Tarayın',copyright:'© 2026 muminsultani • All Rights Reserved.'},
+  general:{defaultLang:'en',pageTitle:'muminsultani',metaDesc:"muminsultani's official personal website.",favicon:''},
+  sectionsOrder:['setup','experience','apps','stack'],
+  effects:{background:'default',confettiEnabled:true,confettiStyle:'classic',tickSoundEnabled:true,tickSoundStyle:'default'},
+  lastEdit:'—'
+};
 function getSiteContent(){try{const r=localStorage.getItem(SITE_CONTENT_KEY);if(r){const p=JSON.parse(r);return deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),p);}}catch(e){}return JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT));}
 function saveSiteContent(c){c.lastEdit=new Date().toLocaleString();try{localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(c));}catch(e){}}
 function deepMerge(t,s){for(const k in s){if(s[k]&&typeof s[k]==='object'&&!Array.isArray(s[k])){t[k]=deepMerge(t[k]||{},s[k]);}else if(s[k]!==undefined&&s[k]!==null){t[k]=s[k];}}return t;}
 function getDyn(path,fb){const c=getSiteContent(),p=path.split('.');let v=c;for(const x of p){if(v&&v[x]!==undefined)v=v[x];else return fb;}return(v===undefined||v===null)?fb:v;}
-function applySiteContent(){const c=getSiteContent(),isTR=currentLang==='tr';document.querySelectorAll('.brand-logo, .footer-brand').forEach(el=>el.textContent=c.header.brand);const il=document.querySelector('.intro-logo');if(il)il.textContent=c.header.brand;document.querySelectorAll('.modal-brand').forEach(el=>el.textContent=c.header.brand);document.getElementById('t-role').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('introSub').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('socialGithub').href=c.social.github;document.getElementById('socialInstagram').href=c.social.instagram;document.getElementById('t-job-title').innerText=isTR?c.experience.titleTr:c.experience.titleEn;document.getElementById('t-job-date').innerText=c.experience.date;document.getElementById('t-job-desc').innerText=isTR?c.experience.descTr:c.experience.descEn;document.getElementById('t-os-val').innerText=isTR?c.setup.osTr:c.setup.osEn;document.getElementById('t-editor-val').innerText=isTR?c.setup.editorTr:c.setup.editorEn;document.getElementById('t-backend-val').innerText=c.stack.backend;document.getElementById('t-frontend-val').innerText=c.stack.frontend;document.getElementById('t-copyright').innerText=(currentLang==='tr'?'© 2026 muminsultani • Tüm Hakları Saklıdır.':c.footer.copyright);if(c.general){if(c.general.pageTitle){document.title=c.general.pageTitle;const pt=document.getElementById('pageTitle');if(pt)pt.textContent=c.general.pageTitle;}if(c.general.metaDesc){const md=document.querySelector('meta[name="description"]');if(md)md.setAttribute('content',c.general.metaDesc);}if(c.general.favicon){const fav=document.getElementById('siteFavicon');if(fav)fav.href=c.general.favicon;}}renderApplications();applySectionOrder();}
+function applySiteContent(){const c=getSiteContent(),isTR=currentLang==='tr';document.querySelectorAll('.brand-logo, .footer-brand').forEach(el=>el.textContent=c.header.brand);const il=document.querySelector('.intro-logo');if(il)il.textContent=c.header.brand;document.querySelectorAll('.modal-brand').forEach(el=>el.textContent=c.header.brand);document.getElementById('t-role').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('introSub').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('socialGithub').href=c.social.github;document.getElementById('socialInstagram').href=c.social.instagram;document.getElementById('t-job-title').innerText=isTR?c.experience.titleTr:c.experience.titleEn;document.getElementById('t-job-date').innerText=c.experience.date;document.getElementById('t-job-desc').innerText=isTR?c.experience.descTr:c.experience.descEn;document.getElementById('t-os-val').innerText=isTR?c.setup.osTr:c.setup.osEn;document.getElementById('t-editor-val').innerText=isTR?c.setup.editorTr:c.setup.editorEn;document.getElementById('t-backend-val').innerText=c.stack.backend;document.getElementById('t-frontend-val').innerText=c.stack.frontend;document.getElementById('t-copyright').innerText=(currentLang==='tr'?'© 2026 muminsultani • Tüm Hakları Saklıdır.':c.footer.copyright);if(c.general){if(c.general.pageTitle){document.title=c.general.pageTitle;const pt=document.getElementById('pageTitle');if(pt)pt.textContent=c.general.pageTitle;}if(c.general.metaDesc){const md=document.querySelector('meta[name="description"]');if(md)md.setAttribute('content',c.general.metaDesc);}if(c.general.favicon){const fav=document.getElementById('siteFavicon');if(fav)fav.href=c.general.favicon;}}renderApplications();applySectionOrder();applyEffectsSettings();}
 
-/* === REQ 5 & 6: Responsive grid + centered card with download badge === */
+/* === REQ 3: Always render 8 slots, CSS controls visibility === */
 async function renderApplications(){
   const grid=document.getElementById('appsGrid');
   if(!grid)return;
   const apps=getSiteContent().apps;
   const isLogged=!!localStorage.getItem('logged_user');
-  const w=window.innerWidth;
-  let maxShow=4; // phone / tablet
-  if(w>=1025)maxShow=6; // desktop
   grid.innerHTML='';
-  for(let idx=0;idx<maxShow;idx++){
-    const app=apps[idx];
-    const hasContent=app&&app.name&&app.name.trim().length>0;
+  for(let idx=0;idx<8;idx++){
+    const app=apps[idx]||{};
+    const hasContent=app.name&&app.name.trim().length>0;
     const card=document.createElement('div');
     card.className='app-card';
     if(!hasContent){
@@ -2094,7 +2306,6 @@ async function renderApplications(){
       card.style.cursor='pointer';
       card.addEventListener('click',()=>{let url=app.url.trim();if(!/^https?:\/\//i.test(url))url='https://'+url;window.open(url,'_blank');});
     }
-    // Badge on icon
     const dlBadge = hasApk ? `<span class="apk-download-badge"><i class="fa-solid fa-download"></i></span>` : '';
     let nI='';
     if(hasApk)nI='<i class="fa-solid fa-download download-icon"></i>';
@@ -2115,9 +2326,9 @@ async function renderApplications(){
 /* ADMIN PANEL */
 function openAdminPanel(){refreshAdminUI();document.getElementById('adminPanelModal').classList.add('active');}
 function closeAdminPanel(){document.getElementById('adminPanelModal').classList.remove('active');applySiteContent();}
-function switchAdminTab(name,btn){document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));if(btn)btn.classList.add('active');const sec=document.querySelector(`.admin-section[data-section="${name}"]`);if(sec)sec.classList.add('active');if(name==='users')renderAdminUsers();if(name==='verify')renderAdminVerifyRequests();if(name==='activity')renderAdminActivity();if(name==='chats')renderAdminChats();if(name==='apps')renderAdminSlots();if(name==='sections')renderAdminSectionsOrder();if(name==='general')refreshGeneralForm();if(name==='account')renderAdminAccount();}
+function switchAdminTab(name,btn){document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));if(btn)btn.classList.add('active');const sec=document.querySelector(`.admin-section[data-section="${name}"]`);if(sec)sec.classList.add('active');if(name==='users')renderAdminUsers();if(name==='verify')renderAdminVerifyRequests();if(name==='activity')renderAdminActivity();if(name==='chats')renderAdminChats();if(name==='apps')renderAdminSlots();if(name==='sections')renderAdminSectionsOrder();if(name==='effects')renderEffectsPanel();if(name==='general')refreshGeneralForm();if(name==='account')renderAdminAccount();}
 function refreshGeneralForm(){const c=getSiteContent();const dl=document.getElementById('ag-default-lang');if(dl)dl.value=c.general?.defaultLang||'en';const pt=document.getElementById('ag-page-title');if(pt)pt.value=c.general?.pageTitle||'';const md=document.getElementById('ag-meta-desc');if(md)md.value=c.general?.metaDesc||'';const fu=document.getElementById('ag-favicon-url');if(fu)fu.value=(c.general?.favicon&&c.general.favicon.startsWith('http'))?c.general.favicon:'';if(c.general?.favicon){const prev=document.getElementById('faviconPreview');if(prev){prev.src=c.general.favicon;prev.style.display='block';}const ico=document.getElementById('faviconUploadIcon');if(ico)ico.style.display='none';const btn=document.getElementById('faviconClearBtn');if(btn)btn.style.display='inline-flex';}else{const prev=document.getElementById('faviconPreview');if(prev){prev.style.display='none';prev.src='';}const ico=document.getElementById('faviconUploadIcon');if(ico)ico.style.display='block';const btn=document.getElementById('faviconClearBtn');if(btn)btn.style.display='none';}}
-function refreshAdminUI(){const c=getSiteContent();const users=getAllUsers();const logs=getActivityLog();const chats=getChatMessages();const reqs=getVerifyRequests().filter(r=>r.status==='pending');let totalChats=0;for(const k in chats)totalChats+=chats[k].length;const appsCount=c.apps.filter(a=>a.name&&a.name.trim()).length;const dac=document.getElementById('dash-apps-count');if(dac)dac.textContent=`Apps: ${appsCount} / 8`;const duc=document.getElementById('dash-users-count');if(duc)duc.textContent=`Users: ${users.length}`;const dvc=document.getElementById('dash-verify-count');if(dvc)dvc.textContent=`Verify: ${reqs.length}`;const dac2=document.getElementById('dash-activity-count');if(dac2)dac2.textContent=`Activities: ${logs.length}`;const dcc=document.getElementById('dash-chats-count');if(dcc)dcc.textContent=`Chat: ${totalChats}`;const dcs=document.getElementById('dash-cloud-status');if(dcs)dcs.textContent='Cloud: '+(cloudEnabled?'✅':'—');const des=document.getElementById('dash-email-status');if(des)des.textContent='Email: '+(EMAILJS_CONFIG.enabled?'✅':'⚠️');const dle=document.getElementById('dash-last-edit');if(dle)dle.textContent='Last: '+c.lastEdit;document.getElementById('ah-brand').value=c.header.brand;document.getElementById('ah-role-en').value=c.header.roleEn;document.getElementById('ah-role-tr').value=c.header.roleTr;document.getElementById('as-github').value=c.social.github;document.getElementById('as-instagram').value=c.social.instagram;document.getElementById('as-gmail').value=c.social.gmail;document.getElementById('ae-t-en').value=c.experience.titleEn;document.getElementById('ae-t-tr').value=c.experience.titleTr;document.getElementById('ae-date').value=c.experience.date;document.getElementById('ae-d-en').value=c.experience.descEn;document.getElementById('ae-d-tr').value=c.experience.descTr;document.getElementById('au-os-en').value=c.setup.osEn;document.getElementById('au-os-tr').value=c.setup.osTr;document.getElementById('au-ed-en').value=c.setup.editorEn;document.getElementById('au-ed-tr').value=c.setup.editorTr;document.getElementById('ak-be').value=c.stack.backend;document.getElementById('ak-fe').value=c.stack.frontend;document.getElementById('af-brand').value=c.footer.brand;document.getElementById('af-scan-en').value=c.footer.scanEn;document.getElementById('af-scan-tr').value=c.footer.scanTr;document.getElementById('af-copy').value=c.footer.copyright;refreshGeneralForm();renderAdminSlots();renderAdminSectionsOrder();}
+function refreshAdminUI(){const c=getSiteContent();const users=getAllUsers();const logs=getActivityLog();const chats=getChatMessages();const reqs=getVerifyRequests().filter(r=>r.status==='pending');let totalChats=0;for(const k in chats)totalChats+=chats[k].length;const appsCount=c.apps.filter(a=>a.name&&a.name.trim()).length;const dac=document.getElementById('dash-apps-count');if(dac)dac.textContent=`Apps: ${appsCount} / 8`;const duc=document.getElementById('dash-users-count');if(duc)duc.textContent=`Users: ${users.length}`;const dvc=document.getElementById('dash-verify-count');if(dvc)dvc.textContent=`Verify: ${reqs.length}`;const dac2=document.getElementById('dash-activity-count');if(dac2)dac2.textContent=`Activities: ${logs.length}`;const dcc=document.getElementById('dash-chats-count');if(dcc)dcc.textContent=`Chat: ${totalChats}`;const dcs=document.getElementById('dash-cloud-status');if(dcs)dcs.textContent='Cloud: '+(cloudEnabled?'✅':'—');const des=document.getElementById('dash-email-status');if(des)des.textContent='Email: '+(EMAILJS_CONFIG.enabled?'✅':'⚠️');const dle=document.getElementById('dash-last-edit');if(dle)dle.textContent='Last: '+c.lastEdit;document.getElementById('ah-brand').value=c.header.brand;document.getElementById('ah-role-en').value=c.header.roleEn;document.getElementById('ah-role-tr').value=c.header.roleTr;document.getElementById('as-github').value=c.social.github;document.getElementById('as-instagram').value=c.social.instagram;document.getElementById('as-gmail').value=c.social.gmail;document.getElementById('ae-t-en').value=c.experience.titleEn;document.getElementById('ae-t-tr').value=c.experience.titleTr;document.getElementById('ae-date').value=c.experience.date;document.getElementById('ae-d-en').value=c.experience.descEn;document.getElementById('ae-d-tr').value=c.experience.descTr;document.getElementById('au-os-en').value=c.setup.osEn;document.getElementById('au-os-tr').value=c.setup.osTr;document.getElementById('au-ed-en').value=c.setup.editorEn;document.getElementById('au-ed-tr').value=c.setup.editorTr;document.getElementById('ak-be').value=c.stack.backend;document.getElementById('ak-fe').value=c.stack.frontend;document.getElementById('af-brand').value=c.footer.brand;document.getElementById('af-scan-en').value=c.footer.scanEn;document.getElementById('af-scan-tr').value=c.footer.scanTr;document.getElementById('af-copy').value=c.footer.copyright;refreshGeneralForm();renderAdminSlots();renderAdminSectionsOrder();renderEffectsPanel();}
 function renderAdminSlots(){const list=document.getElementById('adminSlotsList');if(!list)return;const apps=getSiteContent().apps;list.innerHTML='';apps.forEach((app,idx)=>{const item=document.createElement('div');item.className='admin-slot';item.innerHTML=buildAdminSlotHTML(idx,app,null,null);list.appendChild(item);if(app.hasIcon){withTimeout(getIconData(idx),3000).then(icon=>{if(icon&&icon.dataUrl){const h=item.querySelector('.slot-icon-holder');if(h){h.style.width='26px';h.innerHTML=`<img src="${icon.dataUrl}" class="icon-preview-mini" alt="">`;}}}).catch(()=>{});}});}
 async function editAppSlot(idx){const c=getSiteContent();const app=c.apps[idx]||{name:'',desc:'',url:'',icon:'',requireLogin:false};pendingApkFile=null;pendingApkDelete=false;pendingIconDataUrl=null;pendingIconDelete=false;document.getElementById('editSlotIndex').value=idx;document.getElementById('editAppName').value=app.name||'';document.getElementById('editAppDesc').value=app.desc||'';document.getElementById('editAppUrl').value=app.url||'';document.getElementById('editAppRequireLogin').checked=!!app.requireLogin;document.getElementById('editAppApkFile').value='';document.getElementById('editAppIconFile').value='';let eApk=null,eIcon=null;if(app.hasApk){try{eApk=await withTimeout(getApkFile(idx),5000);}catch(e){}}if(app.hasIcon){try{eIcon=await withTimeout(getIconData(idx),5000);}catch(e){}}updateApkUI(eApk?{name:eApk.name,size:eApk.size,existing:true}:(app.hasApk?{name:app.apkName||'APK',size:app.apkSize||0,existing:true}:null));if(eIcon&&eIcon.dataUrl){updateIconUI({dataUrl:eIcon.dataUrl,existing:true});}else if(app.icon&&app.icon.trim().startsWith('http')){updateIconUI({dataUrl:app.icon.trim(),existing:true,isUrl:true});}else updateIconUI(null);document.getElementById('adminEditModal').classList.add('active');setTimeout(()=>document.getElementById('editAppName').focus(),250);}
 function closeAdminEdit(){document.getElementById('adminEditModal').classList.remove('active');}
@@ -2140,8 +2351,8 @@ function handleFaviconUpload(e){const f=e.target.files[0];if(!f)return;if(!f.typ
 function handleFaviconUrlInput(val){const v=val.trim();if(v){pendingFaviconDataUrl=null;const prev=document.getElementById('faviconPreview');if(prev){prev.src=v;prev.style.display='block';}const ico=document.getElementById('faviconUploadIcon');if(ico)ico.style.display='none';const btn=document.getElementById('faviconClearBtn');if(btn)btn.style.display='inline-flex';}}
 function clearFavicon(){pendingFaviconDataUrl=null;const prev=document.getElementById('faviconPreview');if(prev){prev.style.display='none';prev.src='';}const ico=document.getElementById('faviconUploadIcon');if(ico)ico.style.display='block';const btn=document.getElementById('faviconClearBtn');if(btn)btn.style.display='none';const info=document.getElementById('faviconUploadInfo');if(info)info.style.display='none';const url=document.getElementById('ag-favicon-url');if(url)url.value='';const c=getSiteContent();if(c.general)c.general.favicon='';saveSiteContent(c);applySiteContent();}
 function exportSiteBackup(){const c=getSiteContent();const data=JSON.stringify(c,null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`muminsultani-backup-${new Date().toISOString().slice(0,10)}.json`;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),100);showCustomAlert(t('alert_backup_down'),'success');}
-function importSiteBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){try{const d=JSON.parse(ev.target.result);if(!d||typeof d!=='object')throw new Error('Invalid');saveSiteContent(deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),d));applySiteContent();applySectionOrder();refreshAdminUI();showCustomAlert(t('alert_backup_load'),'success');}catch(err){showCustomAlert(t('alert_invalid_file'));}e.target.value='';};r.readAsText(f);}
-function confirmResetSite(){showCustomAlert(t('alert_reset_confirm'),'delete',async function(){localStorage.removeItem(SITE_CONTENT_KEY);try{for(let i=0;i<8;i++){await withTimeout(deleteApkFile(i),3000);await withTimeout(deleteIconData(i),3000);}await withTimeout(clearAllVoiceMessages(),3000);}catch(e){}applySiteContent();applySectionOrder();refreshAdminUI();showCustomAlert(t('alert_reset_ok'),'success');});}
+function importSiteBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){try{const d=JSON.parse(ev.target.result);if(!d||typeof d!=='object')throw new Error('Invalid');saveSiteContent(deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),d));applySiteContent();applySectionOrder();applyEffectsSettings();refreshAdminUI();showCustomAlert(t('alert_backup_load'),'success');}catch(err){showCustomAlert(t('alert_invalid_file'));}e.target.value='';};r.readAsText(f);}
+function confirmResetSite(){showCustomAlert(t('alert_reset_confirm'),'delete',async function(){localStorage.removeItem(SITE_CONTENT_KEY);try{for(let i=0;i<8;i++){await withTimeout(deleteApkFile(i),3000);await withTimeout(deleteIconData(i),3000);}await withTimeout(clearAllVoiceMessages(),3000);}catch(e){}applySiteContent();applySectionOrder();applyEffectsSettings();refreshAdminUI();showCustomAlert(t('alert_reset_ok'),'success');});}
 function checkAdminHash(){if(window.location.hash==='#manage-muminsultani'||window.location.hash==='#admin'){triggerAdminAccess();history.replaceState(null,'',window.location.pathname+window.location.search);}}
 window.addEventListener('hashchange',checkAdminHash);
 
@@ -2186,9 +2397,32 @@ function switchAuthTab(mode){
     if(nextBtn)nextBtn.style.display='none';
     st.textContent=t('btn_signup');
     if(el)el.textContent=t('lbl_email');if(ei)ei.placeholder=t('ph_email');
+    // REQ 5: auto-sync name → username on signup
+    setupSignupAutoFill();
   }
   const fl=document.getElementById('t-forgot-link');if(fl)fl.style.display=(mode==='signup')?'none':'inline';
   ts.textContent=t('tab_signin');tu.textContent=t('tab_signup');
+}
+/* === REQ 5: Auto-lowercase name + sync username === */
+function setupSignupAutoFill(){
+  const nameInput = document.getElementById('contactClientName');
+  const userInput = document.getElementById('contactClientUsername');
+  if(!nameInput || !userInput) return;
+  if(nameInput.dataset.autoFillInit) return;
+  nameInput.dataset.autoFillInit = '1';
+  nameInput.addEventListener('input', function(){
+    // lowercase name
+    this.value = this.value.toLowerCase();
+    // auto-fill username (remove spaces, keep only [a-z0-9_.-])
+    if(!userInput.dataset.userTouched){
+      let u = this.value.toLowerCase().replace(/[^a-z0-9]/g,'').replace(/^@/,'');
+      userInput.value = u;
+      try { checkUsernameAvailability(); } catch(e){}
+    }
+  });
+  userInput.addEventListener('input', function(){
+    userInput.dataset.userTouched = '1';
+  });
 }
 function handleAuthNext(e){if(e)e.preventDefault();const email=document.getElementById('contactClientEmail').value.trim();if(!email){showCustomAlert(t('alert_next_first'));return;}document.getElementById('groupPassword').style.display='block';document.getElementById('dc-submit-group').style.display='flex';document.getElementById('dc-next-btn').style.display='none';setTimeout(()=>{const p=document.getElementById('contactClientPassword');if(p)p.focus();},150);}
 function openGetInTouchModal(){const lu=localStorage.getItem('logged_user');if(lu){window.scrollTo({top:0,behavior:'smooth'});return;}document.getElementById('getInTouchModal').classList.add('active');}
@@ -2249,7 +2483,33 @@ let activeNoticeEmail="muminsultani@hotmail.com";
 function openGmailNoticeModal(email){const lu=localStorage.getItem('logged_user');if(!lu){showCustomAlert(t('alert_must_signin'));openGetInTouchModal();return;}activeNoticeEmail=email;document.getElementById('gmailNoticeModal').classList.add('active');}
 function closeGmailNoticeModal(){document.getElementById('gmailNoticeModal').classList.remove('active');}
 function confirmOpenGmail(){closeGmailNoticeModal();const to=activeNoticeEmail||'muminsultani@hotmail.com';const brand=getDyn('header.brand','muminsultani');const subj=encodeURIComponent(brand+' - Contact');const body=encodeURIComponent('Hello,\n\n');const url='https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(to)+'&su='+subj+'&body='+body;window.open(url,'_blank');}
-function showCustomAlert(message,type='info',onConfirm=null){const ab=document.getElementById('customAlertModal');const ai=document.getElementById('customAlertIcon');const am=document.getElementById('customAlertMessage');const ag=document.getElementById('customAlertBtnGroup');am.innerText=message;if(type==='logout')ai.innerHTML='<i class="fa-solid fa-door-open"></i>';else if(type==='success')ai.innerHTML='<i class="fa-solid fa-circle-check"></i>';else if(type==='delete')ai.innerHTML='<i class="fa-solid fa-trash-can" style="color:#ef4444"></i>';else ai.innerHTML='<i class="fa-solid fa-circle-exclamation"></i>';if(onConfirm){let bl=t('alert_del_no'),br=t('alert_del_yes'),bi='fa-door-open',bs='background:linear-gradient(135deg,#9333ea,#c084fc)';if(type==='delete'){bl=t('alert_del_no');br=t('alert_del_yes');bi='fa-trash-can';bs='background:linear-gradient(135deg,#ef4444,#dc2626)';}else{bl=t('alert_logout_no');br=t('alert_logout_yes');bi='fa-door-open';bs='background:linear-gradient(135deg,#9333ea,#c084fc)';}ag.innerHTML=`<button class="custom-alert-btn cancel-btn" onclick="closeCustomAlert()" style="flex:1"><i class="fa-solid fa-arrow-left"></i> ${bl}</button><button class="custom-alert-btn" onclick="confirmAction()" style="flex:1; ${bs}"><i class="fa-solid ${bi}"></i> ${br}</button>`;window._confirmActionCallback=onConfirm;}else{let bt=t('alert_ok'),bico='';if(type==='success'){bico='<i class="fa-solid fa-check"></i> ';}ag.innerHTML=`<button class="custom-alert-btn" onclick="closeCustomAlert()" style="flex:1">${bico} ${bt}</button>`;}ab.classList.add('active');}
+
+/* === Custom Alert with icons for downloading/success/error/warning === */
+function showCustomAlert(message,type='info',onConfirm=null){
+  const ab=document.getElementById('customAlertModal');
+  const ai=document.getElementById('customAlertIcon');
+  const am=document.getElementById('customAlertMessage');
+  const ag=document.getElementById('customAlertBtnGroup');
+  am.innerHTML=message;
+  if(type==='logout')ai.innerHTML='<i class="fa-solid fa-door-open"></i>';
+  else if(type==='success')ai.innerHTML='<i class="fa-solid fa-circle-check" style="color:#22c55e"></i>';
+  else if(type==='delete'||type==='error')ai.innerHTML='<i class="fa-solid fa-circle-xmark" style="color:#ef4444"></i>';
+  else if(type==='warning')ai.innerHTML='<i class="fa-solid fa-triangle-exclamation" style="color:#f59e0b"></i>';
+  else if(type==='downloading')ai.innerHTML='<i class="fa-solid fa-download" style="color:#22c55e"></i>';
+  else ai.innerHTML='<i class="fa-solid fa-circle-exclamation"></i>';
+  if(onConfirm){
+    let bl=t('alert_del_no'),br=t('alert_del_yes'),bi='fa-door-open',bs='background:linear-gradient(135deg,#9333ea,#c084fc)';
+    if(type==='delete'){bl=t('alert_del_no');br=t('alert_del_yes');bi='fa-trash-can';bs='background:linear-gradient(135deg,#ef4444,#dc2626)';}
+    else{bl=t('alert_logout_no');br=t('alert_logout_yes');bi='fa-door-open';bs='background:linear-gradient(135deg,#9333ea,#c084fc)';}
+    ag.innerHTML=`<button class="custom-alert-btn cancel-btn" onclick="closeCustomAlert()" style="flex:1"><i class="fa-solid fa-arrow-left"></i> ${bl}</button><button class="custom-alert-btn" onclick="confirmAction()" style="flex:1; ${bs}"><i class="fa-solid ${bi}"></i> ${br}</button>`;
+    window._confirmActionCallback=onConfirm;
+  } else {
+    let bt=t('alert_ok'),bico='';
+    if(type==='success'){bico='<i class="fa-solid fa-check"></i> ';}
+    ag.innerHTML=`<button class="custom-alert-btn" onclick="closeCustomAlert()" style="flex:1">${bico} ${bt}</button>`;
+  }
+  ab.classList.add('active');
+}
 function closeCustomAlert(){document.getElementById('customAlertModal').classList.remove('active');window._confirmActionCallback=null;if(window._pendingLangReset){window._pendingLangReset=false;try{sessionStorage.removeItem('site_lang');}catch(e){}changeLanguage('en');}}
 function confirmAction(){const cb=window._confirmActionCallback;window._confirmActionCallback=null;document.getElementById('customAlertModal').classList.remove('active');if(cb){try{cb();}catch(e){console.error(e);}}if(window._pendingLangReset){window._pendingLangReset=false;try{sessionStorage.removeItem('site_lang');}catch(e){}changeLanguage('en');}}
 function confirmLogout(){showCustomAlert(t('alert_logout_confirm'),'logout',function(){const lu=localStorage.getItem('logged_user');if(lu){try{const u=JSON.parse(lu);logActivity('signout',u,'Logged out');}catch(e){}}localStorage.removeItem('logged_user');try{sessionStorage.removeItem('site_lang');}catch(e){}changeLanguage('en');checkUserSession();renderApplications();updateChatBadge();setTimeout(()=>{showCustomAlert(t('alert_logout_ok'),'success');},300);});}
@@ -2280,7 +2540,7 @@ async function handleAuthSubmit(e){
   else { if(!email||!password){showCustomAlert(t('alert_fill_fields'));return;} }
   let users=JSON.parse(localStorage.getItem('site_users')||'[]');
   if(currentAuthMode==='signup'){
-    const name=document.getElementById('contactClientName').value.trim();
+    const name=document.getElementById('contactClientName').value.trim().toLowerCase();
     let username=document.getElementById('contactClientUsername').value.trim();
     if(username.startsWith('@'))username=username.substring(1);
     if(!name||!username){showCustomAlert(t('alert_fill_fields'));return;}
@@ -2304,6 +2564,9 @@ async function handleAuthSubmit(e){
       logActivity('signin',user,'User signed in');
       closeDirectContactModal();
       forceRefreshUI();
+      // REQ 6: Confetti burst on sign in
+      playApplauseSound();
+      fireConfettiBurst(1.2);
       showCustomAlert(t('alert_success_signin'),'success');
     }else showCustomAlert(t('alert_error_signin'));
   }
@@ -2312,7 +2575,7 @@ function checkUserSession(){
   const lu=localStorage.getItem('logged_user');
   if(lu){ try{const cu=JSON.parse(lu);const allUsers=getAllUsers();const stillExists=allUsers.some(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());if(!stillExists&&!isAdminUser(cu.email)){localStorage.removeItem('logged_user');try{sessionStorage.removeItem('site_lang');}catch(e){}currentLang='en';return checkUserSession();}}catch(e){} }
   const ps=document.getElementById('userProfileSection');
-  const cte=document.getElementById('t-contact-title'),cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');
+  const cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');
   const abi=document.getElementById('authBoxIcon');
   const mab=document.getElementById('mainAuthBox');
   if(lu){
@@ -2336,7 +2599,6 @@ function checkUserSession(){
       const br=document.getElementById('profileBirthdateRow'),bd=document.getElementById('profileDisplayBirthdate');
       if(u.birthDay&&u.birthMonth&&u.birthYear){if(br)br.style.display='flex';if(bd)bd.innerText=`${u.birthDay}/${u.birthMonth}/${u.birthYear}`;}
       else if(br)br.style.display='none';
-      if(cte)cte.innerText=t('contact_sub_logged');
       if(cse)cse.innerText=t('contact_sub_logged');
       if(cme)cme.innerText=u.name?`${t('contact_main_logged')} ${u.name}`:t('contact_main_logged2');
       if(abi)abi.className='fa-solid fa-user-check';
@@ -2348,7 +2610,6 @@ function checkUserSession(){
   }else{
     if(ps)ps.style.display='none';
     if(mab)mab.style.display='flex';
-    if(cte)cte.innerText=t('contact_sub');
     if(cse)cse.innerText=t('contact_sub');
     if(cme)cme.innerText=t('contact_main');
     if(abi)abi.className='fa-solid fa-right-to-bracket';
@@ -2365,7 +2626,7 @@ function openLightbox(){document.getElementById('lightboxImage').src=document.ge
 function closeLightbox(){document.getElementById('lightboxOverlay').classList.remove('active');}
 function scrollPageDown(){window.scrollBy({top:450,behavior:'smooth'});}
 function goHomeFromContact(){closeDirectContactModal();window.scrollTo({top:0,behavior:'smooth'});}
-function resetContactForm(){const f=document.getElementById('directContactForm');if(f)f.reset();if(document.getElementById('contactClientUsername'))document.getElementById('contactClientUsername').value='';if(document.getElementById('contactClientEmail'))document.getElementById('contactClientEmail').value='';clearPasswordField('contactClientPassword');const pi=document.getElementById('contactClientPassword'),pt=document.getElementById('passwordToggleIcon');if(pi){pi.classList.add('password-mask');pi.dataset.masked='1';}if(pt)pt.className='fa-solid fa-eye';const m=document.getElementById('usernameAvailabilityMsg');if(m)m.style.display='none';const w=document.getElementById('pwStrengthWrap_contactClientPassword');if(w)w.classList.remove('show');}
+function resetContactForm(){const f=document.getElementById('directContactForm');if(f)f.reset();if(document.getElementById('contactClientUsername')){document.getElementById('contactClientUsername').value='';document.getElementById('contactClientUsername').dataset.userTouched='';}if(document.getElementById('contactClientEmail'))document.getElementById('contactClientEmail').value='';clearPasswordField('contactClientPassword');const pi=document.getElementById('contactClientPassword'),pt=document.getElementById('passwordToggleIcon');if(pi){pi.classList.add('password-mask');pi.dataset.masked='1';}if(pt)pt.className='fa-solid fa-eye';const m=document.getElementById('usernameAvailabilityMsg');if(m)m.style.display='none';const w=document.getElementById('pwStrengthWrap_contactClientPassword');if(w)w.classList.remove('show');}
 function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('show');}
 window.addEventListener('click',function(e){const ld=document.getElementById('langDropdownBtn'),lm=document.getElementById('langMenu');if(ld&&lm&&!ld.contains(e.target)&&!lm.contains(e.target))lm.classList.remove('show');const ep=document.getElementById('emojiPicker');const eb=document.getElementById('chatEmojiBtn');if(ep&&eb&&!ep.contains(e.target)&&!eb.contains(e.target))ep.remove();});
 let cropperInstance=null;
@@ -2389,6 +2650,7 @@ window.addEventListener('DOMContentLoaded',async ()=>{
   ensureUserIdsAndAdmin();
   initTheme(); initEmailJS(); initAllPasswordMasks(); checkUserSession(); applySiteContent();
   applySectionOrder();
+  applyEffectsSettings();
   const sc=getSiteContent();
   const storedLang=sessionStorage.getItem('site_lang');
   const browserLang=(navigator.language||'en').toLowerCase().startsWith('tr')?'tr':'en';
@@ -2401,6 +2663,7 @@ window.addEventListener('DOMContentLoaded',async ()=>{
   if(emailEl){ emailEl.addEventListener('keydown',function(ev){ if(ev.key==='Enter' && currentAuthMode==='signin' && document.getElementById('groupPassword').style.display==='none'){ ev.preventDefault(); handleAuthNext(ev); } }); }
   const pwEl=document.getElementById('contactClientPassword');
   if(pwEl){ pwEl.addEventListener('keydown',function(ev){ if(ev.key==='Enter'){ev.preventDefault();handleAuthSubmit(ev);} }); }
+  setupSignupAutoFill();
   window.addEventListener('resize',()=>{ if(confettiCanvas&&confettiCanvas.style.display!=='none'){confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;} renderApplications(); });
   checkAdminHash(); openApkDB().catch(e=>{}); updateChatBadge(); startChatPolling(); cloudInitSync().catch(e=>{});
 });
