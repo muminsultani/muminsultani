@@ -2,7 +2,7 @@
 <html lang="en" id="htmlRoot">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="muminsultani's official personal website.">
 <title id="pageTitle">muminsultani</title>
@@ -17,9 +17,14 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
-html{color-scheme:light dark}
-body{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none}
+html{color-scheme:light dark; -webkit-text-size-adjust:100%; text-size-adjust:100%;}
+body{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-text-size-adjust:100%;text-size-adjust:100%;touch-action:manipulation;}
 img{-webkit-user-drag:none;pointer-events:none}
+/* Prevent auto-zoom on iOS / mobile when focusing inputs */
+input, textarea, select { font-size: 16px; }
+@media (max-width: 640px) {
+  input, textarea, select, .form-input, .form-textarea, .chat-input, .chat-search-input, .code-input { font-size: 16px !important; }
+}
 #security-curtain{position:fixed;top:0;left:0;width:100vw;height:100vh;background:var(--bg-color);z-index:99999;display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:opacity .2s ease;pointer-events:none}
 :root{--bg-color:#05050a;--bg-elevated:#0d0d15;--text-primary:#f8fafc;--text-secondary:#94a3b8;--accent:#9333ea;--accent-2:#c084fc;--line-color:rgba(255,255,255,.08);--box-bg:rgba(255,255,255,.03);--box-hover-bg:rgba(147,51,234,.06);--menu-bg:rgba(13,13,21,.98);--modal-container-bg:#0d0d15;--glow-color:radial-gradient(circle,rgba(147,51,234,.15),rgba(168,85,247,.06) 60%,transparent 80%);--shadow-lg:0 25px 60px rgba(0,0,0,.6);--shadow-md:0 10px 32px rgba(0,0,0,.4);--shadow-glow:0 8px 32px rgba(147,51,234,.25)}
 body.light-mode{--bg-color:#f4f6fb;--bg-elevated:#ffffff;--text-primary:#0f172a;--text-secondary:#64748b;--line-color:rgba(0,0,0,.08);--box-bg:rgba(0,0,0,.02);--box-hover-bg:rgba(147,51,234,.05);--menu-bg:rgba(255,255,255,.98);--modal-container-bg:#fff;--glow-color:radial-gradient(circle,rgba(147,51,234,.1),rgba(168,85,247,.04) 60%,transparent 80%);--shadow-lg:0 25px 60px rgba(0,0,0,.12);--shadow-md:0 10px 32px rgba(0,0,0,.08);--shadow-glow:0 8px 32px rgba(147,51,234,.15)}
@@ -251,62 +256,81 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
   .chat-container{max-width:1000px !important}
 }
 
-/* === ADMIN PANEL RESPONSIVE (bigger on tablet/desktop) === */
+/* === ADMIN PANEL — WIDE ON TABLET & DESKTOP (matches red-box screenshot) === */
 @media (min-width:768px){
-  #adminPanelModal .modal-container{max-width:820px !important;padding:34px !important}
-  #adminPanelModal .admin-tab{padding:11px 18px !important;font-size:.82rem !important;gap:6px !important}
-  #adminPanelModal .admin-panel-content{max-height:68vh}
-  #adminPanelModal .admin-stat{font-size:.9rem !important;padding:13px 16px !important;gap:10px !important}
-  #adminPanelModal .admin-stat i{width:20px;font-size:1rem}
-  #adminPanelModal .admin-hint{font-size:.82rem;padding:13px 16px}
-  #adminPanelModal .admin-slot{padding:16px !important;min-height:74px;gap:12px}
-  #adminPanelModal .admin-slot-num{width:38px;height:38px;font-size:.88rem}
-  #adminPanelModal .admin-slot-name{font-size:.94rem !important;gap:6px}
-  #adminPanelModal .admin-slot-url{font-size:.78rem !important}
-  #adminPanelModal .admin-slot-btn{width:36px;height:36px;font-size:.85rem;border-radius:10px}
-  #adminPanelModal .admin-action-btn{padding:14px !important;font-size:.86rem !important}
-  #adminPanelModal .user-card{padding:16px !important;gap:12px}
-  #adminPanelModal .user-card-avatar{width:52px;height:52px;font-size:1.25rem}
-  #adminPanelModal .user-card-name{font-size:.95rem}
-  #adminPanelModal .user-card-detail{font-size:.76rem;margin-top:3px}
-  #adminPanelModal .user-view-btn{width:36px;height:36px;font-size:.86rem}
-  #adminPanelModal .form-input,#adminPanelModal .form-textarea{padding:12px 16px !important;font-size:.92rem !important}
-  #adminPanelModal .form-label{font-size:.82rem !important}
-  #adminPanelModal .submit-btn{padding:13px !important;font-size:.86rem !important}
-  #adminPanelModal .activity-item{padding:14px;gap:12px}
-  #adminPanelModal .activity-title{font-size:.88rem}
-  #adminPanelModal .activity-meta{font-size:.75rem;margin-top:4px}
-  #adminPanelModal .activity-time{font-size:.68rem}
-  #adminPanelModal .activity-icon{width:38px;height:38px;font-size:.9rem}
-  #adminPanelModal .filter-chip{padding:8px 16px;font-size:.78rem}
-  #adminPanelModal .modal-brand{font-size:1.55rem !important}
-  #adminPanelModal .modal-title{font-size:.98rem !important}
+  #adminPanelModal{padding:20px !important;align-items:center;}
+  #adminPanelModal .modal-container{
+    max-width:92vw !important;
+    width:92vw !important;
+    padding:34px 40px !important;
+    border-radius:26px;
+    max-height:92vh;
+  }
+  #adminPanelModal .admin-tabs{gap:8px;padding-bottom:10px;}
+  #adminPanelModal .admin-tab{padding:12px 20px !important;font-size:.86rem !important;gap:7px !important;border-radius:12px !important;}
+  #adminPanelModal .admin-panel-content{max-height:74vh;padding-right:8px;}
+  #adminPanelModal .admin-stat{font-size:.94rem !important;padding:14px 18px !important;gap:12px !important;border-radius:12px !important;}
+  #adminPanelModal .admin-stat i{width:22px;font-size:1.05rem}
+  #adminPanelModal .admin-hint{font-size:.86rem;padding:14px 18px;border-radius:12px;}
+  #adminPanelModal .admin-slot{padding:18px !important;min-height:78px;gap:14px;border-radius:16px;}
+  #adminPanelModal .admin-slot-num{width:40px;height:40px;font-size:.92rem;border-radius:12px;}
+  #adminPanelModal .admin-slot-name{font-size:.98rem !important;gap:8px}
+  #adminPanelModal .admin-slot-url{font-size:.82rem !important}
+  #adminPanelModal .admin-slot-btn{width:38px;height:38px;font-size:.9rem;border-radius:11px}
+  #adminPanelModal .admin-action-btn{padding:15px !important;font-size:.9rem !important;border-radius:12px;}
+  #adminPanelModal .user-card{padding:18px !important;gap:14px;border-radius:16px;}
+  #adminPanelModal .user-card-avatar{width:56px;height:56px;font-size:1.35rem}
+  #adminPanelModal .user-card-name{font-size:1rem}
+  #adminPanelModal .user-card-detail{font-size:.8rem;margin-top:4px}
+  #adminPanelModal .user-view-btn{width:38px;height:38px;font-size:.9rem;border-radius:11px}
+  #adminPanelModal .form-input,#adminPanelModal .form-textarea{padding:13px 18px !important;font-size:.96rem !important;border-radius:12px !important}
+  #adminPanelModal .form-label{font-size:.85rem !important;margin-bottom:6px !important}
+  #adminPanelModal .submit-btn{padding:14px !important;font-size:.9rem !important;border-radius:12px !important}
+  #adminPanelModal .activity-item{padding:16px;gap:14px;border-radius:14px;}
+  #adminPanelModal .activity-title{font-size:.92rem}
+  #adminPanelModal .activity-meta{font-size:.78rem;margin-top:5px}
+  #adminPanelModal .activity-time{font-size:.72rem}
+  #adminPanelModal .activity-icon{width:40px;height:40px;font-size:.95rem}
+  #adminPanelModal .filter-chip{padding:9px 18px;font-size:.8rem}
+  #adminPanelModal .modal-brand{font-size:1.6rem !important}
+  #adminPanelModal .modal-title{font-size:1rem !important}
+  #adminPanelModal .upload-wrapper{padding:22px;border-radius:14px;}
+  #adminPanelModal .icon-preview-big{width:82px;height:82px;border-radius:16px;}
 }
 @media (min-width:1025px){
-  #adminPanelModal .modal-container{max-width:940px !important;padding:40px !important}
-  #adminPanelModal .admin-tab{padding:12px 22px !important;font-size:.88rem !important}
-  #adminPanelModal .admin-stat{font-size:.96rem !important;padding:14px 18px !important}
-  #adminPanelModal .admin-panel-content{max-height:72vh}
-  #adminPanelModal .admin-slot{padding:18px !important;min-height:82px}
-  #adminPanelModal .admin-slot-num{width:42px;height:42px;font-size:.95rem}
-  #adminPanelModal .admin-slot-name{font-size:1rem !important}
-  #adminPanelModal .user-card{padding:18px !important}
-  #adminPanelModal .user-card-avatar{width:60px;height:60px;font-size:1.45rem}
-  #adminPanelModal .user-card-name{font-size:1.02rem}
-  #adminPanelModal .user-card-detail{font-size:.82rem}
-  #adminPanelModal .user-view-btn{width:40px;height:40px;font-size:.95rem;border-radius:11px}
-  #adminPanelModal .form-input,#adminPanelModal .form-textarea{padding:13px 18px !important;font-size:.96rem !important}
-  #adminPanelModal .form-label{font-size:.86rem !important}
-  #adminPanelModal .submit-btn{padding:15px !important;font-size:.9rem !important}
-  #adminPanelModal .admin-action-btn{padding:15px !important;font-size:.9rem !important}
-  #adminPanelModal .admin-hint{font-size:.88rem;padding:15px 18px}
-  #adminPanelModal .activity-item{padding:16px}
-  #adminPanelModal .activity-title{font-size:.94rem}
-  #adminPanelModal .activity-meta{font-size:.8rem}
-  #adminPanelModal .activity-icon{width:42px;height:42px;font-size:1rem}
+  #adminPanelModal .modal-container{
+    max-width:94vw !important;
+    width:94vw !important;
+    padding:38px 46px !important;
+    max-height:92vh;
+  }
+  #adminPanelModal .admin-tab{padding:13px 24px !important;font-size:.9rem !important}
+  #adminPanelModal .admin-stat{font-size:1rem !important;padding:15px 20px !important}
+  #adminPanelModal .admin-panel-content{max-height:76vh}
+  #adminPanelModal .admin-slot{padding:20px !important;min-height:86px}
+  #adminPanelModal .admin-slot-num{width:44px;height:44px;font-size:1rem}
+  #adminPanelModal .admin-slot-name{font-size:1.04rem !important}
+  #adminPanelModal .user-card{padding:20px !important}
+  #adminPanelModal .user-card-avatar{width:64px;height:64px;font-size:1.5rem}
+  #adminPanelModal .user-card-name{font-size:1.08rem}
+  #adminPanelModal .user-card-detail{font-size:.86rem}
+  #adminPanelModal .user-view-btn{width:42px;height:42px;font-size:1rem;border-radius:12px}
+  #adminPanelModal .form-input,#adminPanelModal .form-textarea{padding:14px 20px !important;font-size:1rem !important}
+  #adminPanelModal .form-label{font-size:.88rem !important}
+  #adminPanelModal .submit-btn{padding:16px !important;font-size:.95rem !important}
+  #adminPanelModal .admin-action-btn{padding:16px !important;font-size:.94rem !important}
+  #adminPanelModal .admin-hint{font-size:.9rem;padding:16px 20px}
+  #adminPanelModal .activity-item{padding:18px}
+  #adminPanelModal .activity-title{font-size:.98rem}
+  #adminPanelModal .activity-meta{font-size:.84rem}
+  #adminPanelModal .activity-icon{width:44px;height:44px;font-size:1.05rem}
 }
 @media (min-width:1441px){
-  #adminPanelModal .modal-container{max-width:1080px !important;padding:44px !important}
+  #adminPanelModal .modal-container{
+    max-width:92vw !important;
+    width:92vw !important;
+    padding:42px 56px !important;
+  }
 }
 
 .profile-photo-large-view{display:flex;flex-direction:column;align-items:center;gap:20px;padding:10px 0}
@@ -762,7 +786,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 </div>
 
 <div class="modal-overlay admin-z" id="adminPanelModal">
-<div class="modal-container" style="max-width:720px">
+<div class="modal-container">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="admin-panel-title">Full Site Control</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminPanel()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <div class="admin-tabs">
 <button class="admin-tab active" data-tab="dashboard" onclick="switchAdminTab('dashboard',this)"><i class="fa-solid fa-gauge-high"></i> <span id="tab-dash">dash</span></button>
@@ -1487,6 +1511,7 @@ const LANG = {
     alert_google_success:"signed in with Google!",
     alert_id_invalid:"ID must be exactly 9 digits!",
     alert_id_used:"this ID is already used!",
+    alert_admin_not_found:"Admin account not found. Please sign in with admin credentials.",
     pw_very_weak:"very weak", pw_weak:"weak", pw_medium:"medium", pw_strong:"strong",
     pw_very_strong:"very strong", pw_enter:"password",
     rec_hint:"recording...",
@@ -1652,6 +1677,7 @@ const LANG = {
     alert_google_success:"Google ile giriş yapıldı!",
     alert_id_invalid:"ID 9 rakam olmalıdır!",
     alert_id_used:"bu ID zaten kullanılıyor!",
+    alert_admin_not_found:"Admin hesabı bulunamadı. Lütfen admin bilgileriyle giriş yapın.",
     pw_very_weak:"çok zayıf", pw_weak:"zayıf", pw_medium:"orta", pw_strong:"güçlü",
     pw_very_strong:"çok güçlü", pw_enter:"şifre",
     rec_hint:"kayıt yapılıyor...",
@@ -1673,7 +1699,7 @@ let currentLang = 'en';
 let currentAuthMode = 'signin';
 let currentResetEmail = '';
 let pendingFaviconDataUrl = null;
-let pendingAdminPhoto = undefined; // undefined = no change, null = clear, string = new dataUrl
+let pendingAdminPhoto = undefined;
 
 function t(key, fallback) {
   const dict = LANG[currentLang] || LANG.en;
@@ -2097,29 +2123,44 @@ function generateRandomUserId(){
   for(let i=0;i<9;i++) id += Math.floor(Math.random()*10);
   return id;
 }
-function ensureUnique9DigitId(users, excludeUser){
-  const used = new Set((users||[]).filter(u=>u!==excludeUser).map(u=>String(u.userId||'')));
-  let id, tries=0;
-  do {
-    id = generateRandomUserId();
-    tries++;
-  } while(used.has(id) && tries<300);
-  return id;
-}
 
+/* ROBUST admin detection — checks isAdmin flag, current logged_user, and email */
 function isAdminUser(email){
   if(!email) return false;
   const lc = String(email).toLowerCase().trim();
-  if(lc === ADMIN_EMAIL) return true;
+  // 1) Check admin flag in stored users
   try{
     const users = getAllUsers();
-    const u = users.find(x => x.isAdmin === true);
-    if(u && String(u.email||'').toLowerCase().trim() === lc) return true;
+    const adminRec = users.find(x => x.isAdmin === true);
+    if(adminRec && String(adminRec.email||'').toLowerCase().trim() === lc) return true;
+    // Also check the currently-logged-in user is the same admin
+    const lu = localStorage.getItem('logged_user');
+    if(lu){
+      try{
+        const cu = JSON.parse(lu);
+        if(cu && cu.isAdmin === true && String(cu.email||'').toLowerCase().trim() === lc) return true;
+      }catch(e){}
+    }
   }catch(e){}
+  // 2) Fallback to default admin email
+  if(lc === ADMIN_EMAIL) return true;
   return false;
 }
 
-/* Prettier verified badge (Instagram/Facebook style filled circle with white check) */
+/* Get the admin record from storage reliably */
+function getAdminUser(){
+  const users=getAllUsers();
+  // Priority: isAdmin flag > default email > logged-in admin
+  let f = users.find(u=>u.isAdmin===true);
+  if(!f) f = users.find(u=>String(u.email||'').toLowerCase()===ADMIN_EMAIL);
+  if(!f){
+    const lu=localStorage.getItem('logged_user');
+    if(lu){try{const cu=JSON.parse(lu);if(cu && cu.isAdmin){f=cu;}}catch(e){}}
+  }
+  if(f) return Object.assign({}, f, {isAdmin:true, isVerified:true});
+  return {userId:'000000000', name:'Admin', username:'admin', email:ADMIN_EMAIL, password:'', bio:'', birthDay:'', birthMonth:'', birthYear:'', profilePhoto:'', createdAt:'2020-01-01T00:00:00.000Z', isAdmin:true, isVerified:true};
+}
+
 function getVerifiedBadgeHTML(size){
   const cls='verified-badge'+(size?(' '+size):'');
   return `<span class="${cls}" title="Verified"><i class="fa-solid fa-check"></i></span>`;
@@ -2145,39 +2186,36 @@ function ensureUserIdsAndAdmin(){
   try{
     let users=JSON.parse(localStorage.getItem('site_users')||'[]');
     let changed=false;
-    // Ensure admin exists
-    let ai=users.findIndex(u=>u.isAdmin===true || String(u.email||'').toLowerCase()===ADMIN_EMAIL);
+    // Ensure admin exists — check by isAdmin flag OR default email
+    let ai=users.findIndex(u=>u.isAdmin===true);
+    if(ai===-1) ai = users.findIndex(u=>String(u.email||'').toLowerCase()===ADMIN_EMAIL);
     if(ai===-1){
       users.unshift({userId:'',name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'admin123',bio:'',birthDay:'',birthMonth:'',birthYear:'',profilePhoto:'',createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true,isVerified:true});
+      ai=0;
       changed=true;
     }
-    // Clear invalid IDs (must be 9 digits)
+    // Clear invalid IDs
     users.forEach(u=>{
       const id=String(u.userId||'');
       if(!/^\d{9}$/.test(id)){u.userId='';changed=true;}
       if(u.bio===undefined){u.bio='';changed=true;}
     });
-    // Remove duplicate IDs
+    // Dedupe
     const seen=new Set();
     users.forEach(u=>{
       if(u.userId && seen.has(u.userId)){u.userId='';changed=true;}
       else if(u.userId) seen.add(u.userId);
     });
-    // Assign new unique random 9-digit IDs
+    // Assign new IDs
     users.forEach(u=>{
       if(!u.userId){
         let nid,tries=0;
-        do{
-          nid=generateRandomUserId();
-          tries++;
-        } while(seen.has(nid) && tries<300);
-        u.userId=nid;
-        seen.add(nid);
-        changed=true;
+        do{nid=generateRandomUserId();tries++;} while(seen.has(nid) && tries<300);
+        u.userId=nid;seen.add(nid);changed=true;
       }
     });
-    // Force admin flags
-    const adminIdx=users.findIndex(u=>u.isAdmin===true || String(u.email||'').toLowerCase()===ADMIN_EMAIL);
+    // Force admin flags on the admin record
+    const adminIdx=users.findIndex(u=>u.isAdmin===true);
     if(adminIdx>=0){
       if(!users[adminIdx].isAdmin){users[adminIdx].isAdmin=true;changed=true;}
       if(!users[adminIdx].isVerified){users[adminIdx].isVerified=true;changed=true;}
@@ -2196,13 +2234,6 @@ function ensureUserIdsAndAdmin(){
   }catch(e){}
 }
 
-function getAdminUser(){
-  const users=getAllUsers();
-  let f = users.find(u=>u.isAdmin===true);
-  if(!f) f = users.find(u=>String(u.email||'').toLowerCase()===ADMIN_EMAIL);
-  if(f) return Object.assign({}, f, {isAdmin:true, isVerified:true});
-  return {userId:'', name:'Admin', username:'admin', email:ADMIN_EMAIL, password:'', bio:'', birthDay:'', birthMonth:'', birthYear:'', profilePhoto:'', createdAt:'2020-01-01T00:00:00.000Z', isAdmin:true, isVerified:true};
-}
 function getChatUsersFor(email){const users=getAllUsers();const ce=String(email||'').toLowerCase();let list=users.filter(x=>String(x.email||'').toLowerCase()!==ce);if(!isAdminUser(email)&&!list.some(x=>isAdminUser(x.email))){list.unshift(getAdminUser());}list.sort((a,b)=>{const aa=isAdminUser(a.email)?0:1;const ba=isAdminUser(b.email)?0:1;if(aa!==ba)return aa-ba;return 0;});return list;}
 
 /* ================== ACTIVITY ================== */
@@ -2393,7 +2424,7 @@ let activityFilterType='all';
 function renderAdminActivity(){const list=document.getElementById('adminActivityList');if(!list)return;let logs=getActivityLog();if(activityFilterType!=='all')logs=logs.filter(l=>l.type===activityFilterType);logs=logs.reverse();if(!logs.length){list.innerHTML='<div style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">'+t('alert_no_records')+'</div>';return;}list.innerHTML='';const iIcons={signup:'fa-user-plus',signin:'fa-right-to-bracket',signout:'fa-right-from-bracket',password_change:'fa-key',profile_update:'fa-pen',email_change:'fa-envelope',delete_account:'fa-trash-can',apk_download:'fa-download',apk_blocked:'fa-lock',password_reset:'fa-unlock-keyhole',chat_message:'fa-comments',voice_message:'fa-microphone',email_sent:'fa-paper-plane',verify_request:'fa-circle-check'};const iLabels={signup:t('act_signup'),signin:t('act_signin'),signout:t('act_signout'),password_change:t('act_pass_change'),profile_update:t('act_profile_update'),email_change:t('act_email_change'),delete_account:t('act_delete'),apk_download:t('act_apk_download'),apk_blocked:t('act_apk_blocked'),password_reset:t('act_pass_reset'),chat_message:t('act_chat'),voice_message:t('act_voice'),email_sent:t('act_email_sent'),verify_request:t('act_verify')};logs.slice(0,200).forEach(l=>{const item=document.createElement('div');item.className='activity-item '+l.type;const d=new Date(l.timestamp);const f=d.toLocaleString();const idC=l.userId?`<span style="font-size:.6rem;font-weight:700;padding:1px 6px;border-radius:4px;background:rgba(29,155,240,.12);color:#1d9bf0;font-family:'Fira Code',monospace;">${escapeHtml(l.userId)}</span>`:'';item.innerHTML=`<div class="activity-icon"><i class="fa-solid ${iIcons[l.type]||'fa-circle-info'}"></i></div><div class="activity-body"><div class="activity-title">${escapeHtml(l.name||l.email||'Unknown')} ${idC}<span style="font-size:.6rem;font-weight:600;padding:1px 6px;border-radius:10px;background:rgba(147,51,234,.15);color:#9333ea;">${iLabels[l.type]||l.type}</span></div><div class="activity-meta">${l.email?`<i class="fa-solid fa-envelope" style="color:#9333ea;"></i> ${escapeHtml(l.email)} • `:''}${l.details?escapeHtml(l.details):''}</div></div><div class="activity-time">${f}</div>`;list.appendChild(item);});}
 function filterActivity(type,btn){activityFilterType=type;document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderAdminActivity();}
 
-/* ADMIN — MY ACCOUNT (edit own profile + ID) */
+/* ========== ADMIN — MY ACCOUNT (FIXED) ========== */
 function renderAdminAccount(){
   const admin = getAdminUser();
   document.getElementById('adminAccName').value = admin.name||'';
@@ -2438,25 +2469,48 @@ function clearAdminPhoto(){
   const ico=document.getElementById('adminPhotoUploadIcon');if(ico)ico.style.display='block';
   const cb=document.getElementById('adminPhotoClearBtn');if(cb)cb.style.display='none';
 }
+/* FIXED: finds admin reliably, doesn't error when email was changed */
 function saveAdminAccount(e){
   e.preventDefault();
   const users = getAllUsers();
-  const adminIdx = users.findIndex(u=>u.isAdmin===true || isAdminUser(u.email));
-  if(adminIdx===-1){showCustomAlert('Admin not found');return;}
+  // Robust admin lookup
+  let adminIdx = users.findIndex(u => u.isAdmin === true);
+  if(adminIdx === -1) adminIdx = users.findIndex(u => String(u.email||'').toLowerCase() === ADMIN_EMAIL);
+  if(adminIdx === -1){
+    const lu = localStorage.getItem('logged_user');
+    if(lu){
+      try{
+        const cu = JSON.parse(lu);
+        if(cu && cu.isAdmin) adminIdx = users.findIndex(u => String(u.email||'').toLowerCase() === String(cu.email||'').toLowerCase());
+      }catch(e){}
+    }
+  }
+  // If STILL not found, create the admin record now
+  if(adminIdx === -1){
+    const lu = localStorage.getItem('logged_user');
+    let newAdmin = {userId:'', name:'Admin', username:'admin', email:ADMIN_EMAIL, password:'admin123', bio:'', birthDay:'', birthMonth:'', birthYear:'', profilePhoto:'', createdAt:new Date().toISOString(), isAdmin:true, isVerified:true};
+    if(lu){try{const cu=JSON.parse(lu);if(cu){newAdmin = Object.assign(newAdmin, {name:cu.name||newAdmin.name, username:cu.username||newAdmin.username, email:cu.email||newAdmin.email, userId:cu.userId||newAdmin.userId});}}catch(e){}}
+    users.unshift(newAdmin);
+    adminIdx = 0;
+  }
+
   const newName = document.getElementById('adminAccName').value.trim();
   const newUsername = document.getElementById('adminAccUsername').value.trim().replace(/^@/,'').toLowerCase();
   const newEmail = document.getElementById('adminAccEmail').value.trim().toLowerCase();
   const newId = document.getElementById('adminAccId').value.trim();
   const newBio = document.getElementById('adminAccBio').value.trim();
+
   if(!newName||!newUsername||!newEmail){showCustomAlert(t('alert_fill_fields'));return;}
   if(!/^\d{9}$/.test(newId)){showCustomAlert(t('alert_id_invalid'));return;}
   if(newBio.length>163){showCustomAlert('Bio max 163 chars');return;}
+
   const dupEmail = users.some((u,i)=>i!==adminIdx && String(u.email||'').toLowerCase()===newEmail);
   if(dupEmail){showCustomAlert(t('alert_email_reg'));return;}
   const dupUser = users.some((u,i)=>i!==adminIdx && String(u.username||'').replace(/^@/,'').toLowerCase()===newUsername);
   if(dupUser){showCustomAlert(t('alert_user_taken'));return;}
   const dupId = users.some((u,i)=>i!==adminIdx && String(u.userId||'')===newId);
   if(dupId){showCustomAlert(t('alert_id_used'));return;}
+
   const admin = users[adminIdx];
   const oldEmail = admin.email;
   admin.name = newName;
@@ -2469,8 +2523,9 @@ function saveAdminAccount(e){
   if(pendingAdminPhoto !== undefined){
     admin.profilePhoto = pendingAdminPhoto || '';
   }
+
   localStorage.setItem('site_users', JSON.stringify(users));
-  // Update logged_user if admin was logged in
+  // Keep logged_user in sync
   const lu = localStorage.getItem('logged_user');
   if(lu){
     try{
@@ -2480,6 +2535,7 @@ function saveAdminAccount(e){
       }
     }catch(e){}
   }
+  // Also — if the old email was the default admin email and someone logs in with default, keep working via isAdmin flag.
   pendingAdminPhoto = undefined;
   logActivity('profile_update', admin, 'Admin profile updated');
   refreshAdminUI();
@@ -2826,7 +2882,7 @@ function checkUserSession(){
     try{
       const u=JSON.parse(lu);
       if(ps)ps.style.display='block';
-      if(mab)mab.style.display='none'; // hide header sign-in box
+      if(mab)mab.style.display='none';
       const pd=(id,v)=>{const el=document.getElementById(id);if(el)el.innerText=v;};
       pd('profileDisplayName',u.name||'user');
       pd('profileDisplayUsernameDesktop','@'+(u.username||'username').replace(/^@/,''));
@@ -2850,11 +2906,15 @@ function checkUserSession(){
       const pdc=document.getElementById('profileDetailsContainer');if(pdc)pdc.style.display='none';
       const pi=document.getElementById('privacyIcon');if(pi)pi.className='fa-solid fa-eye-slash';
       const dn=document.getElementById('profileDisplayName');
-      if(dn){dn.querySelectorAll('.verified-badge,.admin-tag').forEach(b=>b.remove());if(isAdminUser(u.email)||u.isVerified)dn.insertAdjacentHTML('beforeend',getVerifiedBadgeHTML('lg'));if(isAdminUser(u.email))dn.insertAdjacentHTML('beforeend',getAdminTagHTML());}
+      if(dn){
+        dn.querySelectorAll('.verified-badge,.admin-tag').forEach(b=>b.remove());
+        if(isAdminUser(u.email)||u.isVerified)dn.insertAdjacentHTML('beforeend',getVerifiedBadgeHTML('lg'));
+        // NOTE: Removed admin-tag from own profile display (request #4)
+      }
     }catch(e){}
   }else{
     if(ps)ps.style.display='none';
-    if(mab)mab.style.display='flex'; // show header sign-in box
+    if(mab)mab.style.display='flex';
     if(cte)cte.innerText=t('contact_sub');
     if(cse)cse.innerText=t('contact_sub');
     if(cme)cme.innerText=t('contact_main');
