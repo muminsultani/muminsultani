@@ -176,7 +176,6 @@ body[data-form="floating"] .form-input,body[data-form="floating"] .form-textarea
 .password-toggle-btn{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--text-secondary);cursor:pointer;font-size:1rem;z-index:2}
 .password-toggle-btn:hover{color:var(--accent)}
 .form-input.password-mask{letter-spacing:3px;font-family:'Fira Code',monospace !important;font-weight:600 !important}
-/* PASSWORD STRENGTH */
 .pw-strength-wrap{margin-top:10px;display:none;clear:both;width:100%}
 .pw-strength-wrap.show{display:block}
 .pw-strength-bar{height:6px;background:var(--line-color);border-radius:6px;overflow:hidden;display:flex;gap:3px}
@@ -281,6 +280,10 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 #usernameAvailabilityMsg{font-size:.7rem;margin-top:4px;display:none;font-weight:600}
 .mock-email-container{display:flex;flex-direction:column;align-items:center;padding:10px 0;text-align:center}
 .mock-email-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line-color);padding-top:12px;margin-top:12px;font-size:.7rem;color:var(--text-secondary)}
+.mock-pass-row{display:flex !important;align-items:center !important;gap:5px !important;justify-content:center;margin-top:8px}
+.mock-pass-row strong{font-size:.82rem}
+#signupMockCodeValue,#mock-email-pass-value,#email-change-code-value{font-size:.9rem;padding:4px 10px;color:var(--accent);font-family:'Fira Code',monospace;font-weight:700;background:rgba(var(--accent-rgb),.12);border-radius:6px;letter-spacing:2px}
+.copy-pass-btn{flex-shrink:0;background:transparent;border:1px solid rgba(var(--accent-rgb),.4);color:var(--accent);cursor:pointer;padding:5px 8px;font-size:.72rem;border-radius:8px}
 .email-sent-icon{font-size:3rem;color:#22c55e;margin-bottom:14px}
 .email-sent-to{font-size:.85rem;color:var(--text-color-override);font-weight:700;word-break:break-all;margin-bottom:6px;padding:10px 14px;background:rgba(var(--accent-rgb),.1);border-radius:10px;border:1px solid rgba(var(--accent-rgb),.25)}
 .email-sent-note{font-size:.72rem;color:var(--text-secondary);line-height:1.5;margin-bottom:16px}
@@ -386,7 +389,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .chat-user-info{flex:1;min-width:0}
 .chat-user-name{font-size:.9rem;font-weight:600;color:var(--text-color-override);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:4px}
 .chat-user-preview{font-size:.72rem;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
-/* REQ 3: blue check next to username */
 .chat-user-username{font-size:.68rem;color:var(--accent);font-weight:600;margin-top:2px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .chat-user-id-row{font-size:.62rem;margin-top:3px;display:block}
 .chat-user-id{font-size:.6rem;color:var(--accent);font-weight:800;font-family:'Fira Code',monospace;background:rgba(var(--accent-rgb),.12);padding:1px 7px;border-radius:5px;display:inline-flex;align-items:center;gap:3px}
@@ -636,7 +638,236 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </footer>
 </div>
 
-<!-- ========= MODALS ========= -->
+<!-- ========== SIGNUP EMAIL MODAL (with fallback code) ========== -->
+<div class="modal-overlay high-z" id="signupMockModal">
+<div class="modal-container" style="max-width:460px">
+<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Check Your Email</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelSignup()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<div class="mock-email-container">
+<div class="email-sent-icon"><i class="fa-solid fa-envelope-circle-check"></i></div>
+<h3 style="font-size:1rem;font-weight:700;color:var(--text-color-override);margin-bottom:10px" id="signupMockTitleText">Email sent!</h3>
+<p class="email-sent-note" id="signupMockDescText">We sent a 6-digit verification code to your email. Please check your inbox.</p>
+<div class="email-sent-to" id="signupMockEmailValue">user@example.com</div>
+<div id="signupEmailStatus"></div>
+<div id="signupFallbackCode" style="display:none;margin-top:12px">
+  <div class="mock-pass-row">
+    <strong>code:</strong>
+    <span id="signupMockCodeValue"></span>
+    <button type="button" class="copy-pass-btn" onclick="copySignupCode()"><i class="fa-regular fa-copy" id="signupCopyIcon"></i></button>
+  </div>
+  <p style="font-size:.7rem;color:#f59e0b;margin-top:8px;text-align:center">⚠️ Email gönderilemedi. Bu kodu kullanarak kaydolabilirsiniz.</p>
+</div>
+<div class="mock-email-footer"><span>admin:</span><span>admin@muminsultani.com</span></div>
+</div>
+<div class="form-buttons-group" style="width:100%;flex-direction:column;gap:8px">
+<button class="submit-btn email-btn" onclick="openSignupCodeModal()" style="width:100%;background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-key"></i> enter code</button>
+<button class="submit-btn" onclick="resendSignupEmail()" style="width:100%;background:var(--box-bg);color:var(--text-color-override);border:1px solid var(--line-color)"><i class="fa-solid fa-rotate-right"></i> resend</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal-overlay high-z" id="signupCodeModal">
+<div class="modal-container" style="max-width:420px">
+<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="backToSignupMock()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title">Verify Email</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelSignup()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<form id="signupCodeForm" onsubmit="verifySignupCode(event)">
+<p class="item-desc" style="margin-bottom:12px;font-size:.8rem">enter the 6-digit code from your email.</p>
+<div class="form-group"><label class="form-label">code</label><input type="text" class="form-input code-input" id="signupCodeInput" required maxlength="6" inputmode="numeric" placeholder="000000"></div>
+<div class="form-buttons-group"><button type="submit" class="submit-btn email-btn" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-circle-check"></i> verify</button></div>
+</form>
+</div>
+</div>
+
+<!-- ========== DIRECT CONTACT (Login/Signup) ========== -->
+<div class="modal-overlay" id="directContactModal">
+<div class="modal-container">
+<div class="modal-header">
+<div class="modal-header-left">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+    <button class="modal-close-btn" onclick="closeDirectContactModal()"><i class="fa-solid fa-chevron-left"></i></button>
+    <div class="modal-brand" style="margin:0">muminsultani</div>
+  </div>
+  <div class="modal-title" style="margin-left:42px">Account Access</div>
+</div>
+<div class="modal-header-actions">
+  <button class="modal-close-btn" onclick="toggleTheme()"><i class="fa-solid fa-moon" id="contactModalThemeIcon"></i></button>
+  <button class="modal-close-btn" onclick="closeDirectContactModal()"><i class="fa-solid fa-xmark"></i></button>
+</div>
+</div>
+<div class="auth-tabs">
+<button type="button" class="auth-tab-btn active" id="tabSigninBtn" onclick="switchAuthTab('signin')">sign in</button>
+<button type="button" class="auth-tab-btn" id="tabSignupBtn" onclick="switchAuthTab('signup')">sign up</button>
+</div>
+<form id="directContactForm" onsubmit="handleAuthSubmit(event)">
+<div class="form-group" id="groupSignupName" style="display:none"><label class="form-label">name</label><input type="text" class="form-input" id="contactClientName" placeholder="name & surname" autocomplete="off"></div>
+<div class="form-group" id="groupSignupUsername" style="display:none"><label class="form-label">username</label><input type="text" class="form-input" id="contactClientUsername" placeholder="@username" minlength="7" autocomplete="off" oninput="this.value = this.value.toLowerCase().replace(/[^a-z0-9_.\-!@#$%^&*+=?]/g, '').replace(/^@/, ''); checkUsernameAvailability()"><div id="usernameAvailabilityMsg"></div></div>
+<div class="form-group" id="groupEmail">
+<label class="form-label" id="dc-label-email">email</label>
+<input type="text" class="form-input" id="contactClientEmail" required placeholder="email or username" autocomplete="off" oninput="this.value = this.value.toLowerCase()">
+</div>
+<button type="button" class="submit-btn email-btn" id="dc-next-btn" onclick="handleAuthNext(event)" style="width:100%"><i class="fa-solid fa-arrow-right"></i> next</button>
+<div class="form-group" id="groupPassword" style="display:none">
+<div style="display:flex;justify-content:space-between;margin-bottom:4px"><label class="form-label" style="margin-bottom:0">password</label><a href="#" id="t-forgot-link" onclick="openForgotPasswordModal(event)" style="font-size:.7rem;color:var(--accent);text-decoration:none;font-weight:600">forgot password?</a></div>
+<div class="password-wrapper"><input type="text" class="form-input password-mask" id="contactClientPassword" placeholder="password" autocomplete="off"><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('contactClientPassword','passwordToggleIcon')"><i class="fa-solid fa-eye" id="passwordToggleIcon"></i></button></div>
+<div class="pw-strength-wrap" id="pwStrengthWrap_contactClientPassword"><div class="pw-strength-bar" id="pwBar_contactClientPassword"><span></span><span></span><span></span><span></span><span></span></div><div class="pw-strength-info"><span class="pw-strength-label s1" id="pwLabel_contactClientPassword">password</span><span id="pwPercent_contactClientPassword">0%</span></div></div>
+</div>
+<div class="form-buttons-group" id="dc-submit-group" style="flex-direction:column;gap:8px;display:none">
+<button type="button" class="submit-btn email-btn" onclick="handleAuthSubmit(event)" style="width:100%"><i class="fa-solid fa-right-to-bracket"></i> <span id="dc-submit-btn-text">go</span></button>
+</div>
+<div class="form-buttons-group" id="dc-google-group" style="flex-direction:column;gap:8px;margin-top:10px">
+<button type="button" class="submit-btn google-btn" onclick="openGoogleModal()" style="width:100%">
+<svg class="google-icon-svg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
+Continue with Google
+</button>
+</div>
+</form>
+</div>
+</div>
+
+<!-- GOOGLE SIGN-IN MODAL -->
+<div class="modal-overlay high-z" id="googleSignInModal">
+<div class="modal-container" style="max-width:420px">
+<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Google Sign In</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeGoogleModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<form onsubmit="handleGoogleSignIn(event)">
+<div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;margin-bottom:14px">
+<svg viewBox="0 0 48 48" style="width:32px;height:32px;flex-shrink:0"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
+<div style="flex:1;min-width:0"><div style="font-size:.85rem;font-weight:700;color:var(--text-color-override)">Sign in with Google</div><div style="font-size:.7rem;color:var(--text-secondary);margin-top:2px">Enter your Gmail address to continue</div></div>
+</div>
+<div class="form-group"><label class="form-label">Gmail address</label><input type="email" class="form-input" id="googleEmailInput" required placeholder="yourname@gmail.com" autocomplete="email" oninput="this.value = this.value.toLowerCase()"></div>
+<div class="form-group"><label class="form-label">Name (display)</label><input type="text" class="form-input" id="googleNameInput" placeholder="Your name" maxlength="60"></div>
+<div class="form-buttons-group"><button type="submit" class="submit-btn email-btn"><i class="fa-solid fa-right-to-bracket"></i> Continue</button></div>
+</form>
+</div>
+</div>
+
+<div class="modal-overlay" id="forgotPasswordModal">
+<div class="modal-container" style="max-width:420px">
+<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeForgotPasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title">Password Recovery</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeForgotPasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<form id="forgotPasswordForm" onsubmit="handleForgotPasswordSubmit(event)">
+<p class="item-desc" style="margin-bottom:12px;font-size:.8rem">enter your registered email.</p>
+<div class="form-group"><label class="form-label">email</label><input type="email" class="form-input" id="forgotClientEmail" required oninput="this.value=this.value.toLowerCase()"></div>
+<div class="form-buttons-group"><button type="submit" class="submit-btn email-btn"><i class="fa-solid fa-paper-plane"></i> send</button></div>
+</form>
+</div>
+</div>
+
+<div class="modal-overlay" id="resetPasswordModal">
+<div class="modal-container" style="max-width:420px">
+<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeResetPasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title">Reset Password</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeResetPasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<form id="resetPasswordForm" onsubmit="handleResetPasswordSubmit(event)">
+<div class="form-group"><label class="form-label">email</label><input type="email" class="form-input" id="resetClientEmail" readonly style="opacity:.7"></div>
+<div class="form-group"><label class="form-label">code</label><input type="text" class="form-input" id="resetClientCode" required></div>
+<div class="form-group"><label class="form-label">new password</label><div class="password-wrapper"><input type="text" class="form-input password-mask" id="resetClientNewPassword" required><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('resetClientNewPassword','resetNewPasswordToggleIcon')"><i class="fa-solid fa-eye" id="resetNewPasswordToggleIcon"></i></button></div>
+<div class="pw-strength-wrap" id="pwStrengthWrap_resetClientNewPassword"><div class="pw-strength-bar" id="pwBar_resetClientNewPassword"><span></span><span></span><span></span><span></span><span></span></div><div class="pw-strength-info"><span class="pw-strength-label s1" id="pwLabel_resetClientNewPassword">password</span><span id="pwPercent_resetClientNewPassword">0%</span></div></div>
+</div>
+<div class="form-buttons-group"><button type="submit" class="submit-btn email-btn" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-check"></i> update</button></div>
+</form>
+</div>
+</div>
+
+<div class="modal-overlay" id="changePasswordModal">
+<div class="modal-container" style="max-width:420px">
+<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeChangePasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title">Change Password</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeChangePasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<form id="changePasswordForm" onsubmit="handleChangePassword(event)">
+<div class="form-group"><label class="form-label">current password</label><div class="password-wrapper"><input type="text" class="form-input password-mask" id="changeOldPassword" required><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('changeOldPassword','oldPasswordToggleIcon')"><i class="fa-solid fa-eye" id="oldPasswordToggleIcon"></i></button></div></div>
+<div class="form-group"><label class="form-label">new password</label><div class="password-wrapper"><input type="text" class="form-input password-mask" id="changeNewPassword" required><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('changeNewPassword','newPasswordToggleIcon')"><i class="fa-solid fa-eye" id="newPasswordToggleIcon"></i></button></div>
+<div class="pw-strength-wrap" id="pwStrengthWrap_changeNewPassword"><div class="pw-strength-bar" id="pwBar_changeNewPassword"><span></span><span></span><span></span><span></span><span></span></div><div class="pw-strength-info"><span class="pw-strength-label s1" id="pwLabel_changeNewPassword">password</span><span id="pwPercent_changeNewPassword">0%</span></div></div>
+</div>
+<div class="form-group"><label class="form-label">confirm password</label><div class="password-wrapper"><input type="text" class="form-input password-mask" id="changeConfirmPassword" required><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('changeConfirmPassword','confirmPasswordToggleIcon')"><i class="fa-solid fa-eye" id="confirmPasswordToggleIcon"></i></button></div></div>
+<div class="form-buttons-group"><button type="submit" class="submit-btn email-btn" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-key"></i> update</button></div>
+</form>
+</div>
+</div>
+
+<div class="modal-overlay" id="deleteAccountModal">
+<div class="modal-container" style="max-width:420px">
+<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeDeleteAccountModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title">Delete Account</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeDeleteAccountModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<form id="deleteAccountForm" onsubmit="handleDeleteAccount(event)">
+<p class="item-desc" style="margin-bottom:12px;font-size:.8rem;color:#ef4444">warning: cannot be undone.</p>
+<div class="form-group"><label class="form-label">username</label><input type="text" class="form-input" id="deleteConfirmUsername" required oninput="this.value = this.value.toLowerCase().replace(/^@/, '')"></div>
+<div class="form-buttons-group"><button type="submit" class="submit-btn" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fa-solid fa-trash-can"></i> delete</button></div>
+</form>
+</div>
+</div>
+
+<div class="modal-overlay" id="confirmDeletePasswordModal">
+<div class="modal-container" style="max-width:420px">
+<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeDeletePasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title">Confirm Deletion</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeDeletePasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<form id="deletePasswordForm" onsubmit="handleDeletePasswordSubmit(event)">
+<div class="form-group"><label class="form-label">password</label><div class="password-wrapper"><input type="text" class="form-input password-mask" id="deleteConfirmPassword" required><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('deleteConfirmPassword','deleteConfirmPasswordToggleIcon')"><i class="fa-solid fa-eye" id="deleteConfirmPasswordToggleIcon"></i></button></div></div>
+<div class="form-buttons-group"><button type="submit" class="submit-btn" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fa-solid fa-trash-can"></i> delete account</button></div>
+</form>
+</div>
+</div>
+
+<div class="modal-overlay" id="editProfileModal">
+<div class="modal-container">
+<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Edit Profile</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeEditProfileModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<form id="editProfileForm" onsubmit="handleProfileUpdate(event)">
+<div class="form-group"><label class="form-label">cover photo</label>
+<div class="upload-wrapper" id="coverUploadWrapper" onclick="document.getElementById('editCoverFile').click()">
+  <img id="coverPreview" class="cover-preview-big" style="display:none" alt="">
+  <i class="fa-solid fa-image upload-icon" id="coverUploadIcon"></i>
+  <span class="upload-text">tap to choose cover</span>
+  <input type="file" id="editCoverFile" accept="image/*" style="display:none" onchange="handleCoverUpload(event)">
+</div>
+<button type="button" class="apk-clear-btn" id="coverClearBtn" onclick="clearCoverPhoto();event.stopPropagation();" style="display:none"><i class="fa-solid fa-trash-can"></i> remove</button>
+</div>
+<div class="form-group"><label class="form-label">name & surname</label><input type="text" class="form-input" id="editClientName" required></div>
+<div class="form-group"><label class="form-label">username</label><input type="text" class="form-input" id="editClientUsername" required minlength="7" oninput="this.value = this.value.toLowerCase().replace(/[^a-z0-9_.\-!@#$%^&*+=?]/g, '').replace(/^@/, '')"></div>
+<div class="form-group"><label class="form-label">email</label><input type="email" class="form-input" id="editClientEmail" required></div>
+<div class="form-group"><label class="form-label">website</label><input type="text" class="form-input" id="editClientWebsite" maxlength="200"></div>
+<div class="form-group"><label class="form-label">bio</label><textarea class="form-textarea" id="editClientBio" maxlength="163" style="min-height:70px"></textarea><div class="bio-counter"><span id="bioCharCount">0</span>/163</div></div>
+<div class="form-group"><label class="form-label">date of birth</label>
+<div style="display:flex;gap:10px">
+<input type="number" class="form-input" id="editClientDay" placeholder="dd" style="text-align:center">
+<input type="number" class="form-input" id="editClientMonth" placeholder="mm" style="text-align:center">
+<input type="number" class="form-input" id="editClientYear" placeholder="yyyy" style="text-align:center">
+</div>
+</div>
+<div class="form-buttons-group" style="flex-direction:column"><button type="submit" class="submit-btn email-btn" style="width:100%"><i class="fa-solid fa-floppy-disk"></i> save</button></div>
+</form>
+</div>
+</div>
+
+<div class="modal-overlay" id="profilePhotoPanelModal">
+<div class="modal-container" style="max-width:420px !important">
+<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Profile Photo</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeProfilePhotoPanel()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<div class="profile-photo-large-view">
+<div class="photo-container" onclick="openLightbox()"><img id="profilePhotoLarge" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Large"></div>
+<div class="photo-action-buttons">
+<button class="btn-back-photo" onclick="closeProfilePhotoPanel()"><i class="fa-solid fa-arrow-left"></i> back</button>
+<button class="btn-change-photo" onclick="document.getElementById('profilePhotoInput').click()"><i class="fa-solid fa-camera"></i> change</button>
+<button class="btn-reset-photo" onclick="resetProfilePhoto()"><i class="fa-solid fa-rotate-left"></i> reset</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal-overlay" id="cropModal">
+<div class="modal-container" style="max-width:500px !important">
+<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">crop photo</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeCropModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<div class="crop-container-wrapper"><img id="cropImage" src="" alt="Crop"></div>
+<div class="crop-ratio-buttons">
+<button type="button" class="ratio-btn active" onclick="setCropRatio(1,this)">1:1</button>
+<button type="button" class="ratio-btn" onclick="setCropRatio(1.3333,this)">4:3</button>
+<button type="button" class="ratio-btn" onclick="setCropRatio(1.7777,this)">16:9</button>
+<button type="button" class="ratio-btn" onclick="setCropRatio(0.75,this)">3:4</button>
+<button type="button" class="ratio-btn" onclick="setCropRatio(NaN,this)">free</button>
+</div>
+<div class="crop-action-buttons">
+<button type="button" class="btn-crop-cancel" onclick="closeCropModal()"><i class="fa-solid fa-arrow-left"></i> cancel</button>
+<button type="button" class="btn-crop-apply" onclick="applyCrop()"><i class="fa-solid fa-check"></i> apply</button>
+</div>
+</div>
+</div>
+
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
+<div class="lightbox-content-box" onclick="event.stopPropagation()">
+<button class="lightbox-close-btn" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
+<div class="lightbox-image-wrapper"><img id="lightboxImage" src="" alt="Preview"></div>
+</div>
+</div>
+
 <div class="modal-overlay profile-view-z" id="publicUserProfileModal">
 <div class="modal-container" style="max-width:480px">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="pub-profile-title">User Profile</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closePublicUserProfile()"><i class="fa-solid fa-xmark"></i></button></div></div>
@@ -731,7 +962,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="admin-stat"><i class="fa-solid fa-cloud"></i> <span id="dash-cloud-status">Cloud: —</span></div>
 <div class="admin-stat"><i class="fa-solid fa-clock"></i> <span id="dash-last-edit">Last: —</span></div>
 </div>
-
 <div class="admin-section" data-section="account">
 <form onsubmit="saveAdminAccount(event)">
 <div class="form-group"><label class="form-label">profile photo</label>
@@ -761,7 +991,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="form-buttons-group"><button type="submit" class="submit-btn email-btn"><i class="fa-solid fa-floppy-disk"></i> save</button></div>
 </form>
 </div>
-
 <div class="admin-section" data-section="general">
 <form onsubmit="saveAdminGeneral(event)">
 <div class="form-group"><label class="form-label">default language</label><select class="form-input" id="ag-default-lang"><option value="en">English</option><option value="tr">Türkçe</option></select></div>
@@ -779,7 +1008,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="form-buttons-group"><button type="submit" class="submit-btn email-btn"><i class="fa-solid fa-floppy-disk"></i> save</button></div>
 </form>
 </div>
-
 <div class="admin-section" data-section="users">
 <div id="adminUsersList"></div>
 <div class="admin-actions-grid">
@@ -787,7 +1015,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <button class="admin-action-btn danger" onclick="clearAllUsers()"><i class="fa-solid fa-trash"></i> Delete All</button>
 </div>
 </div>
-
 <div class="admin-section" data-section="activity">
 <div class="activity-filter">
 <button class="filter-chip active" onclick="filterActivity('all',this)">All</button>
@@ -802,7 +1029,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <button class="admin-action-btn danger" onclick="clearActivityLog()"><i class="fa-solid fa-trash"></i> Clear</button>
 </div>
 </div>
-
 <div class="admin-section" data-section="chats">
 <div id="adminChatsList"></div>
 <div class="admin-actions-grid">
@@ -810,7 +1036,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <button class="admin-action-btn danger" onclick="clearAllChats()"><i class="fa-solid fa-trash"></i> Delete All</button>
 </div>
 </div>
-
 <div class="admin-section" data-section="header">
 <form onsubmit="saveAdminHeader(event)">
 <div class="form-group"><label class="form-label">brand</label><input type="text" class="form-input" id="ah-brand" maxlength="60"></div>
@@ -819,7 +1044,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="form-buttons-group"><button type="submit" class="submit-btn email-btn"><i class="fa-solid fa-floppy-disk"></i> save</button></div>
 </form>
 </div>
-
 <div class="admin-section" data-section="social">
 <div class="admin-hint">Add / remove / edit social links.</div>
 <div id="socialListAdmin"></div>
@@ -827,17 +1051,14 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <button class="admin-action-btn primary" onclick="addSocialPlatformPicker()"><i class="fa-solid fa-plus"></i> Add social</button>
 </div>
 </div>
-
 <div class="admin-section" data-section="apps">
 <div class="admin-hint">8 slots. Upload icon + APK.</div>
 <div id="adminSlotsList"></div>
 </div>
-
 <div class="admin-section" data-section="sections">
 <div class="admin-hint">Reorder content sections</div>
 <div id="adminSectionsOrderList"></div>
 </div>
-
 <div class="admin-section" data-section="effects">
 <h4 class="admin-subsection-title"><i class="fa-solid fa-palette"></i> Site color</h4>
 <div class="effect-grid" id="themeGrid"></div>
@@ -865,7 +1086,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="effect-grid" id="introBgGrid"></div>
 <div class="effect-grid" id="introAnimGrid" style="margin-top:8px"></div>
 </div>
-
 <div class="admin-section" data-section="experience">
 <form onsubmit="saveAdminExperience(event)">
 <div class="form-group"><label class="form-label">title (en)</label><input type="text" class="form-input" id="ae-t-en"></div>
@@ -876,7 +1096,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="form-buttons-group"><button type="submit" class="submit-btn email-btn"><i class="fa-solid fa-floppy-disk"></i> save</button></div>
 </form>
 </div>
-
 <div class="admin-section" data-section="setup">
 <form onsubmit="saveAdminSetup(event)">
 <div class="form-group"><label class="form-label">os (en)</label><input type="text" class="form-input" id="au-os-en"></div>
@@ -886,7 +1105,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="form-buttons-group"><button type="submit" class="submit-btn email-btn"><i class="fa-solid fa-floppy-disk"></i> save</button></div>
 </form>
 </div>
-
 <div class="admin-section" data-section="stack">
 <form onsubmit="saveAdminStack(event)">
 <div class="form-group"><label class="form-label">backend</label><input type="text" class="form-input" id="ak-be"></div>
@@ -894,7 +1112,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="form-buttons-group"><button type="submit" class="submit-btn email-btn"><i class="fa-solid fa-floppy-disk"></i> save</button></div>
 </form>
 </div>
-
 <div class="admin-section" data-section="footer">
 <form onsubmit="saveAdminFooter(event)">
 <div class="form-group"><label class="form-label">brand</label><input type="text" class="form-input" id="af-brand"></div>
@@ -904,7 +1121,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="form-buttons-group"><button type="submit" class="submit-btn email-btn"><i class="fa-solid fa-floppy-disk"></i> save</button></div>
 </form>
 </div>
-
 <div class="admin-section" data-section="backup">
 <div class="admin-actions-grid">
 <button class="admin-action-btn primary" onclick="exportSiteBackup()"><i class="fa-solid fa-download"></i> Export JSON</button>
@@ -956,141 +1172,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 </div>
 
-<div class="modal-overlay" id="profilePhotoPanelModal">
-<div class="modal-container" style="max-width:420px !important">
-<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Profile Photo</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeProfilePhotoPanel()"><i class="fa-solid fa-xmark"></i></button></div></div>
-<div class="profile-photo-large-view">
-<div class="photo-container" onclick="openLightbox()"><img id="profilePhotoLarge" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Large"></div>
-<div class="photo-action-buttons">
-<button class="btn-back-photo" onclick="closeProfilePhotoPanel()"><i class="fa-solid fa-arrow-left"></i> back</button>
-<button class="btn-change-photo" onclick="document.getElementById('profilePhotoInput').click()"><i class="fa-solid fa-camera"></i> change</button>
-<button class="btn-reset-photo" onclick="resetProfilePhoto()"><i class="fa-solid fa-rotate-left"></i> reset</button>
-</div>
-</div>
-</div>
-</div>
-
-<div class="modal-overlay" id="cropModal">
-<div class="modal-container" style="max-width:500px !important">
-<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">crop photo</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeCropModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
-<div class="crop-container-wrapper"><img id="cropImage" src="" alt="Crop"></div>
-<div class="crop-ratio-buttons">
-<button type="button" class="ratio-btn active" onclick="setCropRatio(1,this)">1:1</button>
-<button type="button" class="ratio-btn" onclick="setCropRatio(1.3333,this)">4:3</button>
-<button type="button" class="ratio-btn" onclick="setCropRatio(1.7777,this)">16:9</button>
-<button type="button" class="ratio-btn" onclick="setCropRatio(0.75,this)">3:4</button>
-<button type="button" class="ratio-btn" onclick="setCropRatio(NaN,this)">free</button>
-</div>
-<div class="crop-action-buttons">
-<button type="button" class="btn-crop-cancel" onclick="closeCropModal()"><i class="fa-solid fa-arrow-left"></i> cancel</button>
-<button type="button" class="btn-crop-apply" onclick="applyCrop()"><i class="fa-solid fa-check"></i> apply</button>
-</div>
-</div>
-</div>
-
-<div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
-<div class="lightbox-content-box" onclick="event.stopPropagation()">
-<button class="lightbox-close-btn" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
-<div class="lightbox-image-wrapper"><img id="lightboxImage" src="" alt="Preview"></div>
-</div>
-</div>
-
-<div class="modal-overlay" id="editProfileModal">
-<div class="modal-container">
-<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Edit Profile</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeEditProfileModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
-<form id="editProfileForm" onsubmit="handleProfileUpdate(event)">
-<div class="form-group"><label class="form-label">cover photo</label>
-<div class="upload-wrapper" id="coverUploadWrapper" onclick="document.getElementById('editCoverFile').click()">
-  <img id="coverPreview" class="cover-preview-big" style="display:none" alt="">
-  <i class="fa-solid fa-image upload-icon" id="coverUploadIcon"></i>
-  <span class="upload-text">tap to choose cover</span>
-  <input type="file" id="editCoverFile" accept="image/*" style="display:none" onchange="handleCoverUpload(event)">
-</div>
-<button type="button" class="apk-clear-btn" id="coverClearBtn" onclick="clearCoverPhoto();event.stopPropagation();" style="display:none"><i class="fa-solid fa-trash-can"></i> remove</button>
-</div>
-<div class="form-group"><label class="form-label">name & surname</label><input type="text" class="form-input" id="editClientName" required></div>
-<div class="form-group"><label class="form-label">username</label><input type="text" class="form-input" id="editClientUsername" required minlength="7" oninput="this.value = this.value.toLowerCase().replace(/[^a-z0-9_.\-!@#$%^&*+=?]/g, '').replace(/^@/, '')"></div>
-<div class="form-group"><label class="form-label">email</label><input type="email" class="form-input" id="editClientEmail" required></div>
-<div class="form-group"><label class="form-label">website</label><input type="text" class="form-input" id="editClientWebsite" maxlength="200"></div>
-<div class="form-group"><label class="form-label">bio</label><textarea class="form-textarea" id="editClientBio" maxlength="163" style="min-height:70px"></textarea><div class="bio-counter"><span id="bioCharCount">0</span>/163</div></div>
-<div class="form-group"><label class="form-label">date of birth</label>
-<div style="display:flex;gap:10px">
-<input type="number" class="form-input" id="editClientDay" placeholder="dd" style="text-align:center">
-<input type="number" class="form-input" id="editClientMonth" placeholder="mm" style="text-align:center">
-<input type="number" class="form-input" id="editClientYear" placeholder="yyyy" style="text-align:center">
-</div>
-</div>
-<div class="form-buttons-group" style="flex-direction:column"><button type="submit" class="submit-btn email-btn" style="width:100%"><i class="fa-solid fa-floppy-disk"></i> save</button></div>
-</form>
-</div>
-</div>
-
-<!-- SIGNUP MOCK MODAL (no code displayed) -->
-<div class="modal-overlay high-z" id="signupMockModal">
-<div class="modal-container" style="max-width:460px">
-<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Check Your Email</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelSignup()"><i class="fa-solid fa-xmark"></i></button></div></div>
-<div class="mock-email-container">
-<div class="email-sent-icon"><i class="fa-solid fa-envelope-circle-check"></i></div>
-<h3 style="font-size:1rem;font-weight:700;color:var(--text-color-override);margin-bottom:10px">Email sent!</h3>
-<p class="email-sent-note">We sent a 6-digit verification code to your email. Please check your inbox.</p>
-<div class="email-sent-to" id="signupMockEmailValue">user@example.com</div>
-<div id="signupEmailStatus"></div>
-<div class="mock-email-footer"><span>admin:</span><span>admin@muminsultani.com</span></div>
-</div>
-<div class="form-buttons-group" style="width:100%;flex-direction:column;gap:8px">
-<button class="submit-btn email-btn" onclick="openSignupCodeModal()" style="width:100%;background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-key"></i> enter code</button>
-<button class="submit-btn" onclick="resendSignupEmail()" style="width:100%;background:var(--box-bg);color:var(--text-color-override);border:1px solid var(--line-color)"><i class="fa-solid fa-rotate-right"></i> resend</button>
-</div>
-</div>
-</div>
-</div>
-
-<div class="modal-overlay high-z" id="signupCodeModal">
-<div class="modal-container" style="max-width:420px">
-<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="backToSignupMock()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title">Verify Email</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelSignup()"><i class="fa-solid fa-xmark"></i></button></div></div>
-<form id="signupCodeForm" onsubmit="verifySignupCode(event)">
-<p class="item-desc" style="margin-bottom:12px;font-size:.8rem">enter the 6-digit code from your email.</p>
-<div class="form-group"><label class="form-label">code</label><input type="text" class="form-input code-input" id="signupCodeInput" required maxlength="6" inputmode="numeric" placeholder="000000"></div>
-<div class="form-buttons-group"><button type="submit" class="submit-btn email-btn" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-circle-check"></i> verify</button></div>
-</form>
-</div>
-</div>
-
-<div class="modal-overlay" id="changePasswordModal">
-<div class="modal-container" style="max-width:420px">
-<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeChangePasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title">Change Password</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeChangePasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
-<form id="changePasswordForm" onsubmit="handleChangePassword(event)">
-<div class="form-group"><label class="form-label">current password</label><div class="password-wrapper"><input type="text" class="form-input password-mask" id="changeOldPassword" required><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('changeOldPassword','oldPasswordToggleIcon')"><i class="fa-solid fa-eye" id="oldPasswordToggleIcon"></i></button></div></div>
-<div class="form-group"><label class="form-label">new password</label><div class="password-wrapper"><input type="text" class="form-input password-mask" id="changeNewPassword" required><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('changeNewPassword','newPasswordToggleIcon')"><i class="fa-solid fa-eye" id="newPasswordToggleIcon"></i></button></div>
-<div class="pw-strength-wrap" id="pwStrengthWrap_changeNewPassword"><div class="pw-strength-bar" id="pwBar_changeNewPassword"><span></span><span></span><span></span><span></span><span></span></div><div class="pw-strength-info"><span class="pw-strength-label s1" id="pwLabel_changeNewPassword">password</span><span id="pwPercent_changeNewPassword">0%</span></div></div>
-</div>
-<div class="form-group"><label class="form-label">confirm password</label><div class="password-wrapper"><input type="text" class="form-input password-mask" id="changeConfirmPassword" required><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('changeConfirmPassword','confirmPasswordToggleIcon')"><i class="fa-solid fa-eye" id="confirmPasswordToggleIcon"></i></button></div></div>
-<div class="form-buttons-group"><button type="submit" class="submit-btn email-btn" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-key"></i> update</button></div>
-</form>
-</div>
-</div>
-
-<div class="modal-overlay" id="deleteAccountModal">
-<div class="modal-container" style="max-width:420px">
-<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeDeleteAccountModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title">Delete Account</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeDeleteAccountModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
-<form id="deleteAccountForm" onsubmit="handleDeleteAccount(event)">
-<p class="item-desc" style="margin-bottom:12px;font-size:.8rem;color:#ef4444">warning: cannot be undone.</p>
-<div class="form-group"><label class="form-label">username</label><input type="text" class="form-input" id="deleteConfirmUsername" required oninput="this.value = this.value.toLowerCase().replace(/^@/, '')"></div>
-<div class="form-buttons-group"><button type="submit" class="submit-btn" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fa-solid fa-trash-can"></i> delete</button></div>
-</form>
-</div>
-</div>
-
-<div class="modal-overlay" id="confirmDeletePasswordModal">
-<div class="modal-container" style="max-width:420px">
-<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeDeletePasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title">Confirm Deletion</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeDeletePasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
-<form id="deletePasswordForm" onsubmit="handleDeletePasswordSubmit(event)">
-<div class="form-group"><label class="form-label">password</label><div class="password-wrapper"><input type="text" class="form-input password-mask" id="deleteConfirmPassword" required><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('deleteConfirmPassword','deleteConfirmPasswordToggleIcon')"><i class="fa-solid fa-eye" id="deleteConfirmPasswordToggleIcon"></i></button></div></div>
-<div class="form-buttons-group"><button type="submit" class="submit-btn" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fa-solid fa-trash-can"></i> delete account</button></div>
-</form>
-</div>
-</div>
-
 <div class="custom-alert-overlay" id="getInTouchModal">
 <div class="custom-alert-box" style="max-width:340px;padding:22px 20px;text-align:center">
 <div style="display:flex;justify-content:center;margin-bottom:8px"><div class="custom-alert-icon" style="color:var(--accent);font-size:1.6rem;margin-bottom:0"><i class="fa-solid fa-user-lock"></i></div></div>
@@ -1100,92 +1181,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <button class="custom-alert-btn" onclick="openDirectContactModal()" style="background:linear-gradient(135deg,var(--accent),var(--accent-2));flex:1;padding:10px 6px;font-size:.78rem"><i class="fa-solid fa-right-to-bracket"></i> sign in</button>
 <button class="custom-alert-btn cancel-btn" onclick="closeGetInTouchModal()" style="flex:1;padding:10px 6px;font-size:.78rem"><i class="fa-solid fa-arrow-rotate-left"></i> back</button>
 </div>
-</div>
-</div>
-
-<div class="modal-overlay" id="directContactModal">
-<div class="modal-container">
-<div class="modal-header">
-<div class="modal-header-left">
-  <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
-    <button class="modal-close-btn" onclick="closeDirectContactModal()"><i class="fa-solid fa-chevron-left"></i></button>
-    <div class="modal-brand" style="margin:0">muminsultani</div>
-  </div>
-  <div class="modal-title" style="margin-left:42px">Account Access</div>
-</div>
-<div class="modal-header-actions">
-  <button class="modal-close-btn" onclick="toggleTheme()"><i class="fa-solid fa-moon" id="contactModalThemeIcon"></i></button>
-  <button class="modal-close-btn" onclick="closeDirectContactModal()"><i class="fa-solid fa-xmark"></i></button>
-</div>
-</div>
-<div class="auth-tabs">
-<button type="button" class="auth-tab-btn active" id="tabSigninBtn" onclick="switchAuthTab('signin')">sign in</button>
-<button type="button" class="auth-tab-btn" id="tabSignupBtn" onclick="switchAuthTab('signup')">sign up</button>
-</div>
-<form id="directContactForm" onsubmit="handleAuthSubmit(event)">
-<div class="form-group" id="groupSignupName" style="display:none"><label class="form-label">name</label><input type="text" class="form-input" id="contactClientName" placeholder="name & surname" autocomplete="off"></div>
-<div class="form-group" id="groupSignupUsername" style="display:none"><label class="form-label">username</label><input type="text" class="form-input" id="contactClientUsername" placeholder="@username" minlength="7" autocomplete="off" oninput="this.value = this.value.toLowerCase().replace(/[^a-z0-9_.\-!@#$%^&*+=?]/g, '').replace(/^@/, ''); checkUsernameAvailability()"><div id="usernameAvailabilityMsg"></div></div>
-<div class="form-group" id="groupEmail">
-<label class="form-label" id="dc-label-email">email</label>
-<input type="text" class="form-input" id="contactClientEmail" required placeholder="email or username" autocomplete="off" oninput="this.value = this.value.toLowerCase()">
-</div>
-<button type="button" class="submit-btn email-btn" id="dc-next-btn" onclick="handleAuthNext(event)" style="width:100%"><i class="fa-solid fa-arrow-right"></i> next</button>
-<div class="form-group" id="groupPassword" style="display:none">
-<div style="display:flex;justify-content:space-between;margin-bottom:4px"><label class="form-label" style="margin-bottom:0">password</label><a href="#" id="t-forgot-link" onclick="openForgotPasswordModal(event)" style="font-size:.7rem;color:var(--accent);text-decoration:none;font-weight:600">forgot password?</a></div>
-<div class="password-wrapper"><input type="text" class="form-input password-mask" id="contactClientPassword" placeholder="password" autocomplete="off"><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('contactClientPassword','passwordToggleIcon')"><i class="fa-solid fa-eye" id="passwordToggleIcon"></i></button></div>
-<div class="pw-strength-wrap" id="pwStrengthWrap_contactClientPassword"><div class="pw-strength-bar" id="pwBar_contactClientPassword"><span></span><span></span><span></span><span></span><span></span></div><div class="pw-strength-info"><span class="pw-strength-label s1" id="pwLabel_contactClientPassword">password</span><span id="pwPercent_contactClientPassword">0%</span></div></div>
-</div>
-<div class="form-buttons-group" id="dc-submit-group" style="flex-direction:column;gap:8px;display:none">
-<button type="button" class="submit-btn email-btn" onclick="handleAuthSubmit(event)" style="width:100%"><i class="fa-solid fa-right-to-bracket"></i> <span id="dc-submit-btn-text">go</span></button>
-</div>
-<div class="form-buttons-group" id="dc-google-group" style="flex-direction:column;gap:8px;margin-top:10px">
-<button type="button" class="submit-btn google-btn" onclick="openGoogleModal()" style="width:100%">
-<svg class="google-icon-svg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
-Continue with Google
-</button>
-</div>
-</form>
-</div>
-</div>
-
-<!-- GOOGLE SIGN-IN MODAL -->
-<div class="modal-overlay high-z" id="googleSignInModal">
-<div class="modal-container" style="max-width:420px">
-<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Google Sign In</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeGoogleModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
-<form onsubmit="handleGoogleSignIn(event)">
-<div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;margin-bottom:14px">
-<svg viewBox="0 0 48 48" style="width:32px;height:32px;flex-shrink:0"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
-<div style="flex:1;min-width:0"><div style="font-size:.85rem;font-weight:700;color:var(--text-color-override)">Sign in with Google</div><div style="font-size:.7rem;color:var(--text-secondary);margin-top:2px">Enter your Gmail address to continue</div></div>
-</div>
-<div class="form-group"><label class="form-label">Gmail address</label><input type="email" class="form-input" id="googleEmailInput" required placeholder="yourname@gmail.com" autocomplete="email" oninput="this.value = this.value.toLowerCase()"></div>
-<div class="form-group"><label class="form-label">Name (display)</label><input type="text" class="form-input" id="googleNameInput" placeholder="Your name" maxlength="60"></div>
-<div class="form-buttons-group"><button type="submit" class="submit-btn email-btn"><i class="fa-solid fa-right-to-bracket"></i> Continue</button></div>
-</form>
-</div>
-</div>
-
-<div class="modal-overlay" id="forgotPasswordModal">
-<div class="modal-container" style="max-width:420px">
-<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeForgotPasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title">Password Recovery</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeForgotPasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
-<form id="forgotPasswordForm" onsubmit="handleForgotPasswordSubmit(event)">
-<p class="item-desc" style="margin-bottom:12px;font-size:.8rem">enter your registered email.</p>
-<div class="form-group"><label class="form-label">email</label><input type="email" class="form-input" id="forgotClientEmail" required oninput="this.value=this.value.toLowerCase()"></div>
-<div class="form-buttons-group"><button type="submit" class="submit-btn email-btn"><i class="fa-solid fa-paper-plane"></i> send</button></div>
-</form>
-</div>
-</div>
-
-<div class="modal-overlay" id="resetPasswordModal">
-<div class="modal-container" style="max-width:420px">
-<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeResetPasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title">Reset Password</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeResetPasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
-<form id="resetPasswordForm" onsubmit="handleResetPasswordSubmit(event)">
-<div class="form-group"><label class="form-label">email</label><input type="email" class="form-input" id="resetClientEmail" readonly style="opacity:.7"></div>
-<div class="form-group"><label class="form-label">code</label><input type="text" class="form-input" id="resetClientCode" required></div>
-<div class="form-group"><label class="form-label">new password</label><div class="password-wrapper"><input type="text" class="form-input password-mask" id="resetClientNewPassword" required><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('resetClientNewPassword','resetNewPasswordToggleIcon')"><i class="fa-solid fa-eye" id="resetNewPasswordToggleIcon"></i></button></div>
-<div class="pw-strength-wrap" id="pwStrengthWrap_resetClientNewPassword"><div class="pw-strength-bar" id="pwBar_resetClientNewPassword"><span></span><span></span><span></span><span></span><span></span></div><div class="pw-strength-info"><span class="pw-strength-label s1" id="pwLabel_resetClientNewPassword">password</span><span id="pwPercent_resetClientNewPassword">0%</span></div></div>
-</div>
-<div class="form-buttons-group"><button type="submit" class="submit-btn email-btn" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-check"></i> update</button></div>
-</form>
 </div>
 </div>
 
@@ -1211,8 +1206,9 @@ Continue with Google
 
 <script>
 /* ==================== CONFIG ==================== */
+/* ⚠️ DÜZELTİLDİ: serviceId artık Outlook servisinin gerçek ID'si */
 const FIREBASE_CONFIG = {apiKey:"AIzaSyC3Pi88DP7K_4IG-R81LeDaGdhCTmHpo-c",authDomain:"muminsultani-497b5.firebaseapp.com",databaseURL:"https://muminsultani-497b5-default-rtdb.firebaseio.com",projectId:"muminsultani-497b5",storageBucket:"muminsultani-497b5.firebasestorage.app",messagingSenderId:"929484224535",appId:"1:929484224535:web:5e2b05f0b852357212c452"};
-const EMAILJS_CONFIG = {serviceId:'service_synjcul',templateId:'template_r1ii8ua',publicKey:'B4QKEakw6lpk2YKCh',enabled:false};
+const EMAILJS_CONFIG = {serviceId:'service_ids5d0j',templateId:'template_r1ii8ua',publicKey:'B4QKEakw6lpk2YKCh',enabled:true};
 if(EMAILJS_CONFIG.serviceId&&EMAILJS_CONFIG.serviceId!=='BURAYA_SERVICE_ID'&&EMAILJS_CONFIG.templateId&&EMAILJS_CONFIG.templateId!=='BURAYA_TEMPLATE_ID'&&EMAILJS_CONFIG.publicKey&&EMAILJS_CONFIG.publicKey!=='BURAYA_PUBLIC_KEY'){EMAILJS_CONFIG.enabled=true;}
 
 /* ==================== PASSWORD HELPERS ==================== */
@@ -1221,7 +1217,6 @@ function setPasswordValue(inputId,value){const el=document.getElementById(inputI
 function clearPasswordField(inputId){setPasswordValue(inputId,'');const w=document.getElementById('pwStrengthWrap_'+inputId);if(w)w.classList.remove('show');}
 function isValidPassword(p){return typeof p==='string'&&p.length>=8;}
 
-/* ==================== PASSWORD STRENGTH ==================== */
 const PW_LABELS={en:{pw_enter:'password',pw_very_weak:'very weak',pw_weak:'weak',pw_medium:'medium',pw_strong:'strong',pw_very_strong:'very strong'},tr:{pw_enter:'şifre',pw_very_weak:'çok zayıf',pw_weak:'zayıf',pw_medium:'orta',pw_strong:'güçlü',pw_very_strong:'çok güçlü'}};
 function pwLabel(k){const d=PW_LABELS[currentLang]||PW_LABELS.en;return d[k]||PW_LABELS.en[k]||k;}
 function evaluatePasswordStrength(pw){
@@ -1229,14 +1224,7 @@ function evaluatePasswordStrength(pw){
   let score=0;Object.values(rules).forEach(v=>{if(v)score++;});
   if(pw.length>=12)score+=0.5;if(pw.length>=16)score+=0.5;
   let level=Math.min(5,Math.ceil(score));if(pw.length===0)level=0;
-  const labels={
-    0:{text:pwLabel('pw_enter'),cls:'s1',pct:0},
-    1:{text:pwLabel('pw_very_weak'),cls:'s1',pct:20},
-    2:{text:pwLabel('pw_weak'),cls:'s2',pct:40},
-    3:{text:pwLabel('pw_medium'),cls:'s3',pct:60},
-    4:{text:pwLabel('pw_strong'),cls:'s4',pct:80},
-    5:{text:pwLabel('pw_very_strong'),cls:'s5',pct:100}
-  };
+  const labels={0:{text:pwLabel('pw_enter'),cls:'s1',pct:0},1:{text:pwLabel('pw_very_weak'),cls:'s1',pct:20},2:{text:pwLabel('pw_weak'),cls:'s2',pct:40},3:{text:pwLabel('pw_medium'),cls:'s3',pct:60},4:{text:pwLabel('pw_strong'),cls:'s4',pct:80},5:{text:pwLabel('pw_very_strong'),cls:'s5',pct:100}};
   return{level,info:labels[level]};
 }
 function updatePasswordStrength(inputId,pw){
@@ -1252,48 +1240,64 @@ function updatePasswordStrength(inputId,pw){
   const pct=document.getElementById('pwPercent_'+inputId);
   if(pct)pct.textContent=info.pct+'%';
 }
-
 function initPasswordMask(inputId){
   const input=document.getElementById(inputId);
   if(!input||input.dataset.pwMaskInit)return;
-  input.dataset.pwMaskInit='1';
-  input.dataset.realValue='';
-  input.dataset.masked='1';
-  input.setAttribute('type','text');
-  input.setAttribute('autocomplete','off');
-  input.setAttribute('autocorrect','off');
-  input.setAttribute('autocapitalize','off');
-  input.setAttribute('spellcheck','false');
+  input.dataset.pwMaskInit='1';input.dataset.realValue='';input.dataset.masked='1';
+  input.setAttribute('type','text');input.setAttribute('autocomplete','off');input.setAttribute('autocorrect','off');input.setAttribute('autocapitalize','off');input.setAttribute('spellcheck','false');
   input.classList.add('password-mask');
   input.addEventListener('input',function(e){
     const cur=this.value;const real=this.dataset.realValue||'';const inputType=e.inputType||'';let newReal=real;
-    if(inputType==='deleteContentBackward'||inputType==='deleteContentForward'){
-      const pos=this.selectionStart||0;newReal=real.slice(0,pos)+real.slice(pos+1);
-    }else if(inputType==='insertText'||inputType==='insertCompositionText'||!inputType){
-      const added=cur.length-real.length;
-      if(added>0){const pos=(this.selectionStart||cur.length)-added;const chars=cur.substring(pos,pos+added);if(/^\*+$/.test(chars))newReal=real;else newReal=real.slice(0,pos)+chars+real.slice(pos);}
-      else if(added<0){newReal=real.slice(0,cur.length);}
-    }else{newReal=cur.replace(/\*/g,'')||real;}
+    if(inputType==='deleteContentBackward'||inputType==='deleteContentForward'){const pos=this.selectionStart||0;newReal=real.slice(0,pos)+real.slice(pos+1);}
+    else if(inputType==='insertText'||inputType==='insertCompositionText'||!inputType){const added=cur.length-real.length;if(added>0){const pos=(this.selectionStart||cur.length)-added;const chars=cur.substring(pos,pos+added);if(/^\*+$/.test(chars))newReal=real;else newReal=real.slice(0,pos)+chars+real.slice(pos);}else if(added<0){newReal=real.slice(0,cur.length);}}
+    else{newReal=cur.replace(/\*/g,'')||real;}
     this.dataset.realValue=newReal;
     if(this.dataset.masked==='1'){this.value='*'.repeat(newReal.length);try{this.setSelectionRange(this.value.length,this.value.length);}catch(err){}}
     else{this.value=newReal;try{this.setSelectionRange(this.value.length,this.value.length);}catch(err){}}
     const wrap=document.getElementById('pwStrengthWrap_'+inputId);if(wrap)updatePasswordStrength(inputId,newReal);
   });
-  input.addEventListener('paste',function(e){
-    e.preventDefault();
-    const pasted=(e.clipboardData||window.clipboardData).getData('text')||'';
-    const real=(this.dataset.realValue||'')+pasted;this.dataset.realValue=real;
-    if(this.dataset.masked==='1'){this.value='*'.repeat(real.length);}else{this.value=real;}
-    try{this.setSelectionRange(this.value.length,this.value.length);}catch(err){}
-    const wrap=document.getElementById('pwStrengthWrap_'+inputId);if(wrap)updatePasswordStrength(inputId,real);
-  });
+  input.addEventListener('paste',function(e){e.preventDefault();const pasted=(e.clipboardData||window.clipboardData).getData('text')||'';const real=(this.dataset.realValue||'')+pasted;this.dataset.realValue=real;if(this.dataset.masked==='1'){this.value='*'.repeat(real.length);}else{this.value=real;}try{this.setSelectionRange(this.value.length,this.value.length);}catch(err){}const wrap=document.getElementById('pwStrengthWrap_'+inputId);if(wrap)updatePasswordStrength(inputId,real);});
 }
 const PASSWORD_FIELDS=['adminPasswordInput','contactClientPassword','changeOldPassword','changeNewPassword','changeConfirmPassword','deleteConfirmPassword','resetClientNewPassword'];
 function initAllPasswordMasks(){PASSWORD_FIELDS.forEach(id=>initPasswordMask(id));}
 
 /* ==================== EMAIL ==================== */
-function initEmailJS(){if(!EMAILJS_CONFIG.enabled)return;try{if(typeof emailjs!=='undefined'){emailjs.init({publicKey:EMAILJS_CONFIG.publicKey});}}catch(e){}}
-async function sendVerificationEmail(toEmail,code,type){if(!EMAILJS_CONFIG.enabled||typeof emailjs==='undefined')return{success:false,reason:'not_configured'};const typeLabels={signup:'Account Verification',reset:'Password Reset',email_change:'Email Change'};const brand=getDyn('header.brand','muminsultani');try{const response=await emailjs.send(EMAILJS_CONFIG.serviceId,EMAILJS_CONFIG.templateId,{to_email:toEmail,email:toEmail,name:brand,code,type:typeLabels[type]||'Verification',brand,year:new Date().getFullYear(),subject:`${brand} - ${typeLabels[type]||'Verification'}`,message:`Hello,\n\nYour ${brand} verification code is: ${code}`},{publicKey:EMAILJS_CONFIG.publicKey});logActivity('email_sent',{email:toEmail,name:typeLabels[type]},`Sent: ${toEmail}`);return{success:true,response};}catch(e){return{success:false,reason:e.text||e.message||'send_failed'};}}
+function initEmailJS(){
+  if(!EMAILJS_CONFIG.enabled)return;
+  try{
+    if(typeof emailjs!=='undefined'){
+      emailjs.init({publicKey:EMAILJS_CONFIG.publicKey});
+      console.log('EmailJS initialized with service:',EMAILJS_CONFIG.serviceId);
+    }
+  }catch(e){console.warn('EmailJS init error:',e);}
+}
+async function sendVerificationEmail(toEmail,code,type){
+  if(!EMAILJS_CONFIG.enabled||typeof emailjs==='undefined'){
+    console.warn('EmailJS not enabled or not loaded');
+    return{success:false,reason:'not_configured'};
+  }
+  const typeLabels={signup:'Account Verification',reset:'Password Reset',email_change:'Email Change'};
+  const brand=getDyn('header.brand','muminsultani');
+  try{
+    const response=await emailjs.send(EMAILJS_CONFIG.serviceId,EMAILJS_CONFIG.templateId,{
+      to_email:toEmail,
+      email:toEmail,
+      name:brand,
+      code,
+      type:typeLabels[type]||'Verification',
+      brand,
+      year:new Date().getFullYear(),
+      subject:`${brand} - ${typeLabels[type]||'Verification'}`,
+      message:`Hello,\n\nYour ${brand} verification code is: ${code}`
+    },{publicKey:EMAILJS_CONFIG.publicKey});
+    logActivity('email_sent',{email:toEmail,name:typeLabels[type]},`Sent: ${toEmail}`);
+    console.log('Email sent successfully:',response);
+    return{success:true,response};
+  }catch(e){
+    console.error('EmailJS send error:',e);
+    return{success:false,reason:e.text||e.message||'send_failed'};
+  }
+}
 
 /* ==================== TRANSLATIONS ==================== */
 const LANG={en:{role:"Software Developer",sec_profile:"User Profile & Session",sec_apps:"My Applications",sec_exp:"Experience",sec_setup:"Setup & Environment",sec_stack:"Core Stack",contact_sub:"Sign In / Sign Up",contact_main:"Sign In To Join Us",contact_sub_logged:"User Account",contact_main_logged:"Welcome,",contact_main_logged2:"Session Active",scan_text:"Scan To Connect",copyright:"© 2026 muminsultani • All Rights Reserved.",alert_fill_fields:"please fill in all required fields.",alert_success_signup:"account created successfully!",alert_success_signin:"signed in successfully!",alert_error_signin:"invalid credentials!",alert_auth_required:"you must sign in or register first!",alert_apk_login:"⚠️ sign in required to download APK.",alert_success_update:"profile updated successfully!",alert_success_delete:"account deleted successfully.",alert_del_confirm:"are you sure you want to delete your account?",alert_del_yes:"yes, delete",alert_del_no:"cancel",alert_del_pass_err:"incorrect password!",alert_del_user_err:"username does not match.",alert_cp_success:"password changed successfully!",alert_cp_old_err:"current password is incorrect!",alert_cp_match_err:"new passwords do not match!",alert_logout_confirm:"are you sure you want to log out?",alert_logout_yes:"log out",alert_logout_no:"back",alert_logout_ok:"session closed.",alert_pass_short:"password must be at least 8 characters.",alert_user_avail:"username is available.",alert_user_taken:"this username is already taken.",alert_ok:"OK",alert_rp_success:"password reset successfully!",alert_rp_code_err:"invalid code!",alert_rp_email_err:"email not registered!",alert_email_reg:"email already registered!",alert_chat_del:"delete this message?",alert_chats_clear:"all chat messages will be deleted!",alert_deleted:"deleted!",alert_csv_down:"CSV downloaded!",alert_no_msgs:"no messages yet.",alert_no_records:"no records.",alert_no_users:"no registered users.",alert_wrong_pass:"wrong password!",alert_admin_no_del:"admin account cannot be deleted!",alert_user_deleted:"user deleted!",alert_user_not_found:"user not found!",alert_delete_all_users:"all users will be deleted!",alert_must_signin:"you must sign in.",alert_select_image:"choose an image!",alert_icon_err:"icon upload failed!",alert_app_saved:"app saved!",alert_saved:"saved!",alert_backup_down:"backup downloaded!",alert_backup_load:"backup loaded!",alert_invalid_file:"invalid file!",alert_reset_confirm:"all site content will be reset?",alert_reset_ok:"reset!",alert_clear_activity:"all activity logs will be deleted!",alert_login_chat:"sign in and open a chat first.",alert_browser_unsup:"browser not supported.",alert_mic_denied:"microphone permission denied.",alert_rec_fail:"recording failed to start.",alert_rec_short:"recording too short!",alert_apk_not_found:"APK not found!",alert_downloading:"Downloading",alert_down_err:"Download error!",alert_apk_upload_err:"APK upload error: ",alert_image_5mb:"image must be under 5 MB!",alert_choose_apk:"Choose APK File",alert_copied:"copied!",alert_admin_required:"please sign in as admin first!",alert_next_first:"please enter your email or username first!",alert_google_success:"signed in with Google!",alert_google_invalid:"please enter a valid Gmail address",alert_id_invalid:"ID must be exactly 9 digits!",alert_id_used:"this ID is already used!",alert_followed:"you now follow this user!",alert_unfollowed:"unfollowed.",alert_cannot_follow_self:"you cannot follow yourself.",alert_code_sent:"verification code sent to your email!",alert_code_send_fail:"could not send email. Please try again.",rec_hint:"recording...",chat_search_ph:"search...",chat_no_users:"no other users.",chat_no_search:"no search results.",chat_no_msgs:"no messages yet",chat_start:"start the conversation 👋",chat_you:"you",chat_voice:"🎤 voice message",chat_voice_fail:"voice could not be loaded",chat_ph:"type a message...",admin_title:"Admin Access",admin_restricted:"restricted area.",admin_pass_label:"master password",admin_pass_ph:"master password",admin_unlock:"unlock",admin_panel_title:"Full Site Control",pub_title:"User Profile",pub_send_msg:"Send Message",pub_follow:"Follow",pub_following:"Following",pub_followers:"Followers",pub_joined:"joined",act_voice:"Voice Message",chat_open:"open chat"},tr:{role:"Yazılım Geliştirici",sec_profile:"Kullanıcı Profili & Oturum",sec_apps:"Uygulamalarım",sec_exp:"Deneyim",sec_setup:"Kurulum & Ortam",sec_stack:"Temel Yığın",contact_sub:"Giriş Yap / Kayıt Ol",contact_main:"Bize Katılmak İçin Giriş Yapın",contact_sub_logged:"Kullanıcı Hesabı",contact_main_logged:"Hoş geldiniz,",contact_main_logged2:"Oturum Açık",scan_text:"Bağlanmak İçin Tarayın",copyright:"© 2026 muminsultani • Tüm Hakları Saklıdır.",alert_fill_fields:"lütfen gerekli alanları doldurun.",alert_success_signup:"hesap oluşturuldu!",alert_success_signin:"giriş yapıldı!",alert_error_signin:"geçersiz bilgiler!",alert_auth_required:"önce giriş yapmalısınız!",alert_apk_login:"⚠️ APK indirmek için giriş yapın.",alert_success_update:"profil güncellendi!",alert_success_delete:"hesap silindi.",alert_del_confirm:"hesabınızı silmek istediğinize emin misiniz?",alert_del_yes:"evet, sil",alert_del_no:"iptal",alert_del_pass_err:"şifre yanlış!",alert_del_user_err:"kullanıcı adı eşleşmiyor.",alert_cp_success:"şifre değiştirildi!",alert_cp_old_err:"mevcut şifre yanlış!",alert_cp_match_err:"yeni şifreler eşleşmiyor!",alert_logout_confirm:"çıkış yapmak istiyor musunuz?",alert_logout_yes:"çıkış yap",alert_logout_no:"geri",alert_logout_ok:"oturum kapatıldı.",alert_pass_short:"şifre en az 8 karakter olmalıdır.",alert_user_avail:"kullanıcı adı kullanılabilir.",alert_user_taken:"bu kullanıcı adı alınmış.",alert_ok:"Tamam",alert_rp_success:"şifre sıfırlandı!",alert_rp_code_err:"geçersiz kod!",alert_rp_email_err:"e-posta kayıtlı değil!",alert_email_reg:"bu e-posta zaten kayıtlı!",alert_chat_del:"bu mesaj silinsin mi?",alert_chats_clear:"tüm sohbet mesajları silinecek!",alert_deleted:"silindi!",alert_csv_down:"CSV indirildi!",alert_no_msgs:"henüz mesaj yok.",alert_no_records:"kayıt yok.",alert_no_users:"kayıtlı kullanıcı yok.",alert_wrong_pass:"yanlış şifre!",alert_admin_no_del:"admin hesabı silinemez!",alert_user_deleted:"kullanıcı silindi!",alert_user_not_found:"kullanıcı bulunamadı!",alert_delete_all_users:"tüm kullanıcılar silinecek!",alert_must_signin:"giriş yapmalısınız.",alert_select_image:"bir resim seçin!",alert_icon_err:"ikon yüklenemedi!",alert_app_saved:"uygulama kaydedildi!",alert_saved:"kaydedildi!",alert_backup_down:"yedek indirildi!",alert_backup_load:"yedek yüklendi!",alert_invalid_file:"geçersiz dosya!",alert_reset_confirm:"tüm site içeriği sıfırlanacak?",alert_reset_ok:"sıfırlandı!",alert_clear_activity:"tüm aktivite kayıtları silinecek!",alert_login_chat:"önce giriş yapın ve sohbet açın.",alert_browser_unsup:"tarayıcı desteklemiyor.",alert_mic_denied:"mikrofon izni reddedildi.",alert_rec_fail:"kayıt başlatılamadı.",alert_rec_short:"kayıt çok kısa!",alert_apk_not_found:"APK bulunamadı!",alert_downloading:"İndiriliyor",alert_down_err:"İndirme hatası!",alert_apk_upload_err:"APK hatası: ",alert_image_5mb:"resim 5 MB altı olmalı!",alert_choose_apk:"APK Dosyası Seç",alert_copied:"kopyalandı!",alert_admin_required:"önce admin girişi!",alert_next_first:"lütfen e-posta/kullanıcı adı girin!",alert_google_success:"Google ile giriş yapıldı!",alert_google_invalid:"lütfen geçerli bir Gmail adresi girin",alert_id_invalid:"ID 9 rakam olmalıdır!",alert_id_used:"bu ID zaten kullanılıyor!",alert_followed:"artık takip ediyorsunuz!",alert_unfollowed:"takipten çıkıldı.",alert_cannot_follow_self:"kendinizi takip edemezsiniz.",alert_code_sent:"doğrulama kodu e-postanıza gönderildi!",alert_code_send_fail:"e-posta gönderilemedi. Tekrar deneyin.",rec_hint:"kayıt yapılıyor...",chat_search_ph:"ara...",chat_no_users:"başka kullanıcı yok.",chat_no_search:"arama sonucu yok.",chat_no_msgs:"henüz mesaj yok",chat_start:"sohbete başla 👋",chat_you:"sen",chat_voice:"🎤 sesli mesaj",chat_voice_fail:"ses yüklenemedi",chat_ph:"bir mesaj yaz...",admin_title:"Yönetici Girişi",admin_restricted:"kısıtlı alan.",admin_pass_label:"ana şifre",admin_pass_ph:"ana şifre",admin_unlock:"kilidi aç",admin_panel_title:"Tam Site Kontrolü",pub_title:"Kullanıcı Profili",pub_send_msg:"Mesaj Gönder",pub_follow:"Takip Et",pub_following:"Takipten Çık",pub_followers:"Takipçi",pub_joined:"katılım",act_voice:"Sesli Mesaj",chat_open:"sohbet aç"}};
@@ -1442,6 +1446,7 @@ function getEffectiveLoggedUser(){const lu=localStorage.getItem('logged_user');i
 function getVerifiedBadgeHTML(size){const cls='verified-badge'+(size?(' '+size):'');return `<span class="${cls}" title="Verified"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path fill="#1d9bf0" d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18z"/></svg></span>`;}
 function getUserIdLabelHTML(userId,isAdmin){if(!userId)return'';const cls='chat-user-id'+(isAdmin?' admin-id':'');const eid=escapeHtml(String(userId));return `<span class="${cls}"><i class="fa-solid fa-id-badge" style="font-size:.5rem"></i>${eid}<button type="button" class="copy-id-btn" data-id="${eid}" onclick="event.stopPropagation();copyUserIdFromEl(this);"><i class="fa-regular fa-copy"></i></button></span>`;}
 function copyUserIdFromEl(btn){const id=btn.getAttribute('data-id');if(!id)return;const sc=()=>{btn.innerHTML='<i class="fa-solid fa-check"></i>';setTimeout(()=>{btn.innerHTML='<i class="fa-regular fa-copy"></i>';},1500);};if(navigator.clipboard)navigator.clipboard.writeText(id).then(sc).catch(()=>{});else sc();}
+function fallbackCopy(t2){const ta=document.createElement('textarea');ta.value=t2;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);}
 function ensureUserIdsAndAdmin(){try{let u=JSON.parse(localStorage.getItem('site_users')||'[]');let changed=false;let ai=u.findIndex(x=>x.isAdmin===true);if(ai===-1)ai=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL);if(ai===-1){u.unshift({userId:'',name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'admin123',bio:'',website:'',profilePhoto:'',coverPhoto:'',following:[],createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true,isVerified:true});ai=0;changed=true;}u.forEach(x=>{if(!/^\d{9}$/.test(String(x.userId||''))){x.userId='';changed=true;}if(!x.bio)x.bio='';if(!x.website)x.website='';if(!Array.isArray(x.following))x.following=[];});const seen=new Set();u.forEach(x=>{if(x.userId&&seen.has(x.userId)){x.userId='';changed=true;}else if(x.userId)seen.add(x.userId);});u.forEach(x=>{if(!x.userId){let nid;do{nid=generateRandomUserId();}while(seen.has(nid));x.userId=nid;seen.add(nid);changed=true;}});if(changed){localStorage.setItem('site_users',JSON.stringify(u));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);const f=u.find(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());if(f)localStorage.setItem('logged_user',JSON.stringify(f));}catch(e){}}}}catch(e){}}
 function getChatUsersFor(email){const u=getAllUsers();const ce=String(email||'').toLowerCase();let list=u.filter(x=>String(x.email||'').toLowerCase()!==ce);if(!isAdminUser(email)&&!list.some(x=>isAdminUser(x.email))){list.unshift(getAdminUser());}list.sort((a,b)=>{const aa=isAdminUser(a.email)?0:1,ba=isAdminUser(b.email)?0:1;return aa-ba;});return list;}
 
@@ -1472,7 +1477,6 @@ function closeChatPanel(){document.getElementById('chatPanelModal').classList.re
 function filterChatUsers(){const inp=document.getElementById('chatSearchInput');chatSearchQuery=inp?inp.value.trim().toLowerCase():'';const clr=document.getElementById('chatSearchClear');if(clr){chatSearchQuery?clr.classList.add('show'):clr.classList.remove('show');}renderChatUsersList();}
 function clearChatSearch(){chatSearchQuery='';const inp=document.getElementById('chatSearchInput');if(inp)inp.value='';const clr=document.getElementById('chatSearchClear');if(clr)clr.classList.remove('show');renderChatUsersList();}
 function matchUserQuery(x,q){if(!q)return true;const qq=q.replace(/^@/,'').trim();if(!qq)return true;const id=String(x.userId||'').toLowerCase();const nm=String(x.name||'').toLowerCase();const un=String(x.username||'').toLowerCase().replace(/^@/,'');const em=String(x.email||'').toLowerCase();return id.includes(qq)||nm.includes(qq)||un.includes(qq)||em.includes(qq);}
-/* REQ 3: blue check next to username */
 function renderChatUsersList(){const eff=getEffectiveLoggedUser();if(!eff)return;const u=eff;let others=getChatUsersFor(u.email);if(chatSearchQuery)others=others.filter(x=>matchUserQuery(x,chatSearchQuery));const list=document.getElementById('chatUsersList');if(!list)return;if(others.length===0){list.innerHTML=`<div class="chat-empty"><i class="fa-solid fa-user-group"></i>${t('chat_no_users')}</div>`;return;}const msgs=getChatMessages();others.sort((a,b)=>{const aa=isAdminUser(a.email)?0:1,ba=isAdminUser(b.email)?0:1;return aa-ba;});list.innerHTML='';others.forEach(x=>{const isA=isAdminUser(x.email);const cid=getConversationId(u.email,x.email);const conv=msgs[cid]||[];const last=conv.length?conv[conv.length-1]:null;const unread=conv.filter(m=>String(m.to).toLowerCase()===String(u.email).toLowerCase()&&!m.read).length;const item=document.createElement('div');item.className='chat-user-item'+(isA?' admin-row':'');const av=x.profilePhoto?`<img src="${x.profilePhoto}">`:(x.name?escapeHtml(x.name.trim().charAt(0).toUpperCase()):'?');let preview=t('chat_no_msgs');if(last){const who=String(last.from).toLowerCase()===String(u.email).toLowerCase()?(t('chat_you')+': '):'';preview=who+(last.type==='voice'?t('chat_voice'):last.text);}const uname=String(x.username||'').replace(/^@/,'');const vB=(isA||x.isVerified)?getVerifiedBadgeHTML('sm'):'';const idL=getUserIdLabelHTML(x.userId,isA);const crown=isA?`<span class="admin-crown"><i class="fa-solid fa-crown"></i></span>`:'';item.innerHTML=`<div class="chat-user-avatar${isA?' admin-avatar':''}">${crown}${av}</div><div class="chat-user-info"><div class="chat-user-name">${escapeHtml(x.name||'user')}</div>${uname?`<div class="chat-user-username">@${escapeHtml(uname)}${vB}</div>`:''}<div class="chat-user-id-row">${idL}</div><div class="chat-user-preview">${escapeHtml(preview).substring(0,60)}</div></div>${unread>0?`<div class="chat-unread-badge">${unread>99?'99+':unread}</div>`:''}`;item.onclick=()=>openConversation(x);list.appendChild(item);});}
 function openConversation(user){const eff=getEffectiveLoggedUser();if(!eff)return;const u=eff;activeChatUser=user;const m=getChatMessages();const cid=getConversationId(u.email,user.email);if(m[cid]){let c=false;m[cid].forEach(x=>{if(String(x.to).toLowerCase()===String(u.email).toLowerCase()&&!x.read){x.read=true;c=true;}});if(c)saveChatMessages(m);}document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='flex';applyChatBackground();renderChatConvHeader();renderChatMessages();updateChatBadge();}
 function renderChatConvHeader(){const h=document.getElementById('chatConvHeader');if(!h||!activeChatUser)return;const isA=isAdminUser(activeChatUser.email);const av=activeChatUser.profilePhoto?`<img src="${activeChatUser.profilePhoto}">`:(activeChatUser.name?escapeHtml(activeChatUser.name.trim().charAt(0).toUpperCase()):'?');const uname=String(activeChatUser.username||'').replace(/^@/,'');const se=escapeHtml(activeChatUser.email||'');const vB=(isA||activeChatUser.isVerified)?getVerifiedBadgeHTML(''):'';const idL=getUserIdLabelHTML(activeChatUser.userId,isA);const crown=isA?`<span class="admin-crown"><i class="fa-solid fa-crown"></i></span>`:'';h.innerHTML=`<button class="chat-back-btn" onclick="backToUsersList()"><i class="fa-solid fa-arrow-left"></i></button><div class="chat-user-avatar small${isA?' admin-avatar':''}">${crown}${av}</div><div style="flex:1;min-width:0"><div class="chat-user-name">${escapeHtml(activeChatUser.name||'user')}</div><div class="chat-user-username">${uname?'@'+escapeHtml(uname):''}${vB}</div><div class="chat-user-id-row">${idL}</div></div><button class="chat-profile-btn" onclick="openPublicUserProfile('${se}')"><i class="fa-solid fa-user-circle"></i></button>`;}
@@ -1489,7 +1493,6 @@ function cancelReply(){currentReplyTo=null;document.getElementById('chatReplyPre
 function deleteMessage(idx){showCustomAlert(t('alert_chat_del'),'delete',function(){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);if(m[cid]&&m[cid][idx]){m[cid].splice(idx,1);saveChatMessages(m);renderChatMessages();}});}
 function sendChatMessage(){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const inp=document.getElementById('chatInput');if(!inp)return;const text=inp.value.trim();if(!text)return;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);if(!m[cid])m[cid]=[];const nm={from:u.email,to:activeChatUser.email,fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',type:'text',text:text.substring(0,1000),timestamp:new Date().toISOString(),read:false,replyTo:currentReplyTo?{name:currentReplyTo.name,text:currentReplyTo.text}:null};m[cid].push(nm);saveChatMessages(m);inp.value='';currentReplyTo=null;document.getElementById('chatReplyPreview').style.display='none';renderChatMessages();logActivity('chat_message',u,`To ${activeChatUser.email}: ${text.substring(0,60)}`);}
 
-/* REQ 4,5: Google sign-in modal - fixed */
 function openGoogleModal(){document.getElementById('googleEmailInput').value='';document.getElementById('googleNameInput').value='';document.getElementById('googleSignInModal').classList.add('active');setTimeout(()=>document.getElementById('googleEmailInput').focus(),200);}
 function closeGoogleModal(){document.getElementById('googleSignInModal').classList.remove('active');}
 function handleGoogleSignIn(e){
@@ -1540,21 +1543,12 @@ function stopVoiceRecording(){if(mediaRecorder&&mediaRecorder.state==='recording
 function cancelVoiceRecording(){recordingCancelled=true;if(mediaRecorder&&mediaRecorder.state==='recording'){try{mediaRecorder.stop();}catch(e){}}else stopRecordingStream();}
 function stopRecordingUI(){if(mediaRecorder&&mediaRecorder.state==='recording'){recordingCancelled=true;try{mediaRecorder.stop();}catch(e){}}stopRecordingStream();}
 function blobToBase64(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob);});}
-async function saveAndSendVoiceMessage(blob,duration){
-  const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const audioId=generateVoiceId();
-  let audioData='';
-  try{audioData=await blobToBase64(blob);}catch(e){showCustomAlert('voice encode error');return;}
-  try{await storeVoiceMessage(audioId,blob);}catch(e){}
-  const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);if(!m[cid])m[cid]=[];
-  const nm={from:u.email,to:activeChatUser.email,fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',type:'voice',audioId,audioData,duration:Math.round(duration*10)/10,timestamp:new Date().toISOString(),read:false};
-  m[cid].push(nm);saveChatMessages(m);renderChatMessages();logActivity('voice_message',u,`To ${activeChatUser.email}: ${formatDuration(duration)}`);
-}
+async function saveAndSendVoiceMessage(blob,duration){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const audioId=generateVoiceId();let audioData='';try{audioData=await blobToBase64(blob);}catch(e){showCustomAlert('voice encode error');return;}try{await storeVoiceMessage(audioId,blob);}catch(e){}const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);if(!m[cid])m[cid]=[];const nm={from:u.email,to:activeChatUser.email,fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',type:'voice',audioId,audioData,duration:Math.round(duration*10)/10,timestamp:new Date().toISOString(),read:false};m[cid].push(nm);saveChatMessages(m);renderChatMessages();logActivity('voice_message',u,`To ${activeChatUser.email}: ${formatDuration(duration)}`);}
 function clearAllChats(){showCustomAlert(t('alert_chats_clear'),'delete',function(){localStorage.removeItem(CHAT_KEY);clearAllVoiceMessages().catch(()=>{});updateChatBadge();renderAdminChats();refreshAdminUI();showCustomAlert(t('alert_deleted'),'success');});}
 function exportChatsCSV(){const msgs=getChatMessages();const rows=[['Conv','From','To','Name','UserID','Type','Text','Time','Read']];let c=0;for(const k in msgs){msgs[k].forEach(m=>{const b=m.type==='voice'?`[VOICE ${m.duration||0}s]`:(m.text||'');rows.push([k,m.from,m.to,m.fromName||'',m.fromUserId||'',m.type||'text',b,m.timestamp,m.read?'Yes':'No']);c++;});}if(!c){showCustomAlert(t('alert_no_msgs'));return;}const csv=rows.map(r=>r.map(x=>`"${String(x||'').replace(/"/g,'""')}"`).join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`chats-${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);showCustomAlert(t('alert_csv_down'),'success');}
 function renderAdminChats(){const list=document.getElementById('adminChatsList');if(!list)return;const msgs=getChatMessages();const cIds=Object.keys(msgs);let total=0;cIds.forEach(c=>total+=msgs[c].length);if(total===0){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">'+t('alert_no_msgs')+'</p>';return;}list.innerHTML='';cIds.sort((a,b)=>{const la=msgs[a][msgs[a].length-1],lb=msgs[b][msgs[b].length-1];return new Date(lb.timestamp)-new Date(la.timestamp);});const users=getAllUsers();cIds.forEach(cid=>{const conv=msgs[cid];if(!conv.length)return;const parts=cid.split('__');const otherEmail=parts[0]===ADMIN_EMAIL?parts[1]:(parts[1]===ADMIN_EMAIL?parts[0]:parts[0]);const other=users.find(x=>String(x.email||'').toLowerCase()===String(otherEmail).toLowerCase());const otherName=other?(other.name||other.username||otherEmail):otherEmail;const otherId=other?(other.userId||''):'';const block=document.createElement('div');block.className='admin-slot';block.style.flexDirection='column';block.style.padding='12px';const head=document.createElement('div');head.style.cssText='display:flex;justify-content:space-between;margin-bottom:8px;border-bottom:1px solid var(--line-color);padding-bottom:8px;gap:8px;flex-wrap:wrap;';head.innerHTML=`<div><div style="font-size:.88rem;font-weight:800;color:var(--accent)"><i class="fa-solid fa-comments"></i> ${escapeHtml(otherName)}</div><div style="font-size:.7rem;color:var(--text-secondary);margin-top:3px;">${otherId?'• '+escapeHtml(otherId):''}</div></div><button class="user-view-btn msg" onclick="adminMessageUser('${escapeHtml(otherEmail)}')"><i class="fa-solid fa-comment"></i></button>`;block.appendChild(head);const wrap=document.createElement('div');wrap.style.cssText='max-height:180px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;';conv.slice(-30).forEach(m=>{const body=m.type==='voice'?`🎤 ${t('act_voice')} (${formatDuration(m.duration||0)})`:escapeHtml(m.text||'');const row=document.createElement('div');row.style.cssText='font-size:.7rem;padding:6px 8px;background:var(--box-bg);border-radius:8px;border:1px solid var(--line-color);';row.innerHTML=`<div style="display:flex;justify-content:space-between;margin-bottom:2px;"><strong style="color:var(--accent);font-size:.65rem;">${escapeHtml(m.fromName||m.from)}</strong><span style="color:var(--text-secondary);font-size:.6rem;">${new Date(m.timestamp).toLocaleString()}</span></div><div style="color:var(--text-color-override);word-break:break-word;">${body}</div>`;wrap.appendChild(row);});block.appendChild(wrap);list.appendChild(block);});}
 
 let publicProfileEmail=null;
-/* REQ 3: blue check next to username on public profile too */
 function openPublicUserProfile(email){const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert(t('alert_must_signin'));return;}const users=getAllUsers();let u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());if(!u&&isAdminUser(email))u=getAdminUser();if(!u){showCustomAlert(t('alert_user_not_found'));return;}publicProfileEmail=u.email;const initial=(u.name||'U').trim().charAt(0).toUpperCase();const av=u.profilePhoto?`<img src="${u.profilePhoto}">`:(u.name?escapeHtml(initial):'?');const uname=String(u.username||'').replace(/^@/,'');const created=u.createdAt?new Date(u.createdAt).toLocaleDateString():'—';const myEmail=String(eff.email||'').toLowerCase();const isSelf=myEmail===String(u.email||'').toLowerCase();const isAdm=isAdminUser(u.email);const isVer=(isAdm||u.isVerified);const vB=isVer?getVerifiedBadgeHTML('lg'):'';const followers=getFollowersOf(u.email);const following=getFollowingOf(u.email);const fb=!isSelf&&isFollowing(myEmail,u.email);let websiteHTML='';if(u.website){let w=String(u.website).trim();if(!/^https?:\/\//i.test(w))w='https://'+w;websiteHTML=`<a class="pub-profile-website" href="${escapeHtml(w)}" target="_blank"><i class="fa-solid fa-link"></i> ${escapeHtml(w.replace(/^https?:\/\//,'').substring(0,40))}</a>`;}const coverStyle=u.coverPhoto?`background-image:url('${u.coverPhoto}');background-size:cover;background-position:center;`:'';const idNum=escapeHtml(u.userId||'-');const idRowHTML=`<div class="pub-profile-info-row"><span><i class="fa-solid fa-id-badge"></i>ID</span><span style="font-family:'Fira Code',monospace;font-weight:700;color:var(--accent);">${idNum}</span></div>`;let aH='';if(!isSelf){aH+=`<button class="${fb?'pub-btn-following':'pub-btn-follow'}" onclick="toggleFollow('${escapeHtml(u.email)}')"><i class="fa-solid ${fb?'fa-user-minus':'fa-user-plus'}"></i> ${fb?t('pub_following'):t('pub_follow')}</button>`;aH+=`<button class="pub-btn-msg" onclick="messageFromProfile()"><i class="fa-solid fa-comments"></i> ${t('pub_send_msg')}</button>`;}aH+=`<button class="pub-btn-close" onclick="closePublicUserProfile()"><i class="fa-solid fa-arrow-left"></i> close</button>`;
   document.getElementById('pub-profile-title').innerText=t('pub_title');
   document.getElementById('publicUserProfileContent').innerHTML=`
@@ -1634,32 +1628,7 @@ async function downloadApk(slotIndex){const lu=localStorage.getItem('logged_user
 
 function applySiteContent(){const c=getSiteContent(),isTR=currentLang==='tr';document.querySelectorAll('.brand-logo, .footer-brand').forEach(el=>el.textContent=c.header.brand);const il=document.querySelector('.intro-logo');if(il)il.textContent=c.header.brand;document.querySelectorAll('.modal-brand').forEach(el=>el.textContent=c.header.brand);document.getElementById('t-role').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('introSub').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('t-job-title').innerText=isTR?c.experience.titleTr:c.experience.titleEn;document.getElementById('t-job-date').innerText=c.experience.date;document.getElementById('t-job-desc').innerText=isTR?c.experience.descTr:c.experience.descEn;document.getElementById('t-os-val').innerText=isTR?c.setup.osTr:c.setup.osEn;document.getElementById('t-editor-val').innerText=isTR?c.setup.editorTr:c.setup.editorEn;document.getElementById('t-backend-val').innerText=c.stack.backend;document.getElementById('t-frontend-val').innerText=c.stack.frontend;document.getElementById('t-copyright').innerText=c.footer.copyright;if(c.general){if(c.general.pageTitle){document.title=c.general.pageTitle;}if(c.general.favicon){const f=document.getElementById('siteFavicon');if(f)f.href=c.general.favicon;}}renderApplications();applySectionOrder();applyEffectsSettings();renderFooterSocials();}
 
-async function renderApplications(){
-  const grid=document.getElementById('appsGrid');if(!grid)return;
-  const apps=getSiteContent().apps||[];const isLogged=!!localStorage.getItem('logged_user');
-  const filled=[];
-  for(let i=0;i<8;i++){const a=apps[i]||{};if(a.name&&a.name.trim().length>0)filled.push({idx:i,app:a});}
-  const w=window.innerWidth;let maxVisible=4;
-  if(w>=1025)maxVisible=6; else maxVisible=4;
-  const visible=filled.slice(0,maxVisible);
-  grid.innerHTML='';
-  for(const {idx,app} of visible){
-    const card=document.createElement('div');card.className='app-card';
-    let iconHTML='📱';
-    if(app.hasIcon){try{const ic=await withTimeout(getIconData(idx),3000);if(ic&&ic.dataUrl)iconHTML=`<img src="${ic.dataUrl}">`;}catch(e){}}
-    else if(app.icon&&app.icon.trim().startsWith('http'))iconHTML=`<img src="${escapeHtml(app.icon.trim())}">`;
-    else if(app.icon&&app.icon.trim())iconHTML=escapeHtml(app.icon.trim());
-    const hasApk=!!app.hasApk;const hasUrl=app.url&&app.url.trim();const rl=!!app.requireLogin;
-    if(hasApk){const nl=rl&&!isLogged;if(nl)card.classList.add('locked');card.style.cursor='pointer';card.addEventListener('click',()=>downloadApk(idx));}
-    else if(hasUrl){card.style.cursor='pointer';card.addEventListener('click',()=>{let u=app.url.trim();if(!/^https?:\/\//i.test(u))u='https://'+u;window.open(u,'_blank');});}
-    const dBadge=hasApk?`<span class="apk-download-badge"><i class="fa-solid fa-download"></i></span>`:'';
-    let nI='';if(hasApk)nI='<i class="fa-solid fa-download download-icon"></i>';else if(hasUrl)nI='<i class="fa-solid fa-arrow-up-right-from-square"></i>';
-    let tH='';if(hasApk){const lk=rl&&!isLogged;const lc=lk?' locked-tag':'';const li=rl?'<i class="fa-solid fa-lock" style="margin-left:3px;font-size:.5rem"></i>':'';tH=`<span class="app-card-tag apk-tag${lc}"><i class="fa-brands fa-android"></i>APK${li}</span>`;}else if(hasUrl)tH='<span class="app-card-tag">LINK</span>';
-    const sz=hasApk&&app.apkSize?' • '+formatFileSize(app.apkSize):'';
-    card.innerHTML=`<div class="app-card-icon">${iconHTML}${dBadge}</div><div class="app-card-body"><div class="app-card-name">${escapeHtml(app.name)} ${nI}</div><div class="app-card-desc">${escapeHtml(app.desc||'')}${sz}</div></div>${tH}`;
-    grid.appendChild(card);
-  }
-}
+async function renderApplications(){const grid=document.getElementById('appsGrid');if(!grid)return;const apps=getSiteContent().apps||[];const isLogged=!!localStorage.getItem('logged_user');const filled=[];for(let i=0;i<8;i++){const a=apps[i]||{};if(a.name&&a.name.trim().length>0)filled.push({idx:i,app:a});}const w=window.innerWidth;let maxVisible=4;if(w>=1025)maxVisible=6;else maxVisible=4;const visible=filled.slice(0,maxVisible);grid.innerHTML='';for(const {idx,app} of visible){const card=document.createElement('div');card.className='app-card';let iconHTML='📱';if(app.hasIcon){try{const ic=await withTimeout(getIconData(idx),3000);if(ic&&ic.dataUrl)iconHTML=`<img src="${ic.dataUrl}">`;}catch(e){}}else if(app.icon&&app.icon.trim().startsWith('http'))iconHTML=`<img src="${escapeHtml(app.icon.trim())}">`;else if(app.icon&&app.icon.trim())iconHTML=escapeHtml(app.icon.trim());const hasApk=!!app.hasApk;const hasUrl=app.url&&app.url.trim();const rl=!!app.requireLogin;if(hasApk){const nl=rl&&!isLogged;if(nl)card.classList.add('locked');card.style.cursor='pointer';card.addEventListener('click',()=>downloadApk(idx));}else if(hasUrl){card.style.cursor='pointer';card.addEventListener('click',()=>{let u=app.url.trim();if(!/^https?:\/\//i.test(u))u='https://'+u;window.open(u,'_blank');});}const dBadge=hasApk?`<span class="apk-download-badge"><i class="fa-solid fa-download"></i></span>`:'';let nI='';if(hasApk)nI='<i class="fa-solid fa-download download-icon"></i>';else if(hasUrl)nI='<i class="fa-solid fa-arrow-up-right-from-square"></i>';let tH='';if(hasApk){const lk=rl&&!isLogged;const lc=lk?' locked-tag':'';const li=rl?'<i class="fa-solid fa-lock" style="margin-left:3px;font-size:.5rem"></i>':'';tH=`<span class="app-card-tag apk-tag${lc}"><i class="fa-brands fa-android"></i>APK${li}</span>`;}else if(hasUrl)tH='<span class="app-card-tag">LINK</span>';const sz=hasApk&&app.apkSize?' • '+formatFileSize(app.apkSize):'';card.innerHTML=`<div class="app-card-icon">${iconHTML}${dBadge}</div><div class="app-card-body"><div class="app-card-name">${escapeHtml(app.name)} ${nI}</div><div class="app-card-desc">${escapeHtml(app.desc||'')}${sz}</div></div>${tH}`;grid.appendChild(card);}}
 
 function openAdminPanel(){refreshAdminUI();document.getElementById('adminPanelModal').classList.add('active');}
 function closeAdminPanel(){document.getElementById('adminPanelModal').classList.remove('active');applySiteContent();}
@@ -1697,39 +1666,9 @@ function changeLanguage(lang){currentLang=lang;try{sessionStorage.setItem('site_
 function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('show');}
 window.addEventListener('click',function(e){const ld=document.getElementById('langDropdownBtn'),lm=document.getElementById('langMenu');if(ld&&lm&&!ld.contains(e.target)&&!lm.contains(e.target))lm.classList.remove('show');const ep=document.getElementById('emojiPicker');const eb=document.getElementById('chatEmojiBtn');if(ep&&eb&&!ep.contains(e.target)&&!eb.contains(e.target))ep.remove();});
 
-/* ==================== AUTH ==================== */
-function switchAuthTab(mode){
-  currentAuthMode=mode;
-  const ts=document.getElementById('tabSigninBtn'),tu=document.getElementById('tabSignupBtn');
-  const gn=document.getElementById('groupSignupName'),gu=document.getElementById('groupSignupUsername');
-  const gp=document.getElementById('groupPassword');
-  const ei=document.getElementById('contactClientEmail'),el=document.getElementById('dc-label-email');
-  const nb=document.getElementById('dc-next-btn'),sg=document.getElementById('dc-submit-group');
-  const gg=document.getElementById('dc-google-group');
-  const fl=document.getElementById('t-forgot-link');
-  if(ei)ei.value='';
-  clearPasswordField('contactClientPassword');
-  if(mode==='signin'){
-    ts.classList.add('active');tu.classList.remove('active');
-    gn.style.display='none';gu.style.display='none';
-    if(gp)gp.style.display='none';
-    if(sg)sg.style.display='none';
-    if(nb)nb.style.display='flex';
-    if(gg)gg.style.display='flex'; /* Google only in signin */
-    if(fl)fl.style.display='inline'; /* Forgot only in signin */
-    if(el)el.textContent='email or username';if(ei)ei.placeholder='email or username';
-  }else{
-    tu.classList.add('active');ts.classList.remove('active');
-    gn.style.display='block';gu.style.display='block';
-    if(gp)gp.style.display='block';
-    if(sg)sg.style.display='flex';
-    if(nb)nb.style.display='none';
-    if(gg)gg.style.display='none'; /* Hide Google in signup */
-    if(fl)fl.style.display='none'; /* Hide forgot in signup */
-    if(el)el.textContent='email';if(ei)ei.placeholder='email address';
-    setupSignupAutoFill();
-  }
-}
+function switchAuthTab(mode){currentAuthMode=mode;const ts=document.getElementById('tabSigninBtn'),tu=document.getElementById('tabSignupBtn');const gn=document.getElementById('groupSignupName'),gu=document.getElementById('groupSignupUsername');const gp=document.getElementById('groupPassword');const ei=document.getElementById('contactClientEmail'),el=document.getElementById('dc-label-email');const nb=document.getElementById('dc-next-btn'),sg=document.getElementById('dc-submit-group');const gg=document.getElementById('dc-google-group');const fl=document.getElementById('t-forgot-link');if(ei)ei.value='';clearPasswordField('contactClientPassword');
+  if(mode==='signin'){ts.classList.add('active');tu.classList.remove('active');gn.style.display='none';gu.style.display='none';if(gp)gp.style.display='none';if(sg)sg.style.display='none';if(nb)nb.style.display='flex';if(gg)gg.style.display='flex';if(fl)fl.style.display='inline';if(el)el.textContent='email or username';if(ei)ei.placeholder='email or username';}
+  else{tu.classList.add('active');ts.classList.remove('active');gn.style.display='block';gu.style.display='block';if(gp)gp.style.display='block';if(sg)sg.style.display='flex';if(nb)nb.style.display='none';if(gg)gg.style.display='none';if(fl)fl.style.display='none';if(el)el.textContent='email';if(ei)ei.placeholder='email address';setupSignupAutoFill();}}
 function setupSignupAutoFill(){const ni=document.getElementById('contactClientName'),ui=document.getElementById('contactClientUsername');if(!ni||!ui||ni.dataset.afi)return;ni.dataset.afi='1';ni.addEventListener('input',function(){this.value=this.value.toLowerCase();if(!ui.dataset.ut){ui.value=this.value.toLowerCase().replace(/[^a-z0-9]/g,'');}});ui.addEventListener('input',function(){ui.dataset.ut='1';});}
 function handleAuthNext(e){if(e)e.preventDefault();const email=document.getElementById('contactClientEmail').value.trim();if(!email){showCustomAlert(t('alert_next_first'));return;}document.getElementById('groupPassword').style.display='block';document.getElementById('dc-submit-group').style.display='flex';document.getElementById('dc-next-btn').style.display='none';}
 function openGetInTouchModal(){const lu=localStorage.getItem('logged_user');if(lu){window.scrollTo({top:0,behavior:'smooth'});return;}document.getElementById('getInTouchModal').classList.add('active');}
@@ -1753,7 +1692,6 @@ function handleDeletePasswordSubmit(e){e.preventDefault();const lu=localStorage.
 function openForgotPasswordModal(e){if(e)e.preventDefault();closeDirectContactModal();document.getElementById('forgotPasswordForm').reset();document.getElementById('forgotPasswordModal').classList.add('active');}
 function closeForgotPasswordModal(){document.getElementById('forgotPasswordModal').classList.remove('active');}
 async function handleForgotPasswordSubmit(e){e.preventDefault();const email=document.getElementById('forgotClientEmail').value.trim().toLowerCase();if(!email){showCustomAlert(t('alert_fill_fields'));return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');const u=users.find(x=>x.email===email);if(!u){showCustomAlert(t('alert_rp_email_err'));return;}const tp=String(Math.floor(100000+Math.random()*900000));let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');rc[email]=tp;localStorage.setItem('reset_codes',JSON.stringify(rc));currentResetEmail=email;closeForgotPasswordModal();const result=await sendVerificationEmail(email,tp,'reset');if(result.success){showCustomAlert(t('alert_code_sent'),'success');}else{showCustomAlert(t('alert_code_send_fail'),'error');return;}setTimeout(()=>openResetPasswordModal(),600);}
-function closeMockEmailModal(){document.getElementById('mockEmailModal').classList.remove('active');}
 function openResetPasswordModal(){document.getElementById('resetClientEmail').value=currentResetEmail;document.getElementById('resetPasswordForm').reset();clearPasswordField('resetClientNewPassword');document.getElementById('resetClientEmail').value=currentResetEmail;document.getElementById('resetPasswordModal').classList.add('active');}
 function closeResetPasswordModal(){document.getElementById('resetPasswordModal').classList.remove('active');}
 function handleResetPasswordSubmit(e){e.preventDefault();const email=document.getElementById('resetClientEmail').value,code=document.getElementById('resetClientCode').value.trim(),np=getPasswordValue('resetClientNewPassword').trim();if(!code||!np){showCustomAlert(t('alert_fill_fields'));return;}if(!isValidPassword(np)){showCustomAlert(t('alert_pass_short'));return;}let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');if(!rc[email]||rc[email]!==code){showCustomAlert(t('alert_rp_code_err'));return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');let ok=false;users=users.map(u=>{if(u.email===email){u.password=np;ok=true;}return u;});if(ok){localStorage.setItem('site_users',JSON.stringify(users));delete rc[email];localStorage.setItem('reset_codes',JSON.stringify(rc));closeResetPasswordModal();showCustomAlert(t('alert_rp_success'),'success');}}
@@ -1768,18 +1706,34 @@ function confirmAction(){const cb=window._confirmActionCallback;window._confirmA
 function confirmLogout(){showCustomAlert(t('alert_logout_confirm'),'logout',function(){const lu=localStorage.getItem('logged_user');if(lu){try{const u=JSON.parse(lu);logActivity('signout',u,'Logged out');}catch(e){}}localStorage.removeItem('logged_user');try{sessionStorage.removeItem('site_lang');}catch(e){}changeLanguage('en');checkUserSession();renderApplications();updateChatBadge();setTimeout(()=>{showCustomAlert(t('alert_logout_ok'),'success');},300);});}
 let pendingSignup=null;
 function generateSignupCode(){return String(Math.floor(100000+Math.random()*900000));}
-/* REQ 6: signup code only sent to email, not shown in app */
+
+/* ============================================================
+   REQ: signup email fallback - if email fails, show code
+   ============================================================ */
 async function openSignupMockModal(email){
   document.getElementById('signupMockEmailValue').innerText=email;
   document.getElementById('signupMockModal').classList.add('active');
   const sb=document.getElementById('signupEmailStatus');
+  const fb=document.getElementById('signupFallbackCode');
+  const title=document.getElementById('signupMockTitleText');
+  const desc=document.getElementById('signupMockDescText');
   sb.innerHTML='<div class="email-status-badge"><i class="fa-solid fa-spinner fa-spin"></i></div>';
+  fb.style.display='none';
+  title.textContent='Email sent!';
+  desc.textContent='We sent a 6-digit verification code to your email. Please check your inbox.';
   const code=pendingSignup?pendingSignup.code:'';
   const r=await sendVerificationEmail(email,code,'signup');
   if(r.success){
     sb.innerHTML='<div class="email-status-badge success"><i class="fa-solid fa-check"></i> Sent</div>';
+    fb.style.display='none';
   } else {
-    sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> '+t('alert_code_send_fail')+'</div>';
+    /* FALLBACK: show code because email failed */
+    sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Email failed</div>';
+    title.textContent='Email could not be sent';
+    desc.textContent='The verification email could not be delivered. Use the code below to complete your registration.';
+    document.getElementById('signupMockCodeValue').innerText=code;
+    fb.style.display='block';
+    console.warn('EmailJS error:',r.reason);
   }
 }
 async function resendSignupEmail(){
@@ -1787,10 +1741,31 @@ async function resendSignupEmail(){
   const nc=generateSignupCode();
   pendingSignup.code=nc;
   const sb=document.getElementById('signupEmailStatus');
+  const fb=document.getElementById('signupFallbackCode');
   sb.innerHTML='<div class="email-status-badge"><i class="fa-solid fa-spinner fa-spin"></i></div>';
+  fb.style.display='none';
   const r=await sendVerificationEmail(pendingSignup.email,nc,'signup');
-  if(r.success){sb.innerHTML='<div class="email-status-badge success"><i class="fa-solid fa-check"></i> Sent</div>';}
-  else{sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> '+t('alert_code_send_fail')+'</div>';}
+  if(r.success){
+    sb.innerHTML='<div class="email-status-badge success"><i class="fa-solid fa-check"></i> Sent</div>';
+    fb.style.display='none';
+  } else {
+    sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Email failed</div>';
+    document.getElementById('signupMockCodeValue').innerText=nc;
+    fb.style.display='block';
+  }
+}
+function copySignupCode(){
+  const p=document.getElementById('signupMockCodeValue');
+  if(!p)return;
+  const v=p.innerText.trim();
+  if(!v)return;
+  const ci=document.getElementById('signupCopyIcon');
+  const sc=()=>{
+    if(ci)ci.className='fa-solid fa-check';
+    setTimeout(()=>{if(ci)ci.className='fa-regular fa-copy';},1500);
+  };
+  if(navigator.clipboard)navigator.clipboard.writeText(v).then(sc).catch(()=>{fallbackCopy(v);sc();});
+  else{fallbackCopy(v);sc();}
 }
 function openSignupCodeModal(){document.getElementById('signupMockModal').classList.remove('active');document.getElementById('signupCodeInput').value='';document.getElementById('signupCodeModal').classList.add('active');}
 function backToSignupMock(){document.getElementById('signupCodeModal').classList.remove('active');if(pendingSignup)openSignupMockModal(pendingSignup.email);}
@@ -1798,38 +1773,10 @@ function cancelSignup(){pendingSignup=null;document.getElementById('signupMockMo
 function verifySignupCode(e){e.preventDefault();const ec=document.getElementById('signupCodeInput').value.trim();if(!pendingSignup)return;if(ec!==pendingSignup.code){showCustomAlert(t('alert_rp_code_err'));return;}try{const ub=JSON.parse(localStorage.getItem('site_users')||'[]');const usedIds=new Set(ub.map(u=>String(u.userId||'')));let nid;do{nid=generateRandomUserId();}while(usedIds.has(nid));const nu={userId:nid,name:pendingSignup.name,username:pendingSignup.username,email:pendingSignup.email,password:pendingSignup.password,bio:'',website:'',profilePhoto:'',coverPhoto:'',following:[],createdAt:new Date().toISOString(),isVerified:false};ub.push(nu);localStorage.setItem('site_users',JSON.stringify(ub));localStorage.setItem('logged_user',JSON.stringify(nu));logActivity('signup',nu,'New account ID: '+nid);pendingSignup=null;document.getElementById('signupCodeModal').classList.remove('active');document.getElementById('signupMockModal').classList.remove('active');closeDirectContactModal();checkUserSession();renderApplications();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('alert_success_signup')+' 🆔 '+nid,'success');}catch(err){}}
 async function handleAuthSubmit(e){if(e)e.preventDefault();const email=document.getElementById('contactClientEmail').value.trim().toLowerCase();const password=getPasswordValue('contactClientPassword').trim();if(currentAuthMode==='signin'){if(!email||!password){showCustomAlert(t('alert_fill_fields'));return;}}else{if(!email||!password){showCustomAlert(t('alert_fill_fields'));return;}}
   let users=JSON.parse(localStorage.getItem('site_users')||'[]');
-  if(currentAuthMode==='signup'){
-    const name=document.getElementById('contactClientName').value.trim().toLowerCase();
-    let username=document.getElementById('contactClientUsername').value.trim().replace(/^@/,'');
-    if(!name||!username){showCustomAlert(t('alert_fill_fields'));return;}
-    if(username.length<7){showCustomAlert('min 7 chars');return;}
-    if(users.some(u=>String(u.username||'').toLowerCase()===username.toLowerCase())){showCustomAlert(t('alert_user_taken'));return;}
-    if(!isValidPassword(password)){showCustomAlert(t('alert_pass_short'));return;}
-    if(users.find(u=>u.email===email)){showCustomAlert(t('alert_email_reg'));return;}
-    const code=generateSignupCode();
-    pendingSignup={code,name,username,email,password};
-    await openSignupMockModal(email);
-    return;
-  }else{
-    const ic=email.toLowerCase().trim();
-    let inputName=ic.startsWith('@')?ic.substring(1):ic;
-    let user=users.find(u=>{const em=(u.email||'').toLowerCase()===ic;let un=(u.username||'').toLowerCase().replace(/^@/,'');return(em||un===inputName)&&u.password===password;});
-    if(user){localStorage.setItem('logged_user',JSON.stringify(user));logActivity('signin',user,'Signed in');closeDirectContactModal();forceRefreshUI();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('alert_success_signin'),'success');}
-    else showCustomAlert(t('alert_error_signin'));
-  }
-}
+  if(currentAuthMode==='signup'){const name=document.getElementById('contactClientName').value.trim().toLowerCase();let username=document.getElementById('contactClientUsername').value.trim().replace(/^@/,'');if(!name||!username){showCustomAlert(t('alert_fill_fields'));return;}if(username.length<7){showCustomAlert('min 7 chars');return;}if(users.some(u=>String(u.username||'').toLowerCase()===username.toLowerCase())){showCustomAlert(t('alert_user_taken'));return;}if(!isValidPassword(password)){showCustomAlert(t('alert_pass_short'));return;}if(users.find(u=>u.email===email)){showCustomAlert(t('alert_email_reg'));return;}const code=generateSignupCode();pendingSignup={code,name,username,email,password};await openSignupMockModal(email);return;}
+  else{const ic=email.toLowerCase().trim();let inputName=ic.startsWith('@')?ic.substring(1):ic;let user=users.find(u=>{const em=(u.email||'').toLowerCase()===ic;let un=(u.username||'').toLowerCase().replace(/^@/,'');return(em||un===inputName)&&u.password===password;});if(user){localStorage.setItem('logged_user',JSON.stringify(user));logActivity('signin',user,'Signed in');closeDirectContactModal();forceRefreshUI();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('alert_success_signin'),'success');}else showCustomAlert(t('alert_error_signin'));}}
 function checkUserSession(){const lu=localStorage.getItem('logged_user');const ps=document.getElementById('userProfileSection');const cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');const abi=document.getElementById('authBoxIcon');const mab=document.getElementById('mainAuthBox');
-  if(lu){try{const u=JSON.parse(lu);if(ps)ps.style.display='block';if(mab)mab.style.display='none';const pd=(id,v)=>{const e=document.getElementById(id);if(e)e.innerText=v;};pd('profileDisplayName',u.name||'user');pd('profileDisplayIdDesktop',u.userId||'-');pd('profileDisplayId',u.userId||'-');
-    /* REQ 3: blue check next to username in profile */
-    const uname=String(u.username||'username').replace(/^@/,'');
-    const utop=document.getElementById('profileDisplayUsernameTop');
-    if(utop){utop.innerHTML='@'+escapeHtml(uname)+((isAdminUser(u.email)||u.isVerified)?getVerifiedBadgeHTML('sm'):'');}
-    const bi=document.getElementById('profileBioInline');if(bi){if(u.bio){bi.style.display='block';bi.innerText=u.bio;}else bi.style.display='none';}
-    const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const ppd=document.getElementById('profilePhotoDisplay');if(ppd)ppd.src=p;const ppl=document.getElementById('profilePhotoLarge');if(ppl)ppl.src=p;
-    if(cse)cse.innerText=t('contact_sub_logged');if(cme)cme.innerText=u.name?`${t('contact_main_logged')} ${u.name}`:t('contact_main_logged2');if(abi)abi.className='fa-solid fa-user-check';
-    const dn=document.getElementById('profileDisplayName');
-    if(dn){dn.querySelectorAll('.verified-badge').forEach(b=>b.remove());}
-  }catch(e){}
+  if(lu){try{const u=JSON.parse(lu);if(ps)ps.style.display='block';if(mab)mab.style.display='none';const pd=(id,v)=>{const e=document.getElementById(id);if(e)e.innerText=v;};pd('profileDisplayName',u.name||'user');pd('profileDisplayIdDesktop',u.userId||'-');pd('profileDisplayId',u.userId||'-');const uname=String(u.username||'username').replace(/^@/,'');const utop=document.getElementById('profileDisplayUsernameTop');if(utop){utop.innerHTML='@'+escapeHtml(uname)+((isAdminUser(u.email)||u.isVerified)?getVerifiedBadgeHTML('sm'):'');}const bi=document.getElementById('profileBioInline');if(bi){if(u.bio){bi.style.display='block';bi.innerText=u.bio;}else bi.style.display='none';}const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const ppd=document.getElementById('profilePhotoDisplay');if(ppd)ppd.src=p;const ppl=document.getElementById('profilePhotoLarge');if(ppl)ppl.src=p;if(cse)cse.innerText=t('contact_sub_logged');if(cme)cme.innerText=u.name?`${t('contact_main_logged')} ${u.name}`:t('contact_main_logged2');if(abi)abi.className='fa-solid fa-user-check';const dn=document.getElementById('profileDisplayName');if(dn){dn.querySelectorAll('.verified-badge').forEach(b=>b.remove());}}catch(e){}
   }else{if(ps)ps.style.display='none';if(mab)mab.style.display='flex';if(cse)cse.innerText=t('contact_sub');if(cme)cme.innerText=t('contact_main');if(abi)abi.className='fa-solid fa-right-to-bracket';}
   updateChatBadge();}
 function togglePasswordVisibility(i,ic){const p=document.getElementById(i),t2=document.getElementById(ic);if(!p||!t2)return;if(p.dataset.masked==='1'){p.dataset.masked='0';p.classList.remove('password-mask');t2.className='fa-solid fa-eye-slash';p.value=p.dataset.realValue||'';}else{p.dataset.masked='1';p.classList.add('password-mask');t2.className='fa-solid fa-eye';p.value='*'.repeat((p.dataset.realValue||'').length);}}
@@ -1916,7 +1863,6 @@ window.addEventListener('DOMContentLoaded',async ()=>{
   window.addEventListener('resize',()=>{if(confettiCanvas&&confettiCanvas.style.display!=='none'){confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;}renderApplications();});
   checkAdminHash();openApkDB().catch(e=>{});updateChatBadge();startChatPolling();cloudInitSync().catch(e=>{});
   setupSignupAutoFill();
-  /* Ensure forgot link hidden if starting in signin mode (should be inline by default) */
   const fl=document.getElementById('t-forgot-link');if(fl)fl.style.display='inline';
   const gg=document.getElementById('dc-google-group');if(gg)gg.style.display='flex';
 });
