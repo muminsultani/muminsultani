@@ -638,24 +638,16 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </footer>
 </div>
 
-<!-- ========== SIGNUP EMAIL MODAL (with fallback code) ========== -->
+<!-- ========== SIGNUP EMAIL MODAL (fallback code REMOVED - code only sent via email) ========== -->
 <div class="modal-overlay high-z" id="signupMockModal">
 <div class="modal-container" style="max-width:460px">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Check Your Email</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelSignup()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <div class="mock-email-container">
 <div class="email-sent-icon"><i class="fa-solid fa-envelope-circle-check"></i></div>
-<h3 style="font-size:1rem;font-weight:700;color:var(--text-color-override);margin-bottom:10px" id="signupMockTitleText">Email sent!</h3>
-<p class="email-sent-note" id="signupMockDescText">We sent a 6-digit verification code to your email. Please check your inbox.</p>
+<h3 style="font-size:1rem;font-weight:700;color:var(--text-color-override);margin-bottom:10px" id="signupMockTitleText">Sending...</h3>
+<p class="email-sent-note" id="signupMockDescText">Please wait, your verification code is being sent.</p>
 <div class="email-sent-to" id="signupMockEmailValue">user@example.com</div>
 <div id="signupEmailStatus"></div>
-<div id="signupFallbackCode" style="display:none;margin-top:12px">
-  <div class="mock-pass-row">
-    <strong>code:</strong>
-    <span id="signupMockCodeValue"></span>
-    <button type="button" class="copy-pass-btn" onclick="copySignupCode()"><i class="fa-regular fa-copy" id="signupCopyIcon"></i></button>
-  </div>
-  <p style="font-size:.7rem;color:#f59e0b;margin-top:8px;text-align:center">⚠️ Email gönderilemedi. Bu kodu kullanarak kaydolabilirsiniz.</p>
-</div>
 <div class="mock-email-footer"><span>admin:</span><span>admin@muminsultani.com</span></div>
 </div>
 <div class="form-buttons-group" style="width:100%;flex-direction:column;gap:8px">
@@ -1206,7 +1198,6 @@ Continue with Google
 
 <script>
 /* ==================== CONFIG ==================== */
-/* ⚠️ DÜZELTİLDİ: serviceId artık Outlook servisinin gerçek ID'si */
 const FIREBASE_CONFIG = {apiKey:"AIzaSyC3Pi88DP7K_4IG-R81LeDaGdhCTmHpo-c",authDomain:"muminsultani-497b5.firebaseapp.com",databaseURL:"https://muminsultani-497b5-default-rtdb.firebaseio.com",projectId:"muminsultani-497b5",storageBucket:"muminsultani-497b5.firebasestorage.app",messagingSenderId:"929484224535",appId:"1:929484224535:web:5e2b05f0b852357212c452"};
 const EMAILJS_CONFIG = {serviceId:'service_ids5d0j',templateId:'template_r1ii8ua',publicKey:'B4QKEakw6lpk2YKCh',enabled:true};
 if(EMAILJS_CONFIG.serviceId&&EMAILJS_CONFIG.serviceId!=='BURAYA_SERVICE_ID'&&EMAILJS_CONFIG.templateId&&EMAILJS_CONFIG.templateId!=='BURAYA_TEMPLATE_ID'&&EMAILJS_CONFIG.publicKey&&EMAILJS_CONFIG.publicKey!=='BURAYA_PUBLIC_KEY'){EMAILJS_CONFIG.enabled=true;}
@@ -1261,41 +1252,65 @@ function initPasswordMask(inputId){
 const PASSWORD_FIELDS=['adminPasswordInput','contactClientPassword','changeOldPassword','changeNewPassword','changeConfirmPassword','deleteConfirmPassword','resetClientNewPassword'];
 function initAllPasswordMasks(){PASSWORD_FIELDS.forEach(id=>initPasswordMask(id));}
 
-/* ==================== EMAIL ==================== */
+/* ==================== EMAIL (REST API - Fallback code REMOVED) ==================== */
 function initEmailJS(){
   if(!EMAILJS_CONFIG.enabled)return;
   try{
     if(typeof emailjs!=='undefined'){
       emailjs.init({publicKey:EMAILJS_CONFIG.publicKey});
-      console.log('EmailJS initialized with service:',EMAILJS_CONFIG.serviceId);
+      console.log('[EmailJS] Initialized with service:',EMAILJS_CONFIG.serviceId);
+    } else {
+      console.warn('[EmailJS] SDK not loaded, using REST API');
     }
-  }catch(e){console.warn('EmailJS init error:',e);}
+  }catch(e){console.warn('[EmailJS] init error:',e);}
 }
-async function sendVerificationEmail(toEmail,code,type){
-  if(!EMAILJS_CONFIG.enabled||typeof emailjs==='undefined'){
-    console.warn('EmailJS not enabled or not loaded');
-    return{success:false,reason:'not_configured'};
+
+async function sendVerificationEmail(toEmail, code, type) {
+  if (!EMAILJS_CONFIG.enabled) {
+    console.warn('[EmailJS] Not enabled');
+    return { success: false, reason: 'not_configured' };
   }
-  const typeLabels={signup:'Account Verification',reset:'Password Reset',email_change:'Email Change'};
-  const brand=getDyn('header.brand','muminsultani');
-  try{
-    const response=await emailjs.send(EMAILJS_CONFIG.serviceId,EMAILJS_CONFIG.templateId,{
-      to_email:toEmail,
-      email:toEmail,
-      name:brand,
-      code,
-      type:typeLabels[type]||'Verification',
-      brand,
-      year:new Date().getFullYear(),
-      subject:`${brand} - ${typeLabels[type]||'Verification'}`,
-      message:`Hello,\n\nYour ${brand} verification code is: ${code}`
-    },{publicKey:EMAILJS_CONFIG.publicKey});
-    logActivity('email_sent',{email:toEmail,name:typeLabels[type]},`Sent: ${toEmail}`);
-    console.log('Email sent successfully:',response);
-    return{success:true,response};
-  }catch(e){
-    console.error('EmailJS send error:',e);
-    return{success:false,reason:e.text||e.message||'send_failed'};
+
+  const typeLabels = {
+    signup: 'Account Verification',
+    reset: 'Password Reset',
+    email_change: 'Email Change'
+  };
+  const brand = getDyn('header.brand', 'muminsultani');
+
+  // EmailJS panelindeki test ile birebir aynı parametreler
+  const templateParams = {
+    to_email: toEmail,
+    brand: brand,
+    type: typeLabels[type] || 'Verification',
+    code: String(code),
+    year: new Date().getFullYear()
+  };
+
+  try {
+    const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        service_id: EMAILJS_CONFIG.serviceId,
+        template_id: EMAILJS_CONFIG.templateId,
+        user_id: EMAILJS_CONFIG.publicKey,
+        template_params: templateParams
+      })
+    });
+
+    const responseText = await response.text();
+    console.log('[EmailJS] Status:', response.status, 'Response:', responseText);
+
+    if (response.ok && (responseText === 'OK' || response.status === 200)) {
+      logActivity('email_sent', { email: toEmail, name: typeLabels[type] }, `Sent: ${toEmail}`);
+      return { success: true };
+    }
+
+    return { success: false, reason: responseText || `HTTP ${response.status}` };
+  } catch (err) {
+    console.error('[EmailJS] Fetch error:', err);
+    return { success: false, reason: err.message || 'network_error' };
   }
 }
 
@@ -1708,65 +1723,65 @@ let pendingSignup=null;
 function generateSignupCode(){return String(Math.floor(100000+Math.random()*900000));}
 
 /* ============================================================
-   REQ: signup email fallback - if email fails, show code
+   SIGNUP EMAIL MODAL - Fallback code TAMAMEN KALDIRILDI
+   Kod artık SADECE e-posta ile gönderilir
    ============================================================ */
 async function openSignupMockModal(email){
   document.getElementById('signupMockEmailValue').innerText=email;
   document.getElementById('signupMockModal').classList.add('active');
+
   const sb=document.getElementById('signupEmailStatus');
-  const fb=document.getElementById('signupFallbackCode');
   const title=document.getElementById('signupMockTitleText');
   const desc=document.getElementById('signupMockDescText');
-  sb.innerHTML='<div class="email-status-badge"><i class="fa-solid fa-spinner fa-spin"></i></div>';
-  fb.style.display='none';
-  title.textContent='Email sent!';
-  desc.textContent='We sent a 6-digit verification code to your email. Please check your inbox.';
+
+  sb.innerHTML='<div class="email-status-badge"><i class="fa-solid fa-spinner fa-spin"></i> Sending...</div>';
+  title.textContent='Sending...';
+  desc.textContent='Please wait, your verification code is being sent.';
+
   const code=pendingSignup?pendingSignup.code:'';
   const r=await sendVerificationEmail(email,code,'signup');
+
   if(r.success){
     sb.innerHTML='<div class="email-status-badge success"><i class="fa-solid fa-check"></i> Sent</div>';
-    fb.style.display='none';
+    title.textContent='Email sent!';
+    desc.textContent='We sent a 6-digit verification code to your email. Please check your inbox (and spam folder).';
   } else {
-    /* FALLBACK: show code because email failed */
-    sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Email failed</div>';
+    // HATA DURUMU - EKRANDA KOD GÖSTERİLMİYOR
+    sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Failed</div>';
     title.textContent='Email could not be sent';
-    desc.textContent='The verification email could not be delivered. Use the code below to complete your registration.';
-    document.getElementById('signupMockCodeValue').innerText=code;
-    fb.style.display='block';
-    console.warn('EmailJS error:',r.reason);
+    desc.textContent='Something went wrong. Please click "Resend" to try again. If the problem persists, contact support.';
+    console.error('[Signup] Email failed. Reason:',r.reason);
   }
 }
+
 async function resendSignupEmail(){
   if(!pendingSignup)return;
-  const nc=generateSignupCode();
-  pendingSignup.code=nc;
+
+  const newCode=generateSignupCode();
+  pendingSignup.code=newCode;
+
   const sb=document.getElementById('signupEmailStatus');
-  const fb=document.getElementById('signupFallbackCode');
-  sb.innerHTML='<div class="email-status-badge"><i class="fa-solid fa-spinner fa-spin"></i></div>';
-  fb.style.display='none';
-  const r=await sendVerificationEmail(pendingSignup.email,nc,'signup');
+  const title=document.getElementById('signupMockTitleText');
+  const desc=document.getElementById('signupMockDescText');
+
+  sb.innerHTML='<div class="email-status-badge"><i class="fa-solid fa-spinner fa-spin"></i> Resending...</div>';
+  title.textContent='Resending...';
+  desc.textContent='Please wait, a new verification code is being sent.';
+
+  const r=await sendVerificationEmail(pendingSignup.email,newCode,'signup');
+
   if(r.success){
     sb.innerHTML='<div class="email-status-badge success"><i class="fa-solid fa-check"></i> Sent</div>';
-    fb.style.display='none';
+    title.textContent='Email sent!';
+    desc.textContent='A new verification code has been sent to your email. Please check your inbox.';
   } else {
-    sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Email failed</div>';
-    document.getElementById('signupMockCodeValue').innerText=nc;
-    fb.style.display='block';
+    sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Failed</div>';
+    title.textContent='Try again';
+    desc.textContent='Still unable to send. Please check your internet connection or try again later.';
+    console.error('[Signup Resend] Email failed. Reason:',r.reason);
   }
 }
-function copySignupCode(){
-  const p=document.getElementById('signupMockCodeValue');
-  if(!p)return;
-  const v=p.innerText.trim();
-  if(!v)return;
-  const ci=document.getElementById('signupCopyIcon');
-  const sc=()=>{
-    if(ci)ci.className='fa-solid fa-check';
-    setTimeout(()=>{if(ci)ci.className='fa-regular fa-copy';},1500);
-  };
-  if(navigator.clipboard)navigator.clipboard.writeText(v).then(sc).catch(()=>{fallbackCopy(v);sc();});
-  else{fallbackCopy(v);sc();}
-}
+
 function openSignupCodeModal(){document.getElementById('signupMockModal').classList.remove('active');document.getElementById('signupCodeInput').value='';document.getElementById('signupCodeModal').classList.add('active');}
 function backToSignupMock(){document.getElementById('signupCodeModal').classList.remove('active');if(pendingSignup)openSignupMockModal(pendingSignup.email);}
 function cancelSignup(){pendingSignup=null;document.getElementById('signupMockModal').classList.remove('active');document.getElementById('signupCodeModal').classList.remove('active');}
