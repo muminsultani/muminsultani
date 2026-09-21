@@ -638,7 +638,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </footer>
 </div>
 
-<!-- ========== SIGNUP EMAIL MODAL (fallback code removed, error details shown) ========== -->
+<!-- ========== SIGNUP EMAIL MODAL (5-digit code) ========== -->
 <div class="modal-overlay high-z" id="signupMockModal">
 <div class="modal-container" style="max-width:460px">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Check Your Email</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelSignup()"><i class="fa-solid fa-xmark"></i></button></div></div>
@@ -662,8 +662,8 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="modal-container" style="max-width:420px">
 <div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="backToSignupMock()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title">Verify Email</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelSignup()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <form id="signupCodeForm" onsubmit="verifySignupCode(event)">
-<p class="item-desc" style="margin-bottom:12px;font-size:.8rem">enter the 6-digit code from your email.</p>
-<div class="form-group"><label class="form-label">code</label><input type="text" class="form-input code-input" id="signupCodeInput" required maxlength="6" inputmode="numeric" placeholder="000000"></div>
+<p class="item-desc" style="margin-bottom:12px;font-size:.8rem">enter the 5-digit code from your email.</p>
+<div class="form-group"><label class="form-label">code</label><input type="text" class="form-input code-input" id="signupCodeInput" required maxlength="5" inputmode="numeric" placeholder="00000"></div>
 <div class="form-buttons-group"><button type="submit" class="submit-btn email-btn" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-circle-check"></i> verify</button></div>
 </form>
 </div>
@@ -747,7 +747,7 @@ Continue with Google
 <div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeResetPasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title">Reset Password</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeResetPasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <form id="resetPasswordForm" onsubmit="handleResetPasswordSubmit(event)">
 <div class="form-group"><label class="form-label">email</label><input type="email" class="form-input" id="resetClientEmail" readonly style="opacity:.7"></div>
-<div class="form-group"><label class="form-label">code</label><input type="text" class="form-input" id="resetClientCode" required></div>
+<div class="form-group"><label class="form-label">code</label><input type="text" class="form-input" id="resetClientCode" required maxlength="5" placeholder="00000"></div>
 <div class="form-group"><label class="form-label">new password</label><div class="password-wrapper"><input type="text" class="form-input password-mask" id="resetClientNewPassword" required><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('resetClientNewPassword','resetNewPasswordToggleIcon')"><i class="fa-solid fa-eye" id="resetNewPasswordToggleIcon"></i></button></div>
 <div class="pw-strength-wrap" id="pwStrengthWrap_resetClientNewPassword"><div class="pw-strength-bar" id="pwBar_resetClientNewPassword"><span></span><span></span><span></span><span></span><span></span></div><div class="pw-strength-info"><span class="pw-strength-label s1" id="pwLabel_resetClientNewPassword">password</span><span id="pwPercent_resetClientNewPassword">0%</span></div></div>
 </div>
@@ -1704,7 +1704,7 @@ function handleDeleteAccount(e){e.preventDefault();const lu=localStorage.getItem
 function handleDeletePasswordSubmit(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const ep=getPasswordValue('deleteConfirmPassword').trim();try{const u=JSON.parse(lu);if(u.password!==ep){showCustomAlert(t('alert_del_pass_err'));return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.filter(x=>x.email!==u.email);localStorage.setItem('site_users',JSON.stringify(users));localStorage.removeItem('logged_user');const m=getChatMessages();const tg=String(u.email||'').toLowerCase();for(const cid in m){const p=cid.split('__');if(p.includes(tg))delete m[cid];}saveChatMessages(m);closeDeletePasswordModal();showCustomAlert(t('alert_success_delete'),'success');window._pendingLangReset=true;forceRefreshUI();}catch(err){}}
 function openForgotPasswordModal(e){if(e)e.preventDefault();closeDirectContactModal();document.getElementById('forgotPasswordForm').reset();document.getElementById('forgotPasswordModal').classList.add('active');}
 function closeForgotPasswordModal(){document.getElementById('forgotPasswordModal').classList.remove('active');}
-async function handleForgotPasswordSubmit(e){e.preventDefault();const email=document.getElementById('forgotClientEmail').value.trim().toLowerCase();if(!email){showCustomAlert(t('alert_fill_fields'));return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');const u=users.find(x=>x.email===email);if(!u){showCustomAlert(t('alert_rp_email_err'));return;}const tp=String(Math.floor(100000+Math.random()*900000));let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');rc[email]=tp;localStorage.setItem('reset_codes',JSON.stringify(rc));currentResetEmail=email;closeForgotPasswordModal();const result=await sendVerificationEmail(email,tp,'reset');if(result.success){showCustomAlert(t('alert_code_sent'),'success');}else{showCustomAlert(t('alert_code_send_fail'),'error');return;}setTimeout(()=>openResetPasswordModal(),600);}
+async function handleForgotPasswordSubmit(e){e.preventDefault();const email=document.getElementById('forgotClientEmail').value.trim().toLowerCase();if(!email){showCustomAlert(t('alert_fill_fields'));return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');const u=users.find(x=>x.email===email);if(!u){showCustomAlert(t('alert_rp_email_err'));return;}const tp=String(Math.floor(10000+Math.random()*90000));let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');rc[email]=tp;localStorage.setItem('reset_codes',JSON.stringify(rc));currentResetEmail=email;closeForgotPasswordModal();const result=await sendVerificationEmail(email,tp,'reset');if(result.success){showCustomAlert(t('alert_code_sent'),'success');}else{showCustomAlert(t('alert_code_send_fail'),'error');return;}setTimeout(()=>openResetPasswordModal(),600);}
 function openResetPasswordModal(){document.getElementById('resetClientEmail').value=currentResetEmail;document.getElementById('resetPasswordForm').reset();clearPasswordField('resetClientNewPassword');document.getElementById('resetClientEmail').value=currentResetEmail;document.getElementById('resetPasswordModal').classList.add('active');}
 function closeResetPasswordModal(){document.getElementById('resetPasswordModal').classList.remove('active');}
 function handleResetPasswordSubmit(e){e.preventDefault();const email=document.getElementById('resetClientEmail').value,code=document.getElementById('resetClientCode').value.trim(),np=getPasswordValue('resetClientNewPassword').trim();if(!code||!np){showCustomAlert(t('alert_fill_fields'));return;}if(!isValidPassword(np)){showCustomAlert(t('alert_pass_short'));return;}let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');if(!rc[email]||rc[email]!==code){showCustomAlert(t('alert_rp_code_err'));return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');let ok=false;users=users.map(u=>{if(u.email===email){u.password=np;ok=true;}return u;});if(ok){localStorage.setItem('site_users',JSON.stringify(users));delete rc[email];localStorage.setItem('reset_codes',JSON.stringify(rc));closeResetPasswordModal();showCustomAlert(t('alert_rp_success'),'success');}}
@@ -1718,10 +1718,10 @@ function closeCustomAlert(){document.getElementById('customAlertModal').classLis
 function confirmAction(){const cb=window._confirmActionCallback;window._confirmActionCallback=null;document.getElementById('customAlertModal').classList.remove('active');if(cb){try{cb();}catch(e){}}if(window._pendingLangReset){window._pendingLangReset=false;try{sessionStorage.removeItem('site_lang');}catch(e){}changeLanguage('en');}}
 function confirmLogout(){showCustomAlert(t('alert_logout_confirm'),'logout',function(){const lu=localStorage.getItem('logged_user');if(lu){try{const u=JSON.parse(lu);logActivity('signout',u,'Logged out');}catch(e){}}localStorage.removeItem('logged_user');try{sessionStorage.removeItem('site_lang');}catch(e){}changeLanguage('en');checkUserSession();renderApplications();updateChatBadge();setTimeout(()=>{showCustomAlert(t('alert_logout_ok'),'success');},300);});}
 let pendingSignup=null;
-function generateSignupCode(){return String(Math.floor(100000+Math.random()*900000));}
+function generateSignupCode(){return String(Math.floor(10000+Math.random()*90000));}
 
 /* ============================================================
-   SIGNUP EMAIL MODAL - Fallback code removed, error details shown
+   SIGNUP EMAIL MODAL - 5 haneli kod
    ============================================================ */
 async function openSignupMockModal(email){
   document.getElementById('signupMockEmailValue').innerText=email;
@@ -1741,7 +1741,7 @@ async function openSignupMockModal(email){
   if(r.success){
     sb.innerHTML='<div class="email-status-badge success"><i class="fa-solid fa-check"></i> Sent</div>';
     title.textContent='Email sent!';
-    desc.textContent='We sent a 6-digit verification code to your email. Please check your inbox (and spam folder).';
+    desc.textContent='We sent a 5-digit verification code to your email. Please check your inbox (and spam folder).';
   } else {
     // HATA DURUMU - detay göster
     sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Failed</div>';
@@ -1770,7 +1770,7 @@ async function resendSignupEmail(){
   if(r.success){
     sb.innerHTML='<div class="email-status-badge success"><i class="fa-solid fa-check"></i> Sent</div>';
     title.textContent='Email sent!';
-    desc.textContent='A new verification code has been sent to your email. Please check your inbox.';
+    desc.textContent='A new 5-digit verification code has been sent to your email. Please check your inbox.';
   } else {
     sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Failed</div>';
     title.textContent='Try again';
