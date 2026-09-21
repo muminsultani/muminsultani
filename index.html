@@ -638,7 +638,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </footer>
 </div>
 
-<!-- ========== SIGNUP EMAIL MODAL (fallback code REMOVED - code only sent via email) ========== -->
+<!-- ========== SIGNUP EMAIL MODAL (fallback code KALDIRILDI) ========== -->
 <div class="modal-overlay high-z" id="signupMockModal">
 <div class="modal-container" style="max-width:460px">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Check Your Email</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelSignup()"><i class="fa-solid fa-xmark"></i></button></div></div>
@@ -1252,7 +1252,7 @@ function initPasswordMask(inputId){
 const PASSWORD_FIELDS=['adminPasswordInput','contactClientPassword','changeOldPassword','changeNewPassword','changeConfirmPassword','deleteConfirmPassword','resetClientNewPassword'];
 function initAllPasswordMasks(){PASSWORD_FIELDS.forEach(id=>initPasswordMask(id));}
 
-/* ==================== EMAIL (REST API - Fallback code REMOVED) ==================== */
+/* ==================== EMAIL (REST API - fallback removed) ==================== */
 function initEmailJS(){
   if(!EMAILJS_CONFIG.enabled)return;
   try{
@@ -1267,7 +1267,6 @@ function initEmailJS(){
 
 async function sendVerificationEmail(toEmail, code, type) {
   if (!EMAILJS_CONFIG.enabled) {
-    console.warn('[EmailJS] Not enabled');
     return { success: false, reason: 'not_configured' };
   }
 
@@ -1278,7 +1277,6 @@ async function sendVerificationEmail(toEmail, code, type) {
   };
   const brand = getDyn('header.brand', 'muminsultani');
 
-  // EmailJS panelindeki test ile birebir aynı parametreler
   const templateParams = {
     to_email: toEmail,
     brand: brand,
@@ -1723,8 +1721,7 @@ let pendingSignup=null;
 function generateSignupCode(){return String(Math.floor(100000+Math.random()*900000));}
 
 /* ============================================================
-   SIGNUP EMAIL MODAL - Fallback code TAMAMEN KALDIRILDI
-   Kod artık SADECE e-posta ile gönderilir
+   SIGNUP EMAIL MODAL - Fallback code removed, error details shown
    ============================================================ */
 async function openSignupMockModal(email){
   document.getElementById('signupMockEmailValue').innerText=email;
@@ -1746,11 +1743,11 @@ async function openSignupMockModal(email){
     title.textContent='Email sent!';
     desc.textContent='We sent a 6-digit verification code to your email. Please check your inbox (and spam folder).';
   } else {
-    // HATA DURUMU - EKRANDA KOD GÖSTERİLMİYOR
+    // HATA DURUMU - detay göster
     sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Failed</div>';
     title.textContent='Email could not be sent';
-    desc.textContent='Something went wrong. Please click "Resend" to try again. If the problem persists, contact support.';
-    console.error('[Signup] Email failed. Reason:',r.reason);
+    desc.innerHTML='<span style="color:#f59e0b;font-size:.72rem;word-break:break-all">Hata: ' + String(r.reason || 'bilinmeyen').substring(0,150) + '</span><br><br>Lütfen "Resend" butonuna basarak tekrar deneyin.';
+    console.error('[Signup] Email failed. Reason:', r.reason);
   }
 }
 
@@ -1777,8 +1774,8 @@ async function resendSignupEmail(){
   } else {
     sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Failed</div>';
     title.textContent='Try again';
-    desc.textContent='Still unable to send. Please check your internet connection or try again later.';
-    console.error('[Signup Resend] Email failed. Reason:',r.reason);
+    desc.innerHTML='<span style="color:#f59e0b;font-size:.72rem;word-break:break-all">Hata: ' + String(r.reason || 'bilinmeyen').substring(0,150) + '</span><br><br>Bağlantınızı kontrol edin.';
+    console.error('[Signup Resend] Email failed. Reason:', r.reason);
   }
 }
 
