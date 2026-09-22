@@ -1348,8 +1348,12 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <script>
 const FIREBASE_CONFIG = {apiKey:"AIzaSyC3Pi88DP7K_4IG-R81LeDaGdhCTmHpo-c",authDomain:"muminsultani-497b5.firebaseapp.com",databaseURL:"https://muminsultani-497b5-default-rtdb.firebaseio.com",projectId:"muminsultani-497b5",storageBucket:"muminsultani-497b5.firebasestorage.app",messagingSenderId:"929484224535",appId:"1:929484224535:web:5e2b05f0b852357212c452"};
 const EMAILJS_CONFIG = {serviceId:'service_ids5d0j',templateId:'template_custom',publicKey:'B4QKEakw6Ipk2YKCh',enabled:true};
-const ADMIN_EMAIL='muminsultani@hotmail.com';
-const ADMIN_MASTER_PASSWORD='Mum1n$ultan1';
+
+// ==== YENİ ADMIN BİLGİLERİ (İSTEĞİNİZE GÖRE GÜNCELLENDİ) ====
+const ADMIN_EMAIL = 'admin@muminsultani.com';
+const ADMIN_MASTER_PASSWORD = 'Mum1n$ultan1';
+// ===========================================================
+
 const ADMIN_SESSION_KEY='admin_session_active_v2';
 const SITE_CONTENT_KEY='site_content_v1';
 const USER_PREFS_KEY='user_prefs_v1';
@@ -1429,12 +1433,110 @@ async function sendVerificationEmail(toEmail,code,type){if(!EMAILJS_CONFIG.enabl
 function generateRandomUserId(){let id='';for(let i=0;i<9;i++)id+=Math.floor(Math.random()*10);return id;}
 function isAdminLoggedIn(){try{return sessionStorage.getItem(ADMIN_SESSION_KEY)==='yes';}catch(e){return false;}}
 function getAllUsers(){try{return JSON.parse(localStorage.getItem('site_users')||'[]');}catch(e){return[];}}
-function isAdminUser(email){if(!email)return false;const lc=String(email).toLowerCase().trim();try{const u=getAllUsers();const ar=u.find(x=>x.isAdmin===true);if(ar&&String(ar.email||'').toLowerCase().trim()===lc)return true;}catch(e){}return lc===ADMIN_EMAIL;}
-function getAdminUser(){const u=getAllUsers();let f=u.find(x=>x.isAdmin===true);if(!f)f=u.find(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL);if(f)return Object.assign({},f,{isAdmin:true,isVerified:true});return{userId:'000000000',name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'',bio:'',website:'',profilePhoto:'',following:[],createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true,isVerified:true};}
+
+function isAdminUser(email) {
+  if (!email) return false;
+  const lc = String(email).toLowerCase().trim();
+  try {
+    const u = getAllUsers();
+    const ar = u.find(x => x.isAdmin === true);
+    if (ar && String(ar.email || '').toLowerCase().trim() === lc) return true;
+  } catch (e) {}
+  return lc === ADMIN_EMAIL.toLowerCase();
+}
+
+function getAdminUser() {
+  const u = getAllUsers();
+  let f = u.find(x => x.isAdmin === true);
+  if (!f) f = u.find(x => String(x.email || '').toLowerCase() === ADMIN_EMAIL.toLowerCase());
+  if (f) return Object.assign({}, f, { isAdmin: true, isVerified: true });
+  
+  return {
+    userId: '788133910',
+    name: 'muminsultani',
+    username: 'muminsultani',
+    email: ADMIN_EMAIL,
+    password: 'SUl#784429$',
+    bio: "hello! dear friends I'm #muminsultani.",
+    website: '',
+    profilePhoto: '',
+    following: [],
+    createdAt: '2023-08-18T00:00:00.000Z',
+    isAdmin: true,
+    isVerified: true
+  };
+}
+
 function getEffectiveLoggedUser(){const lu=localStorage.getItem('logged_user');if(lu){try{const u=JSON.parse(lu);if(u&&u.email)return u;}catch(e){}}if(isAdminLoggedIn()){const a=getAdminUser();try{localStorage.setItem('logged_user',JSON.stringify(a));}catch(e){}return a;}return null;}
 function getVerifiedBadgeHTML(size){const cls='verified-badge'+(size?(' '+size):'');return `<span class="${cls}" title="Verified"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path fill="#1d9bf0" d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18z"/></svg></span>`;}
-function ensureUserIdsAndAdmin(){try{let u=JSON.parse(localStorage.getItem('site_users')||'[]');let changed=false;let ai=u.findIndex(x=>x.isAdmin===true);if(ai===-1)ai=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL);if(ai===-1){u.unshift({userId:'',name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'admin123',bio:'',website:'',profilePhoto:'',following:[],createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true,isVerified:true});ai=0;changed=true;}u.forEach(x=>{if(!/^\d{9}$/.test(String(x.userId||''))){x.userId='';changed=true;}if(!x.bio)x.bio='';if(!x.website)x.website='';if(!Array.isArray(x.following))x.following=[];});const seen=new Set();u.forEach(x=>{if(x.userId&&seen.has(x.userId)){x.userId='';changed=true;}else if(x.userId)seen.add(x.userId);});u.forEach(x=>{if(!x.userId){let nid;do{nid=generateRandomUserId();}while(seen.has(nid));x.userId=nid;seen.add(nid);changed=true;}});if(changed){localStorage.setItem('site_users',JSON.stringify(u));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);const f=u.find(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());if(f)localStorage.setItem('logged_user',JSON.stringify(f));}catch(e){}}}}catch(e){}}
-function getChatUsersFor(email){const u=getAllUsers();const ce=String(email||'').toLowerCase();let list=u.filter(x=>String(x.email||'').toLowerCase()!==ce);if(!isAdminUser(email)&&!list.some(x=>isAdminUser(x.email))){list.unshift(getAdminUser());}list.sort((a,b)=>{const aa=isAdminUser(a.email)?0:1,ba=isAdminUser(b.email)?0:1;return aa-ba;});return list;}
+
+function ensureUserIdsAndAdmin() {
+  try {
+    let u = JSON.parse(localStorage.getItem('site_users') || '[]');
+    let changed = false;
+    let ai = u.findIndex(x => x.isAdmin === true);
+    
+    if (ai === -1) ai = u.findIndex(x => String(x.email || '').toLowerCase() === ADMIN_EMAIL.toLowerCase());
+    if (ai === -1) {
+      u.unshift({
+        userId: '788133910',
+        name: 'muminsultani',
+        username: 'muminsultani',
+        email: ADMIN_EMAIL,
+        password: 'SUl#784429$',
+        bio: "hello! dear friends I'm #muminsultani.",
+        website: '',
+        profilePhoto: '',
+        following: [],
+        createdAt: '2023-08-18T00:00:00.000Z',
+        isAdmin: true,
+        isVerified: true
+      });
+      ai = 0;
+      changed = true;
+    }
+    
+    u.forEach(x => {
+      if (!/^\d{9}$/.test(String(x.userId || ''))) { x.userId = ''; changed = true; }
+      if (!x.bio) x.bio = '';
+      if (!x.website) x.website = '';
+      if (!Array.isArray(x.following)) x.following = [];
+    });
+    
+    const seen = new Set();
+    u.forEach(x => { if (x.userId && seen.has(x.userId)) { x.userId = ''; changed = true; } else if (x.userId) seen.add(x.userId); });
+    u.forEach(x => { if (!x.userId) { let nid; do { nid = generateRandomUserId(); } while (seen.has(nid)); x.userId = nid; seen.add(nid); changed = true; } });
+    
+    if (changed) {
+      localStorage.setItem('site_users', JSON.stringify(u));
+      const lu = localStorage.getItem('logged_user');
+      if (lu) {
+        try {
+          const cu = JSON.parse(lu);
+          const f = u.find(x => String(x.email || '').toLowerCase() === String(cu.email || '').toLowerCase());
+          if (f) localStorage.setItem('logged_user', JSON.stringify(f));
+        } catch (e) {}
+      }
+    }
+  } catch (e) {}
+}
+
+function getChatUsersFor(email) {
+  const u = getAllUsers();
+  const ce = String(email || '').toLowerCase();
+  let list = u.filter(x => String(x.email || '').toLowerCase() !== ce);
+  
+  if (!isAdminUser(email) && !list.some(x => isAdminUser(x.email))) {
+    list.unshift(getAdminUser());
+  }
+  
+  list.sort((a, b) => {
+    const aa = isAdminUser(a.email) ? 0 : 1, ba = isAdminUser(b.email) ? 0 : 1;
+    return aa - ba;
+  });
+  return list;
+}
+
 function logActivity(type,userData,details){try{let l=JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');const u=userData||{};l.push({type,timestamp:new Date().toISOString(),name:u.name||'',username:u.username||'',email:u.email||'',userId:u.userId||'',details:details||''});if(l.length>2000)l=l.slice(-2000);localStorage.setItem(ACTIVITY_LOG_KEY,JSON.stringify(l));}catch(e){}}
 function getActivityLog(){try{return JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');}catch(e){return[];}}
 function getChatMessages(){try{return JSON.parse(localStorage.getItem(CHAT_KEY)||'{}');}catch(e){return{};}}
@@ -1630,7 +1732,51 @@ function closeChatPanel(){document.getElementById('chatPanelModal').classList.re
 function filterChatUsers(){const inp=document.getElementById('chatSearchInput');chatSearchQuery=inp?inp.value.trim().toLowerCase():'';const clr=document.getElementById('chatSearchClear');if(clr){chatSearchQuery?clr.classList.add('show'):clr.classList.remove('show');}renderChatUsersList();}
 function clearChatSearch(){chatSearchQuery='';const inp=document.getElementById('chatSearchInput');if(inp)inp.value='';const clr=document.getElementById('chatSearchClear');if(clr)clr.classList.remove('show');renderChatUsersList();}
 function matchUserQuery(x,q){if(!q)return true;const qq=q.replace(/^@/,'').trim();if(!qq)return true;const id=String(x.userId||'').toLowerCase();const nm=String(x.name||'').toLowerCase();const un=String(x.username||'').toLowerCase().replace(/^@/,'');const em=String(x.email||'').toLowerCase();return id.includes(qq)||nm.includes(qq)||un.includes(qq)||em.includes(qq);}
-function renderChatUsersList(){const eff=getEffectiveLoggedUser();if(!eff)return;const u=eff;let others=getChatUsersFor(u.email);if(chatSearchQuery)others=others.filter(x=>matchUserQuery(x,chatSearchQuery));const list=document.getElementById('chatUsersList');if(!list)return;if(others.length===0){list.innerHTML=`<div class="chat-empty"><i class="fa-solid fa-user-group"></i>${t('chat_no_users')}</div>`;return;}const msgs=getChatMessages();others.sort((a,b)=>{const aa=isAdminUser(a.email)?0:1,ba=isAdminUser(b.email)?0:1;return aa-ba;});list.innerHTML='';others.forEach(x=>{const isA=isAdminUser(x.email);const cid=getConversationId(u.email,x.email);const conv=msgs[cid]||[];const last=conv.length?conv[conv.length-1]:null;const unread=conv.filter(m=>String(m.to).toLowerCase()===String(u.email).toLowerCase()&&!m.read).length;const item=document.createElement('div');item.className='chat-user-item'+(isA?' admin-row':'');const av=x.profilePhoto?`<img src="${x.profilePhoto}">`:(x.name?escapeHtml(x.name.trim().charAt(0).toUpperCase()):'?');let preview=t('chat_no_msgs');if(last){const who=String(last.from).toLowerCase()===String(u.email).toLowerCase()?(t('chat_you')+': '):'';preview=who+(last.type==='voice'?t('chat_voice'):(last.type==='photo'?'📷 photo':(last.text||'')));}const uname=String(x.username||'').replace(/^@/,'');const vB=(isA||x.isVerified)?getVerifiedBadgeHTML('sm'):'';const crown=isA?`<span class="admin-crown"><i class="fa-solid fa-crown"></i></span>`:'';item.innerHTML=`<div class="chat-user-avatar${isA?' admin-avatar':''}">${crown}${av}</div><div class="chat-user-info"><div class="chat-user-name">${escapeHtml(x.name||'user')}</div>${uname?`<div class="chat-user-username">@${escapeHtml(uname)}${vB}</div>`:''}<div class="chat-user-preview">${escapeHtml(preview).substring(0,60)}</div></div>${unread>0?`<div class="chat-unread-badge">${unread>99?'99+':unread}</div>`:''}`;item.onclick=()=>openConversation(x);list.appendChild(item);});}
+
+function renderChatUsersList() {
+  const eff = getEffectiveLoggedUser();
+  if (!eff) return;
+  const u = eff;
+  let others = getChatUsersFor(u.email);
+  if (chatSearchQuery) others = others.filter(x => matchUserQuery(x, chatSearchQuery));
+  const list = document.getElementById('chatUsersList');
+  if (!list) return;
+  
+  if (others.length === 0) {
+    list.innerHTML = `<div class="chat-empty"><i class="fa-solid fa-user-group"></i>${t('chat_no_users')}</div>`;
+    return;
+  }
+  
+  const msgs = getChatMessages();
+  others.sort((a, b) => {
+    const aa = isAdminUser(a.email) ? 0 : 1, ba = isAdminUser(b.email) ? 0 : 1;
+    return aa - ba;
+  });
+  
+  list.innerHTML = '';
+  others.forEach(x => {
+    const isA = isAdminUser(x.email);
+    const cid = getConversationId(u.email, x.email);
+    const conv = msgs[cid] || [];
+    const last = conv.length ? conv[conv.length - 1] : null;
+    const unread = conv.filter(m => String(m.to).toLowerCase() === String(u.email).toLowerCase() && !m.read).length;
+    const item = document.createElement('div');
+    item.className = 'chat-user-item' + (isA ? ' admin-row' : '');
+    const av = x.profilePhoto ? `<img src="${x.profilePhoto}">` : (x.name ? escapeHtml(x.name.trim().charAt(0).toUpperCase()) : '?');
+    let preview = t('chat_no_msgs');
+    if (last) {
+      const who = String(last.from).toLowerCase() === String(u.email).toLowerCase() ? (t('chat_you') + ': ') : '';
+      preview = who + (last.type === 'voice' ? t('chat_voice') : (last.type === 'photo' ? '📷 photo' : (last.text || '')));
+    }
+    const uname = String(x.username || '').replace(/^@/, '');
+    const vB = (isA || x.isVerified) ? getVerifiedBadgeHTML('sm') : '';
+    const crown = isA ? `<span class="admin-crown"><i class="fa-solid fa-crown"></i></span>` : '';
+    item.innerHTML = `<div class="chat-user-avatar${isA ? ' admin-avatar' : ''}">${crown}${av}</div><div class="chat-user-info"><div class="chat-user-name">${escapeHtml(x.name || 'user')}</div>${uname ? `<div class="chat-user-username">@${escapeHtml(uname)}${vB}</div>` : ''}<div class="chat-user-preview">${escapeHtml(preview).substring(0, 60)}</div></div>${unread > 0 ? `<div class="chat-unread-badge">${unread > 99 ? '99+' : unread}</div>` : ''}`;
+    item.onclick = () => openConversation(x);
+    list.appendChild(item);
+  });
+}
+
 function openConversation(user){const eff=getEffectiveLoggedUser();if(!eff)return;const u=eff;activeChatUser=user;const m=getChatMessages();const cid=getConversationId(u.email,user.email);if(m[cid]){let c=false;m[cid].forEach(x=>{if(String(x.to).toLowerCase()===String(u.email).toLowerCase()&&!x.read){x.read=true;c=true;}});if(c)saveChatMessages(m);}document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='flex';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent=currentLang==='tr'?'Sohbet':'Chat';applyChatBackground();renderChatConvHeader();renderChatMessages();updateChatBadge();}
 function backToUsersList(){activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';document.getElementById('chatReplyPreview').style.display='none';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent=currentLang==='tr'?'Mesajlar':'Messages';renderChatUsersList();}
 function renderChatConvHeader(){const h=document.getElementById('chatConvHeader');if(!h||!activeChatUser)return;const isA=isAdminUser(activeChatUser.email);const av=activeChatUser.profilePhoto?`<img src="${activeChatUser.profilePhoto}">`:(activeChatUser.name?escapeHtml(activeChatUser.name.trim().charAt(0).toUpperCase()):'?');const uname=String(activeChatUser.username||'').replace(/^@/,'');const se=escapeHtml(activeChatUser.email||'');const vB=(isA||activeChatUser.isVerified)?getVerifiedBadgeHTML(''):'';const crown=isA?`<span class="admin-crown"><i class="fa-solid fa-crown"></i></span>`:'';h.innerHTML=`<div class="chat-user-avatar small${isA?' admin-avatar':''}">${crown}${av}</div><div style="flex:1;min-width:0"><div class="chat-user-name">${escapeHtml(activeChatUser.name||'user')}</div><div class="chat-user-username">${uname?'@'+escapeHtml(uname):''}${vB}</div></div><button class="chat-profile-btn chat-profile-btn-lg" onclick="openPublicUserProfile('${se}')" title="Profile"><i class="fa-solid fa-user-circle"></i></button>`;}
@@ -1708,7 +1854,7 @@ function moveSectionOrder(i,d){const c=getSiteContent();let o=getSectionOrder();
 function renderAdminAccount(){const a=getAdminUser();document.getElementById('adminAccName').value=a.name||'';document.getElementById('adminAccUsername').value=(a.username||'').replace(/^@/,'');document.getElementById('adminAccEmail').value=a.email||'';document.getElementById('adminAccId').value=a.userId||'';document.getElementById('adminAccWebsite').value=a.website||'';document.getElementById('adminAccBio').value=a.bio||'';document.getElementById('adminBioCount').textContent=(a.bio||'').length;const p=a.profilePhoto;const pv=document.getElementById('adminPhotoPreview'),ic=document.getElementById('adminPhotoUploadIcon'),cb=document.getElementById('adminPhotoClearBtn');if(p&&pv){pv.src=p;pv.style.display='block';if(ic)ic.style.display='none';if(cb)cb.style.display='inline-flex';}else if(pv){pv.style.display='none';if(ic)ic.style.display='block';if(cb)cb.style.display='none';}pendingAdminPhoto=undefined;}
 function handleAdminPhotoUpload(e){const f=e.target.files[0];if(!f||!f.type.startsWith('image/'))return;if(f.size>3*1024*1024){showCustomAlert('Max 3 MB');e.target.value='';return;}const r=new FileReader();r.onload=ev=>{pendingAdminPhoto=ev.target.result;const pv=document.getElementById('adminPhotoPreview');if(pv){pv.src=ev.target.result;pv.style.display='block';}const ic=document.getElementById('adminPhotoUploadIcon');if(ic)ic.style.display='none';const cb=document.getElementById('adminPhotoClearBtn');if(cb)cb.style.display='inline-flex';};r.readAsDataURL(f);}
 function clearAdminPhoto(){pendingAdminPhoto=null;const pv=document.getElementById('adminPhotoPreview');if(pv)pv.style.display='none';const ic=document.getElementById('adminPhotoUploadIcon');if(ic)ic.style.display='block';const cb=document.getElementById('adminPhotoClearBtn');if(cb)cb.style.display='none';}
-function saveAdminAccount(e){e.preventDefault();const u=getAllUsers();let i=u.findIndex(x=>x.isAdmin===true);if(i===-1)i=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL);if(i===-1){u.unshift({userId:'',name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'admin123',bio:'',website:'',profilePhoto:'',following:[],createdAt:new Date().toISOString(),isAdmin:true,isVerified:true});i=0;}const nn=document.getElementById('adminAccName').value.trim(),nu=document.getElementById('adminAccUsername').value.trim().replace(/^@/,'').toLowerCase(),ne=document.getElementById('adminAccEmail').value.trim().toLowerCase(),nid=document.getElementById('adminAccId').value.trim(),nw=document.getElementById('adminAccWebsite').value.trim(),nb=document.getElementById('adminAccBio').value.trim();if(!nn||!nu||!ne){showCustomAlert(t('fill_fields'));return;}if(!/^\d{9}$/.test(nid)){showCustomAlert('ID must be 9 digits!');return;}const a=u[i];const oldE=a.email;a.name=nn;a.username=nu;a.email=ne;a.userId=nid;a.website=nw;a.bio=nb;a.isAdmin=true;a.isVerified=true;if(pendingAdminPhoto!==undefined)a.profilePhoto=pendingAdminPhoto||'';localStorage.setItem('site_users',JSON.stringify(u));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);if(cu.isAdmin||String(cu.email||'').toLowerCase()===String(oldE).toLowerCase())localStorage.setItem('logged_user',JSON.stringify(a));}catch(e){}}pendingAdminPhoto=undefined;refreshAdminUI();renderAdminAccount();checkUserSession();showCustomAlert('Saved!','success');}
+function saveAdminAccount(e){e.preventDefault();const u=getAllUsers();let i=u.findIndex(x=>x.isAdmin===true);if(i===-1)i=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL.toLowerCase());if(i===-1){u.unshift(getAdminUser());i=0;}const nn=document.getElementById('adminAccName').value.trim(),nu=document.getElementById('adminAccUsername').value.trim().replace(/^@/,'').toLowerCase(),ne=document.getElementById('adminAccEmail').value.trim().toLowerCase(),nid=document.getElementById('adminAccId').value.trim(),nw=document.getElementById('adminAccWebsite').value.trim(),nb=document.getElementById('adminAccBio').value.trim();if(!nn||!nu||!ne){showCustomAlert(t('fill_fields'));return;}if(!/^\d{9}$/.test(nid)){showCustomAlert('ID must be 9 digits!');return;}const a=u[i];const oldE=a.email;a.name=nn;a.username=nu;a.email=ne;a.userId=nid;a.website=nw;a.bio=nb;a.isAdmin=true;a.isVerified=true;if(pendingAdminPhoto!==undefined)a.profilePhoto=pendingAdminPhoto||'';localStorage.setItem('site_users',JSON.stringify(u));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);if(cu.isAdmin||String(cu.email||'').toLowerCase()===String(oldE).toLowerCase())localStorage.setItem('logged_user',JSON.stringify(a));}catch(e){}}pendingAdminPhoto=undefined;refreshAdminUI();renderAdminAccount();checkUserSession();showCustomAlert('Saved!','success');}
 function withTimeout(p,ms=5000){return Promise.race([Promise.resolve(p),new Promise(r=>setTimeout(()=>r(null),ms))]);}
 function buildAdminSlotHTML(idx,app){const filled=app.name&&app.name.trim();let iconPreview='';if(app.hasIcon)iconPreview='(icon)';else if(app.icon&&app.icon.trim())iconPreview=`<span style="font-size:1.1rem">${escapeHtml(app.icon.trim())}</span>`;const nameText=filled?escapeHtml(app.name):`<em style="opacity:.5">empty slot ${idx+1}</em>`;return `<div class="admin-slot-num">${idx+1}</div>${iconPreview?`<div style="width:26px">${iconPreview}</div>`:''}<div class="admin-slot-info"><div class="admin-slot-name">${nameText} ${app.hasApk?'<span style="font-size:.6rem;color:#22c55e">APK</span>':''}</div><div class="admin-slot-url">${filled&&app.desc?escapeHtml(app.desc):''}</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="editAppSlot(${idx})"><i class="fa-solid fa-pen"></i></button><button class="admin-slot-btn delete" onclick="clearAppSlot(${idx})"><i class="fa-solid fa-trash-can"></i></button></div>`;}
 function openApkDB(){return new Promise((res,rej)=>{if(apkDB)return res(apkDB);try{const r=indexedDB.open('muminsultani_apk_db_v2',3);r.onupgradeneeded=e=>{const db=e.target.result;if(!db.objectStoreNames.contains('apks'))db.createObjectStore('apks');if(!db.objectStoreNames.contains('icons'))db.createObjectStore('icons');};r.onsuccess=e=>{apkDB=e.target.result;res(apkDB);};r.onerror=e=>rej(e.target.error);}catch(e){rej(e);}});}
@@ -1737,7 +1883,6 @@ function refreshAdminUI(){
   if(el('dash-activity-count'))el('dash-activity-count').textContent=`Activities: ${logs.length}`;
   if(el('dash-chats-count'))el('dash-chats-count').textContent=`Chat: ${totalChats}`;
   if(el('dash-email-status'))el('dash-email-status').textContent='Email: '+(EMAILJS_CONFIG.enabled?'✅':'⚠️');
-  // CLOUD STATUS FIX
   if(el('dash-cloud-status')){
     let cloudOk=false;
     try{
