@@ -153,13 +153,14 @@ section{border-top:1px solid var(--line-color);padding-top:24px}
 .modal-close-btn{background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-secondary);width:32px;height:32px;border-radius:10px;font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .modal-close-btn:hover{border-color:var(--accent);color:var(--accent);transform:rotate(90deg)}
 .auth-tabs{display:flex;gap:8px;margin-bottom:14px;background:var(--box-bg);padding:5px;border-radius:12px;border:1px solid var(--line-color)}
-.auth-tab-btn{flex:1;background:transparent;border:none;padding:10px;border-radius:9px;color:var(--text-secondary);font-size:.85rem;font-weight:700;cursor:pointer}
+.auth-tab-btn{flex:1;background:transparent;border:none;padding:10px;border-radius:9px;color:var(--text-secondary);font-size:.85rem;font-weight:700;cursor:pointer;text-transform:lowercase}
+.auth-tab-btn::first-letter{text-transform:uppercase}
 .auth-tab-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff}
 .form-group{margin-bottom:14px;position:relative}
 .form-label{display:block;font-size:.85rem;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:lowercase}
 .form-label::first-letter{text-transform:uppercase}
 .form-input,.form-textarea{width:100%;background:var(--box-bg) !important;border:1px solid var(--line-color);padding:12px 16px;border-radius:12px;color:var(--text-color-override) !important;outline:none;transition:all .25s;-webkit-text-fill-color:var(--text-color-override) !important;font-family:var(--font-main);font-size:16px !important}
-.form-input::placeholder,.form-textarea::placeholder{color:#94a3b8 !important;opacity:.5 !important;text-transform:lowercase !important}
+.form-input::placeholder,.form-textarea::placeholder{color:#94a3b8 !important;opacity:.5 !important}
 .form-input:focus,.form-textarea:focus{border-color:var(--accent)}
 .password-wrapper{position:relative;width:100%}
 .password-wrapper .form-input{padding-right:44px}
@@ -185,10 +186,10 @@ section{border-top:1px solid var(--line-color);padding-top:24px}
 .submit-btn.google-btn{background:#fff;color:#1f1f1f;border:1px solid #dadce0}
 .custom-alert-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(5,5,10,.7);backdrop-filter:blur(10px);z-index:20000;display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:opacity .3s;padding:16px;pointer-events:none}
 .custom-alert-overlay.active{opacity:1;visibility:visible;pointer-events:auto}
-.custom-alert-box{background:var(--modal-container-bg);border:1px solid rgba(var(--accent-rgb),.35);border-radius:var(--panel-radius);width:100%;max-width:400px;padding:30px;text-align:center;transform:scale(.88);transition:transform .4s,opacity .3s;opacity:0}
+.custom-alert-box{background:var(--modal-container-bg);border:1px solid rgba(var(--accent-rgb),.35);border-radius:var(--panel-radius);width:100%;max-width:400px;padding:30px 24px;text-align:center;transform:scale(.88);transition:transform .4s,opacity .3s;opacity:0}
 .custom-alert-overlay.active .custom-alert-box{transform:scale(1);opacity:1}
-.custom-alert-icon{font-size:2.4rem;color:var(--accent);margin-bottom:14px}
-.custom-alert-message{font-size:.95rem;color:var(--text-color-override);font-weight:500;margin-bottom:22px;line-height:1.5;word-break:break-word}
+.custom-alert-icon{font-size:2.2rem;color:var(--accent) !important;margin-bottom:14px;filter:drop-shadow(0 2px 6px rgba(var(--accent-rgb),.35))}
+.custom-alert-message{font-size:.92rem;color:var(--accent);font-weight:600;margin-bottom:22px;line-height:1.45;word-break:break-word;max-width:320px;margin-left:auto;margin-right:auto;text-align:center}
 .custom-alert-btn-group{display:flex;gap:8px;width:100%}
 .custom-alert-btn{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border:none;flex:1;padding:12px 8px;border-radius:12px;font-weight:600;font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;text-transform:lowercase}
 .custom-alert-btn::first-letter{text-transform:uppercase}
@@ -409,13 +410,9 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .chat-reply-preview .reply-text{color:var(--text-color-override);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.72rem;margin-top:2px}
 .chat-reply-preview .reply-close{background:transparent;border:none;color:var(--text-secondary);cursor:pointer;font-size:.85rem;padding:4px}
 .voice-play-btn{width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,.22);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:all .2s}
-.chat-msg.theirs .voice-play-btn{background:rgba(var(--accent-rgb),.15);color:var(--accent)}
 .voice-waveform{display:flex;align-items:center;gap:2px;flex:1;height:26px;overflow:hidden;padding:0 2px}
 .voice-bar{width:3px;background:rgba(255,255,255,.72);border-radius:2px;flex-shrink:0}
-.chat-msg.theirs .voice-bar{background:rgba(var(--accent-rgb),.55)}
 .voice-duration{font-size:.68rem;color:rgba(255,255,255,.9);font-weight:700;flex-shrink:0}
-.chat-msg.theirs .voice-duration{color:var(--text-secondary)}
-.chat-voice-msg audio{display:none}
 .recording-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(5,5,10,.85);backdrop-filter:blur(14px);z-index:26000;display:none;flex-direction:column;justify-content:center;align-items:center;gap:22px;padding:20px}
 .recording-overlay.active{display:flex}
 .recording-pulse{width:140px;height:140px;border-radius:50%;background:linear-gradient(135deg,#ef4444,#dc2626);display:flex;align-items:center;justify-content:center;color:#fff;font-size:2.8rem}
@@ -430,14 +427,13 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .pub-profile-avatar img{width:100%;height:100%;object-fit:cover}
 .pub-profile-name{font-size:1.35rem;font-weight:800;background:linear-gradient(270deg,var(--accent),var(--accent-2),var(--accent),var(--accent-2),var(--accent));background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientFlow 8s ease infinite;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;margin-top:8px}
 .pub-profile-username{font-size:.85rem;color:var(--accent);font-weight:600;display:inline-flex;align-items:center;gap:4px}
-.pub-profile-bio-inline{font-size:.78rem;color:var(--text-secondary);text-align:center;line-height:1.4;max-width:340px;word-break:break-word;white-space:pre-wrap;margin-top:2px}
 .pub-profile-website{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--accent);text-decoration:none;font-weight:600;padding:6px 14px;border-radius:20px;background:rgba(var(--accent-rgb),.1);border:1px solid rgba(var(--accent-rgb),.25);margin-top:6px;cursor:pointer}
 .pub-profile-info{width:100%;background:var(--box-bg);border:1px solid var(--line-color);border-radius:14px;padding:12px;margin-top:8px}
 .pub-profile-info-row{display:flex;justify-content:space-between;align-items:center;padding:10px 4px;font-size:.82rem;gap:10px;border-bottom:1px solid var(--line-color)}
 .pub-profile-info-row:last-child{border-bottom:none}
 .pub-profile-info-row span:first-child{color:var(--text-secondary);font-weight:600;display:flex;align-items:center;gap:8px}
 .pub-profile-info-row span:first-child i{color:var(--accent);font-size:.9rem;width:14px;text-align:center}
-.pub-profile-info-row span:last-child{color:var(--text-color-override);font-weight:600;text-align:right;word-break:break-word;display:inline-flex;align-items:center;gap:4px}
+.pub-profile-info-row span:last-child{color:var(--text-color-override);font-weight:600;text-align:right;word-break:break-word}
 .pub-profile-actions{display:flex;flex-direction:column;gap:8px;width:100%;margin-top:8px}
 .pub-profile-actions button{width:100%;padding:12px 14px;border-radius:12px;font-weight:600;font-size:.84rem;cursor:pointer;border:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;text-transform:lowercase}
 .pub-profile-actions button::first-letter{text-transform:uppercase}
@@ -511,11 +507,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .order-status-badge.read{background:rgba(245,158,11,.15);color:#f59e0b}
 .order-status-badge.approved{background:rgba(34,197,94,.15);color:#22c55e}
 .admin-tab .tab-badge{display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:#ef4444;color:#fff;font-size:.55rem;font-weight:800;margin-left:4px}
-
-/* === YENİ: KÜÇÜK KOPYALAMA BUTONU (ID YANINDA) === */
-.copy-id-btn-sm{background:rgba(var(--accent-rgb),.15);border:1px solid rgba(var(--accent-rgb),.3);color:var(--accent);width:22px;height:22px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:.62rem;padding:0;flex-shrink:0;transition:all .2s}
-.copy-id-btn-sm:hover{background:rgba(var(--accent-rgb),.25);transform:scale(1.05)}
-.copy-id-btn-sm:active{transform:scale(.95)}
 </style>
 </head>
 
@@ -658,8 +649,8 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
           <option value="other">Other</option>
         </select>
       </div>
-      <div class="form-group"><label class="form-label" id="t-ord-budget-label">Budget (optional)</label><input type="text" class="form-input" id="orderBudget" maxlength="50" placeholder="optional"></div>
-      <div class="form-group"><label class="form-label" id="t-ord-deadline-label">Deadline (optional)</label><input type="text" class="form-input" id="orderDeadline" maxlength="50" placeholder="e.g. 2 weeks"></div>
+      <div class="form-group"><label class="form-label" id="t-ord-budget-label">Budget</label><input type="text" class="form-input" id="orderBudget" maxlength="50" placeholder="optional"></div>
+      <div class="form-group"><label class="form-label" id="t-ord-deadline-label">Deadline</label><input type="text" class="form-input" id="orderDeadline" maxlength="50" placeholder="e.g. 2 weeks"></div>
       <div class="form-group"><label class="form-label" id="t-ord-desc-label">Project Details</label><textarea class="form-textarea" id="orderDesc" required maxlength="2000" style="min-height:110px" placeholder="describe your project..."></textarea></div>
       <button type="submit" class="submit-btn email-btn" style="width:100%"><i class="fa-solid fa-paper-plane"></i> <span id="t-ord-submit">Submit Order</span></button>
     </form>
@@ -696,6 +687,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 </div>
 
+<!-- ============ ACCOUNT ACCESS (SIGN IN / SIGN UP) ============ -->
 <div class="modal-overlay" id="directContactModal">
 <div class="modal-container">
 <div class="modal-header">
@@ -720,19 +712,17 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="form-group" id="groupSignupUsername" style="display:none"><label class="form-label" id="t-username-label">Username</label><input type="text" class="form-input" id="contactClientUsername" placeholder="@username" minlength="7" autocomplete="off" oninput="this.value = this.value.toLowerCase().replace(/[^a-z0-9_.\-!@#$%^&*+=?]/g, '').replace(/^@/, ''); checkUsernameAvailability()"><div id="usernameAvailabilityMsg"></div></div>
 <div class="form-group" id="groupEmail">
 <label class="form-label" id="dc-label-email">Email</label>
-<input type="text" class="form-input" id="contactClientEmail" required placeholder="email or username" autocomplete="off" oninput="this.value = this.value.toLowerCase()">
+<input type="text" class="form-input" id="contactClientEmail" required placeholder="email or username" autocomplete="username" oninput="this.value = this.value.toLowerCase()">
 </div>
-<button type="button" class="submit-btn email-btn" id="dc-next-btn" onclick="handleAuthNext(event)" style="width:100%"><i class="fa-solid fa-arrow-right"></i> <span id="t-next-btn">Next</span></button>
-<div class="form-group" id="groupPassword" style="display:none">
+<button type="button" class="submit-btn email-btn" id="dc-next-btn" onclick="handleAuthNext(event)" style="width:100%;display:none"><i class="fa-solid fa-arrow-right"></i> <span id="t-next-btn">Next</span></button>
+<div class="form-group" id="groupPassword">
 <div style="display:flex;justify-content:space-between;margin-bottom:4px"><label class="form-label" style="margin-bottom:0" id="t-password-label">Password</label><a href="#" id="t-forgot-link" onclick="openForgotPasswordModal(event)" style="font-size:.7rem;color:var(--accent);text-decoration:none;font-weight:600">forgot password?</a></div>
-<div class="password-wrapper"><input type="text" class="form-input password-mask" id="contactClientPassword" placeholder="password" autocomplete="off"><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('contactClientPassword','passwordToggleIcon')"><i class="fa-solid fa-eye" id="passwordToggleIcon"></i></button></div>
-<!-- Şifre güç göstergesi SADECE sign up'ta gösterilecek - JS kontrol eder -->
+<div class="password-wrapper"><input type="text" class="form-input password-mask" id="contactClientPassword" placeholder="password" autocomplete="current-password"><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('contactClientPassword','passwordToggleIcon')"><i class="fa-solid fa-eye" id="passwordToggleIcon"></i></button></div>
 <div class="pw-strength-wrap" id="pwStrengthWrap_contactClientPassword" data-ctx="auth"><div class="pw-strength-bar" id="pwBar_contactClientPassword"><span></span><span></span><span></span><span></span><span></span></div><div class="pw-strength-info"><span class="pw-strength-label s1" id="pwLabel_contactClientPassword">password</span><span id="pwPercent_contactClientPassword">0%</span></div></div>
 </div>
-<div class="form-buttons-group" id="dc-submit-group" style="flex-direction:column;gap:8px;display:none">
+<div class="form-buttons-group" id="dc-submit-group" style="flex-direction:column;gap:8px">
 <button type="button" class="submit-btn email-btn" onclick="handleAuthSubmit(event)" style="width:100%"><i class="fa-solid fa-right-to-bracket"></i> <span id="dc-submit-btn-text">Go</span></button>
 </div>
-<!-- Google butonu TAMAMEN KALDIRILDI -->
 </form>
 </div>
 </div>
@@ -797,7 +787,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 </div>
 
-<!-- ============ EDIT PROFILE MODAL (BIO KALDIRILDI, DOB DÜZELTİLDİ, WEBSITE DOB'DAN ÖNCE) ============ -->
+<!-- ============ EDIT PROFILE (BIO KALDIRILDI, WEBSITE DOB'TAN ÖNCE) ============ -->
 <div class="modal-overlay" id="editProfileModal">
 <div class="modal-container">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-edit-title">Edit Profile</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeEditProfileModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
@@ -816,7 +806,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="form-group"><label class="form-label" id="t-ep-username-label">Username</label><input type="text" class="form-input" id="editClientUsername" required minlength="7" placeholder="@username" oninput="this.value = this.value.toLowerCase().replace(/[^a-z0-9_.\-!@#$%^&*+=?]/g, '').replace(/^@/, '')"></div>
 <div class="form-group"><label class="form-label" id="t-ep-email-label">Email</label><input type="email" class="form-input" id="editClientEmail" required placeholder="email address"></div>
 <div class="form-group"><label class="form-label" id="t-ep-website-label">Website</label><input type="text" class="form-input" id="editClientWebsite" maxlength="200" placeholder="https://example.com"></div>
-<!-- BIO KALDIRILDI -->
 <div class="form-group"><label class="form-label" id="t-ep-dob-label">Date of Birth</label>
 <div style="display:flex;gap:10px">
 <input type="text" class="form-input" id="editClientDay" placeholder="dd" style="text-align:center" inputmode="numeric" maxlength="2" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,2)">
@@ -1372,14 +1361,14 @@ const PASSWORD_FIELDS=['adminPasswordInput','contactClientPassword','changeOldPa
 
 const PW_LABELS={en:{pw_enter:'password',pw_very_weak:'very weak',pw_weak:'weak',pw_medium:'medium',pw_strong:'strong',pw_very_strong:'very strong'},tr:{pw_enter:'şifre',pw_very_weak:'çok zayıf',pw_weak:'zayıf',pw_medium:'orta',pw_strong:'güçlü',pw_very_strong:'çok güçlü'}};
 
-/* ==================== TAM KAPSAMLI DİL SÖZLÜĞÜ ==================== */
+/* ==================== TAM ÇEVİRİ SÖZLÜĞÜ ==================== */
 const LANG={
 en:{
 role:"Software Developer",sec_apps:"My Applications",sec_exp:"Experience",sec_setup:"Setup & Environment",sec_stack:"Core Stack",
 contact_sub:"Sign In / Sign Up",contact_main:"Sign In To Join Us",scan_text:"Scan To Connect",copyright:"© 2026 muminsultani • All Rights Reserved.",
 chat_search_ph:"search...",chat_ph:"type a message...",chat_no_users:"no other users.",chat_no_msgs:"no messages yet",chat_start:"start the conversation 👋",chat_you:"you",chat_voice:"🎤 voice message",
 order_title:"Order Software",order_sub:"Need a website or app?",order_main:"Place an Order",order_modal_title:"Order Software",
-ord_name:"Name",ord_email:"Email",ord_type:"Project Type",ord_budget:"Budget (optional)",ord_deadline:"Deadline (optional)",ord_desc:"Project Details",ord_submit:"Submit Order",
+ord_name:"Name",ord_email:"Email",ord_type:"Project Type",ord_budget:"Budget",ord_deadline:"Deadline",ord_desc:"Project Details",ord_submit:"Submit Order",
 edit_profile:"Edit Profile",change_password:"Change Password",settings:"Settings",delete_account:"Delete Account",logout:"Logout",
 check_email:"Check Your Email",enter_code:"Enter Code",resend:"Resend",
 verify_email:"Verify Email",verify_desc:"Enter the 5-digit code from your email.",code:"Code",verify:"Verify",
@@ -1395,14 +1384,18 @@ name_surname:"Name & Surname",website:"Website",dob:"Date of Birth",save:"Save",
 settings_title:"Settings",settings_hint:"Customize your site appearance.",color_theme:"Color Theme",font_color:"Font Color",font_family:"Font",background:"Background",chat_bg:"Chat Background",settings_reset:"Reset",settings_ok:"OK",
 crop_photo:"Crop Photo",cancel:"Cancel",apply:"Apply",
 message:"Message",close:"Close",send_message:"Send Message",user_profile:"User Profile",joined:"Joined",
-profile:"Profile",orders:"Orders"
+profile:"Profile",orders:"Orders",
+no_orders:"No orders yet.",you_must_signin:"You must sign in to place an order.",order_received:"Order received! We will contact you soon.",
+fill_fields:"Please fill in all fields.",invalid_credentials:"Invalid credentials!",email_registered:"Email already registered!",username_taken:"This username is already taken.",min_7:"Minimum 7 characters.",pw_8:"Password must be at least 8 characters.",
+signin_success:"Signed in successfully!",signup_success:"Account created successfully!",logout_confirm:"Are you sure you want to log out?",logout_done:"Session closed.",
+order_modal:"Order Software",order_approved:"Order approved and email sent!"
 },
 tr:{
 role:"Yazılım Geliştirici",sec_apps:"Uygulamalarım",sec_exp:"Deneyim",sec_setup:"Kurulum & Ortam",sec_stack:"Temel Yığın",
 contact_sub:"Giriş Yap / Kayıt Ol",contact_main:"Bize Katılmak İçin Giriş Yapın",scan_text:"Bağlanmak İçin Tarayın",copyright:"© 2026 muminsultani • Tüm Hakları Saklıdır.",
 chat_search_ph:"ara...",chat_ph:"bir mesaj yaz...",chat_no_users:"başka kullanıcı yok.",chat_no_msgs:"henüz mesaj yok",chat_start:"sohbete başla 👋",chat_you:"sen",chat_voice:"🎤 sesli mesaj",
 order_title:"Yazılım Siparişi",order_sub:"Web sitesi veya uygulama mı lazım?",order_main:"Sipariş Ver",order_modal_title:"Yazılım Siparişi",
-ord_name:"Adınız",ord_email:"Email",ord_type:"Proje Tipi",ord_budget:"Bütçe (opsiyonel)",ord_deadline:"Teslim Tarihi (opsiyonel)",ord_desc:"Proje Detayları",ord_submit:"Sipariş Ver",
+ord_name:"Ad",ord_email:"Email",ord_type:"Proje Tipi",ord_budget:"Bütçe",ord_deadline:"Teslim Tarihi",ord_desc:"Proje Detayları",ord_submit:"Sipariş Ver",
 edit_profile:"Profili Düzenle",change_password:"Şifre Değiştir",settings:"Ayarlar",delete_account:"Hesabı Sil",logout:"Çıkış Yap",
 check_email:"Emailinizi Kontrol Edin",enter_code:"Kodu Girin",resend:"Yeniden Gönder",
 verify_email:"Emaili Doğrula",verify_desc:"Emailinizdeki 5 haneli kodu girin.",code:"Kod",verify:"Doğrula",
@@ -1418,7 +1411,11 @@ name_surname:"Ad & Soyad",website:"Web Sitesi",dob:"Doğum Tarihi",save:"Kaydet"
 settings_title:"Ayarlar",settings_hint:"Site görünümünüzü özelleştirin.",color_theme:"Renk Teması",font_color:"Yazı Rengi",font_family:"Yazı Tipi",background:"Arkaplan",chat_bg:"Sohbet Arkaplanı",settings_reset:"Sıfırla",settings_ok:"Tamam",
 crop_photo:"Fotoğrafı Kırp",cancel:"İptal",apply:"Uygula",
 message:"Mesaj",close:"Kapat",send_message:"Mesaj Gönder",user_profile:"Kullanıcı Profili",joined:"Katıldı",
-profile:"Profil",orders:"Siparişler"
+profile:"Profil",orders:"Siparişler",
+no_orders:"Henüz sipariş yok.",you_must_signin:"Sipariş vermek için giriş yapmalısınız.",order_received:"Siparişiniz alındı! En kısa sürede iletişime geçeceğiz.",
+fill_fields:"Lütfen tüm alanları doldurun.",invalid_credentials:"Geçersiz bilgiler!",email_registered:"Email zaten kayıtlı!",username_taken:"Bu kullanıcı adı alınmış.",min_7:"En az 7 karakter.",pw_8:"Şifre en az 8 karakter olmalı.",
+signin_success:"Başarıyla giriş yapıldı!",signup_success:"Hesap başarıyla oluşturuldu!",logout_confirm:"Çıkış yapmak istediğinizden emin misiniz?",logout_done:"Oturum kapatıldı.",
+order_modal:"Yazılım Siparişi",order_approved:"Sipariş onaylandı ve email gönderildi!"
 }};
 
 const THEMES=[{key:'purple',name:'Purple',c1:'#9333ea',c2:'#c084fc'},{key:'blue',name:'Blue',c1:'#2563eb',c2:'#60a5fa'},{key:'green',name:'Green',c1:'#16a34a',c2:'#4ade80'},{key:'red',name:'Red',c1:'#dc2626',c2:'#f87171'},{key:'orange',name:'Orange',c1:'#ea580c',c2:'#fb923c'},{key:'pink',name:'Pink',c1:'#db2777',c2:'#f472b6'},{key:'teal',name:'Teal',c1:'#0d9488',c2:'#2dd4bf'},{key:'indigo',name:'Indigo',c1:'#4f46e5',c2:'#818cf8'},{key:'amber',name:'Amber',c1:'#d97706',c2:'#fbbf24'},{key:'cyan',name:'Cyan',c1:'#0891b2',c2:'#22d3ee'},{key:'rose',name:'Rose',c1:'#e11d48',c2:'#fb7185'},{key:'slate',name:'Slate',c1:'#475569',c2:'#94a3b8'}];
@@ -1457,7 +1454,6 @@ function evaluatePasswordStrength(pw){const rules={length:pw.length>=8,upper:/[A
 
 /* === ŞİFRE GÜÇ GÖSTERGESİ — sign in modunda GİZLİ === */
 function updatePasswordStrength(id,pw){
-  // Sign in modunda şifre güç göstergesini hiç gösterme
   if(id==='contactClientPassword' && currentAuthMode==='signin'){const w=document.getElementById('pwStrengthWrap_'+id);if(w)w.classList.remove('show');return;}
   const wrap=document.getElementById('pwStrengthWrap_'+id);if(!wrap)return;
   if(!pw||pw.length===0){wrap.classList.remove('show');return;}
@@ -1481,9 +1477,6 @@ function isAdminUser(email){if(!email)return false;const lc=String(email).toLowe
 function getAdminUser(){const u=getAllUsers();let f=u.find(x=>x.isAdmin===true);if(!f)f=u.find(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL);if(f)return Object.assign({},f,{isAdmin:true,isVerified:true});return{userId:'000000000',name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'',bio:'',website:'',profilePhoto:'',following:[],createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true,isVerified:true};}
 function getEffectiveLoggedUser(){const lu=localStorage.getItem('logged_user');if(lu){try{const u=JSON.parse(lu);if(u&&u.email)return u;}catch(e){}}if(isAdminLoggedIn()){const a=getAdminUser();try{localStorage.setItem('logged_user',JSON.stringify(a));}catch(e){}return a;}return null;}
 function getVerifiedBadgeHTML(size){const cls='verified-badge'+(size?(' '+size):'');return `<span class="${cls}" title="Verified"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path fill="#1d9bf0" d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18z"/></svg></span>`;}
-
-/* === KÜÇÜK KOPYALAMA BUTONU === */
-function copyToClipboard(text,btn){if(!text)return;const sc=()=>{const old=btn.innerHTML;btn.innerHTML='<i class="fa-solid fa-check"></i>';setTimeout(()=>{btn.innerHTML=old;},1400);};if(navigator.clipboard)navigator.clipboard.writeText(text).then(sc).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');sc();}catch(e){}document.body.removeChild(ta);});else{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');sc();}catch(e){}document.body.removeChild(ta);}}
 
 function ensureUserIdsAndAdmin(){try{let u=JSON.parse(localStorage.getItem('site_users')||'[]');let changed=false;let ai=u.findIndex(x=>x.isAdmin===true);if(ai===-1)ai=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL);if(ai===-1){u.unshift({userId:'',name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'admin123',bio:'',website:'',profilePhoto:'',following:[],createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true,isVerified:true});ai=0;changed=true;}u.forEach(x=>{if(!/^\d{9}$/.test(String(x.userId||''))){x.userId='';changed=true;}if(!x.bio)x.bio='';if(!x.website)x.website='';if(!Array.isArray(x.following))x.following=[];});const seen=new Set();u.forEach(x=>{if(x.userId&&seen.has(x.userId)){x.userId='';changed=true;}else if(x.userId)seen.add(x.userId);});u.forEach(x=>{if(!x.userId){let nid;do{nid=generateRandomUserId();}while(seen.has(nid));x.userId=nid;seen.add(nid);changed=true;}});if(changed){localStorage.setItem('site_users',JSON.stringify(u));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);const f=u.find(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());if(f)localStorage.setItem('logged_user',JSON.stringify(f));}catch(e){}}}}catch(e){}}
 function getChatUsersFor(email){const u=getAllUsers();const ce=String(email||'').toLowerCase();let list=u.filter(x=>String(x.email||'').toLowerCase()!==ce);if(!isAdminUser(email)&&!list.some(x=>isAdminUser(x.email))){list.unshift(getAdminUser());}list.sort((a,b)=>{const aa=isAdminUser(a.email)?0:1,ba=isAdminUser(b.email)?0:1;return aa-ba;});return list;}
@@ -1577,9 +1570,20 @@ function drawHeart(c,s){c.beginPath();const t2=s/2;c.moveTo(0,t2*0.35);c.bezierC
 function drawStar(c,s){c.beginPath();for(let i=0;i<5;i++){const a=-Math.PI/2+i*(Math.PI*2/5);c.lineTo(Math.cos(a)*s,Math.sin(a)*s);const a2=a+Math.PI/5;c.lineTo(Math.cos(a2)*s*0.45,Math.sin(a2)*s*0.45);}c.closePath();c.fill();}
 function animateConfetti(){if(!confettiCanvas||!confettiCtx)return;confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);let a=false;for(let i=0;i<confettiParticles.length;i++){const p=confettiParticles[i];if(p.life<=0)continue;a=true;p.vy+=p.gravity;p.vx*=p.drag;p.vy*=p.drag;p.x+=p.vx;p.y+=p.vy;p.rotation+=p.rotationSpeed;p.life-=.006;if(p.y>confettiCanvas.height+120)p.life=0;if(p.x<-120||p.x>confettiCanvas.width+120)p.life=0;confettiCtx.save();confettiCtx.translate(p.x,p.y);confettiCtx.rotate(p.rotation);confettiCtx.globalAlpha=Math.max(0,Math.min(1,p.life));confettiCtx.fillStyle=p.color;const sz=p.size*0.5;if(p.shape==='rect')confettiCtx.fillRect(-sz,-sz/2,sz*2,sz);else if(p.shape==='circle'){confettiCtx.beginPath();confettiCtx.arc(0,0,sz,0,Math.PI*2);confettiCtx.fill();}else if(p.shape==='heart'){drawHeart(confettiCtx,p.size);}else if(p.shape==='star'){drawStar(confettiCtx,p.size);}confettiCtx.restore();}if(confettiParticles.length>800)confettiParticles=confettiParticles.filter(p=>p.life>0);if(a||confettiRunning)requestAnimationFrame(animateConfetti);else{confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);confettiCanvas.style.display='none';confettiParticles=[];}}
 
-function showCustomAlert(message,type='info',onConfirm=null){const ab=document.getElementById('customAlertModal'),ai=document.getElementById('customAlertIcon'),am=document.getElementById('customAlertMessage'),ag=document.getElementById('customAlertBtnGroup');am.innerHTML=message;if(type==='success')ai.innerHTML='<i class="fa-solid fa-circle-check" style="color:#22c55e"></i>';else if(type==='delete'||type==='error')ai.innerHTML='<i class="fa-solid fa-circle-xmark" style="color:#ef4444"></i>';else if(type==='warning')ai.innerHTML='<i class="fa-solid fa-triangle-exclamation" style="color:#f59e0b"></i>';else if(type==='downloading')ai.innerHTML='<i class="fa-solid fa-download" style="color:#22c55e"></i>';else ai.innerHTML='<i class="fa-solid fa-circle-exclamation" style="color:var(--accent)"></i>';
-  if(onConfirm){ag.innerHTML=`<button class="custom-alert-btn cancel-btn" onclick="closeCustomAlert()" style="flex:1">Cancel</button><button class="custom-alert-btn" onclick="confirmAction()" style="flex:1;background:linear-gradient(135deg,#ef4444,#dc2626)">Yes</button>`;window._confirmActionCallback=onConfirm;}else{ag.innerHTML=`<button class="custom-alert-btn" onclick="closeCustomAlert()" style="flex:1">OK</button>`;}
-  ab.classList.add('active');}
+/* ==================== ALERT (MOR RENK) ==================== */
+function showCustomAlert(message,type='info',onConfirm=null){
+  const ab=document.getElementById('customAlertModal'),ai=document.getElementById('customAlertIcon'),am=document.getElementById('customAlertMessage'),ag=document.getElementById('customAlertBtnGroup');
+  am.innerHTML=message;
+  // TÜM İKONLAR MOR
+  ai.innerHTML='<i class="fa-solid fa-circle-exclamation" style="color:var(--accent)"></i>';
+  if(onConfirm){
+    ag.innerHTML=`<button class="custom-alert-btn cancel-btn" onclick="closeCustomAlert()" style="flex:1">Cancel</button><button class="custom-alert-btn" onclick="confirmAction()" style="flex:1;background:linear-gradient(135deg,var(--accent),var(--accent-2))">Yes</button>`;
+    window._confirmActionCallback=onConfirm;
+  }else{
+    ag.innerHTML=`<button class="custom-alert-btn" onclick="closeCustomAlert()" style="flex:1">OK</button>`;
+  }
+  ab.classList.add('active');
+}
 function closeCustomAlert(){document.getElementById('customAlertModal').classList.remove('active');window._confirmActionCallback=null;if(window._pendingLangReset){window._pendingLangReset=false;try{sessionStorage.removeItem('site_lang');}catch(e){}changeLanguage('en');}}
 function confirmAction(){const cb=window._confirmActionCallback;window._confirmActionCallback=null;document.getElementById('customAlertModal').classList.remove('active');if(cb){try{cb();}catch(e){}}if(window._pendingLangReset){window._pendingLangReset=false;try{sessionStorage.removeItem('site_lang');}catch(e){}changeLanguage('en');}}
 
@@ -1589,49 +1593,133 @@ function toggleTheme(){document.body.classList.toggle('light-mode');const il=doc
 function changeLanguage(lang){currentLang=lang;try{sessionStorage.setItem('site_lang',lang);}catch(e){}document.getElementById('htmlRoot').setAttribute('lang',lang);applyTranslations();applySiteContent();const lm=document.getElementById('langMenu');if(lm)lm.classList.remove('show');}
 function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('show');}
 
-/* ==================== TAM ÇEVİRİ ==================== */
+/* ==================== TAM ÇEVİRİ UYGULAMA ==================== */
 function applyTranslations(){
   const d=LANG[currentLang]||LANG.en;
-  const st=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
-  const sph=(id,v)=>{const e=document.getElementById(id);if(e)e.placeholder=v;};
-  // Ana başlık
-  st('t-role',d.role);st('t-apps-title',d.sec_apps);st('t-exp-title',d.sec_exp);st('t-setup-title',d.sec_setup);st('t-stack-title',d.sec_stack);
-  st('t-contact-sub',d.contact_sub);st('t-contact-main',d.contact_main);st('t-scan-text',d.scan_text);st('t-copyright',d.copyright);
-  st('t-order-title',d.order_title);st('t-order-sub',d.order_sub);st('t-order-main',d.order_main);
-  // Header profil menü
-  st('t-edit-profile',d.edit_profile);st('t-change-password',d.change_password);st('t-settings',d.settings);st('t-delete-account',d.delete_account);st('t-logout',d.logout);
-  // Order modal
+  const st=(id,v)=>{const e=document.getElementById(id);if(e&&v!==undefined)e.textContent=v;};
+  const sph=(id,v)=>{const e=document.getElementById(id);if(e&&v!==undefined)e.placeholder=v;};
+
+  st('t-role',d.role);
+  st('t-apps-title',d.sec_apps);
+  st('t-exp-title',d.sec_exp);
+  st('t-setup-title',d.sec_setup);
+  st('t-stack-title',d.sec_stack);
+  st('t-contact-sub',d.contact_sub);
+  st('t-contact-main',d.contact_main);
+  st('t-scan-text',d.scan_text);
+  st('t-copyright',d.copyright);
+  st('t-order-title',d.order_title);
+  st('t-order-sub',d.order_sub);
+  st('t-order-main',d.order_main);
+
+  st('t-edit-profile',d.edit_profile);
+  st('t-change-password',d.change_password);
+  st('t-settings',d.settings);
+  st('t-delete-account',d.delete_account);
+  st('t-logout',d.logout);
+
   st('t-order-modal-title',d.order_modal_title);
-  st('t-ord-name-label',d.ord_name);st('t-ord-email-label',d.ord_email);st('t-ord-type-label',d.ord_type);st('t-ord-budget-label',d.ord_budget);st('t-ord-deadline-label',d.ord_deadline);st('t-ord-desc-label',d.ord_desc);st('t-ord-submit',d.ord_submit);
-  sph('orderName','your name');sph('orderEmail','email address');sph('orderBudget','optional');sph('orderDeadline','e.g. 2 weeks');sph('orderDesc','describe your project...');
-  // Signup mock
-  st('t-check-email',d.check_email);st('t-enter-code',d.enter_code);st('t-resend',d.resend);
-  // Signup code
-  st('t-verify-email',d.verify_email);st('t-verify-desc',d.verify_desc);st('t-code-label',d.code);st('t-verify-btn',d.verify);
-  // Direct contact
-  st('t-account-access',d.account_access);st('t-signin-tab',d.signin_tab);st('t-signup-tab',d.signup_tab);
-  st('t-name-label',d.name);st('t-username-label',d.username);st('dc-label-email',d.email);st('t-password-label',d.password);st('t-next-btn',d.next);
-  st('t-forgot-link',d.forgot);st('dc-submit-btn-text',d.go);
-  // Forgot
-  st('t-pw-recovery',d.pw_recovery);st('t-pw-recovery-desc',d.pw_recovery_desc);st('t-fp-email-label',d.email);st('t-fp-send',d.send);
-  // Reset
-  st('t-reset-pw',d.reset_pw);st('t-rp-email-label',d.email);st('t-rp-code-label',d.code);st('t-rp-newpw-label',d.new_password);st('t-rp-update',d.update);
-  // Change password
-  st('t-change-pw-title',d.change_pw_title);st('t-cp-old-label',d.current_password);st('t-cp-new-label',d.new_password);st('t-cp-confirm-label',d.confirm_password);st('t-cp-update',d.update);
-  // Delete
-  st('t-del-acc-title',d.del_acc_title);st('t-del-warn',d.del_warn);st('t-del-username-label',d.username);st('t-del-btn',d.delete);
-  st('t-confirm-del',d.confirm_del);st('t-delpw-label',d.password);st('t-delpw-btn',d.delete_account_btn);
-  // Edit profile
-  st('t-edit-title',d.edit_title);st('t-ep-photo-label',d.profile_photo);st('t-ep-change-photo',d.change_photo);st('t-ep-reset-photo',d.reset);
-  st('t-ep-name-label',d.name_surname);st('t-ep-username-label',d.username);st('t-ep-email-label',d.email);st('t-ep-website-label',d.website);st('t-ep-dob-label',d.dob);st('t-ep-save',d.save);
-  sph('editClientName','name & surname');sph('editClientUsername','@username');sph('editClientEmail','email address');sph('editClientWebsite','https://example.com');
-  // Settings modal
-  st('t-settings-title',d.settings_title);st('t-settings-hint',d.settings_hint);st('t-color-theme',d.color_theme);st('t-font-color',d.font_color);st('t-font-family',d.font_family);st('t-background',d.background);st('t-chat-bg',d.chat_bg);st('t-settings-reset',d.settings_reset);st('t-settings-ok',d.settings_ok);
-  // Crop
-  st('t-crop-photo',d.crop_photo);st('t-crop-cancel',d.cancel);st('t-crop-apply',d.apply);
-  // Update lang button flag
+  st('t-ord-name-label',d.ord_name);
+  st('t-ord-email-label',d.ord_email);
+  st('t-ord-type-label',d.ord_type);
+  st('t-ord-budget-label',d.ord_budget);
+  st('t-ord-deadline-label',d.ord_deadline);
+  st('t-ord-desc-label',d.ord_desc);
+  st('t-ord-submit',d.ord_submit);
+
+  st('t-check-email',d.check_email);
+  st('t-enter-code',d.enter_code);
+  st('t-resend',d.resend);
+
+  st('t-verify-email',d.verify_email);
+  st('t-verify-desc',d.verify_desc);
+  st('t-code-label',d.code);
+  st('t-verify-btn',d.verify);
+
+  st('t-account-access',d.account_access);
+  st('t-signin-tab',d.signin_tab);
+  st('t-signup-tab',d.signup_tab);
+  st('t-name-label',d.name);
+  st('t-username-label',d.username);
+  st('dc-label-email',d.email);
+  st('t-password-label',d.password);
+  st('t-next-btn',d.next);
+  st('t-forgot-link',d.forgot);
+  st('dc-submit-btn-text',d.go);
+
+  st('t-pw-recovery',d.pw_recovery);
+  st('t-pw-recovery-desc',d.pw_recovery_desc);
+  st('t-fp-email-label',d.email);
+  st('t-fp-send',d.send);
+  st('t-reset-pw',d.reset_pw);
+  st('t-rp-email-label',d.email);
+  st('t-rp-code-label',d.code);
+  st('t-rp-newpw-label',d.new_password);
+  st('t-rp-update',d.update);
+
+  st('t-change-pw-title',d.change_pw_title);
+  st('t-cp-old-label',d.current_password);
+  st('t-cp-new-label',d.new_password);
+  st('t-cp-confirm-label',d.confirm_password);
+  st('t-cp-update',d.update);
+
+  st('t-del-acc-title',d.del_acc_title);
+  st('t-del-warn',d.del_warn);
+  st('t-del-username-label',d.username);
+  st('t-del-btn',d.delete);
+  st('t-confirm-del',d.confirm_del);
+  st('t-delpw-label',d.password);
+  st('t-delpw-btn',d.delete_account_btn);
+
+  st('t-edit-title',d.edit_title);
+  st('t-ep-photo-label',d.profile_photo);
+  st('t-ep-change-photo',d.change_photo);
+  st('t-ep-reset-photo',d.reset);
+  st('t-ep-name-label',d.name_surname);
+  st('t-ep-username-label',d.username);
+  st('t-ep-email-label',d.email);
+  st('t-ep-website-label',d.website);
+  st('t-ep-dob-label',d.dob);
+  st('t-ep-save',d.save);
+
+  st('t-settings-title',d.settings_title);
+  st('t-settings-hint',d.settings_hint);
+  st('t-color-theme',d.color_theme);
+  st('t-font-color',d.font_color);
+  st('t-font-family',d.font_family);
+  st('t-background',d.background);
+  st('t-chat-bg',d.chat_bg);
+  st('t-settings-reset',d.settings_reset);
+  st('t-settings-ok',d.settings_ok);
+
+  st('t-crop-photo',d.crop_photo);
+  st('t-crop-cancel',d.cancel);
+  st('t-crop-apply',d.apply);
+
+  // Placeholder'lar
+  sph('contactClientName',d.name_surname?d.name_surname.toLowerCase():'name & surname');
+  sph('contactClientUsername','@username');
+  sph('contactClientPassword',d.password?d.password.toLowerCase():'password');
+  sph('orderName',d.ord_name.toLowerCase());
+  sph('orderEmail',d.email.toLowerCase());
+  sph('orderBudget','optional');
+  sph('orderDeadline','e.g. 2 weeks');
+  sph('orderDesc',d.ord_desc.toLowerCase());
+  sph('editClientName',d.name_surname.toLowerCase());
+  sph('editClientUsername','@username');
+  sph('editClientEmail',d.email.toLowerCase());
+  sph('editClientWebsite','https://example.com');
+
+  // Dynamic lang button
   const lt=document.getElementById('currentLangText');
   if(lt)lt.innerHTML=currentLang==='tr'?'<img src="https://flagcdn.com/tr.svg" class="lang-flag" alt="TR">':'<img src="https://flagcdn.com/gb.svg" class="lang-flag" alt="EN">';
+
+  // Dynamic: sign in / sign up placeholder
+  const ei=document.getElementById('contactClientEmail');
+  if(ei)ei.placeholder=currentAuthMode==='signin'?(currentLang==='tr'?'email veya kullanıcı adı':'email or username'):(currentLang==='tr'?'email adresi':'email address');
+
+  // Sign in'de şifre güç göstergesi gizli
+  if(currentAuthMode==='signin'){const w=document.getElementById('pwStrengthWrap_contactClientPassword');if(w)w.classList.remove('show');}
 }
 window.addEventListener('click',function(e){const ld=document.getElementById('langDropdownBtn'),lm=document.getElementById('langMenu');if(ld&&lm&&!ld.contains(e.target)&&!lm.contains(e.target))lm.classList.remove('show');});
 
@@ -1649,48 +1737,48 @@ function switchAuthTab(mode){
   if(mode==='signin'){
     ts.classList.add('active');tu.classList.remove('active');
     gn.style.display='none';gu.style.display='none';
-    if(gp)gp.style.display='none';
-    if(sg)sg.style.display='none';if(nb)nb.style.display='flex';
+    if(gp)gp.style.display='block';
+    if(sg)sg.style.display='flex';if(nb)nb.style.display='none';
     if(fl)fl.style.display='inline';
-    if(el)el.textContent=t('email');if(ei)ei.placeholder='email or username';
-    if(psw)psw.classList.remove('show'); // Şifre güç göstergesi gizli
+    if(el)el.textContent=t('email');if(ei)ei.placeholder=currentLang==='tr'?'email veya kullanıcı adı':'email or username';
+    if(psw)psw.classList.remove('show');
   } else {
     tu.classList.add('active');ts.classList.remove('active');
     gn.style.display='block';gu.style.display='block';
     if(gp)gp.style.display='block';
     if(sg)sg.style.display='flex';if(nb)nb.style.display='none';
     if(fl)fl.style.display='none';
-    if(el)el.textContent=t('email');if(ei)ei.placeholder='email address';
+    if(el)el.textContent=t('email');if(ei)ei.placeholder=currentLang==='tr'?'email adresi':'email address';
     setupSignupAutoFill();
   }
 }
 function setupSignupAutoFill(){const ni=document.getElementById('contactClientName'),ui=document.getElementById('contactClientUsername');if(!ni||!ui||ni.dataset.afi)return;ni.dataset.afi='1';ni.addEventListener('input',function(){this.value=this.value.toLowerCase();if(!ui.dataset.ut){ui.value=this.value.toLowerCase().replace(/[^a-z0-9]/g,'');}});ui.addEventListener('input',function(){ui.dataset.ut='1';});}
-function handleAuthNext(e){if(e)e.preventDefault();const email=document.getElementById('contactClientEmail').value.trim();if(!email){showCustomAlert('Please enter your email or username first!');return;}document.getElementById('groupPassword').style.display='block';document.getElementById('dc-submit-group').style.display='flex';document.getElementById('dc-next-btn').style.display='none';}
+function handleAuthNext(e){if(e)e.preventDefault();const email=document.getElementById('contactClientEmail').value.trim();if(!email){showCustomAlert(t('fill_fields'));return;}document.getElementById('groupPassword').style.display='block';document.getElementById('dc-submit-group').style.display='flex';const nb=document.getElementById('dc-next-btn');if(nb)nb.style.display='none';const pi=document.getElementById('contactClientPassword');if(pi)pi.focus();}
 function openGetInTouchModal(){const lu=localStorage.getItem('logged_user');if(lu){window.scrollTo({top:0,behavior:'smooth'});return;}document.getElementById('getInTouchModal').classList.add('active');}
 function closeGetInTouchModal(){document.getElementById('getInTouchModal').classList.remove('active');}
-function openDirectContactModal(){closeGetInTouchModal();switchAuthTab('signin');document.getElementById('directContactModal').classList.add('active');}
+function openDirectContactModal(){closeGetInTouchModal();switchAuthTab('signin');document.getElementById('directContactModal').classList.add('active');setTimeout(()=>{const ei=document.getElementById('contactClientEmail');if(ei)ei.focus();},200);}
 function closeDirectContactModal(){document.getElementById('directContactModal').classList.remove('active');forceRefreshUI();}
 function checkUsernameAvailability(){const i=document.getElementById('contactClientUsername'),m=document.getElementById('usernameAvailabilityMsg');if(!i||!m)return;let un=i.value.trim().replace(/^@/,'');if(!un){m.style.display='none';return;}if(un.length<7){m.style.display='block';m.style.color='#f59e0b';m.innerText='min 7 chars';return;}const users=JSON.parse(localStorage.getItem('site_users')||'[]');const ex=users.some(u=>String(u.username||'').replace(/^@/,'').toLowerCase()===un.toLowerCase());m.style.display='block';if(ex){m.style.color='#ef4444';m.innerText='taken';}else{m.style.color='#22c55e';m.innerText='available';}}
 
 function openForgotPasswordModal(e){if(e)e.preventDefault();closeDirectContactModal();document.getElementById('forgotPasswordForm').reset();document.getElementById('forgotPasswordModal').classList.add('active');}
 function closeForgotPasswordModal(){document.getElementById('forgotPasswordModal').classList.remove('active');}
-async function handleForgotPasswordSubmit(e){e.preventDefault();const email=document.getElementById('forgotClientEmail').value.trim().toLowerCase();if(!email){showCustomAlert('Please fill in all fields.');return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');const u=users.find(x=>x.email===email);if(!u){showCustomAlert('Email not registered!');return;}const tp=String(Math.floor(10000+Math.random()*90000));let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');rc[email]=tp;localStorage.setItem('reset_codes',JSON.stringify(rc));currentResetEmail=email;closeForgotPasswordModal();const result=await sendVerificationEmail(email,tp,'reset');if(result.success){showCustomAlert('Verification code sent to your email!','success');}else{showCustomAlert('Could not send email. Please try again.','error');return;}setTimeout(()=>openResetPasswordModal(),600);}
+async function handleForgotPasswordSubmit(e){e.preventDefault();const email=document.getElementById('forgotClientEmail').value.trim().toLowerCase();if(!email){showCustomAlert(t('fill_fields'));return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');const u=users.find(x=>x.email===email);if(!u){showCustomAlert('Email not registered!');return;}const tp=String(Math.floor(10000+Math.random()*90000));let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');rc[email]=tp;localStorage.setItem('reset_codes',JSON.stringify(rc));currentResetEmail=email;closeForgotPasswordModal();const result=await sendVerificationEmail(email,tp,'reset');if(result.success){showCustomAlert('Verification code sent!','success');}else{showCustomAlert('Could not send email. Try again.','error');return;}setTimeout(()=>openResetPasswordModal(),600);}
 function openResetPasswordModal(){document.getElementById('resetClientEmail').value=currentResetEmail;document.getElementById('resetPasswordForm').reset();clearPasswordField('resetClientNewPassword');document.getElementById('resetClientEmail').value=currentResetEmail;document.getElementById('resetPasswordModal').classList.add('active');}
 function closeResetPasswordModal(){document.getElementById('resetPasswordModal').classList.remove('active');}
-function handleResetPasswordSubmit(e){e.preventDefault();const email=document.getElementById('resetClientEmail').value,code=document.getElementById('resetClientCode').value.trim(),np=getPasswordValue('resetClientNewPassword').trim();if(!code||!np){showCustomAlert('Please fill in all fields.');return;}if(!isValidPassword(np)){showCustomAlert('Password must be at least 8 characters.');return;}let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');if(!rc[email]||rc[email]!==code){showCustomAlert('Invalid code!');return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');let ok=false;users=users.map(u=>{if(u.email===email){u.password=np;ok=true;}return u;});if(ok){localStorage.setItem('site_users',JSON.stringify(users));delete rc[email];localStorage.setItem('reset_codes',JSON.stringify(rc));closeResetPasswordModal();showCustomAlert('Password reset successfully!','success');}}
+function handleResetPasswordSubmit(e){e.preventDefault();const email=document.getElementById('resetClientEmail').value,code=document.getElementById('resetClientCode').value.trim(),np=getPasswordValue('resetClientNewPassword').trim();if(!code||!np){showCustomAlert(t('fill_fields'));return;}if(!isValidPassword(np)){showCustomAlert(t('pw_8'));return;}let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');if(!rc[email]||rc[email]!==code){showCustomAlert('Invalid code!');return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');let ok=false;users=users.map(u=>{if(u.email===email){u.password=np;ok=true;}return u;});if(ok){localStorage.setItem('site_users',JSON.stringify(users));delete rc[email];localStorage.setItem('reset_codes',JSON.stringify(rc));closeResetPasswordModal();showCustomAlert('Password reset successfully!','success');}}
 
 function generateSignupCode(){return String(Math.floor(10000+Math.random()*90000));}
-async function openSignupMockModal(email){document.getElementById('signupMockEmailValue').innerText=email;document.getElementById('signupMockModal').classList.add('active');const sb=document.getElementById('signupEmailStatus');const title=document.getElementById('signupMockTitleText');const desc=document.getElementById('signupMockDescText');sb.innerHTML='<div class="email-status-badge"><i class="fa-solid fa-spinner fa-spin"></i> Sending...</div>';title.textContent='Sending...';desc.textContent='Please wait, your verification code is being sent.';const code=pendingSignup?pendingSignup.code:'';const r=await sendVerificationEmail(email,code,'signup');if(r.success){sb.innerHTML='<div class="email-status-badge success"><i class="fa-solid fa-check"></i> Sent</div>';title.textContent='Email sent!';desc.textContent='We sent a 5-digit verification code to your email.';}else{sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Failed</div>';title.textContent='Email could not be sent';desc.innerHTML='<span style="color:#f59e0b;font-size:.72rem;word-break:break-all">Error: '+String(r.reason||'unknown').substring(0,150)+'</span>';}}
-async function resendSignupEmail(){if(!pendingSignup)return;const newCode=generateSignupCode();pendingSignup.code=newCode;const sb=document.getElementById('signupEmailStatus');const title=document.getElementById('signupMockTitleText');const desc=document.getElementById('signupMockDescText');sb.innerHTML='<div class="email-status-badge"><i class="fa-solid fa-spinner fa-spin"></i> Resending...</div>';title.textContent='Resending...';desc.textContent='Please wait.';const r=await sendVerificationEmail(pendingSignup.email,newCode,'signup');if(r.success){sb.innerHTML='<div class="email-status-badge success"><i class="fa-solid fa-check"></i> Sent</div>';title.textContent='Email sent!';desc.textContent='A new 5-digit verification code has been sent.';}else{sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Failed</div>';title.textContent='Try again';desc.innerHTML='<span style="color:#f59e0b;font-size:.72rem">Error: '+String(r.reason||'').substring(0,150)+'</span>';}}
+async function openSignupMockModal(email){document.getElementById('signupMockEmailValue').innerText=email;document.getElementById('signupMockModal').classList.add('active');const sb=document.getElementById('signupEmailStatus');const title=document.getElementById('signupMockTitleText');const desc=document.getElementById('signupMockDescText');sb.innerHTML='<div class="email-status-badge"><i class="fa-solid fa-spinner fa-spin"></i> Sending...</div>';title.textContent='Sending...';desc.textContent='Please wait...';const code=pendingSignup?pendingSignup.code:'';const r=await sendVerificationEmail(email,code,'signup');if(r.success){sb.innerHTML='<div class="email-status-badge success"><i class="fa-solid fa-check"></i> Sent</div>';title.textContent='Email sent!';desc.textContent='5-digit verification code sent.';}else{sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Failed</div>';title.textContent='Email failed';desc.innerHTML='<span style="color:#f59e0b;font-size:.72rem">'+String(r.reason||'unknown').substring(0,150)+'</span>';}}
+async function resendSignupEmail(){if(!pendingSignup)return;const newCode=generateSignupCode();pendingSignup.code=newCode;const sb=document.getElementById('signupEmailStatus');const title=document.getElementById('signupMockTitleText');const desc=document.getElementById('signupMockDescText');sb.innerHTML='<div class="email-status-badge"><i class="fa-solid fa-spinner fa-spin"></i> Resending...</div>';title.textContent='Resending...';desc.textContent='Please wait.';const r=await sendVerificationEmail(pendingSignup.email,newCode,'signup');if(r.success){sb.innerHTML='<div class="email-status-badge success"><i class="fa-solid fa-check"></i> Sent</div>';title.textContent='Email sent!';desc.textContent='New code sent.';}else{sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Failed</div>';title.textContent='Try again';}}
 function openSignupCodeModal(){document.getElementById('signupMockModal').classList.remove('active');document.getElementById('signupCodeInput').value='';document.getElementById('signupCodeModal').classList.add('active');}
 function backToSignupMock(){document.getElementById('signupCodeModal').classList.remove('active');if(pendingSignup)openSignupMockModal(pendingSignup.email);}
 function cancelSignup(){pendingSignup=null;document.getElementById('signupMockModal').classList.remove('active');document.getElementById('signupCodeModal').classList.remove('active');}
-function verifySignupCode(e){e.preventDefault();const ec=document.getElementById('signupCodeInput').value.trim();if(!pendingSignup)return;if(ec!==pendingSignup.code){showCustomAlert('Invalid code!');return;}try{const ub=JSON.parse(localStorage.getItem('site_users')||'[]');const usedIds=new Set(ub.map(u=>String(u.userId||'')));let nid;do{nid=generateRandomUserId();}while(usedIds.has(nid));const nu={userId:nid,name:pendingSignup.name,username:pendingSignup.username,email:pendingSignup.email,password:pendingSignup.password,bio:'',website:'',profilePhoto:'',following:[],createdAt:new Date().toISOString(),isVerified:false};ub.push(nu);localStorage.setItem('site_users',JSON.stringify(ub));localStorage.setItem('logged_user',JSON.stringify(nu));logActivity('signup',nu,'New account ID: '+nid);pendingSignup=null;document.getElementById('signupCodeModal').classList.remove('active');document.getElementById('signupMockModal').classList.remove('active');closeDirectContactModal();checkUserSession();renderApplications();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert('Account created successfully! 🆔 '+nid,'success');}catch(err){}}
+function verifySignupCode(e){e.preventDefault();const ec=document.getElementById('signupCodeInput').value.trim();if(!pendingSignup)return;if(ec!==pendingSignup.code){showCustomAlert('Invalid code!');return;}try{const ub=JSON.parse(localStorage.getItem('site_users')||'[]');const usedIds=new Set(ub.map(u=>String(u.userId||'')));let nid;do{nid=generateRandomUserId();}while(usedIds.has(nid));const nu={userId:nid,name:pendingSignup.name,username:pendingSignup.username,email:pendingSignup.email,password:pendingSignup.password,bio:'',website:'',profilePhoto:'',following:[],createdAt:new Date().toISOString(),isVerified:false};ub.push(nu);localStorage.setItem('site_users',JSON.stringify(ub));localStorage.setItem('logged_user',JSON.stringify(nu));logActivity('signup',nu,'New account ID: '+nid);pendingSignup=null;document.getElementById('signupCodeModal').classList.remove('active');document.getElementById('signupMockModal').classList.remove('active');closeDirectContactModal();checkUserSession();renderApplications();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('signup_success')+' 🆔 '+nid,'success');}catch(err){}}
 
-async function handleAuthSubmit(e){if(e)e.preventDefault();const email=document.getElementById('contactClientEmail').value.trim().toLowerCase();const password=getPasswordValue('contactClientPassword').trim();if(currentAuthMode==='signin'){if(!email||!password){showCustomAlert('Please fill in all fields.');return;}}else{if(!email||!password){showCustomAlert('Please fill in all fields.');return;}}
+async function handleAuthSubmit(e){if(e)e.preventDefault();const email=document.getElementById('contactClientEmail').value.trim().toLowerCase();const password=getPasswordValue('contactClientPassword').trim();if(!email||!password){showCustomAlert(t('fill_fields'));return;}
   let users=JSON.parse(localStorage.getItem('site_users')||'[]');
-  if(currentAuthMode==='signup'){const name=document.getElementById('contactClientName').value.trim().toLowerCase();let username=document.getElementById('contactClientUsername').value.trim().replace(/^@/,'');if(!name||!username){showCustomAlert('Please fill in all fields.');return;}if(username.length<7){showCustomAlert('Min 7 chars');return;}if(users.some(u=>String(u.username||'').toLowerCase()===username.toLowerCase())){showCustomAlert('This username is already taken.');return;}if(!isValidPassword(password)){showCustomAlert('Password must be at least 8 characters.');return;}if(users.find(u=>u.email===email)){showCustomAlert('Email already registered!');return;}const code=generateSignupCode();pendingSignup={code,name,username,email,password};await openSignupMockModal(email);return;}
-  else{const ic=email.toLowerCase().trim();let inputName=ic.startsWith('@')?ic.substring(1):ic;let user=users.find(u=>{const em=(u.email||'').toLowerCase()===ic;let un=(u.username||'').toLowerCase().replace(/^@/,'');return(em||un===inputName)&&u.password===password;});if(user){localStorage.setItem('logged_user',JSON.stringify(user));logActivity('signin',user,'Signed in');closeDirectContactModal();forceRefreshUI();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert('Signed in successfully!','success');}else showCustomAlert('Invalid credentials!');}}
+  if(currentAuthMode==='signup'){const name=document.getElementById('contactClientName').value.trim().toLowerCase();let username=document.getElementById('contactClientUsername').value.trim().replace(/^@/,'');if(!name||!username){showCustomAlert(t('fill_fields'));return;}if(username.length<7){showCustomAlert(t('min_7'));return;}if(users.some(u=>String(u.username||'').toLowerCase()===username.toLowerCase())){showCustomAlert(t('username_taken'));return;}if(!isValidPassword(password)){showCustomAlert(t('pw_8'));return;}if(users.find(u=>u.email===email)){showCustomAlert(t('email_registered'));return;}const code=generateSignupCode();pendingSignup={code,name,username,email,password};await openSignupMockModal(email);return;}
+  else{const ic=email.toLowerCase().trim();let inputName=ic.startsWith('@')?ic.substring(1):ic;let user=users.find(u=>{const em=(u.email||'').toLowerCase()===ic;let un=(u.username||'').toLowerCase().replace(/^@/,'');return(em||un===inputName)&&u.password===password;});if(user){localStorage.setItem('logged_user',JSON.stringify(user));logActivity('signin',user,'Signed in');closeDirectContactModal();forceRefreshUI();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('signin_success'),'success');}else showCustomAlert(t('invalid_credentials'));}}
 
 /* ==================== PROFILE ==================== */
 function openEditProfileModal(){const lu=localStorage.getItem('logged_user');if(!lu)return;try{const u=JSON.parse(lu);document.getElementById('editClientName').value=u.name||'';document.getElementById('editClientUsername').value=(u.username||'').replace(/^@/,'');document.getElementById('editClientEmail').value=u.email||'';document.getElementById('editClientWebsite').value=u.website||'';document.getElementById('editClientDay').value=u.birthDay||'';document.getElementById('editClientMonth').value=u.birthMonth||'';document.getElementById('editClientYear').value=u.birthYear||'';const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const prev=document.getElementById('editProfilePhotoPreview');if(prev)prev.src=p;}catch(e){}document.getElementById('editProfileModal').classList.add('active');}
@@ -1703,28 +1791,22 @@ function closeDeleteAccountModal(){document.getElementById('deleteAccountModal')
 function openDeletePasswordModal(){clearPasswordField('deleteConfirmPassword');document.getElementById('confirmDeletePasswordModal').classList.add('active');}
 function closeDeletePasswordModal(){document.getElementById('confirmDeletePasswordModal').classList.remove('active');}
 
-/* === DOB VALIDATION (1920 - 2014) === */
-function validateDOB(){
-  const day=document.getElementById('editClientDay'),mon=document.getElementById('editClientMonth'),yr=document.getElementById('editClientYear');
-  if(day.value){let v=parseInt(day.value);if(isNaN(v)||v<1||v>31)day.value='';}
-  if(mon.value){let v=parseInt(mon.value);if(isNaN(v)||v<1||v>12)mon.value='';}
-  if(yr.value){let v=parseInt(yr.value);if(isNaN(v)||v<1920||v>2014){yr.value='';showCustomAlert('Date of birth year must be between 1920 and 2014.','warning');}}
-}
+function validateDOB(){const day=document.getElementById('editClientDay'),mon=document.getElementById('editClientMonth'),yr=document.getElementById('editClientYear');if(day&&day.value){let v=parseInt(day.value);if(isNaN(v)||v<1||v>31)day.value='';}if(mon&&mon.value){let v=parseInt(mon.value);if(isNaN(v)||v<1||v>12)mon.value='';}if(yr&&yr.value){let v=parseInt(yr.value);if(isNaN(v)||v<1920||v>2014){yr.value='';showCustomAlert('Year must be 1920 - 2014','warning');}}}
 
 function handleProfileUpdate(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;
   const nn=document.getElementById('editClientName').value.trim(),nu=document.getElementById('editClientUsername').value.trim(),ne=document.getElementById('editClientEmail').value.trim();
   const web=document.getElementById('editClientWebsite').value.trim(),bd=document.getElementById('editClientDay').value.trim(),bm=document.getElementById('editClientMonth').value.trim(),by=document.getElementById('editClientYear').value.trim();
   validateDOB();
-  if(!nn||!nu||!ne){showCustomAlert('Please fill in all fields.');return;}
-  if(nu.length<7){showCustomAlert('Min 7 chars');return;}
+  if(!nn||!nu||!ne){showCustomAlert(t('fill_fields'));return;}
+  if(nu.length<7){showCustomAlert(t('min_7'));return;}
   try{let u=JSON.parse(lu);let users=JSON.parse(localStorage.getItem('site_users')||'[]');
-    if(users.some(x=>x.email!==u.email&&x.email===ne)){showCustomAlert('Email already registered!');return;}
+    if(users.some(x=>x.email!==u.email&&x.email===ne)){showCustomAlert(t('email_registered'));return;}
     u.name=nn;u.username=nu;u.bio='';u.website=web;u.birthDay=bd;u.birthMonth=bm;u.birthYear=by;
     users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));
-    logActivity('profile_update',u,'Updated');closeEditProfileModal();checkUserSession();renderApplications();showCustomAlert('Profile updated successfully!','success');}catch(err){}}
-function handleChangePassword(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const op=getPasswordValue('changeOldPassword').trim(),np=getPasswordValue('changeNewPassword').trim(),cp=getPasswordValue('changeConfirmPassword').trim();if(!op||!np||!cp){showCustomAlert('Please fill in all fields.');return;}if(!isValidPassword(np)){showCustomAlert('Password must be at least 8 characters.');return;}try{let u=JSON.parse(lu);let users=JSON.parse(localStorage.getItem('site_users')||'[]');if(u.password!==op){showCustomAlert('Current password is incorrect!');return;}if(np!==cp){showCustomAlert('New passwords do not match!');return;}u.password=np;users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));logActivity('password_change',u,'updated');closeChangePasswordModal();showCustomAlert('Password changed successfully!','success');}catch(err){}}
+    logActivity('profile_update',u,'Updated');closeEditProfileModal();checkUserSession();renderApplications();showCustomAlert('Profile updated!','success');}catch(err){}}
+function handleChangePassword(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const op=getPasswordValue('changeOldPassword').trim(),np=getPasswordValue('changeNewPassword').trim(),cp=getPasswordValue('changeConfirmPassword').trim();if(!op||!np||!cp){showCustomAlert(t('fill_fields'));return;}if(!isValidPassword(np)){showCustomAlert(t('pw_8'));return;}try{let u=JSON.parse(lu);let users=JSON.parse(localStorage.getItem('site_users')||'[]');if(u.password!==op){showCustomAlert('Current password is incorrect!');return;}if(np!==cp){showCustomAlert('Passwords do not match!');return;}u.password=np;users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));logActivity('password_change',u,'updated');closeChangePasswordModal();showCustomAlert('Password changed!','success');}catch(err){}}
 function handleDeleteAccount(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const iu=document.getElementById('deleteConfirmUsername').value.trim();try{const u=JSON.parse(lu);const au=(u.username||'').replace(/^@/,'');const ci=iu.replace(/^@/,'');if(ci.toLowerCase()!==au.toLowerCase()){showCustomAlert('Username does not match.');return;}showCustomAlert('Are you sure you want to delete your account?','delete',function(){document.getElementById('deleteAccountModal').classList.remove('active');openDeletePasswordModal();});}catch(err){}}
-function handleDeletePasswordSubmit(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const ep=getPasswordValue('deleteConfirmPassword').trim();try{const u=JSON.parse(lu);if(u.password!==ep){showCustomAlert('Incorrect password!');return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.filter(x=>x.email!==u.email);localStorage.setItem('site_users',JSON.stringify(users));localStorage.removeItem('logged_user');closeDeletePasswordModal();showCustomAlert('Account deleted successfully.','success');window._pendingLangReset=true;forceRefreshUI();}catch(err){}}
+function handleDeletePasswordSubmit(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const ep=getPasswordValue('deleteConfirmPassword').trim();try{const u=JSON.parse(lu);if(u.password!==ep){showCustomAlert('Incorrect password!');return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.filter(x=>x.email!==u.email);localStorage.setItem('site_users',JSON.stringify(users));localStorage.removeItem('logged_user');closeDeletePasswordModal();showCustomAlert('Account deleted.','success');window._pendingLangReset=true;forceRefreshUI();}catch(err){}}
 
 function openProfilePhotoPanel(){const inp=document.getElementById('profilePhotoInput');if(inp)inp.click();}
 function resetProfilePhoto(){const lu=localStorage.getItem('logged_user');if(!lu)return;try{let u=JSON.parse(lu);u.profilePhoto='';let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));}catch(e){}updateEditPhotoPreview();updateHeaderProfileAll();}
@@ -1756,39 +1838,27 @@ function checkUserSession(){const lu=localStorage.getItem('logged_user');const c
   updateChatBadge();setTimeout(updateMessengerDefaultPosition,80);
 }
 
-/* === ÇIKIŞ YAPMA — TAM TEMİZLEME (FIX) === */
+/* === ÇIKIŞ YAPMA — KESİN ÇÖZÜM === */
 function confirmLogout(){
-  showCustomAlert('Are you sure you want to log out?','delete',function(){
-    // TÜM oturum verilerini temizle
+  showCustomAlert(t('logout_confirm'),'delete',function(){
     try{
       localStorage.removeItem('logged_user');
       localStorage.removeItem('user_prefs_v1');
-      sessionStorage.removeItem(ADMIN_SESSION_KEY);
-      sessionStorage.removeItem('site_lang');
+      try{sessionStorage.removeItem(ADMIN_SESSION_KEY);}catch(e){}
+      try{sessionStorage.removeItem('site_lang');}catch(e){}
+      try{sessionStorage.clear();}catch(e){}
     }catch(e){}
-    // Dil sıfırla
-    currentLang='en';
-    currentAuthMode='signin';
-    // UI'yı komple sıfırla
-    const mab=document.getElementById('mainAuthBox');
-    if(mab)mab.style.display='flex';
-    const cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');
-    if(cse)cse.innerText=LANG.en.contact_sub;if(cme)cme.innerText=LANG.en.contact_main;
-    const abi=document.getElementById('authBoxIcon');if(abi)abi.className='fa-solid fa-right-to-bracket';
-    const hpw=document.getElementById('headerProfileWrapper');if(hpw)hpw.style.display='none';
-    const hpm=document.getElementById('headerProfileMenu');if(hpm)hpm.classList.remove('show');
-    // Force refresh - tüm panelleri kapat
-    try{document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('active'));}catch(e){}
-    try{updateChatBadge();}catch(e){}
-    try{applyTranslations();}catch(e){}
-    try{renderApplications();}catch(e){}
-    try{checkUserSession();}catch(e){}
-    setTimeout(()=>{showCustomAlert('Session closed.','success');},250);
+    setTimeout(function(){
+      try{
+        var base=window.location.href.split('?')[0];
+        window.location.href=base+'?logout=1&t='+Date.now();
+      }catch(e){window.location.reload();}
+    },250);
   });
 }
 
 /* ==================== CHAT ==================== */
-function openChatPanel(){const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert('You must sign in or register first!');openGetInTouchModal();return;}document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';document.getElementById('chatReplyPreview').style.display='none';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent='Messages';chatSearchQuery='';const si=document.getElementById('chatSearchInput');if(si)si.value='';renderChatUsersList();updateChatBadge();}
+function openChatPanel(){const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert('Sign in first!');openGetInTouchModal();return;}document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';document.getElementById('chatReplyPreview').style.display='none';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent='Messages';chatSearchQuery='';const si=document.getElementById('chatSearchInput');if(si)si.value='';renderChatUsersList();updateChatBadge();}
 function closeChatPanel(){document.getElementById('chatPanelModal').classList.remove('active');activeChatUser=null;currentReplyTo=null;const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent='Messages';}
 function filterChatUsers(){const inp=document.getElementById('chatSearchInput');chatSearchQuery=inp?inp.value.trim().toLowerCase():'';const clr=document.getElementById('chatSearchClear');if(clr){chatSearchQuery?clr.classList.add('show'):clr.classList.remove('show');}renderChatUsersList();}
 function clearChatSearch(){chatSearchQuery='';const inp=document.getElementById('chatSearchInput');if(inp)inp.value='';const clr=document.getElementById('chatSearchClear');if(clr)clr.classList.remove('show');renderChatUsersList();}
@@ -1797,17 +1867,10 @@ function renderChatUsersList(){const eff=getEffectiveLoggedUser();if(!eff)return
 function openConversation(user){const eff=getEffectiveLoggedUser();if(!eff)return;const u=eff;activeChatUser=user;const m=getChatMessages();const cid=getConversationId(u.email,user.email);if(m[cid]){let c=false;m[cid].forEach(x=>{if(String(x.to).toLowerCase()===String(u.email).toLowerCase()&&!x.read){x.read=true;c=true;}});if(c)saveChatMessages(m);}document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='flex';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent='Chat';applyChatBackground();renderChatConvHeader();renderChatMessages();updateChatBadge();}
 function backToUsersList(){activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';document.getElementById('chatReplyPreview').style.display='none';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent='Messages';renderChatUsersList();}
 
-/* Chat başlığı — ID yok, geri yok, profil butonu yuvarlak */
-function renderChatConvHeader(){
-  const h=document.getElementById('chatConvHeader');if(!h||!activeChatUser)return;
-  const isA=isAdminUser(activeChatUser.email);
-  const av=activeChatUser.profilePhoto?`<img src="${activeChatUser.profilePhoto}">`:(activeChatUser.name?escapeHtml(activeChatUser.name.trim().charAt(0).toUpperCase()):'?');
-  const uname=String(activeChatUser.username||'').replace(/^@/,'');
-  const se=escapeHtml(activeChatUser.email||'');
-  const vB=(isA||activeChatUser.isVerified)?getVerifiedBadgeHTML(''):'';
-  const crown=isA?`<span class="admin-crown"><i class="fa-solid fa-crown"></i></span>`:'';
-  h.innerHTML=`<div class="chat-user-avatar small${isA?' admin-avatar':''}">${crown}${av}</div><div style="flex:1;min-width:0"><div class="chat-user-name">${escapeHtml(activeChatUser.name||'user')}</div><div class="chat-user-username">${uname?'@'+escapeHtml(uname):''}${vB}</div></div><button class="chat-profile-btn chat-profile-btn-lg" onclick="openPublicUserProfile('${se}')" title="Profile"><i class="fa-solid fa-user-circle"></i></button>`;
-}
+function renderChatConvHeader(){const h=document.getElementById('chatConvHeader');if(!h||!activeChatUser)return;const isA=isAdminUser(activeChatUser.email);const av=activeChatUser.profilePhoto?`<img src="${activeChatUser.profilePhoto}">`:(activeChatUser.name?escapeHtml(activeChatUser.name.trim().charAt(0).toUpperCase()):'?');const uname=String(activeChatUser.username||'').replace(/^@/,'');const se=escapeHtml(activeChatUser.email||'');const vB=(isA||activeChatUser.isVerified)?getVerifiedBadgeHTML(''):'';const crown=isA?`<span class="admin-crown"><i class="fa-solid fa-crown"></i></span>`:'';h.innerHTML=`<div class="chat-user-avatar small${isA?' admin-avatar':''}">${crown}${av}</div><div style="flex:1;min-width:0"><div class="chat-user-name">${escapeHtml(activeChatUser.name||'user')}</div><div class="chat-user-username">${uname?'@'+escapeHtml(uname):''}${vB}</div></div><button class="chat-profile-btn chat-profile-btn-lg" onclick="openPublicUserProfile('${se}')" title="Profile"><i class="fa-solid fa-user-circle"></i></button>`;}
+
+function getWaveformBars(seed,count){let bars='';let h=0;const s=String(seed||'x');for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;for(let i=0;i<count;i++){h=(h*1103515245+12345)>>>0;const height=5+(h%17);bars+=`<span class="voice-bar" style="height:${height}px"></span>`;}return bars;}
+function toggleVoicePlayback(btn){const wrap=btn.closest('.chat-voice-msg');if(!wrap)return;const audio=wrap.querySelector('audio');if(!audio||!audio.src)return;if(audio.paused){document.querySelectorAll('.chat-voice-msg audio').forEach(a=>{if(a!==audio&&!a.paused){a.pause();const ob=a.closest('.chat-voice-msg').querySelector('.voice-play-btn');if(ob)ob.innerHTML='<i class="fa-solid fa-play"></i>';}});audio.play().catch(()=>{});btn.innerHTML='<i class="fa-solid fa-pause"></i>';}else{audio.pause();btn.innerHTML='<i class="fa-solid fa-play"></i>';}}
 
 function renderChatMessages(){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);const conv=m[cid]||[];const box=document.getElementById('chatMessages');if(!box)return;box.innerHTML='';if(conv.length===0){box.innerHTML='<div class="chat-empty">'+t('chat_start')+'</div>';return;}const myEmail=String(u.email).toLowerCase();
   conv.forEach((msg,idx)=>{const isMine=String(msg.from).toLowerCase()===myEmail;const div=document.createElement('div');div.className='chat-msg '+(isMine?'mine':'theirs');const d=new Date(msg.timestamp);const time=d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});const readStatus=isMine?`<span class="read-status">${msg.read?'✓✓':'✓'}</span>`:'';
@@ -1815,8 +1878,6 @@ function renderChatMessages(){const eff=getEffectiveLoggedUser();if(!eff||!activ
     else if(msg.type==='photo'){div.innerHTML=`<div class="chat-msg-photo" onclick="openChatPhoto(${idx})"><img src="${msg.photoData||''}" alt="photo"></div><div class="chat-msg-actions">${!isMine?`<button class="chat-msg-action-btn" onclick="replyToMessage(${idx})"><i class="fa-solid fa-reply"></i></button>`:''}${isMine?`<button class="chat-msg-action-btn delete" onclick="deleteMessage(${idx})"><i class="fa-solid fa-trash"></i></button>`:''}</div><div class="chat-msg-time">${time} ${readStatus}</div>`;box.appendChild(div);}
     else{div.innerHTML=`<div class="chat-msg-text">${escapeHtml(msg.text||'')}</div><div class="chat-msg-actions">${!isMine?`<button class="chat-msg-action-btn" onclick="replyToMessage(${idx})"><i class="fa-solid fa-reply"></i></button>`:''}${isMine?`<button class="chat-msg-action-btn delete" onclick="deleteMessage(${idx})"><i class="fa-solid fa-trash"></i></button>`:''}</div><div class="chat-msg-time">${time} ${readStatus}</div>`;box.appendChild(div);}});box.scrollTop=box.scrollHeight;}
 function formatDuration(sec){sec=Math.max(0,Math.floor(sec));const m=Math.floor(sec/60),s=sec%60;return m+':'+String(s).padStart(2,'0');}
-function getWaveformBars(seed,count){let bars='';let h=0;const s=String(seed||'x');for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;for(let i=0;i<count;i++){h=(h*1103515245+12345)>>>0;const height=5+(h%17);bars+=`<span class="voice-bar" style="height:${height}px"></span>`;}return bars;}
-function toggleVoicePlayback(btn){const wrap=btn.closest('.chat-voice-msg');if(!wrap)return;const audio=wrap.querySelector('audio');if(!audio||!audio.src)return;if(audio.paused){document.querySelectorAll('.chat-voice-msg audio').forEach(a=>{if(a!==audio&&!a.paused){a.pause();const ob=a.closest('.chat-voice-msg').querySelector('.voice-play-btn');if(ob)ob.innerHTML='<i class="fa-solid fa-play"></i>';}});audio.play().catch(()=>{});btn.innerHTML='<i class="fa-solid fa-pause"></i>';}else{audio.pause();btn.innerHTML='<i class="fa-solid fa-play"></i>';}}
 function replyToMessage(idx){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);const conv=m[cid]||[];const msg=conv[idx];if(!msg)return;const previewText=msg.type==='voice'?t('chat_voice'):(msg.type==='photo'?'📷 photo':(msg.text||''));currentReplyTo={name:msg.fromName||msg.from,text:previewText,idx};document.getElementById('replyName').innerText='↩ '+currentReplyTo.name;document.getElementById('replyText').innerText=currentReplyTo.text;document.getElementById('chatReplyPreview').style.display='flex';document.getElementById('chatInput').focus();}
 function cancelReply(){currentReplyTo=null;document.getElementById('chatReplyPreview').style.display='none';}
 function deleteMessage(idx){showCustomAlert('Delete this message?','delete',function(){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);if(m[cid]&&m[cid][idx]){m[cid].splice(idx,1);saveChatMessages(m);renderChatMessages();}});}
@@ -1826,7 +1887,7 @@ function handleChatPhotoUpload(event){const f=event.target.files[0];if(!f||!f.ty
 function sendPhotoMessage(dataUrl){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);if(!m[cid])m[cid]=[];m[cid].push({from:u.email,to:activeChatUser.email,fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',type:'photo',photoData:dataUrl,timestamp:new Date().toISOString(),read:false,replyTo:currentReplyTo?{name:currentReplyTo.name,text:currentReplyTo.text}:null});saveChatMessages(m);currentReplyTo=null;document.getElementById('chatReplyPreview').style.display='none';renderChatMessages();logActivity('chat_message',u,`Photo to ${activeChatUser.email}`);}
 function openChatPhoto(idx){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const m=getChatMessages();const cid=getConversationId(eff.email,activeChatUser.email);const conv=m[cid]||[];if(conv[idx]&&conv[idx].photoData){document.getElementById('lightboxImage').src=conv[idx].photoData;document.getElementById('lightboxOverlay').classList.add('active');}}
 
-/* ==================== USER PROFILE (SİTE + KOPYA BUTONU) ==================== */
+/* === USER PROFILE (KOPYA İKONU KALDIRILDI, WEBSITE GÖRÜNÜYOR) === */
 function openPublicUserProfile(email){
   const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert('You must sign in.');return;}
   const users=getAllUsers();let u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());
@@ -1843,8 +1904,8 @@ function openPublicUserProfile(email){
   const isVer=(isAdm||u.isVerified);
   const vB=isVer?getVerifiedBadgeHTML('lg'):'';
   const idNum=escapeHtml(u.userId||'-');
-  // ID + kopyalama butonu
-  const idRowHTML=`<div class="pub-profile-info-row"><span><i class="fa-solid fa-id-badge"></i>ID</span><span style="font-family:'Fira Code',monospace;font-weight:700;color:var(--accent);">${idNum} <button type="button" class="copy-id-btn-sm" onclick="copyToClipboard('${idNum}',this)" title="Copy ID"><i class="fa-regular fa-copy"></i></button></span></div>`;
+  // KOPYALAMA İKONU YOK
+  const idRowHTML=`<div class="pub-profile-info-row"><span><i class="fa-solid fa-id-badge"></i>ID</span><span style="font-family:'Fira Code',monospace;font-weight:700;color:var(--accent);">${idNum}</span></div>`;
   // Username altında WEBSITE linki
   let websiteHTML='';
   if(u.website){
@@ -1879,7 +1940,7 @@ function toggleHeaderProfileMenu(e){if(e)e.stopPropagation();const m=document.ge
 function closeHeaderProfileMenu(){const m=document.getElementById('headerProfileMenu');if(m)m.classList.remove('show');}
 window.addEventListener('click',function(e){const m=document.getElementById('headerProfileMenu');const w=document.getElementById('headerProfileWrapper');if(m&&w&&!w.contains(e.target))m.classList.remove('show');});
 
-/* === MESSENGER — SÜRÜKLENEBİLİR === */
+/* === MESSENGER SÜRÜKLENEBİLİR === */
 function initMessengerBtn(){const btn=document.getElementById('messengerFloatBtn');if(!btn)return;updateMessengerDefaultPosition();
   const onDown=(e)=>{if(e.target.closest('.messenger-badge'))return;const pt=e.touches?e.touches[0]:e;messengerDragState.isDragging=true;messengerDragState.moved=false;messengerDragState.startX=pt.clientX;messengerDragState.startY=pt.clientY;messengerDragState.startPosX=messengerPos.x;messengerDragState.startPosY=messengerPos.y;btn.classList.add('dragging');};
   const onMove=(e)=>{if(!messengerDragState.isDragging)return;const pt=e.touches?e.touches[0]:e;const dx=pt.clientX-messengerDragState.startX,dy=pt.clientY-messengerDragState.startY;if(Math.abs(dx)>4||Math.abs(dy)>4)messengerDragState.moved=true;messengerPos.x=Math.max(6,Math.min(window.innerWidth-38,messengerDragState.startPosX+dx));messengerPos.y=Math.max(6,Math.min(window.innerHeight-38,messengerDragState.startPosY+dy));applyMessengerPos();if(e.cancelable)e.preventDefault();};
@@ -1889,21 +1950,21 @@ function initMessengerBtn(){const btn=document.getElementById('messengerFloatBtn
 function updateMessengerDefaultPosition(){const btn=document.getElementById('messengerFloatBtn');if(!btn)return;const hpp=document.getElementById('headerProfilePhoto');const hpw=document.getElementById('headerProfileWrapper');let x=window.innerWidth-44,y=100;if(hpw&&hpw.style.display!=='none'&&hpp){const r=hpp.getBoundingClientRect();x=r.right-34;y=r.bottom+6;}messengerPos={x:Math.max(6,x),y:Math.max(6,y)};applyMessengerPos();}
 function applyMessengerPos(){const btn=document.getElementById('messengerFloatBtn');if(!btn||!messengerPos)return;btn.style.left=messengerPos.x+'px';btn.style.top=messengerPos.y+'px';btn.style.right='auto';btn.style.bottom='auto';}
 
-/* ==================== ORDER SİSTEMİ ==================== */
+/* ==================== ORDER ==================== */
 function getOrders(){try{return JSON.parse(localStorage.getItem(ORDERS_KEY)||'[]');}catch(e){return[];}}
 function saveOrders(o){try{localStorage.setItem(ORDERS_KEY,JSON.stringify(o));}catch(e){}}
 function getOrderSettings(){const c=getSiteContent();if(!c.general)c.general={};if(c.general.orderRequireLogin===undefined)c.general.orderRequireLogin=true;return{requireLogin:c.general.orderRequireLogin};}
 function setOrderRequireLogin(v){const c=getSiteContent();if(!c.general)c.general={};c.general.orderRequireLogin=!!v;saveSiteContent(c);showCustomAlert(v?'🔒 Order requires login':'🔓 Anyone can order','success');}
-function openOrderModal(){const s=getOrderSettings();const lu=localStorage.getItem('logged_user');if(s.requireLogin&&!lu){showCustomAlert('⚠️ You must sign in to place an order.','warning');setTimeout(()=>openGetInTouchModal(),400);return;}const f=document.getElementById('orderForm');if(f)f.reset();if(lu){try{const u=JSON.parse(lu);const n=document.getElementById('orderName'),m=document.getElementById('orderEmail');if(n&&!n.value)n.value=u.name||'';if(m&&!m.value)m.value=u.email||'';}catch(e){}}document.getElementById('orderModal').classList.add('active');}
+function openOrderModal(){const s=getOrderSettings();const lu=localStorage.getItem('logged_user');if(s.requireLogin&&!lu){showCustomAlert('⚠️ '+t('you_must_signin'),'warning');setTimeout(()=>openGetInTouchModal(),400);return;}const f=document.getElementById('orderForm');if(f)f.reset();if(lu){try{const u=JSON.parse(lu);const n=document.getElementById('orderName'),m=document.getElementById('orderEmail');if(n&&!n.value)n.value=u.name||'';if(m&&!m.value)m.value=u.email||'';}catch(e){}}document.getElementById('orderModal').classList.add('active');}
 function closeOrderModal(){document.getElementById('orderModal').classList.remove('active');}
-function submitOrder(e){e.preventDefault();const s=getOrderSettings();const logged=!!localStorage.getItem('logged_user');if(s.requireLogin&&!logged){closeOrderModal();showCustomAlert('⚠️ You must sign in to place an order.','warning');setTimeout(()=>openGetInTouchModal(),400);return;}const o={id:'o_'+Date.now()+'_'+Math.random().toString(36).substring(2,6),name:document.getElementById('orderName').value.trim(),email:document.getElementById('orderEmail').value.trim().toLowerCase(),type:document.getElementById('orderType').value,budget:document.getElementById('orderBudget').value.trim(),deadline:document.getElementById('orderDeadline').value.trim(),description:document.getElementById('orderDesc').value.trim(),timestamp:new Date().toISOString(),status:'new',read:false,guest:!logged};if(!o.name||!o.email||!o.description){showCustomAlert('Please fill in all required fields.');return;}const all=getOrders();all.unshift(o);saveOrders(all);updateOrdersBadge();logActivity('order_submitted',{name:o.name,email:o.email},`Type: ${o.type} | ${o.description.substring(0,60)}`);closeOrderModal();playApplauseSound();fireConfettiBurst(1);showCustomAlert('✅ Order received! We will contact you soon.','success');}
+function submitOrder(e){e.preventDefault();const s=getOrderSettings();const logged=!!localStorage.getItem('logged_user');if(s.requireLogin&&!logged){closeOrderModal();showCustomAlert('⚠️ '+t('you_must_signin'),'warning');setTimeout(()=>openGetInTouchModal(),400);return;}const o={id:'o_'+Date.now()+'_'+Math.random().toString(36).substring(2,6),name:document.getElementById('orderName').value.trim(),email:document.getElementById('orderEmail').value.trim().toLowerCase(),type:document.getElementById('orderType').value,budget:document.getElementById('orderBudget').value.trim(),deadline:document.getElementById('orderDeadline').value.trim(),description:document.getElementById('orderDesc').value.trim(),timestamp:new Date().toISOString(),status:'new',read:false,guest:!logged};if(!o.name||!o.email||!o.description){showCustomAlert(t('fill_fields'));return;}const all=getOrders();all.unshift(o);saveOrders(all);updateOrdersBadge();logActivity('order_submitted',{name:o.name,email:o.email},`Type: ${o.type}`);closeOrderModal();playApplauseSound();fireConfettiBurst(1);showCustomAlert('✅ '+t('order_received'),'success');}
 function getUnreadOrdersCount(){return getOrders().filter(o=>o.status==='new'||!o.read).length;}
 function updateOrdersBadge(){const b=document.getElementById('ordersTabBadge');const c=getUnreadOrdersCount();if(b){if(c>0){b.style.display='inline-flex';b.textContent=c>99?'99+':String(c);}else b.style.display='none';}}
-function renderAdminOrders(){const list=document.getElementById('adminOrdersList');if(!list)return;const orders=getOrders();if(!orders.length){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">No orders yet.</p>';return;}list.innerHTML='';orders.forEach((o,idx)=>{const d=new Date(o.timestamp);const st=o.status||'new';const badge=`<span class="order-status-badge ${st}">${st==='new'?'● NEW':st==='read'?'READ':'✓ APPROVED'}</span>`;const item=document.createElement('div');item.className='user-card';item.style.borderLeft='3px solid var(--accent)';item.innerHTML=`<div class="user-card-info" style="flex:1"><div class="user-card-name">${escapeHtml(o.name)} <span style="font-size:.6rem;padding:1px 6px;border-radius:8px;background:rgba(var(--accent-rgb),.15);color:var(--accent)">${escapeHtml(o.type)}</span> ${badge} ${o.guest?'<span style="font-size:.55rem;padding:2px 6px;border-radius:8px;background:rgba(148,163,184,.15);color:var(--text-secondary)">GUEST</span>':''}</div><div class="user-card-detail"><i class="fa-solid fa-envelope"></i>${escapeHtml(o.email)}</div>${o.budget?`<div class="user-card-detail"><i class="fa-solid fa-dollar-sign"></i>${escapeHtml(o.budget)}</div>`:''}${o.deadline?`<div class="user-card-detail"><i class="fa-solid fa-clock"></i>${escapeHtml(o.deadline)}</div>`:''}<div class="user-card-detail" style="margin-top:6px;color:var(--text-color-override);white-space:pre-wrap;font-size:.72rem;">${escapeHtml(o.description)}</div><div class="user-card-detail" style="opacity:.7">${d.toLocaleString()}</div></div><div class="user-card-btns">${o.status!=='approved'?`<button class="user-view-btn" onclick="approveOrder(${idx})" title="Approve" style="color:#22c55e"><i class="fa-solid fa-check-double"></i></button>`:''}<button class="user-view-btn" onclick="markOrderRead(${idx})" title="Read"><i class="fa-solid fa-check"></i></button><button class="user-view-btn danger" onclick="deleteOrder(${idx})" title="Delete"><i class="fa-solid fa-trash-can"></i></button></div>`;list.appendChild(item);});}
+function renderAdminOrders(){const list=document.getElementById('adminOrdersList');if(!list)return;const orders=getOrders();if(!orders.length){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">'+t('no_orders')+'</p>';return;}list.innerHTML='';orders.forEach((o,idx)=>{const d=new Date(o.timestamp);const st=o.status||'new';const badge=`<span class="order-status-badge ${st}">${st==='new'?'● NEW':st==='read'?'READ':'✓ APPROVED'}</span>`;const item=document.createElement('div');item.className='user-card';item.style.borderLeft='3px solid var(--accent)';item.innerHTML=`<div class="user-card-info" style="flex:1"><div class="user-card-name">${escapeHtml(o.name)} <span style="font-size:.6rem;padding:1px 6px;border-radius:8px;background:rgba(var(--accent-rgb),.15);color:var(--accent)">${escapeHtml(o.type)}</span> ${badge} ${o.guest?'<span style="font-size:.55rem;padding:2px 6px;border-radius:8px;background:rgba(148,163,184,.15);color:var(--text-secondary)">GUEST</span>':''}</div><div class="user-card-detail"><i class="fa-solid fa-envelope"></i>${escapeHtml(o.email)}</div>${o.budget?`<div class="user-card-detail"><i class="fa-solid fa-dollar-sign"></i>${escapeHtml(o.budget)}</div>`:''}${o.deadline?`<div class="user-card-detail"><i class="fa-solid fa-clock"></i>${escapeHtml(o.deadline)}</div>`:''}<div class="user-card-detail" style="margin-top:6px;color:var(--text-color-override);white-space:pre-wrap;font-size:.72rem;">${escapeHtml(o.description)}</div><div class="user-card-detail" style="opacity:.7">${d.toLocaleString()}</div></div><div class="user-card-btns">${o.status!=='approved'?`<button class="user-view-btn" onclick="approveOrder(${idx})" title="Approve" style="color:#22c55e"><i class="fa-solid fa-check-double"></i></button>`:''}<button class="user-view-btn" onclick="markOrderRead(${idx})" title="Read"><i class="fa-solid fa-check"></i></button><button class="user-view-btn danger" onclick="deleteOrder(${idx})" title="Delete"><i class="fa-solid fa-trash-can"></i></button></div>`;list.appendChild(item);});}
 function markOrderRead(idx){const o=getOrders();if(o[idx]){o[idx].read=true;o[idx].status='read';saveOrders(o);updateOrdersBadge();renderAdminOrders();}}
 function deleteOrder(idx){showCustomAlert('Delete this order?','delete',()=>{const o=getOrders();o.splice(idx,1);saveOrders(o);updateOrdersBadge();renderAdminOrders();});}
 function clearAllOrders(){showCustomAlert('Delete all orders?','delete',()=>{localStorage.removeItem(ORDERS_KEY);updateOrdersBadge();renderAdminOrders();});}
-async function approveOrder(idx){const orders=getOrders();if(!orders[idx])return;showCustomAlert('Approve this order and send email to customer?','warning',async function(){const r=await sendOrderApprovalEmail(orders[idx]);if(r.success){orders[idx].status='approved';orders[idx].read=true;orders[idx].approvedAt=new Date().toISOString();saveOrders(orders);renderAdminOrders();updateOrdersBadge();logActivity('order_approved',{name:orders[idx].name,email:orders[idx].email},'Email sent');showCustomAlert('✅ Order approved and email sent!','success');fireConfettiBurst(.8);}else{showCustomAlert('Email failed: '+(r.reason||'unknown'),'error');}});}
+async function approveOrder(idx){const orders=getOrders();if(!orders[idx])return;showCustomAlert('Approve this order and send email?','warning',async function(){const r=await sendOrderApprovalEmail(orders[idx]);if(r.success){orders[idx].status='approved';orders[idx].read=true;orders[idx].approvedAt=new Date().toISOString();saveOrders(orders);renderAdminOrders();updateOrdersBadge();logActivity('order_approved',{name:orders[idx].name,email:orders[idx].email},'Email sent');showCustomAlert('✅ '+t('order_approved'),'success');fireConfettiBurst(.8);}else{showCustomAlert('Email failed: '+(r.reason||'unknown'),'error');}});}
 async function sendOrderApprovalEmail(order){if(!EMAILJS_CONFIG.enabled)return{success:false,reason:'not_configured'};const brand=getDyn('header.brand','muminsultani');const logoUrl='https://muminsultani.com/img/ms.png';const bodyText='Hello '+order.name+',\n\nYour order has been approved! 🎉\n\n• Type: '+order.type+'\n• Budget: '+(order.budget||'Not specified')+'\n• Deadline: '+(order.deadline||'Not specified')+'\n\nDescription:\n'+order.description+'\n\nWe will contact you soon.\n\nThanks,\n'+brand;const tp={to_email:order.email,from_email:ADMIN_EMAIL,from_name:brand,reply_to:ADMIN_EMAIL,brand:brand,subject:'✅ Order Approved — '+brand,message:bodyText,image_url:logoUrl,link_url:'https://muminsultani.com',link_text:'Visit Site',has_image:'yes',has_link:'yes',has_pdf:'no',pdf_url:'',year:new Date().getFullYear(),type:'Order Approval',code:'—'};try{const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EMAILJS_CONFIG.serviceId,template_id:EMAILJS_CONFIG.templateId,user_id:EMAILJS_CONFIG.publicKey,template_params:tp})});const txt=await r.text();if(r.ok&&(txt==='OK'||r.status===200))return{success:true};return{success:false,reason:txt||('HTTP '+r.status)};}catch(err){return{success:false,reason:err.message||'network_error'};}}
 
 /* ==================== ADMIN ==================== */
@@ -1912,22 +1973,22 @@ function closeAdminLogin(){document.getElementById('adminLoginModal').classList.
 function verifyAdminPassword(e){if(e)e.preventDefault();const v=getPasswordValue('adminPasswordInput');if(v===ADMIN_MASTER_PASSWORD){try{sessionStorage.setItem(ADMIN_SESSION_KEY,'yes');}catch(err){}closeAdminLogin();openAdminPanel();fireConfettiBurst(.6);}else{showCustomAlert('Wrong password!');setPasswordValue('adminPasswordInput','');}}
 function logoutAdmin(){try{sessionStorage.removeItem(ADMIN_SESSION_KEY);}catch(e){}closeAdminPanel();}
 
-function renderAdminUsers(){const list=document.getElementById('adminUsersList');if(!list)return;const u=getAllUsers();if(!u.length){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">No registered users.</p>';return;}list.innerHTML='';u.forEach((user,idx)=>{const card=document.createElement('div');card.className='user-card';const av=user.profilePhoto?`<img src="${user.profilePhoto}">`:(user.name?user.name.trim().charAt(0).toUpperCase():'?');const se=escapeHtml(String(user.email||''));const isA=isAdminUser(user.email);const isV=isA||user.isVerified;const vB=isV?getVerifiedBadgeHTML('sm'):'';const vB2=isA?'':`<button class="user-view-btn verify${isV?' active':''}" onclick="toggleUserVerification('${se}')"><i class="fa-solid fa-circle-check"></i></button>`;card.innerHTML=`<div class="user-card-avatar">${av}</div><div class="user-card-info"><div class="user-card-name">${escapeHtml(user.name||'unknown')}${vB}</div><div class="user-card-detail"><i class="fa-solid fa-id-badge"></i>${escapeHtml(user.userId||'-')}</div><div class="user-card-detail"><i class="fa-solid fa-at"></i>${escapeHtml(user.username||'-')}</div><div class="user-card-detail"><i class="fa-solid fa-envelope"></i>${escapeHtml(user.email||'-')}</div></div><div class="user-card-btns">${vB2}<button class="user-view-btn" title="Email" onclick="openAdminUserEmail('${se}')" style="color:#22c55e"><i class="fa-solid fa-envelope"></i></button><button class="user-view-btn msg" onclick="adminMessageUser('${se}')"><i class="fa-solid fa-comment"></i></button><button class="user-view-btn" onclick="viewUserDetail(${idx})"><i class="fa-solid fa-eye"></i></button><button class="user-view-btn danger" onclick="deleteUserAdmin('${se}')"><i class="fa-solid fa-trash-can"></i></button></div>`;list.appendChild(card);});}
+function renderAdminUsers(){const list=document.getElementById('adminUsersList');if(!list)return;const u=getAllUsers();if(!u.length){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">No users.</p>';return;}list.innerHTML='';u.forEach((user,idx)=>{const card=document.createElement('div');card.className='user-card';const av=user.profilePhoto?`<img src="${user.profilePhoto}">`:(user.name?user.name.trim().charAt(0).toUpperCase():'?');const se=escapeHtml(String(user.email||''));const isA=isAdminUser(user.email);const isV=isA||user.isVerified;const vB=isV?getVerifiedBadgeHTML('sm'):'';const vB2=isA?'':`<button class="user-view-btn verify${isV?' active':''}" onclick="toggleUserVerification('${se}')"><i class="fa-solid fa-circle-check"></i></button>`;card.innerHTML=`<div class="user-card-avatar">${av}</div><div class="user-card-info"><div class="user-card-name">${escapeHtml(user.name||'unknown')}${vB}</div><div class="user-card-detail"><i class="fa-solid fa-id-badge"></i>${escapeHtml(user.userId||'-')}</div><div class="user-card-detail"><i class="fa-solid fa-at"></i>${escapeHtml(user.username||'-')}</div><div class="user-card-detail"><i class="fa-solid fa-envelope"></i>${escapeHtml(user.email||'-')}</div></div><div class="user-card-btns">${vB2}<button class="user-view-btn" title="Email" onclick="openAdminUserEmail('${se}')" style="color:#22c55e"><i class="fa-solid fa-envelope"></i></button><button class="user-view-btn msg" onclick="adminMessageUser('${se}')"><i class="fa-solid fa-comment"></i></button><button class="user-view-btn" onclick="viewUserDetail(${idx})"><i class="fa-solid fa-eye"></i></button><button class="user-view-btn danger" onclick="deleteUserAdmin('${se}')"><i class="fa-solid fa-trash-can"></i></button></div>`;list.appendChild(card);});}
 function toggleUserVerification(email){if(!email)return;if(isAdminUser(email)){showCustomAlert('Admin already verified');return;}let u=getAllUsers();const i=u.findIndex(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());if(i===-1)return;u[i].isVerified=!u[i].isVerified;localStorage.setItem('site_users',JSON.stringify(u));logActivity('profile_update',u[i],'Verified: '+(u[i].isVerified?'YES':'NO'));renderAdminUsers();refreshAdminUI();showCustomAlert(u[i].isVerified?'✅ Granted':'Removed','success');}
-function adminMessageUser(email){if(!isAdminLoggedIn()){showCustomAlert('Please sign in as admin first!');return;}const t2=getAllUsers().find(u=>String(u.email||'').toLowerCase()===String(email||'').toLowerCase());if(!t2){showCustomAlert('User not found!');return;}const lu=localStorage.getItem('logged_user');let cu=null;if(lu){try{cu=JSON.parse(lu);}catch(e){}}if(!cu||!isAdminUser(cu.email)){const a=getAdminUser();localStorage.setItem('logged_user',JSON.stringify(a));checkUserSession();}closeAdminPanel();document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='flex';applyChatBackground();openConversation(t2);}
+function adminMessageUser(email){if(!isAdminLoggedIn()){showCustomAlert('Sign in as admin first!');return;}const t2=getAllUsers().find(u=>String(u.email||'').toLowerCase()===String(email||'').toLowerCase());if(!t2){showCustomAlert('User not found!');return;}const lu=localStorage.getItem('logged_user');let cu=null;if(lu){try{cu=JSON.parse(lu);}catch(e){}}if(!cu||!isAdminUser(cu.email)){const a=getAdminUser();localStorage.setItem('logged_user',JSON.stringify(a));checkUserSession();}closeAdminPanel();document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='flex';applyChatBackground();openConversation(t2);}
 function viewUserDetail(idx){const users=getAllUsers();const u=users[idx];if(!u)return;const av=u.profilePhoto?`<img src="${u.profilePhoto}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:10px;">`:'';const isA=isAdminUser(u.email);const isV=isA||u.isVerified;const vB=isV?getVerifiedBadgeHTML('lg'):'';let rows=`<div style="text-align:center;margin-bottom:16px;">${av}<div style="font-size:1.1rem;font-weight:800;display:flex;align-items:center;justify-content:center;gap:6px;">${escapeHtml(u.name||'unknown')}${vB}</div><div style="font-size:.75rem;color:var(--text-secondary);">${escapeHtml(u.username||'')}</div></div><div class="user-detail-modal-row"><span>ID</span><span>${escapeHtml(u.userId||'-')}</span></div><div class="user-detail-modal-row"><span>Email</span><span>${escapeHtml(u.email||'-')}</span></div><div class="user-detail-modal-row"><span>Password</span><span style="font-family:'Fira Code',monospace;font-size:.7rem;">${escapeHtml(u.password||'-')}</span></div><div class="user-detail-modal-row"><span>Bio</span><span>${escapeHtml(u.bio||'-')}</span></div><div class="user-detail-modal-row"><span>Verified</span><span>${isV?'yes':'no'}</span></div><div class="user-detail-modal-row"><span>Joined</span><span>${u.createdAt?new Date(u.createdAt).toLocaleString():'-'}</span></div><div class="form-buttons-group" style="margin-top:12px">${!isA?`<button class="submit-btn" onclick="toggleUserVerification('${escapeHtml(String(u.email||''))}');closeUserDetail();" style="background:linear-gradient(135deg,#1d9bf0,#1a8cd8)"><i class="fa-solid fa-circle-check"></i> ${isV?'Remove':'Verify'}</button>`:''}<button class="submit-btn" onclick="closeUserDetail();openAdminUserEmail('${escapeHtml(String(u.email||''))}');" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-envelope"></i> Email</button><button class="submit-btn email-btn" onclick="adminMessageUser('${escapeHtml(String(u.email||''))}');closeUserDetail();"><i class="fa-solid fa-comment"></i> Msg</button><button class="submit-btn" onclick="deleteUserAdmin('${escapeHtml(String(u.email||''))}')" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fa-solid fa-trash-can"></i> Del</button></div>`;document.getElementById('userDetailContent').innerHTML=rows;document.getElementById('userDetailModal').classList.add('active');}
 function closeUserDetail(){document.getElementById('userDetailModal').classList.remove('active');}
-function deleteUserAdmin(email){if(!email)return;const u=getAllUsers();const user=u.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());if(!user){showCustomAlert('User not found!');return;}if(isAdminUser(user.email)){showCustomAlert('Admin account cannot be deleted!');return;}showCustomAlert(`"${user.name||user.email}" delete?`,'delete',function(){const tg=String(email).toLowerCase();const nu=u.filter(x=>String(x.email||'').toLowerCase()!==tg);localStorage.setItem('site_users',JSON.stringify(nu));const m=getChatMessages();for(const cid in m){const p=cid.split('__');if(p.includes(tg))delete m[cid];}saveChatMessages(m);const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);if(String(cu.email||'').toLowerCase()===tg)localStorage.removeItem('logged_user');}catch(e){}}renderAdminUsers();refreshAdminUI();updateChatBadge();closeUserDetail();showCustomAlert('User deleted!','success');});}
-function exportUsersCSV(){const users=getAllUsers();if(!users.length){showCustomAlert('No registered users.');return;}const rows=[['ID','Name','Username','Email','Password','Bio','Website','Verified']];users.forEach(u=>rows.push([u.userId||'',u.name,u.username,u.email,u.password,u.bio||'',u.website||'',(isAdminUser(u.email)||u.isVerified)?'Yes':'No']));const csv=rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`users-${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);showCustomAlert('CSV downloaded!','success');}
+function deleteUserAdmin(email){if(!email)return;const u=getAllUsers();const user=u.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());if(!user){showCustomAlert('User not found!');return;}if(isAdminUser(user.email)){showCustomAlert('Admin cannot be deleted!');return;}showCustomAlert(`"${user.name||user.email}" delete?`,'delete',function(){const tg=String(email).toLowerCase();const nu=u.filter(x=>String(x.email||'').toLowerCase()!==tg);localStorage.setItem('site_users',JSON.stringify(nu));const m=getChatMessages();for(const cid in m){const p=cid.split('__');if(p.includes(tg))delete m[cid];}saveChatMessages(m);const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);if(String(cu.email||'').toLowerCase()===tg)localStorage.removeItem('logged_user');}catch(e){}}renderAdminUsers();refreshAdminUI();updateChatBadge();closeUserDetail();showCustomAlert('User deleted!','success');});}
+function exportUsersCSV(){const users=getAllUsers();if(!users.length){showCustomAlert('No users.');return;}const rows=[['ID','Name','Username','Email','Password','Bio','Website','Verified']];users.forEach(u=>rows.push([u.userId||'',u.name,u.username,u.email,u.password,u.bio||'',u.website||'',(isAdminUser(u.email)||u.isVerified)?'Yes':'No']));const csv=rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`users-${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);showCustomAlert('CSV downloaded!','success');}
 function clearAllUsers(){showCustomAlert('All users will be deleted!','delete',function(){const u=getAllUsers();const admin=u.find(x=>x.isAdmin===true||isAdminUser(x.email));localStorage.setItem('site_users',JSON.stringify(admin?[admin]:[]));checkUserSession();renderAdminUsers();renderApplications();showCustomAlert('Deleted!','success');});}
 let activityFilterType='all';
 function renderAdminActivity(){const list=document.getElementById('adminActivityList');if(!list)return;let l=getActivityLog();if(activityFilterType!=='all')l=l.filter(x=>x.type===activityFilterType);l=l.reverse();if(!l.length){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">No records.</p>';return;}list.innerHTML='';l.slice(0,200).forEach(a=>{const item=document.createElement('div');item.className='activity-item';const d=new Date(a.timestamp);item.innerHTML=`<div class="activity-icon"><i class="fa-solid fa-circle-info"></i></div><div class="activity-body"><div class="activity-title">${escapeHtml(a.name||a.email||'Unknown')} <span style="font-size:.6rem;padding:1px 6px;border-radius:10px;background:rgba(var(--accent-rgb),.15);color:var(--accent)">${a.type}</span></div><div class="activity-meta">${a.details?escapeHtml(a.details):''}</div></div><div class="activity-time">${d.toLocaleString()}</div>`;list.appendChild(item);});}
 function filterActivity(type,btn){activityFilterType=type;document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderAdminActivity();}
 function clearActivityLog(){showCustomAlert('All activity logs will be deleted!','delete',function(){localStorage.removeItem(ACTIVITY_LOG_KEY);renderAdminActivity();refreshAdminUI();showCustomAlert('Deleted!','success');});}
 function exportActivityCSV(){const logs=getActivityLog();if(!logs.length){showCustomAlert('No records.');return;}const rows=[['Time','Type','Name','User ID','Email','Details']];logs.forEach(l=>rows.push([l.timestamp,l.type,l.name,l.userId||'',l.email,l.details]));const csv=rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`activity-${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);showCustomAlert('CSV downloaded!','success');}
-function renderAdminChats(){const list=document.getElementById('adminChatsList');if(!list)return;const msgs=getChatMessages();const cIds=Object.keys(msgs);let total=0;cIds.forEach(c=>total+=msgs[c].length);if(total===0){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">No messages yet.</p>';return;}list.innerHTML='';}
-function clearAllChats(){showCustomAlert('All chat messages will be deleted!','delete',function(){localStorage.removeItem(CHAT_KEY);updateChatBadge();renderAdminChats();refreshAdminUI();showCustomAlert('Deleted!','success');});}
-function exportChatsCSV(){const msgs=getChatMessages();const rows=[['Conv','From','To','Name','UserID','Type','Text','Time','Read']];let c=0;for(const k in msgs){msgs[k].forEach(m=>{const b=m.type==='voice'?`[VOICE ${m.duration||0}s]`:(m.type==='photo'?'[PHOTO]':(m.text||''));rows.push([k,m.from,m.to,m.fromName||'',m.fromUserId||'',m.type||'text',b,m.timestamp,m.read?'Yes':'No']);c++;});}if(!c){showCustomAlert('No messages yet.');return;}const csv=rows.map(r=>r.map(x=>`"${String(x||'').replace(/"/g,'""')}"`).join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`chats-${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);showCustomAlert('CSV downloaded!','success');}
+function renderAdminChats(){const list=document.getElementById('adminChatsList');if(!list)return;const msgs=getChatMessages();const cIds=Object.keys(msgs);let total=0;cIds.forEach(c=>total+=msgs[c].length);if(total===0){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">No messages.</p>';return;}list.innerHTML='';}
+function clearAllChats(){showCustomAlert('All chats will be deleted!','delete',function(){localStorage.removeItem(CHAT_KEY);updateChatBadge();renderAdminChats();refreshAdminUI();showCustomAlert('Deleted!','success');});}
+function exportChatsCSV(){const msgs=getChatMessages();const rows=[['Conv','From','To','Name','UserID','Type','Text','Time','Read']];let c=0;for(const k in msgs){msgs[k].forEach(m=>{const b=m.type==='voice'?`[VOICE ${m.duration||0}s]`:(m.type==='photo'?'[PHOTO]':(m.text||''));rows.push([k,m.from,m.to,m.fromName||'',m.fromUserId||'',m.type||'text',b,m.timestamp,m.read?'Yes':'No']);c++;});}if(!c){showCustomAlert('No messages.');return;}const csv=rows.map(r=>r.map(x=>`"${String(x||'').replace(/"/g,'""')}"`).join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`chats-${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);showCustomAlert('CSV downloaded!','success');}
 
 const SECTION_KEYS=['apps','experience','order','setup','stack'];
 const SECTION_LABEL_KEYS={apps:'sec_apps',experience:'sec_exp',order:'order_title',setup:'sec_setup',stack:'sec_stack'};
@@ -1940,7 +2001,7 @@ function moveSectionOrder(i,d){const c=getSiteContent();let o=getSectionOrder();
 function renderAdminAccount(){const a=getAdminUser();document.getElementById('adminAccName').value=a.name||'';document.getElementById('adminAccUsername').value=(a.username||'').replace(/^@/,'');document.getElementById('adminAccEmail').value=a.email||'';document.getElementById('adminAccId').value=a.userId||'';document.getElementById('adminAccWebsite').value=a.website||'';document.getElementById('adminAccBio').value=a.bio||'';document.getElementById('adminBioCount').textContent=(a.bio||'').length;const p=a.profilePhoto;const pv=document.getElementById('adminPhotoPreview'),ic=document.getElementById('adminPhotoUploadIcon'),cb=document.getElementById('adminPhotoClearBtn');if(p&&pv){pv.src=p;pv.style.display='block';if(ic)ic.style.display='none';if(cb)cb.style.display='inline-flex';}else if(pv){pv.style.display='none';if(ic)ic.style.display='block';if(cb)cb.style.display='none';}pendingAdminPhoto=undefined;}
 function handleAdminPhotoUpload(e){const f=e.target.files[0];if(!f||!f.type.startsWith('image/'))return;if(f.size>3*1024*1024){showCustomAlert('Max 3 MB');e.target.value='';return;}const r=new FileReader();r.onload=ev=>{pendingAdminPhoto=ev.target.result;const pv=document.getElementById('adminPhotoPreview');if(pv){pv.src=ev.target.result;pv.style.display='block';}const ic=document.getElementById('adminPhotoUploadIcon');if(ic)ic.style.display='none';const cb=document.getElementById('adminPhotoClearBtn');if(cb)cb.style.display='inline-flex';};r.readAsDataURL(f);}
 function clearAdminPhoto(){pendingAdminPhoto=null;const pv=document.getElementById('adminPhotoPreview');if(pv)pv.style.display='none';const ic=document.getElementById('adminPhotoUploadIcon');if(ic)ic.style.display='block';const cb=document.getElementById('adminPhotoClearBtn');if(cb)cb.style.display='none';}
-function saveAdminAccount(e){e.preventDefault();const u=getAllUsers();let i=u.findIndex(x=>x.isAdmin===true);if(i===-1)i=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL);if(i===-1){u.unshift({userId:'',name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'admin123',bio:'',website:'',profilePhoto:'',following:[],createdAt:new Date().toISOString(),isAdmin:true,isVerified:true});i=0;}const nn=document.getElementById('adminAccName').value.trim(),nu=document.getElementById('adminAccUsername').value.trim().replace(/^@/,'').toLowerCase(),ne=document.getElementById('adminAccEmail').value.trim().toLowerCase(),nid=document.getElementById('adminAccId').value.trim(),nw=document.getElementById('adminAccWebsite').value.trim(),nb=document.getElementById('adminAccBio').value.trim();if(!nn||!nu||!ne){showCustomAlert('Please fill in all fields.');return;}if(!/^\d{9}$/.test(nid)){showCustomAlert('ID must be exactly 9 digits!');return;}const a=u[i];const oldE=a.email;a.name=nn;a.username=nu;a.email=ne;a.userId=nid;a.website=nw;a.bio=nb;a.isAdmin=true;a.isVerified=true;if(pendingAdminPhoto!==undefined)a.profilePhoto=pendingAdminPhoto||'';localStorage.setItem('site_users',JSON.stringify(u));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);if(cu.isAdmin||String(cu.email||'').toLowerCase()===String(oldE).toLowerCase())localStorage.setItem('logged_user',JSON.stringify(a));}catch(e){}}pendingAdminPhoto=undefined;refreshAdminUI();renderAdminAccount();checkUserSession();showCustomAlert('Saved!','success');}
+function saveAdminAccount(e){e.preventDefault();const u=getAllUsers();let i=u.findIndex(x=>x.isAdmin===true);if(i===-1)i=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL);if(i===-1){u.unshift({userId:'',name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'admin123',bio:'',website:'',profilePhoto:'',following:[],createdAt:new Date().toISOString(),isAdmin:true,isVerified:true});i=0;}const nn=document.getElementById('adminAccName').value.trim(),nu=document.getElementById('adminAccUsername').value.trim().replace(/^@/,'').toLowerCase(),ne=document.getElementById('adminAccEmail').value.trim().toLowerCase(),nid=document.getElementById('adminAccId').value.trim(),nw=document.getElementById('adminAccWebsite').value.trim(),nb=document.getElementById('adminAccBio').value.trim();if(!nn||!nu||!ne){showCustomAlert(t('fill_fields'));return;}if(!/^\d{9}$/.test(nid)){showCustomAlert('ID must be 9 digits!');return;}const a=u[i];const oldE=a.email;a.name=nn;a.username=nu;a.email=ne;a.userId=nid;a.website=nw;a.bio=nb;a.isAdmin=true;a.isVerified=true;if(pendingAdminPhoto!==undefined)a.profilePhoto=pendingAdminPhoto||'';localStorage.setItem('site_users',JSON.stringify(u));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);if(cu.isAdmin||String(cu.email||'').toLowerCase()===String(oldE).toLowerCase())localStorage.setItem('logged_user',JSON.stringify(a));}catch(e){}}pendingAdminPhoto=undefined;refreshAdminUI();renderAdminAccount();checkUserSession();showCustomAlert('Saved!','success');}
 function withTimeout(p,ms=5000){return Promise.race([Promise.resolve(p),new Promise(r=>setTimeout(()=>r(null),ms))]);}
 function buildAdminSlotHTML(idx,app){const filled=app.name&&app.name.trim();let iconPreview='';if(app.hasIcon)iconPreview='(icon)';else if(app.icon&&app.icon.trim())iconPreview=`<span style="font-size:1.1rem">${escapeHtml(app.icon.trim())}</span>`;const nameText=filled?escapeHtml(app.name):`<em style="opacity:.5">empty slot ${idx+1}</em>`;return `<div class="admin-slot-num">${idx+1}</div>${iconPreview?`<div style="width:26px">${iconPreview}</div>`:''}<div class="admin-slot-info"><div class="admin-slot-name">${nameText} ${app.hasApk?'<span style="font-size:.6rem;color:#22c55e">APK</span>':''}</div><div class="admin-slot-url">${filled&&app.desc?escapeHtml(app.desc):''}</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="editAppSlot(${idx})"><i class="fa-solid fa-pen"></i></button><button class="admin-slot-btn delete" onclick="clearAppSlot(${idx})"><i class="fa-solid fa-trash-can"></i></button></div>`;}
 
@@ -1956,7 +2017,7 @@ async function downloadApk(slotIndex){const lu=localStorage.getItem('logged_user
 
 function applySiteContent(){const c=getSiteContent(),isTR=currentLang==='tr';document.querySelectorAll('.brand-logo, .footer-brand').forEach(el=>el.textContent=c.header.brand);const il=document.querySelector('.intro-logo');if(il)il.textContent=c.header.brand;document.querySelectorAll('.modal-brand').forEach(el=>el.textContent=c.header.brand);document.getElementById('t-role').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('introSub').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('t-job-title').innerText=isTR?c.experience.titleTr:c.experience.titleEn;document.getElementById('t-job-date').innerText=c.experience.date;document.getElementById('t-job-desc').innerText=isTR?c.experience.descTr:c.experience.descEn;document.getElementById('t-os-val').innerText=isTR?c.setup.osTr:c.setup.osEn;document.getElementById('t-editor-val').innerText=isTR?c.setup.editorTr:c.setup.editorEn;document.getElementById('t-backend-val').innerText=c.stack.backend;document.getElementById('t-frontend-val').innerText=c.stack.frontend;document.getElementById('t-copyright').innerText=c.footer.copyright;if(c.general){if(c.general.pageTitle){document.title=c.general.pageTitle;}if(c.general.favicon){const f=document.getElementById('siteFavicon');if(f)f.href=c.general.favicon;}}renderApplications();applySectionOrder();applyEffectsSettings();renderFooterSocials();}
 
-/* === APPS RENDER — KİLİT VE SABİT SAYI (FIX) === */
+/* === APPS RENDER — FLICKER FIX === */
 async function renderApplications(){
   if(appsRenderLock)return;
   appsRenderLock=true;
@@ -1966,7 +2027,6 @@ async function renderApplications(){
     const isLogged=!!localStorage.getItem('logged_user');
     const filled=[];
     for(let i=0;i<8;i++){const a=apps[i]||{};if(a.name&&a.name.trim().length>0)filled.push({idx:i,app:a});}
-    // SABİT görünür sayı (kıpırdama önlenir)
     const w=window.innerWidth;
     let maxVisible=4;
     if(w>=1025)maxVisible=6;
@@ -2046,14 +2106,13 @@ window.introConstellation=createAnimSystem('intro-canvas',{numberOfParticles:50,
 
 function forceRefreshUI(){applyTranslations();try{applySiteContent();}catch(e){}try{applySectionOrder();}catch(e){}try{applyEffectsSettings();}catch(e){}try{checkUserSession();}catch(e){}try{renderApplications();}catch(e){}try{updateChatBadge();}catch(e){}try{if(document.getElementById('chatPanelModal').classList.contains('active')){if(activeChatUser)renderChatMessages();else renderChatUsersList();}}catch(e){}try{if(document.getElementById('adminPanelModal').classList.contains('active')){refreshAdminUI();}}catch(e){}}
 
-document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.chat-user-item,.chat-send-btn,.chat-profile-btn,.modal-close-btn,.auth-tab-btn,.ratio-btn,.social-btn,.lightbox-close-btn,.copy-id-btn-sm,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.chat-mic-btn,.toggle-switch,.chat-msg-action-btn,.voice-play-btn,.effect-chip,.social-del,.hpm-item,.messenger-float-btn,.settings-chip,.hpm-close-x');if(b)playTickSound();},true);
+document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.chat-user-item,.chat-send-btn,.chat-profile-btn,.modal-close-btn,.auth-tab-btn,.ratio-btn,.social-btn,.lightbox-close-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.chat-mic-btn,.toggle-switch,.chat-msg-action-btn,.voice-play-btn,.effect-chip,.social-del,.hpm-item,.messenger-float-btn,.settings-chip,.hpm-close-x');if(b)playTickSound();},true);
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&(e.key==='M'||e.key==='m')){e.preventDefault();triggerAdminAccess();}});
 const curtain=document.getElementById('security-curtain');
 window.addEventListener('blur',()=>{curtain.style.opacity='1';curtain.style.visibility='visible';});
 window.addEventListener('focus',()=>{curtain.style.opacity='0';curtain.style.visibility='hidden';});
 
-/* === RESIZE — DEBOUNCE ile apps kıpırdamayı önle === */
 window.addEventListener('resize',()=>{
   updateMessengerDefaultPosition();
   if(confettiCanvas&&confettiCanvas.style.display!=='none'){confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;}
@@ -2062,6 +2121,16 @@ window.addEventListener('resize',()=>{
 });
 
 window.addEventListener('DOMContentLoaded',async ()=>{
+  // === LOGOUT KONTROLÜ — sayfa açılışında kesin temizlik ===
+  try{
+    if(window.location.search.indexOf('logout=1')!==-1){
+      localStorage.removeItem('logged_user');
+      localStorage.removeItem('user_prefs_v1');
+      try{sessionStorage.clear();}catch(e){}
+      history.replaceState(null,'',window.location.pathname);
+    }
+  }catch(e){}
+
   setTimeout(()=>{const i=document.getElementById('intro-screen');if(i){i.style.opacity='0';i.style.visibility='hidden';setTimeout(()=>{i.style.display='none';if(window.introConstellation)window.introConstellation.stop();},600);}},1500);
   ensureUserIdsAndAdmin();
   initTheme();initEmailJS();initAllPasswordMasks();
@@ -2071,8 +2140,18 @@ window.addEventListener('DOMContentLoaded',async ()=>{
   const defaultLang=(getSiteContent().general&&getSiteContent().general.defaultLang)?getSiteContent().general.defaultLang:browserLang;
   currentLang=storedLang||defaultLang;
   applyTranslations();
+
+  // === ENTER İLE SONRAKİ ALANA GEÇİŞ ===
+  const authEmailInput=document.getElementById('contactClientEmail');
+  const authPassInput=document.getElementById('contactClientPassword');
+  if(authEmailInput)authEmailInput.addEventListener('keydown',function(e){
+    if(e.key==='Enter'){e.preventDefault();const nb=document.getElementById('dc-next-btn');const pi=document.getElementById('contactClientPassword');if(pi)pi.focus();}
+  });
+  if(authPassInput)authPassInput.addEventListener('keydown',function(e){
+    if(e.key==='Enter'){e.preventDefault();handleAuthSubmit(e);}
+  });
+
   const adminBioEl=document.getElementById('adminAccBio');if(adminBioEl)adminBioEl.addEventListener('input',function(){document.getElementById('adminBioCount').textContent=this.value.length;});
-  // DOB inputlarına blur ile validasyon
   ['editClientDay','editClientMonth','editClientYear'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('blur',validateDOB);});
   checkAdminHash();openApkDB().catch(e=>{});updateChatBadge();startChatPolling();
   setupSignupAutoFill();
@@ -2081,8 +2160,6 @@ window.addEventListener('DOMContentLoaded',async ()=>{
   updateOrdersBadge();
   setInterval(updateOrdersBadge,5000);
   setTimeout(updateMessengerDefaultPosition,300);
-  // Ensure forgot link shows in signin
-  const fl=document.getElementById('t-forgot-link');if(fl)fl.style.display='inline';
 });
 </script>
 </body>
