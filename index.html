@@ -86,26 +86,25 @@ body.bg-mono{background-image:radial-gradient(circle at 20% 20%,rgba(148,163,184
 .header-section{padding-bottom:2px}
 .header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;position:relative;gap:12px}
 .brand-wrap{position:relative;display:inline-flex;align-items:center}
-.brand-logo{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.85rem;font-weight:900;letter-spacing:-1.5px;background:linear-gradient(270deg,var(--accent),var(--accent-2),var(--accent),var(--accent-2),var(--accent));background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientFlow 8s ease infinite}
+.brand-logo{font-family:'Plus Jakarta Sans',sans-serif;font-size:2.1rem;font-weight:900;letter-spacing:-1.5px;background:linear-gradient(270deg,var(--accent),var(--accent-2),var(--accent),var(--accent-2),var(--accent));background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientFlow 8s ease infinite}
 .brand-notif-badge{position:absolute;top:-8px;right:-14px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-size:.6rem;font-weight:800;min-width:20px;height:20px;border-radius:10px;display:none;align-items:center;justify-content:center;padding:0 5px;box-shadow:0 0 0 3px var(--bg-color),0 4px 12px rgba(var(--accent-rgb),.5);animation:notifPulse 1.6s ease infinite}
 .brand-notif-badge.show{display:inline-flex}
 @keyframes notifPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
-.header-actions{display:flex;align-items:center;gap:8px}
-.theme-toggle-btn,.scroll-down-action-btn,.chat-toggle-btn{background:var(--box-bg);border:1px solid var(--line-color);padding:5px 10px;border-radius:10px;color:var(--text-secondary);font-size:.75rem;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;height:34px;position:relative}
-.theme-toggle-btn:hover,.scroll-down-action-btn:hover,.chat-toggle-btn:hover{border-color:var(--accent);background:var(--box-hover-bg);color:var(--accent);transform:translateY(-2px)}
-.chat-toggle-btn{display:none}.chat-toggle-btn.visible{display:flex}
-.chat-badge{position:absolute;top:-5px;right:-5px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-size:.55rem;font-weight:800;min-width:18px;height:18px;border-radius:10px;display:none;align-items:center;justify-content:center;padding:0 4px;border:2px solid var(--bg-color)}
-.chat-badge.show{display:flex}
+.header-actions{display:flex;align-items:center;gap:10px}
+.theme-toggle-btn{background:var(--box-bg);border:1px solid var(--line-color);width:36px;height:36px;border-radius:50%;color:var(--text-secondary);font-size:.85rem;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0}
+.theme-toggle-btn:hover{border-color:var(--accent);background:var(--box-hover-bg);color:var(--accent);transform:translateY(-2px)}
 .lang-dropdown-container{position:relative}
-.lang-btn{display:flex;align-items:center;gap:5px;background:var(--box-bg);border:1px solid var(--line-color);padding:5px 10px;border-radius:10px;color:var(--text-secondary);font-size:.75rem;font-weight:700;cursor:pointer;transition:all .3s;height:34px}
+.lang-btn{display:flex;align-items:center;justify-content:center;background:var(--box-bg);border:1px solid var(--line-color);width:36px;height:36px;border-radius:50%;color:var(--text-secondary);cursor:pointer;transition:all .3s;padding:0;overflow:hidden;flex-shrink:0}
 .lang-btn:hover{border-color:var(--accent);background:var(--box-hover-bg);color:var(--accent)}
+.lang-btn .lang-flag{width:22px;height:15px;border-radius:3px;object-fit:cover}
+.lang-btn .lang-chevron{display:none}
 .lang-menu{position:absolute;right:0;top:calc(100% + 8px);background:var(--menu-bg);border:1px solid var(--line-color);border-radius:12px;width:150px;display:none;flex-direction:column;overflow:hidden;z-index:100;box-shadow:0 12px 40px rgba(0,0,0,.5)}
 .lang-menu.show{display:flex}
 .lang-option{display:flex;align-items:center;gap:10px;padding:10px 14px;color:var(--text-secondary);font-size:.78rem;font-weight:700;cursor:pointer;background:transparent;border:none;width:100%;text-align:left}
 .lang-option:hover{background:var(--box-hover-bg);color:var(--accent)}
 .lang-flag{width:22px;height:15px;border-radius:3px;object-fit:cover;vertical-align:middle}
 .lang-flag.small{width:18px;height:12px;margin-right:4px}
-.header-bottom-row{margin-top:6px;margin-bottom:14px}
+.header-bottom-row{margin-top:8px;margin-bottom:14px}
 .role-text{font-size:1.05rem;color:var(--text-secondary);font-weight:400}
 .social-btn{font-size:1.25rem;text-decoration:none;display:inline-flex;align-items:center;cursor:pointer;background:transparent;border:none;transition:transform .3s}
 .social-btn:hover{transform:translateY(-3px) scale(1.1)}
@@ -213,8 +212,6 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .footer-socials .social-btn svg,.footer-socials .social-btn img{width:1.6rem !important;height:1.6rem !important}
 .profile-action-btn{background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-secondary);border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;height:32px;width:34px;font-size:.75rem;flex-shrink:0;padding:0}
 .profile-action-btn:hover{border-color:var(--accent);color:var(--accent)}
-.profile-photo-wrapper{position:relative;width:38px;height:32px;display:flex;align-items:center;justify-content:center}
-.profile-photo-wrapper img{width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid rgba(var(--accent-rgb),.4);cursor:pointer}
 @media (min-width:768px){.desktop-info-row{display:flex !important;align-items:center;justify-content:space-between;width:100%;margin-top:8px;gap:15px}.desktop-id-area{display:flex;align-items:center;gap:8px}.mobile-email-row{display:none !important}}
 .mobile-email-row{display:flex;align-items:center;gap:8px}
 .desktop-info-row{display:none}
@@ -230,7 +227,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .custom-alert-btn{padding:10px 8px !important;font-size:.75rem !important}
 .auth-tab-btn{padding:8px !important;font-size:.78rem !important}
 .modal-close-btn{width:28px !important;height:28px !important;font-size:.8rem !important}
-@media (max-width:640px){body{padding:16px 12px}.wrapper{gap:24px}.specs-grid{grid-template-columns:1fr}.brand-logo{font-size:1.5rem}.footer-qr-container img{width:80px;height:80px}.intro-logo{font-size:1.9rem}}
+@media (max-width:640px){body{padding:16px 12px}.wrapper{gap:24px}.specs-grid{grid-template-columns:1fr}.brand-logo{font-size:1.7rem}.footer-qr-container img{width:80px;height:80px}.intro-logo{font-size:1.9rem}}
 @media (min-width:768px){
   .modal-container{max-width:600px !important;padding:30px !important}
   .chat-container{max-width:760px !important}
@@ -274,16 +271,9 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .lightbox-image-wrapper{width:100%;aspect-ratio:1/1;border-radius:14px;overflow:hidden;border:2px solid rgba(var(--accent-rgb),.4);background:var(--box-bg)}
 .lightbox-image-wrapper img{width:100%;height:100%;object-fit:cover}
 .lightbox-close-btn{position:absolute;top:-14px;right:-14px;background:var(--modal-container-bg);border:1px solid var(--line-color);color:var(--text-secondary);width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
-#profileDisplayName{font-family:'Plus Jakarta Sans',sans-serif !important;font-weight:900 !important;font-size:1.35rem !important;background:linear-gradient(270deg,var(--accent),var(--accent-2),var(--accent),var(--accent-2),var(--accent));background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientFlow 8s ease infinite;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-#profileDisplayIdDesktop,#profileDisplayId{font-weight:500 !important;font-size:.95rem !important;color:var(--text-color-override) !important}
-.desktop-id-area i,.mobile-email-row i{color:var(--accent) !important;font-size:.95rem !important}
 #usernameAvailabilityMsg{font-size:.7rem;margin-top:4px;display:none;font-weight:600}
 .mock-email-container{display:flex;flex-direction:column;align-items:center;padding:10px 0;text-align:center}
 .mock-email-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line-color);padding-top:12px;margin-top:12px;font-size:.7rem;color:var(--text-secondary)}
-.mock-pass-row{display:flex !important;align-items:center !important;gap:5px !important;justify-content:center;margin-top:8px}
-.mock-pass-row strong{font-size:.82rem}
-#signupMockCodeValue,#mock-email-pass-value,#email-change-code-value{font-size:.9rem;padding:4px 10px;color:var(--accent);font-family:'Fira Code',monospace;font-weight:700;background:rgba(var(--accent-rgb),.12);border-radius:6px;letter-spacing:2px}
-.copy-pass-btn{flex-shrink:0;background:transparent;border:1px solid rgba(var(--accent-rgb),.4);color:var(--accent);cursor:pointer;padding:5px 8px;font-size:.72rem;border-radius:8px}
 .email-sent-icon{font-size:3rem;color:#22c55e;margin-bottom:14px}
 .email-sent-to{font-size:.85rem;color:var(--text-color-override);font-weight:700;word-break:break-all;margin-bottom:6px;padding:10px 14px;background:rgba(var(--accent-rgb),.1);border-radius:10px;border:1px solid rgba(var(--accent-rgb),.25)}
 .email-sent-note{font-size:.72rem;color:var(--text-secondary);line-height:1.5;margin-bottom:16px}
@@ -367,7 +357,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .user-detail-modal-row:last-child{border-bottom:none}
 .user-detail-modal-row span:first-child{color:var(--text-secondary);font-weight:600}
 .user-detail-modal-row span:last-child{color:var(--text-color-override);font-weight:500;text-align:right;word-break:break-all}
-.chat-container{max-width:660px !important;padding:0 !important;overflow:hidden;display:flex;flex-direction:column;max-height:90vh !important}
+.chat-container{max-width:660px !important;padding:0 !important;overflow:hidden;display:flex;flex-direction:column;max-height:90vh !important;border-radius:20px !important}
 .chat-container .modal-header{padding:16px 20px 12px;margin-bottom:0;border-bottom:1px solid var(--line-color)}
 .chat-body{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
 .chat-users-list-wrapper{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
@@ -462,7 +452,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .recording-btn.cancel{background:var(--modal-container-bg);border:1px solid rgba(239,68,68,.5);color:#ef4444}
 .recording-btn.send{background:linear-gradient(135deg,#22c55e,#16a34a)}
 .pub-profile-view{display:flex;flex-direction:column;align-items:center;gap:8px;padding:8px 0 4px}
-.pub-profile-cover{width:100%;height:130px;border-radius:16px;background:linear-gradient(135deg,var(--accent),var(--accent-2));position:relative;overflow:hidden;margin-bottom:-70px;background-size:cover;background-position:center}
 .pub-profile-avatar{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-weight:800;overflow:hidden;border:4px solid var(--modal-container-bg);position:relative;z-index:1}
 .pub-profile-avatar img{width:100%;height:100%;object-fit:cover}
 .pub-profile-name{font-size:1.35rem;font-weight:800;background:linear-gradient(270deg,var(--accent),var(--accent-2),var(--accent),var(--accent-2),var(--accent));background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientFlow 8s ease infinite;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;margin-top:8px}
@@ -528,27 +517,71 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
   #emojiPicker{width:260px}
   #emojiPicker .emoji-grid{grid-template-columns:repeat(6,1fr)}
 }
-
-/* === Yeni Header Profil Sistemi === */
-.header-profile-wrapper{position:relative;display:flex;align-items:center;justify-content:center;width:34px;height:34px}
-.header-profile-btn{padding:0;border:none;background:transparent;cursor:pointer;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-.header-profile-photo{width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid rgba(var(--accent-rgb),.4);transition:all .3s;display:block}
+/* ==================== HEADER PROFİL SİSTEMİ ==================== */
+.header-profile-wrapper{position:relative;display:flex;align-items:center;justify-content:center;width:36px;height:36px;flex-shrink:0}
+.header-profile-btn{padding:0;border:none;background:transparent;cursor:pointer;width:100%;height:100%;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.header-profile-photo{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(var(--accent-rgb),.4);transition:all .3s;display:block}
 .header-profile-btn:hover .header-profile-photo{border-color:var(--accent);transform:scale(1.06)}
-.header-profile-status{position:absolute;bottom:-3px;right:-3px;width:11px;height:11px;border-radius:50%;background:#22c55e;border:2px solid var(--bg-color);box-shadow:0 0 8px rgba(34,197,94,.7);pointer-events:none;animation:notifPulse 2s infinite;z-index:2}
+.header-profile-status{position:absolute;bottom:-2px;right:-2px;width:11px;height:11px;border-radius:50%;background:#22c55e;border:2px solid var(--bg-color);box-shadow:0 0 8px rgba(34,197,94,.7);pointer-events:none;animation:notifPulse 2s infinite;z-index:2}
 .header-profile-status.offline{background:#94a3b8;box-shadow:none;animation:none}
-.header-profile-menu{position:absolute;top:calc(100% + 12px);right:0;background:var(--menu-bg);border:1px solid var(--line-color);border-radius:14px;min-width:230px;padding:8px;display:none;flex-direction:column;gap:2px;box-shadow:0 12px 40px rgba(0,0,0,.55);z-index:200;backdrop-filter:blur(20px)}
+.header-profile-menu{position:absolute;top:calc(100% + 14px);right:-4px;background:var(--menu-bg);border:1px solid var(--line-color);border-radius:16px;min-width:320px;max-width:360px;width:min(340px, 90vw);padding:10px;display:none;flex-direction:column;gap:2px;box-shadow:0 16px 48px rgba(0,0,0,.55);z-index:300;backdrop-filter:blur(20px)}
 .header-profile-menu.show{display:flex}
-.hpm-header{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line-color);margin-bottom:6px}
-.hpm-photo{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid rgba(var(--accent-rgb),.4);flex-shrink:0}
+.hpm-header{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--line-color);margin-bottom:8px}
+.hpm-photo{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid rgba(var(--accent-rgb),.4);flex-shrink:0}
 .hpm-info{flex:1;min-width:0}
-.hpm-name{font-size:.85rem;font-weight:700;color:var(--text-color-override);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hpm-id{font-size:.66rem;color:var(--accent);font-family:'Fira Code',monospace;margin-top:2px;font-weight:700}
-.hpm-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:transparent;border:none;color:var(--text-color-override);font-size:.8rem;font-weight:500;cursor:pointer;text-align:left;width:100%;transition:all .2s}
+.hpm-name{font-size:.95rem;font-weight:700;color:var(--text-color-override);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hpm-id{font-size:.72rem;color:var(--accent);font-family:'Fira Code',monospace;margin-top:3px;font-weight:700}
+.hpm-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;background:transparent;border:none;color:var(--text-color-override);font-size:.88rem;font-weight:500;cursor:pointer;text-align:left;width:100%;transition:all .2s}
 .hpm-item:hover{background:var(--box-hover-bg);color:var(--accent);transform:translateX(3px)}
-.hpm-item i{width:16px;text-align:center;color:var(--accent);font-size:.85rem}
+.hpm-item i{width:18px;text-align:center;color:var(--accent);font-size:.95rem}
 .hpm-item.danger:hover{background:rgba(239,68,68,.12);color:#ef4444}
 .hpm-item.danger i{color:#ef4444}
-@media (max-width:640px){.header-profile-menu{min-width:200px}}
+@media (max-width:640px){.header-profile-menu{min-width:280px;max-width:calc(100vw - 24px);right:-4px}}
+
+/* ==================== MESSENGER FLOAT BUTTON ==================== */
+.messenger-float-btn{
+  position:fixed;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#0084FF,#00C6FF);
+  cursor:pointer;
+  z-index:500;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 24px rgba(0,132,255,.45);
+  user-select:none;
+  touch-action:none;
+  transition:transform .15s, box-shadow .15s;
+  border:none;
+  padding:0;
+}
+.messenger-float-btn.visible{display:flex;}
+.messenger-float-btn:hover{box-shadow:0 10px 30px rgba(0,132,255,.6);}
+.messenger-float-btn:active{transform:scale(1.08);}
+.messenger-float-btn.dragging{transform:scale(1.12);box-shadow:0 14px 36px rgba(0,132,255,.7);}
+.messenger-float-btn svg{width:26px;height:26px;display:block;pointer-events:none;}
+.messenger-badge{
+  position:absolute;
+  top:-4px;
+  right:-4px;
+  min-width:20px;
+  height:20px;
+  border-radius:10px;
+  background:#ff3b30;
+  color:#fff;
+  font-size:.65rem;
+  font-weight:800;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:0 5px;
+  border:2px solid var(--bg-color);
+  box-shadow:0 2px 8px rgba(255,59,48,.5);
+  pointer-events:none;
+}
+.messenger-badge.show{display:flex;}
 </style>
 </head>
 <body data-theme="purple" data-fcolor="default" data-panel="default" data-form="default">
@@ -567,6 +600,14 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 </div>
 
+<!-- Floating Messenger Button -->
+<button id="messengerFloatBtn" class="messenger-float-btn" title="Messages">
+  <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+    <path fill="white" d="M18 2C9.7 2 3 8.4 3 16.3c0 4.6 2.1 8.7 5.4 11.4v6.1l5.1-2.8c1.5.4 3 .6 4.5.6 8.3 0 15-6.4 15-14.3S26.3 2 18 2zm1.5 19.2l-3.8-4.1-7.4 4.1 8.2-8.7 3.9 4.1 7.3-4.1-8.2 8.7z"/>
+  </svg>
+  <span class="messenger-badge" id="messengerBadge">0</span>
+</button>
+
 <div class="wrapper">
 <header class="header-section">
 <div class="header-top">
@@ -577,7 +618,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="header-actions">
 <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Theme"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
 <div class="lang-dropdown-container">
-<button class="lang-btn" id="langDropdownBtn" onclick="toggleLangMenu()"><span id="currentLangText"><img src="https://flagcdn.com/gb.svg" class="lang-flag small" alt="EN"></span><i class="fa-solid fa-chevron-down" style="font-size:.4rem;margin-left:2px"></i></button>
+<button class="lang-btn" id="langDropdownBtn" onclick="toggleLangMenu()" title="Language"><span id="currentLangText"><img src="https://flagcdn.com/gb.svg" class="lang-flag" alt="EN"></span></button>
 <div class="lang-menu" id="langMenu"><button class="lang-option" onclick="changeLanguage('en')"><img src="https://flagcdn.com/gb.svg" class="lang-flag" alt="EN"> English</button><button class="lang-option" onclick="changeLanguage('tr')"><img src="https://flagcdn.com/tr.svg" class="lang-flag" alt="TR"> Turkish</button></div>
 </div>
 <div class="header-profile-wrapper" id="headerProfileWrapper" style="display:none">
@@ -595,8 +636,8 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 <button class="hpm-item" onclick="openProfilePhotoPanel();closeHeaderProfileMenu()"><i class="fa-solid fa-image"></i> <span>Profile Photo</span></button>
 <button class="hpm-item" onclick="openEditProfileModal();closeHeaderProfileMenu()"><i class="fa-solid fa-pen-to-square"></i> <span>Edit Profile</span></button>
-<button class="hpm-item" onclick="openChatPanel();closeHeaderProfileMenu()"><i class="fa-solid fa-comments"></i> <span>Messages</span></button>
 <button class="hpm-item" onclick="openChangePasswordModal();closeHeaderProfileMenu()"><i class="fa-solid fa-key"></i> <span>Change Password</span></button>
+<button class="hpm-item danger" onclick="openDeleteAccountModal();closeHeaderProfileMenu()"><i class="fa-solid fa-trash-can"></i> <span>Delete Account</span></button>
 <button class="hpm-item danger" onclick="confirmLogout();closeHeaderProfileMenu()"><i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span></button>
 </div>
 </div>
@@ -608,32 +649,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <i class="fa-solid fa-right-to-bracket" id="authBoxIcon"></i>
 </div>
 </header>
-
-<section id="userProfileSection" style="display:none">
-<div class="section-title"><i class="fa-solid fa-user-gear"></i> <span id="t-profile-title">User Profile & Session</span></div>
-<div class="contact-box" style="cursor:default;align-items:flex-start;flex-direction:column;gap:12px">
-<div style="display:flex;gap:8px;width:100%;align-items:center;justify-content:space-between;flex-wrap:nowrap">
-<div class="profile-photo-wrapper"><img id="profilePhotoDisplay" src="https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani" alt="Profile" onclick="openProfilePhotoPanel()"><input type="file" id="profilePhotoInput" accept="image/*" style="display:none" onchange="handleProfilePhotoUpload(event)"></div>
-<div style="display:flex;gap:5px;align-items:center;flex-shrink:1;min-width:0;flex-wrap:wrap;justify-content:flex-end">
-<button onclick="openChatPanel()" title="Messages" class="profile-action-btn" id="profileMsgBtn" style="color:var(--accent);border-color:rgba(var(--accent-rgb),.4)"><i class="fa-solid fa-comments"></i></button>
-<button onclick="toggleProfilePrivacy()" title="Hide / Show" class="profile-action-btn"><i class="fa-solid fa-eye" id="privacyIcon"></i></button>
-<button onclick="openEditProfileModal()" title="Edit Profile" class="profile-action-btn"><i class="fa-solid fa-pen-to-square"></i></button>
-<button onclick="openChangePasswordModal()" title="Change Password" class="profile-action-btn"><i class="fa-solid fa-key"></i></button>
-<button onclick="openDeleteAccountModal()" title="Delete Account" class="profile-action-btn"><i class="fa-solid fa-trash-can"></i></button>
-<button onclick="confirmLogout()" title="Log Out" class="profile-action-btn"><i class="fa-solid fa-right-from-bracket"></i></button>
-</div>
-</div>
-<div id="profileDetailsContainer" style="display:none;flex-direction:column;gap:8px;width:100%">
-<strong id="profileDisplayName" style="font-size:1.35rem;color:var(--accent)">User</strong>
-<div style="font-size:.85rem;color:var(--accent);font-weight:600;margin-top:-4px;display:inline-flex;align-items:center;gap:4px" id="profileDisplayUsernameTop">@username</div>
-<div id="profileBioInline" style="font-size:.82rem;color:var(--text-secondary);line-height:1.4;margin-top:2px;word-break:break-word;display:none"></div>
-<div class="desktop-info-row">
-<div class="desktop-id-area"><i class="fa-solid fa-id-badge"></i><strong id="profileDisplayIdDesktop">123456789</strong></div>
-</div>
-<div class="mobile-email-row"><i class="fa-solid fa-id-badge"></i><strong id="profileDisplayId" class="chat-user-id" style="font-size:.8rem">123456789</strong></div>
-</div>
-</div>
-</section>
 
 <div id="contentSections" style="display:flex;flex-direction:column;gap:32px">
   <section id="sectionApps">
@@ -858,6 +873,7 @@ Continue with Google
 <button class="btn-reset-photo" onclick="resetProfilePhoto()"><i class="fa-solid fa-rotate-left"></i> reset</button>
 </div>
 </div>
+<input type="file" id="profilePhotoInput" accept="image/*" style="display:none" onchange="handleProfilePhotoUpload(event)">
 </div>
 </div>
 
@@ -1252,17 +1268,14 @@ Continue with Google
   </div>
 </div>
 <form id="adminUserEmailForm" onsubmit="sendAdminUserEmailSubmit(event)">
-
   <div class="form-group">
     <label class="form-label"><i class="fa-solid fa-tag" style="color:var(--accent)"></i> Konu</label>
     <input type="text" class="form-input" id="aue-subject" required maxlength="120" placeholder="Email konusu">
   </div>
-
   <div class="form-group">
     <label class="form-label"><i class="fa-solid fa-align-left" style="color:var(--accent)"></i> Mesaj</label>
     <textarea class="form-textarea" id="aue-message" required maxlength="5000" style="min-height:130px" placeholder="Mesajınızı buraya yazın..."></textarea>
   </div>
-
   <div class="toggle-row" style="background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.25)">
     <div class="toggle-label">
       <div class="toggle-label-title"><i class="fa-solid fa-image" style="color:#3b82f6"></i> Resim Ekle</div>
@@ -1277,7 +1290,6 @@ Continue with Google
     <label class="form-label">Resim URL</label>
     <input type="text" class="form-input" id="aue-image" placeholder="https://ornek.com/resim.png">
   </div>
-
   <div class="toggle-row" style="background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.25)">
     <div class="toggle-label">
       <div class="toggle-label-title"><i class="fa-solid fa-link" style="color:#22c55e"></i> Link (Buton) Ekle</div>
@@ -1298,7 +1310,6 @@ Continue with Google
       <input type="text" class="form-input" id="aue-link-text" placeholder="Siteye Git">
     </div>
   </div>
-
   <div class="toggle-row" style="background:rgba(147,51,234,.08);border-color:rgba(147,51,234,.3)">
     <div class="toggle-label">
       <div class="toggle-label-title"><i class="fa-solid fa-file-pdf" style="color:var(--accent)"></i> PDF Olarak da Gönder</div>
@@ -1309,7 +1320,6 @@ Continue with Google
       <span class="toggle-slider"></span>
     </label>
   </div>
-
   <div class="form-buttons-group">
     <button type="submit" class="submit-btn email-btn" style="width:100%">
       <i class="fa-solid fa-paper-plane"></i> Email Gönder
@@ -1476,7 +1486,7 @@ async function sendRichEmail(toEmail, options) {
 /* ==================== TRANSLATIONS ==================== */
 const LANG={en:{role:"Software Developer",sec_profile:"User Profile & Session",sec_apps:"My Applications",sec_exp:"Experience",sec_setup:"Setup & Environment",sec_stack:"Core Stack",contact_sub:"Sign In / Sign Up",contact_main:"Sign In To Join Us",contact_sub_logged:"User Account",contact_main_logged:"Welcome,",contact_main_logged2:"Session Active",scan_text:"Scan To Connect",copyright:"© 2026 muminsultani • All Rights Reserved.",alert_fill_fields:"please fill in all required fields.",alert_success_signup:"account created successfully!",alert_success_signin:"signed in successfully!",alert_error_signin:"invalid credentials!",alert_auth_required:"you must sign in or register first!",alert_apk_login:"⚠️ sign in required to download APK.",alert_success_update:"profile updated successfully!",alert_success_delete:"account deleted successfully.",alert_del_confirm:"are you sure you want to delete your account?",alert_del_yes:"yes, delete",alert_del_no:"cancel",alert_del_pass_err:"incorrect password!",alert_del_user_err:"username does not match.",alert_cp_success:"password changed successfully!",alert_cp_old_err:"current password is incorrect!",alert_cp_match_err:"new passwords do not match!",alert_logout_confirm:"are you sure you want to log out?",alert_logout_yes:"log out",alert_logout_no:"back",alert_logout_ok:"session closed.",alert_pass_short:"password must be at least 8 characters.",alert_user_avail:"username is available.",alert_user_taken:"this username is already taken.",alert_ok:"OK",alert_rp_success:"password reset successfully!",alert_rp_code_err:"invalid code!",alert_rp_email_err:"email not registered!",alert_email_reg:"email already registered!",alert_chat_del:"delete this message?",alert_chats_clear:"all chat messages will be deleted!",alert_deleted:"deleted!",alert_csv_down:"CSV downloaded!",alert_no_msgs:"no messages yet.",alert_no_records:"no records.",alert_no_users:"no registered users.",alert_wrong_pass:"wrong password!",alert_admin_no_del:"admin account cannot be deleted!",alert_user_deleted:"user deleted!",alert_user_not_found:"user not found!",alert_delete_all_users:"all users will be deleted!",alert_must_signin:"you must sign in.",alert_select_image:"choose an image!",alert_icon_err:"icon upload failed!",alert_app_saved:"app saved!",alert_saved:"saved!",alert_backup_down:"backup downloaded!",alert_backup_load:"backup loaded!",alert_invalid_file:"invalid file!",alert_reset_confirm:"all site content will be reset?",alert_reset_ok:"reset!",alert_clear_activity:"all activity logs will be deleted!",alert_login_chat:"sign in and open a chat first.",alert_browser_unsup:"browser not supported.",alert_mic_denied:"microphone permission denied.",alert_rec_fail:"recording failed to start.",alert_rec_short:"recording too short!",alert_apk_not_found:"APK not found!",alert_downloading:"Downloading",alert_down_err:"Download error!",alert_apk_upload_err:"APK upload error: ",alert_image_5mb:"image must be under 5 MB!",alert_choose_apk:"Choose APK File",alert_copied:"copied!",alert_admin_required:"please sign in as admin first!",alert_next_first:"please enter your email or username first!",alert_google_success:"signed in with Google!",alert_google_invalid:"please enter a valid Gmail address",alert_id_invalid:"ID must be exactly 9 digits!",alert_id_used:"this ID is already used!",alert_followed:"you now follow this user!",alert_unfollowed:"unfollowed.",alert_cannot_follow_self:"you cannot follow yourself.",alert_code_sent:"verification code sent to your email!",alert_code_send_fail:"could not send email. Please try again.",rec_hint:"recording...",chat_search_ph:"search...",chat_no_users:"no other users.",chat_no_search:"no search results.",chat_no_msgs:"no messages yet",chat_start:"start the conversation 👋",chat_you:"you",chat_voice:"🎤 voice message",chat_voice_fail:"voice could not be loaded",chat_ph:"type a message...",admin_title:"Admin Access",admin_restricted:"restricted area.",admin_pass_label:"master password",admin_pass_ph:"master password",admin_unlock:"unlock",admin_panel_title:"Full Site Control",pub_title:"User Profile",pub_send_msg:"Send Message",pub_follow:"Follow",pub_following:"Following",pub_followers:"Followers",pub_joined:"joined",act_voice:"Voice Message",chat_open:"open chat"},tr:{role:"Yazılım Geliştirici",sec_profile:"Kullanıcı Profili & Oturum",sec_apps:"Uygulamalarım",sec_exp:"Deneyim",sec_setup:"Kurulum & Ortam",sec_stack:"Temel Yığın",contact_sub:"Giriş Yap / Kayıt Ol",contact_main:"Bize Katılmak İçin Giriş Yapın",contact_sub_logged:"Kullanıcı Hesabı",contact_main_logged:"Hoş geldiniz,",contact_main_logged2:"Oturum Açık",scan_text:"Bağlanmak İçin Tarayın",copyright:"© 2026 muminsultani • Tüm Hakları Saklıdır.",alert_fill_fields:"lütfen gerekli alanları doldurun.",alert_success_signup:"hesap oluşturuldu!",alert_success_signin:"giriş yapıldı!",alert_error_signin:"geçersiz bilgiler!",alert_auth_required:"önce giriş yapmalısınız!",alert_apk_login:"⚠️ APK indirmek için giriş yapın.",alert_success_update:"profil güncellendi!",alert_success_delete:"hesap silindi.",alert_del_confirm:"hesabınızı silmek istediğinize emin misiniz?",alert_del_yes:"evet, sil",alert_del_no:"iptal",alert_del_pass_err:"şifre yanlış!",alert_del_user_err:"kullanıcı adı eşleşmiyor.",alert_cp_success:"şifre değiştirildi!",alert_cp_old_err:"mevcut şifre yanlış!",alert_cp_match_err:"yeni şifreler eşleşmiyor!",alert_logout_confirm:"çıkış yapmak istiyor musunuz?",alert_logout_yes:"çıkış yap",alert_logout_no:"geri",alert_logout_ok:"oturum kapatıldı.",alert_pass_short:"şifre en az 8 karakter olmalıdır.",alert_user_avail:"kullanıcı adı kullanılabilir.",alert_user_taken:"bu kullanıcı adı alınmış.",alert_ok:"Tamam",alert_rp_success:"şifre sıfırlandı!",alert_rp_code_err:"geçersiz kod!",alert_rp_email_err:"e-posta kayıtlı değil!",alert_email_reg:"bu e-posta zaten kayıtlı!",alert_chat_del:"bu mesaj silinsin mi?",alert_chats_clear:"tüm sohbet mesajları silinecek!",alert_deleted:"silindi!",alert_csv_down:"CSV indirildi!",alert_no_msgs:"henüz mesaj yok.",alert_no_records:"kayıt yok.",alert_no_users:"kayıtlı kullanıcı yok.",alert_wrong_pass:"yanlış şifre!",alert_admin_no_del:"admin hesabı silinemez!",alert_user_deleted:"kullanıcı silindi!",alert_user_not_found:"kullanıcı bulunamadı!",alert_delete_all_users:"tüm kullanıcılar silinecek!",alert_must_signin:"giriş yapmalısınız.",alert_select_image:"bir resim seçin!",alert_icon_err:"ikon yüklenemedi!",alert_app_saved:"uygulama kaydedildi!",alert_saved:"kaydedildi!",alert_backup_down:"yedek indirildi!",alert_backup_load:"yedek yüklendi!",alert_invalid_file:"geçersiz dosya!",alert_reset_confirm:"tüm site içeriği sıfırlanacak?",alert_reset_ok:"sıfırlandı!",alert_clear_activity:"tüm aktivite kayıtları silinecek!",alert_login_chat:"önce giriş yapın ve sohbet açın.",alert_browser_unsup:"tarayıcı desteklemiyor.",alert_mic_denied:"mikrofon izni reddedildi.",alert_rec_fail:"kayıt başlatılamadı.",alert_rec_short:"kayıt çok kısa!",alert_apk_not_found:"APK bulunamadı!",alert_downloading:"İndiriliyor",alert_down_err:"İndirme hatası!",alert_apk_upload_err:"APK hatası: ",alert_image_5mb:"resim 5 MB altı olmalı!",alert_choose_apk:"APK Dosyası Seç",alert_copied:"kopyalandı!",alert_admin_required:"önce admin girişi!",alert_next_first:"lütfen e-posta/kullanıcı adı girin!",alert_google_success:"Google ile giriş yapıldı!",alert_google_invalid:"lütfen geçerli bir Gmail adresi girin",alert_id_invalid:"ID 9 rakam olmalıdır!",alert_id_used:"bu ID zaten kullanılıyor!",alert_followed:"artık takip ediyorsunuz!",alert_unfollowed:"takipten çıkıldı.",alert_cannot_follow_self:"kendinizi takip edemezsiniz.",alert_code_sent:"doğrulama kodu e-postanıza gönderildi!",alert_code_send_fail:"e-posta gönderilemedi. Tekrar deneyin.",rec_hint:"kayıt yapılıyor...",chat_search_ph:"ara...",chat_no_users:"başka kullanıcı yok.",chat_no_search:"arama sonucu yok.",chat_no_msgs:"henüz mesaj yok",chat_start:"sohbete başla 👋",chat_you:"sen",chat_voice:"🎤 sesli mesaj",chat_voice_fail:"ses yüklenemedi",chat_ph:"bir mesaj yaz...",admin_title:"Yönetici Girişi",admin_restricted:"kısıtlı alan.",admin_pass_label:"ana şifre",admin_pass_ph:"ana şifre",admin_unlock:"kilidi aç",admin_panel_title:"Tam Site Kontrolü",pub_title:"Kullanıcı Profili",pub_send_msg:"Mesaj Gönder",pub_follow:"Takip Et",pub_following:"Takipten Çık",pub_followers:"Takipçi",pub_joined:"katılım",act_voice:"Sesli Mesaj",chat_open:"sohbet aç"}};
 
-let currentLang='en',currentAuthMode='signin',currentResetEmail='',pendingFaviconDataUrl=null,pendingAdminPhoto=undefined,pendingCoverDataUrl=undefined,currentProfileEmail=null,currentFollowersView='followers';
+let currentLang='en',currentAuthMode='signin',currentResetEmail='',pendingFaviconDataUrl=null,pendingAdminPhoto=undefined,currentProfileEmail=null,currentFollowersView='followers';
 function t(key,fallback){const d=LANG[currentLang]||LANG.en;const v=d[key];return(v!==undefined&&v!==null&&v!=='')?v:(fallback!==undefined?fallback:key);}
 function escapeHtml(s){if(s===null||s===undefined)return'';return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 
@@ -1563,7 +1573,7 @@ function tone(freq,dur,type='sine',vol=0.05,decay=0.08){try{const c=getAudioCont
 const TICK_STYLES={default:{name:'Default',icon:'fa-bell',fn:()=>tone(2000,0.08)},soft:{name:'Soft',icon:'fa-feather',fn:()=>tone(800,0.14)},click:{name:'Click',icon:'fa-computer-mouse',fn:()=>tone(1500,0.03,'square',0.03,0.025)},pop:{name:'Pop',icon:'fa-droplet',fn:()=>tone(1000,0.1)},tick:{name:'Tick',icon:'fa-clock',fn:()=>tone(3000,0.02)},bell:{name:'Bell',icon:'fa-bell',fn:()=>{tone(2500,0.15);tone(3750,0.15);}},wood:{name:'Wood',icon:'fa-tree',fn:()=>tone(500,0.09,'triangle',0.06)},glass:{name:'Glass',icon:'fa-wine-glass',fn:()=>tone(3500,0.12)},deep:{name:'Deep',icon:'fa-water',fn:()=>tone(400,0.16)}};
 function playTickSound(){try{const eff=getSiteContent().effects||{};if(eff.tickSoundEnabled===false)return;const s=TICK_STYLES[eff.tickSoundStyle||'default']||TICK_STYLES.default;s.fn();}catch(e){}}
 function playApplauseSound(){try{const c=getAudioContext();if(!c)return;const d=2,sr=c.sampleRate,b=c.createBuffer(1,sr*d,sr),dt=b.getChannelData(0);for(let i=0;i<dt.length;i++){const tt=i/sr,dec=Math.exp(-tt*1.2),cp=(tt*10)%1,ce=cp<.15?Math.exp(-cp*20):0,n=Math.random()*2-1;dt[i]=n*(ce*.6+.15)*dec*.5;}const s=c.createBufferSource();s.buffer=b;const f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=1800;const g=c.createGain();g.gain.setValueAtTime(.5,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);s.connect(f);f.connect(g);g.connect(c.destination);s.start();}catch(e){}}
-document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.scroll-down-action-btn,.chat-toggle-btn,.chat-user-item,.chat-send-btn,.chat-back-btn,.chat-profile-btn,.modal-close-btn,.profile-action-btn,.auth-tab-btn,.ratio-btn,.social-btn,.lightbox-close-btn,.copy-pass-btn,.copy-id-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.chat-mic-btn,.recording-btn,.toggle-switch,.emoji-item,.emoji-cat-btn,.chat-msg-action-btn,.follower-item,.f-btn,.voice-play-btn,.effect-chip,.social-del,.hpm-item,.header-profile-btn');if(b)playTickSound();},true);
+document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.chat-user-item,.chat-send-btn,.chat-back-btn,.chat-profile-btn,.modal-close-btn,.auth-tab-btn,.ratio-btn,.social-btn,.lightbox-close-btn,.copy-pass-btn,.copy-id-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.chat-mic-btn,.recording-btn,.toggle-switch,.emoji-item,.emoji-cat-btn,.chat-msg-action-btn,.follower-item,.f-btn,.voice-play-btn,.effect-chip,.social-del,.hpm-item,.messenger-float-btn');if(b)playTickSound();},true);
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&(e.key==='M'||e.key==='m')){e.preventDefault();triggerAdminAccess();}});
 const curtain=document.getElementById('security-curtain');
@@ -1592,7 +1602,7 @@ function generateRandomUserId(){let id='';for(let i=0;i<9;i++)id+=Math.floor(Mat
 function isAdminLoggedIn(){try{return sessionStorage.getItem(ADMIN_SESSION_KEY)==='yes';}catch(e){return false;}}
 function getAllUsers(){try{return JSON.parse(localStorage.getItem('site_users')||'[]');}catch(e){return[];}}
 function isAdminUser(email){if(!email)return false;const lc=String(email).toLowerCase().trim();try{const u=getAllUsers();const ar=u.find(x=>x.isAdmin===true);if(ar&&String(ar.email||'').toLowerCase().trim()===lc)return true;}catch(e){}return lc===ADMIN_EMAIL;}
-function getAdminUser(){const u=getAllUsers();let f=u.find(x=>x.isAdmin===true);if(!f)f=u.find(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL);if(f)return Object.assign({},f,{isAdmin:true,isVerified:true});return{userId:'000000000',name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'',bio:'',website:'',profilePhoto:'',coverPhoto:'',following:[],createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true,isVerified:true};}
+function getAdminUser(){const u=getAllUsers();let f=u.find(x=>x.isAdmin===true);if(!f)f=u.find(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL);if(f)return Object.assign({},f,{isAdmin:true,isVerified:true});return{userId:'000000000',name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'',bio:'',website:'',profilePhoto:'',following:[],createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true,isVerified:true};}
 function getEffectiveLoggedUser(){const lu=localStorage.getItem('logged_user');if(lu){try{const u=JSON.parse(lu);if(u&&u.email)return u;}catch(e){}}if(isAdminLoggedIn()){const a=getAdminUser();try{localStorage.setItem('logged_user',JSON.stringify(a));}catch(e){}return a;}return null;}
 function getVerifiedBadgeHTML(size){const cls='verified-badge'+(size?(' '+size):'');return `<span class="${cls}" title="Verified"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path fill="#1d9bf0" d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18z"/></svg></span>`;}
 function getUserIdLabelHTML(userId,isAdmin){if(!userId)return'';const cls='chat-user-id'+(isAdmin?' admin-id':'');const eid=escapeHtml(String(userId));return `<span class="${cls}"><i class="fa-solid fa-id-badge" style="font-size:.5rem"></i>${eid}<button type="button" class="copy-id-btn" data-id="${eid}" onclick="event.stopPropagation();copyUserIdFromEl(this);"><i class="fa-regular fa-copy"></i></button></span>`;}
@@ -1618,11 +1628,29 @@ function getChatMessages(){try{return JSON.parse(localStorage.getItem(CHAT_KEY)|
 function saveChatMessages(m){try{localStorage.setItem(CHAT_KEY,JSON.stringify(m));}catch(e){}}
 function getConversationId(a,b){return [String(a||'').toLowerCase(),String(b||'').toLowerCase()].sort().join('__');}
 function getTotalUnread(email){if(!email)return 0;const m=getChatMessages();let t2=0;const tg=email.toLowerCase();for(const k in m){const p=k.split('__');if(p.includes(tg)){t2+=m[k].filter(x=>String(x.to).toLowerCase()===tg&&!x.read).length;}}return t2;}
-function updateChatBadge(){const lu=localStorage.getItem('logged_user');const eff=getEffectiveLoggedUser();const total=eff?getTotalUnread(eff.email):0;const badge=document.getElementById('chatUnreadBadge');const btn=document.getElementById('chatToggleBtn');const bn=document.getElementById('brandNotifBadge');
-  if(!lu&&!isAdminLoggedIn()){if(btn)btn.classList.remove('visible');if(badge)badge.classList.remove('show');if(bn){bn.classList.remove('show');bn.textContent='0';}return;}
-  if(btn)btn.classList.add('visible');
+function updateChatBadge(){
+  const lu=localStorage.getItem('logged_user');
+  const eff=getEffectiveLoggedUser();
+  const total=eff?getTotalUnread(eff.email):0;
+  const badge=document.getElementById('chatUnreadBadge');
+  const bn=document.getElementById('brandNotifBadge');
+  const mb=document.getElementById('messengerFloatBtn');
+  const mBadge=document.getElementById('messengerBadge');
+  const isLogged = !!lu || isAdminLoggedIn();
+  if(mb){
+    if(isLogged) mb.classList.add('visible');
+    else mb.classList.remove('visible');
+  }
+  if(!isLogged){
+    if(badge)badge.classList.remove('show');
+    if(bn){bn.classList.remove('show');bn.textContent='0';}
+    if(mBadge)mBadge.classList.remove('show');
+    return;
+  }
   if(badge){if(total>0){badge.classList.add('show');badge.textContent=total>99?'99+':String(total);}else badge.classList.remove('show');}
-  if(bn){if(total>0){bn.classList.add('show');bn.textContent=total>99?'99+':String(total);}else bn.classList.remove('show');}}
+  if(bn){if(total>0){bn.classList.add('show');bn.textContent=total>99?'99+':String(total);}else bn.classList.remove('show');}
+  if(mBadge){if(total>0){mBadge.classList.add('show');mBadge.textContent=total>99?'99+':String(total);}else mBadge.classList.remove('show');}
+}
 function openChatPanel(){const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert(t('alert_auth_required'));openGetInTouchModal();return;}document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';document.getElementById('chatReplyPreview').style.display='none';chatSearchQuery='';const si=document.getElementById('chatSearchInput');if(si)si.value='';renderChatUsersList();updateChatBadge();}
 function closeChatPanel(){document.getElementById('chatPanelModal').classList.remove('active');activeChatUser=null;currentReplyTo=null;stopRecordingUI();}
 function filterChatUsers(){const inp=document.getElementById('chatSearchInput');chatSearchQuery=inp?inp.value.trim().toLowerCase():'';const clr=document.getElementById('chatSearchClear');if(clr){chatSearchQuery?clr.classList.add('show'):clr.classList.remove('show');}renderChatUsersList();}
@@ -1952,8 +1980,10 @@ async function handleAuthSubmit(e){if(e)e.preventDefault();const email=document.
   let users=JSON.parse(localStorage.getItem('site_users')||'[]');
   if(currentAuthMode==='signup'){const name=document.getElementById('contactClientName').value.trim().toLowerCase();let username=document.getElementById('contactClientUsername').value.trim().replace(/^@/,'');if(!name||!username){showCustomAlert(t('alert_fill_fields'));return;}if(username.length<7){showCustomAlert('min 7 chars');return;}if(users.some(u=>String(u.username||'').toLowerCase()===username.toLowerCase())){showCustomAlert(t('alert_user_taken'));return;}if(!isValidPassword(password)){showCustomAlert(t('alert_pass_short'));return;}if(users.find(u=>u.email===email)){showCustomAlert(t('alert_email_reg'));return;}const code=generateSignupCode();pendingSignup={code,name,username,email,password};await openSignupMockModal(email);return;}
   else{const ic=email.toLowerCase().trim();let inputName=ic.startsWith('@')?ic.substring(1):ic;let user=users.find(u=>{const em=(u.email||'').toLowerCase()===ic;let un=(u.username||'').toLowerCase().replace(/^@/,'');return(em||un===inputName)&&u.password===password;});if(user){localStorage.setItem('logged_user',JSON.stringify(user));logActivity('signin',user,'Signed in');closeDirectContactModal();forceRefreshUI();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('alert_success_signin'),'success');}else showCustomAlert(t('alert_error_signin'));}}
-function checkUserSession(){const lu=localStorage.getItem('logged_user');const ps=document.getElementById('userProfileSection');const cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');const abi=document.getElementById('authBoxIcon');const mab=document.getElementById('mainAuthBox');
-  if(lu){try{const u=JSON.parse(lu);if(ps)ps.style.display='block';if(mab)mab.style.display='none';const pd=(id,v)=>{const e=document.getElementById(id);if(e)e.innerText=v;};pd('profileDisplayName',u.name||'user');pd('profileDisplayIdDesktop',u.userId||'-');pd('profileDisplayId',u.userId||'-');const uname=String(u.username||'username').replace(/^@/,'');const utop=document.getElementById('profileDisplayUsernameTop');if(utop){utop.innerHTML='@'+escapeHtml(uname)+((isAdminUser(u.email)||u.isVerified)?getVerifiedBadgeHTML('sm'):'');}const bi=document.getElementById('profileBioInline');if(bi){if(u.bio){bi.style.display='block';bi.innerText=u.bio;}else bi.style.display='none';}const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const ppd=document.getElementById('profilePhotoDisplay');if(ppd)ppd.src=p;const ppl=document.getElementById('profilePhotoLarge');if(ppl)ppl.src=p;if(cse)cse.innerText=t('contact_sub_logged');if(cme)cme.innerText=u.name?`${t('contact_main_logged')} ${u.name}`:t('contact_main_logged2');if(abi)abi.className='fa-solid fa-user-check';const dn=document.getElementById('profileDisplayName');if(dn){dn.querySelectorAll('.verified-badge').forEach(b=>b.remove());}
+function checkUserSession(){const lu=localStorage.getItem('logged_user');const cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');const abi=document.getElementById('authBoxIcon');const mab=document.getElementById('mainAuthBox');
+  if(lu){try{const u=JSON.parse(lu);if(mab)mab.style.display='none';if(cse)cse.innerText=t('contact_sub_logged');if(cme)cme.innerText=u.name?`${t('contact_main_logged')} ${u.name}`:t('contact_main_logged2');if(abi)abi.className='fa-solid fa-user-check';
+    const uname=String(u.username||'username').replace(/^@/,'');
+    const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');
     /* === Header Profile Sync === */
     const hpw=document.getElementById('headerProfileWrapper');
     const hpp=document.getElementById('headerProfilePhoto');
@@ -1966,26 +1996,25 @@ function checkUserSession(){const lu=localStorage.getItem('logged_user');const p
     if(hpmN)hpmN.textContent=u.name||'User';
     if(hpmI)hpmI.textContent='ID: '+(u.userId||'-');
   }catch(e){}
-  }else{if(ps)ps.style.display='none';if(mab)mab.style.display='flex';if(cse)cse.innerText=t('contact_sub');if(cme)cme.innerText=t('contact_main');if(abi)abi.className='fa-solid fa-right-to-bracket';
+  }else{if(mab)mab.style.display='flex';if(cse)cse.innerText=t('contact_sub');if(cme)cme.innerText=t('contact_main');if(abi)abi.className='fa-solid fa-right-to-bracket';
     const hpw=document.getElementById('headerProfileWrapper');
     if(hpw)hpw.style.display='none';
   }
   updateChatBadge();}
 function togglePasswordVisibility(i,ic){const p=document.getElementById(i),t2=document.getElementById(ic);if(!p||!t2)return;if(p.dataset.masked==='1'){p.dataset.masked='0';p.classList.remove('password-mask');t2.className='fa-solid fa-eye-slash';p.value=p.dataset.realValue||'';}else{p.dataset.masked='1';p.classList.add('password-mask');t2.className='fa-solid fa-eye';p.value='*'.repeat((p.dataset.realValue||'').length);}}
 function checkUsernameAvailability(){const i=document.getElementById('contactClientUsername'),m=document.getElementById('usernameAvailabilityMsg');if(!i||!m)return;let un=i.value.trim().replace(/^@/,'');if(!un){m.style.display='none';return;}if(un.length<7){m.style.display='block';m.style.color='#f59e0b';m.innerText='min 7 chars';return;}const users=JSON.parse(localStorage.getItem('site_users')||'[]');const ex=users.some(u=>String(u.username||'').replace(/^@/,'').toLowerCase()===un.toLowerCase());m.style.display='block';if(ex){m.style.color='#ef4444';m.innerText='taken';}else{m.style.color='#22c55e';m.innerText='available';}}
-function toggleProfilePrivacy(){const dc=document.getElementById('profileDetailsContainer'),pi=document.getElementById('privacyIcon');if(dc.style.display==='none'){dc.style.display='flex';pi.className='fa-solid fa-eye';}else{dc.style.display='none';pi.className='fa-solid fa-eye-slash';}}
 function openProfilePhotoPanel(){const lu=localStorage.getItem('logged_user');if(!lu)return;try{const u=JSON.parse(lu);const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');document.getElementById('profilePhotoLarge').src=p;}catch(e){}document.getElementById('profilePhotoPanelModal').classList.add('active');}
 function closeProfilePhotoPanel(){document.getElementById('profilePhotoPanelModal').classList.remove('active');}
-function resetProfilePhoto(){const lu=localStorage.getItem('logged_user');if(!lu)return;const d='https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani';document.getElementById('profilePhotoDisplay').src=d;document.getElementById('profilePhotoLarge').src=d;try{let u=JSON.parse(lu);u.profilePhoto='';let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));}catch(e){}updateHeaderProfileAll();}
+function resetProfilePhoto(){const lu=localStorage.getItem('logged_user');if(!lu)return;const d='https://api.dicebear.com/7.x/avataaars/svg?seed=muminsultani';document.getElementById('profilePhotoLarge').src=d;try{let u=JSON.parse(lu);u.profilePhoto='';let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));}catch(e){}updateHeaderProfileAll();}
 function openLightbox(){document.getElementById('lightboxImage').src=document.getElementById('profilePhotoLarge').src;document.getElementById('lightboxOverlay').classList.add('active');}
 function closeLightbox(){document.getElementById('lightboxOverlay').classList.remove('active');}
-function scrollPageDown(){window.scrollBy({top:450,behavior:'smooth'});}
 let cropperInstance=null;
 function handleProfilePhotoUpload(event){const f=event.target.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{openCropModal(e.target.result);};r.readAsDataURL(f);event.target.value='';}
 function openCropModal(src){const ci=document.getElementById('cropImage');ci.src=src;document.querySelectorAll('.ratio-btn').forEach(b=>b.classList.remove('active'));const db=document.querySelector('.ratio-btn');if(db)db.classList.add('active');document.getElementById('cropModal').classList.add('active');if(cropperInstance){try{cropperInstance.destroy();}catch(e){}cropperInstance=null;}const ic=()=>{try{cropperInstance=new Cropper(ci,{aspectRatio:1,viewMode:1,autoCropArea:.9,background:false,responsive:true});}catch(e){}};if(ci.complete&&ci.naturalWidth>0)setTimeout(ic,50);else ci.onload=()=>setTimeout(ic,50);}
 function closeCropModal(){if(cropperInstance){try{cropperInstance.destroy();}catch(e){}cropperInstance=null;}document.getElementById('cropModal').classList.remove('active');}
 function setCropRatio(r,btn){document.querySelectorAll('.ratio-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');if(cropperInstance){try{cropperInstance.setAspectRatio(isNaN(r)?NaN:r);}catch(e){}}}
-function applyCrop(){if(!cropperInstance)return;try{const c=cropperInstance.getCroppedCanvas({width:400,height:400,imageSmoothingQuality:'high'});if(!c)return;const d=c.toDataURL('image/png');document.getElementById('profilePhotoDisplay').src=d;document.getElementById('profilePhotoLarge').src=d;const lu=localStorage.getItem('logged_user');if(lu){try{let u=JSON.parse(lu);u.profilePhoto=d;let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));}catch(e){}}closeCropModal();updateHeaderProfileAll();}catch(e){}}
+function applyCrop(){if(!cropperInstance)return;try{const c=cropperInstance.getCroppedCanvas({width:400,height:400,imageSmoothingQuality:'high'});if(!c)return;const d=c.toDataURL('image/png');document.getElementById('profilePhotoLarge').src=d;const lu=localStorage.getItem('logged_user');if(lu){try{let u=JSON.parse(lu);u.profilePhoto=d;let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));}catch(e){}}closeCropModal();updateHeaderProfileAll();}catch(e){}}
+function updateHeaderProfileAll(){try{checkUserSession();}catch(e){}}
 
 function createAnimSystem(canvasId,options={}){const c=document.getElementById(canvasId);if(!c)return{stop:()=>{},setMode:()=>{}};const ctx=c.getContext('2d');const baseNP=options.numberOfParticles||55,mr=options.mouseRadius||130,ld=options.lineDistance||110;let pa=[],mouse={x:null,y:null,radius:mr},running=true;let mode='constellation';let codeCols=[],codeDrops=[],binaryDrops=[],hexRipples=[],waves=[],blocks=[];function rc(){c.width=window.innerWidth;c.height=window.innerHeight;initMode();}class P{constructor(){this.reset();}reset(){this.x=Math.random()*c.width;this.y=Math.random()*c.height;this.vx=(Math.random()-.5)*.8;this.vy=(Math.random()-.5)*.8;this.size=Math.random()*1.8+1;}update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>c.width)this.vx=-this.vx;if(this.y<0||this.y>c.height)this.vy=-this.vy;}draw(){const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';ctx.fillStyle=`rgba(${ar},.55)`;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();}}function initMode(){pa=[];codeCols=[];codeDrops=[];binaryDrops=[];hexRipples=[];waves=[];blocks=[];if(mode==='constellation'||mode==='network'){for(let i=0;i<baseNP;i++)pa.push(new P());}else if(mode==='code_rain'){const cols=Math.floor(c.width/22);for(let i=0;i<cols;i++)codeCols.push({x:i*22,y:Math.random()*c.height,speed:Math.random()*3+1});}else if(mode==='matrix'){const cols=Math.floor(c.width/16);for(let i=0;i<cols;i++)codeDrops.push({x:i*16,y:Math.random()*c.height,speed:Math.random()*4+1.5});}else if(mode==='particles'){for(let i=0;i<80;i++)pa.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6,size:Math.random()*3+1,alpha:Math.random()*.5+.3});}else if(mode==='binary'){const cols=Math.floor(c.width/24);for(let i=0;i<cols;i++)binaryDrops.push({x:i*24,y:Math.random()*c.height,speed:Math.random()*2.5+1});}else if(mode==='hex_grid'){const size=40;const rows=Math.floor(c.height/(size*0.86))+1;const cols=Math.floor(c.width/size)+1;for(let r=0;r<rows;r++)for(let col=0;col<cols;col++)hexRipples.push({x:col*size+(r%2?size/2:0),y:r*size*0.86,size:size*0.5,phase:Math.random()*Math.PI*2});}else if(mode==='blocks'){const size=30;const rows=Math.floor(c.height/size)+1;const cols=Math.floor(c.width/size)+1;for(let r=0;r<rows;r++)for(let col=0;col<cols;col++)blocks.push({x:col*size,y:r*size,size:size-2,alpha:Math.random()*.15});}else if(mode==='waves'){for(let i=0;i<6;i++)waves.push({y:c.height*(i+1)/7,amp:30+Math.random()*40,freq:.008+Math.random()*.01,phase:Math.random()*Math.PI*2});}else if(mode==='dots'){const spacing=60;const rows=Math.floor(c.height/spacing)+1;const cols=Math.floor(c.width/spacing)+1;for(let r=0;r<rows;r++)for(let col=0;col<cols;col++)pa.push({x:col*spacing,y:r*spacing,phase:Math.random()*Math.PI*2,size:2+Math.random()*1.5});}}
 function draw(){if(!running)return;ctx.clearRect(0,0,c.width,c.height);const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';if(mode==='none'){requestAnimationFrame(draw);return;}if(mode==='constellation'){for(let i=0;i<pa.length;i++){pa[i].update();pa[i].draw();for(let j=i+1;j<pa.length;j++){const dx=pa[i].x-pa[j].x,dy=pa[i].y-pa[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<ld){const o=1-(dist/ld);ctx.strokeStyle=`rgba(${ar},${o*.22})`;ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(pa[i].x,pa[i].y);ctx.lineTo(pa[j].x,pa[j].y);ctx.stroke();}}}}else if(mode==='network'){for(let i=0;i<pa.length;i++){pa[i].update();for(let j=i+1;j<pa.length;j++){const dx=pa[i].x-pa[j].x,dy=pa[i].y-pa[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<180){const o=1-(dist/180);ctx.strokeStyle=`rgba(${ar},${o*.4})`;ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(pa[i].x,pa[i].y);ctx.lineTo(pa[j].x,pa[j].y);ctx.stroke();}}ctx.beginPath();ctx.arc(pa[i].x,pa[i].y,2.5,0,Math.PI*2);ctx.fillStyle=`rgba(${ar},.7)`;ctx.fill();}}else if(mode==='code_rain'){const chars='アカサタナハマヤラワ0123456789ABCDEF{}[]()<>/*-+=;:.'.split('');ctx.font='16px monospace';ctx.textAlign='center';codeCols.forEach(col=>{col.y+=col.speed;if(col.y>c.height+100){col.y=-100;col.speed=Math.random()*3+1;}for(let k=0;k<12;k++){const y=col.y-k*18;if(y<-20||y>c.height+20)continue;const alpha=(1-k/12)*.9;const ch=chars[Math.floor(Math.random()*chars.length)];ctx.fillStyle=`rgba(${ar},${alpha*.9})`;ctx.fillText(ch,col.x,y);}});}else if(mode==='matrix'){ctx.font='14px monospace';ctx.textAlign='center';codeDrops.forEach(d=>{d.y+=d.speed;if(d.y>c.height+20){d.y=-20;d.speed=Math.random()*4+1.5;}ctx.fillStyle=`rgba(34,197,94,.85)`;const ch=Math.random()>.5?'1':'0';ctx.fillText(ch,d.x,d.y);for(let k=1;k<15;k++){const y=d.y-k*14;if(y<-20||y>c.height+20)continue;ctx.fillStyle=`rgba(34,197,94,${.75-k*.05})`;ctx.fillText(ch,d.x,y);}});}else if(mode==='particles'){pa.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>c.width)p.vx=-p.vx;if(p.y<0||p.y>c.height)p.vy=-p.vy;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(${ar},${p.alpha})`;ctx.fill();});}else if(mode==='binary'){ctx.font='16px monospace';ctx.textAlign='center';binaryDrops.forEach(d=>{d.y+=d.speed;if(d.y>c.height+20){d.y=-20;d.speed=Math.random()*2.5+1;}ctx.fillStyle=`rgba(${ar},.7)`;ctx.fillText(Math.random()>.5?'1':'0',d.x,d.y);});}else if(mode==='hex_grid'){const t2=Date.now()/1000;hexRipples.forEach(h=>{const s=h.size*(0.6+0.4*Math.sin(t2*2+h.phase));ctx.beginPath();for(let i=0;i<6;i++){const a=i*Math.PI/3;const x=h.x+Math.cos(a)*s;const y=h.y+Math.sin(a)*s;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.closePath();ctx.strokeStyle=`rgba(${ar},.2)`;ctx.lineWidth=1;ctx.stroke();});}else if(mode==='blocks'){const t2=Date.now()/1000;blocks.forEach(b=>{const a=b.alpha*(0.5+0.5*Math.sin(t2+b.x*.01+b.y*.01));ctx.fillStyle=`rgba(${ar},${a})`;ctx.fillRect(b.x,b.y,b.size,b.size);});}else if(mode==='waves'){const t2=Date.now()/1000;waves.forEach(w=>{ctx.beginPath();ctx.strokeStyle=`rgba(${ar},.35)`;ctx.lineWidth=1.5;for(let x=0;x<c.width;x+=8){const y=w.y+Math.sin(x*w.freq+t2+w.phase)*w.amp;if(x===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.stroke();});}else if(mode==='dots'){const t2=Date.now()/1000;pa.forEach(p=>{const o=Math.sin(t2*2+p.phase)*3;ctx.beginPath();ctx.arc(p.x+o,p.y+o,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(${ar},.5)`;ctx.fill();});}requestAnimationFrame(draw);}
@@ -2021,9 +2050,76 @@ window.addEventListener('click',function(e){
   const w=document.getElementById('headerProfileWrapper');
   if(m&&w&&!w.contains(e.target))m.classList.remove('show');
 });
-function updateHeaderProfileAll(){
-  try{checkUserSession();}catch(e){}
+
+/* ==================== MESSENGER FLOAT BUTTON ==================== */
+let messengerPos = null;
+let messengerDragState = { isDragging:false, moved:false, startX:0, startY:0, startPosX:0, startPosY:0 };
+function initMessengerBtn(){
+  const btn = document.getElementById('messengerFloatBtn');
+  if(!btn) return;
+  try{
+    const saved = localStorage.getItem('messenger_pos');
+    if(saved){ messengerPos = JSON.parse(saved); }
+  }catch(e){}
+  if(!messengerPos || typeof messengerPos.x!=='number' || typeof messengerPos.y!=='number'){
+    messengerPos = { x: Math.max(10, window.innerWidth - 70), y: 120 };
+  }
+  messengerPos.x = Math.max(10, Math.min(window.innerWidth - 54, messengerPos.x));
+  messengerPos.y = Math.max(10, Math.min(window.innerHeight - 54, messengerPos.y));
+  applyMessengerPos();
+
+  const onDown = (e)=>{
+    if(e.target.closest('.messenger-badge')) return;
+    const pt = e.touches ? e.touches[0] : e;
+    messengerDragState.isDragging = true;
+    messengerDragState.moved = false;
+    messengerDragState.startX = pt.clientX;
+    messengerDragState.startY = pt.clientY;
+    messengerDragState.startPosX = messengerPos.x;
+    messengerDragState.startPosY = messengerPos.y;
+    btn.classList.add('dragging');
+  };
+  const onMove = (e)=>{
+    if(!messengerDragState.isDragging) return;
+    const pt = e.touches ? e.touches[0] : e;
+    const dx = pt.clientX - messengerDragState.startX;
+    const dy = pt.clientY - messengerDragState.startY;
+    if(Math.abs(dx)>4 || Math.abs(dy)>4) messengerDragState.moved = true;
+    messengerPos.x = Math.max(6, Math.min(window.innerWidth-50, messengerDragState.startPosX + dx));
+    messengerPos.y = Math.max(6, Math.min(window.innerHeight-50, messengerDragState.startPosY + dy));
+    applyMessengerPos();
+    if(e.cancelable) e.preventDefault();
+  };
+  const onUp = (e)=>{
+    if(!messengerDragState.isDragging) return;
+    messengerDragState.isDragging = false;
+    btn.classList.remove('dragging');
+    try{ localStorage.setItem('messenger_pos', JSON.stringify(messengerPos)); }catch(err){}
+    if(!messengerDragState.moved){
+      openChatPanel();
+    }
+  };
+  btn.addEventListener('mousedown', onDown);
+  btn.addEventListener('touchstart', onDown, {passive:true});
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('touchmove', onMove, {passive:false});
+  document.addEventListener('mouseup', onUp);
+  document.addEventListener('touchend', onUp);
 }
+function applyMessengerPos(){
+  const btn = document.getElementById('messengerFloatBtn');
+  if(!btn || !messengerPos) return;
+  btn.style.left = messengerPos.x + 'px';
+  btn.style.top = messengerPos.y + 'px';
+  btn.style.right = 'auto';
+  btn.style.bottom = 'auto';
+}
+window.addEventListener('resize', ()=>{
+  if(!messengerPos) return;
+  messengerPos.x = Math.max(6, Math.min(window.innerWidth-50, messengerPos.x));
+  messengerPos.y = Math.max(6, Math.min(window.innerHeight-50, messengerPos.y));
+  applyMessengerPos();
+});
 
 window.addEventListener('DOMContentLoaded',async ()=>{
   setTimeout(()=>{const i=document.getElementById('intro-screen');if(i){i.style.opacity='0';i.style.visibility='hidden';setTimeout(()=>{i.style.display='none';if(window.introConstellation)window.introConstellation.stop();},600);}},1500);
@@ -2040,6 +2136,7 @@ window.addEventListener('DOMContentLoaded',async ()=>{
   window.addEventListener('resize',()=>{if(confettiCanvas&&confettiCanvas.style.display!=='none'){confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;}renderApplications();});
   checkAdminHash();openApkDB().catch(e=>{});updateChatBadge();startChatPolling();cloudInitSync().catch(e=>{});
   setupSignupAutoFill();
+  initMessengerBtn();
   const fl=document.getElementById('t-forgot-link');if(fl)fl.style.display='inline';
   const gg=document.getElementById('dc-google-group');if(gg)gg.style.display='flex';
 });
