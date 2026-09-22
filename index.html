@@ -502,8 +502,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .order-status-badge.read{background:rgba(245,158,11,.15);color:#f59e0b}
 .order-status-badge.approved{background:rgba(34,197,94,.15);color:#22c55e}
 .admin-tab .tab-badge{display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:#ef4444;color:#fff;font-size:.55rem;font-weight:800;margin-left:4px}
-
-/* === ORDER TYPE - ÖZEL RADYO BUTONLARI (MOR) === */
 .order-type-group{display:flex;flex-direction:column;gap:8px}
 .order-type-option{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--box-bg);border:1.5px solid var(--line-color);border-radius:12px;cursor:pointer;transition:all .2s;font-size:.88rem;color:var(--text-color-override);user-select:none}
 .order-type-option:hover{border-color:rgba(var(--accent-rgb),.5);background:var(--box-hover-bg)}
@@ -511,10 +509,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .order-type-check{width:20px;height:20px;border-radius:50%;border:2px solid var(--line-color);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;position:relative}
 .order-type-option.active .order-type-check{border-color:var(--accent);background:var(--accent)}
 .order-type-option.active .order-type-check::after{content:'\f00c';font-family:'Font Awesome 6 Free';font-weight:900;color:#fff;font-size:.6rem}
-
-/* === AUTH MODAL HEADER - LOGO SOLDA, BUTONLAR SAĞDA === */
-#directContactModal .modal-header .modal-header-left{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
-#directContactModal .modal-header .modal-brand{margin:0}
 </style>
 </head>
 
@@ -640,17 +634,17 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
     <div class="modal-header">
       <div class="modal-header-left">
         <div class="modal-brand">muminsultani</div>
-        <div class="modal-title" id="t-order-modal-title">Order Software</div>
+        <div class="modal-title" id="t-order-modal-title">Yazılım Siparişi</div>
       </div>
       <div class="modal-header-actions">
         <button class="modal-close-btn" onclick="closeOrderModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
     </div>
     <form id="orderForm" onsubmit="submitOrder(event)">
-      <div class="form-group"><label class="form-label" id="t-ord-name-label">Name</label><input type="text" class="form-input" id="orderName" required maxlength="80" placeholder="ad & soyad"></div>
+      <div class="form-group"><label class="form-label" id="t-ord-name-label">Ad & Soyad</label><input type="text" class="form-input" id="orderName" required maxlength="80" placeholder="ad & soyad"></div>
       <div class="form-group"><label class="form-label" id="t-ord-email-label">Email</label><input type="email" class="form-input" id="orderEmail" required placeholder="email"></div>
       <div class="form-group">
-        <label class="form-label" id="t-ord-type-label">Project Type</label>
+        <label class="form-label" id="t-ord-type-label">Proje Tipi</label>
         <input type="hidden" id="orderType" value="website">
         <div class="order-type-group" id="orderTypeGroup">
           <div class="order-type-option active" data-value="website" onclick="selectOrderType('website',this)">
@@ -659,21 +653,21 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
           </div>
           <div class="order-type-option" data-value="mobile-app" onclick="selectOrderType('mobile-app',this)">
             <div class="order-type-check"></div>
-            <span data-order-label="mobile-app">Mobile App</span>
+            <span data-order-label="mobile-app">Mobil Uygulama</span>
           </div>
           <div class="order-type-option" data-value="web-app" onclick="selectOrderType('web-app',this)">
             <div class="order-type-check"></div>
-            <span data-order-label="web-app">Web App</span>
+            <span data-order-label="web-app">Web Uygulaması</span>
           </div>
           <div class="order-type-option" data-value="other" onclick="selectOrderType('other',this)">
             <div class="order-type-check"></div>
-            <span data-order-label="other">Other</span>
+            <span data-order-label="other">Diğer</span>
           </div>
         </div>
       </div>
-      <div class="form-group"><label class="form-label" id="t-ord-budget-label">Budget</label><input type="text" class="form-input" id="orderBudget" maxlength="50" placeholder="optional"></div>
-      <div class="form-group"><label class="form-label" id="t-ord-deadline-label">Deadline</label><input type="text" class="form-input" id="orderDeadline" maxlength="50" placeholder="e.g. 2 weeks"></div>
-      <div class="form-group"><label class="form-label" id="t-ord-desc-label">Project Details</label><textarea class="form-textarea" id="orderDesc" required maxlength="2000" style="min-height:110px" placeholder="proje detayları"></textarea></div>
+      <div class="form-group"><label class="form-label" id="t-ord-budget-label">Bütçe</label><input type="text" class="form-input" id="orderBudget" maxlength="50" placeholder="opsiyonel"></div>
+      <div class="form-group"><label class="form-label" id="t-ord-deadline-label">Teslim Tarihi</label><input type="text" class="form-input" id="orderDeadline" maxlength="50" placeholder="örn. 2 hafta"></div>
+      <div class="form-group"><label class="form-label" id="t-ord-desc-label">Proje Detayları</label><textarea class="form-textarea" id="orderDesc" required maxlength="2000" style="min-height:110px" placeholder="proje detayları"></textarea></div>
       <button type="submit" class="submit-btn email-btn" style="width:100%"><i class="fa-solid fa-paper-plane"></i> <span id="t-ord-submit">Sipariş Ver</span></button>
     </form>
   </div>
@@ -682,7 +676,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <!-- ============ SIGNUP / AUTH MODALLAR ============ -->
 <div class="modal-overlay high-z" id="signupMockModal">
 <div class="modal-container" style="max-width:460px">
-<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-check-email">Check Your Email</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelSignup()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-check-email">Emailinizi Kontrol Edin</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelSignup()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <div class="mock-email-container">
 <div class="email-sent-icon"><i class="fa-solid fa-envelope-circle-check"></i></div>
 <h3 style="font-size:1rem;font-weight:700;color:var(--text-color-override);margin-bottom:10px" id="signupMockTitleText">Sending...</h3>
@@ -692,30 +686,29 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="mock-email-footer"><span>admin:</span><span>admin@muminsultani.com</span></div>
 </div>
 <div class="form-buttons-group" style="width:100%;flex-direction:column;gap:8px">
-<button class="submit-btn email-btn" onclick="openSignupCodeModal()" style="width:100%;background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-key"></i> <span id="t-enter-code">Enter Code</span></button>
-<button class="submit-btn" onclick="resendSignupEmail()" style="width:100%;background:var(--box-bg);color:var(--text-color-override);border:1px solid var(--line-color)"><i class="fa-solid fa-rotate-right"></i> <span id="t-resend">Resend</span></button>
+<button class="submit-btn email-btn" onclick="openSignupCodeModal()" style="width:100%;background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-key"></i> <span id="t-enter-code">Kodu Girin</span></button>
+<button class="submit-btn" onclick="resendSignupEmail()" style="width:100%;background:var(--box-bg);color:var(--text-color-override);border:1px solid var(--line-color)"><i class="fa-solid fa-rotate-right"></i> <span id="t-resend">Yeniden Gönder</span></button>
 </div>
 </div>
 </div>
 
 <div class="modal-overlay high-z" id="signupCodeModal">
 <div class="modal-container" style="max-width:420px">
-<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="backToSignupMock()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-verify-email">Verify Email</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelSignup()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="backToSignupMock()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-verify-email">Emaili Doğrula</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelSignup()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <form id="signupCodeForm" onsubmit="verifySignupCode(event)">
-<p class="item-desc" style="margin-bottom:12px;font-size:.8rem" id="t-verify-desc">Enter the 5-digit code from your email.</p>
-<div class="form-group"><label class="form-label" id="t-code-label">Code</label><input type="text" class="form-input code-input" id="signupCodeInput" required maxlength="5" inputmode="numeric" placeholder="00000"></div>
-<div class="form-buttons-group"><button type="submit" class="submit-btn email-btn" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-circle-check"></i> <span id="t-verify-btn">Verify</span></button></div>
+<p class="item-desc" style="margin-bottom:12px;font-size:.8rem" id="t-verify-desc">Emailinizdeki 5 haneli kodu girin.</p>
+<div class="form-group"><label class="form-label" id="t-code-label">Kod</label><input type="text" class="form-input code-input" id="signupCodeInput" required maxlength="5" inputmode="numeric" placeholder="00000"></div>
+<div class="form-buttons-group"><button type="submit" class="submit-btn email-btn" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-circle-check"></i> <span id="t-verify-btn">Doğrula</span></button></div>
 </form>
 </div>
 </div>
 
-<!-- ============ ACCOUNT ACCESS MODAL — LOGO SOLDA, BUTONLAR SAĞDA ============ -->
 <div class="modal-overlay" id="directContactModal">
 <div class="modal-container">
 <div class="modal-header">
   <div class="modal-header-left">
     <div class="modal-brand" style="margin:0">muminsultani</div>
-    <div class="modal-title" style="margin-top:4px" id="t-account-access">Account Access</div>
+    <div class="modal-title" style="margin-top:4px" id="t-account-access">Hesap Erişimi</div>
   </div>
   <div class="modal-header-actions">
     <button class="modal-close-btn" onclick="closeDirectContactModal()" title="Back"><i class="fa-solid fa-chevron-left"></i></button>
@@ -724,8 +717,8 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
   </div>
 </div>
 <div class="auth-tabs">
-<button type="button" class="auth-tab-btn active" id="tabSigninBtn" onclick="switchAuthTab('signin')"><span id="t-signin-tab">Sign In</span></button>
-<button type="button" class="auth-tab-btn" id="tabSignupBtn" onclick="switchAuthTab('signup')"><span id="t-signup-tab">Sign Up</span></button>
+<button type="button" class="auth-tab-btn active" id="tabSigninBtn" onclick="switchAuthTab('signin')"><span id="t-signin-tab">Giriş Yap</span></button>
+<button type="button" class="auth-tab-btn" id="tabSignupBtn" onclick="switchAuthTab('signup')"><span id="t-signup-tab">Kayıt Ol</span></button>
 </div>
 <form id="directContactForm" onsubmit="handleAuthSubmit(event)">
 <div class="form-group" id="groupSignupName" style="display:none"><label class="form-label" id="t-name-label">Ad & Soyad</label><input type="text" class="form-input" id="contactClientName" placeholder="ad & soyad" autocomplete="off"></div>
@@ -748,7 +741,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 
 <div class="modal-overlay" id="forgotPasswordModal">
 <div class="modal-container" style="max-width:420px">
-<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeForgotPasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-pw-recovery">Password Recovery</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeForgotPasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeForgotPasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-pw-recovery">Şifre Kurtarma</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeForgotPasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <form id="forgotPasswordForm" onsubmit="handleForgotPasswordSubmit(event)">
 <p class="item-desc" style="margin-bottom:12px;font-size:.8rem" id="t-pw-recovery-desc">Kayıtlı emailinizi girin.</p>
 <div class="form-group"><label class="form-label" id="t-fp-email-label">Email</label><input type="email" class="form-input" id="forgotClientEmail" required placeholder="email" oninput="this.value=this.value.toLowerCase()"></div>
@@ -759,7 +752,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 
 <div class="modal-overlay" id="resetPasswordModal">
 <div class="modal-container" style="max-width:420px">
-<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeResetPasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-reset-pw">Reset Password</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeResetPasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeResetPasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-reset-pw">Şifre Sıfırla</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeResetPasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <form id="resetPasswordForm" onsubmit="handleResetPasswordSubmit(event)">
 <div class="form-group"><label class="form-label" id="t-rp-email-label">Email</label><input type="email" class="form-input" id="resetClientEmail" readonly style="opacity:.7"></div>
 <div class="form-group"><label class="form-label" id="t-rp-code-label">Kod</label><input type="text" class="form-input" id="resetClientCode" required maxlength="5" placeholder="00000"></div>
@@ -773,7 +766,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 
 <div class="modal-overlay" id="changePasswordModal">
 <div class="modal-container" style="max-width:420px">
-<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeChangePasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-change-pw-title">Change Password</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeChangePasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeChangePasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-change-pw-title">Şifre Değiştir</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeChangePasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <form id="changePasswordForm" onsubmit="handleChangePassword(event)">
 <div class="form-group"><label class="form-label" id="t-cp-old-label">Mevcut Şifre</label><div class="password-wrapper"><input type="text" class="form-input password-mask" id="changeOldPassword" required placeholder="mevcut şifre"><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('changeOldPassword','oldPasswordToggleIcon')"><i class="fa-solid fa-eye" id="oldPasswordToggleIcon"></i></button></div></div>
 <div class="form-group"><label class="form-label" id="t-cp-new-label">Yeni Şifre</label><div class="password-wrapper"><input type="text" class="form-input password-mask" id="changeNewPassword" required placeholder="yeni şifre"><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('changeNewPassword','newPasswordToggleIcon')"><i class="fa-solid fa-eye" id="newPasswordToggleIcon"></i></button></div>
@@ -787,7 +780,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 
 <div class="modal-overlay" id="deleteAccountModal">
 <div class="modal-container" style="max-width:420px">
-<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeDeleteAccountModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-del-acc-title">Delete Account</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeDeleteAccountModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeDeleteAccountModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-del-acc-title">Hesabı Sil</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeDeleteAccountModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <form id="deleteAccountForm" onsubmit="handleDeleteAccount(event)">
 <p class="item-desc" style="margin-bottom:12px;font-size:.8rem;color:#ef4444" id="t-del-warn">Uyarı: geri alınamaz.</p>
 <div class="form-group"><label class="form-label" id="t-del-username-label">Kullanıcı Adı</label><input type="text" class="form-input" id="deleteConfirmUsername" required placeholder="@username" oninput="this.value = this.value.toLowerCase().replace(/^@/, '')"></div>
@@ -798,7 +791,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 
 <div class="modal-overlay" id="confirmDeletePasswordModal">
 <div class="modal-container" style="max-width:420px">
-<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeDeletePasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-confirm-del">Confirm Deletion</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeDeletePasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeDeletePasswordModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-confirm-del">Silmeyi Onayla</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeDeletePasswordModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <form id="deletePasswordForm" onsubmit="handleDeletePasswordSubmit(event)">
 <div class="form-group"><label class="form-label" id="t-delpw-label">Şifre</label><div class="password-wrapper"><input type="text" class="form-input password-mask" id="deleteConfirmPassword" required placeholder="şifre"><button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('deleteConfirmPassword','deleteConfirmPasswordToggleIcon')"><i class="fa-solid fa-eye" id="deleteConfirmPasswordToggleIcon"></i></button></div></div>
 <div class="form-buttons-group"><button type="submit" class="submit-btn" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fa-solid fa-trash-can"></i> <span id="t-delpw-btn">Hesabı Sil</span></button></div>
@@ -808,7 +801,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 
 <div class="modal-overlay" id="editProfileModal">
 <div class="modal-container">
-<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-edit-title">Edit Profile</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeEditProfileModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-edit-title">Profili Düzenle</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeEditProfileModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <form id="editProfileForm" onsubmit="handleProfileUpdate(event)">
 <div class="form-group"><label class="form-label" id="t-ep-photo-label">Profil Fotoğrafı</label>
 <div style="display:flex;align-items:center;gap:14px;padding:12px;background:var(--box-bg);border:1px solid var(--line-color);border-radius:14px;margin-bottom:6px">
@@ -838,7 +831,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 
 <div class="modal-overlay" id="userSettingsModal">
 <div class="modal-container" style="max-width:560px">
-<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-settings-title">Settings</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeUserSettingsModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-settings-title">Ayarlar</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeUserSettingsModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <div class="admin-hint" id="t-settings-hint"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent)"></i> Site görünümünüzü özelleştirin.</div>
 <h4 class="admin-subsection-title"><i class="fa-solid fa-palette"></i> <span id="t-color-theme">Renk Teması</span></h4>
 <div class="settings-grid" id="userThemeGrid"></div>
@@ -859,7 +852,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 
 <div class="modal-overlay" id="cropModal">
 <div class="modal-container" style="max-width:500px !important">
-<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-crop-photo">Crop Photo</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeCropModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
+<div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="t-crop-photo">Fotoğrafı Kırp</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeCropModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <div class="crop-container-wrapper"><img id="cropImage" src="" alt="Crop"></div>
 <div class="crop-ratio-buttons">
 <button type="button" class="ratio-btn active" onclick="setCropRatio(1,this)">1:1</button>
@@ -894,7 +887,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="modal-header">
   <div class="modal-header-left">
     <div class="modal-brand">muminsultani</div>
-    <div class="modal-title" id="chat-panel-title">Messages</div>
+    <div class="modal-title" id="chat-panel-title">Mesajlar</div>
   </div>
   <div class="modal-header-actions">
     <button class="modal-close-btn" onclick="closeChatPanel()" title="Close"><i class="fa-solid fa-xmark"></i></button>
@@ -940,6 +933,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 </div>
 
+<!-- ============ ADMIN MODALLAR ============ -->
 <div class="modal-overlay admin-z" id="adminLoginModal">
 <div class="modal-container" style="max-width:380px">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="admin-login-title">Admin Access</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminLogin()"><i class="fa-solid fa-xmark"></i></button></div></div>
@@ -1097,7 +1091,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 
 <div class="admin-section" data-section="orders">
   <div class="admin-hint"><i class="fa-solid fa-bell" style="color:var(--accent)"></i> Gelen yazılım siparişleri burada görünür. Onayladığınızda müşteriye otomatik email gider.</div>
-
   <div class="toggle-row" style="background:rgba(147,51,234,.08);border-color:rgba(147,51,234,.3)">
     <div class="toggle-label">
       <div class="toggle-label-title"><i class="fa-solid fa-user-lock" style="color:var(--accent)"></i> Sipariş için kayıt zorunlu</div>
@@ -1108,7 +1101,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
       <span class="toggle-slider"></span>
     </label>
   </div>
-
   <div id="adminOrdersList"></div>
   <div class="admin-actions-grid">
     <button class="admin-action-btn danger" onclick="clearAllOrders()"><i class="fa-solid fa-trash"></i> Tümünü Sil</button>
@@ -1373,72 +1365,14 @@ let confettiParticles=[],confettiRunning=false,confettiCanvas=null,confettiCtx=n
 let messengerPos=null;
 let messengerDragState={isDragging:false,moved:false,startX:0,startY:0,startPosX:0,startPosY:0};
 let appsRenderLock=false,appsResizeTimer=null;
+let firebaseConnected=false,firebaseDbRef=null;
 const PASSWORD_FIELDS=['adminPasswordInput','contactClientPassword','changeOldPassword','changeNewPassword','changeConfirmPassword','deleteConfirmPassword','resetClientNewPassword'];
 
 const PW_LABELS={en:{pw_enter:'password',pw_very_weak:'very weak',pw_weak:'weak',pw_medium:'medium',pw_strong:'strong',pw_very_strong:'very strong'},tr:{pw_enter:'şifre',pw_very_weak:'çok zayıf',pw_weak:'zayıf',pw_medium:'orta',pw_strong:'güçlü',pw_very_strong:'çok güçlü'}};
 
-/* ==================== TAM ÇEVİRİ SÖZLÜĞÜ ==================== */
 const LANG={
-en:{
-role:"Software Developer",sec_apps:"My Applications",sec_exp:"Experience",sec_setup:"Setup & Environment",sec_stack:"Core Stack",
-contact_sub:"Sign In / Sign Up",contact_main:"Sign In To Join Us",scan_text:"Scan To Connect",copyright:"© 2026 muminsultani • All Rights Reserved.",
-chat_search_ph:"search...",chat_ph:"type a message...",chat_no_users:"no other users.",chat_no_msgs:"no messages yet",chat_start:"start the conversation 👋",chat_you:"you",chat_voice:"🎤 voice message",
-order_title:"Order Software",order_sub:"Need a website or app?",order_main:"Place an Order",order_modal_title:"Order Software",
-ord_name:"Name",ord_email:"Email",ord_type:"Project Type",ord_budget:"Budget",ord_deadline:"Deadline",ord_desc:"Project Details",ord_submit:"Submit Order",
-ord_website:"Website",ord_mobile:"Mobile App",ord_web_app:"Web App",ord_other:"Other",
-ord_name_ph:"name & surname",ord_email_ph:"email",ord_budget_ph:"optional",ord_deadline_ph:"e.g. 2 weeks",ord_desc_ph:"project details",
-edit_profile:"Edit Profile",change_password:"Change Password",settings:"Settings",delete_account:"Delete Account",logout:"Logout",
-check_email:"Check Your Email",enter_code:"Enter Code",resend:"Resend",
-verify_email:"Verify Email",verify_desc:"Enter the 5-digit code from your email.",code:"Code",verify:"Verify",
-account_access:"Account Access",signin_tab:"Sign In",signup_tab:"Sign Up",
-name:"Ad & Soyad",username:"Username",email:"Email",password:"Password",forgot:"forgot password?",next:"Next",go:"Go",
-name_ph:"name & surname",username_ph:"@username",email_ph:"email or username",password_ph:"password",
-pw_recovery:"Password Recovery",pw_recovery_desc:"Enter your registered email.",send:"Send",
-reset_pw:"Reset Password",new_password:"New Password",update:"Update",
-change_pw_title:"Change Password",current_password:"Current Password",confirm_password:"Confirm Password",
-del_acc_title:"Delete Account",del_warn:"Warning: cannot be undone.",delete:"Delete",
-confirm_del:"Confirm Deletion",delete_account_btn:"Delete Account",
-edit_title:"Edit Profile",profile_photo:"Profile Photo",change_photo:"Change Photo",reset:"Reset",
-name_surname:"Ad & Soyad",website:"Website",dob:"Date of Birth",save:"Save",
-settings_title:"Settings",settings_hint:"Customize your site appearance.",color_theme:"Color Theme",font_color:"Font Color",font_family:"Font",background:"Background",chat_bg:"Chat Background",settings_reset:"Reset",settings_ok:"OK",
-crop_photo:"Crop Photo",cancel:"Cancel",apply:"Apply",
-message:"Message",close:"Close",send_message:"Send Message",user_profile:"User Profile",joined:"Joined",
-no_orders:"No orders yet.",you_must_signin:"You must sign in to place an order.",order_received:"Order received! We will contact you soon.",
-fill_fields:"Please fill in all fields.",invalid_credentials:"Invalid credentials!",email_registered:"Email already registered!",username_taken:"This username is already taken.",min_7:"Minimum 7 characters.",pw_8:"Password must be at least 8 characters.",
-signin_success:"Signed in successfully!",signup_success:"Account created successfully!",logout_confirm:"Are you sure you want to log out?",logout_done:"Session closed.",
-order_approved:"Order approved and email sent!",
-gt_signin:"Sign In",gt_back:"Back",gt_ok:"OK",gt_cancel:"Cancel",gt_yes:"Yes"
-},
-tr:{
-role:"Yazılım Geliştirici",sec_apps:"Uygulamalarım",sec_exp:"Deneyim",sec_setup:"Kurulum & Ortam",sec_stack:"Temel Yığın",
-contact_sub:"Giriş Yap / Kayıt Ol",contact_main:"Bize Katılmak İçin Giriş Yapın",scan_text:"Bağlanmak İçin Tarayın",copyright:"© 2026 muminsultani • Tüm Hakları Saklıdır.",
-chat_search_ph:"ara...",chat_ph:"bir mesaj yaz...",chat_no_users:"başka kullanıcı yok.",chat_no_msgs:"henüz mesaj yok",chat_start:"sohbete başla 👋",chat_you:"sen",chat_voice:"🎤 sesli mesaj",
-order_title:"Yazılım Siparişi",order_sub:"Web sitesi veya uygulama mı lazım?",order_main:"Sipariş Ver",order_modal_title:"Yazılım Siparişi",
-ord_name:"Ad & Soyad",ord_email:"Email",ord_type:"Proje Tipi",ord_budget:"Bütçe",ord_deadline:"Teslim Tarihi",ord_desc:"Proje Detayları",ord_submit:"Sipariş Ver",
-ord_website:"Website",ord_mobile:"Mobil Uygulama",ord_web_app:"Web Uygulaması",ord_other:"Diğer",
-ord_name_ph:"ad & soyad",ord_email_ph:"email",ord_budget_ph:"opsiyonel",ord_deadline_ph:"örn. 2 hafta",ord_desc_ph:"proje detayları",
-edit_profile:"Profili Düzenle",change_password:"Şifre Değiştir",settings:"Ayarlar",delete_account:"Hesabı Sil",logout:"Çıkış Yap",
-check_email:"Emailinizi Kontrol Edin",enter_code:"Kodu Girin",resend:"Yeniden Gönder",
-verify_email:"Emaili Doğrula",verify_desc:"Emailinizdeki 5 haneli kodu girin.",code:"Kod",verify:"Doğrula",
-account_access:"Hesap Erişimi",signin_tab:"Giriş Yap",signup_tab:"Kayıt Ol",
-name:"Ad & Soyad",username:"Kullanıcı Adı",email:"Email",password:"Şifre",forgot:"şifremi unuttum?",next:"İleri",go:"Git",
-name_ph:"ad & soyad",username_ph:"@username",email_ph:"email veya kullanıcı adı",password_ph:"şifre",
-pw_recovery:"Şifre Kurtarma",pw_recovery_desc:"Kayıtlı emailinizi girin.",send:"Gönder",
-reset_pw:"Şifre Sıfırla",new_password:"Yeni Şifre",update:"Güncelle",
-change_pw_title:"Şifre Değiştir",current_password:"Mevcut Şifre",confirm_password:"Şifre Onayı",
-del_acc_title:"Hesabı Sil",del_warn:"Uyarı: geri alınamaz.",delete:"Sil",
-confirm_del:"Silmeyi Onayla",delete_account_btn:"Hesabı Sil",
-edit_title:"Profili Düzenle",profile_photo:"Profil Fotoğrafı",change_photo:"Fotoğrafı Değiştir",reset:"Sıfırla",
-name_surname:"Ad & Soyad",website:"Web Sitesi",dob:"Doğum Tarihi",save:"Kaydet",
-settings_title:"Ayarlar",settings_hint:"Site görünümünüzü özelleştirin.",color_theme:"Renk Teması",font_color:"Yazı Rengi",font_family:"Yazı Tipi",background:"Arkaplan",chat_bg:"Sohbet Arkaplanı",settings_reset:"Sıfırla",settings_ok:"Tamam",
-crop_photo:"Fotoğrafı Kırp",cancel:"İptal",apply:"Uygula",
-message:"Mesaj",close:"Kapat",send_message:"Mesaj Gönder",user_profile:"Kullanıcı Profili",joined:"Katıldı",
-no_orders:"Henüz sipariş yok.",you_must_signin:"Sipariş vermek için giriş yapmalısınız.",order_received:"Siparişiniz alındı! En kısa sürede iletişime geçeceğiz.",
-fill_fields:"Lütfen tüm alanları doldurun.",invalid_credentials:"Geçersiz bilgiler!",email_registered:"Email zaten kayıtlı!",username_taken:"Bu kullanıcı adı alınmış.",min_7:"En az 7 karakter.",pw_8:"Şifre en az 8 karakter olmalı.",
-signin_success:"Başarıyla giriş yapıldı!",signup_success:"Hesap başarıyla oluşturuldu!",logout_confirm:"Çıkış yapmak istediğinizden emin misiniz?",logout_done:"Oturum kapatıldı.",
-order_approved:"Sipariş onaylandı ve email gönderildi!",
-gt_signin:"Giriş Yap",gt_back:"Geri",gt_ok:"Tamam",gt_cancel:"İptal",gt_yes:"Evet"
-}};
+en:{role:"Software Developer",sec_apps:"My Applications",sec_exp:"Experience",sec_setup:"Setup & Environment",sec_stack:"Core Stack",contact_sub:"Sign In / Sign Up",contact_main:"Sign In To Join Us",scan_text:"Scan To Connect",copyright:"© 2026 muminsultani • All Rights Reserved.",chat_search_ph:"search...",chat_ph:"type a message...",chat_no_users:"no other users.",chat_no_msgs:"no messages yet",chat_start:"start the conversation 👋",chat_you:"you",chat_voice:"🎤 voice message",order_title:"Order Software",order_sub:"Need a website or app?",order_main:"Place an Order",order_modal_title:"Order Software",ord_name:"Ad & Soyad",ord_email:"Email",ord_type:"Project Type",ord_budget:"Budget",ord_deadline:"Deadline",ord_desc:"Project Details",ord_submit:"Sipariş Ver",ord_website:"Website",ord_mobile:"Mobile App",ord_web_app:"Web App",ord_other:"Other",ord_name_ph:"name & surname",ord_email_ph:"email",ord_budget_ph:"optional",ord_deadline_ph:"e.g. 2 weeks",ord_desc_ph:"project details",edit_profile:"Edit Profile",change_password:"Change Password",settings:"Settings",delete_account:"Delete Account",logout:"Logout",check_email:"Check Your Email",enter_code:"Enter Code",resend:"Resend",verify_email:"Verify Email",verify_desc:"Enter the 5-digit code from your email.",code:"Code",verify:"Verify",account_access:"Account Access",signin_tab:"Sign In",signup_tab:"Sign Up",name:"Ad & Soyad",username:"Username",email:"Email",password:"Password",forgot:"forgot password?",next:"Next",go:"Go",name_ph:"name & surname",username_ph:"@username",email_ph:"email or username",password_ph:"password",pw_recovery:"Password Recovery",pw_recovery_desc:"Enter your registered email.",send:"Send",reset_pw:"Reset Password",new_password:"New Password",update:"Update",change_pw_title:"Change Password",current_password:"Current Password",confirm_password:"Confirm Password",del_acc_title:"Delete Account",del_warn:"Warning: cannot be undone.",delete:"Delete",confirm_del:"Confirm Deletion",delete_account_btn:"Delete Account",edit_title:"Edit Profile",profile_photo:"Profile Photo",change_photo:"Change Photo",reset:"Reset",name_surname:"Ad & Soyad",website:"Website",dob:"Date of Birth",save:"Save",settings_title:"Settings",settings_hint:"Customize your site appearance.",color_theme:"Color Theme",font_color:"Font Color",font_family:"Font",background:"Background",chat_bg:"Chat Background",settings_reset:"Reset",settings_ok:"OK",crop_photo:"Crop Photo",cancel:"Cancel",apply:"Apply",message:"Message",close:"Close",send_message:"Send Message",user_profile:"User Profile",joined:"Joined",no_orders:"No orders yet.",you_must_signin:"You must sign in to place an order.",order_received:"Order received! We will contact you soon.",fill_fields:"Please fill in all fields.",invalid_credentials:"Invalid credentials!",email_registered:"Email already registered!",username_taken:"This username is already taken.",min_7:"Minimum 7 characters.",pw_8:"Password must be at least 8 characters.",signin_success:"Signed in successfully!",signup_success:"Account created successfully!",logout_confirm:"Are you sure you want to log out?",logout_done:"Session closed.",order_approved:"Order approved and email sent!",gt_signin:"Sign In",gt_back:"Back",gt_ok:"OK",gt_cancel:"Cancel",gt_yes:"Yes",min7:"min 7 chars",taken:"taken",available:"available"},
+tr:{role:"Yazılım Geliştirici",sec_apps:"Uygulamalarım",sec_exp:"Deneyim",sec_setup:"Kurulum & Ortam",sec_stack:"Temel Yığın",contact_sub:"Giriş Yap / Kayıt Ol",contact_main:"Bize Katılmak İçin Giriş Yapın",scan_text:"Bağlanmak İçin Tarayın",copyright:"© 2026 muminsultani • Tüm Hakları Saklıdır.",chat_search_ph:"ara...",chat_ph:"bir mesaj yaz...",chat_no_users:"başka kullanıcı yok.",chat_no_msgs:"henüz mesaj yok",chat_start:"sohbete başla 👋",chat_you:"sen",chat_voice:"🎤 sesli mesaj",order_title:"Yazılım Siparişi",order_sub:"Web sitesi veya uygulama mı lazım?",order_main:"Sipariş Ver",order_modal_title:"Yazılım Siparişi",ord_name:"Ad & Soyad",ord_email:"Email",ord_type:"Proje Tipi",ord_budget:"Bütçe",ord_deadline:"Teslim Tarihi",ord_desc:"Proje Detayları",ord_submit:"Sipariş Ver",ord_website:"Website",ord_mobile:"Mobil Uygulama",ord_web_app:"Web Uygulaması",ord_other:"Diğer",ord_name_ph:"ad & soyad",ord_email_ph:"email",ord_budget_ph:"opsiyonel",ord_deadline_ph:"örn. 2 hafta",ord_desc_ph:"proje detayları",edit_profile:"Profili Düzenle",change_password:"Şifre Değiştir",settings:"Ayarlar",delete_account:"Hesabı Sil",logout:"Çıkış Yap",check_email:"Emailinizi Kontrol Edin",enter_code:"Kodu Girin",resend:"Yeniden Gönder",verify_email:"Emaili Doğrula",verify_desc:"Emailinizdeki 5 haneli kodu girin.",code:"Kod",verify:"Doğrula",account_access:"Hesap Erişimi",signin_tab:"Giriş Yap",signup_tab:"Kayıt Ol",name:"Ad & Soyad",username:"Kullanıcı Adı",email:"Email",password:"Şifre",forgot:"şifremi unuttum?",next:"İleri",go:"Git",name_ph:"ad & soyad",username_ph:"@username",email_ph:"email veya kullanıcı adı",password_ph:"şifre",pw_recovery:"Şifre Kurtarma",pw_recovery_desc:"Kayıtlı emailinizi girin.",send:"Gönder",reset_pw:"Şifre Sıfırla",new_password:"Yeni Şifre",update:"Güncelle",change_pw_title:"Şifre Değiştir",current_password:"Mevcut Şifre",confirm_password:"Şifre Onayı",del_acc_title:"Hesabı Sil",del_warn:"Uyarı: geri alınamaz.",delete:"Sil",confirm_del:"Silmeyi Onayla",delete_account_btn:"Hesabı Sil",edit_title:"Profili Düzenle",profile_photo:"Profil Fotoğrafı",change_photo:"Fotoğrafı Değiştir",reset:"Sıfırla",name_surname:"Ad & Soyad",website:"Web Sitesi",dob:"Doğum Tarihi",save:"Kaydet",settings_title:"Ayarlar",settings_hint:"Site görünümünüzü özelleştirin.",color_theme:"Renk Teması",font_color:"Yazı Rengi",font_family:"Yazı Tipi",background:"Arkaplan",chat_bg:"Sohbet Arkaplanı",settings_reset:"Sıfırla",settings_ok:"Tamam",crop_photo:"Fotoğrafı Kırp",cancel:"İptal",apply:"Uygula",message:"Mesaj",close:"Kapat",send_message:"Mesaj Gönder",user_profile:"Kullanıcı Profili",joined:"Katıldı",no_orders:"Henüz sipariş yok.",you_must_signin:"Sipariş vermek için giriş yapmalısınız.",order_received:"Siparişiniz alındı! En kısa sürede iletişime geçeceğiz.",fill_fields:"Lütfen tüm alanları doldurun.",invalid_credentials:"Geçersiz bilgiler!",email_registered:"Email zaten kayıtlı!",username_taken:"Bu kullanıcı adı alınmış.",min_7:"En az 7 karakter.",pw_8:"Şifre en az 8 karakter olmalı.",signin_success:"Başarıyla giriş yapıldı!",signup_success:"Hesap başarıyla oluşturuldu!",logout_confirm:"Çıkış yapmak istediğinizden emin misiniz?",logout_done:"Oturum kapatıldı.",order_approved:"Sipariş onaylandı ve email gönderildi!",gt_signin:"Giriş Yap",gt_back:"Geri",gt_ok:"Tamam",gt_cancel:"İptal",gt_yes:"Evet",min7:"min 7 karakter",taken:"alınmış",available:"uygun"}};
 
 const THEMES=[{key:'purple',name:'Purple',c1:'#9333ea',c2:'#c084fc'},{key:'blue',name:'Blue',c1:'#2563eb',c2:'#60a5fa'},{key:'green',name:'Green',c1:'#16a34a',c2:'#4ade80'},{key:'red',name:'Red',c1:'#dc2626',c2:'#f87171'},{key:'orange',name:'Orange',c1:'#ea580c',c2:'#fb923c'},{key:'pink',name:'Pink',c1:'#db2777',c2:'#f472b6'},{key:'teal',name:'Teal',c1:'#0d9488',c2:'#2dd4bf'},{key:'indigo',name:'Indigo',c1:'#4f46e5',c2:'#818cf8'},{key:'amber',name:'Amber',c1:'#d97706',c2:'#fbbf24'},{key:'cyan',name:'Cyan',c1:'#0891b2',c2:'#22d3ee'},{key:'rose',name:'Rose',c1:'#e11d48',c2:'#fb7185'},{key:'slate',name:'Slate',c1:'#475569',c2:'#94a3b8'}];
 const FONTS_NORMAL=[{key:'Sora',label:'Sora'},{key:'Inter',label:'Inter'},{key:'Roboto',label:'Roboto'},{key:'Poppins',label:'Poppins'},{key:'Montserrat',label:'Montserrat'},{key:'Lato',label:'Lato'},{key:'Open Sans',label:'Open Sans'},{key:'Raleway',label:'Raleway'},{key:'Nunito',label:'Nunito'},{key:'Work Sans',label:'Work Sans'},{key:'Rubik',label:'Rubik'},{key:'Karla',label:'Karla'},{key:'Manrope',label:'Manrope'},{key:'Outfit',label:'Outfit'},{key:'DM Sans',label:'DM Sans'},{key:'Urbanist',label:'Urbanist'},{key:'Space Grotesk',label:'Space Grotesk'},{key:'Lexend',label:'Lexend'},{key:'Plus Jakarta Sans',label:'Plus Jakarta Sans'}];
@@ -1473,20 +1407,21 @@ function clearPasswordField(id){setPasswordValue(id,'');const w=document.getElem
 function isValidPassword(p){return typeof p==='string'&&p.length>=8;}
 function pwLabel(k){const d=PW_LABELS[currentLang]||PW_LABELS.en;return d[k]||PW_LABELS.en[k]||k;}
 function evaluatePasswordStrength(pw){const rules={length:pw.length>=8,upper:/[A-Z]/.test(pw),lower:/[a-z]/.test(pw),digit:/[0-9]/.test(pw),special:/[^A-Za-z0-9]/.test(pw)};let score=0;Object.values(rules).forEach(v=>{if(v)score++;});if(pw.length>=12)score+=0.5;if(pw.length>=16)score+=0.5;let level=Math.min(5,Math.ceil(score));if(pw.length===0)level=0;const labels={0:{text:pwLabel('pw_enter'),cls:'s1',pct:0},1:{text:pwLabel('pw_very_weak'),cls:'s1',pct:20},2:{text:pwLabel('pw_weak'),cls:'s2',pct:40},3:{text:pwLabel('pw_medium'),cls:'s3',pct:60},4:{text:pwLabel('pw_strong'),cls:'s4',pct:80},5:{text:pwLabel('pw_very_strong'),cls:'s5',pct:100}};return{level,info:labels[level]};}
-
-function updatePasswordStrength(id,pw){
-  if(id==='contactClientPassword' && currentAuthMode==='signin'){const w=document.getElementById('pwStrengthWrap_'+id);if(w)w.classList.remove('show');return;}
-  const wrap=document.getElementById('pwStrengthWrap_'+id);if(!wrap)return;
-  if(!pw||pw.length===0){wrap.classList.remove('show');return;}
-  wrap.classList.add('show');
-  const{level,info}=evaluatePasswordStrength(pw);
-  const bar=document.getElementById('pwBar_'+id);if(bar){bar.classList.remove('level-1','level-2','level-3','level-4','level-5');if(level>0)bar.classList.add('level-'+level);}
-  const label=document.getElementById('pwLabel_'+id);if(label){label.className='pw-strength-label '+info.cls;label.textContent=info.text;}
-  const pct=document.getElementById('pwPercent_'+id);if(pct)pct.textContent=info.pct+'%';
-}
+function updatePasswordStrength(id,pw){if(id==='contactClientPassword' && currentAuthMode==='signin'){const w=document.getElementById('pwStrengthWrap_'+id);if(w)w.classList.remove('show');return;}const wrap=document.getElementById('pwStrengthWrap_'+id);if(!wrap)return;if(!pw||pw.length===0){wrap.classList.remove('show');return;}wrap.classList.add('show');const{level,info}=evaluatePasswordStrength(pw);const bar=document.getElementById('pwBar_'+id);if(bar){bar.classList.remove('level-1','level-2','level-3','level-4','level-5');if(level>0)bar.classList.add('level-'+level);}const label=document.getElementById('pwLabel_'+id);if(label){label.className='pw-strength-label '+info.cls;label.textContent=info.text;}const pct=document.getElementById('pwPercent_'+id);if(pct)pct.textContent=info.pct+'%';}
 function initPasswordMask(id){const input=document.getElementById(id);if(!input||input.dataset.pwMaskInit)return;input.dataset.pwMaskInit='1';input.dataset.realValue='';input.dataset.masked='1';input.setAttribute('type','text');input.setAttribute('autocomplete','off');input.classList.add('password-mask');input.addEventListener('input',function(e){const cur=this.value;const real=this.dataset.realValue||'';const inputType=e.inputType||'';let newReal=real;if(inputType==='deleteContentBackward'||inputType==='deleteContentForward'){const pos=this.selectionStart||0;newReal=real.slice(0,pos)+real.slice(pos+1);}else if(inputType==='insertText'||inputType==='insertCompositionText'||!inputType){const added=cur.length-real.length;if(added>0){const pos=(this.selectionStart||cur.length)-added;const chars=cur.substring(pos,pos+added);if(/^\*+$/.test(chars))newReal=real;else newReal=real.slice(0,pos)+chars+real.slice(pos);}else if(added<0){newReal=real.slice(0,cur.length);}}else{newReal=cur.replace(/\*/g,'')||real;}this.dataset.realValue=newReal;if(this.dataset.masked==='1'){this.value='*'.repeat(newReal.length);try{this.setSelectionRange(this.value.length,this.value.length);}catch(err){}}else{this.value=newReal;try{this.setSelectionRange(this.value.length,this.value.length);}catch(err){}}updatePasswordStrength(id,newReal);});}
 function initAllPasswordMasks(){PASSWORD_FIELDS.forEach(id=>initPasswordMask(id));}
 function togglePasswordVisibility(i,ic){const p=document.getElementById(i),t2=document.getElementById(ic);if(!p||!t2)return;if(p.dataset.masked==='1'){p.dataset.masked='0';p.classList.remove('password-mask');t2.className='fa-solid fa-eye-slash';p.value=p.dataset.realValue||'';}else{p.dataset.masked='1';p.classList.add('password-mask');t2.className='fa-solid fa-eye';p.value='*'.repeat((p.dataset.realValue||'').length);}}
+
+function initFirebase(){
+  try{
+    if(typeof firebase==='undefined'||!FIREBASE_CONFIG||!FIREBASE_CONFIG.databaseURL){firebaseConnected=false;return;}
+    if(!firebase.apps||!firebase.apps.length){firebase.initializeApp(FIREBASE_CONFIG);}
+    const db=firebase.database();
+    firebaseDbRef=db.ref('.info/connected');
+    firebaseDbRef.on('value',function(snap){firebaseConnected=(snap.val()===true);try{const el=document.getElementById('dash-cloud-status');if(el)el.textContent='Cloud: '+(firebaseConnected?'✅':'⚠️');}catch(e){}});
+    db.ref('.info/serverTimeOffset').once('value').then(function(){firebaseConnected=true;try{const el=document.getElementById('dash-cloud-status');if(el)el.textContent='Cloud: ✅';}catch(e){}}).catch(function(){firebaseConnected=false;try{const el=document.getElementById('dash-cloud-status');if(el)el.textContent='Cloud: ⚠️';}catch(e){}});
+  }catch(e){firebaseConnected=false;try{const el=document.getElementById('dash-cloud-status');if(el)el.textContent='Cloud: ⚠️';}catch(err){}}
+}
 
 function initEmailJS(){if(!EMAILJS_CONFIG.enabled)return;try{if(typeof emailjs!=='undefined'){emailjs.init({publicKey:EMAILJS_CONFIG.publicKey});}}catch(e){}}
 async function sendVerificationEmail(toEmail,code,type){if(!EMAILJS_CONFIG.enabled)return{success:false,reason:'not_configured'};const typeLabels={signup:'Account Verification',reset:'Password Reset'};const brand=getDyn('header.brand','muminsultani');const tp={to_email:toEmail,brand,subject:typeLabels[type]||'Verification',type:typeLabels[type]||'Verification',code:String(code),message:'Doğrulama kodunuz: '+code,image_url:'',link_url:'',link_text:'',has_image:'no',has_link:'no',has_pdf:'no',pdf_url:'',year:new Date().getFullYear()};try{const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EMAILJS_CONFIG.serviceId,template_id:EMAILJS_CONFIG.templateId,user_id:EMAILJS_CONFIG.publicKey,template_params:tp})});const txt=await r.text();if(r.ok&&(txt==='OK'||r.status===200)){logActivity('email_sent',{email:toEmail,name:typeLabels[type]},`Sent: ${toEmail}`);return{success:true};}return{success:false,reason:txt||`HTTP ${r.status}`};}catch(err){return{success:false,reason:err.message||'network_error'};}}
@@ -1498,13 +1433,10 @@ function isAdminUser(email){if(!email)return false;const lc=String(email).toLowe
 function getAdminUser(){const u=getAllUsers();let f=u.find(x=>x.isAdmin===true);if(!f)f=u.find(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL);if(f)return Object.assign({},f,{isAdmin:true,isVerified:true});return{userId:'000000000',name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'',bio:'',website:'',profilePhoto:'',following:[],createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true,isVerified:true};}
 function getEffectiveLoggedUser(){const lu=localStorage.getItem('logged_user');if(lu){try{const u=JSON.parse(lu);if(u&&u.email)return u;}catch(e){}}if(isAdminLoggedIn()){const a=getAdminUser();try{localStorage.setItem('logged_user',JSON.stringify(a));}catch(e){}return a;}return null;}
 function getVerifiedBadgeHTML(size){const cls='verified-badge'+(size?(' '+size):'');return `<span class="${cls}" title="Verified"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path fill="#1d9bf0" d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18z"/></svg></span>`;}
-
 function ensureUserIdsAndAdmin(){try{let u=JSON.parse(localStorage.getItem('site_users')||'[]');let changed=false;let ai=u.findIndex(x=>x.isAdmin===true);if(ai===-1)ai=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL);if(ai===-1){u.unshift({userId:'',name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'admin123',bio:'',website:'',profilePhoto:'',following:[],createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true,isVerified:true});ai=0;changed=true;}u.forEach(x=>{if(!/^\d{9}$/.test(String(x.userId||''))){x.userId='';changed=true;}if(!x.bio)x.bio='';if(!x.website)x.website='';if(!Array.isArray(x.following))x.following=[];});const seen=new Set();u.forEach(x=>{if(x.userId&&seen.has(x.userId)){x.userId='';changed=true;}else if(x.userId)seen.add(x.userId);});u.forEach(x=>{if(!x.userId){let nid;do{nid=generateRandomUserId();}while(seen.has(nid));x.userId=nid;seen.add(nid);changed=true;}});if(changed){localStorage.setItem('site_users',JSON.stringify(u));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);const f=u.find(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());if(f)localStorage.setItem('logged_user',JSON.stringify(f));}catch(e){}}}}catch(e){}}
 function getChatUsersFor(email){const u=getAllUsers();const ce=String(email||'').toLowerCase();let list=u.filter(x=>String(x.email||'').toLowerCase()!==ce);if(!isAdminUser(email)&&!list.some(x=>isAdminUser(x.email))){list.unshift(getAdminUser());}list.sort((a,b)=>{const aa=isAdminUser(a.email)?0:1,ba=isAdminUser(b.email)?0:1;return aa-ba;});return list;}
-
 function logActivity(type,userData,details){try{let l=JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');const u=userData||{};l.push({type,timestamp:new Date().toISOString(),name:u.name||'',username:u.username||'',email:u.email||'',userId:u.userId||'',details:details||''});if(l.length>2000)l=l.slice(-2000);localStorage.setItem(ACTIVITY_LOG_KEY,JSON.stringify(l));}catch(e){}}
 function getActivityLog(){try{return JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');}catch(e){return[];}}
-
 function getChatMessages(){try{return JSON.parse(localStorage.getItem(CHAT_KEY)||'{}');}catch(e){return{};}}
 function saveChatMessages(m){try{localStorage.setItem(CHAT_KEY,JSON.stringify(m));}catch(e){}}
 function getConversationId(a,b){return [String(a||'').toLowerCase(),String(b||'').toLowerCase()].sort().join('__');}
@@ -1591,9 +1523,7 @@ function drawHeart(c,s){c.beginPath();const t2=s/2;c.moveTo(0,t2*0.35);c.bezierC
 function drawStar(c,s){c.beginPath();for(let i=0;i<5;i++){const a=-Math.PI/2+i*(Math.PI*2/5);c.lineTo(Math.cos(a)*s,Math.sin(a)*s);const a2=a+Math.PI/5;c.lineTo(Math.cos(a2)*s*0.45,Math.sin(a2)*s*0.45);}c.closePath();c.fill();}
 function animateConfetti(){if(!confettiCanvas||!confettiCtx)return;confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);let a=false;for(let i=0;i<confettiParticles.length;i++){const p=confettiParticles[i];if(p.life<=0)continue;a=true;p.vy+=p.gravity;p.vx*=p.drag;p.vy*=p.drag;p.x+=p.vx;p.y+=p.vy;p.rotation+=p.rotationSpeed;p.life-=.006;if(p.y>confettiCanvas.height+120)p.life=0;if(p.x<-120||p.x>confettiCanvas.width+120)p.life=0;confettiCtx.save();confettiCtx.translate(p.x,p.y);confettiCtx.rotate(p.rotation);confettiCtx.globalAlpha=Math.max(0,Math.min(1,p.life));confettiCtx.fillStyle=p.color;const sz=p.size*0.5;if(p.shape==='rect')confettiCtx.fillRect(-sz,-sz/2,sz*2,sz);else if(p.shape==='circle'){confettiCtx.beginPath();confettiCtx.arc(0,0,sz,0,Math.PI*2);confettiCtx.fill();}else if(p.shape==='heart'){drawHeart(confettiCtx,p.size);}else if(p.shape==='star'){drawStar(confettiCtx,p.size);}confettiCtx.restore();}if(confettiParticles.length>800)confettiParticles=confettiParticles.filter(p=>p.life>0);if(a||confettiRunning)requestAnimationFrame(animateConfetti);else{confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);confettiCanvas.style.display='none';confettiParticles=[];}}
 
-function showCustomAlert(message,type='info',onConfirm=null){const ab=document.getElementById('customAlertModal'),ai=document.getElementById('customAlertIcon'),am=document.getElementById('customAlertMessage'),ag=document.getElementById('customAlertBtnGroup');am.innerHTML=message;ai.innerHTML='<i class="fa-solid fa-circle-exclamation" style="color:var(--accent)"></i>';
-  if(onConfirm){ag.innerHTML=`<button class="custom-alert-btn cancel-btn" onclick="closeCustomAlert()" style="flex:1">${t('gt_cancel')}</button><button class="custom-alert-btn" onclick="confirmAction()" style="flex:1;background:linear-gradient(135deg,var(--accent),var(--accent-2))">${t('gt_yes')}</button>`;window._confirmActionCallback=onConfirm;}else{ag.innerHTML=`<button class="custom-alert-btn" onclick="closeCustomAlert()" style="flex:1">${t('gt_ok')}</button>`;}
-  ab.classList.add('active');}
+function showCustomAlert(message,type='info',onConfirm=null){const ab=document.getElementById('customAlertModal'),ai=document.getElementById('customAlertIcon'),am=document.getElementById('customAlertMessage'),ag=document.getElementById('customAlertBtnGroup');am.innerHTML=message;ai.innerHTML='<i class="fa-solid fa-circle-exclamation" style="color:var(--accent)"></i>';if(onConfirm){ag.innerHTML=`<button class="custom-alert-btn cancel-btn" onclick="closeCustomAlert()" style="flex:1">${t('gt_cancel')}</button><button class="custom-alert-btn" onclick="confirmAction()" style="flex:1;background:linear-gradient(135deg,var(--accent),var(--accent-2))">${t('gt_yes')}</button>`;window._confirmActionCallback=onConfirm;}else{ag.innerHTML=`<button class="custom-alert-btn" onclick="closeCustomAlert()" style="flex:1">${t('gt_ok')}</button>`;}ab.classList.add('active');}
 function closeCustomAlert(){document.getElementById('customAlertModal').classList.remove('active');window._confirmActionCallback=null;if(window._pendingLangReset){window._pendingLangReset=false;try{sessionStorage.removeItem('site_lang');}catch(e){}changeLanguage('en');}}
 function confirmAction(){const cb=window._confirmActionCallback;window._confirmActionCallback=null;document.getElementById('customAlertModal').classList.remove('active');if(cb){try{cb();}catch(e){}}if(window._pendingLangReset){window._pendingLangReset=false;try{sessionStorage.removeItem('site_lang');}catch(e){}changeLanguage('en');}}
 
@@ -1603,216 +1533,52 @@ function toggleTheme(){document.body.classList.toggle('light-mode');const il=doc
 function changeLanguage(lang){currentLang=lang;try{sessionStorage.setItem('site_lang',lang);}catch(e){}document.getElementById('htmlRoot').setAttribute('lang',lang);applyTranslations();applySiteContent();const lm=document.getElementById('langMenu');if(lm)lm.classList.remove('show');}
 function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('show');}
 
-/* ==================== TAM ÇEVİRİ UYGULAMA ==================== */
 function applyTranslations(){
   const d=LANG[currentLang]||LANG.en;
   const st=(id,v)=>{const e=document.getElementById(id);if(e&&v!==undefined)e.textContent=v;};
   const sph=(id,v)=>{const e=document.getElementById(id);if(e&&v!==undefined)e.placeholder=v;};
-
-  // === Ana sayfa ===
-  st('t-role',d.role);
-  st('t-apps-title',d.sec_apps);
-  st('t-exp-title',d.sec_exp);
-  st('t-setup-title',d.sec_setup);
-  st('t-stack-title',d.sec_stack);
-  st('t-contact-sub',d.contact_sub);
-  st('t-contact-main',d.contact_main);
-  st('t-scan-text',d.scan_text);
-  st('t-copyright',d.copyright);
-  st('t-order-title',d.order_title);
-  st('t-order-sub',d.order_sub);
-  st('t-order-main',d.order_main);
-
-  // === Header profil menü ===
-  st('t-edit-profile',d.edit_profile);
-  st('t-change-password',d.change_password);
-  st('t-settings',d.settings);
-  st('t-delete-account',d.delete_account);
-  st('t-logout',d.logout);
-
-  // === Order modal ===
-  st('t-order-modal-title',d.order_modal_title);
-  st('t-ord-name-label',d.ord_name);
-  st('t-ord-email-label',d.ord_email);
-  st('t-ord-type-label',d.ord_type);
-  st('t-ord-budget-label',d.ord_budget);
-  st('t-ord-deadline-label',d.ord_deadline);
-  st('t-ord-desc-label',d.ord_desc);
-  st('t-ord-submit',d.ord_submit);
-  sph('orderName',d.ord_name_ph);
-  sph('orderEmail',d.ord_email_ph);
-  sph('orderBudget',d.ord_budget_ph);
-  sph('orderDeadline',d.ord_deadline_ph);
-  sph('orderDesc',d.ord_desc_ph);
-
-  // === Order type labels (Website / Mobil Uygulama) ===
-  document.querySelectorAll('[data-order-label]').forEach(el=>{
-    const k=el.getAttribute('data-order-label');
-    if(k==='website')el.textContent=d.ord_website;
-    else if(k==='mobile-app')el.textContent=d.ord_mobile;
-    else if(k==='web-app')el.textContent=d.ord_web_app;
-    else if(k==='other')el.textContent=d.ord_other;
-  });
-
-  // === Signup mock ===
-  st('t-check-email',d.check_email);
-  st('t-enter-code',d.enter_code);
-  st('t-resend',d.resend);
-  st('t-verify-email',d.verify_email);
-  st('t-verify-desc',d.verify_desc);
-  st('t-code-label',d.code);
-  st('t-verify-btn',d.verify);
-
-  // === Account Access ===
-  st('t-account-access',d.account_access);
-  st('t-signin-tab',d.signin_tab);
-  st('t-signup-tab',d.signup_tab);
-  st('t-name-label',d.name);
-  st('t-username-label',d.username);
-  st('dc-label-email',d.email);
-  st('t-password-label',d.password);
-  st('t-next-btn',d.next);
-  st('t-forgot-link',d.forgot);
-  st('dc-submit-btn-text',d.go);
-  sph('contactClientName',d.name_ph);
-  sph('contactClientUsername',d.username_ph);
-  sph('contactClientPassword',d.password_ph);
-  // Dinamik email placeholder
-  const ei=document.getElementById('contactClientEmail');
-  if(ei)ei.placeholder=currentAuthMode==='signin'?d.email_ph:(currentLang==='tr'?'email adresi':'email address');
-
-  // === Forgot / Reset ===
-  st('t-pw-recovery',d.pw_recovery);
-  st('t-pw-recovery-desc',d.pw_recovery_desc);
-  st('t-fp-email-label',d.email);
-  st('t-fp-send',d.send);
-  sph('forgotClientEmail','email');
-  st('t-reset-pw',d.reset_pw);
-  st('t-rp-email-label',d.email);
-  st('t-rp-code-label',d.code);
-  st('t-rp-newpw-label',d.new_password);
-  st('t-rp-update',d.update);
-
-  // === Change password ===
-  st('t-change-pw-title',d.change_pw_title);
-  st('t-cp-old-label',d.current_password);
-  st('t-cp-new-label',d.new_password);
-  st('t-cp-confirm-label',d.confirm_password);
-  st('t-cp-update',d.update);
-
-  // === Delete account ===
-  st('t-del-acc-title',d.del_acc_title);
-  st('t-del-warn',d.del_warn);
-  st('t-del-username-label',d.username);
-  st('t-del-btn',d.delete);
-  st('t-confirm-del',d.confirm_del);
-  st('t-delpw-label',d.password);
-  st('t-delpw-btn',d.delete_account_btn);
-
-  // === Edit Profile ===
-  st('t-edit-title',d.edit_title);
-  st('t-ep-photo-label',d.profile_photo);
-  st('t-ep-change-photo',d.change_photo);
-  st('t-ep-reset-photo',d.reset);
-  st('t-ep-name-label',d.name_surname);
-  st('t-ep-username-label',d.username);
-  st('t-ep-email-label',d.email);
-  st('t-ep-website-label',d.website);
-  st('t-ep-dob-label',d.dob);
-  st('t-ep-save',d.save);
-  sph('editClientName',d.name_ph);
-  sph('editClientUsername','@username');
-  sph('editClientEmail','email');
-  sph('editClientWebsite','https://example.com');
-
-  // === Settings ===
-  st('t-settings-title',d.settings_title);
-  st('t-settings-hint',d.settings_hint);
-  st('t-color-theme',d.color_theme);
-  st('t-font-color',d.font_color);
-  st('t-font-family',d.font_family);
-  st('t-background',d.background);
-  st('t-chat-bg',d.chat_bg);
-  st('t-settings-reset',d.settings_reset);
-  st('t-settings-ok',d.settings_ok);
-
-  // === Crop ===
-  st('t-crop-photo',d.crop_photo);
-  st('t-crop-cancel',d.cancel);
-  st('t-crop-apply',d.apply);
-
-  // === Get in touch ===
-  const gits=document.getElementById('getInTouchModal');
-  if(gits){
-    const msgEl=gits.querySelector('.custom-alert-message');
-    if(msgEl)msgEl.textContent=d.contact_sub;
-    const btns=gits.querySelectorAll('.custom-alert-btn');
-    if(btns[0])btns[0].innerHTML=`<i class="fa-solid fa-right-to-bracket"></i> ${d.gt_signin}`;
-    if(btns[1])btns[1].innerHTML=`<i class="fa-solid fa-arrow-rotate-left"></i> ${d.gt_back}`;
-  }
-
-  // === Default custom alert OK ===
-  const cab=document.querySelector('#customAlertBtnGroup .custom-alert-btn');
-  if(cab)cab.textContent=d.gt_ok;
-
-  // === Lang button flag ===
-  const lt=document.getElementById('currentLangText');
-  if(lt)lt.innerHTML=currentLang==='tr'?'<img src="https://flagcdn.com/tr.svg" class="lang-flag" alt="TR">':'<img src="https://flagcdn.com/gb.svg" class="lang-flag" alt="EN">';
-
-  // === Şifre güç göstergesi sign in'de gizli ===
+  st('t-role',d.role);st('t-apps-title',d.sec_apps);st('t-exp-title',d.sec_exp);st('t-setup-title',d.sec_setup);st('t-stack-title',d.sec_stack);
+  st('t-contact-sub',d.contact_sub);st('t-contact-main',d.contact_main);st('t-scan-text',d.scan_text);st('t-copyright',d.copyright);
+  st('t-order-title',d.order_title);st('t-order-sub',d.order_sub);st('t-order-main',d.order_main);
+  st('t-edit-profile',d.edit_profile);st('t-change-password',d.change_password);st('t-settings',d.settings);st('t-delete-account',d.delete_account);st('t-logout',d.logout);
+  st('t-order-modal-title',d.order_modal_title);st('t-ord-name-label',d.ord_name);st('t-ord-email-label',d.ord_email);st('t-ord-type-label',d.ord_type);st('t-ord-budget-label',d.ord_budget);st('t-ord-deadline-label',d.ord_deadline);st('t-ord-desc-label',d.ord_desc);st('t-ord-submit',d.ord_submit);
+  sph('orderName',d.ord_name_ph);sph('orderEmail',d.ord_email_ph);sph('orderBudget',d.ord_budget_ph);sph('orderDeadline',d.ord_deadline_ph);sph('orderDesc',d.ord_desc_ph);
+  document.querySelectorAll('[data-order-label]').forEach(el=>{const k=el.getAttribute('data-order-label');if(k==='website')el.textContent=d.ord_website;else if(k==='mobile-app')el.textContent=d.ord_mobile;else if(k==='web-app')el.textContent=d.ord_web_app;else if(k==='other')el.textContent=d.ord_other;});
+  st('t-check-email',d.check_email);st('t-enter-code',d.enter_code);st('t-resend',d.resend);
+  st('t-verify-email',d.verify_email);st('t-verify-desc',d.verify_desc);st('t-code-label',d.code);st('t-verify-btn',d.verify);
+  st('t-account-access',d.account_access);st('t-signin-tab',d.signin_tab);st('t-signup-tab',d.signup_tab);st('t-name-label',d.name);st('t-username-label',d.username);st('dc-label-email',d.email);st('t-password-label',d.password);st('t-next-btn',d.next);st('t-forgot-link',d.forgot);st('dc-submit-btn-text',d.go);
+  sph('contactClientName',d.name_ph);sph('contactClientUsername',d.username_ph);sph('contactClientPassword',d.password_ph);
+  const ei=document.getElementById('contactClientEmail');if(ei)ei.placeholder=currentAuthMode==='signin'?d.email_ph:(currentLang==='tr'?'email adresi':'email address');
+  st('t-pw-recovery',d.pw_recovery);st('t-pw-recovery-desc',d.pw_recovery_desc);st('t-fp-email-label',d.email);st('t-fp-send',d.send);sph('forgotClientEmail','email');
+  st('t-reset-pw',d.reset_pw);st('t-rp-email-label',d.email);st('t-rp-code-label',d.code);st('t-rp-newpw-label',d.new_password);st('t-rp-update',d.update);
+  st('t-change-pw-title',d.change_pw_title);st('t-cp-old-label',d.current_password);st('t-cp-new-label',d.new_password);st('t-cp-confirm-label',d.confirm_password);st('t-cp-update',d.update);
+  st('t-del-acc-title',d.del_acc_title);st('t-del-warn',d.del_warn);st('t-del-username-label',d.username);st('t-del-btn',d.delete);st('t-confirm-del',d.confirm_del);st('t-delpw-label',d.password);st('t-delpw-btn',d.delete_account_btn);
+  st('t-edit-title',d.edit_title);st('t-ep-photo-label',d.profile_photo);st('t-ep-change-photo',d.change_photo);st('t-ep-reset-photo',d.reset);st('t-ep-name-label',d.name_surname);st('t-ep-username-label',d.username);st('t-ep-email-label',d.email);st('t-ep-website-label',d.website);st('t-ep-dob-label',d.dob);st('t-ep-save',d.save);
+  sph('editClientName',d.name_ph);sph('editClientUsername','@username');sph('editClientEmail','email');sph('editClientWebsite','https://example.com');
+  st('t-settings-title',d.settings_title);st('t-settings-hint',d.settings_hint);st('t-color-theme',d.color_theme);st('t-font-color',d.font_color);st('t-font-family',d.font_family);st('t-background',d.background);st('t-chat-bg',d.chat_bg);st('t-settings-reset',d.settings_reset);st('t-settings-ok',d.settings_ok);
+  st('t-crop-photo',d.crop_photo);st('t-crop-cancel',d.cancel);st('t-crop-apply',d.apply);
+  const gits=document.getElementById('getInTouchModal');if(gits){const msgEl=gits.querySelector('.custom-alert-message');if(msgEl)msgEl.textContent=d.contact_sub;const btns=gits.querySelectorAll('.custom-alert-btn');if(btns[0])btns[0].innerHTML=`<i class="fa-solid fa-right-to-bracket"></i> ${d.gt_signin}`;if(btns[1])btns[1].innerHTML=`<i class="fa-solid fa-arrow-rotate-left"></i> ${d.gt_back}`;}
+  const cab=document.querySelector('#customAlertBtnGroup .custom-alert-btn');if(cab)cab.textContent=d.gt_ok;
+  const lt=document.getElementById('currentLangText');if(lt)lt.innerHTML=currentLang==='tr'?'<img src="https://flagcdn.com/tr.svg" class="lang-flag" alt="TR">':'<img src="https://flagcdn.com/gb.svg" class="lang-flag" alt="EN">';
   if(currentAuthMode==='signin'){const w=document.getElementById('pwStrengthWrap_contactClientPassword');if(w)w.classList.remove('show');}
+  const cpt=document.getElementById('chat-panel-title');if(cpt&&activeChatUser)cpt.textContent=currentLang==='tr'?'Sohbet':'Chat';else if(cpt)cpt.textContent=currentLang==='tr'?'Mesajlar':'Messages';
 }
 window.addEventListener('click',function(e){const ld=document.getElementById('langDropdownBtn'),lm=document.getElementById('langMenu');if(ld&&lm&&!ld.contains(e.target)&&!lm.contains(e.target))lm.classList.remove('show');});
 
-/* ==================== ORDER TYPE SELECTOR ==================== */
-function selectOrderType(value,el){
-  const hidden=document.getElementById('orderType');
-  if(hidden)hidden.value=value;
-  document.querySelectorAll('.order-type-option').forEach(o=>o.classList.remove('active'));
-  if(el)el.classList.add('active');
-}
+function selectOrderType(value,el){const hidden=document.getElementById('orderType');if(hidden)hidden.value=value;document.querySelectorAll('.order-type-option').forEach(o=>o.classList.remove('active'));if(el)el.classList.add('active');}
 
-/* ==================== AUTH ==================== */
-function switchAuthTab(mode){
-  currentAuthMode=mode;
-  const ts=document.getElementById('tabSigninBtn'),tu=document.getElementById('tabSignupBtn');
-  const gn=document.getElementById('groupSignupName'),gu=document.getElementById('groupSignupUsername');
-  const gp=document.getElementById('groupPassword');
-  const ei=document.getElementById('contactClientEmail');
-  const sg=document.getElementById('dc-submit-group');
-  const fl=document.getElementById('t-forgot-link');
-  const psw=document.getElementById('pwStrengthWrap_contactClientPassword');
-  if(ei)ei.value='';clearPasswordField('contactClientPassword');
-  const d=LANG[currentLang]||LANG.en;
-  if(mode==='signin'){
-    ts.classList.add('active');tu.classList.remove('active');
-    gn.style.display='none';gu.style.display='none';
-    if(gp)gp.style.display='block';
-    if(sg)sg.style.display='flex';
-    if(fl)fl.style.display='inline';
-    if(ei)ei.placeholder=d.email_ph;
-    if(psw)psw.classList.remove('show');
-  } else {
-    tu.classList.add('active');ts.classList.remove('active');
-    gn.style.display='block';gu.style.display='block';
-    if(gp)gp.style.display='block';
-    if(sg)sg.style.display='flex';
-    if(fl)fl.style.display='none';
-    if(ei)ei.placeholder=currentLang==='tr'?'email adresi':'email address';
-    setupSignupAutoFill();
-  }
-}
+function switchAuthTab(mode){currentAuthMode=mode;const ts=document.getElementById('tabSigninBtn'),tu=document.getElementById('tabSignupBtn');const gn=document.getElementById('groupSignupName'),gu=document.getElementById('groupSignupUsername');const gp=document.getElementById('groupPassword');const ei=document.getElementById('contactClientEmail');const sg=document.getElementById('dc-submit-group');const fl=document.getElementById('t-forgot-link');const psw=document.getElementById('pwStrengthWrap_contactClientPassword');if(ei)ei.value='';clearPasswordField('contactClientPassword');const d=LANG[currentLang]||LANG.en;if(mode==='signin'){ts.classList.add('active');tu.classList.remove('active');gn.style.display='none';gu.style.display='none';if(gp)gp.style.display='block';if(sg)sg.style.display='flex';if(fl)fl.style.display='inline';if(ei)ei.placeholder=d.email_ph;if(psw)psw.classList.remove('show');}else{tu.classList.add('active');ts.classList.remove('active');gn.style.display='block';gu.style.display='block';if(gp)gp.style.display='block';if(sg)sg.style.display='flex';if(fl)fl.style.display='none';if(ei)ei.placeholder=currentLang==='tr'?'email adresi':'email address';setupSignupAutoFill();}}
 function setupSignupAutoFill(){const ni=document.getElementById('contactClientName'),ui=document.getElementById('contactClientUsername');if(!ni||!ui||ni.dataset.afi)return;ni.dataset.afi='1';ni.addEventListener('input',function(){this.value=this.value.toLowerCase();if(!ui.dataset.ut){ui.value=this.value.toLowerCase().replace(/[^a-z0-9]/g,'');}});ui.addEventListener('input',function(){ui.dataset.ut='1';});}
 function handleAuthNext(e){if(e)e.preventDefault();const email=document.getElementById('contactClientEmail').value.trim();if(!email){showCustomAlert(t('fill_fields'));return;}const pi=document.getElementById('contactClientPassword');if(pi)pi.focus();}
 function openGetInTouchModal(){const lu=localStorage.getItem('logged_user');if(lu){window.scrollTo({top:0,behavior:'smooth'});return;}document.getElementById('getInTouchModal').classList.add('active');}
 function closeGetInTouchModal(){document.getElementById('getInTouchModal').classList.remove('active');}
 function openDirectContactModal(){closeGetInTouchModal();switchAuthTab('signin');document.getElementById('directContactModal').classList.add('active');setTimeout(()=>{const ei=document.getElementById('contactClientEmail');if(ei)ei.focus();},200);}
 function closeDirectContactModal(){document.getElementById('directContactModal').classList.remove('active');forceRefreshUI();}
-function checkUsernameAvailability(){const i=document.getElementById('contactClientUsername'),m=document.getElementById('usernameAvailabilityMsg');if(!i||!m)return;let un=i.value.trim().replace(/^@/,'');if(!un){m.style.display='none';return;}if(un.length<7){m.style.display='block';m.style.color='#f59e0b';m.innerText=currentLang==='tr'?'min 7 karakter':'min 7 chars';return;}const users=JSON.parse(localStorage.getItem('site_users')||'[]');const ex=users.some(u=>String(u.username||'').replace(/^@/,'').toLowerCase()===un.toLowerCase());m.style.display='block';if(ex){m.style.color='#ef4444';m.innerText=currentLang==='tr'?'alınmış':'taken';}else{m.style.color='#22c55e';m.innerText=currentLang==='tr'?'uygun':'available';}}
+function checkUsernameAvailability(){const i=document.getElementById('contactClientUsername'),m=document.getElementById('usernameAvailabilityMsg');if(!i||!m)return;let un=i.value.trim().replace(/^@/,'');if(!un){m.style.display='none';return;}if(un.length<7){m.style.display='block';m.style.color='#f59e0b';m.innerText=t('min7');return;}const users=JSON.parse(localStorage.getItem('site_users')||'[]');const ex=users.some(u=>String(u.username||'').replace(/^@/,'').toLowerCase()===un.toLowerCase());m.style.display='block';if(ex){m.style.color='#ef4444';m.innerText=t('taken');}else{m.style.color='#22c55e';m.innerText=t('available');}}
 
 function openForgotPasswordModal(e){if(e)e.preventDefault();closeDirectContactModal();document.getElementById('forgotPasswordForm').reset();document.getElementById('forgotPasswordModal').classList.add('active');}
 function closeForgotPasswordModal(){document.getElementById('forgotPasswordModal').classList.remove('active');}
-async function handleForgotPasswordSubmit(e){e.preventDefault();const email=document.getElementById('forgotClientEmail').value.trim().toLowerCase();if(!email){showCustomAlert(t('fill_fields'));return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');const u=users.find(x=>x.email===email);if(!u){showCustomAlert(currentLang==='tr'?'Email kayıtlı değil!':'Email not registered!');return;}const tp=String(Math.floor(10000+Math.random()*90000));let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');rc[email]=tp;localStorage.setItem('reset_codes',JSON.stringify(rc));currentResetEmail=email;closeForgotPasswordModal();const result=await sendVerificationEmail(email,tp,'reset');if(result.success){showCustomAlert(currentLang==='tr'?'Doğrulama kodu emailinize gönderildi!':'Verification code sent!','success');}else{showCustomAlert(currentLang==='tr'?'Email gönderilemedi. Tekrar deneyin.':'Could not send email. Try again.','error');return;}setTimeout(()=>openResetPasswordModal(),600);}
+async function handleForgotPasswordSubmit(e){e.preventDefault();const email=document.getElementById('forgotClientEmail').value.trim().toLowerCase();if(!email){showCustomAlert(t('fill_fields'));return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');const u=users.find(x=>x.email===email);if(!u){showCustomAlert(currentLang==='tr'?'Email kayıtlı değil!':'Email not registered!');return;}const tp=String(Math.floor(10000+Math.random()*90000));let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');rc[email]=tp;localStorage.setItem('reset_codes',JSON.stringify(rc));currentResetEmail=email;closeForgotPasswordModal();const result=await sendVerificationEmail(email,tp,'reset');if(result.success){showCustomAlert(currentLang==='tr'?'Doğrulama kodu emailinize gönderildi!':'Verification code sent!','success');}else{showCustomAlert(currentLang==='tr'?'Email gönderilemedi.':'Could not send email.','error');return;}setTimeout(()=>openResetPasswordModal(),600);}
 function openResetPasswordModal(){document.getElementById('resetClientEmail').value=currentResetEmail;document.getElementById('resetPasswordForm').reset();clearPasswordField('resetClientNewPassword');document.getElementById('resetClientEmail').value=currentResetEmail;document.getElementById('resetPasswordModal').classList.add('active');}
 function closeResetPasswordModal(){document.getElementById('resetPasswordModal').classList.remove('active');}
 function handleResetPasswordSubmit(e){e.preventDefault();const email=document.getElementById('resetClientEmail').value,code=document.getElementById('resetClientCode').value.trim(),np=getPasswordValue('resetClientNewPassword').trim();if(!code||!np){showCustomAlert(t('fill_fields'));return;}if(!isValidPassword(np)){showCustomAlert(t('pw_8'));return;}let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');if(!rc[email]||rc[email]!==code){showCustomAlert(currentLang==='tr'?'Geçersiz kod!':'Invalid code!');return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');let ok=false;users=users.map(u=>{if(u.email===email){u.password=np;ok=true;}return u;});if(ok){localStorage.setItem('site_users',JSON.stringify(users));delete rc[email];localStorage.setItem('reset_codes',JSON.stringify(rc));closeResetPasswordModal();showCustomAlert(currentLang==='tr'?'Şifre başarıyla sıfırlandı!':'Password reset successfully!','success');}}
@@ -1825,12 +1591,8 @@ function backToSignupMock(){document.getElementById('signupCodeModal').classList
 function cancelSignup(){pendingSignup=null;document.getElementById('signupMockModal').classList.remove('active');document.getElementById('signupCodeModal').classList.remove('active');}
 function verifySignupCode(e){e.preventDefault();const ec=document.getElementById('signupCodeInput').value.trim();if(!pendingSignup)return;if(ec!==pendingSignup.code){showCustomAlert(currentLang==='tr'?'Geçersiz kod!':'Invalid code!');return;}try{const ub=JSON.parse(localStorage.getItem('site_users')||'[]');const usedIds=new Set(ub.map(u=>String(u.userId||'')));let nid;do{nid=generateRandomUserId();}while(usedIds.has(nid));const nu={userId:nid,name:pendingSignup.name,username:pendingSignup.username,email:pendingSignup.email,password:pendingSignup.password,bio:'',website:'',profilePhoto:'',following:[],createdAt:new Date().toISOString(),isVerified:false};ub.push(nu);localStorage.setItem('site_users',JSON.stringify(ub));localStorage.setItem('logged_user',JSON.stringify(nu));logActivity('signup',nu,'New account ID: '+nid);pendingSignup=null;document.getElementById('signupCodeModal').classList.remove('active');document.getElementById('signupMockModal').classList.remove('active');closeDirectContactModal();checkUserSession();renderApplications();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('signup_success')+' 🆔 '+nid,'success');}catch(err){}}
 
-async function handleAuthSubmit(e){if(e)e.preventDefault();const email=document.getElementById('contactClientEmail').value.trim().toLowerCase();const password=getPasswordValue('contactClientPassword').trim();if(!email||!password){showCustomAlert(t('fill_fields'));return;}
-  let users=JSON.parse(localStorage.getItem('site_users')||'[]');
-  if(currentAuthMode==='signup'){const name=document.getElementById('contactClientName').value.trim().toLowerCase();let username=document.getElementById('contactClientUsername').value.trim().replace(/^@/,'');if(!name||!username){showCustomAlert(t('fill_fields'));return;}if(username.length<7){showCustomAlert(t('min_7'));return;}if(users.some(u=>String(u.username||'').toLowerCase()===username.toLowerCase())){showCustomAlert(t('username_taken'));return;}if(!isValidPassword(password)){showCustomAlert(t('pw_8'));return;}if(users.find(u=>u.email===email)){showCustomAlert(t('email_registered'));return;}const code=generateSignupCode();pendingSignup={code,name,username,email,password};await openSignupMockModal(email);return;}
-  else{const ic=email.toLowerCase().trim();let inputName=ic.startsWith('@')?ic.substring(1):ic;let user=users.find(u=>{const em=(u.email||'').toLowerCase()===ic;let un=(u.username||'').toLowerCase().replace(/^@/,'');return(em||un===inputName)&&u.password===password;});if(user){localStorage.setItem('logged_user',JSON.stringify(user));logActivity('signin',user,'Signed in');closeDirectContactModal();forceRefreshUI();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('signin_success'),'success');}else showCustomAlert(t('invalid_credentials'));}}
+async function handleAuthSubmit(e){if(e)e.preventDefault();const email=document.getElementById('contactClientEmail').value.trim().toLowerCase();const password=getPasswordValue('contactClientPassword').trim();if(!email||!password){showCustomAlert(t('fill_fields'));return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');if(currentAuthMode==='signup'){const name=document.getElementById('contactClientName').value.trim().toLowerCase();let username=document.getElementById('contactClientUsername').value.trim().replace(/^@/,'');if(!name||!username){showCustomAlert(t('fill_fields'));return;}if(username.length<7){showCustomAlert(t('min_7'));return;}if(users.some(u=>String(u.username||'').toLowerCase()===username.toLowerCase())){showCustomAlert(t('username_taken'));return;}if(!isValidPassword(password)){showCustomAlert(t('pw_8'));return;}if(users.find(u=>u.email===email)){showCustomAlert(t('email_registered'));return;}const code=generateSignupCode();pendingSignup={code,name,username,email,password};await openSignupMockModal(email);return;}else{const ic=email.toLowerCase().trim();let inputName=ic.startsWith('@')?ic.substring(1):ic;let user=users.find(u=>{const em=(u.email||'').toLowerCase()===ic;let un=(u.username||'').toLowerCase().replace(/^@/,'');return(em||un===inputName)&&u.password===password;});if(user){localStorage.setItem('logged_user',JSON.stringify(user));logActivity('signin',user,'Signed in');closeDirectContactModal();forceRefreshUI();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('signin_success'),'success');}else showCustomAlert(t('invalid_credentials'));}}
 
-/* ==================== PROFILE ==================== */
 function openEditProfileModal(){const lu=localStorage.getItem('logged_user');if(!lu)return;try{const u=JSON.parse(lu);document.getElementById('editClientName').value=u.name||'';document.getElementById('editClientUsername').value=(u.username||'').replace(/^@/,'');document.getElementById('editClientEmail').value=u.email||'';document.getElementById('editClientWebsite').value=u.website||'';document.getElementById('editClientDay').value=u.birthDay||'';document.getElementById('editClientMonth').value=u.birthMonth||'';document.getElementById('editClientYear').value=u.birthYear||'';const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const prev=document.getElementById('editProfilePhotoPreview');if(prev)prev.src=p;}catch(e){}document.getElementById('editProfileModal').classList.add('active');}
 function closeEditProfileModal(){document.getElementById('editProfileModal').classList.remove('active');forceRefreshUI();}
 function updateEditPhotoPreview(){const lu=localStorage.getItem('logged_user');if(!lu)return;try{const u=JSON.parse(lu);const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const prev=document.getElementById('editProfilePhotoPreview');if(prev)prev.src=p;}catch(e){}}
@@ -1843,17 +1605,7 @@ function closeDeletePasswordModal(){document.getElementById('confirmDeletePasswo
 
 function validateDOB(){const day=document.getElementById('editClientDay'),mon=document.getElementById('editClientMonth'),yr=document.getElementById('editClientYear');if(day&&day.value){let v=parseInt(day.value);if(isNaN(v)||v<1||v>31)day.value='';}if(mon&&mon.value){let v=parseInt(mon.value);if(isNaN(v)||v<1||v>12)mon.value='';}if(yr&&yr.value){let v=parseInt(yr.value);if(isNaN(v)||v<1920||v>2014){yr.value='';showCustomAlert(currentLang==='tr'?'Yıl 1920 - 2014 arası olmalı':'Year must be 1920 - 2014','warning');}}}
 
-function handleProfileUpdate(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;
-  const nn=document.getElementById('editClientName').value.trim(),nu=document.getElementById('editClientUsername').value.trim(),ne=document.getElementById('editClientEmail').value.trim();
-  const web=document.getElementById('editClientWebsite').value.trim(),bd=document.getElementById('editClientDay').value.trim(),bm=document.getElementById('editClientMonth').value.trim(),by=document.getElementById('editClientYear').value.trim();
-  validateDOB();
-  if(!nn||!nu||!ne){showCustomAlert(t('fill_fields'));return;}
-  if(nu.length<7){showCustomAlert(t('min_7'));return;}
-  try{let u=JSON.parse(lu);let users=JSON.parse(localStorage.getItem('site_users')||'[]');
-    if(users.some(x=>x.email!==u.email&&x.email===ne)){showCustomAlert(t('email_registered'));return;}
-    u.name=nn;u.username=nu;u.bio='';u.website=web;u.birthDay=bd;u.birthMonth=bm;u.birthYear=by;
-    users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));
-    logActivity('profile_update',u,'Updated');closeEditProfileModal();checkUserSession();renderApplications();showCustomAlert(currentLang==='tr'?'Profil güncellendi!':'Profile updated!','success');}catch(err){}}
+function handleProfileUpdate(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const nn=document.getElementById('editClientName').value.trim(),nu=document.getElementById('editClientUsername').value.trim(),ne=document.getElementById('editClientEmail').value.trim();const web=document.getElementById('editClientWebsite').value.trim(),bd=document.getElementById('editClientDay').value.trim(),bm=document.getElementById('editClientMonth').value.trim(),by=document.getElementById('editClientYear').value.trim();validateDOB();if(!nn||!nu||!ne){showCustomAlert(t('fill_fields'));return;}if(nu.length<7){showCustomAlert(t('min_7'));return;}try{let u=JSON.parse(lu);let users=JSON.parse(localStorage.getItem('site_users')||'[]');if(users.some(x=>x.email!==u.email&&x.email===ne)){showCustomAlert(t('email_registered'));return;}u.name=nn;u.username=nu;u.bio='';u.website=web;u.birthDay=bd;u.birthMonth=bm;u.birthYear=by;users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));logActivity('profile_update',u,'Updated');closeEditProfileModal();checkUserSession();renderApplications();showCustomAlert(currentLang==='tr'?'Profil güncellendi!':'Profile updated!','success');}catch(err){}}
 function handleChangePassword(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const op=getPasswordValue('changeOldPassword').trim(),np=getPasswordValue('changeNewPassword').trim(),cp=getPasswordValue('changeConfirmPassword').trim();if(!op||!np||!cp){showCustomAlert(t('fill_fields'));return;}if(!isValidPassword(np)){showCustomAlert(t('pw_8'));return;}try{let u=JSON.parse(lu);let users=JSON.parse(localStorage.getItem('site_users')||'[]');if(u.password!==op){showCustomAlert(currentLang==='tr'?'Mevcut şifre yanlış!':'Current password is incorrect!');return;}if(np!==cp){showCustomAlert(currentLang==='tr'?'Şifreler eşleşmiyor!':'Passwords do not match!');return;}u.password=np;users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));logActivity('password_change',u,'updated');closeChangePasswordModal();showCustomAlert(currentLang==='tr'?'Şifre değiştirildi!':'Password changed!','success');}catch(err){}}
 function handleDeleteAccount(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const iu=document.getElementById('deleteConfirmUsername').value.trim();try{const u=JSON.parse(lu);const au=(u.username||'').replace(/^@/,'');const ci=iu.replace(/^@/,'');if(ci.toLowerCase()!==au.toLowerCase()){showCustomAlert(currentLang==='tr'?'Kullanıcı adı eşleşmiyor.':'Username does not match.');return;}showCustomAlert(currentLang==='tr'?'Hesabınızı silmek istediğinizden emin misiniz?':'Are you sure you want to delete your account?','delete',function(){document.getElementById('deleteAccountModal').classList.remove('active');openDeletePasswordModal();});}catch(err){}}
 function handleDeletePasswordSubmit(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const ep=getPasswordValue('deleteConfirmPassword').trim();try{const u=JSON.parse(lu);if(u.password!==ep){showCustomAlert(currentLang==='tr'?'Yanlış şifre!':'Incorrect password!');return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.filter(x=>x.email!==u.email);localStorage.setItem('site_users',JSON.stringify(users));localStorage.removeItem('logged_user');closeDeletePasswordModal();showCustomAlert(currentLang==='tr'?'Hesap silindi.':'Account deleted.','success');window._pendingLangReset=true;forceRefreshUI();}catch(err){}}
@@ -1869,117 +1621,32 @@ function setCropRatio(r,btn){document.querySelectorAll('.ratio-btn').forEach(b=>
 function applyCrop(){if(!cropperInstance)return;try{const c=cropperInstance.getCroppedCanvas({width:400,height:400,imageSmoothingQuality:'high'});if(!c)return;const d=c.toDataURL('image/png');const lu=localStorage.getItem('logged_user');if(lu){try{let u=JSON.parse(lu);u.profilePhoto=d;let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));}catch(e){}}const prev=document.getElementById('editProfilePhotoPreview');if(prev)prev.src=d;closeCropModal();updateHeaderProfileAll();}catch(e){}}
 function updateHeaderProfileAll(){try{checkUserSession();}catch(e){}}
 
-function checkUserSession(){const lu=localStorage.getItem('logged_user');const cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');const abi=document.getElementById('authBoxIcon');const mab=document.getElementById('mainAuthBox');
-  if(lu){try{const u=JSON.parse(lu);if(mab)mab.style.display='none';if(cse)cse.innerText=currentLang==='tr'?'Kullanıcı Hesabı':'User Account';if(cme)cme.innerText=u.name?(currentLang==='tr'?'Hoş geldin, '+u.name:'Welcome, '+u.name):'Session Active';if(abi)abi.className='fa-solid fa-user-check';
-    const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');
-    const hpw=document.getElementById('headerProfileWrapper');
-    const hpp=document.getElementById('headerProfilePhoto');
-    const hpmP=document.getElementById('hpmPhoto');
-    const hpmN=document.getElementById('hpmName');
-    const hpmI=document.getElementById('hpmId');
-    if(hpw)hpw.style.display='flex';
-    if(hpp)hpp.src=p;if(hpmP)hpmP.src=p;
-    if(hpmN)hpmN.textContent=u.name||'User';
-    if(hpmI)hpmI.textContent='ID: '+(u.userId||'-');
-  }catch(e){}
-  }else{if(mab)mab.style.display='flex';if(cse)cse.innerText=t('contact_sub');if(cme)cme.innerText=t('contact_main');if(abi)abi.className='fa-solid fa-right-to-bracket';
-    const hpw=document.getElementById('headerProfileWrapper');if(hpw)hpw.style.display='none';
-  }
-  updateChatBadge();setTimeout(updateMessengerDefaultPosition,80);
-}
+function checkUserSession(){const lu=localStorage.getItem('logged_user');const cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');const abi=document.getElementById('authBoxIcon');const mab=document.getElementById('mainAuthBox');if(lu){try{const u=JSON.parse(lu);if(mab)mab.style.display='none';if(cse)cse.innerText=currentLang==='tr'?'Kullanıcı Hesabı':'User Account';if(cme)cme.innerText=u.name?(currentLang==='tr'?'Hoş geldin, '+u.name:'Welcome, '+u.name):'Session Active';if(abi)abi.className='fa-solid fa-user-check';const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const hpw=document.getElementById('headerProfileWrapper');const hpp=document.getElementById('headerProfilePhoto');const hpmP=document.getElementById('hpmPhoto');const hpmN=document.getElementById('hpmName');const hpmI=document.getElementById('hpmId');if(hpw)hpw.style.display='flex';if(hpp)hpp.src=p;if(hpmP)hpmP.src=p;if(hpmN)hpmN.textContent=u.name||'User';if(hpmI)hpmI.textContent='ID: '+(u.userId||'-');}catch(e){}}else{if(mab)mab.style.display='flex';if(cse)cse.innerText=t('contact_sub');if(cme)cme.innerText=t('contact_main');if(abi)abi.className='fa-solid fa-right-to-bracket';const hpw=document.getElementById('headerProfileWrapper');if(hpw)hpw.style.display='none';}updateChatBadge();setTimeout(updateMessengerDefaultPosition,80);}
 
-/* === ÇIKIŞ YAPMA — KESİN ÇÖZÜM === */
-function confirmLogout(){
-  showCustomAlert(t('logout_confirm'),'delete',function(){
-    try{
-      localStorage.removeItem('logged_user');
-      localStorage.removeItem('user_prefs_v1');
-      try{sessionStorage.removeItem(ADMIN_SESSION_KEY);}catch(e){}
-      try{sessionStorage.removeItem('site_lang');}catch(e){}
-      try{sessionStorage.clear();}catch(e){}
-    }catch(e){}
-    setTimeout(function(){
-      try{
-        var base=window.location.href.split('?')[0];
-        window.location.href=base+'?logout=1&t='+Date.now();
-      }catch(e){window.location.reload();}
-    },250);
-  });
-}
+function confirmLogout(){showCustomAlert(t('logout_confirm'),'delete',function(){try{localStorage.removeItem('logged_user');localStorage.removeItem('user_prefs_v1');try{sessionStorage.removeItem(ADMIN_SESSION_KEY);}catch(e){}try{sessionStorage.removeItem('site_lang');}catch(e){}try{sessionStorage.clear();}catch(e){}}catch(e){}setTimeout(function(){try{var base=window.location.href.split('?')[0];window.location.href=base+'?logout=1&t='+Date.now();}catch(e){window.location.reload();}},250);});}
 
-/* ==================== CHAT ==================== */
-function openChatPanel(){const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert('Sign in first!');openGetInTouchModal();return;}document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';document.getElementById('chatReplyPreview').style.display='none';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent=currentLang==='tr'?'Mesajlar':'Messages';chatSearchQuery='';const si=document.getElementById('chatSearchInput');if(si)si.value='';renderChatUsersList();updateChatBadge();}
+function openChatPanel(){const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert(currentLang==='tr'?'Önce giriş yapın!':'Sign in first!');openGetInTouchModal();return;}document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';document.getElementById('chatReplyPreview').style.display='none';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent=currentLang==='tr'?'Mesajlar':'Messages';chatSearchQuery='';const si=document.getElementById('chatSearchInput');if(si)si.value='';renderChatUsersList();updateChatBadge();}
 function closeChatPanel(){document.getElementById('chatPanelModal').classList.remove('active');activeChatUser=null;currentReplyTo=null;const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent=currentLang==='tr'?'Mesajlar':'Messages';}
 function filterChatUsers(){const inp=document.getElementById('chatSearchInput');chatSearchQuery=inp?inp.value.trim().toLowerCase():'';const clr=document.getElementById('chatSearchClear');if(clr){chatSearchQuery?clr.classList.add('show'):clr.classList.remove('show');}renderChatUsersList();}
 function clearChatSearch(){chatSearchQuery='';const inp=document.getElementById('chatSearchInput');if(inp)inp.value='';const clr=document.getElementById('chatSearchClear');if(clr)clr.classList.remove('show');renderChatUsersList();}
 function matchUserQuery(x,q){if(!q)return true;const qq=q.replace(/^@/,'').trim();if(!qq)return true;const id=String(x.userId||'').toLowerCase();const nm=String(x.name||'').toLowerCase();const un=String(x.username||'').toLowerCase().replace(/^@/,'');const em=String(x.email||'').toLowerCase();return id.includes(qq)||nm.includes(qq)||un.includes(qq)||em.includes(qq);}
 function renderChatUsersList(){const eff=getEffectiveLoggedUser();if(!eff)return;const u=eff;let others=getChatUsersFor(u.email);if(chatSearchQuery)others=others.filter(x=>matchUserQuery(x,chatSearchQuery));const list=document.getElementById('chatUsersList');if(!list)return;if(others.length===0){list.innerHTML=`<div class="chat-empty"><i class="fa-solid fa-user-group"></i>${t('chat_no_users')}</div>`;return;}const msgs=getChatMessages();others.sort((a,b)=>{const aa=isAdminUser(a.email)?0:1,ba=isAdminUser(b.email)?0:1;return aa-ba;});list.innerHTML='';others.forEach(x=>{const isA=isAdminUser(x.email);const cid=getConversationId(u.email,x.email);const conv=msgs[cid]||[];const last=conv.length?conv[conv.length-1]:null;const unread=conv.filter(m=>String(m.to).toLowerCase()===String(u.email).toLowerCase()&&!m.read).length;const item=document.createElement('div');item.className='chat-user-item'+(isA?' admin-row':'');const av=x.profilePhoto?`<img src="${x.profilePhoto}">`:(x.name?escapeHtml(x.name.trim().charAt(0).toUpperCase()):'?');let preview=t('chat_no_msgs');if(last){const who=String(last.from).toLowerCase()===String(u.email).toLowerCase()?(t('chat_you')+': '):'';preview=who+(last.type==='voice'?t('chat_voice'):(last.type==='photo'?'📷 photo':(last.text||'')));}const uname=String(x.username||'').replace(/^@/,'');const vB=(isA||x.isVerified)?getVerifiedBadgeHTML('sm'):'';const crown=isA?`<span class="admin-crown"><i class="fa-solid fa-crown"></i></span>`:'';item.innerHTML=`<div class="chat-user-avatar${isA?' admin-avatar':''}">${crown}${av}</div><div class="chat-user-info"><div class="chat-user-name">${escapeHtml(x.name||'user')}</div>${uname?`<div class="chat-user-username">@${escapeHtml(uname)}${vB}</div>`:''}<div class="chat-user-preview">${escapeHtml(preview).substring(0,60)}</div></div>${unread>0?`<div class="chat-unread-badge">${unread>99?'99+':unread}</div>`:''}`;item.onclick=()=>openConversation(x);list.appendChild(item);});}
-function openConversation(user){const eff=getEffectiveLoggedUser();if(!eff)return;const u=eff;activeChatUser=user;const m=getChatMessages();const cid=getConversationId(u.email,user.email);if(m[cid]){let c=false;m[cid].forEach(x=>{if(String(x.to).toLowerCase()===String(u.email).toLowerCase()&&!x.read){x.read=true;c=true;}});if(c)saveChatMessages(m);}document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='flex';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent='Chat';applyChatBackground();renderChatConvHeader();renderChatMessages();updateChatBadge();}
+function openConversation(user){const eff=getEffectiveLoggedUser();if(!eff)return;const u=eff;activeChatUser=user;const m=getChatMessages();const cid=getConversationId(u.email,user.email);if(m[cid]){let c=false;m[cid].forEach(x=>{if(String(x.to).toLowerCase()===String(u.email).toLowerCase()&&!x.read){x.read=true;c=true;}});if(c)saveChatMessages(m);}document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='flex';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent=currentLang==='tr'?'Sohbet':'Chat';applyChatBackground();renderChatConvHeader();renderChatMessages();updateChatBadge();}
 function backToUsersList(){activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';document.getElementById('chatReplyPreview').style.display='none';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent=currentLang==='tr'?'Mesajlar':'Messages';renderChatUsersList();}
-
 function renderChatConvHeader(){const h=document.getElementById('chatConvHeader');if(!h||!activeChatUser)return;const isA=isAdminUser(activeChatUser.email);const av=activeChatUser.profilePhoto?`<img src="${activeChatUser.profilePhoto}">`:(activeChatUser.name?escapeHtml(activeChatUser.name.trim().charAt(0).toUpperCase()):'?');const uname=String(activeChatUser.username||'').replace(/^@/,'');const se=escapeHtml(activeChatUser.email||'');const vB=(isA||activeChatUser.isVerified)?getVerifiedBadgeHTML(''):'';const crown=isA?`<span class="admin-crown"><i class="fa-solid fa-crown"></i></span>`:'';h.innerHTML=`<div class="chat-user-avatar small${isA?' admin-avatar':''}">${crown}${av}</div><div style="flex:1;min-width:0"><div class="chat-user-name">${escapeHtml(activeChatUser.name||'user')}</div><div class="chat-user-username">${uname?'@'+escapeHtml(uname):''}${vB}</div></div><button class="chat-profile-btn chat-profile-btn-lg" onclick="openPublicUserProfile('${se}')" title="Profile"><i class="fa-solid fa-user-circle"></i></button>`;}
-
 function getWaveformBars(seed,count){let bars='';let h=0;const s=String(seed||'x');for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;for(let i=0;i<count;i++){h=(h*1103515245+12345)>>>0;const height=5+(h%17);bars+=`<span class="voice-bar" style="height:${height}px"></span>`;}return bars;}
 function toggleVoicePlayback(btn){const wrap=btn.closest('.chat-voice-msg');if(!wrap)return;const audio=wrap.querySelector('audio');if(!audio||!audio.src)return;if(audio.paused){document.querySelectorAll('.chat-voice-msg audio').forEach(a=>{if(a!==audio&&!a.paused){a.pause();const ob=a.closest('.chat-voice-msg').querySelector('.voice-play-btn');if(ob)ob.innerHTML='<i class="fa-solid fa-play"></i>';}});audio.play().catch(()=>{});btn.innerHTML='<i class="fa-solid fa-pause"></i>';}else{audio.pause();btn.innerHTML='<i class="fa-solid fa-play"></i>';}}
-
-function renderChatMessages(){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);const conv=m[cid]||[];const box=document.getElementById('chatMessages');if(!box)return;box.innerHTML='';if(conv.length===0){box.innerHTML='<div class="chat-empty">'+t('chat_start')+'</div>';return;}const myEmail=String(u.email).toLowerCase();
-  conv.forEach((msg,idx)=>{const isMine=String(msg.from).toLowerCase()===myEmail;const div=document.createElement('div');div.className='chat-msg '+(isMine?'mine':'theirs');const d=new Date(msg.timestamp);const time=d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});const readStatus=isMine?`<span class="read-status">${msg.read?'✓✓':'✓'}</span>`:'';
-    if(msg.type==='voice'){const dur=msg.duration?formatDuration(msg.duration):'0:00';const bars=getWaveformBars(msg.audioId||String(idx)+msg.timestamp,22);div.innerHTML=`<div class="chat-voice-msg"><button class="voice-play-btn" onclick="toggleVoicePlayback(this)"><i class="fa-solid fa-play"></i></button><div class="voice-waveform">${bars}</div><span class="voice-duration">${dur}</span><audio preload="metadata"></audio></div><div class="chat-msg-actions">${!isMine?`<button class="chat-msg-action-btn" onclick="replyToMessage(${idx})"><i class="fa-solid fa-reply"></i></button>`:''}${isMine?`<button class="chat-msg-action-btn delete" onclick="deleteMessage(${idx})"><i class="fa-solid fa-trash"></i></button>`:''}</div><div class="chat-msg-time">${time} ${readStatus}</div>`;box.appendChild(div);const audioEl=div.querySelector('audio');if(audioEl&&msg.audioData)audioEl.src=msg.audioData;}
-    else if(msg.type==='photo'){div.innerHTML=`<div class="chat-msg-photo" onclick="openChatPhoto(${idx})"><img src="${msg.photoData||''}" alt="photo"></div><div class="chat-msg-actions">${!isMine?`<button class="chat-msg-action-btn" onclick="replyToMessage(${idx})"><i class="fa-solid fa-reply"></i></button>`:''}${isMine?`<button class="chat-msg-action-btn delete" onclick="deleteMessage(${idx})"><i class="fa-solid fa-trash"></i></button>`:''}</div><div class="chat-msg-time">${time} ${readStatus}</div>`;box.appendChild(div);}
-    else{div.innerHTML=`<div class="chat-msg-text">${escapeHtml(msg.text||'')}</div><div class="chat-msg-actions">${!isMine?`<button class="chat-msg-action-btn" onclick="replyToMessage(${idx})"><i class="fa-solid fa-reply"></i></button>`:''}${isMine?`<button class="chat-msg-action-btn delete" onclick="deleteMessage(${idx})"><i class="fa-solid fa-trash"></i></button>`:''}</div><div class="chat-msg-time">${time} ${readStatus}</div>`;box.appendChild(div);}});box.scrollTop=box.scrollHeight;}
+function renderChatMessages(){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);const conv=m[cid]||[];const box=document.getElementById('chatMessages');if(!box)return;box.innerHTML='';if(conv.length===0){box.innerHTML='<div class="chat-empty">'+t('chat_start')+'</div>';return;}const myEmail=String(u.email).toLowerCase();conv.forEach((msg,idx)=>{const isMine=String(msg.from).toLowerCase()===myEmail;const div=document.createElement('div');div.className='chat-msg '+(isMine?'mine':'theirs');const d=new Date(msg.timestamp);const time=d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});const readStatus=isMine?`<span class="read-status">${msg.read?'✓✓':'✓'}</span>`:'';if(msg.type==='voice'){const dur=msg.duration?formatDuration(msg.duration):'0:00';const bars=getWaveformBars(msg.audioId||String(idx)+msg.timestamp,22);div.innerHTML=`<div class="chat-voice-msg"><button class="voice-play-btn" onclick="toggleVoicePlayback(this)"><i class="fa-solid fa-play"></i></button><div class="voice-waveform">${bars}</div><span class="voice-duration">${dur}</span><audio preload="metadata"></audio></div><div class="chat-msg-actions">${!isMine?`<button class="chat-msg-action-btn" onclick="replyToMessage(${idx})"><i class="fa-solid fa-reply"></i></button>`:''}${isMine?`<button class="chat-msg-action-btn delete" onclick="deleteMessage(${idx})"><i class="fa-solid fa-trash"></i></button>`:''}</div><div class="chat-msg-time">${time} ${readStatus}</div>`;box.appendChild(div);const audioEl=div.querySelector('audio');if(audioEl&&msg.audioData)audioEl.src=msg.audioData;}else if(msg.type==='photo'){div.innerHTML=`<div class="chat-msg-photo" onclick="openChatPhoto(${idx})"><img src="${msg.photoData||''}" alt="photo"></div><div class="chat-msg-actions">${!isMine?`<button class="chat-msg-action-btn" onclick="replyToMessage(${idx})"><i class="fa-solid fa-reply"></i></button>`:''}${isMine?`<button class="chat-msg-action-btn delete" onclick="deleteMessage(${idx})"><i class="fa-solid fa-trash"></i></button>`:''}</div><div class="chat-msg-time">${time} ${readStatus}</div>`;box.appendChild(div);}else{div.innerHTML=`<div class="chat-msg-text">${escapeHtml(msg.text||'')}</div><div class="chat-msg-actions">${!isMine?`<button class="chat-msg-action-btn" onclick="replyToMessage(${idx})"><i class="fa-solid fa-reply"></i></button>`:''}${isMine?`<button class="chat-msg-action-btn delete" onclick="deleteMessage(${idx})"><i class="fa-solid fa-trash"></i></button>`:''}</div><div class="chat-msg-time">${time} ${readStatus}</div>`;box.appendChild(div);}});box.scrollTop=box.scrollHeight;}
 function formatDuration(sec){sec=Math.max(0,Math.floor(sec));const m=Math.floor(sec/60),s=sec%60;return m+':'+String(s).padStart(2,'0');}
 function replyToMessage(idx){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);const conv=m[cid]||[];const msg=conv[idx];if(!msg)return;const previewText=msg.type==='voice'?t('chat_voice'):(msg.type==='photo'?'📷 photo':(msg.text||''));currentReplyTo={name:msg.fromName||msg.from,text:previewText,idx};document.getElementById('replyName').innerText='↩ '+currentReplyTo.name;document.getElementById('replyText').innerText=currentReplyTo.text;document.getElementById('chatReplyPreview').style.display='flex';document.getElementById('chatInput').focus();}
 function cancelReply(){currentReplyTo=null;document.getElementById('chatReplyPreview').style.display='none';}
 function deleteMessage(idx){showCustomAlert(currentLang==='tr'?'Bu mesaj silinsin mi?':'Delete this message?','delete',function(){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);if(m[cid]&&m[cid][idx]){m[cid].splice(idx,1);saveChatMessages(m);renderChatMessages();}});}
 function sendChatMessage(){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const inp=document.getElementById('chatInput');if(!inp)return;const text=inp.value.trim();if(!text)return;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);if(!m[cid])m[cid]=[];const nm={from:u.email,to:activeChatUser.email,fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',type:'text',text:text.substring(0,1000),timestamp:new Date().toISOString(),read:false,replyTo:currentReplyTo?{name:currentReplyTo.name,text:currentReplyTo.text}:null};m[cid].push(nm);saveChatMessages(m);inp.value='';currentReplyTo=null;document.getElementById('chatReplyPreview').style.display='none';renderChatMessages();logActivity('chat_message',u,`To ${activeChatUser.email}: ${text.substring(0,60)}`);}
-
 function handleChatPhotoUpload(event){const f=event.target.files[0];if(!f||!f.type.startsWith('image/'))return;if(f.size>5*1024*1024){showCustomAlert('Max 5 MB image.');event.target.value='';return;}const r=new FileReader();r.onload=ev=>{const img=new Image();img.onload=()=>{const canvas=document.createElement('canvas');const maxW=800;let w=img.width,h=img.height;if(w>maxW){h=h*maxW/w;w=maxW;}canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);const dataUrl=canvas.toDataURL('image/jpeg',0.78);sendPhotoMessage(dataUrl);};img.src=ev.target.result;};r.readAsDataURL(f);event.target.value='';}
 function sendPhotoMessage(dataUrl){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);if(!m[cid])m[cid]=[];m[cid].push({from:u.email,to:activeChatUser.email,fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',type:'photo',photoData:dataUrl,timestamp:new Date().toISOString(),read:false,replyTo:currentReplyTo?{name:currentReplyTo.name,text:currentReplyTo.text}:null});saveChatMessages(m);currentReplyTo=null;document.getElementById('chatReplyPreview').style.display='none';renderChatMessages();logActivity('chat_message',u,`Photo to ${activeChatUser.email}`);}
 function openChatPhoto(idx){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const m=getChatMessages();const cid=getConversationId(eff.email,activeChatUser.email);const conv=m[cid]||[];if(conv[idx]&&conv[idx].photoData){document.getElementById('lightboxImage').src=conv[idx].photoData;document.getElementById('lightboxOverlay').classList.add('active');}}
 
-/* === USER PROFILE === */
-function openPublicUserProfile(email){
-  const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert('You must sign in.');return;}
-  const users=getAllUsers();let u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());
-  if(!u&&isAdminUser(email))u=getAdminUser();
-  if(!u){showCustomAlert('User not found!');return;}
-  publicProfileEmail=u.email;
-  const initial=(u.name||'U').trim().charAt(0).toUpperCase();
-  const av=u.profilePhoto?`<img src="${u.profilePhoto}">`:(u.name?escapeHtml(initial):'?');
-  const uname=String(u.username||'').replace(/^@/,'');
-  const created=u.createdAt?new Date(u.createdAt).toLocaleDateString():'—';
-  const myEmail=String(eff.email||'').toLowerCase();
-  const isSelf=myEmail===String(u.email||'').toLowerCase();
-  const isAdm=isAdminUser(u.email);
-  const isVer=(isAdm||u.isVerified);
-  const vB=isVer?getVerifiedBadgeHTML('lg'):'';
-  const idNum=escapeHtml(u.userId||'-');
-  const idRowHTML=`<div class="pub-profile-info-row"><span><i class="fa-solid fa-id-badge"></i>ID</span><span style="font-family:'Fira Code',monospace;font-weight:700;color:var(--accent);">${idNum}</span></div>`;
-  let websiteHTML='';
-  if(u.website){
-    let w=String(u.website).trim();
-    if(!/^https?:\/\//i.test(w))w='https://'+w;
-    const short=escapeHtml(w.replace(/^https?:\/\//,'').substring(0,50));
-    websiteHTML=`<a class="pub-profile-website" href="${escapeHtml(w)}" target="_blank"><i class="fa-solid fa-link"></i> ${short}</a>`;
-  }
-  let aH='';
-  if(!isSelf){aH+=`<button class="pub-btn-msg" onclick="messageFromProfile()"><i class="fa-solid fa-comments"></i> ${t('send_message')}</button>`;}
-  aH+=`<button class="pub-btn-close" onclick="closePublicUserProfile()"><i class="fa-solid fa-arrow-left"></i> ${t('close')}</button>`;
-  document.getElementById('pub-profile-title').innerText=t('user_profile');
-  document.getElementById('publicUserProfileContent').innerHTML=`
-    <div class="pub-profile-view">
-      <div class="pub-profile-avatar" style="${isAdm?'border-color:#1d9bf0;':''}">${av}</div>
-      <div class="pub-profile-name">${escapeHtml(u.name||'user')}</div>
-      ${uname?`<div class="pub-profile-username">@${escapeHtml(uname)}${vB}</div>`:''}
-      ${websiteHTML}
-      <div class="pub-profile-info">
-        ${idRowHTML}
-        <div class="pub-profile-info-row"><span><i class="fa-solid fa-calendar-days"></i>${t('joined')}</span><span>${escapeHtml(created)}</span></div>
-      </div>
-      <div class="pub-profile-actions">${aH}</div>
-    </div>`;
-  document.getElementById('publicUserProfileModal').classList.add('active');
-}
+function openPublicUserProfile(email){const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert(currentLang==='tr'?'Giriş yapmalısınız.':'You must sign in.');return;}const users=getAllUsers();let u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());if(!u&&isAdminUser(email))u=getAdminUser();if(!u){showCustomAlert(currentLang==='tr'?'Kullanıcı bulunamadı!':'User not found!');return;}publicProfileEmail=u.email;const initial=(u.name||'U').trim().charAt(0).toUpperCase();const av=u.profilePhoto?`<img src="${u.profilePhoto}">`:(u.name?escapeHtml(initial):'?');const uname=String(u.username||'').replace(/^@/,'');const created=u.createdAt?new Date(u.createdAt).toLocaleDateString():'—';const myEmail=String(eff.email||'').toLowerCase();const isSelf=myEmail===String(u.email||'').toLowerCase();const isAdm=isAdminUser(u.email);const isVer=(isAdm||u.isVerified);const vB=isVer?getVerifiedBadgeHTML('lg'):'';const idNum=escapeHtml(u.userId||'-');const idRowHTML=`<div class="pub-profile-info-row"><span><i class="fa-solid fa-id-badge"></i>ID</span><span style="font-family:'Fira Code',monospace;font-weight:700;color:var(--accent);">${idNum}</span></div>`;let websiteHTML='';if(u.website){let w=String(u.website).trim();if(!/^https?:\/\//i.test(w))w='https://'+w;const short=escapeHtml(w.replace(/^https?:\/\//,'').substring(0,50));websiteHTML=`<a class="pub-profile-website" href="${escapeHtml(w)}" target="_blank"><i class="fa-solid fa-link"></i> ${short}</a>`;}let aH='';if(!isSelf){aH+=`<button class="pub-btn-msg" onclick="messageFromProfile()"><i class="fa-solid fa-comments"></i> ${t('send_message')}</button>`;}aH+=`<button class="pub-btn-close" onclick="closePublicUserProfile()"><i class="fa-solid fa-arrow-left"></i> ${t('close')}</button>`;document.getElementById('pub-profile-title').innerText=t('user_profile');document.getElementById('publicUserProfileContent').innerHTML=`<div class="pub-profile-view"><div class="pub-profile-avatar" style="${isAdm?'border-color:#1d9bf0;':''}">${av}</div><div class="pub-profile-name">${escapeHtml(u.name||'user')}</div>${uname?`<div class="pub-profile-username">@${escapeHtml(uname)}${vB}</div>`:''}${websiteHTML}<div class="pub-profile-info">${idRowHTML}<div class="pub-profile-info-row"><span><i class="fa-solid fa-calendar-days"></i>${t('joined')}</span><span>${escapeHtml(created)}</span></div></div><div class="pub-profile-actions">${aH}</div></div>`;document.getElementById('publicUserProfileModal').classList.add('active');}
 function closePublicUserProfile(){document.getElementById('publicUserProfileModal').classList.remove('active');publicProfileEmail=null;}
 function messageFromProfile(){if(!publicProfileEmail)return;const users=getAllUsers();let u=users.find(x=>x.email===publicProfileEmail);if(!u&&isAdminUser(publicProfileEmail))u=getAdminUser();if(!u){closePublicUserProfile();return;}closePublicUserProfile();document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='none';openConversation(u);}
 function startChatPolling(){if(chatPollTimer)clearInterval(chatPollTimer);chatPollTimer=setInterval(()=>{const lu=localStorage.getItem('logged_user');if(!lu&&!isAdminLoggedIn()){updateChatBadge();return;}updateChatBadge();const p=document.getElementById('chatPanelModal');if(p&&p.classList.contains('active')){const eff=getEffectiveLoggedUser();if(!eff)return;if(activeChatUser){const msgs=getChatMessages();const cid=getConversationId(eff.email,activeChatUser.email);if(msgs[cid]){let c=false;msgs[cid].forEach(m=>{if(String(m.to).toLowerCase()===String(eff.email).toLowerCase()&&!m.read){m.read=true;c=true;}});if(c)saveChatMessages(msgs);}renderChatMessages();}else renderChatUsersList();}},2500);}
@@ -1988,16 +1655,10 @@ function toggleHeaderProfileMenu(e){if(e)e.stopPropagation();const m=document.ge
 function closeHeaderProfileMenu(){const m=document.getElementById('headerProfileMenu');if(m)m.classList.remove('show');}
 window.addEventListener('click',function(e){const m=document.getElementById('headerProfileMenu');const w=document.getElementById('headerProfileWrapper');if(m&&w&&!w.contains(e.target))m.classList.remove('show');});
 
-function initMessengerBtn(){const btn=document.getElementById('messengerFloatBtn');if(!btn)return;updateMessengerDefaultPosition();
-  const onDown=(e)=>{if(e.target.closest('.messenger-badge'))return;const pt=e.touches?e.touches[0]:e;messengerDragState.isDragging=true;messengerDragState.moved=false;messengerDragState.startX=pt.clientX;messengerDragState.startY=pt.clientY;messengerDragState.startPosX=messengerPos.x;messengerDragState.startPosY=messengerPos.y;btn.classList.add('dragging');};
-  const onMove=(e)=>{if(!messengerDragState.isDragging)return;const pt=e.touches?e.touches[0]:e;const dx=pt.clientX-messengerDragState.startX,dy=pt.clientY-messengerDragState.startY;if(Math.abs(dx)>4||Math.abs(dy)>4)messengerDragState.moved=true;messengerPos.x=Math.max(6,Math.min(window.innerWidth-38,messengerDragState.startPosX+dx));messengerPos.y=Math.max(6,Math.min(window.innerHeight-38,messengerDragState.startPosY+dy));applyMessengerPos();if(e.cancelable)e.preventDefault();};
-  const onUp=()=>{if(!messengerDragState.isDragging)return;messengerDragState.isDragging=false;btn.classList.remove('dragging');if(!messengerDragState.moved){openChatPanel();}};
-  btn.addEventListener('mousedown',onDown);btn.addEventListener('touchstart',onDown,{passive:true});document.addEventListener('mousemove',onMove);document.addEventListener('touchmove',onMove,{passive:false});document.addEventListener('mouseup',onUp);document.addEventListener('touchend',onUp);
-}
+function initMessengerBtn(){const btn=document.getElementById('messengerFloatBtn');if(!btn)return;updateMessengerDefaultPosition();const onDown=(e)=>{if(e.target.closest('.messenger-badge'))return;const pt=e.touches?e.touches[0]:e;messengerDragState.isDragging=true;messengerDragState.moved=false;messengerDragState.startX=pt.clientX;messengerDragState.startY=pt.clientY;messengerDragState.startPosX=messengerPos.x;messengerDragState.startPosY=messengerPos.y;btn.classList.add('dragging');};const onMove=(e)=>{if(!messengerDragState.isDragging)return;const pt=e.touches?e.touches[0]:e;const dx=pt.clientX-messengerDragState.startX,dy=pt.clientY-messengerDragState.startY;if(Math.abs(dx)>4||Math.abs(dy)>4)messengerDragState.moved=true;messengerPos.x=Math.max(6,Math.min(window.innerWidth-38,messengerDragState.startPosX+dx));messengerPos.y=Math.max(6,Math.min(window.innerHeight-38,messengerDragState.startPosY+dy));applyMessengerPos();if(e.cancelable)e.preventDefault();};const onUp=()=>{if(!messengerDragState.isDragging)return;messengerDragState.isDragging=false;btn.classList.remove('dragging');if(!messengerDragState.moved){openChatPanel();}};btn.addEventListener('mousedown',onDown);btn.addEventListener('touchstart',onDown,{passive:true});document.addEventListener('mousemove',onMove);document.addEventListener('touchmove',onMove,{passive:false});document.addEventListener('mouseup',onUp);document.addEventListener('touchend',onUp);}
 function updateMessengerDefaultPosition(){const btn=document.getElementById('messengerFloatBtn');if(!btn)return;const hpp=document.getElementById('headerProfilePhoto');const hpw=document.getElementById('headerProfileWrapper');let x=window.innerWidth-44,y=100;if(hpw&&hpw.style.display!=='none'&&hpp){const r=hpp.getBoundingClientRect();x=r.right-34;y=r.bottom+6;}messengerPos={x:Math.max(6,x),y:Math.max(6,y)};applyMessengerPos();}
 function applyMessengerPos(){const btn=document.getElementById('messengerFloatBtn');if(!btn||!messengerPos)return;btn.style.left=messengerPos.x+'px';btn.style.top=messengerPos.y+'px';btn.style.right='auto';btn.style.bottom='auto';}
 
-/* ==================== ORDER ==================== */
 function getOrders(){try{return JSON.parse(localStorage.getItem(ORDERS_KEY)||'[]');}catch(e){return[];}}
 function saveOrders(o){try{localStorage.setItem(ORDERS_KEY,JSON.stringify(o));}catch(e){}}
 function getOrderSettings(){const c=getSiteContent();if(!c.general)c.general={};if(c.general.orderRequireLogin===undefined)c.general.orderRequireLogin=true;return{requireLogin:c.general.orderRequireLogin};}
@@ -2014,7 +1675,6 @@ function clearAllOrders(){showCustomAlert('Delete all orders?','delete',()=>{loc
 async function approveOrder(idx){const orders=getOrders();if(!orders[idx])return;showCustomAlert('Approve this order and send email?','warning',async function(){const r=await sendOrderApprovalEmail(orders[idx]);if(r.success){orders[idx].status='approved';orders[idx].read=true;orders[idx].approvedAt=new Date().toISOString();saveOrders(orders);renderAdminOrders();updateOrdersBadge();logActivity('order_approved',{name:orders[idx].name,email:orders[idx].email},'Email sent');showCustomAlert('✅ '+t('order_approved'),'success');fireConfettiBurst(.8);}else{showCustomAlert('Email failed: '+(r.reason||'unknown'),'error');}});}
 async function sendOrderApprovalEmail(order){if(!EMAILJS_CONFIG.enabled)return{success:false,reason:'not_configured'};const brand=getDyn('header.brand','muminsultani');const logoUrl='https://muminsultani.com/img/ms.png';const bodyText='Hello '+order.name+',\n\nYour order has been approved! 🎉\n\n• Type: '+order.type+'\n• Budget: '+(order.budget||'Not specified')+'\n• Deadline: '+(order.deadline||'Not specified')+'\n\nDescription:\n'+order.description+'\n\nWe will contact you soon.\n\nThanks,\n'+brand;const tp={to_email:order.email,from_email:ADMIN_EMAIL,from_name:brand,reply_to:ADMIN_EMAIL,brand:brand,subject:'✅ Order Approved — '+brand,message:bodyText,image_url:logoUrl,link_url:'https://muminsultani.com',link_text:'Visit Site',has_image:'yes',has_link:'yes',has_pdf:'no',pdf_url:'',year:new Date().getFullYear(),type:'Order Approval',code:'—'};try{const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EMAILJS_CONFIG.serviceId,template_id:EMAILJS_CONFIG.templateId,user_id:EMAILJS_CONFIG.publicKey,template_params:tp})});const txt=await r.text();if(r.ok&&(txt==='OK'||r.status===200))return{success:true};return{success:false,reason:txt||('HTTP '+r.status)};}catch(err){return{success:false,reason:err.message||'network_error'};}}
 
-/* ==================== ADMIN ==================== */
 function triggerAdminAccess(){if(isAdminLoggedIn())openAdminPanel();else{document.getElementById('adminLoginModal').classList.add('active');setTimeout(()=>{const i=document.getElementById('adminPasswordInput');if(i){setPasswordValue('adminPasswordInput','');i.focus();}},200);}}
 function closeAdminLogin(){document.getElementById('adminLoginModal').classList.remove('active');}
 function verifyAdminPassword(e){if(e)e.preventDefault();const v=getPasswordValue('adminPasswordInput');if(v===ADMIN_MASTER_PASSWORD){try{sessionStorage.setItem(ADMIN_SESSION_KEY,'yes');}catch(err){}closeAdminLogin();openAdminPanel();fireConfettiBurst(.6);}else{showCustomAlert('Wrong password!');setPasswordValue('adminPasswordInput','');}}
@@ -2051,7 +1711,6 @@ function clearAdminPhoto(){pendingAdminPhoto=null;const pv=document.getElementBy
 function saveAdminAccount(e){e.preventDefault();const u=getAllUsers();let i=u.findIndex(x=>x.isAdmin===true);if(i===-1)i=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL);if(i===-1){u.unshift({userId:'',name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'admin123',bio:'',website:'',profilePhoto:'',following:[],createdAt:new Date().toISOString(),isAdmin:true,isVerified:true});i=0;}const nn=document.getElementById('adminAccName').value.trim(),nu=document.getElementById('adminAccUsername').value.trim().replace(/^@/,'').toLowerCase(),ne=document.getElementById('adminAccEmail').value.trim().toLowerCase(),nid=document.getElementById('adminAccId').value.trim(),nw=document.getElementById('adminAccWebsite').value.trim(),nb=document.getElementById('adminAccBio').value.trim();if(!nn||!nu||!ne){showCustomAlert(t('fill_fields'));return;}if(!/^\d{9}$/.test(nid)){showCustomAlert('ID must be 9 digits!');return;}const a=u[i];const oldE=a.email;a.name=nn;a.username=nu;a.email=ne;a.userId=nid;a.website=nw;a.bio=nb;a.isAdmin=true;a.isVerified=true;if(pendingAdminPhoto!==undefined)a.profilePhoto=pendingAdminPhoto||'';localStorage.setItem('site_users',JSON.stringify(u));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);if(cu.isAdmin||String(cu.email||'').toLowerCase()===String(oldE).toLowerCase())localStorage.setItem('logged_user',JSON.stringify(a));}catch(e){}}pendingAdminPhoto=undefined;refreshAdminUI();renderAdminAccount();checkUserSession();showCustomAlert('Saved!','success');}
 function withTimeout(p,ms=5000){return Promise.race([Promise.resolve(p),new Promise(r=>setTimeout(()=>r(null),ms))]);}
 function buildAdminSlotHTML(idx,app){const filled=app.name&&app.name.trim();let iconPreview='';if(app.hasIcon)iconPreview='(icon)';else if(app.icon&&app.icon.trim())iconPreview=`<span style="font-size:1.1rem">${escapeHtml(app.icon.trim())}</span>`;const nameText=filled?escapeHtml(app.name):`<em style="opacity:.5">empty slot ${idx+1}</em>`;return `<div class="admin-slot-num">${idx+1}</div>${iconPreview?`<div style="width:26px">${iconPreview}</div>`:''}<div class="admin-slot-info"><div class="admin-slot-name">${nameText} ${app.hasApk?'<span style="font-size:.6rem;color:#22c55e">APK</span>':''}</div><div class="admin-slot-url">${filled&&app.desc?escapeHtml(app.desc):''}</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="editAppSlot(${idx})"><i class="fa-solid fa-pen"></i></button><button class="admin-slot-btn delete" onclick="clearAppSlot(${idx})"><i class="fa-solid fa-trash-can"></i></button></div>`;}
-
 function openApkDB(){return new Promise((res,rej)=>{if(apkDB)return res(apkDB);try{const r=indexedDB.open('muminsultani_apk_db_v2',3);r.onupgradeneeded=e=>{const db=e.target.result;if(!db.objectStoreNames.contains('apks'))db.createObjectStore('apks');if(!db.objectStoreNames.contains('icons'))db.createObjectStore('icons');};r.onsuccess=e=>{apkDB=e.target.result;res(apkDB);};r.onerror=e=>rej(e.target.error);}catch(e){rej(e);}});}
 async function storeApkFile(idx,file){const db=await openApkDB();return new Promise((res,rej)=>{const tx=db.transaction(['apks'],'readwrite');const r=tx.objectStore('apks').put({blob:file,name:file.name,size:file.size,type:file.type},'slot_'+idx);r.onsuccess=()=>res();r.onerror=e=>rej(e.target.error);});}
 async function getApkFile(idx){const db=await openApkDB();return new Promise((res,rej)=>{const tx=db.transaction(['apks'],'readonly');const r=tx.objectStore('apks').get('slot_'+idx);r.onsuccess=e=>res(e.target.result||null);r.onerror=e=>rej(e.target.error);});}
@@ -2064,47 +1723,43 @@ async function downloadApk(slotIndex){const lu=localStorage.getItem('logged_user
 
 function applySiteContent(){const c=getSiteContent(),isTR=currentLang==='tr';document.querySelectorAll('.brand-logo, .footer-brand').forEach(el=>el.textContent=c.header.brand);const il=document.querySelector('.intro-logo');if(il)il.textContent=c.header.brand;document.querySelectorAll('.modal-brand').forEach(el=>el.textContent=c.header.brand);document.getElementById('t-role').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('introSub').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('t-job-title').innerText=isTR?c.experience.titleTr:c.experience.titleEn;document.getElementById('t-job-date').innerText=c.experience.date;document.getElementById('t-job-desc').innerText=isTR?c.experience.descTr:c.experience.descEn;document.getElementById('t-os-val').innerText=isTR?c.setup.osTr:c.setup.osEn;document.getElementById('t-editor-val').innerText=isTR?c.setup.editorTr:c.setup.editorEn;document.getElementById('t-backend-val').innerText=c.stack.backend;document.getElementById('t-frontend-val').innerText=c.stack.frontend;document.getElementById('t-copyright').innerText=c.footer.copyright;if(c.general){if(c.general.pageTitle){document.title=c.general.pageTitle;}if(c.general.favicon){const f=document.getElementById('siteFavicon');if(f)f.href=c.general.favicon;}}renderApplications();applySectionOrder();applyEffectsSettings();renderFooterSocials();}
 
-async function renderApplications(){
-  if(appsRenderLock)return;
-  appsRenderLock=true;
-  try{
-    const grid=document.getElementById('appsGrid');if(!grid)return;
-    const apps=getSiteContent().apps||[];
-    const isLogged=!!localStorage.getItem('logged_user');
-    const filled=[];
-    for(let i=0;i<8;i++){const a=apps[i]||{};if(a.name&&a.name.trim().length>0)filled.push({idx:i,app:a});}
-    const w=window.innerWidth;
-    let maxVisible=4;
-    if(w>=1025)maxVisible=6;
-    const visible=filled.slice(0,maxVisible);
-    grid.innerHTML='';
-    for(const {idx,app} of visible){
-      const card=document.createElement('div');card.className='app-card';
-      let iconHTML='📱';
-      if(app.hasIcon){try{const ic=await withTimeout(getIconData(idx),3000);if(ic&&ic.dataUrl)iconHTML=`<img src="${ic.dataUrl}">`;}catch(e){}}
-      else if(app.icon&&app.icon.trim().startsWith('http'))iconHTML=`<img src="${escapeHtml(app.icon.trim())}">`;
-      else if(app.icon&&app.icon.trim())iconHTML=escapeHtml(app.icon.trim());
-      const hasApk=!!app.hasApk;const hasUrl=app.url&&app.url.trim();const rl=!!app.requireLogin;
-      if(hasApk){const nl=rl&&!isLogged;if(nl)card.classList.add('locked');card.style.cursor='pointer';card.addEventListener('click',()=>downloadApk(idx));}
-      else if(hasUrl){card.style.cursor='pointer';card.addEventListener('click',()=>{let u=app.url.trim();if(!/^https?:\/\//i.test(u))u='https://'+u;window.open(u,'_blank');});}
-      const dBadge=hasApk?`<span class="apk-download-badge"><i class="fa-solid fa-download"></i></span>`:'';
-      let nI='';if(hasApk)nI='<i class="fa-solid fa-download download-icon"></i>';else if(hasUrl)nI='<i class="fa-solid fa-arrow-up-right-from-square"></i>';
-      let tH='';
-      if(hasApk){const lk=rl&&!isLogged;const lc=lk?' locked-tag':'';const li=rl?'<i class="fa-solid fa-lock" style="margin-left:3px;font-size:.5rem"></i>':'';tH=`<span class="app-card-tag apk-tag${lc}"><i class="fa-brands fa-android"></i>APK${li}</span>`;}
-      else if(hasUrl)tH='<span class="app-card-tag">LINK</span>';
-      const sz=hasApk&&app.apkSize?' • '+formatFileSize(app.apkSize):'';
-      card.innerHTML=`<div class="app-card-icon">${iconHTML}${dBadge}</div><div class="app-card-body"><div class="app-card-name">${escapeHtml(app.name)} ${nI}</div><div class="app-card-desc">${escapeHtml(app.desc||'')}${sz}</div></div>${tH}`;
-      grid.appendChild(card);
-    }
-  } finally {
-    appsRenderLock=false;
-  }
-}
+async function renderApplications(){if(appsRenderLock)return;appsRenderLock=true;try{const grid=document.getElementById('appsGrid');if(!grid)return;const apps=getSiteContent().apps||[];const isLogged=!!localStorage.getItem('logged_user');const filled=[];for(let i=0;i<8;i++){const a=apps[i]||{};if(a.name&&a.name.trim().length>0)filled.push({idx:i,app:a});}const w=window.innerWidth;let maxVisible=4;if(w>=1025)maxVisible=6;const visible=filled.slice(0,maxVisible);grid.innerHTML='';for(const {idx,app} of visible){const card=document.createElement('div');card.className='app-card';let iconHTML='📱';if(app.hasIcon){try{const ic=await withTimeout(getIconData(idx),3000);if(ic&&ic.dataUrl)iconHTML=`<img src="${ic.dataUrl}">`;}catch(e){}}else if(app.icon&&app.icon.trim().startsWith('http'))iconHTML=`<img src="${escapeHtml(app.icon.trim())}">`;else if(app.icon&&app.icon.trim())iconHTML=escapeHtml(app.icon.trim());const hasApk=!!app.hasApk;const hasUrl=app.url&&app.url.trim();const rl=!!app.requireLogin;if(hasApk){const nl=rl&&!isLogged;if(nl)card.classList.add('locked');card.style.cursor='pointer';card.addEventListener('click',()=>downloadApk(idx));}else if(hasUrl){card.style.cursor='pointer';card.addEventListener('click',()=>{let u=app.url.trim();if(!/^https?:\/\//i.test(u))u='https://'+u;window.open(u,'_blank');});}const dBadge=hasApk?`<span class="apk-download-badge"><i class="fa-solid fa-download"></i></span>`:'';let nI='';if(hasApk)nI='<i class="fa-solid fa-download download-icon"></i>';else if(hasUrl)nI='<i class="fa-solid fa-arrow-up-right-from-square"></i>';let tH='';if(hasApk){const lk=rl&&!isLogged;const lc=lk?' locked-tag':'';const li=rl?'<i class="fa-solid fa-lock" style="margin-left:3px;font-size:.5rem"></i>':'';tH=`<span class="app-card-tag apk-tag${lc}"><i class="fa-brands fa-android"></i>APK${li}</span>`;}else if(hasUrl)tH='<span class="app-card-tag">LINK</span>';const sz=hasApk&&app.apkSize?' • '+formatFileSize(app.apkSize):'';card.innerHTML=`<div class="app-card-icon">${iconHTML}${dBadge}</div><div class="app-card-body"><div class="app-card-name">${escapeHtml(app.name)} ${nI}</div><div class="app-card-desc">${escapeHtml(app.desc||'')}${sz}</div></div>${tH}`;grid.appendChild(card);}}finally{appsRenderLock=false;}}
 
 function openAdminPanel(){refreshAdminUI();document.getElementById('adminPanelModal').classList.add('active');}
 function closeAdminPanel(){document.getElementById('adminPanelModal').classList.remove('active');applySiteContent();}
 function switchAdminTab(name,btn){document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));if(btn)btn.classList.add('active');const sec=document.querySelector(`.admin-section[data-section="${name}"]`);if(sec)sec.classList.add('active');if(name==='users')renderAdminUsers();if(name==='activity')renderAdminActivity();if(name==='chats')renderAdminChats();if(name==='apps')renderAdminSlots();if(name==='sections')renderAdminSectionsOrder();if(name==='effects')renderEffectsPanel();if(name==='social')renderAdminSocial();if(name==='account')renderAdminAccount();if(name==='emails')renderWelcomeSettings();if(name==='orders'){renderAdminOrders();updateOrdersBadge();}}
-function refreshAdminUI(){const c=getSiteContent();const users=getAllUsers();const logs=getActivityLog();const chats=getChatMessages();let totalChats=0;for(const k in chats)totalChats+=chats[k].length;const appsCount=(c.apps||[]).filter(a=>a.name&&a.name.trim()).length;const el=id=>document.getElementById(id);if(el('dash-apps-count'))el('dash-apps-count').textContent=`Apps: ${appsCount} / 8`;if(el('dash-users-count'))el('dash-users-count').textContent=`Users: ${users.length}`;if(el('dash-activity-count'))el('dash-activity-count').textContent=`Activities: ${logs.length}`;if(el('dash-chats-count'))el('dash-chats-count').textContent=`Chat: ${totalChats}`;if(el('dash-email-status'))el('dash-email-status').textContent='Email: '+(EMAILJS_CONFIG.enabled?'✅':'⚠️');if(el('dash-last-edit'))el('dash-last-edit').textContent='Last: '+c.lastEdit;document.getElementById('ah-brand').value=c.header.brand;document.getElementById('ah-role-en').value=c.header.roleEn;document.getElementById('ah-role-tr').value=c.header.roleTr;document.getElementById('ae-t-en').value=c.experience.titleEn;document.getElementById('ae-t-tr').value=c.experience.titleTr;document.getElementById('ae-date').value=c.experience.date;document.getElementById('ae-d-en').value=c.experience.descEn;document.getElementById('ae-d-tr').value=c.experience.descTr;document.getElementById('au-os-en').value=c.setup.osEn;document.getElementById('au-os-tr').value=c.setup.osTr;document.getElementById('au-ed-en').value=c.setup.editorEn;document.getElementById('au-ed-tr').value=c.setup.editorTr;document.getElementById('ak-be').value=c.stack.backend;document.getElementById('ak-fe').value=c.stack.frontend;document.getElementById('af-brand').value=c.footer.brand;document.getElementById('af-scan-en').value=c.footer.scanEn;document.getElementById('af-scan-tr').value=c.footer.scanTr;document.getElementById('af-copy').value=c.footer.copyright;const dl=document.getElementById('ag-default-lang');if(dl)dl.value=c.general?.defaultLang||'en';const pt=document.getElementById('ag-page-title');if(pt)pt.value=c.general?.pageTitle||'';const md=document.getElementById('ag-meta-desc');if(md)md.value=c.general?.metaDesc||'';renderAdminSlots();renderAdminSectionsOrder();renderEffectsPanel();renderAdminSocial();try{renderWelcomeSettings();}catch(e){}try{updateOrdersBadge();}catch(e){}try{const ort=document.getElementById('orderRequireLoginToggle');if(ort)ort.checked=(getSiteContent().general?.orderRequireLogin!==false);}catch(e){}}
+
+function refreshAdminUI(){
+  const c=getSiteContent();const users=getAllUsers();const logs=getActivityLog();const chats=getChatMessages();let totalChats=0;for(const k in chats)totalChats+=chats[k].length;const appsCount=(c.apps||[]).filter(a=>a.name&&a.name.trim()).length;
+  const el=id=>document.getElementById(id);
+  if(el('dash-apps-count'))el('dash-apps-count').textContent=`Apps: ${appsCount} / 8`;
+  if(el('dash-users-count'))el('dash-users-count').textContent=`Users: ${users.length}`;
+  if(el('dash-activity-count'))el('dash-activity-count').textContent=`Activities: ${logs.length}`;
+  if(el('dash-chats-count'))el('dash-chats-count').textContent=`Chat: ${totalChats}`;
+  if(el('dash-email-status'))el('dash-email-status').textContent='Email: '+(EMAILJS_CONFIG.enabled?'✅':'⚠️');
+  // CLOUD STATUS FIX
+  if(el('dash-cloud-status')){
+    let cloudOk=false;
+    try{
+      cloudOk=(typeof FIREBASE_CONFIG!=='undefined'&&FIREBASE_CONFIG&&FIREBASE_CONFIG.databaseURL)?true:false;
+      if(firebaseConnected===true)cloudOk=true;
+    }catch(e){cloudOk=false;}
+    el('dash-cloud-status').textContent='Cloud: '+(cloudOk?'✅':'⚠️');
+  }
+  if(el('dash-last-edit'))el('dash-last-edit').textContent='Last: '+c.lastEdit;
+  document.getElementById('ah-brand').value=c.header.brand;document.getElementById('ah-role-en').value=c.header.roleEn;document.getElementById('ah-role-tr').value=c.header.roleTr;
+  document.getElementById('ae-t-en').value=c.experience.titleEn;document.getElementById('ae-t-tr').value=c.experience.titleTr;document.getElementById('ae-date').value=c.experience.date;document.getElementById('ae-d-en').value=c.experience.descEn;document.getElementById('ae-d-tr').value=c.experience.descTr;
+  document.getElementById('au-os-en').value=c.setup.osEn;document.getElementById('au-os-tr').value=c.setup.osTr;document.getElementById('au-ed-en').value=c.setup.editorEn;document.getElementById('au-ed-tr').value=c.setup.editorTr;
+  document.getElementById('ak-be').value=c.stack.backend;document.getElementById('ak-fe').value=c.stack.frontend;
+  document.getElementById('af-brand').value=c.footer.brand;document.getElementById('af-scan-en').value=c.footer.scanEn;document.getElementById('af-scan-tr').value=c.footer.scanTr;document.getElementById('af-copy').value=c.footer.copyright;
+  const dl=document.getElementById('ag-default-lang');if(dl)dl.value=c.general?.defaultLang||'en';
+  const pt=document.getElementById('ag-page-title');if(pt)pt.value=c.general?.pageTitle||'';
+  const md=document.getElementById('ag-meta-desc');if(md)md.value=c.general?.metaDesc||'';
+  renderAdminSlots();renderAdminSectionsOrder();renderEffectsPanel();renderAdminSocial();
+  try{renderWelcomeSettings();}catch(e){}
+  try{updateOrdersBadge();}catch(e){}
+  try{const ort=document.getElementById('orderRequireLoginToggle');if(ort)ort.checked=(getSiteContent().general?.orderRequireLogin!==false);}catch(e){}
+}
 function renderAdminSlots(){const list=document.getElementById('adminSlotsList');if(!list)return;const apps=getSiteContent().apps||[];list.innerHTML='';apps.forEach((app,idx)=>{const item=document.createElement('div');item.className='admin-slot';item.innerHTML=buildAdminSlotHTML(idx,app);list.appendChild(item);if(app.hasIcon){withTimeout(getIconData(idx),3000).then(icon=>{if(icon&&icon.dataUrl){const h=item.querySelector('div[style*="width:26px"]');if(h)h.innerHTML=`<img src="${icon.dataUrl}" class="icon-preview-mini">`;}}).catch(()=>{});}});}
 async function editAppSlot(idx){const c=getSiteContent();const app=c.apps[idx]||{name:'',desc:'',url:'',icon:'',requireLogin:false};pendingApkFile=null;pendingApkDelete=false;pendingIconDataUrl=null;pendingIconDelete=false;document.getElementById('editSlotIndex').value=idx;document.getElementById('editAppName').value=app.name||'';document.getElementById('editAppDesc').value=app.desc||'';document.getElementById('editAppUrl').value=app.url||'';document.getElementById('editAppRequireLogin').checked=!!app.requireLogin;document.getElementById('editAppApkFile').value='';document.getElementById('editAppIconFile').value='';let eA=null,eI=null;if(app.hasApk){try{eA=await withTimeout(getApkFile(idx),5000);}catch(e){}}if(app.hasIcon){try{eI=await withTimeout(getIconData(idx),5000);}catch(e){}}updateApkUI(eA?{name:eA.name,size:eA.size,existing:true}:(app.hasApk?{name:app.apkName||'APK',size:app.apkSize||0,existing:true}:null));if(eI&&eI.dataUrl)updateIconUI({dataUrl:eI.dataUrl,existing:true});else if(app.icon&&app.icon.trim().startsWith('http'))updateIconUI({dataUrl:app.icon.trim(),existing:true,isUrl:true});else updateIconUI(null);document.getElementById('adminEditModal').classList.add('active');}
 function closeAdminEdit(){document.getElementById('adminEditModal').classList.remove('active');}
@@ -2175,26 +1830,22 @@ window.addEventListener('DOMContentLoaded',async ()=>{
       history.replaceState(null,'',window.location.pathname);
     }
   }catch(e){}
-
   setTimeout(()=>{const i=document.getElementById('intro-screen');if(i){i.style.opacity='0';i.style.visibility='hidden';setTimeout(()=>{i.style.display='none';if(window.introConstellation)window.introConstellation.stop();},600);}},1500);
   ensureUserIdsAndAdmin();
-  initTheme();initEmailJS();initAllPasswordMasks();
+  initTheme();
+  initEmailJS();
+  initFirebase();
+  initAllPasswordMasks();
   checkUserSession();applySiteContent();applySectionOrder();applyEffectsSettings();
   const storedLang=sessionStorage.getItem('site_lang');
   const browserLang=(navigator.language||'en').toLowerCase().startsWith('tr')?'tr':'en';
   const defaultLang=(getSiteContent().general&&getSiteContent().general.defaultLang)?getSiteContent().general.defaultLang:browserLang;
   currentLang=storedLang||defaultLang;
   applyTranslations();
-
   const authEmailInput=document.getElementById('contactClientEmail');
   const authPassInput=document.getElementById('contactClientPassword');
-  if(authEmailInput)authEmailInput.addEventListener('keydown',function(e){
-    if(e.key==='Enter'){e.preventDefault();const pi=document.getElementById('contactClientPassword');if(pi)pi.focus();}
-  });
-  if(authPassInput)authPassInput.addEventListener('keydown',function(e){
-    if(e.key==='Enter'){e.preventDefault();handleAuthSubmit(e);}
-  });
-
+  if(authEmailInput)authEmailInput.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();const pi=document.getElementById('contactClientPassword');if(pi)pi.focus();}});
+  if(authPassInput)authPassInput.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();handleAuthSubmit(e);}});
   const adminBioEl=document.getElementById('adminAccBio');if(adminBioEl)adminBioEl.addEventListener('input',function(){document.getElementById('adminBioCount').textContent=this.value.length;});
   ['editClientDay','editClientMonth','editClientYear'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('blur',validateDOB);});
   checkAdminHash();openApkDB().catch(e=>{});updateChatBadge();startChatPolling();
