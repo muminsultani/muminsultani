@@ -319,7 +319,7 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .user-card-avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,rgba(var(--accent-rgb),.2),rgba(var(--accent-rgb),.1));border:2px solid rgba(var(--accent-rgb),.35);display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;color:var(--accent);flex-shrink:0;overflow:hidden}
 .user-card-avatar img{width:100%;height:100%;object-fit:cover}
 .user-card-info{flex:1;min-width:0}
-.user-card-name{font-size:.88rem;font-weight:700;color:var(--text-color-override);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:4px}
+.user-card-name{font-size:.88rem;font-weight:700;color:var(--text-color-override);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
 .user-card-detail{font-size:.68rem;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
 .user-card-detail i{color:var(--accent);margin-right:3px;width:10px;text-align:center}
 .user-card-btns{display:flex;gap:4px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
@@ -347,7 +347,10 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .chat-body{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
 .chat-users-list-wrapper{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
 .chat-search-box{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line-color);background:var(--box-bg);position:relative}
-.chat-search-input{flex:1;background:var(--bg-color);border:1px solid var(--line-color);border-radius:22px;padding:10px 16px;color:var(--text-color-override);font-size:16px !important;outline:none;min-width:0}
+.chat-search-input-wrap{position:relative;flex:1;min-width:0}
+.chat-search-input-wrap>i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--accent);pointer-events:none;font-size:.85rem;z-index:1}
+.chat-search-input{flex:1;background:var(--bg-color);border:1px solid var(--line-color);border-radius:22px;padding:10px 16px;color:var(--text-color-override);font-size:16px !important;outline:none;min-width:0;width:100%}
+.chat-search-input-wrap .chat-search-input{padding-left:38px !important;padding-right:38px}
 .chat-search-clear{background:transparent;border:none;color:var(--text-secondary);cursor:pointer;font-size:.8rem;padding:6px;display:none}
 .chat-search-clear.show{display:block}
 .chat-users-list{flex:1;overflow-y:auto;padding:8px;min-height:280px;max-height:60vh}
@@ -369,9 +372,10 @@ footer{border-top:1px solid var(--line-color);padding-top:28px;padding-bottom:12
 .chat-empty{text-align:center;padding:50px 20px;color:var(--text-secondary);font-size:.85rem;opacity:.8}
 .chat-empty i{font-size:2.2rem;color:var(--accent);opacity:.5;display:block;margin-bottom:10px}
 .chat-conversation{flex:1;display:flex;flex-direction:column;min-height:0}
-.chat-conv-header{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--line-color);background:var(--box-bg)}
+.chat-conv-header{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line-color);background:var(--box-bg)}
 .chat-back-btn{background:transparent;border:none;color:var(--accent);cursor:pointer;font-size:1.05rem;padding:8px 10px;border-radius:10px;display:flex;align-items:center;justify-content:center}
 .chat-profile-btn{background:transparent;border:1px solid var(--line-color);color:var(--accent);cursor:pointer;font-size:.85rem;padding:7px 11px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.chat-profile-btn.chat-profile-btn-lg{font-size:1.35rem !important;padding:0 !important;border-radius:50% !important;width:48px !important;height:48px !important;display:flex !important;align-items:center !important;justify-content:center !important}
 .chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:6px;min-height:300px;max-height:55vh;background-color:var(--bg-color);transition:background .3s;position:relative}
 .chat-messages.chat-bg-whatsapp{background-color:#0b141a}
 .chat-messages.chat-bg-telegram{background-color:#17212b}
@@ -388,22 +392,22 @@ body.light-mode .chat-messages.chat-bg-telegram{background-color:#d4e4f5}
 .chat-msg{max-width:80%;display:flex;flex-direction:column;gap:2px;word-wrap:break-word;position:relative;z-index:1}
 .chat-msg.mine{align-self:flex-end;align-items:flex-end}
 .chat-msg.theirs{align-self:flex-start;align-items:flex-start}
-.chat-msg-text{padding:10px 14px;border-radius:18px;font-size:.86rem;line-height:1.45;word-break:break-word;white-space:pre-wrap}
-.chat-msg.mine .chat-msg-text{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border-bottom-right-radius:5px}
-.chat-msg.theirs .chat-msg-text{background:rgba(255,255,255,.09);border:1px solid var(--line-color);color:var(--text-color-override);border-bottom-left-radius:5px;backdrop-filter:blur(6px)}
-body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgba(0,0,0,.08)}
+.chat-msg-text{padding:10px 14px;border-radius:20px;font-size:.86rem;line-height:1.45;word-break:break-word;white-space:pre-wrap}
+.chat-msg.mine .chat-msg-text{background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;border-bottom-right-radius:6px;box-shadow:0 3px 10px rgba(147,51,234,.3)}
+.chat-msg.theirs .chat-msg-text{background:rgba(255,255,255,.14);border:1px solid var(--line-color);color:var(--text-color-override);border-bottom-left-radius:6px;backdrop-filter:blur(8px);box-shadow:0 2px 8px rgba(0,0,0,.22)}
+body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgba(0,0,0,.08);box-shadow:0 2px 8px rgba(0,0,0,.08)}
 .chat-msg-time{font-size:.6rem;color:#94a3b8;padding:0 8px;opacity:.9;display:flex;align-items:center;gap:4px}
 .chat-msg-time .read-status{color:#60a5fa;font-size:.65rem}
 .chat-msg-actions{display:flex;gap:4px;opacity:0;transition:opacity .2s;margin-top:-4px;margin-bottom:4px}
 .chat-msg:hover .chat-msg-actions{opacity:1}
 .chat-msg-action-btn{background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-secondary);cursor:pointer;font-size:.65rem;padding:4px 8px;border-radius:8px;display:inline-flex;align-items:center;gap:3px}
 .chat-msg-action-btn.delete:hover{color:#ef4444}
+.chat-msg-photo{max-width:100%;border-radius:14px;overflow:hidden;cursor:pointer;display:inline-block}
+.chat-msg-photo img{display:block;width:100%;max-width:240px;height:auto;border-radius:14px}
 .chat-input-row{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line-color);background:var(--box-bg);align-items:center;position:relative}
 .chat-input{flex:1;background:var(--bg-color);border:1px solid var(--line-color);border-radius:22px;padding:11px 18px;color:var(--text-color-override);font-size:16px !important;outline:none;min-width:0}
 .chat-send-btn{width:44px;height:44px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
 .chat-mic-btn{width:44px;height:44px;border-radius:50%;background:var(--box-bg);border:1px solid var(--line-color);color:var(--accent);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;transition:all .2s}
-#chatMicBtn{background:linear-gradient(135deg,var(--accent),var(--accent-2));border:none;color:#fff;box-shadow:0 4px 12px rgba(var(--accent-rgb),.35)}
-#chatMicBtn:disabled{opacity:.45}
 .chat-reply-preview{display:flex;align-items:center;gap:8px;padding:8px 14px;background:rgba(var(--accent-rgb),.08);border-top:1px solid var(--line-color);font-size:.72rem;color:var(--text-secondary)}
 .chat-reply-preview .reply-line{width:3px;height:30px;background:var(--accent);border-radius:3px}
 .chat-reply-preview .reply-content{flex:1;min-width:0}
@@ -417,15 +421,11 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 #emojiPicker .emoji-cat-btn.active{background:rgba(var(--accent-rgb),.15);color:var(--accent)}
 #emojiPicker .emoji-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;overflow-y:auto;max-height:180px}
 #emojiPicker .emoji-item{background:transparent;border:none;font-size:1.35rem;cursor:pointer;padding:5px 0;border-radius:8px;line-height:1}
-.chat-voice-msg{display:flex;align-items:center;gap:10px;min-width:200px;max-width:280px;padding:2px 0}
 .voice-play-btn{width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,.22);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:all .2s}
-.chat-msg.theirs .voice-play-btn{background:rgba(var(--accent-rgb),.15);color:var(--accent)}
+.voice-play-btn:hover{transform:scale(1.08)}
 .voice-waveform{display:flex;align-items:center;gap:2px;flex:1;height:26px;overflow:hidden;padding:0 2px}
 .voice-bar{width:3px;background:rgba(255,255,255,.72);border-radius:2px;flex-shrink:0}
-.chat-msg.theirs .voice-bar{background:rgba(var(--accent-rgb),.55)}
 .voice-duration{font-size:.68rem;color:rgba(255,255,255,.9);font-weight:700;flex-shrink:0}
-.chat-msg.theirs .voice-duration{color:var(--text-secondary)}
-.chat-voice-msg audio{display:none}
 .recording-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(5,5,10,.85);backdrop-filter:blur(14px);z-index:26000;display:none;flex-direction:column;justify-content:center;align-items:center;gap:22px;padding:20px}
 .recording-overlay.active{display:flex}
 .recording-pulse{width:140px;height:140px;border-radius:50%;background:linear-gradient(135deg,#ef4444,#dc2626);display:flex;align-items:center;justify-content:center;color:#fff;font-size:2.8rem}
@@ -442,12 +442,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .pub-profile-username{font-size:.85rem;color:var(--accent);font-weight:600;display:inline-flex;align-items:center;gap:4px}
 .pub-profile-bio-inline{font-size:.78rem;color:var(--text-secondary);text-align:center;line-height:1.4;max-width:340px;word-break:break-word;white-space:pre-wrap;margin-top:2px}
 .pub-profile-website{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--accent);text-decoration:none;font-weight:600;padding:6px 14px;border-radius:20px;background:rgba(var(--accent-rgb),.1);border:1px solid rgba(var(--accent-rgb),.25);margin-top:2px;cursor:pointer}
-.pub-profile-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;width:100%;margin-top:10px}
-.pub-profile-stat{background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;padding:12px 8px;text-align:center}
-.pub-profile-stat.clickable{cursor:pointer}
-.pub-profile-stat.clickable:hover{border-color:var(--accent);background:var(--box-hover-bg)}
-.pub-profile-stat strong{display:block;font-size:1.15rem;font-weight:800;color:var(--accent)}
-.pub-profile-stat span{display:block;font-size:.65rem;color:var(--text-secondary);margin-top:2px;font-weight:700;text-transform:uppercase}
 .pub-profile-info{width:100%;background:var(--box-bg);border:1px solid var(--line-color);border-radius:14px;padding:12px;margin-top:8px}
 .pub-profile-info-row{display:flex;justify-content:space-between;align-items:center;padding:10px 4px;font-size:.82rem;gap:10px;border-bottom:1px solid var(--line-color)}
 .pub-profile-info-row:last-child{border-bottom:none}
@@ -456,21 +450,8 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .pub-profile-info-row span:last-child{color:var(--text-color-override);font-weight:600;text-align:right;word-break:break-word}
 .pub-profile-actions{display:flex;flex-direction:column;gap:8px;width:100%;margin-top:8px}
 .pub-profile-actions button{width:100%;padding:12px 14px;border-radius:12px;font-weight:600;font-size:.84rem;cursor:pointer;border:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap}
-.pub-btn-follow{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff}
-.pub-btn-following{background:var(--box-bg);color:var(--text-color-override);border:1px solid var(--line-color) !important}
 .pub-btn-msg{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff}
 .pub-btn-close{background:var(--box-bg);color:var(--text-color-override);border:1px solid var(--line-color) !important}
-.follower-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;border:1px solid var(--line-color);background:var(--box-bg);margin-bottom:8px}
-.follower-item .f-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;flex-shrink:0;overflow:hidden}
-.follower-item .f-avatar img{width:100%;height:100%;object-fit:cover}
-.follower-item .f-info{flex:1;min-width:0}
-.follower-item .f-name{font-size:.9rem;font-weight:700;color:var(--text-color-override);display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.follower-item .f-user{font-size:.75rem;color:var(--accent);font-weight:600;margin-top:2px}
-.follower-item .f-actions{display:flex;gap:6px;flex-shrink:0}
-.follower-item .f-btn{padding:7px 12px;border-radius:10px;font-size:.72rem;font-weight:700;cursor:pointer;border:none;display:flex;align-items:center;gap:4px;white-space:nowrap}
-.follower-item .f-btn.follow{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff}
-.follower-item .f-btn.unfollow{background:rgba(239,68,68,.1);color:#ef4444;border:1px solid rgba(239,68,68,.3)}
-.follower-item .f-btn.msg{background:var(--box-bg);color:var(--accent);border:1px solid var(--line-color)}
 .verified-badge{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;flex-shrink:0;vertical-align:middle;position:relative;margin-left:3px}
 .verified-badge svg{width:100%;height:100%;display:block;filter:drop-shadow(0 1px 2px rgba(29,155,240,.45))}
 .verified-badge.lg{width:18px;height:18px}
@@ -508,7 +489,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .header-profile-status.offline{background:#94a3b8;box-shadow:none;animation:none}
 .header-profile-menu{position:absolute;top:calc(100% + 14px);right:-4px;background:var(--menu-bg);border:1px solid var(--line-color);border-radius:16px;min-width:320px;max-width:360px;width:min(340px, 90vw);padding:10px;display:none;flex-direction:column;gap:2px;box-shadow:0 16px 48px rgba(0,0,0,.55);z-index:300;backdrop-filter:blur(20px)}
 .header-profile-menu.show{display:flex}
-.hpm-header{display:flex;align-items:center;gap:12px;padding:12px 14px 12px 14px;border-bottom:1px solid var(--line-color);margin-bottom:8px;position:relative}
+.hpm-header{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--line-color);margin-bottom:8px;position:relative}
 .hpm-photo{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid rgba(var(--accent-rgb),.4);flex-shrink:0}
 .hpm-info{flex:1;min-width:0}
 .hpm-name{font-size:.95rem;font-weight:700;color:var(--text-color-override);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -521,112 +502,27 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .hpm-item.danger:hover{background:rgba(239,68,68,.12);color:#ef4444}
 .hpm-item.danger i{color:#ef4444}
 @media (max-width:640px){.header-profile-menu{min-width:280px;max-width:calc(100vw - 24px);right:-4px}}
-.messenger-float-btn{
-  position:fixed;
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  background:transparent;
-  cursor:pointer;
-  z-index:500;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  user-select:none;
-  touch-action:none;
-  transition:transform .15s, filter .15s;
-  border:none;
-  padding:0;
-  filter:drop-shadow(0 4px 12px rgba(147,51,234,.5));
-}
-.messenger-float-btn.visible{display:flex;}
-.messenger-float-btn:hover{filter:drop-shadow(0 6px 18px rgba(147,51,234,.7));transform:scale(1.06);}
-.messenger-float-btn:active{transform:scale(1.12);}
-.messenger-float-btn.dragging{transform:scale(1.15);}
-.messenger-float-btn svg{width:100%;height:100%;display:block;pointer-events:none;}
-.messenger-float-btn svg path{fill:var(--messenger-color, #9333ea);transition:fill .3s;}
-.messenger-badge{
-  position:absolute;
-  top:-2px;
-  right:-2px;
-  min-width:22px;
-  height:22px;
-  border-radius:11px;
-  background:#ff3b30;
-  color:#fff;
-  font-size:.68rem;
-  font-weight:800;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:0 5px;
-  border:2px solid var(--bg-color);
-  box-shadow:0 2px 8px rgba(255,59,48,.55);
-  pointer-events:none;
-  z-index:5;
-}
-.messenger-badge.show{display:flex;}
+.messenger-float-btn{position:fixed;width:32px;height:32px;border-radius:50%;background:transparent;cursor:pointer;z-index:200;display:none;align-items:center;justify-content:center;user-select:none;touch-action:none;transition:transform .15s,filter .15s;border:none;padding:0;filter:drop-shadow(0 4px 12px rgba(147,51,234,.5))}
+.messenger-float-btn.visible{display:flex}
+.messenger-float-btn:hover{filter:drop-shadow(0 6px 18px rgba(147,51,234,.7));transform:scale(1.06)}
+.messenger-float-btn:active{transform:scale(1.12)}
+.messenger-float-btn.dragging{transform:scale(1.15)}
+.messenger-float-btn svg{width:100%;height:100%;display:block;pointer-events:none}
+.messenger-float-btn svg path{fill:var(--messenger-color,#9333ea);transition:fill .3s}
+.messenger-badge{position:absolute;top:-4px;right:-4px;min-width:16px;height:16px;border-radius:8px;background:#ff3b30;color:#fff;font-size:.5rem;font-weight:800;display:none;align-items:center;justify-content:center;padding:0 3px;border:1.5px solid var(--bg-color);box-shadow:0 2px 8px rgba(255,59,48,.55);pointer-events:none;z-index:5}
+.messenger-badge.show{display:flex}
 .settings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:14px}
 .settings-chip{background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;padding:10px 6px;cursor:pointer;transition:all .2s;text-align:center;font-size:.7rem;font-weight:600;color:var(--text-color-override);display:flex;flex-direction:column;align-items:center;gap:5px}
 .settings-chip:hover{border-color:var(--accent);background:var(--box-hover-bg)}
 .settings-chip.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent}
 .settings-chip i{font-size:1.1rem}
 @media (min-width:641px){.settings-grid{grid-template-columns:repeat(3,1fr)}}
-
-/* ============================================================
-   === YENİ EKLENEN STİLLER (İSTEK 1-5) ===
-   ============================================================ */
-
-/* 1) Chat arama ikonu input içinde */
-.chat-search-box { padding:12px 16px; }
-.chat-search-input-wrap { position:relative; flex:1; min-width:0; }
-.chat-search-input-wrap > i {
-  position:absolute; left:14px; top:50%; transform:translateY(-50%);
-  color:var(--accent); pointer-events:none; font-size:.85rem; z-index:1;
-}
-.chat-search-input-wrap .chat-search-input {
-  padding-left:38px !important; width:100%; padding-right:38px;
-}
-
-/* 2) Messenger butonu küçültüldü - profil logosu boyutunda (32px) */
-.messenger-float-btn { width:32px !important; height:32px !important; }
-.messenger-badge {
-  font-size:.5rem !important; min-width:16px !important; height:16px !important;
-  padding:0 3px !important; border-width:1.5px !important; top:-4px !important; right:-4px !important;
-}
-
-/* 3) Foto mesaj */
-.chat-msg-photo { max-width:100%; border-radius:14px; overflow:hidden; cursor:pointer; display:inline-block; }
-.chat-msg-photo img { display:block; width:100%; max-width:240px; height:auto; border-radius:14px; }
-
-/* 4) Daha güzel chat teması */
-.chat-msg.mine .chat-msg-text {
-  background:linear-gradient(135deg,#9333ea,#c084fc) !important;
-  box-shadow:0 3px 10px rgba(147,51,234,.3) !important;
-}
-.chat-msg.theirs .chat-msg-text {
-  background:rgba(255,255,255,.14) !important;
-  box-shadow:0 2px 8px rgba(0,0,0,.22) !important;
-  backdrop-filter:blur(8px);
-}
-body.light-mode .chat-msg.theirs .chat-msg-text { background:#fff !important; box-shadow:0 2px 8px rgba(0,0,0,.08) !important; }
-.chat-msg-text { border-radius:20px !important; padding:11px 15px !important; }
-.chat-msg.mine .chat-msg-text { border-bottom-right-radius:6px !important; }
-.chat-msg.theirs .chat-msg-text { border-bottom-left-radius:6px !important; }
-
-/* 5) Admin tab order badge */
-.admin-tab .tab-badge {
-  display:inline-flex; align-items:center; justify-content:center;
-  min-width:16px; height:16px; padding:0 4px; border-radius:8px;
-  background:#ef4444; color:#fff; font-size:.55rem; font-weight:800;
-  margin-left:4px;
-}
-
-/* 6) Order section */
-.order-section-box {
-  background:linear-gradient(135deg,rgba(var(--accent-rgb),.12),rgba(var(--accent-rgb),.04));
-  border:1px solid rgba(var(--accent-rgb),.3);
-}
+.order-section-box{background:linear-gradient(135deg,rgba(var(--accent-rgb),.12),rgba(var(--accent-rgb),.04));border:1px solid rgba(var(--accent-rgb),.3)}
+.order-status-badge{display:inline-flex;align-items:center;gap:3px;font-size:.55rem;font-weight:800;padding:2px 7px;border-radius:8px;text-transform:uppercase;letter-spacing:.5px}
+.order-status-badge.new{background:rgba(239,68,68,.15);color:#ef4444}
+.order-status-badge.read{background:rgba(245,158,11,.15);color:#f59e0b}
+.order-status-badge.approved{background:rgba(34,197,94,.15);color:#22c55e}
+.admin-tab .tab-badge{display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:#ef4444;color:#fff;font-size:.55rem;font-weight:800;margin-left:4px}
 </style>
 </head>
 
@@ -707,7 +603,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text { background:#fff !important; bo
   <p class="item-desc" id="t-job-desc">Developing scalable backend services...</p>
   </div>
   </section>
-  <!-- === YENİ: YAZILIM SİPARİŞİ BÖLÜMÜ === -->
   <section id="sectionOrder">
     <div class="section-title"><i class="fa-solid fa-cart-shopping"></i> <span id="t-order-title">Order Software</span></div>
     <div class="contact-box order-section-box" onclick="openOrderModal()" style="cursor:pointer">
@@ -747,9 +642,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text { background:#fff !important; bo
 </footer>
 </div>
 
-<!-- ============ MODALLAR ============ -->
-
-<!-- YENİ: ORDER MODAL -->
+<!-- ============ ORDER MODAL ============ -->
 <div class="modal-overlay" id="orderModal">
   <div class="modal-container" style="max-width:500px">
     <div class="modal-header">
@@ -780,6 +673,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text { background:#fff !important; bo
   </div>
 </div>
 
+<!-- ============ SIGNUP / AUTH MODALLAR ============ -->
 <div class="modal-overlay high-z" id="signupMockModal">
 <div class="modal-container" style="max-width:460px">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Check Your Email</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="cancelSignup()"><i class="fa-solid fa-xmark"></i></button></div></div>
@@ -1013,14 +907,7 @@ Continue with Google
 </div>
 </div>
 
-<div class="modal-overlay profile-view-z" id="followersModal">
-<div class="modal-container" style="max-width:460px">
-<div class="modal-header"><div class="modal-header-left"><div style="display:flex;gap:8px;margin-bottom:4px"><button class="modal-close-btn" onclick="closeFollowersModal()"><i class="fa-solid fa-chevron-left"></i></button></div><div class="modal-brand">muminsultani</div><div class="modal-title" id="followersTitle">Followers</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeFollowersModal()"><i class="fa-solid fa-xmark"></i></button></div></div>
-<div id="followersListContent"></div>
-</div>
-</div>
-
-<!-- === CHAT MODAL (YENİ BAŞLIK YAPISI) === -->
+<!-- ============ CHAT MODAL (MİKROFON KALDIRILDI) ============ -->
 <div class="modal-overlay chat-z" id="chatPanelModal">
 <div class="modal-container chat-container">
 <div class="modal-header">
@@ -1029,13 +916,11 @@ Continue with Google
     <div class="modal-title" id="chat-panel-title">Messages</div>
   </div>
   <div class="modal-header-actions">
-    <button class="modal-close-btn" id="chatBackBtn" style="display:none" onclick="handleChatBack()" title="Back"><i class="fa-solid fa-arrow-left"></i></button>
     <button class="modal-close-btn" onclick="closeChatPanel()" title="Close"><i class="fa-solid fa-xmark"></i></button>
   </div>
 </div>
 <div class="chat-body">
 <div class="chat-users-list-wrapper" id="chatUsersListWrapper">
-<!-- === ARAMA KUTUSU (YENİ) === -->
 <div class="chat-search-box">
   <div class="chat-search-input-wrap">
     <i class="fa-solid fa-magnifying-glass"></i>
@@ -1053,9 +938,9 @@ Continue with Google
 <div class="reply-content"><div class="reply-name" id="replyName"></div><div class="reply-text" id="replyText"></div></div>
 <button class="reply-close" onclick="cancelReply()"><i class="fa-solid fa-xmark"></i></button>
 </div>
-<!-- === INPUT ROW (EMOJI + MIC KALDIRILDI, FOTO EKLENDİ) === -->
+<!-- MİKROFON BUTONU KALDIRILDI - SADECE FOTO + INPUT + GÖNDER -->
 <div class="chat-input-row">
-<button class="chat-mic-btn" id="chatPhotoBtn" onclick="document.getElementById('chatPhotoInput').click()" title="Send photo" style="background:var(--box-bg);border:1px solid var(--line-color);color:var(--accent)"><i class="fa-solid fa-image"></i></button>
+<button class="chat-mic-btn" id="chatPhotoBtn" onclick="document.getElementById('chatPhotoInput').click()" title="Fotoğraf gönder" style="background:var(--box-bg);border:1px solid var(--line-color);color:var(--accent)"><i class="fa-solid fa-image"></i></button>
 <input type="file" id="chatPhotoInput" accept="image/*" style="display:none" onchange="handleChatPhotoUpload(event)">
 <input type="text" class="chat-input" id="chatInput" placeholder="type a message..." maxlength="1000" onkeydown="if(event.key==='Enter')sendChatMessage()">
 <button class="chat-send-btn" onclick="sendChatMessage()"><i class="fa-solid fa-paper-plane"></i></button>
@@ -1065,6 +950,7 @@ Continue with Google
 </div>
 </div>
 
+<!-- RECORDING OVERLAY (artık kullanılmıyor ama referans için kalıyor) -->
 <div class="recording-overlay" id="recordingOverlay">
 <div class="recording-pulse"><i class="fa-solid fa-microphone"></i></div>
 <div class="recording-timer" id="recordingTimer">00:00</div>
@@ -1075,6 +961,7 @@ Continue with Google
 </div>
 </div>
 
+<!-- ============ ADMIN MODALLAR ============ -->
 <div class="modal-overlay admin-z" id="adminLoginModal">
 <div class="modal-container" style="max-width:380px">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="admin-login-title">Admin Access</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminLogin()"><i class="fa-solid fa-xmark"></i></button></div></div>
@@ -1097,7 +984,6 @@ Continue with Google
 <button class="admin-tab" data-tab="activity" onclick="switchAdminTab('activity',this)"><i class="fa-solid fa-list-activity"></i> <span>activity</span></button>
 <button class="admin-tab" data-tab="chats" onclick="switchAdminTab('chats',this)"><i class="fa-solid fa-comments"></i> <span>chats</span></button>
 <button class="admin-tab" data-tab="emails" onclick="switchAdminTab('emails',this)"><i class="fa-solid fa-envelope"></i> <span>emails</span></button>
-<!-- === YENİ: ORDERS TAB === -->
 <button class="admin-tab" data-tab="orders" onclick="switchAdminTab('orders',this)"><i class="fa-solid fa-cart-shopping"></i> <span>orders</span><span class="tab-badge" id="ordersTabBadge" style="display:none">0</span></button>
 <button class="admin-tab" data-tab="header" onclick="switchAdminTab('header',this)"><i class="fa-solid fa-heading"></i> <span>header</span></button>
 <button class="admin-tab" data-tab="social" onclick="switchAdminTab('social',this)"><i class="fa-solid fa-share-nodes"></i> <span>social</span></button>
@@ -1173,6 +1059,7 @@ Continue with Google
 <button class="filter-chip" onclick="filterActivity('apk_download',this)">APK</button>
 <button class="filter-chip" onclick="filterActivity('chat_message',this)">Chat</button>
 <button class="filter-chip" onclick="filterActivity('email_sent',this)">Email</button>
+<button class="filter-chip" onclick="filterActivity('order_submitted',this)">Orders</button>
 </div>
 <div id="adminActivityList"></div>
 <div class="admin-actions-grid">
@@ -1229,14 +1116,27 @@ Continue with Google
   <div class="admin-stat"><i class="fa-solid fa-envelope"></i> <span>EmailJS: Aktif</span></div>
   <div class="admin-stat"><i class="fa-solid fa-file-pdf"></i> <span>PDF: jsPDF + tmpfiles.org</span></div>
 </div>
-<!-- === YENİ: ORDERS SECTION === -->
+
 <div class="admin-section" data-section="orders">
-  <div class="admin-hint"><i class="fa-solid fa-bell" style="color:var(--accent)"></i> Gelen yazılım siparişleri burada görünür.</div>
+  <div class="admin-hint"><i class="fa-solid fa-bell" style="color:var(--accent)"></i> Gelen yazılım siparişleri burada görünür. Onayladığınızda müşteriye otomatik email gider.</div>
+
+  <div class="toggle-row" style="background:rgba(147,51,234,.08);border-color:rgba(147,51,234,.3)">
+    <div class="toggle-label">
+      <div class="toggle-label-title"><i class="fa-solid fa-user-lock" style="color:var(--accent)"></i> Sipariş için kayıt zorunlu</div>
+      <div style="font-size:.65rem;color:var(--text-secondary);margin-top:2px">Kapalıysa ziyaretçiler kayıt olmadan sipariş verebilir</div>
+    </div>
+    <label class="toggle-switch">
+      <input type="checkbox" id="orderRequireLoginToggle" onchange="setOrderRequireLogin(this.checked)">
+      <span class="toggle-slider"></span>
+    </label>
+  </div>
+
   <div id="adminOrdersList"></div>
   <div class="admin-actions-grid">
-    <button class="admin-action-btn danger" onclick="clearAllOrders()"><i class="fa-solid fa-trash"></i> Delete All</button>
+    <button class="admin-action-btn danger" onclick="clearAllOrders()"><i class="fa-solid fa-trash"></i> Tümünü Sil</button>
   </div>
 </div>
+
 <div class="admin-section" data-section="header">
 <form onsubmit="saveAdminHeader(event)">
 <div class="form-group"><label class="form-label">brand</label><input type="text" class="form-input" id="ah-brand" maxlength="60"></div>
@@ -1478,14 +1378,14 @@ Continue with Google
 <script>
 const FIREBASE_CONFIG = {apiKey:"AIzaSyC3Pi88DP7K_4IG-R81LeDaGdhCTmHpo-c",authDomain:"muminsultani-497b5.firebaseapp.com",databaseURL:"https://muminsultani-497b5-default-rtdb.firebaseio.com",projectId:"muminsultani-497b5",storageBucket:"muminsultani-497b5.firebasestorage.app",messagingSenderId:"929484224535",appId:"1:929484224535:web:5e2b05f0b852357212c452"};
 const EMAILJS_CONFIG = {serviceId:'service_ids5d0j',templateId:'template_custom',publicKey:'B4QKEakw6Ipk2YKCh',enabled:true};
-const ADMIN_EMAIL='admin@muminsultani.com';
+const ADMIN_EMAIL='muminsultani@hotmail.com';
 const ADMIN_MASTER_PASSWORD='Mum1n$ultan1';
 const ADMIN_SESSION_KEY='admin_session_active_v2';
 const SITE_CONTENT_KEY='site_content_v1';
 const USER_PREFS_KEY='user_prefs_v1';
 const CHAT_KEY='site_chat_v1';
 const ACTIVITY_LOG_KEY='site_activity_log_v1';
-const ORDERS_KEY='site_orders_v1'; // === YENİ ===
+const ORDERS_KEY='site_orders_v1';
 let currentLang='en',currentAuthMode='signin',currentResetEmail='',pendingFaviconDataUrl=null,pendingAdminPhoto=undefined,currentProfileEmail=null,currentFollowersView='followers';
 let pendingSignup=null,pendingApkFile=null,pendingApkDelete=false,pendingIconDataUrl=null,pendingIconDelete=false;
 let activeChatUser=null,chatPollTimer=null,chatSearchQuery='',currentReplyTo=null;
@@ -1503,7 +1403,6 @@ const LANG={en:{role:"Software Developer",sec_apps:"My Applications",sec_exp:"Ex
 
 const THEMES=[{key:'purple',name:'Purple',c1:'#9333ea',c2:'#c084fc'},{key:'blue',name:'Blue',c1:'#2563eb',c2:'#60a5fa'},{key:'green',name:'Green',c1:'#16a34a',c2:'#4ade80'},{key:'red',name:'Red',c1:'#dc2626',c2:'#f87171'},{key:'orange',name:'Orange',c1:'#ea580c',c2:'#fb923c'},{key:'pink',name:'Pink',c1:'#db2777',c2:'#f472b6'},{key:'teal',name:'Teal',c1:'#0d9488',c2:'#2dd4bf'},{key:'indigo',name:'Indigo',c1:'#4f46e5',c2:'#818cf8'},{key:'amber',name:'Amber',c1:'#d97706',c2:'#fbbf24'},{key:'cyan',name:'Cyan',c1:'#0891b2',c2:'#22d3ee'},{key:'rose',name:'Rose',c1:'#e11d48',c2:'#fb7185'},{key:'slate',name:'Slate',c1:'#475569',c2:'#94a3b8'}];
 const FONTS_NORMAL=[{key:'Sora',label:'Sora'},{key:'Inter',label:'Inter'},{key:'Roboto',label:'Roboto'},{key:'Poppins',label:'Poppins'},{key:'Montserrat',label:'Montserrat'},{key:'Lato',label:'Lato'},{key:'Open Sans',label:'Open Sans'},{key:'Raleway',label:'Raleway'},{key:'Nunito',label:'Nunito'},{key:'Work Sans',label:'Work Sans'},{key:'Rubik',label:'Rubik'},{key:'Karla',label:'Karla'},{key:'Manrope',label:'Manrope'},{key:'Outfit',label:'Outfit'},{key:'DM Sans',label:'DM Sans'},{key:'Urbanist',label:'Urbanist'},{key:'Space Grotesk',label:'Space Grotesk'},{key:'Lexend',label:'Lexend'},{key:'Plus Jakarta Sans',label:'Plus Jakarta Sans'}];
-const FONTS_SMALL=[{key:'Fira Code',label:'Fira Code'},{key:'JetBrains Mono',label:'JetBrains Mono'},{key:'IBM Plex Mono',label:'IBM Plex Mono'},{key:'Source Code Pro',label:'Source Code Pro'},{key:'Inconsolata',label:'Inconsolata'},{key:'Roboto Mono',label:'Roboto Mono'},{key:'Space Mono',label:'Space Mono'},{key:'Ubuntu Mono',label:'Ubuntu Mono'},{key:'Cousine',label:'Cousine'},{key:'PT Mono',label:'PT Mono'},{key:'Share Tech Mono',label:'Share Tech Mono'},{key:'Anonymous Pro',label:'Anonymous Pro'}];
 const FONT_COLORS=[{key:'default',name:'Default',c:'inherit'},{key:'white',name:'White',c:'#ffffff'},{key:'black',name:'Black',c:'#000000'},{key:'gray',name:'Gray',c:'#94a3b8'},{key:'purple',name:'Purple',c:'#c084fc'},{key:'blue',name:'Blue',c:'#60a5fa'},{key:'green',name:'Green',c:'#4ade80'},{key:'red',name:'Red',c:'#f87171'},{key:'orange',name:'Orange',c:'#fb923c'},{key:'pink',name:'Pink',c:'#f472b6'},{key:'cyan',name:'Cyan',c:'#22d3ee'},{key:'yellow',name:'Yellow',c:'#facc15'}];
 const FORM_STYLES=[{key:'default',name:'Default',icon:'fa-square'},{key:'minimal',name:'Minimal',icon:'fa-minus'},{key:'bordered',name:'Bordered',icon:'fa-square'},{key:'filled',name:'Filled',icon:'fa-fill'},{key:'glass',name:'Glass',icon:'fa-droplet'},{key:'neon',name:'Neon',icon:'fa-bolt'},{key:'rounded',name:'Rounded',icon:'fa-circle'},{key:'sharp',name:'Sharp',icon:'fa-crop-simple'},{key:'floating',name:'Floating',icon:'fa-arrow-up'}];
 const PANEL_STYLES=[{key:'default',name:'Default',icon:'fa-square'},{key:'sharp',name:'Sharp',icon:'fa-crop-simple'},{key:'rounded',name:'Rounded',icon:'fa-square'},{key:'pill',name:'Pill',icon:'fa-circle'},{key:'glass',name:'Glass',icon:'fa-droplet'},{key:'neumorphism',name:'Soft',icon:'fa-cloud'},{key:'neon',name:'Neon',icon:'fa-bolt'},{key:'dashed',name:'Dashed',icon:'fa-border-none'},{key:'fullscreen',name:'Full',icon:'fa-expand'}];
@@ -1517,7 +1416,7 @@ const INTRO_ANIMS=ANIM_PRESETS.filter(a=>a.key!=='none');
 const SOCIAL_PLATFORMS=[{key:'github',label:'GitHub',icon:'fa-brands fa-github',placeholder:'https://github.com/username'},{key:'instagram',label:'Instagram',icon:'fa-brands fa-instagram',placeholder:'https://instagram.com/username'},{key:'gmail',label:'Gmail',icon:'fa-solid fa-envelope',placeholder:'email@example.com'},{key:'twitter',label:'Twitter/X',icon:'fa-brands fa-x-twitter',placeholder:'https://x.com/username'},{key:'facebook',label:'Facebook',icon:'fa-brands fa-facebook',placeholder:'https://facebook.com/username'},{key:'youtube',label:'YouTube',icon:'fa-brands fa-youtube',placeholder:'https://youtube.com/@channel'},{key:'linkedin',label:'LinkedIn',icon:'fa-brands fa-linkedin',placeholder:'https://linkedin.com/in/username'},{key:'tiktok',label:'TikTok',icon:'fa-brands fa-tiktok',placeholder:'https://tiktok.com/@username'},{key:'telegram',label:'Telegram',icon:'fa-brands fa-telegram',placeholder:'https://t.me/username'},{key:'whatsapp',label:'WhatsApp',icon:'fa-brands fa-whatsapp',placeholder:'https://wa.me/1234567890'},{key:'discord',label:'Discord',icon:'fa-brands fa-discord',placeholder:'https://discord.gg/invite'},{key:'pinterest',label:'Pinterest',icon:'fa-brands fa-pinterest',placeholder:'https://pinterest.com/username'}];
 const EMOJI_CATEGORIES={'😀':['😀','😃','😄','😁','😆','😅','😂','🤣','😊','😇','🙂','🙃','😉','😌','😍','🥰','😘','😗','😙','😚','😋','😛','😝','😜','🤪','🤨','🧐','🤓','😎','🤩','🥳','😏','😒','😞','😔','😟','😕','🙁','☹️','😣','😖','😫','😩','🥺','😢','😭','😤','😠','😡','🤬','🤯','😳','🥵','🥶','😱','😨','😰','😥','😓','🤗','🤔','🤭','🤫','🤥','😶','😐','😑','😬','🙄','😯','😦','😧','😮','😲','🥱','😴','🤤','😪','😵','🤐','🥴','🤢','🤮','🤧','😷','🤒','🤕'],'👋':['👋','🤚','🖐️','✋','🖖','👌','🤌','🤏','✌️','🤞','🤟','🤘','🤙','👈','👉','👆','🖕','👇','☝️','👍','👎','✊','👊','🤛','🤜','👏','🙌','👐','🤲','🤝','🙏','✍️','💅','🤳','💪','🦾','🦵','🦶'],'❤️':['❤️','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💔','❣️','💕','💞','💓','💗','💖','💘','💝','💟','💌','💋','😻','💐','🌹','🌺','🌸','🌼','🌻','🌞','⭐','🌟','✨','⚡','🔥','💥','💫','💦','💨','🎉','🎊','🎈','🎁']};
 
-const DEFAULT_SITE_CONTENT={header:{brand:'muminsultani',roleEn:'Software Developer',roleTr:'Yazılım Geliştirici'},social:[{platform:'github',url:'https://github.com/muminsultani',enabled:true},{platform:'instagram',url:'https://instagram.com/sultanimumin',enabled:true},{platform:'gmail',url:'muminsultani@hotmail.com',enabled:true}],apps:Array(8).fill(null).map(()=>({name:'',desc:'',url:'',icon:'',requireLogin:false,hasApk:false,apkName:'',apkSize:0,apkType:'',hasIcon:false})),experience:{titleEn:'Remote Software Developer',titleTr:'Uzaktan Yazılım Geliştirici',date:'2025 - Present',descEn:'Developing scalable backend services, REST APIs, and mobile-friendly web solutions using Python and Node.js.',descTr:"Python and Node.js kullanarak ölçeklenebilir arka uç servisleri, REST API'ler ve mobil uyumlu web çözümleri geliştirme."},setup:{osEn:'Linux / Mobile Node',osTr:'Linux / Mobil Node',editorEn:'Spck & VS Code',editorTr:'Spck & VS Code'},stack:{backend:'Python, Node.js, Django',frontend:'JavaScript, HTML/CSS'},footer:{brand:'muminsultani',scanEn:'Scan To Connect',scanTr:'Bağlanmak İçin Tarayın',copyright:'© 2026 muminsultani • All Rights Reserved.'},general:{defaultLang:'en',pageTitle:'muminsultani',metaDesc:"muminsultani's official personal website.",favicon:''},sectionsOrder:['setup','experience','order','apps','stack'],effects:{background:'default',siteAnimation:'constellation',chatBackground:'default',confettiEnabled:true,confettiStyle:'classic',tickSoundEnabled:true,tickSoundStyle:'default',introBg:'default',introAnim:'constellation',messengerColor:'purple'},appearance:{theme:'purple',font:'Sora',fontIsSmall:false,fontColor:'default',formStyle:'default',panelStyle:'default'},welcomeEmail:{enabled:true,includePdf:true,subject:'Hoşgeldiniz! 🎉',message:'Merhaba {name},\n\nSitemize kayıt olduğunuz için teşekkür ederiz!\n\nKullanıcı ID: {userId}\nKullanıcı Adı: @{username}\n\nİyi günler dileriz,\nmuminsultani'},lastEdit:'—'};
+const DEFAULT_SITE_CONTENT={header:{brand:'muminsultani',roleEn:'Software Developer',roleTr:'Yazılım Geliştirici'},social:[{platform:'github',url:'https://github.com/muminsultani',enabled:true},{platform:'instagram',url:'https://instagram.com/sultanimumin',enabled:true},{platform:'gmail',url:'muminsultani@hotmail.com',enabled:true}],apps:Array(8).fill(null).map(()=>({name:'',desc:'',url:'',icon:'',requireLogin:false,hasApk:false,apkName:'',apkSize:0,apkType:'',hasIcon:false})),experience:{titleEn:'Remote Software Developer',titleTr:'Uzaktan Yazılım Geliştirici',date:'2025 - Present',descEn:'Developing scalable backend services, REST APIs, and mobile-friendly web solutions using Python and Node.js.',descTr:"Python and Node.js kullanarak ölçeklenebilir arka uç servisleri, REST API'ler ve mobil uyumlu web çözümleri geliştirme."},setup:{osEn:'Linux / Mobile Node',osTr:'Linux / Mobil Node',editorEn:'Spck & VS Code',editorTr:'Spck & VS Code'},stack:{backend:'Python, Node.js, Django',frontend:'JavaScript, HTML/CSS'},footer:{brand:'muminsultani',scanEn:'Scan To Connect',scanTr:'Bağlanmak İçin Tarayın',copyright:'© 2026 muminsultani • All Rights Reserved.'},general:{defaultLang:'en',pageTitle:'muminsultani',metaDesc:"muminsultani's official personal website.",favicon:'',orderRequireLogin:true},sectionsOrder:['setup','experience','order','apps','stack'],effects:{background:'default',siteAnimation:'constellation',chatBackground:'default',confettiEnabled:true,confettiStyle:'classic',tickSoundEnabled:true,tickSoundStyle:'default',introBg:'default',introAnim:'constellation',messengerColor:'purple'},appearance:{theme:'purple',font:'Sora',fontIsSmall:false,fontColor:'default',formStyle:'default',panelStyle:'default'},welcomeEmail:{enabled:true,includePdf:true,subject:'Hoşgeldiniz! 🎉',message:'Merhaba {name},\n\nSitemize kayıt olduğunuz için teşekkür ederiz!\n\nKullanıcı ID: {userId}\nKullanıcı Adı: @{username}\n\nİyi günler dileriz,\nmuminsultani'},lastEdit:'—'};
 
 function t(key,fallback){const d=LANG[currentLang]||LANG.en;const v=d[key];return(v!==undefined&&v!==null&&v!=='')?v:(fallback!==undefined?fallback:key);}
 function escapeHtml(s){if(s===null||s===undefined)return'';return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
@@ -1555,10 +1454,6 @@ function getUserIdLabelHTML(userId,isAdmin){if(!userId)return'';const cls='chat-
 function copyUserIdFromEl(btn){const id=btn.getAttribute('data-id');if(!id)return;const sc=()=>{btn.innerHTML='<i class="fa-solid fa-check"></i>';setTimeout(()=>{btn.innerHTML='<i class="fa-regular fa-copy"></i>';},1500);};if(navigator.clipboard)navigator.clipboard.writeText(id).then(sc).catch(()=>{});else sc();}
 function ensureUserIdsAndAdmin(){try{let u=JSON.parse(localStorage.getItem('site_users')||'[]');let changed=false;let ai=u.findIndex(x=>x.isAdmin===true);if(ai===-1)ai=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL);if(ai===-1){u.unshift({userId:'',name:'Admin',username:'admin',email:ADMIN_EMAIL,password:'admin123',bio:'',website:'',profilePhoto:'',following:[],createdAt:'2020-01-01T00:00:00.000Z',isAdmin:true,isVerified:true});ai=0;changed=true;}u.forEach(x=>{if(!/^\d{9}$/.test(String(x.userId||''))){x.userId='';changed=true;}if(!x.bio)x.bio='';if(!x.website)x.website='';if(!Array.isArray(x.following))x.following=[];});const seen=new Set();u.forEach(x=>{if(x.userId&&seen.has(x.userId)){x.userId='';changed=true;}else if(x.userId)seen.add(x.userId);});u.forEach(x=>{if(!x.userId){let nid;do{nid=generateRandomUserId();}while(seen.has(nid));x.userId=nid;seen.add(nid);changed=true;}});if(changed){localStorage.setItem('site_users',JSON.stringify(u));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);const f=u.find(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());if(f)localStorage.setItem('logged_user',JSON.stringify(f));}catch(e){}}}}catch(e){}}
 function getChatUsersFor(email){const u=getAllUsers();const ce=String(email||'').toLowerCase();let list=u.filter(x=>String(x.email||'').toLowerCase()!==ce);if(!isAdminUser(email)&&!list.some(x=>isAdminUser(x.email))){list.unshift(getAdminUser());}list.sort((a,b)=>{const aa=isAdminUser(a.email)?0:1,ba=isAdminUser(b.email)?0:1;return aa-ba;});return list;}
-function getFollowersOf(em){const u=getAllUsers();const t2=String(em||'').toLowerCase();return u.filter(x=>Array.isArray(x.following)&&x.following.map(e=>String(e).toLowerCase()).includes(t2));}
-function getFollowingOf(em){const u=getAllUsers();const x=u.find(y=>String(y.email||'').toLowerCase()===String(em||'').toLowerCase());if(!x||!Array.isArray(x.following))return[];return u.filter(y=>x.following.map(e=>String(e).toLowerCase()).includes(String(y.email||'').toLowerCase()));}
-function isFollowing(me,tg){const u=getAllUsers();const x=u.find(y=>String(y.email||'').toLowerCase()===String(me||'').toLowerCase());if(!x||!Array.isArray(x.following))return false;return x.following.map(e=>String(e).toLowerCase()).includes(String(tg||'').toLowerCase());}
-function toggleFollow(tg){const lu=localStorage.getItem('logged_user');if(!lu){showCustomAlert('you must sign in.');openGetInTouchModal();return;}let me;try{me=JSON.parse(lu);}catch(e){return;}if(String(me.email||'').toLowerCase()===String(tg||'').toLowerCase()){showCustomAlert('you cannot follow yourself.');return;}let u=getAllUsers();const i=u.findIndex(x=>String(x.email||'').toLowerCase()===String(me.email||'').toLowerCase());if(i===-1)return;if(!Array.isArray(u[i].following))u[i].following=[];const tlc=String(tg).toLowerCase();const p=u[i].following.map(e=>String(e).toLowerCase()).indexOf(tlc);let nf=false;if(p===-1){u[i].following.push(tg);nf=true;}else{u[i].following.splice(p,1);}localStorage.setItem('site_users',JSON.stringify(u));localStorage.setItem('logged_user',JSON.stringify(u[i]));logActivity('profile_update',u[i],(nf?'Followed ':'Unfollowed ')+tg);showCustomAlert(nf?'you now follow this user!':'unfollowed.','success');if(currentProfileEmail)openPublicUserProfile(currentProfileEmail);}
 
 function logActivity(type,userData,details){try{let l=JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');const u=userData||{};l.push({type,timestamp:new Date().toISOString(),name:u.name||'',username:u.username||'',email:u.email||'',userId:u.userId||'',details:details||''});if(l.length>2000)l=l.slice(-2000);localStorage.setItem(ACTIVITY_LOG_KEY,JSON.stringify(l));}catch(e){}}
 function getActivityLog(){try{return JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');}catch(e){return[];}}
@@ -1567,19 +1462,7 @@ function getChatMessages(){try{return JSON.parse(localStorage.getItem(CHAT_KEY)|
 function saveChatMessages(m){try{localStorage.setItem(CHAT_KEY,JSON.stringify(m));}catch(e){}}
 function getConversationId(a,b){return [String(a||'').toLowerCase(),String(b||'').toLowerCase()].sort().join('__');}
 function getTotalUnread(email){if(!email)return 0;const m=getChatMessages();let t2=0;const tg=email.toLowerCase();for(const k in m){const p=k.split('__');if(p.includes(tg)){t2+=m[k].filter(x=>String(x.to).toLowerCase()===tg&&!x.read).length;}}return t2;}
-function updateChatBadge(){
-  const lu=localStorage.getItem('logged_user');
-  const eff=getEffectiveLoggedUser();
-  const total=eff?getTotalUnread(eff.email):0;
-  const bn=document.getElementById('brandNotifBadge');
-  const mb=document.getElementById('messengerFloatBtn');
-  const mBadge=document.getElementById('messengerBadge');
-  const isLogged = !!lu || isAdminLoggedIn();
-  if(mb){if(isLogged) mb.classList.add('visible');else mb.classList.remove('visible');}
-  if(!isLogged){if(bn){bn.classList.remove('show');bn.textContent='0';}if(mBadge)mBadge.classList.remove('show');return;}
-  if(bn){if(total>0){bn.classList.add('show');bn.textContent=total>99?'99+':String(total);}else bn.classList.remove('show');}
-  if(mBadge){if(total>0){mBadge.classList.add('show');mBadge.textContent=total>99?'99+':String(total);}else mBadge.classList.remove('show');}
-}
+function updateChatBadge(){const lu=localStorage.getItem('logged_user');const eff=getEffectiveLoggedUser();const total=eff?getTotalUnread(eff.email):0;const bn=document.getElementById('brandNotifBadge');const mb=document.getElementById('messengerFloatBtn');const mBadge=document.getElementById('messengerBadge');const isLogged=!!lu||isAdminLoggedIn();if(mb){if(isLogged)mb.classList.add('visible');else mb.classList.remove('visible');}if(!isLogged){if(bn){bn.classList.remove('show');bn.textContent='0';}if(mBadge)mBadge.classList.remove('show');return;}if(bn){if(total>0){bn.classList.add('show');bn.textContent=total>99?'99+':String(total);}else bn.classList.remove('show');}if(mBadge){if(total>0){mBadge.classList.add('show');mBadge.textContent=total>99?'99+':String(total);}else mBadge.classList.remove('show');}}
 
 function applyAppearance(){const a=(getSiteContent().appearance)||{};const u=getUserPrefs();const theme=u.theme||a.theme||'purple';const fontColor=u.fontColor||a.fontColor||'default';const panelStyle=u.panelStyle||a.panelStyle||'default';const formStyle=u.formStyle||a.formStyle||'default';const font=u.font||a.font||'Sora';document.body.dataset.theme=theme;document.body.dataset.fcolor=fontColor;document.body.dataset.panel=panelStyle;document.body.dataset.form=formStyle;document.documentElement.style.setProperty('--font-main',`'${font}',sans-serif`);}
 function applyBackground(){const eff=(getSiteContent().effects)||{};const u=getUserPrefs();const bg=u.background||eff.background||'default';BG_PRESETS.forEach(b=>document.body.classList.remove('bg-'+b.key));if(bg&&bg!=='default')document.body.classList.add('bg-'+bg);}
@@ -1702,7 +1585,6 @@ function openResetPasswordModal(){document.getElementById('resetClientEmail').va
 function closeResetPasswordModal(){document.getElementById('resetPasswordModal').classList.remove('active');}
 function handleResetPasswordSubmit(e){e.preventDefault();const email=document.getElementById('resetClientEmail').value,code=document.getElementById('resetClientCode').value.trim(),np=getPasswordValue('resetClientNewPassword').trim();if(!code||!np){showCustomAlert('please fill in all fields.');return;}if(!isValidPassword(np)){showCustomAlert('password must be at least 8 characters.');return;}let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');if(!rc[email]||rc[email]!==code){showCustomAlert('invalid code!');return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');let ok=false;users=users.map(u=>{if(u.email===email){u.password=np;ok=true;}return u;});if(ok){localStorage.setItem('site_users',JSON.stringify(users));delete rc[email];localStorage.setItem('reset_codes',JSON.stringify(rc));closeResetPasswordModal();showCustomAlert('password reset successfully!','success');}}
 
-let pendingSignup2=null;
 function generateSignupCode(){return String(Math.floor(10000+Math.random()*90000));}
 async function openSignupMockModal(email){document.getElementById('signupMockEmailValue').innerText=email;document.getElementById('signupMockModal').classList.add('active');const sb=document.getElementById('signupEmailStatus');const title=document.getElementById('signupMockTitleText');const desc=document.getElementById('signupMockDescText');sb.innerHTML='<div class="email-status-badge"><i class="fa-solid fa-spinner fa-spin"></i> Sending...</div>';title.textContent='Sending...';desc.textContent='Please wait, your verification code is being sent.';const code=pendingSignup?pendingSignup.code:'';const r=await sendVerificationEmail(email,code,'signup');if(r.success){sb.innerHTML='<div class="email-status-badge success"><i class="fa-solid fa-check"></i> Sent</div>';title.textContent='Email sent!';desc.textContent='We sent a 5-digit verification code to your email.';}else{sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Failed</div>';title.textContent='Email could not be sent';desc.innerHTML='<span style="color:#f59e0b;font-size:.72rem;word-break:break-all">Hata: '+String(r.reason||'bilinmeyen').substring(0,150)+'</span>';}}
 async function resendSignupEmail(){if(!pendingSignup)return;const newCode=generateSignupCode();pendingSignup.code=newCode;const sb=document.getElementById('signupEmailStatus');const title=document.getElementById('signupMockTitleText');const desc=document.getElementById('signupMockDescText');sb.innerHTML='<div class="email-status-badge"><i class="fa-solid fa-spinner fa-spin"></i> Resending...</div>';title.textContent='Resending...';desc.textContent='Please wait.';const r=await sendVerificationEmail(pendingSignup.email,newCode,'signup');if(r.success){sb.innerHTML='<div class="email-status-badge success"><i class="fa-solid fa-check"></i> Sent</div>';title.textContent='Email sent!';desc.textContent='A new 5-digit verification code has been sent.';}else{sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Failed</div>';title.textContent='Try again';desc.innerHTML='<span style="color:#f59e0b;font-size:.72rem">Hata: '+String(r.reason||'').substring(0,150)+'</span>';}}
@@ -1766,23 +1648,58 @@ function checkUserSession(){const lu=localStorage.getItem('logged_user');const c
 
 function confirmLogout(){showCustomAlert('are you sure you want to log out?','logout',function(){const lu=localStorage.getItem('logged_user');if(lu){try{const u=JSON.parse(lu);logActivity('signout',u,'Logged out');}catch(e){}}localStorage.removeItem('logged_user');try{sessionStorage.removeItem('site_lang');}catch(e){}changeLanguage('en');checkUserSession();renderApplications();updateChatBadge();setTimeout(()=>{showCustomAlert('session closed.','success');},300);});}
 
-function openChatPanel(){const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert('you must sign in or register first!');openGetInTouchModal();return;}document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';document.getElementById('chatReplyPreview').style.display='none';const bb=document.getElementById('chatBackBtn');if(bb)bb.style.display='none';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent='Messages';chatSearchQuery='';const si=document.getElementById('chatSearchInput');if(si)si.value='';renderChatUsersList();updateChatBadge();}
-function closeChatPanel(){document.getElementById('chatPanelModal').classList.remove('active');activeChatUser=null;currentReplyTo=null;stopRecordingUI();const bb=document.getElementById('chatBackBtn');if(bb)bb.style.display='none';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent='Messages';}
-function handleChatBack(){if(activeChatUser)backToUsersList();else closeChatPanel();}
+function openChatPanel(){const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert('you must sign in or register first!');openGetInTouchModal();return;}document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';document.getElementById('chatReplyPreview').style.display='none';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent='Messages';chatSearchQuery='';const si=document.getElementById('chatSearchInput');if(si)si.value='';renderChatUsersList();updateChatBadge();}
+function closeChatPanel(){document.getElementById('chatPanelModal').classList.remove('active');activeChatUser=null;currentReplyTo=null;stopRecordingUI();const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent='Messages';}
 function filterChatUsers(){const inp=document.getElementById('chatSearchInput');chatSearchQuery=inp?inp.value.trim().toLowerCase():'';const clr=document.getElementById('chatSearchClear');if(clr){chatSearchQuery?clr.classList.add('show'):clr.classList.remove('show');}renderChatUsersList();}
 function clearChatSearch(){chatSearchQuery='';const inp=document.getElementById('chatSearchInput');if(inp)inp.value='';const clr=document.getElementById('chatSearchClear');if(clr)clr.classList.remove('show');renderChatUsersList();}
 function matchUserQuery(x,q){if(!q)return true;const qq=q.replace(/^@/,'').trim();if(!qq)return true;const id=String(x.userId||'').toLowerCase();const nm=String(x.name||'').toLowerCase();const un=String(x.username||'').toLowerCase().replace(/^@/,'');const em=String(x.email||'').toLowerCase();return id.includes(qq)||nm.includes(qq)||un.includes(qq)||em.includes(qq);}
-function renderChatUsersList(){const eff=getEffectiveLoggedUser();if(!eff)return;const u=eff;let others=getChatUsersFor(u.email);if(chatSearchQuery)others=others.filter(x=>matchUserQuery(x,chatSearchQuery));const list=document.getElementById('chatUsersList');if(!list)return;if(others.length===0){list.innerHTML=`<div class="chat-empty"><i class="fa-solid fa-user-group"></i>${t('chat_no_users')}</div>`;return;}const msgs=getChatMessages();others.sort((a,b)=>{const aa=isAdminUser(a.email)?0:1,ba=isAdminUser(b.email)?0:1;return aa-ba;});list.innerHTML='';others.forEach(x=>{const isA=isAdminUser(x.email);const cid=getConversationId(u.email,x.email);const conv=msgs[cid]||[];const last=conv.length?conv[conv.length-1]:null;const unread=conv.filter(m=>String(m.to).toLowerCase()===String(u.email).toLowerCase()&&!m.read).length;const item=document.createElement('div');item.className='chat-user-item'+(isA?' admin-row':'');const av=x.profilePhoto?`<img src="${x.profilePhoto}">`:(x.name?escapeHtml(x.name.trim().charAt(0).toUpperCase()):'?');let preview=t('chat_no_msgs');if(last){const who=String(last.from).toLowerCase()===String(u.email).toLowerCase()?(t('chat_you')+': '):'';preview=who+(last.type==='voice'?t('chat_voice'):(last.type==='photo'?'📷 photo':(last.text||'')));}const uname=String(x.username||'').replace(/^@/,'');const vB=(isA||x.isVerified)?getVerifiedBadgeHTML('sm'):'';const idL=getUserIdLabelHTML(x.userId,isA);const crown=isA?`<span class="admin-crown"><i class="fa-solid fa-crown"></i></span>`:'';item.innerHTML=`<div class="chat-user-avatar${isA?' admin-avatar':''}">${crown}${av}</div><div class="chat-user-info"><div class="chat-user-name">${escapeHtml(x.name||'user')}</div>${uname?`<div class="chat-user-username">@${escapeHtml(uname)}${vB}</div>`:''}<div class="chat-user-id-row">${idL}</div><div class="chat-user-preview">${escapeHtml(preview).substring(0,60)}</div></div>${unread>0?`<div class="chat-unread-badge">${unread>99?'99+':unread}</div>`:''}`;item.onclick=()=>openConversation(x);list.appendChild(item);});}
-function openConversation(user){const eff=getEffectiveLoggedUser();if(!eff)return;const u=eff;activeChatUser=user;const m=getChatMessages();const cid=getConversationId(u.email,user.email);if(m[cid]){let c=false;m[cid].forEach(x=>{if(String(x.to).toLowerCase()===String(u.email).toLowerCase()&&!x.read){x.read=true;c=true;}});if(c)saveChatMessages(m);}document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='flex';const bb=document.getElementById('chatBackBtn');if(bb)bb.style.display='flex';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent='Chat';applyChatBackground();renderChatConvHeader();renderChatMessages();updateChatBadge();}
-function backToUsersList(){activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';document.getElementById('chatReplyPreview').style.display='none';const bb=document.getElementById('chatBackBtn');if(bb)bb.style.display='none';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent='Messages';renderChatUsersList();}
-function renderChatConvHeader(){const h=document.getElementById('chatConvHeader');if(!h||!activeChatUser)return;const isA=isAdminUser(activeChatUser.email);const av=activeChatUser.profilePhoto?`<img src="${activeChatUser.profilePhoto}">`:(activeChatUser.name?escapeHtml(activeChatUser.name.trim().charAt(0).toUpperCase()):'?');const uname=String(activeChatUser.username||'').replace(/^@/,'');const se=escapeHtml(activeChatUser.email||'');const vB=(isA||activeChatUser.isVerified)?getVerifiedBadgeHTML(''):'';const idL=getUserIdLabelHTML(activeChatUser.userId,isA);const crown=isA?`<span class="admin-crown"><i class="fa-solid fa-crown"></i></span>`:'';h.innerHTML=`<button class="chat-back-btn" onclick="backToUsersList()"><i class="fa-solid fa-arrow-left"></i></button><div class="chat-user-avatar small${isA?' admin-avatar':''}">${crown}${av}</div><div style="flex:1;min-width:0"><div class="chat-user-name">${escapeHtml(activeChatUser.name||'user')}</div><div class="chat-user-username">${uname?'@'+escapeHtml(uname):''}${vB}</div><div class="chat-user-id-row">${idL}</div></div><button class="chat-profile-btn" onclick="openPublicUserProfile('${se}')"><i class="fa-solid fa-user-circle"></i></button>`;}
+
+/* === CHAT USER LIST (ID KALDIRILDI) === */
+function renderChatUsersList(){const eff=getEffectiveLoggedUser();if(!eff)return;const u=eff;let others=getChatUsersFor(u.email);if(chatSearchQuery)others=others.filter(x=>matchUserQuery(x,chatSearchQuery));const list=document.getElementById('chatUsersList');if(!list)return;if(others.length===0){list.innerHTML=`<div class="chat-empty"><i class="fa-solid fa-user-group"></i>${t('chat_no_users')}</div>`;return;}const msgs=getChatMessages();others.sort((a,b)=>{const aa=isAdminUser(a.email)?0:1,ba=isAdminUser(b.email)?0:1;return aa-ba;});list.innerHTML='';others.forEach(x=>{const isA=isAdminUser(x.email);const cid=getConversationId(u.email,x.email);const conv=msgs[cid]||[];const last=conv.length?conv[conv.length-1]:null;const unread=conv.filter(m=>String(m.to).toLowerCase()===String(u.email).toLowerCase()&&!m.read).length;const item=document.createElement('div');item.className='chat-user-item'+(isA?' admin-row':'');const av=x.profilePhoto?`<img src="${x.profilePhoto}">`:(x.name?escapeHtml(x.name.trim().charAt(0).toUpperCase()):'?');let preview=t('chat_no_msgs');if(last){const who=String(last.from).toLowerCase()===String(u.email).toLowerCase()?(t('chat_you')+': '):'';preview=who+(last.type==='voice'?t('chat_voice'):(last.type==='photo'?'📷 photo':(last.text||'')));}const uname=String(x.username||'').replace(/^@/,'');const vB=(isA||x.isVerified)?getVerifiedBadgeHTML('sm'):'';const crown=isA?`<span class="admin-crown"><i class="fa-solid fa-crown"></i></span>`:'';item.innerHTML=`<div class="chat-user-avatar${isA?' admin-avatar':''}">${crown}${av}</div><div class="chat-user-info"><div class="chat-user-name">${escapeHtml(x.name||'user')}</div>${uname?`<div class="chat-user-username">@${escapeHtml(uname)}${vB}</div>`:''}<div class="chat-user-preview">${escapeHtml(preview).substring(0,60)}</div></div>${unread>0?`<div class="chat-unread-badge">${unread>99?'99+':unread}</div>`:''}`;item.onclick=()=>openConversation(x);list.appendChild(item);});}
+function openConversation(user){const eff=getEffectiveLoggedUser();if(!eff)return;const u=eff;activeChatUser=user;const m=getChatMessages();const cid=getConversationId(u.email,user.email);if(m[cid]){let c=false;m[cid].forEach(x=>{if(String(x.to).toLowerCase()===String(u.email).toLowerCase()&&!x.read){x.read=true;c=true;}});if(c)saveChatMessages(m);}document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='flex';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent='Chat';applyChatBackground();renderChatConvHeader();renderChatMessages();updateChatBadge();}
+function backToUsersList(){activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';document.getElementById('chatReplyPreview').style.display='none';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent='Messages';renderChatUsersList();}
+
+/* === CHAT CONV HEADER (GERİ BUTONU VE ID KALDIRILDI, PROFİL BUTONU YUVARLAK) === */
+function renderChatConvHeader(){
+  const h=document.getElementById('chatConvHeader');
+  if(!h||!activeChatUser)return;
+  const isA=isAdminUser(activeChatUser.email);
+  const av=activeChatUser.profilePhoto?`<img src="${activeChatUser.profilePhoto}">`:(activeChatUser.name?escapeHtml(activeChatUser.name.trim().charAt(0).toUpperCase()):'?');
+  const uname=String(activeChatUser.username||'').replace(/^@/,'');
+  const se=escapeHtml(activeChatUser.email||'');
+  const vB=(isA||activeChatUser.isVerified)?getVerifiedBadgeHTML(''):'';
+  const crown=isA?`<span class="admin-crown"><i class="fa-solid fa-crown"></i></span>`:'';
+  h.innerHTML=`<div class="chat-user-avatar small${isA?' admin-avatar':''}">${crown}${av}</div><div style="flex:1;min-width:0"><div class="chat-user-name">${escapeHtml(activeChatUser.name||'user')}</div><div class="chat-user-username">${uname?'@'+escapeHtml(uname):''}${vB}</div></div><button class="chat-profile-btn chat-profile-btn-lg" onclick="openPublicUserProfile('${se}')" title="Profil"><i class="fa-solid fa-user-circle"></i></button>`;
+}
+
 function getWaveformBars(seed,count){let bars='';let h=0;const s=String(seed||'x');for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;for(let i=0;i<count;i++){h=(h*1103515245+12345)>>>0;const height=5+(h%17);bars+=`<span class="voice-bar" style="height:${height}px"></span>`;}return bars;}
 function toggleVoicePlayback(btn){const wrap=btn.closest('.chat-voice-msg');if(!wrap)return;const audio=wrap.querySelector('audio');if(!audio||!audio.src)return;if(audio.paused){document.querySelectorAll('.chat-voice-msg audio').forEach(a=>{if(a!==audio&&!a.paused){a.pause();const ob=a.closest('.chat-voice-msg').querySelector('.voice-play-btn');if(ob)ob.innerHTML='<i class="fa-solid fa-play"></i>';}});audio.play().catch(()=>{});btn.innerHTML='<i class="fa-solid fa-pause"></i>';}else{audio.pause();btn.innerHTML='<i class="fa-solid fa-play"></i>';}}
-function renderChatMessages(){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);const conv=m[cid]||[];const box=document.getElementById('chatMessages');if(!box)return;box.innerHTML='';if(conv.length===0){box.innerHTML='<div class="chat-empty">'+t('chat_start')+'</div>';return;}const myEmail=String(u.email).toLowerCase();
-  conv.forEach((msg,idx)=>{const isMine=String(msg.from).toLowerCase()===myEmail;const div=document.createElement('div');div.className='chat-msg '+(isMine?'mine':'theirs');const d=new Date(msg.timestamp);const time=d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});const readStatus=isMine?`<span class="read-status">${msg.read?'✓✓':'✓'}</span>`:'';
-    if(msg.type==='voice'){const dur=msg.duration?formatDuration(msg.duration):'0:00';const bars=getWaveformBars(msg.audioId||String(idx)+msg.timestamp,22);div.innerHTML=`<div class="chat-voice-msg"><button class="voice-play-btn" onclick="toggleVoicePlayback(this)"><i class="fa-solid fa-play"></i></button><div class="voice-waveform">${bars}</div><span class="voice-duration">${dur}</span><audio preload="metadata"></audio></div><div class="chat-msg-actions">${!isMine?`<button class="chat-msg-action-btn" onclick="replyToMessage(${idx})"><i class="fa-solid fa-reply"></i></button>`:''}${isMine?`<button class="chat-msg-action-btn delete" onclick="deleteMessage(${idx})"><i class="fa-solid fa-trash"></i></button>`:''}</div><div class="chat-msg-time">${time} ${readStatus}</div>`;box.appendChild(div);const audioEl=div.querySelector('audio');if(audioEl&&msg.audioData)audioEl.src=msg.audioData;}
-    else if(msg.type==='photo'){div.innerHTML=`<div class="chat-msg-photo" onclick="openChatPhoto(${idx})"><img src="${msg.photoData||''}" alt="photo"></div><div class="chat-msg-actions">${!isMine?`<button class="chat-msg-action-btn" onclick="replyToMessage(${idx})"><i class="fa-solid fa-reply"></i></button>`:''}${isMine?`<button class="chat-msg-action-btn delete" onclick="deleteMessage(${idx})"><i class="fa-solid fa-trash"></i></button>`:''}</div><div class="chat-msg-time">${time} ${readStatus}</div>`;box.appendChild(div);}
-    else{div.innerHTML=`<div class="chat-msg-text">${escapeHtml(msg.text||'')}</div><div class="chat-msg-actions">${!isMine?`<button class="chat-msg-action-btn" onclick="replyToMessage(${idx})"><i class="fa-solid fa-reply"></i></button>`:''}${isMine?`<button class="chat-msg-action-btn delete" onclick="deleteMessage(${idx})"><i class="fa-solid fa-trash"></i></button>`:''}</div><div class="chat-msg-time">${time} ${readStatus}</div>`;box.appendChild(div);}});box.scrollTop=box.scrollHeight;}
+
+function renderChatMessages(){
+  const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;
+  const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);const conv=m[cid]||[];
+  const box=document.getElementById('chatMessages');if(!box)return;box.innerHTML='';
+  if(conv.length===0){box.innerHTML='<div class="chat-empty">'+t('chat_start')+'</div>';return;}
+  const myEmail=String(u.email).toLowerCase();
+  conv.forEach((msg,idx)=>{
+    const isMine=String(msg.from).toLowerCase()===myEmail;
+    const div=document.createElement('div');div.className='chat-msg '+(isMine?'mine':'theirs');
+    const d=new Date(msg.timestamp);const time=d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    const readStatus=isMine?`<span class="read-status">${msg.read?'✓✓':'✓'}</span>`:'';
+    if(msg.type==='voice'){
+      const dur=msg.duration?formatDuration(msg.duration):'0:00';const bars=getWaveformBars(msg.audioId||String(idx)+msg.timestamp,22);
+      div.innerHTML=`<div class="chat-voice-msg"><button class="voice-play-btn" onclick="toggleVoicePlayback(this)"><i class="fa-solid fa-play"></i></button><div class="voice-waveform">${bars}</div><span class="voice-duration">${dur}</span><audio preload="metadata"></audio></div><div class="chat-msg-actions">${!isMine?`<button class="chat-msg-action-btn" onclick="replyToMessage(${idx})"><i class="fa-solid fa-reply"></i></button>`:''}${isMine?`<button class="chat-msg-action-btn delete" onclick="deleteMessage(${idx})"><i class="fa-solid fa-trash"></i></button>`:''}</div><div class="chat-msg-time">${time} ${readStatus}</div>`;
+      box.appendChild(div);const audioEl=div.querySelector('audio');if(audioEl&&msg.audioData)audioEl.src=msg.audioData;
+    } else if(msg.type==='photo'){
+      div.innerHTML=`<div class="chat-msg-photo" onclick="openChatPhoto(${idx})"><img src="${msg.photoData||''}" alt="photo"></div><div class="chat-msg-actions">${!isMine?`<button class="chat-msg-action-btn" onclick="replyToMessage(${idx})"><i class="fa-solid fa-reply"></i></button>`:''}${isMine?`<button class="chat-msg-action-btn delete" onclick="deleteMessage(${idx})"><i class="fa-solid fa-trash"></i></button>`:''}</div><div class="chat-msg-time">${time} ${readStatus}</div>`;
+      box.appendChild(div);
+    } else {
+      div.innerHTML=`<div class="chat-msg-text">${escapeHtml(msg.text||'')}</div><div class="chat-msg-actions">${!isMine?`<button class="chat-msg-action-btn" onclick="replyToMessage(${idx})"><i class="fa-solid fa-reply"></i></button>`:''}${isMine?`<button class="chat-msg-action-btn delete" onclick="deleteMessage(${idx})"><i class="fa-solid fa-trash"></i></button>`:''}</div><div class="chat-msg-time">${time} ${readStatus}</div>`;
+      box.appendChild(div);
+    }
+  });
+  box.scrollTop=box.scrollHeight;
+}
 function formatDuration(sec){sec=Math.max(0,Math.floor(sec));const m=Math.floor(sec/60),s=sec%60;return m+':'+String(s).padStart(2,'0');}
 function replyToMessage(idx){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);const conv=m[cid]||[];const msg=conv[idx];if(!msg)return;const previewText=msg.type==='voice'?t('chat_voice'):(msg.type==='photo'?'📷 photo':(msg.text||''));currentReplyTo={name:msg.fromName||msg.from,text:previewText,idx};document.getElementById('replyName').innerText='↩ '+currentReplyTo.name;document.getElementById('replyText').innerText=currentReplyTo.text;document.getElementById('chatReplyPreview').style.display='flex';document.getElementById('chatInput').focus();}
 function cancelReply(){currentReplyTo=null;document.getElementById('chatReplyPreview').style.display='none';}
@@ -1826,8 +1743,6 @@ function openChatPhoto(idx){
   if(conv[idx]&&conv[idx].photoData){document.getElementById('lightboxImage').src=conv[idx].photoData;document.getElementById('lightboxOverlay').classList.add('active');}
 }
 
-function toggleEmojiPicker(){let p=document.getElementById('emojiPicker');if(p){p.remove();return;}p=document.createElement('div');p.id='emojiPicker';const header=document.createElement('div');header.className='emoji-header';Object.keys(EMOJI_CATEGORIES).forEach(cat=>{const b=document.createElement('button');b.type='button';b.className='emoji-cat-btn'+(cat===currentEmojiCat?' active':'');b.innerText=cat;b.onclick=()=>{currentEmojiCat=cat;const g=p.querySelector('.emoji-grid');g.innerHTML='';EMOJI_CATEGORIES[cat].forEach(e=>{const bi=document.createElement('button');bi.type='button';bi.className='emoji-item';bi.innerText=e;bi.onclick=()=>{const inp=document.getElementById('chatInput');if(inp){inp.value+=e;inp.focus();}};g.appendChild(bi);});header.querySelectorAll('.emoji-cat-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');};header.appendChild(b);});p.appendChild(header);const grid=document.createElement('div');grid.className='emoji-grid';EMOJI_CATEGORIES[currentEmojiCat].forEach(e=>{const bi=document.createElement('button');bi.type='button';bi.className='emoji-item';bi.innerText=e;bi.onclick=()=>{const inp=document.getElementById('chatInput');if(inp){inp.value+=e;inp.focus();}};grid.appendChild(bi);});p.appendChild(grid);document.querySelector('.chat-input-row').appendChild(p);}
-
 function generateVoiceId(){return 'v_'+Date.now()+'_'+Math.random().toString(36).substring(2,9);}
 async function startVoiceRecording(){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser){showCustomAlert('sign in and open a chat first.');return;}if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){showCustomAlert('browser not supported.');return;}try{recordingStream=await navigator.mediaDevices.getUserMedia({audio:true});}catch(err){showCustomAlert('microphone permission denied.');return;}let mt='';const candidates=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus','audio/ogg',''];for(const c of candidates){if(c===''||(window.MediaRecorder&&MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(c))){mt=c;break;}}try{mediaRecorder=mt?new MediaRecorder(recordingStream,{mimeType:mt}):new MediaRecorder(recordingStream);}catch(e){try{mediaRecorder=new MediaRecorder(recordingStream);}catch(e2){showCustomAlert('recording failed to start.');stopRecordingStream();return;}}recordingChunks=[];recordingCancelled=false;mediaRecorder.ondataavailable=e=>{if(e.data&&e.data.size>0)recordingChunks.push(e.data);};mediaRecorder.onstop=async()=>{const wasCancelled=recordingCancelled;const duration=(Date.now()-recordingStartTime)/1000;stopRecordingStream();if(wasCancelled){recordingChunks=[];return;}if(recordingChunks.length===0){showCustomAlert('recording too short!');return;}const blob=new Blob(recordingChunks,{type:mediaRecorder.mimeType||'audio/webm'});recordingChunks=[];await saveAndSendVoiceMessage(blob,duration);};try{mediaRecorder.start();}catch(e){showCustomAlert('recording failed to start.');stopRecordingStream();return;}recordingStartTime=Date.now();document.getElementById('recordingOverlay').classList.add('active');const micBtn=document.getElementById('chatMicBtn');if(micBtn)micBtn.disabled=true;updateRecordingTimer();recordingTimerInterval=setInterval(()=>{updateRecordingTimer();const elapsed=(Date.now()-recordingStartTime)/1000;if(elapsed>=MAX_RECORD_SECONDS)stopVoiceRecording();},200);}
 function updateRecordingTimer(){const el=document.getElementById('recordingTimer');if(!el)return;const e=Math.floor((Date.now()-recordingStartTime)/1000);el.textContent=formatDuration(e)+' / '+formatDuration(MAX_RECORD_SECONDS);}
@@ -1838,7 +1753,7 @@ function stopRecordingUI(){if(mediaRecorder&&mediaRecorder.state==='recording'){
 function blobToBase64(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob);});}
 async function saveAndSendVoiceMessage(blob,duration){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const audioId=generateVoiceId();let audioData='';try{audioData=await blobToBase64(blob);}catch(e){showCustomAlert('voice encode error');return;}const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);if(!m[cid])m[cid]=[];const nm={from:u.email,to:activeChatUser.email,fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',type:'voice',audioId,audioData,duration:Math.round(duration*10)/10,timestamp:new Date().toISOString(),read:false};m[cid].push(nm);saveChatMessages(m);renderChatMessages();logActivity('voice_message',u,`To ${activeChatUser.email}: ${formatDuration(duration)}`);}
 
-/* ==== USER PROFILE (TAKİP PANELİ KALDIRILDI) ==== */
+/* === USER PROFILE (TAKİPÇİ PANELİ YOK) === */
 function openPublicUserProfile(email){const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert('you must sign in.');return;}const users=getAllUsers();let u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());if(!u&&isAdminUser(email))u=getAdminUser();if(!u){showCustomAlert('user not found!');return;}publicProfileEmail=u.email;const initial=(u.name||'U').trim().charAt(0).toUpperCase();const av=u.profilePhoto?`<img src="${u.profilePhoto}">`:(u.name?escapeHtml(initial):'?');const uname=String(u.username||'').replace(/^@/,'');const created=u.createdAt?new Date(u.createdAt).toLocaleDateString():'—';const myEmail=String(eff.email||'').toLowerCase();const isSelf=myEmail===String(u.email||'').toLowerCase();const isAdm=isAdminUser(u.email);const isVer=(isAdm||u.isVerified);const vB=isVer?getVerifiedBadgeHTML('lg'):'';let websiteHTML='';if(u.website){let w=String(u.website).trim();if(!/^https?:\/\//i.test(w))w='https://'+w;websiteHTML=`<a class="pub-profile-website" href="${escapeHtml(w)}" target="_blank"><i class="fa-solid fa-link"></i> ${escapeHtml(w.replace(/^https?:\/\//,'').substring(0,40))}</a>`;}const idNum=escapeHtml(u.userId||'-');const idRowHTML=`<div class="pub-profile-info-row"><span><i class="fa-solid fa-id-badge"></i>ID</span><span style="font-family:'Fira Code',monospace;font-weight:700;color:var(--accent);">${idNum}</span></div>`;let aH='';if(!isSelf){aH+=`<button class="pub-btn-msg" onclick="messageFromProfile()"><i class="fa-solid fa-comments"></i> Send Message</button>`;}aH+=`<button class="pub-btn-close" onclick="closePublicUserProfile()"><i class="fa-solid fa-arrow-left"></i> close</button>`;
 document.getElementById('pub-profile-title').innerText='User Profile';
 document.getElementById('publicUserProfileContent').innerHTML=`
@@ -1857,17 +1772,13 @@ document.getElementById('publicUserProfileContent').innerHTML=`
 document.getElementById('publicUserProfileModal').classList.add('active');}
 function closePublicUserProfile(){document.getElementById('publicUserProfileModal').classList.remove('active');publicProfileEmail=null;}
 function messageFromProfile(){if(!publicProfileEmail)return;const users=getAllUsers();let u=users.find(x=>x.email===publicProfileEmail);if(!u&&isAdminUser(publicProfileEmail))u=getAdminUser();if(!u){closePublicUserProfile();return;}closePublicUserProfile();document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='none';openConversation(u);}
-function showFollowers(email,view){currentFollowersView=view||'followers';const list=currentFollowersView==='followers'?getFollowersOf(email):getFollowingOf(email);const eff=getEffectiveLoggedUser();let meEmail='';if(eff)meEmail=String(eff.email||'').toLowerCase();document.getElementById('followersTitle').textContent=currentFollowersView==='followers'?'Followers':'Following';const c=document.getElementById('followersListContent');if(!list.length){c.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">No users</p>';}else{c.innerHTML='';list.forEach(u=>{const av=u.profilePhoto?`<img src="${u.profilePhoto}">`:(u.name?escapeHtml(u.name.trim().charAt(0).toUpperCase()):'?');const isAdm=isAdminUser(u.email);const vB=(isAdm||u.isVerified)?getVerifiedBadgeHTML('sm'):'';const uname=String(u.username||'').replace(/^@/,'');const isSelf=String(u.email||'').toLowerCase()===meEmail;const af=meEmail?isFollowing(meEmail,u.email):false;let btns='';if(!isSelf){btns+=`<button class="f-btn ${af?'unfollow':'follow'}" onclick="toggleFollowAndRefresh('${escapeHtml(u.email)}')">${af?'Unfollow':'Follow'}</button>`;btns+=`<button class="f-btn msg" onclick="openChatWithEmail('${escapeHtml(u.email)}')"><i class="fa-solid fa-comment"></i></button>`;}const item=document.createElement('div');item.className='follower-item';item.innerHTML=`<div class="f-avatar">${av}</div><div class="f-info"><div class="f-name">${escapeHtml(u.name||u.username||'user')}${vB}</div><div class="f-user">@${escapeHtml(uname)}</div></div><div class="f-actions">${btns}</div>`;c.appendChild(item);});}document.getElementById('followersModal').classList.add('active');}
-function closeFollowersModal(){document.getElementById('followersModal').classList.remove('active');}
-function toggleFollowAndRefresh(email){toggleFollow(email);if(document.getElementById('followersModal').classList.contains('active')&&publicProfileEmail){showFollowers(publicProfileEmail,currentFollowersView);}}
-function openChatWithEmail(email){const users=getAllUsers();let u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());if(!u&&isAdminUser(email))u=getAdminUser();if(!u){showCustomAlert('user not found!');return;}closeFollowersModal();document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='flex';applyChatBackground();openConversation(u);}
 function startChatPolling(){if(chatPollTimer)clearInterval(chatPollTimer);chatPollTimer=setInterval(()=>{const lu=localStorage.getItem('logged_user');if(!lu&&!isAdminLoggedIn()){updateChatBadge();return;}updateChatBadge();const p=document.getElementById('chatPanelModal');if(p&&p.classList.contains('active')){const eff=getEffectiveLoggedUser();if(!eff)return;if(activeChatUser){const msgs=getChatMessages();const cid=getConversationId(eff.email,activeChatUser.email);if(msgs[cid]){let c=false;msgs[cid].forEach(m=>{if(String(m.to).toLowerCase()===String(eff.email).toLowerCase()&&!m.read){m.read=true;c=true;}});if(c)saveChatMessages(msgs);}renderChatMessages();}else renderChatUsersList();}},2500);}
 
 function toggleHeaderProfileMenu(e){if(e)e.stopPropagation();const m=document.getElementById('headerProfileMenu');if(!m)return;m.classList.toggle('show');}
 function closeHeaderProfileMenu(){const m=document.getElementById('headerProfileMenu');if(m)m.classList.remove('show');}
 window.addEventListener('click',function(e){const m=document.getElementById('headerProfileMenu');const w=document.getElementById('headerProfileWrapper');if(m&&w&&!w.contains(e.target))m.classList.remove('show');});
 
-/* === MESSENGER BUTONU (PROFİL ALTINDA, RELOAD'DA RESET) === */
+/* === MESSENGER — SÜRÜKLENEBİLİR AMA PROFİL PANELİNİN ALTINDA (z-index 200 < 300) === */
 function initMessengerBtn(){
   const btn=document.getElementById('messengerFloatBtn');
   if(!btn)return;
@@ -1890,7 +1801,12 @@ function initMessengerBtn(){
     applyMessengerPos();
     if(e.cancelable)e.preventDefault();
   };
-  const onUp=()=>{if(!messengerDragState.isDragging)return;messengerDragState.isDragging=false;btn.classList.remove('dragging');if(!messengerDragState.moved){openChatPanel();}};
+  const onUp=()=>{
+    if(!messengerDragState.isDragging)return;
+    messengerDragState.isDragging=false;
+    btn.classList.remove('dragging');
+    if(!messengerDragState.moved){openChatPanel();}
+  };
   btn.addEventListener('mousedown',onDown);
   btn.addEventListener('touchstart',onDown,{passive:true});
   document.addEventListener('mousemove',onMove);
@@ -1927,15 +1843,69 @@ window.addEventListener('resize',()=>{
 /* === ORDER (SİPARİŞ) SİSTEMİ === */
 function getOrders(){try{return JSON.parse(localStorage.getItem(ORDERS_KEY)||'[]');}catch(e){return[];}}
 function saveOrders(o){try{localStorage.setItem(ORDERS_KEY,JSON.stringify(o));}catch(e){}}
-function openOrderModal(){const f=document.getElementById('orderForm');if(f)f.reset();document.getElementById('orderModal').classList.add('active');}
+function getOrderSettings(){const c=getSiteContent();if(!c.general)c.general={};if(c.general.orderRequireLogin===undefined)c.general.orderRequireLogin=true;return{requireLogin:c.general.orderRequireLogin};}
+function setOrderRequireLogin(v){const c=getSiteContent();if(!c.general)c.general={};c.general.orderRequireLogin=!!v;saveSiteContent(c);showCustomAlert(v?'🔒 Sipariş için kayıt zorunlu':'🔓 Herkes sipariş verebilir','success');}
+function openOrderModal(){
+  const s=getOrderSettings();const lu=localStorage.getItem('logged_user');
+  if(s.requireLogin&&!lu){showCustomAlert('⚠️ Sipariş vermek için önce giriş yapmanız gerekiyor.','warning');setTimeout(()=>openGetInTouchModal(),400);return;}
+  const f=document.getElementById('orderForm');if(f)f.reset();
+  if(lu){try{const u=JSON.parse(lu);const n=document.getElementById('orderName'),m=document.getElementById('orderEmail');if(n&&!n.value)n.value=u.name||'';if(m&&!m.value)m.value=u.email||'';}catch(e){}}
+  document.getElementById('orderModal').classList.add('active');
+}
 function closeOrderModal(){document.getElementById('orderModal').classList.remove('active');}
-function submitOrder(e){e.preventDefault();const o={id:'o_'+Date.now()+'_'+Math.random().toString(36).substring(2,6),name:document.getElementById('orderName').value.trim(),email:document.getElementById('orderEmail').value.trim().toLowerCase(),type:document.getElementById('orderType').value,budget:document.getElementById('orderBudget').value.trim(),deadline:document.getElementById('orderDeadline').value.trim(),description:document.getElementById('orderDesc').value.trim(),timestamp:new Date().toISOString(),status:'new',read:false};if(!o.name||!o.email||!o.description){showCustomAlert('please fill in all required fields.');return;}const all=getOrders();all.unshift(o);saveOrders(all);updateOrdersBadge();logActivity('order_submitted',{name:o.name,email:o.email},`Type: ${o.type} | ${o.description.substring(0,60)}`);closeOrderModal();playApplauseSound();fireConfettiBurst(1);showCustomAlert('✅ Order submitted! We will contact you soon.','success');}
+function submitOrder(e){
+  e.preventDefault();
+  const s=getOrderSettings();const logged=!!localStorage.getItem('logged_user');
+  if(s.requireLogin&&!logged){closeOrderModal();showCustomAlert('⚠️ Sipariş vermek için giriş yapmalısınız.','warning');setTimeout(()=>openGetInTouchModal(),400);return;}
+  const o={id:'o_'+Date.now()+'_'+Math.random().toString(36).substring(2,6),name:document.getElementById('orderName').value.trim(),email:document.getElementById('orderEmail').value.trim().toLowerCase(),type:document.getElementById('orderType').value,budget:document.getElementById('orderBudget').value.trim(),deadline:document.getElementById('orderDeadline').value.trim(),description:document.getElementById('orderDesc').value.trim(),timestamp:new Date().toISOString(),status:'new',read:false,guest:!logged};
+  if(!o.name||!o.email||!o.description){showCustomAlert('Lütfen tüm zorunlu alanları doldurun.');return;}
+  const all=getOrders();all.unshift(o);saveOrders(all);updateOrdersBadge();logActivity('order_submitted',{name:o.name,email:o.email},`Type: ${o.type} | ${o.description.substring(0,60)}`);
+  closeOrderModal();playApplauseSound();fireConfettiBurst(1);
+  showCustomAlert('✅ Siparişiniz alındı! En kısa sürede iletişime geçilecek.','success');
+}
 function getUnreadOrdersCount(){return getOrders().filter(o=>o.status==='new'||!o.read).length;}
 function updateOrdersBadge(){const b=document.getElementById('ordersTabBadge');const c=getUnreadOrdersCount();if(b){if(c>0){b.style.display='inline-flex';b.textContent=c>99?'99+':String(c);}else b.style.display='none';}}
-function renderAdminOrders(){const list=document.getElementById('adminOrdersList');if(!list)return;const orders=getOrders();if(!orders.length){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">No orders yet.</p>';return;}list.innerHTML='';orders.forEach((o,idx)=>{const d=new Date(o.timestamp);const item=document.createElement('div');item.className='user-card';item.style.borderLeft='3px solid var(--accent)';item.innerHTML=`<div class="user-card-info" style="flex:1"><div class="user-card-name">${escapeHtml(o.name)} <span style="font-size:.6rem;padding:1px 6px;border-radius:8px;background:rgba(var(--accent-rgb),.15);color:var(--accent)">${escapeHtml(o.type)}</span></div><div class="user-card-detail"><i class="fa-solid fa-envelope"></i>${escapeHtml(o.email)}</div>${o.budget?`<div class="user-card-detail"><i class="fa-solid fa-dollar-sign"></i>${escapeHtml(o.budget)}</div>`:''}${o.deadline?`<div class="user-card-detail"><i class="fa-solid fa-clock"></i>${escapeHtml(o.deadline)}</div>`:''}<div class="user-card-detail" style="margin-top:6px;color:var(--text-color-override);white-space:pre-wrap;font-size:.72rem;">${escapeHtml(o.description)}</div><div class="user-card-detail" style="opacity:.7">${d.toLocaleString()}</div></div><div class="user-card-btns"><button class="user-view-btn" onclick="markOrderRead(${idx})" title="Mark read"><i class="fa-solid fa-check"></i></button><button class="user-view-btn danger" onclick="deleteOrder(${idx})"><i class="fa-solid fa-trash-can"></i></button></div>`;list.appendChild(item);});}
+function renderAdminOrders(){
+  const list=document.getElementById('adminOrdersList');if(!list)return;
+  const orders=getOrders();
+  if(!orders.length){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">Henüz sipariş yok.</p>';return;}
+  list.innerHTML='';
+  orders.forEach((o,idx)=>{
+    const d=new Date(o.timestamp);const st=o.status||'new';
+    const badge=`<span class="order-status-badge ${st}">${st==='new'?'● YENİ':st==='read'?'OKUNDU':'✓ ONAYLANDI'}</span>`;
+    const item=document.createElement('div');item.className='user-card';item.style.borderLeft='3px solid var(--accent)';
+    item.innerHTML=`<div class="user-card-info" style="flex:1"><div class="user-card-name">${escapeHtml(o.name)} <span style="font-size:.6rem;padding:1px 6px;border-radius:8px;background:rgba(var(--accent-rgb),.15);color:var(--accent)">${escapeHtml(o.type)}</span> ${badge} ${o.guest?'<span style="font-size:.55rem;padding:2px 6px;border-radius:8px;background:rgba(148,163,184,.15);color:var(--text-secondary)">GUEST</span>':''}</div><div class="user-card-detail"><i class="fa-solid fa-envelope"></i>${escapeHtml(o.email)}</div>${o.budget?`<div class="user-card-detail"><i class="fa-solid fa-dollar-sign"></i>${escapeHtml(o.budget)}</div>`:''}${o.deadline?`<div class="user-card-detail"><i class="fa-solid fa-clock"></i>${escapeHtml(o.deadline)}</div>`:''}<div class="user-card-detail" style="margin-top:6px;color:var(--text-color-override);white-space:pre-wrap;font-size:.72rem;">${escapeHtml(o.description)}</div><div class="user-card-detail" style="opacity:.7">${d.toLocaleString()}</div></div><div class="user-card-btns">${o.status!=='approved'?`<button class="user-view-btn" onclick="approveOrder(${idx})" title="Onayla ve Email Gönder" style="color:#22c55e"><i class="fa-solid fa-check-double"></i></button>`:''}<button class="user-view-btn" onclick="markOrderRead(${idx})" title="Okundu"><i class="fa-solid fa-check"></i></button><button class="user-view-btn danger" onclick="deleteOrder(${idx})" title="Sil"><i class="fa-solid fa-trash-can"></i></button></div>`;
+    list.appendChild(item);
+  });
+}
 function markOrderRead(idx){const o=getOrders();if(o[idx]){o[idx].read=true;o[idx].status='read';saveOrders(o);updateOrdersBadge();renderAdminOrders();}}
-function deleteOrder(idx){showCustomAlert('Delete this order?','delete',()=>{const o=getOrders();o.splice(idx,1);saveOrders(o);updateOrdersBadge();renderAdminOrders();});}
-function clearAllOrders(){showCustomAlert('Delete all orders?','delete',()=>{localStorage.removeItem(ORDERS_KEY);updateOrdersBadge();renderAdminOrders();});}
+function deleteOrder(idx){showCustomAlert('Bu sipariş silinsin mi?','delete',()=>{const o=getOrders();o.splice(idx,1);saveOrders(o);updateOrdersBadge();renderAdminOrders();});}
+function clearAllOrders(){showCustomAlert('Tüm siparişler silinsin mi?','delete',()=>{localStorage.removeItem(ORDERS_KEY);updateOrdersBadge();renderAdminOrders();});}
+async function approveOrder(idx){
+  const orders=getOrders();if(!orders[idx])return;
+  showCustomAlert('Bu sipariş onaylanıp müşteriye email gönderilsin mi?','warning',async function(){
+    const r=await sendOrderApprovalEmail(orders[idx]);
+    if(r.success){
+      orders[idx].status='approved';orders[idx].read=true;orders[idx].approvedAt=new Date().toISOString();
+      saveOrders(orders);renderAdminOrders();updateOrdersBadge();
+      logActivity('order_approved',{name:orders[idx].name,email:orders[idx].email},'Email sent');
+      showCustomAlert('✅ Sipariş onaylandı ve müşteriye email gönderildi!','success');fireConfettiBurst(.8);
+    } else {showCustomAlert('Email gönderilemedi: '+(r.reason||'bilinmeyen hata'),'error');}
+  });
+}
+async function sendOrderApprovalEmail(order){
+  if(!EMAILJS_CONFIG.enabled)return{success:false,reason:'not_configured'};
+  const brand=getDyn('header.brand','muminsultani');
+  const logoUrl='https://muminsultani.com/img/ms.png';
+  const bodyText='Merhaba '+order.name+',\n\nSiparişiniz onaylandı! 🎉\n\n• Tip: '+order.type+'\n• Bütçe: '+(order.budget||'Belirtilmedi')+'\n• Teslim: '+(order.deadline||'Belirtilmedi')+'\n\nAçıklama:\n'+order.description+'\n\nEn kısa sürede sizinle iletişime geçeceğiz.\n\nTeşekkürler,\n'+brand;
+  const tp={to_email:order.email,from_email:ADMIN_EMAIL,from_name:brand,reply_to:ADMIN_EMAIL,brand:brand,subject:'✅ Siparişiniz Onaylandı — '+brand,message:bodyText,image_url:logoUrl,link_url:'https://muminsultani.com',link_text:'Siteyi Ziyaret Et',has_image:'yes',has_link:'yes',has_pdf:'no',pdf_url:'',year:new Date().getFullYear(),type:'Order Approval',code:'—'};
+  try{
+    const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EMAILJS_CONFIG.serviceId,template_id:EMAILJS_CONFIG.templateId,user_id:EMAILJS_CONFIG.publicKey,template_params:tp})});
+    const txt=await r.text();
+    if(r.ok&&(txt==='OK'||r.status===200))return{success:true};
+    return{success:false,reason:txt||('HTTP '+r.status)};
+  }catch(err){return{success:false,reason:err.message||'network_error'};}
+}
 
 /* === ADMIN === */
 function triggerAdminAccess(){if(isAdminLoggedIn())openAdminPanel();else{document.getElementById('adminLoginModal').classList.add('active');setTimeout(()=>{const i=document.getElementById('adminPasswordInput');if(i){setPasswordValue('adminPasswordInput','');i.focus();}},200);}}
@@ -1946,7 +1916,7 @@ function logoutAdmin(){try{sessionStorage.removeItem(ADMIN_SESSION_KEY);}catch(e
 function renderAdminUsers(){const list=document.getElementById('adminUsersList');if(!list)return;const u=getAllUsers();if(!u.length){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">no registered users.</p>';return;}list.innerHTML='';u.forEach((user,idx)=>{const card=document.createElement('div');card.className='user-card';const av=user.profilePhoto?`<img src="${user.profilePhoto}">`:(user.name?user.name.trim().charAt(0).toUpperCase():'?');const se=escapeHtml(String(user.email||''));const isA=isAdminUser(user.email);const isV=isA||user.isVerified;const vB=isV?getVerifiedBadgeHTML('sm'):'';const vB2=isA?'':`<button class="user-view-btn verify${isV?' active':''}" onclick="toggleUserVerification('${se}')"><i class="fa-solid fa-circle-check"></i></button>`;card.innerHTML=`<div class="user-card-avatar">${av}</div><div class="user-card-info"><div class="user-card-name">${escapeHtml(user.name||'unknown')}${vB}</div><div class="user-card-detail"><i class="fa-solid fa-id-badge"></i>${escapeHtml(user.userId||'-')}</div><div class="user-card-detail"><i class="fa-solid fa-at"></i>${escapeHtml(user.username||'-')}</div><div class="user-card-detail"><i class="fa-solid fa-envelope"></i>${escapeHtml(user.email||'-')}</div></div><div class="user-card-btns">${vB2}<button class="user-view-btn" title="Email" onclick="openAdminUserEmail('${se}')" style="color:#22c55e"><i class="fa-solid fa-envelope"></i></button><button class="user-view-btn msg" onclick="adminMessageUser('${se}')"><i class="fa-solid fa-comment"></i></button><button class="user-view-btn" onclick="viewUserDetail(${idx})"><i class="fa-solid fa-eye"></i></button><button class="user-view-btn danger" onclick="deleteUserAdmin('${se}')"><i class="fa-solid fa-trash-can"></i></button></div>`;list.appendChild(card);});}
 function toggleUserVerification(email){if(!email)return;if(isAdminUser(email)){showCustomAlert('admin already verified');return;}let u=getAllUsers();const i=u.findIndex(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());if(i===-1)return;u[i].isVerified=!u[i].isVerified;localStorage.setItem('site_users',JSON.stringify(u));logActivity('profile_update',u[i],'Verified: '+(u[i].isVerified?'YES':'NO'));renderAdminUsers();refreshAdminUI();showCustomAlert(u[i].isVerified?'✅ granted':'removed','success');}
 function adminMessageUser(email){if(!isAdminLoggedIn()){showCustomAlert('please sign in as admin first!');return;}const t2=getAllUsers().find(u=>String(u.email||'').toLowerCase()===String(email||'').toLowerCase());if(!t2){showCustomAlert('user not found!');return;}const lu=localStorage.getItem('logged_user');let cu=null;if(lu){try{cu=JSON.parse(lu);}catch(e){}}if(!cu||!isAdminUser(cu.email)){const a=getAdminUser();localStorage.setItem('logged_user',JSON.stringify(a));checkUserSession();}closeAdminPanel();document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='flex';applyChatBackground();openConversation(t2);}
-function viewUserDetail(idx){const users=getAllUsers();const u=users[idx];if(!u)return;const logs=getActivityLog().filter(l=>l.email===u.email);const av=u.profilePhoto?`<img src="${u.profilePhoto}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:10px;">`:'';const isA=isAdminUser(u.email);const isV=isA||u.isVerified;const vB=isV?getVerifiedBadgeHTML('lg'):'';let rows=`<div style="text-align:center;margin-bottom:16px;">${av}<div style="font-size:1.1rem;font-weight:800;display:flex;align-items:center;justify-content:center;gap:6px;">${escapeHtml(u.name||'unknown')}${vB}</div><div style="font-size:.75rem;color:var(--text-secondary);">${escapeHtml(u.username||'')}</div></div><div class="user-detail-modal-row"><span>ID</span><span>${escapeHtml(u.userId||'-')}</span></div><div class="user-detail-modal-row"><span>Email</span><span>${escapeHtml(u.email||'-')}</span></div><div class="user-detail-modal-row"><span>Password</span><span style="font-family:'Fira Code',monospace;font-size:.7rem;">${escapeHtml(u.password||'-')}</span></div><div class="user-detail-modal-row"><span>Bio</span><span>${escapeHtml(u.bio||'-')}</span></div><div class="user-detail-modal-row"><span>Verified</span><span>${isV?'yes':'no'}</span></div><div class="user-detail-modal-row"><span>Joined</span><span>${u.createdAt?new Date(u.createdAt).toLocaleString():'-'}</span></div><div class="form-buttons-group" style="margin-top:12px">${!isA?`<button class="submit-btn" onclick="toggleUserVerification('${escapeHtml(String(u.email||''))}');closeUserDetail();" style="background:linear-gradient(135deg,#1d9bf0,#1a8cd8)"><i class="fa-solid fa-circle-check"></i> ${isV?'remove':'verify'}</button>`:''}<button class="submit-btn" onclick="closeUserDetail();openAdminUserEmail('${escapeHtml(String(u.email||''))}');" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-envelope"></i> Email</button><button class="submit-btn email-btn" onclick="adminMessageUser('${escapeHtml(String(u.email||''))}');closeUserDetail();"><i class="fa-solid fa-comment"></i> Msg</button><button class="submit-btn" onclick="deleteUserAdmin('${escapeHtml(String(u.email||''))}')" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fa-solid fa-trash-can"></i> Del</button></div>`;document.getElementById('userDetailContent').innerHTML=rows;document.getElementById('userDetailModal').classList.add('active');}
+function viewUserDetail(idx){const users=getAllUsers();const u=users[idx];if(!u)return;const av=u.profilePhoto?`<img src="${u.profilePhoto}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:10px;">`:'';const isA=isAdminUser(u.email);const isV=isA||u.isVerified;const vB=isV?getVerifiedBadgeHTML('lg'):'';let rows=`<div style="text-align:center;margin-bottom:16px;">${av}<div style="font-size:1.1rem;font-weight:800;display:flex;align-items:center;justify-content:center;gap:6px;">${escapeHtml(u.name||'unknown')}${vB}</div><div style="font-size:.75rem;color:var(--text-secondary);">${escapeHtml(u.username||'')}</div></div><div class="user-detail-modal-row"><span>ID</span><span>${escapeHtml(u.userId||'-')}</span></div><div class="user-detail-modal-row"><span>Email</span><span>${escapeHtml(u.email||'-')}</span></div><div class="user-detail-modal-row"><span>Password</span><span style="font-family:'Fira Code',monospace;font-size:.7rem;">${escapeHtml(u.password||'-')}</span></div><div class="user-detail-modal-row"><span>Bio</span><span>${escapeHtml(u.bio||'-')}</span></div><div class="user-detail-modal-row"><span>Verified</span><span>${isV?'yes':'no'}</span></div><div class="user-detail-modal-row"><span>Joined</span><span>${u.createdAt?new Date(u.createdAt).toLocaleString():'-'}</span></div><div class="form-buttons-group" style="margin-top:12px">${!isA?`<button class="submit-btn" onclick="toggleUserVerification('${escapeHtml(String(u.email||''))}');closeUserDetail();" style="background:linear-gradient(135deg,#1d9bf0,#1a8cd8)"><i class="fa-solid fa-circle-check"></i> ${isV?'remove':'verify'}</button>`:''}<button class="submit-btn" onclick="closeUserDetail();openAdminUserEmail('${escapeHtml(String(u.email||''))}');" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fa-solid fa-envelope"></i> Email</button><button class="submit-btn email-btn" onclick="adminMessageUser('${escapeHtml(String(u.email||''))}');closeUserDetail();"><i class="fa-solid fa-comment"></i> Msg</button><button class="submit-btn" onclick="deleteUserAdmin('${escapeHtml(String(u.email||''))}')" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fa-solid fa-trash-can"></i> Del</button></div>`;document.getElementById('userDetailContent').innerHTML=rows;document.getElementById('userDetailModal').classList.add('active');}
 function closeUserDetail(){document.getElementById('userDetailModal').classList.remove('active');}
 function deleteUserAdmin(email){if(!email)return;const u=getAllUsers();const user=u.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());if(!user){showCustomAlert('user not found!');return;}if(isAdminUser(user.email)){showCustomAlert('admin account cannot be deleted!');return;}showCustomAlert(`"${user.name||user.email}" delete?`,'delete',function(){const tg=String(email).toLowerCase();const nu=u.filter(x=>String(x.email||'').toLowerCase()!==tg);localStorage.setItem('site_users',JSON.stringify(nu));const m=getChatMessages();for(const cid in m){const p=cid.split('__');if(p.includes(tg))delete m[cid];}saveChatMessages(m);const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);if(String(cu.email||'').toLowerCase()===tg)localStorage.removeItem('logged_user');}catch(e){}}renderAdminUsers();refreshAdminUI();updateChatBadge();closeUserDetail();showCustomAlert('user deleted!','success');});}
 function exportUsersCSV(){const users=getAllUsers();if(!users.length){showCustomAlert('no registered users.');return;}const rows=[['ID','Name','Username','Email','Password','Bio','Website','Verified']];users.forEach(u=>rows.push([u.userId||'',u.name,u.username,u.email,u.password,u.bio||'',u.website||'',(isAdminUser(u.email)||u.isVerified)?'Yes':'No']));const csv=rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`users-${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);showCustomAlert('CSV downloaded!','success');}
@@ -1991,8 +1961,8 @@ async function renderApplications(){const grid=document.getElementById('appsGrid
 
 function openAdminPanel(){refreshAdminUI();document.getElementById('adminPanelModal').classList.add('active');}
 function closeAdminPanel(){document.getElementById('adminPanelModal').classList.remove('active');applySiteContent();}
-function switchAdminTab(name,btn){document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));if(btn)btn.classList.add('active');const sec=document.querySelector(`.admin-section[data-section="${name}"]`);if(sec)sec.classList.add('active');if(name==='users')renderAdminUsers();if(name==='activity')renderAdminActivity();if(name==='chats')renderAdminChats();if(name==='apps')renderAdminSlots();if(name==='sections')renderAdminSectionsOrder();if(name==='effects')renderEffectsPanel();if(name==='social')renderAdminSocial();if(name==='account')renderAdminAccount();if(name==='emails')renderWelcomeSettings();if(name==='orders')renderAdminOrders();}
-function refreshAdminUI(){const c=getSiteContent();const users=getAllUsers();const logs=getActivityLog();const chats=getChatMessages();let totalChats=0;for(const k in chats)totalChats+=chats[k].length;const appsCount=(c.apps||[]).filter(a=>a.name&&a.name.trim()).length;const el=id=>document.getElementById(id);if(el('dash-apps-count'))el('dash-apps-count').textContent=`Apps: ${appsCount} / 8`;if(el('dash-users-count'))el('dash-users-count').textContent=`Users: ${users.length}`;if(el('dash-activity-count'))el('dash-activity-count').textContent=`Activities: ${logs.length}`;if(el('dash-chats-count'))el('dash-chats-count').textContent=`Chat: ${totalChats}`;if(el('dash-email-status'))el('dash-email-status').textContent='Email: '+(EMAILJS_CONFIG.enabled?'✅':'⚠️');if(el('dash-last-edit'))el('dash-last-edit').textContent='Last: '+c.lastEdit;document.getElementById('ah-brand').value=c.header.brand;document.getElementById('ah-role-en').value=c.header.roleEn;document.getElementById('ah-role-tr').value=c.header.roleTr;document.getElementById('ae-t-en').value=c.experience.titleEn;document.getElementById('ae-t-tr').value=c.experience.titleTr;document.getElementById('ae-date').value=c.experience.date;document.getElementById('ae-d-en').value=c.experience.descEn;document.getElementById('ae-d-tr').value=c.experience.descTr;document.getElementById('au-os-en').value=c.setup.osEn;document.getElementById('au-os-tr').value=c.setup.osTr;document.getElementById('au-ed-en').value=c.setup.editorEn;document.getElementById('au-ed-tr').value=c.setup.editorTr;document.getElementById('ak-be').value=c.stack.backend;document.getElementById('ak-fe').value=c.stack.frontend;document.getElementById('af-brand').value=c.footer.brand;document.getElementById('af-scan-en').value=c.footer.scanEn;document.getElementById('af-scan-tr').value=c.footer.scanTr;document.getElementById('af-copy').value=c.footer.copyright;const dl=document.getElementById('ag-default-lang');if(dl)dl.value=c.general?.defaultLang||'en';const pt=document.getElementById('ag-page-title');if(pt)pt.value=c.general?.pageTitle||'';const md=document.getElementById('ag-meta-desc');if(md)md.value=c.general?.metaDesc||'';renderAdminSlots();renderAdminSectionsOrder();renderEffectsPanel();renderAdminSocial();try{renderWelcomeSettings();}catch(e){}try{updateOrdersBadge();}catch(e){}}
+function switchAdminTab(name,btn){document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));if(btn)btn.classList.add('active');const sec=document.querySelector(`.admin-section[data-section="${name}"]`);if(sec)sec.classList.add('active');if(name==='users')renderAdminUsers();if(name==='activity')renderAdminActivity();if(name==='chats')renderAdminChats();if(name==='apps')renderAdminSlots();if(name==='sections')renderAdminSectionsOrder();if(name==='effects')renderEffectsPanel();if(name==='social')renderAdminSocial();if(name==='account')renderAdminAccount();if(name==='emails')renderWelcomeSettings();if(name==='orders'){renderAdminOrders();updateOrdersBadge();}}
+function refreshAdminUI(){const c=getSiteContent();const users=getAllUsers();const logs=getActivityLog();const chats=getChatMessages();let totalChats=0;for(const k in chats)totalChats+=chats[k].length;const appsCount=(c.apps||[]).filter(a=>a.name&&a.name.trim()).length;const el=id=>document.getElementById(id);if(el('dash-apps-count'))el('dash-apps-count').textContent=`Apps: ${appsCount} / 8`;if(el('dash-users-count'))el('dash-users-count').textContent=`Users: ${users.length}`;if(el('dash-activity-count'))el('dash-activity-count').textContent=`Activities: ${logs.length}`;if(el('dash-chats-count'))el('dash-chats-count').textContent=`Chat: ${totalChats}`;if(el('dash-email-status'))el('dash-email-status').textContent='Email: '+(EMAILJS_CONFIG.enabled?'✅':'⚠️');if(el('dash-last-edit'))el('dash-last-edit').textContent='Last: '+c.lastEdit;document.getElementById('ah-brand').value=c.header.brand;document.getElementById('ah-role-en').value=c.header.roleEn;document.getElementById('ah-role-tr').value=c.header.roleTr;document.getElementById('ae-t-en').value=c.experience.titleEn;document.getElementById('ae-t-tr').value=c.experience.titleTr;document.getElementById('ae-date').value=c.experience.date;document.getElementById('ae-d-en').value=c.experience.descEn;document.getElementById('ae-d-tr').value=c.experience.descTr;document.getElementById('au-os-en').value=c.setup.osEn;document.getElementById('au-os-tr').value=c.setup.osTr;document.getElementById('au-ed-en').value=c.setup.editorEn;document.getElementById('au-ed-tr').value=c.setup.editorTr;document.getElementById('ak-be').value=c.stack.backend;document.getElementById('ak-fe').value=c.stack.frontend;document.getElementById('af-brand').value=c.footer.brand;document.getElementById('af-scan-en').value=c.footer.scanEn;document.getElementById('af-scan-tr').value=c.footer.scanTr;document.getElementById('af-copy').value=c.footer.copyright;const dl=document.getElementById('ag-default-lang');if(dl)dl.value=c.general?.defaultLang||'en';const pt=document.getElementById('ag-page-title');if(pt)pt.value=c.general?.pageTitle||'';const md=document.getElementById('ag-meta-desc');if(md)md.value=c.general?.metaDesc||'';renderAdminSlots();renderAdminSectionsOrder();renderEffectsPanel();renderAdminSocial();try{renderWelcomeSettings();}catch(e){}try{updateOrdersBadge();}catch(e){}try{const ort=document.getElementById('orderRequireLoginToggle');if(ort)ort.checked=(getSiteContent().general?.orderRequireLogin!==false);}catch(e){}}
 function renderAdminSlots(){const list=document.getElementById('adminSlotsList');if(!list)return;const apps=getSiteContent().apps||[];list.innerHTML='';apps.forEach((app,idx)=>{const item=document.createElement('div');item.className='admin-slot';item.innerHTML=buildAdminSlotHTML(idx,app);list.appendChild(item);if(app.hasIcon){withTimeout(getIconData(idx),3000).then(icon=>{if(icon&&icon.dataUrl){const h=item.querySelector('div[style*="width:26px"]');if(h)h.innerHTML=`<img src="${icon.dataUrl}" class="icon-preview-mini">`;}}).catch(()=>{});}});}
 async function editAppSlot(idx){const c=getSiteContent();const app=c.apps[idx]||{name:'',desc:'',url:'',icon:'',requireLogin:false};pendingApkFile=null;pendingApkDelete=false;pendingIconDataUrl=null;pendingIconDelete=false;document.getElementById('editSlotIndex').value=idx;document.getElementById('editAppName').value=app.name||'';document.getElementById('editAppDesc').value=app.desc||'';document.getElementById('editAppUrl').value=app.url||'';document.getElementById('editAppRequireLogin').checked=!!app.requireLogin;document.getElementById('editAppApkFile').value='';document.getElementById('editAppIconFile').value='';let eA=null,eI=null;if(app.hasApk){try{eA=await withTimeout(getApkFile(idx),5000);}catch(e){}}if(app.hasIcon){try{eI=await withTimeout(getIconData(idx),5000);}catch(e){}}updateApkUI(eA?{name:eA.name,size:eA.size,existing:true}:(app.hasApk?{name:app.apkName||'APK',size:app.apkSize||0,existing:true}:null));if(eI&&eI.dataUrl)updateIconUI({dataUrl:eI.dataUrl,existing:true});else if(app.icon&&app.icon.trim().startsWith('http'))updateIconUI({dataUrl:app.icon.trim(),existing:true,isUrl:true});else updateIconUI(null);document.getElementById('adminEditModal').classList.add('active');}
 function closeAdminEdit(){document.getElementById('adminEditModal').classList.remove('active');}
@@ -2028,7 +1998,7 @@ function renderWelcomeSettings(){const s=getWelcomeSettings();const en=document.
 function openAdminUserEmail(email){const users=getAllUsers();let u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());if(!u&&isAdminUser(email))u=getAdminUser();if(!u){showCustomAlert('user not found!');return;}currentEmailTargetUser=u;const av=document.getElementById('aueAvatar');const nm=document.getElementById('aueName');const em=document.getElementById('aueEmail');const initial=(u.name||'U').trim().charAt(0).toUpperCase();if(av)av.textContent=initial;if(nm)nm.textContent=u.name||'User';if(em)em.textContent=u.email||'';document.getElementById('aue-subject').value='';document.getElementById('aue-message').value='';document.getElementById('aue-image').value='';document.getElementById('aue-link').value='';document.getElementById('aue-link-text').value='';document.getElementById('aue-include-pdf').checked=true;document.getElementById('aue-enable-image').checked=false;document.getElementById('aue-enable-link').checked=false;document.getElementById('aue-image-group').style.display='none';document.getElementById('aue-link-group').style.display='none';document.getElementById('adminUserEmailModal').classList.add('active');}
 function closeAdminUserEmail(){document.getElementById('adminUserEmailModal').classList.remove('active');currentEmailTargetUser=null;}
 async function sendAdminUserEmailSubmit(e){e.preventDefault();if(!currentEmailTargetUser)return;const user=currentEmailTargetUser;const subject=document.getElementById('aue-subject').value.trim();const message=document.getElementById('aue-message').value.trim();const enableImage=document.getElementById('aue-enable-image').checked;const enableLink=document.getElementById('aue-enable-link').checked;const imageUrl=enableImage?document.getElementById('aue-image').value.trim():'';const linkUrl=enableLink?document.getElementById('aue-link').value.trim():'';const linkText=enableLink?(document.getElementById('aue-link-text').value.trim()||'Buraya Tıkla'):'';const includePdf=document.getElementById('aue-include-pdf').checked;if(!subject||!message){showCustomAlert('Konu ve mesaj zorunludur');return;}const btn=e.target.querySelector('button[type="submit"]');const oldHTML=btn.innerHTML;btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Gönderiliyor...';btn.disabled=true;const r=await sendRichEmail(user.email,{subject,message,imageUrl,linkUrl,linkText,includePdf,type:'Admin Message'});btn.innerHTML=oldHTML;btn.disabled=false;if(r.success){logActivity('email_sent',getEffectiveLoggedUser(),`To ${user.email}: ${subject}`);closeAdminUserEmail();showCustomAlert('✅ Email gönderildi!','success');fireConfettiBurst(.5);}else{showCustomAlert('❌ '+(r.reason||'hata'),'error');}}
-function generatePDFBlob(subject,message,brand){try{const{jsPDF}=window.jspdf;const doc=new jsPDF({unit:'pt',format:'a4'});const pW=doc.internal.pageSize.getWidth();const pH=doc.internal.pageSize.getHeight();const m=50;doc.setFillColor(147,51,234);doc.rect(0,0,pW,80,'F');doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(26);doc.text(brand||'muminsultani',m,48);doc.setTextColor(30,30,40);doc.setFont('helvetica','bold');doc.setFontSize(18);doc.text(subject||'Message',m,130);doc.setDrawColor(147,51,234);doc.setLineWidth(2);doc.line(m,140,m+60,140);doc.setTextColor(40,40,55);doc.setFont('helvetica','normal');doc.setFontSize(11);const lines=doc.splitTextToSize(message||'',pW-m*2);doc.text(lines,m,170);return doc.output('blob');}catch(e){return null;}}
+function generatePDFBlob(subject,message,brand){try{const{jsPDF}=window.jspdf;const doc=new jsPDF({unit:'pt',format:'a4'});const pW=doc.internal.pageSize.getWidth();const m=50;doc.setFillColor(147,51,234);doc.rect(0,0,pW,80,'F');doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(26);doc.text(brand||'muminsultani',m,48);doc.setTextColor(30,30,40);doc.setFont('helvetica','bold');doc.setFontSize(18);doc.text(subject||'Message',m,130);doc.setDrawColor(147,51,234);doc.setLineWidth(2);doc.line(m,140,m+60,140);doc.setTextColor(40,40,55);doc.setFont('helvetica','normal');doc.setFontSize(11);const lines=doc.splitTextToSize(message||'',pW-m*2);doc.text(lines,m,170);return doc.output('blob');}catch(e){return null;}}
 async function uploadPDFToHost(blob,name){try{const fd=new FormData();fd.append('file',blob,name||'message.pdf');const r=await fetch('https://tmpfiles.org/api/v1/upload',{method:'POST',body:fd});if(!r.ok)throw new Error('upload');const d=await r.json();let url=(d&&d.data&&d.data.url)?d.data.url:'';if(!url)throw new Error('no url');return url.replace('tmpfiles.org/','tmpfiles.org/dl/');}catch(e){return null;}}
 async function sendRichEmail(toEmail,options){if(!EMAILJS_CONFIG.enabled)return{success:false,reason:'not_configured'};const brand=options.brand||getDyn('header.brand','muminsultani');let pdfUrl='';if(options.includePdf){const pb=generatePDFBlob(options.subject,options.message,brand);if(pb)pdfUrl=await uploadPDFToHost(pb,'muminsultani-message.pdf')||'';}const tp={to_email:toEmail,brand,subject:options.subject||'',message:options.message||'',image_url:options.imageUrl||'',link_url:options.linkUrl||'',link_text:options.linkText||'Buraya Tıkla',has_image:options.imageUrl?'yes':'no',has_link:options.linkUrl?'yes':'no',has_pdf:pdfUrl?'yes':'no',pdf_url:pdfUrl,year:new Date().getFullYear(),type:options.type||'Mesaj',code:'—'};try{const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EMAILJS_CONFIG.serviceId,template_id:EMAILJS_CONFIG.templateId,user_id:EMAILJS_CONFIG.publicKey,template_params:tp})});const txt=await r.text();if(r.ok&&(txt==='OK'||r.status===200))return{success:true,pdfUrl};return{success:false,reason:txt||`HTTP ${r.status}`};}catch(err){return{success:false,reason:err.message||'network_error'};}}
 
@@ -2040,7 +2010,7 @@ window.introConstellation=createAnimSystem('intro-canvas',{numberOfParticles:50,
 
 function forceRefreshUI(){applyTranslations();try{applySiteContent();}catch(e){}try{applySectionOrder();}catch(e){}try{applyEffectsSettings();}catch(e){}try{checkUserSession();}catch(e){}try{renderApplications();}catch(e){}try{updateChatBadge();}catch(e){}try{if(document.getElementById('chatPanelModal').classList.contains('active')){if(activeChatUser)renderChatMessages();else renderChatUsersList();}}catch(e){}try{if(document.getElementById('adminPanelModal').classList.contains('active')){refreshAdminUI();}}catch(e){}}
 
-document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.chat-user-item,.chat-send-btn,.chat-back-btn,.chat-profile-btn,.modal-close-btn,.auth-tab-btn,.ratio-btn,.social-btn,.lightbox-close-btn,.copy-pass-btn,.copy-id-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.chat-mic-btn,.recording-btn,.toggle-switch,.emoji-item,.emoji-cat-btn,.chat-msg-action-btn,.follower-item,.f-btn,.voice-play-btn,.effect-chip,.social-del,.hpm-item,.messenger-float-btn,.settings-chip,.hpm-close-x');if(b)playTickSound();},true);
+document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.chat-user-item,.chat-send-btn,.chat-back-btn,.chat-profile-btn,.modal-close-btn,.auth-tab-btn,.ratio-btn,.social-btn,.lightbox-close-btn,.copy-pass-btn,.copy-id-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.chat-mic-btn,.recording-btn,.toggle-switch,.emoji-item,.emoji-cat-btn,.chat-msg-action-btn,.voice-play-btn,.effect-chip,.social-del,.hpm-item,.messenger-float-btn,.settings-chip,.hpm-close-x');if(b)playTickSound();},true);
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&(e.key==='M'||e.key==='m')){e.preventDefault();triggerAdminAccess();}});
 const curtain=document.getElementById('security-curtain');
