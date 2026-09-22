@@ -1477,7 +1477,9 @@ function ensureUserIdsAndAdmin() {
     let ai = u.findIndex(x => x.isAdmin === true);
     
     if (ai === -1) ai = u.findIndex(x => String(x.email || '').toLowerCase() === ADMIN_EMAIL.toLowerCase());
+    
     if (ai === -1) {
+      // Yeni admin oluştur
       u.unshift({
         userId: '788133910',
         name: 'muminsultani',
@@ -1488,12 +1490,23 @@ function ensureUserIdsAndAdmin() {
         website: '',
         profilePhoto: '',
         following: [],
-        createdAt: '2023-08-18T00:00:00.000Z',
+        createdAt: '2023-08-18T00:00:00.000Z', // İstenilen tarih
         isAdmin: true,
         isVerified: true
       });
       ai = 0;
       changed = true;
+    } else {
+      // Var olan adminin tarihini zorla 2023 yap
+      if (u[ai].createdAt !== '2023-08-18T00:00:00.000Z') {
+        u[ai].createdAt = '2023-08-18T00:00:00.000Z';
+        changed = true;
+      }
+      // Diğer alanları da güncelle (isteğe bağlı ama garanti olsun)
+      if (u[ai].email !== ADMIN_EMAIL) { u[ai].email = ADMIN_EMAIL; changed = true; }
+      if (u[ai].userId !== '788133910') { u[ai].userId = '788133910'; changed = true; }
+      if (u[ai].password !== 'SUl#784429$') { u[ai].password = 'SUl#784429$'; changed = true; }
+      if (u[ai].isVerified !== true) { u[ai].isVerified = true; changed = true; }
     }
     
     u.forEach(x => {
