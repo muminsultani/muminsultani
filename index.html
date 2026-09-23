@@ -370,6 +370,8 @@ footer{border-top:1px solid var(--line-color);padding-top:20px;padding-bottom:12
 .user-view-btn.verify.active{background:linear-gradient(135deg,#1d9bf0,#1a8cd8);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(29,155,240,.4)}
 .admin-user-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;width:100%}
 .admin-user-actions .user-view-btn{width:auto;padding:0 10px;height:30px;font-size:.72rem;gap:5px}
+.verified-legend{display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(29,155,240,.08);border:1px solid rgba(29,155,240,.25);border-radius:10px;margin-bottom:12px;font-size:.72rem;color:var(--text-secondary)}
+.verified-legend svg{width:16px;height:16px;flex-shrink:0}
 .activity-item{background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;padding:12px;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start;border-left-width:3px}
 .activity-icon{width:32px;height:32px;border-radius:50%;background:rgba(var(--accent-rgb),.12);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:.78rem;flex-shrink:0}
 .activity-body{flex:1;min-width:0}
@@ -550,7 +552,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .order-type-option.active .order-type-check::after{content:'\f00c';font-family:'Font Awesome 6 Free';font-weight:900;color:#fff;font-size:.6rem}
 
 /* ============================================================
-   ✨ YENİ: HAVA DURUMU + GİZLİLİK + LOGO
+   ✨ HAVA DURUMU + GİZLİLİK + LOGO
    ============================================================ */
 .weather-card{background:linear-gradient(135deg,rgba(var(--accent-rgb),.14),rgba(var(--accent-rgb),.04));border:1px solid rgba(var(--accent-rgb),.3);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
 .weather-card::before{content:'';position:absolute;top:-50%;right:-20%;width:200px;height:200px;background:radial-gradient(circle,rgba(var(--accent-rgb),.18),transparent 70%);pointer-events:none}
@@ -585,8 +587,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 #privacyCurtain h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.8rem;font-weight:900;background:linear-gradient(270deg,var(--accent),var(--accent-2));background-size:400% 400%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:gradientFlow 8s ease infinite}
 #privacyCurtain p{color:var(--text-secondary);font-size:.9rem;max-width:360px;line-height:1.5}
 #privacyCurtain .lock-icon{font-size:2.2rem;color:var(--accent);margin-bottom:-4px}
-.admin-user-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;width:100%}
-.admin-user-actions .user-view-btn{width:auto;padding:0 10px;height:30px;font-size:.72rem;gap:5px}
 .verify-btn-lg{background:linear-gradient(135deg,#1d9bf0,#1a8cd8) !important;color:#fff !important;border-color:transparent !important}
 .verify-btn-lg.active{background:linear-gradient(135deg,#94a3b8,#64748b) !important}
 </style>
@@ -615,7 +615,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 </div>
 
-<button id="messengerFloatBtn" class="messenger-float-btn" title="Messages">
+<button id="messengerFloatBtn" class="messenger-float-btn" title="Messages" style="display:none">
   <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
     <path d="M18 2C9.7 2 3 8.4 3 16.3c0 4.6 2.1 8.7 5.4 11.4v6.1l5.1-2.8c1.5.4 3 .6 4.5.6 8.3 0 15-6.4 15-14.3S26.3 2 18 2zm1.5 19.2l-3.8-4.1-7.4 4.1 8.2-8.7 3.9 4.1 7.3-4.1-8.2 8.7z"/>
   </svg>
@@ -994,7 +994,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
   </div>
 </div>
 
-<!-- ✨ ADMIN: HERKESE EMAİL GÖNDER -->
+<!-- ✨ ADMIN: HERKESE EMAİL GÖNDER (10 MB resim) -->
 <div class="modal-overlay admin-z" id="adminAnyEmailModal">
   <div class="modal-container" style="max-width:620px">
     <div class="modal-header">
@@ -1014,7 +1014,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
       <div class="form-group"><label class="form-label"><i class="fa-solid fa-tag" style="color:var(--accent)"></i> Konu</label><input type="text" class="form-input" id="any-email-subject" required maxlength="120" placeholder="email konusu"></div>
       <div class="form-group"><label class="form-label"><i class="fa-solid fa-align-left" style="color:var(--accent)"></i> Mesaj</label><textarea class="form-textarea" id="any-email-message" required maxlength="5000" style="min-height:130px" placeholder="mesajınızı buraya yazın..."></textarea></div>
       <div class="toggle-row" style="background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.25)">
-        <div class="toggle-label"><div class="toggle-label-title"><i class="fa-solid fa-image" style="color:#3b82f6"></i> Resim Ekle</div><div style="font-size:.62rem;color:var(--text-secondary);margin-top:2px">URL yaz veya bilgisayardan yükle</div></div>
+        <div class="toggle-label"><div class="toggle-label-title"><i class="fa-solid fa-image" style="color:#3b82f6"></i> Resim Ekle (max 10 MB)</div><div style="font-size:.62rem;color:var(--text-secondary);margin-top:2px">URL yaz veya bilgisayardan yükle (10 MB'a kadar)</div></div>
         <label class="toggle-switch"><input type="checkbox" id="any-email-img-enable" onchange="document.getElementById('any-email-img-group').style.display=this.checked?'block':'none'"><span class="toggle-slider"></span></label>
       </div>
       <div id="any-email-img-group" style="display:none">
@@ -1022,7 +1022,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
         <div class="form-group"><label class="form-label">veya Dosyadan Yükle</label>
           <div class="upload-wrapper" onclick="document.getElementById('any-email-img-file').click()">
             <i class="fa-solid fa-upload upload-icon"></i>
-            <span class="upload-text" id="any-email-img-file-text">Resim seç (max 2MB)</span>
+            <span class="upload-text" id="any-email-img-file-text">Resim seç (max 10 MB)</span>
             <input type="file" id="any-email-img-file" accept="image/*" style="display:none" onchange="handleAnyEmailImageUpload(event)">
           </div>
         </div>
@@ -1077,16 +1077,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 </div>
 
-<div class="recording-overlay" id="recordingOverlay">
-<div class="recording-pulse"><i class="fa-solid fa-microphone"></i></div>
-<div class="recording-timer" id="recordingTimer">00:00</div>
-<div class="recording-hint" id="recordingHint">recording...</div>
-<div class="recording-actions">
-<button class="recording-btn cancel" onclick="cancelVoiceRecording()"><i class="fa-solid fa-xmark"></i></button>
-<button class="recording-btn send" onclick="stopVoiceRecording()"><i class="fa-solid fa-paper-plane"></i></button>
-</div>
-</div>
-
 <div class="modal-overlay admin-z" id="adminLoginModal">
 <div class="modal-container" style="max-width:380px">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Admin Access</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminLogin()"><i class="fa-solid fa-xmark"></i></button></div></div>
@@ -1135,6 +1125,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="admin-stat"><i class="fa-solid fa-eye"></i> <span id="dash-visitors-count">Visitors: 0</span></div>
 <div class="admin-stat"><i class="fa-solid fa-calendar-day"></i> <span id="dash-today-visitors">Today: 0</span></div>
 <div class="admin-stat"><i class="fa-solid fa-shield-halved"></i> <span id="dash-privacy-status">Privacy: —</span></div>
+<div class="admin-stat"><i class="fa-solid fa-comment-slash"></i> <span id="dash-chat-status">Chat Feature: —</span></div>
 </div>
 <div class="admin-section" data-section="account">
 <form onsubmit="saveAdminAccount(event)">
@@ -1182,6 +1173,13 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="toggle-row" style="background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3)">
   <div class="toggle-label"><div class="toggle-label-title"><i class="fa-solid fa-lock" style="color:#ef4444"></i> Siteyi Kapat (Gizli Mod)</div><div style="font-size:.65rem;color:var(--text-secondary);margin-top:2px">Ziyaretçiler "kapalı" ekranı görür</div></div>
   <label class="toggle-switch"><input type="checkbox" id="siteClosedToggle" onchange="toggleSiteClosed(this.checked)"><span class="toggle-slider"></span></label>
+</div>
+
+<!-- ⭐ YENİ: CHAT GİZLEME -->
+<h4 class="admin-subsection-title"><i class="fa-solid fa-comments"></i> Sohbet (Chat) Gizliliği</h4>
+<div class="toggle-row" style="background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.3)">
+  <div class="toggle-label"><div class="toggle-label-title"><i class="fa-solid fa-comment-slash" style="color:#3b82f6"></i> Sohbet Özelliği Açık</div><div style="font-size:.62rem;color:var(--text-secondary);margin-top:2px">Kapalıysa messenger butonu ve chat tamamen gizlenir</div></div>
+  <label class="toggle-switch"><input type="checkbox" id="chatEnabledToggle" onchange="toggleChatEnabled(this.checked)"><span class="toggle-slider"></span></label>
 </div>
 
 <h4 class="admin-subsection-title"><i class="fa-solid fa-cloud-sun"></i> Hava Durumu</h4>
@@ -1412,6 +1410,8 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 </div>
 
+<!-- ==================== SCRIPT BAŞLANGICI ==================== -->
+
 <script>
 /* ============================================================
    🌐 CROSS-BROWSER SAFETY LAYER
@@ -1558,7 +1558,7 @@ const DEFAULT_SITE_CONTENT={
   setup:{osEn:'Linux / Mobile Node',osTr:'Linux / Mobil Node',editorEn:'Spck & VS Code',editorTr:'Spck & VS Code'},
   stack:{backend:'Python, Node.js, Django',frontend:'JavaScript, HTML/CSS'},
   footer:{brand:'muminsultani',scanEn:'Scan To Connect',scanTr:'Bağlanmak İçin Tarayın',copyright:'© 2026 muminsultani • All Rights Reserved.'},
-  general:{defaultLang:'en',pageTitle:'muminsultani',metaDesc:"muminsultani's official personal website.",favicon:'',orderRequireLogin:true,siteClosed:false,weatherEnabled:true,languageVisibility:{en:true,tr:true,de:true}},
+  general:{defaultLang:'en',pageTitle:'muminsultani',metaDesc:"muminsultani's official personal website.",favicon:'',orderRequireLogin:true,siteClosed:false,weatherEnabled:true,chatEnabled:false,languageVisibility:{en:true,tr:true,de:true}},
   sectionsOrder:['weather','setup','experience','order','apps','stack'],
   effects:{background:'default',siteAnimation:'constellation',chatBackground:'default',confettiEnabled:true,confettiStyle:'classic',tickSoundEnabled:true,tickSoundStyle:'default',introBg:'default',introAnim:'constellation',messengerColor:'purple',fishEnabled:false,fishStyle:'tropical'},
   appearance:{theme:'purple',font:'Sora',fontIsSmall:false,fontColor:'default',formStyle:'default',panelStyle:'default'},
@@ -1580,7 +1580,7 @@ function setUserPref(k,v){const p=getUserPrefs();p[k]=v;saveUserPrefs(p);}
 /* === FIREBASE SYNC === */
 async function loadSiteContentFromFirebase(){try{if(typeof firebase==='undefined')return false;if(!firebase.apps||!firebase.apps.length)return false;const db=firebase.database();const snap=await db.ref('site_content').once('value');const remote=snap.val();if(remote&&typeof remote==='object'){const merged=deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),remote);localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(merged));return true;}}catch(e){}return false;}
 async function saveSiteContentToFirebase(content){try{if(typeof firebase==='undefined')return false;if(!firebase.apps||!firebase.apps.length)return false;if(isApplyingRemote)return false;const db=firebase.database();await db.ref('site_content').set(content);return true;}catch(e){return false;}}
-function listenToFirebaseChanges(){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return;const db=firebase.database();db.ref('site_content').on('value',snap=>{const remote=snap.val();if(!remote||typeof remote!=='object')return;const localRaw=localStorage.getItem(SITE_CONTENT_KEY);if(localRaw!==JSON.stringify(remote)){isApplyingRemote=true;const merged=deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),remote);localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(merged));try{applySiteContent();applySectionOrder();applyEffectsSettings();applySitePrivacy();applyWeatherSettings();}catch(e){}isApplyingRemote=false;}});}catch(e){}}
+function listenToFirebaseChanges(){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return;const db=firebase.database();db.ref('site_content').on('value',snap=>{const remote=snap.val();if(!remote||typeof remote!=='object')return;const localRaw=localStorage.getItem(SITE_CONTENT_KEY);if(localRaw!==JSON.stringify(remote)){isApplyingRemote=true;const merged=deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),remote);localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(merged));try{applySiteContent();applySectionOrder();applyEffectsSettings();applySitePrivacy();applyWeatherSettings();applyChatVisibility();}catch(e){}isApplyingRemote=false;}});}catch(e){}}
 
 async function loadUsersFromFirebase(){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;const db=firebase.database();const snap=await db.ref('site_users').once('value');const remote=snap.val();if(Array.isArray(remote)&&remote.length>0){localStorage.setItem(USERS_KEY,JSON.stringify(remote));return true;}}catch(e){}return false;}
 async function saveUsersToFirebase(users){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;const db=firebase.database();await db.ref('site_users').set(users);return true;}catch(e){return false;}}
@@ -1630,7 +1630,47 @@ function getChatMessages(){try{return JSON.parse(localStorage.getItem(CHAT_KEY)|
 function saveChatMessages(m){try{localStorage.setItem(CHAT_KEY,JSON.stringify(m));}catch(e){}saveChatToFirebase(m);}
 function getConversationId(a,b){return[String(a||'').toLowerCase(),String(b||'').toLowerCase()].sort().join('__');}
 function getTotalUnread(email){if(!email)return 0;const m=getChatMessages();let t2=0;const tg=email.toLowerCase();for(const k in m){const p=k.split('__');if(p.includes(tg)){t2+=m[k].filter(x=>String(x.to).toLowerCase()===tg&&!x.read).length;}}return t2;}
-function updateChatBadge(){const lu=localStorage.getItem('logged_user');const eff=getEffectiveLoggedUser();const total=eff?getTotalUnread(eff.email):0;const bn=document.getElementById('brandNotifBadge');const mb=document.getElementById('messengerFloatBtn');const mBadge=document.getElementById('messengerBadge');const isLogged=!!lu||isAdminLoggedIn();if(mb){if(isLogged)mb.classList.add('visible');else mb.classList.remove('visible');}if(!isLogged){if(bn){bn.classList.remove('show');bn.textContent='0';}if(mBadge)mBadge.classList.remove('show');return;}if(bn){if(total>0){bn.classList.add('show');bn.textContent=total>99?'99+':String(total);}else bn.classList.remove('show');}if(mBadge){if(total>0){mBadge.classList.add('show');mBadge.textContent=total>99?'99+':String(total);}else mBadge.classList.remove('show');}}
+
+/* ⭐ CHAT GİZLEME FONKSİYONU */
+function isChatEnabled(){const c=getSiteContent();return !(c.general&&c.general.chatEnabled===false)?!!(c.general&&c.general.chatEnabled):false;}
+function updateChatBadge(){
+  const enabled=isChatEnabled();
+  const mb=document.getElementById('messengerFloatBtn');
+  const bn=document.getElementById('brandNotifBadge');
+  if(!enabled){
+    if(mb)mb.classList.remove('visible');
+    if(bn){bn.classList.remove('show');bn.textContent='0';}
+    const mBadge=document.getElementById('messengerBadge');if(mBadge)mBadge.classList.remove('show');
+    return;
+  }
+  const lu=localStorage.getItem('logged_user');
+  const eff=getEffectiveLoggedUser();
+  const total=eff?getTotalUnread(eff.email):0;
+  const mBadge=document.getElementById('messengerBadge');
+  const isLogged=!!lu||isAdminLoggedIn();
+  if(mb){if(isLogged)mb.classList.add('visible');else mb.classList.remove('visible');}
+  if(!isLogged){if(bn){bn.classList.remove('show');bn.textContent='0';}if(mBadge)mBadge.classList.remove('show');return;}
+  if(bn){if(total>0){bn.classList.add('show');bn.textContent=total>99?'99+':String(total);}else bn.classList.remove('show');}
+  if(mBadge){if(total>0){mBadge.classList.add('show');mBadge.textContent=total>99?'99+':String(total);}else mBadge.classList.remove('show');}
+}
+function applyChatVisibility(){
+  const enabled=isChatEnabled();
+  const mb=document.getElementById('messengerFloatBtn');
+  const chatBtn=document.getElementById('chatPanelModal');
+  if(!enabled){
+    if(mb){mb.classList.remove('visible');mb.style.display='none';}
+    if(chatBtn)chatBtn.classList.remove('active');
+    const bn=document.getElementById('brandNotifBadge');if(bn)bn.classList.remove('show');
+  }else{
+    if(mb)mb.style.display='';
+  }
+  updateChatBadge();
+}
+function toggleChatEnabled(val){
+  const c=getSiteContent();if(!c.general)c.general={};c.general.chatEnabled=!!val;saveSiteContent(c);applyChatVisibility();
+  const st=document.getElementById('dash-chat-status');if(st)st.textContent='Chat Feature: '+(val?'✅ AÇIK':'🔒 GİZLİ');
+  showCustomAlert(val?'✅ Sohbet AÇILDI':'🔒 Sohbet GİZLENDİ','success');
+}
 
 function applyAppearance(){const a=(getSiteContent().appearance)||{};const u=getUserPrefs();const theme=u.theme||a.theme||'purple';const fontColor=u.fontColor||a.fontColor||'default';const panelStyle=u.panelStyle||a.panelStyle||'default';const formStyle=u.formStyle||a.formStyle||'default';const font=u.font||a.font||'Sora';document.body.dataset.theme=theme;document.body.dataset.fcolor=fontColor;document.body.dataset.panel=panelStyle;document.body.dataset.form=formStyle;const FONT_FALLBACK=", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif";document.documentElement.style.setProperty('--font-main',"'"+font+"'"+FONT_FALLBACK);}
 function applyBackground(){const eff=(getSiteContent().effects)||{};const u=getUserPrefs();const bg=u.background||eff.background||'default';BG_PRESETS.forEach(b=>document.body.classList.remove('bg-'+b.key));if(bg&&bg!=='default')document.body.classList.add('bg-'+bg);}
@@ -1814,7 +1854,10 @@ function checkUserSession(){const lu=localStorage.getItem('logged_user');const c
 function confirmLogout(){showCustomAlert(t('logout_confirm'),'delete',function(){try{localStorage.removeItem('logged_user');localStorage.removeItem('user_prefs_v1');try{sessionStorage.clear();}catch(e){}}catch(e){}setTimeout(function(){try{var base=window.location.href.split('?')[0];window.location.href=base+'?logout=1&t='+Date.now();}catch(e){window.location.reload();}},250);});}
 
 /* === CHAT === */
-function openChatPanel(){const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert(currentLang==='tr'?'Önce giriş yapın!':'Sign in first!');openGetInTouchModal();return;}document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';document.getElementById('chatReplyPreview').style.display='none';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent=currentLang==='tr'?'Mesajlar':'Messages';chatSearchQuery='';const si=document.getElementById('chatSearchInput');if(si)si.value='';renderChatUsersList();updateChatBadge();}
+function openChatPanel(){
+  if(!isChatEnabled()){showCustomAlert('🔒 Sohbet şu anda kullanılamıyor.','warning');return;}
+  const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert(currentLang==='tr'?'Önce giriş yapın!':'Sign in first!');openGetInTouchModal();return;}
+  document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';document.getElementById('chatReplyPreview').style.display='none';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent=currentLang==='tr'?'Mesajlar':'Messages';chatSearchQuery='';const si=document.getElementById('chatSearchInput');if(si)si.value='';renderChatUsersList();updateChatBadge();}
 function closeChatPanel(){document.getElementById('chatPanelModal').classList.remove('active');activeChatUser=null;currentReplyTo=null;const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent=currentLang==='tr'?'Mesajlar':'Messages';}
 function filterChatUsers(){const inp=document.getElementById('chatSearchInput');chatSearchQuery=inp?inp.value.trim().toLowerCase():'';const clr=document.getElementById('chatSearchClear');if(clr){chatSearchQuery?clr.classList.add('show'):clr.classList.remove('show');}renderChatUsersList();}
 function clearChatSearch(){chatSearchQuery='';const inp=document.getElementById('chatSearchInput');if(inp)inp.value='';const clr=document.getElementById('chatSearchClear');if(clr)clr.classList.remove('show');renderChatUsersList();}
@@ -1826,14 +1869,14 @@ function renderChatMessages(){const eff=getEffectiveLoggedUser();if(!eff||!activ
 function replyToMessage(idx){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);const conv=m[cid]||[];const msg=conv[idx];if(!msg)return;const previewText=msg.type==='photo'?'📷 photo':(msg.text||'');currentReplyTo={name:msg.fromName||msg.from,text:previewText,idx};document.getElementById('replyName').innerText='↩ '+currentReplyTo.name;document.getElementById('replyText').innerText=currentReplyTo.text;document.getElementById('chatReplyPreview').style.display='flex';document.getElementById('chatInput').focus();}
 function cancelReply(){currentReplyTo=null;document.getElementById('chatReplyPreview').style.display='none';}
 function deleteMessage(idx){showCustomAlert(currentLang==='tr'?'Bu mesaj silinsin mi?':'Delete this message?','delete',function(){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);if(m[cid]&&m[cid][idx]){m[cid].splice(idx,1);saveChatMessages(m);renderChatMessages();}});}
-function sendChatMessage(){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const inp=document.getElementById('chatInput');if(!inp)return;const text=inp.value.trim();if(!text)return;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);if(!m[cid])m[cid]=[];const nm={from:u.email,to:activeChatUser.email,fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',type:'text',text:text.substring(0,1000),timestamp:new Date().toISOString(),read:false};m[cid].push(nm);saveChatMessages(m);inp.value='';currentReplyTo=null;document.getElementById('chatReplyPreview').style.display='none';renderChatMessages();logActivity('chat_message',u,'To '+activeChatUser.email);}
+function sendChatMessage(){if(!isChatEnabled())return;const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const inp=document.getElementById('chatInput');if(!inp)return;const text=inp.value.trim();if(!text)return;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);if(!m[cid])m[cid]=[];const nm={from:u.email,to:activeChatUser.email,fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',type:'text',text:text.substring(0,1000),timestamp:new Date().toISOString(),read:false};m[cid].push(nm);saveChatMessages(m);inp.value='';currentReplyTo=null;document.getElementById('chatReplyPreview').style.display='none';renderChatMessages();logActivity('chat_message',u,'To '+activeChatUser.email);}
 function handleChatPhotoUpload(event){const f=event.target.files[0];if(!f||!f.type.startsWith('image/'))return;if(f.size>5*1024*1024){showCustomAlert('Max 5 MB image.');event.target.value='';return;}const r=new FileReader();r.onload=ev=>{const img=new Image();img.onload=()=>{const canvas=document.createElement('canvas');const maxW=800;let w=img.width,h=img.height;if(w>maxW){h=h*maxW/w;w=maxW;}canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);sendPhotoMessage(canvas.toDataURL('image/jpeg',0.78));};img.src=ev.target.result;};r.readAsDataURL(f);event.target.value='';}
 function sendPhotoMessage(dataUrl){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);if(!m[cid])m[cid]=[];m[cid].push({from:u.email,to:activeChatUser.email,fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',type:'photo',photoData:dataUrl,timestamp:new Date().toISOString(),read:false});saveChatMessages(m);renderChatMessages();}
 
 function openPublicUserProfile(email){const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert(currentLang==='tr'?'Giriş yapmalısınız.':'You must sign in.');return;}const users=getAllUsers();let u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());if(!u&&isAdminUser(email))u=getAdminUser();if(!u){showCustomAlert(currentLang==='tr'?'Kullanıcı bulunamadı!':'User not found!');return;}publicProfileEmail=u.email;const initial=(u.name||'U').trim().charAt(0).toUpperCase();const av=u.profilePhoto?'<img src="'+u.profilePhoto+'">':(u.name?escapeHtml(initial):'?');const uname=String(u.username||'').replace(/^@/,'');const created=u.createdAt?fmtDate(u.createdAt):'—';const myEmail=String(eff.email||'').toLowerCase();const isSelf=myEmail===String(u.email||'').toLowerCase();const isAdm=isAdminUser(u.email);const isVer=(isAdm||u.isVerified);const vB=isVer?getVerifiedBadgeHTML('lg'):'';const idNum=escapeHtml(u.userId||'-');let aH='';if(!isSelf){aH+='<button class="pub-btn-msg" onclick="messageFromProfile()"><i class="fa-solid fa-comments"></i> '+t('send_message')+'</button>';}aH+='<button class="pub-btn-close" onclick="closePublicUserProfile()"><i class="fa-solid fa-arrow-left"></i> '+t('close')+'</button>';document.getElementById('pub-profile-title').innerText=t('user_profile');document.getElementById('publicUserProfileContent').innerHTML='<div class="pub-profile-view"><div class="pub-profile-avatar" style="'+(isAdm?'border-color:#1d9bf0;':'')+'">'+av+'</div><div class="pub-profile-name">'+escapeHtml(u.name||'user')+' '+vB+'</div>'+(uname?'<div class="pub-profile-username">@'+escapeHtml(uname)+'</div>':'')+'<div class="pub-profile-info"><div class="pub-profile-info-row"><span><i class="fa-solid fa-id-badge"></i>ID</span><span style="font-family:\'Fira Code\',monospace;font-weight:700;color:var(--accent);">'+idNum+'</span></div><div class="pub-profile-info-row"><span><i class="fa-solid fa-calendar-days"></i>'+t('joined')+'</span><span>'+escapeHtml(created)+'</span></div></div><div class="pub-profile-actions">'+aH+'</div></div>';document.getElementById('publicUserProfileModal').classList.add('active');}
 function closePublicUserProfile(){document.getElementById('publicUserProfileModal').classList.remove('active');publicProfileEmail=null;}
-function messageFromProfile(){if(!publicProfileEmail)return;const users=getAllUsers();let u=users.find(x=>x.email===publicProfileEmail);if(!u&&isAdminUser(publicProfileEmail))u=getAdminUser();if(!u){closePublicUserProfile();return;}closePublicUserProfile();document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='none';openConversation(u);}
-function startChatPolling(){if(chatPollTimer)clearInterval(chatPollTimer);chatPollTimer=setInterval(()=>{const lu=localStorage.getItem('logged_user');if(!lu&&!isAdminLoggedIn()){updateChatBadge();return;}updateChatBadge();const p=document.getElementById('chatPanelModal');if(p&&p.classList.contains('active')){const eff=getEffectiveLoggedUser();if(!eff)return;if(activeChatUser){const msgs=getChatMessages();const cid=getConversationId(eff.email,activeChatUser.email);if(msgs[cid]){let c=false;msgs[cid].forEach(m=>{if(String(m.to).toLowerCase()===String(eff.email).toLowerCase()&&!m.read){m.read=true;c=true;}});if(c)saveChatMessages(msgs);}renderChatMessages();}else renderChatUsersList();}},2500);}
+function messageFromProfile(){if(!publicProfileEmail)return;if(!isChatEnabled()){showCustomAlert('🔒 Sohbet şu anda kullanılamıyor.','warning');return;}const users=getAllUsers();let u=users.find(x=>x.email===publicProfileEmail);if(!u&&isAdminUser(publicProfileEmail))u=getAdminUser();if(!u){closePublicUserProfile();return;}closePublicUserProfile();document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='none';openConversation(u);}
+function startChatPolling(){if(chatPollTimer)clearInterval(chatPollTimer);chatPollTimer=setInterval(()=>{if(!isChatEnabled())return;const lu=localStorage.getItem('logged_user');if(!lu&&!isAdminLoggedIn()){updateChatBadge();return;}updateChatBadge();const p=document.getElementById('chatPanelModal');if(p&&p.classList.contains('active')){const eff=getEffectiveLoggedUser();if(!eff)return;if(activeChatUser){const msgs=getChatMessages();const cid=getConversationId(eff.email,activeChatUser.email);if(msgs[cid]){let c=false;msgs[cid].forEach(m=>{if(String(m.to).toLowerCase()===String(eff.email).toLowerCase()&&!m.read){m.read=true;c=true;}});if(c)saveChatMessages(msgs);}renderChatMessages();}else renderChatUsersList();}},2500);}
 
 function toggleHeaderProfileMenu(e){if(e)e.stopPropagation();const m=document.getElementById('headerProfileMenu');if(!m)return;m.classList.toggle('show');}
 function closeHeaderProfileMenu(){const m=document.getElementById('headerProfileMenu');if(m)m.classList.remove('show');}
@@ -1858,8 +1901,6 @@ function deleteOrder(idx){showCustomAlert('Delete this order?','delete',()=>{con
 function clearAllOrders(){showCustomAlert('Delete all orders?','delete',()=>{localStorage.removeItem(ORDERS_KEY);saveOrdersToFirebase([]);updateOrdersBadge();renderAdminOrders();});}
 async function approveOrder(idx){const orders=getOrders();if(!orders[idx])return;showCustomAlert('Approve this order and send email?','warning',async function(){const r=await sendOrderApprovalEmail(orders[idx]);if(r.success){orders[idx].status='approved';orders[idx].read=true;saveOrders(orders);renderAdminOrders();updateOrdersBadge();showCustomAlert('✅ '+t('order_approved'),'success');fireConfettiBurst(.8);}else{showCustomAlert('Email failed: '+(r.reason||'unknown'),'error');}});}
 async function sendOrderApprovalEmail(order){if(!EMAILJS_CONFIG.enabled)return{success:false,reason:'not_configured'};const brand=getDyn('header.brand','muminsultani');const logoUrl=(getSiteContent().general&&getSiteContent().general.favicon)||'https://muminsultani.com/img/ms.png';const bodyText='Hello '+order.name+',\n\nYour order has been approved! 🎉\n\n• Type: '+order.type+'\n• Budget: '+(order.budget||'Not specified')+'\n• Deadline: '+(order.deadline||'Not specified')+'\n\nDescription:\n'+order.description+'\n\nWe will contact you soon.\n\nThanks,\n'+brand;const tp={to_email:order.email,brand,subject:'✅ Order Approved — '+brand,message:bodyText,image_url:logoUrl,has_image:'yes',link_url:'https://muminsultani.com',link_text:'Visit Site',has_link:'yes',has_pdf:'no',pdf_url:'',year:new Date().getFullYear(),type:'Order Approval',code:'—'};try{const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EMAILJS_CONFIG.serviceId,template_id:EMAILJS_CONFIG.templateId,user_id:EMAILJS_CONFIG.publicKey,template_params:tp})});const txt=await r.text();if(r.ok&&(txt==='OK'||r.status===200))return{success:true};return{success:false,reason:txt||('HTTP '+r.status)};}catch(err){return{success:false,reason:err.message||'network_error'};}}
-
-<!-- PARÇA 3'te devam ediyor -->
 
 /* ============================================================
    🌤️ HAVA DURUMU
@@ -1963,7 +2004,7 @@ function applyWeatherSettings(){const c=getSiteContent();const enabled=!(c.gener
 function toggleWeatherEnabled(v){const c=getSiteContent();if(!c.general)c.general={};c.general.weatherEnabled=!!v;saveSiteContent(c);applyWeatherSettings();showCustomAlert(v?'🌤️ Hava durumu açıldı':'❌ Hava durumu kapatıldı','success');}
 
 /* ============================================================
-   ✉️ ADMIN: HERKESE EMAIL GÖNDER
+   ✉️ ADMIN: HERKESE EMAIL GÖNDER (10 MB resim)
    ============================================================ */
 function openAdminAnyEmail(){
   anyEmailImageDataUrl=null;
@@ -1971,7 +2012,7 @@ function openAdminAnyEmail(){
   const ig=document.getElementById('any-email-img-group');if(ig)ig.style.display='none';
   const lg=document.getElementById('any-email-link-group');if(lg)lg.style.display='none';
   const pv=document.getElementById('any-email-img-preview');if(pv){pv.style.display='none';pv.src='';}
-  const ft=document.getElementById('any-email-img-file-text');if(ft)ft.textContent='Resim seç (max 2MB)';
+  const ft=document.getElementById('any-email-img-file-text');if(ft)ft.textContent='Resim seç (max 10 MB)';
   const logoUrl=(getSiteContent().general&&getSiteContent().general.favicon)||'https://muminsultani.com/img/ms.png';
   const brand=getDyn('header.brand','muminsultani');
   const lp=document.getElementById('any-email-logo-preview');if(lp)lp.src=logoUrl;
@@ -1980,7 +2021,21 @@ function openAdminAnyEmail(){
 }
 function closeAdminAnyEmail(){document.getElementById('adminAnyEmailModal').classList.remove('active');anyEmailImageDataUrl=null;}
 function previewAnyEmailImage(url){const pv=document.getElementById('any-email-img-preview');if(!pv)return;if(!url||!/^https?:\/\//i.test(url)){pv.style.display='none';pv.src='';return;}pv.src=url;pv.style.display='block';pv.onerror=()=>{pv.style.display='none';};}
-function handleAnyEmailImageUpload(e){const f=e.target.files[0];if(!f||!f.type.startsWith('image/'))return;if(f.size>2*1024*1024){showCustomAlert('Resim max 2 MB olmalı','warning');e.target.value='';return;}const r=new FileReader();r.onload=ev=>{anyEmailImageDataUrl=ev.target.result;const pv=document.getElementById('any-email-img-preview');if(pv){pv.src=ev.target.result;pv.style.display='block';}const ft=document.getElementById('any-email-img-file-text');if(ft)ft.textContent=f.name;};r.readAsDataURL(f);}
+/* ⭐ 10 MB RESİM LİMİTİ */
+function handleAnyEmailImageUpload(e){
+  const f=e.target.files[0];
+  if(!f||!f.type.startsWith('image/'))return;
+  if(f.size>10*1024*1024){showCustomAlert('Resim max 10 MB olmalı! (Seçilen: '+(f.size/(1024*1024)).toFixed(2)+' MB)','warning');e.target.value='';return;}
+  const r=new FileReader();
+  r.onload=ev=>{
+    anyEmailImageDataUrl=ev.target.result;
+    const pv=document.getElementById('any-email-img-preview');
+    if(pv){pv.src=ev.target.result;pv.style.display='block';}
+    const ft=document.getElementById('any-email-img-file-text');
+    if(ft)ft.textContent=f.name+' ('+(f.size/(1024*1024)).toFixed(2)+' MB)';
+  };
+  r.readAsDataURL(f);
+}
 
 async function sendAdminAnyEmail(e){
   e.preventDefault();
@@ -2065,7 +2120,7 @@ function verifyAdminPassword(e){if(e)e.preventDefault();const v=getPasswordValue
 function logoutAdmin(){try{sessionStorage.removeItem(ADMIN_SESSION_KEY);}catch(e){}closeAdminPanel();}
 
 function openAdminPanel(){refreshAdminUI();document.getElementById('adminPanelModal').classList.add('active');}
-function closeAdminPanel(){document.getElementById('adminPanelModal').classList.remove('active');applySiteContent();applySitePrivacy();if(window._chatPrevUser){try{localStorage.setItem('logged_user',window._chatPrevUser);}catch(e){}window._chatPrevUser=null;try{checkUserSession();}catch(e){}}}
+function closeAdminPanel(){document.getElementById('adminPanelModal').classList.remove('active');applySiteContent();applySitePrivacy();applyChatVisibility();if(window._chatPrevUser){try{localStorage.setItem('logged_user',window._chatPrevUser);}catch(e){}window._chatPrevUser=null;try{checkUserSession();}catch(e){}}}
 function switchAdminTab(name,btn){document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));if(btn)btn.classList.add('active');const sec=document.querySelector('.admin-section[data-section="'+name+'"]');if(sec)sec.classList.add('active');if(name==='users')renderAdminUsers();if(name==='activity')renderAdminActivity();if(name==='chats')renderAdminChats();if(name==='apps')renderAdminSlots();if(name==='sections')renderAdminSectionsOrder();if(name==='effects')renderEffectsPanel();if(name==='social')renderAdminSocial();if(name==='account')renderAdminAccount();if(name==='emails')renderWelcomeSettings();if(name==='orders'){renderAdminOrders();updateOrdersBadge();}}
 
 function refreshAdminUI(){
@@ -2080,6 +2135,7 @@ function refreshAdminUI(){
   if(el('dash-email-status'))el('dash-email-status').textContent='Email: '+(EMAILJS_CONFIG.enabled?'✅':'⚠️');
   if(el('dash-cloud-status'))el('dash-cloud-status').textContent='Cloud: '+(firebaseConnected?'✅':'⚠️');
   if(el('dash-last-edit'))el('dash-last-edit').textContent='Last: '+c.lastEdit;
+  if(el('dash-chat-status'))el('dash-chat-status').textContent='Chat Feature: '+(isChatEnabled()?'✅ AÇIK':'🔒 GİZLİ');
   if(el('ah-brand'))el('ah-brand').value=c.header.brand;
   if(el('ah-role-en'))el('ah-role-en').value=c.header.roleEn;
   if(el('ah-role-tr'))el('ah-role-tr').value=c.header.roleTr;
@@ -2106,6 +2162,7 @@ function refreshAdminUI(){
   try{updateOrdersBadge();}catch(e){}
   try{const ort=document.getElementById('orderRequireLoginToggle');if(ort)ort.checked=!c.general||c.general.orderRequireLogin!==false;}catch(e){}
   try{const fet=document.getElementById('fishEnabledToggle');if(fet)fet.checked=!!(c.effects&&c.effects.fishEnabled);}catch(e){}
+  try{const cet=document.getElementById('chatEnabledToggle');if(cet)cet.checked=isChatEnabled();}catch(e){}
   try{refreshDashStats();}catch(e){}
 }
 
@@ -2119,10 +2176,13 @@ function refreshDashStats(){
     const td=document.getElementById('dash-today-visitors');if(td)td.textContent='Today: '+(s.today||0);
     const ps=document.getElementById('dash-privacy-status');
     if(ps){const closed=!!(getSiteContent().general&&getSiteContent().general.siteClosed);ps.textContent='Privacy: '+(closed?'🔒 CLOSED':'🔓 OPEN');}
+    const cs=document.getElementById('dash-chat-status');
+    if(cs){cs.textContent='Chat Feature: '+(isChatEnabled()?'✅ AÇIK':'🔒 GİZLİ');}
     const vis=(getSiteContent().general&&getSiteContent().general.languageVisibility)||{en:true,tr:true,de:true};
     ['en','tr','de'].forEach(k=>{const t2=document.getElementById('langToggle_'+k);if(t2)t2.checked=vis[k]!==false;});
     const sc=document.getElementById('siteClosedToggle');if(sc)sc.checked=!!(getSiteContent().general&&getSiteContent().general.siteClosed);
     const wt=document.getElementById('weatherEnabledToggle');if(wt)wt.checked=!(getSiteContent().general&&getSiteContent().general.weatherEnabled===false);
+    const cet=document.getElementById('chatEnabledToggle');if(cet)cet.checked=isChatEnabled();
   }catch(e){}
 }
 
@@ -2139,7 +2199,6 @@ function renderAdminUsers(){
     const isA=isAdminUser(user.email);
     const isV=isA||user.isVerified;
     const vB=isV?getVerifiedBadgeHTML('sm'):'';
-    /* 🎯 MAVİ TİK BUTONU */
     const vBtn=isA
       ? '<button class="user-view-btn verify big active" disabled title="Admin"><i class="fa-solid fa-circle-check"></i> Admin</button>'
       : '<button class="user-view-btn verify big'+(isV?' active':'')+'" onclick="toggleUserVerification(\''+se+'\')" title="'+(isV?'Remove Blue Tick':'Give Blue Tick')+'"><i class="fa-solid fa-circle-check"></i> '+(isV?'Verified':'Verify')+'</button>';
@@ -2151,7 +2210,7 @@ function renderAdminUsers(){
         '<div class="user-card-detail"><i class="fa-solid fa-envelope"></i>'+escapeHtml(user.email||'-')+'</div>'+
         '<div class="admin-user-actions">'+
           '<button class="user-view-btn" onclick="adminViewUser(\''+se+'\')" title="Profile"><i class="fa-solid fa-user"></i> '+t('admin_view')+'</button>'+
-          '<button class="user-view-btn msg" onclick="adminChatUser(\''+se+'\')" title="Chat"><i class="fa-solid fa-comments"></i> Chat</button>'+
+          (isChatEnabled()?'<button class="user-view-btn msg" onclick="adminChatUser(\''+se+'\')" title="Chat"><i class="fa-solid fa-comments"></i> Chat</button>':'')+
           '<button class="user-view-btn" onclick="openAdminUserEmail(\''+se+'\')" title="Email" style="color:#22c55e"><i class="fa-solid fa-envelope"></i> Email</button>'+
           vBtn+
           '<button class="user-view-btn danger" onclick="deleteUserAdmin(\''+se+'\')"><i class="fa-solid fa-trash-can"></i></button>'+
@@ -2216,7 +2275,7 @@ function adminViewUser(email){
       '</div>'+
       '<div class="pub-profile-actions">'+
         (!isA?'<button class="pub-btn-msg" style="background:linear-gradient(135deg,#1d9bf0,#1a8cd8)" onclick="closeAdminUserProfile();toggleUserVerification(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-circle-check"></i> '+(isV?'Remove Blue Tick':'Give Blue Tick')+'</button>':'')+
-        '<button class="pub-btn-msg" onclick="closeAdminUserProfile();adminChatUser(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-comments"></i> Chat</button>'+
+        (isChatEnabled()?'<button class="pub-btn-msg" onclick="closeAdminUserProfile();adminChatUser(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-comments"></i> Chat</button>':'')+
         '<button class="pub-btn-msg" style="background:linear-gradient(135deg,#22c55e,#16a34a)" onclick="closeAdminUserProfile();openAdminUserEmail(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-envelope"></i> '+t('admin_send_email')+'</button>'+
         '<button class="pub-btn-close" onclick="closeAdminUserProfile()"><i class="fa-solid fa-arrow-left"></i> '+t('close')+'</button>'+
       '</div>'+
@@ -2227,6 +2286,7 @@ function closeAdminUserProfile(){document.getElementById('adminUserProfileModal'
 
 /* === ADMIN: CHAT === */
 function adminChatUser(email){
+  if(!isChatEnabled()){showCustomAlert('🔒 Sohbet gizli. Önce Genel ayarlardan açın.','warning');return;}
   const admin=getAdminUser();const users=getAllUsers();
   const target=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());
   if(!target){showCustomAlert('User not found!');return;}
@@ -2333,7 +2393,7 @@ function formatFileSize(b){if(b<1024)return b+' B';if(b<1024*1024)return (b/1024
 async function downloadApk(slotIndex){if(IS_IOS){showCustomAlert('⚠️ APK dosyaları sadece Android cihazlarda kurulabilir.','warning');return;}const lu=localStorage.getItem('logged_user');const uo=lu?JSON.parse(lu):null;const c=getSiteContent();const app=c.apps[slotIndex];if(!app)return;const rl=!!app.requireLogin;if(rl&&!lu){showCustomAlert('⚠️ Sign in required to download APK.','warning');setTimeout(()=>openGetInTouchModal(),300);return;}try{const apk=await withTimeout(getApkFile(slotIndex),60000);if(!apk){showCustomAlert('APK not found!','error');return;}const blob=apk.blob instanceof Blob?apk.blob:new Blob([new Uint8Array(apk.blob)],{type:apk.type||'application/vnd.android.package-archive'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;const bn=(apk.name||('app_slot_'+(slotIndex+1)+'.apk')).replace(/\.apk$/i,'');a.download=bn+'_'+Date.now()+'.apk';a.style.display='none';document.body.appendChild(a);a.click();setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},2500);if(lu)logActivity('apk_download',uo,'Slot #'+(slotIndex+1)+' - '+apk.name);showCustomAlert('✅ Downloaded: '+apk.name,'success');}catch(e){showCustomAlert('Download error!','error');}}
 
 /* === APPLY SITE CONTENT === */
-function applySiteContent(){const c=getSiteContent(),isTR=currentLang==='tr';document.querySelectorAll('.brand-logo, .footer-brand').forEach(el=>el.textContent=c.header.brand);const il=document.querySelector('.intro-logo');if(il)il.textContent=c.header.brand;document.querySelectorAll('.modal-brand').forEach(el=>{if(el.dataset.enhanced!=='1')el.textContent=c.header.brand;});document.getElementById('t-role').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('introSub').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('t-job-title').innerText=isTR?c.experience.titleTr:c.experience.titleEn;document.getElementById('t-job-date').innerText=c.experience.date;document.getElementById('t-job-desc').innerText=isTR?c.experience.descTr:c.experience.descEn;document.getElementById('t-os-val').innerText=isTR?c.setup.osTr:c.setup.osEn;document.getElementById('t-editor-val').innerText=isTR?c.setup.editorTr:c.setup.editorEn;document.getElementById('t-backend-val').innerText=c.stack.backend;document.getElementById('t-frontend-val').innerText=c.stack.frontend;document.getElementById('t-copyright').innerText=c.footer.copyright;if(c.general){if(c.general.pageTitle){document.title=c.general.pageTitle;}if(c.general.favicon){const f=document.getElementById('siteFavicon');if(f)f.href=c.general.favicon;}const md=document.querySelector('meta[name="description"]');if(md&&c.general.metaDesc)md.setAttribute('content',c.general.metaDesc);}renderApplications();applySectionOrder();applyEffectsSettings();renderFooterSocials();updateBrandLogos();applyWeatherSettings();}
+function applySiteContent(){const c=getSiteContent(),isTR=currentLang==='tr';document.querySelectorAll('.brand-logo, .footer-brand').forEach(el=>el.textContent=c.header.brand);const il=document.querySelector('.intro-logo');if(il)il.textContent=c.header.brand;document.querySelectorAll('.modal-brand').forEach(el=>{if(el.dataset.enhanced!=='1')el.textContent=c.header.brand;});document.getElementById('t-role').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('introSub').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('t-job-title').innerText=isTR?c.experience.titleTr:c.experience.titleEn;document.getElementById('t-job-date').innerText=c.experience.date;document.getElementById('t-job-desc').innerText=isTR?c.experience.descTr:c.experience.descEn;document.getElementById('t-os-val').innerText=isTR?c.setup.osTr:c.setup.osEn;document.getElementById('t-editor-val').innerText=isTR?c.setup.editorTr:c.setup.editorEn;document.getElementById('t-backend-val').innerText=c.stack.backend;document.getElementById('t-frontend-val').innerText=c.stack.frontend;document.getElementById('t-copyright').innerText=c.footer.copyright;if(c.general){if(c.general.pageTitle){document.title=c.general.pageTitle;}if(c.general.favicon){const f=document.getElementById('siteFavicon');if(f)f.href=c.general.favicon;}const md=document.querySelector('meta[name="description"]');if(md&&c.general.metaDesc)md.setAttribute('content',c.general.metaDesc);}renderApplications();applySectionOrder();applyEffectsSettings();renderFooterSocials();updateBrandLogos();applyWeatherSettings();applyChatVisibility();}
 
 async function renderApplications(){if(appsRenderLock)return;appsRenderLock=true;try{const grid=document.getElementById('appsGrid');if(!grid)return;const apps=getSiteContent().apps||[];const isLogged=!!localStorage.getItem('logged_user');const filled=[];for(let i=0;i<8;i++){const a=apps[i]||{};if(a.name&&a.name.trim().length>0)filled.push({idx:i,app:a});}const w=window.innerWidth;let maxVisible=4;if(w>=1025)maxVisible=6;const visible=filled.slice(0,maxVisible);grid.innerHTML='';for(const item of visible){const idx=item.idx,app=item.app;const card=document.createElement('div');card.className='app-card';let iconHTML='📱';if(app.hasIcon){try{const ic=await withTimeout(getIconData(idx),3000);if(ic&&ic.dataUrl)iconHTML='<img src="'+ic.dataUrl+'">';}catch(e){}}else if(app.icon&&app.icon.trim().startsWith('http'))iconHTML='<img src="'+escapeHtml(app.icon.trim())+'">';else if(app.icon&&app.icon.trim())iconHTML=escapeHtml(app.icon.trim());const hasApk=!!app.hasApk;const hasUrl=app.url&&app.url.trim();const rl=!!app.requireLogin;if(hasApk){if(rl&&!isLogged)card.classList.add('locked');card.style.cursor='pointer';card.addEventListener('click',()=>downloadApk(idx));}else if(hasUrl){card.style.cursor='pointer';card.addEventListener('click',()=>{let u=app.url.trim();if(!/^https?:\/\//i.test(u))u='https://'+u;window.open(u,'_blank');});}const dBadge=hasApk?'<span class="apk-download-badge"><i class="fa-solid fa-download"></i></span>':'';let nI='';if(hasApk)nI='<i class="fa-solid fa-download download-icon"></i>';else if(hasUrl)nI='<i class="fa-solid fa-arrow-up-right-from-square"></i>';let tH='';if(hasApk){const lk=rl&&!isLogged;tH='<span class="app-card-tag apk-tag'+(lk?' locked-tag':'')+'"><i class="fa-brands fa-android"></i>APK</span>';}else if(hasUrl)tH='<span class="app-card-tag">LINK</span>';card.innerHTML='<div class="app-card-icon">'+iconHTML+dBadge+'</div><div class="app-card-body"><div class="app-card-name">'+escapeHtml(app.name)+' '+nI+'</div><div class="app-card-desc">'+escapeHtml(app.desc||'')+'</div></div>'+tH;grid.appendChild(card);}}finally{appsRenderLock=false;}}
 
@@ -2383,7 +2443,7 @@ async function loadVisitorStatsFromFirebase(){try{if(typeof firebase==='undefine
 /* === ANIM SYSTEM === */
 function createAnimSystem(canvasId,options){options=options||{};const c=document.getElementById(canvasId);if(!c)return{stop:function(){},setMode:function(){}};const ctx=c.getContext('2d');const baseNP=options.numberOfParticles||55,ld=options.lineDistance||110;let pa=[],running=true;let mode='constellation';function rc(){c.width=window.innerWidth;c.height=window.innerHeight;initMode();}function P(){this.x=Math.random()*c.width;this.y=Math.random()*c.height;this.vx=(Math.random()-.5)*.8;this.vy=(Math.random()-.5)*.8;this.size=Math.random()*1.8+1;}P.prototype.update=function(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>c.width)this.vx=-this.vx;if(this.y<0||this.y>c.height)this.vy=-this.vy;};P.prototype.draw=function(){const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';ctx.fillStyle='rgba('+ar+',.55)';ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();};function initMode(){pa=[];if(mode==='constellation'||mode==='network'){for(let i=0;i<baseNP;i++)pa.push(new P());}else if(mode==='particles'){for(let i=0;i<80;i++)pa.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6,size:Math.random()*3+1,alpha:Math.random()*.5+.3});}}function draw(){if(!running)return;ctx.clearRect(0,0,c.width,c.height);const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';if(mode==='none'){requestAnimationFrame(draw);return;}if(mode==='constellation'){for(let i=0;i<pa.length;i++){pa[i].update();pa[i].draw();for(let j=i+1;j<pa.length;j++){const dx=pa[i].x-pa[j].x,dy=pa[i].y-pa[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<ld){const o=1-(dist/ld);ctx.strokeStyle='rgba('+ar+','+(o*.22)+')';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(pa[i].x,pa[i].y);ctx.lineTo(pa[j].x,pa[j].y);ctx.stroke();}}}}else if(mode==='network'){for(let i=0;i<pa.length;i++){pa[i].update();for(let j=i+1;j<pa.length;j++){const dx=pa[i].x-pa[j].x,dy=pa[i].y-pa[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<180){const o=1-(dist/180);ctx.strokeStyle='rgba('+ar+','+(o*.4)+')';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(pa[i].x,pa[i].y);ctx.lineTo(pa[j].x,pa[j].y);ctx.stroke();}}ctx.beginPath();ctx.arc(pa[i].x,pa[i].y,2.5,0,Math.PI*2);ctx.fillStyle='rgba('+ar+',.7)';ctx.fill();}}else if(mode==='particles'){pa.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>c.width)p.vx=-p.vx;if(p.y<0||p.y>c.height)p.vy=-p.vy;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle='rgba('+ar+','+p.alpha+')';ctx.fill();});}else if(mode==='dots'){for(let x=30;x<c.width;x+=60)for(let y=30;y<c.height;y+=60){ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);ctx.fillStyle='rgba('+ar+',.4)';ctx.fill();}}requestAnimationFrame(draw);}window.addEventListener('resize',rc);rc();draw();return{stop:function(){running=false;},setMode:function(m){mode=m||'constellation';initMode();}};}
 
-function forceRefreshUI(){applyTranslations();try{applySiteContent();}catch(e){}try{checkUserSession();}catch(e){}try{renderApplications();}catch(e){}try{updateChatBadge();}catch(e){}try{applyWeatherSettings();}catch(e){}}
+function forceRefreshUI(){applyTranslations();try{applySiteContent();}catch(e){}try{checkUserSession();}catch(e){}try{renderApplications();}catch(e){}try{updateChatBadge();}catch(e){}try{applyWeatherSettings();}catch(e){}try{applyChatVisibility();}catch(e){}}
 
 document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.chat-user-item,.chat-send-btn,.chat-profile-btn,.modal-close-btn,.auth-tab-btn,.ratio-btn,.social-btn,.lightbox-close-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.chat-mic-btn,.toggle-switch,.chat-msg-action-btn,.effect-chip,.social-del,.hpm-item,.settings-chip,.hpm-close-x,.order-type-option,.weather-refresh');if(b)playTickSound();},true);
 document.addEventListener('contextmenu',e=>e.preventDefault());
@@ -2397,18 +2457,40 @@ window.addEventListener('resize',()=>{updateMessengerDefaultPosition();if(confet
    🚀 INIT
    ============================================================ */
 window.addEventListener('DOMContentLoaded',async ()=>{
-  try{if(window.location.search.indexOf('logout=1')!==-1){localStorage.removeItem('logged_user');localStorage.removeItem('user_prefs_v1');try{sessionStorage.clear();}catch(e){}history.replaceState(null,'',window.location.pathname);}}catch(e){}
+  /* Çıkış parametresi temizle */
+  try{
+    if(window.location.search.indexOf('logout=1')!==-1){
+      localStorage.removeItem('logged_user');
+      localStorage.removeItem('user_prefs_v1');
+      try{sessionStorage.clear();}catch(e){}
+      history.replaceState(null,'',window.location.pathname);
+    }
+  }catch(e){}
 
-  setTimeout(()=>{const i=document.getElementById('intro-screen');if(i){i.style.opacity='0';i.style.visibility='hidden';setTimeout(()=>{i.style.display='none';if(window.introConstellation)window.introConstellation.stop();},600);}},1500);
+  /* Intro ekranını kapat */
+  setTimeout(()=>{
+    const i=document.getElementById('intro-screen');
+    if(i){
+      i.style.opacity='0';
+      i.style.visibility='hidden';
+      setTimeout(()=>{
+        i.style.display='none';
+        if(window.introConstellation)window.introConstellation.stop();
+      },600);
+    }
+  },1500);
 
+  /* Animasyon sistemlerini başlat */
   window.mainConstellation=createAnimSystem('constellation-canvas',{numberOfParticles:55,lineDistance:110});
   window.introConstellation=createAnimSystem('intro-canvas',{numberOfParticles:50,lineDistance:120});
 
+  /* Firebase + EmailJS + Şifre maskeleri */
   initFirebase();
   initEmailJS();
   initAllPasswordMasks();
   ensureUserIdsAndAdmin();
 
+  /* Firebase'den veri yükle */
   try{
     await loadSiteContentFromFirebase();
     await loadUsersFromFirebase();
@@ -2418,13 +2500,16 @@ window.addEventListener('DOMContentLoaded',async ()=>{
     firebaseSyncReady=true;
   }catch(e){}
 
+  /* Tema & Oturum & İçerik */
   initTheme();
   checkUserSession();
   applySiteContent();
   applySectionOrder();
   applyEffectsSettings();
   applySitePrivacy();
+  applyChatVisibility();
 
+  /* Dil */
   const storedLang=sessionStorage.getItem('site_lang');
   const bl=(navigator.language||'en').toLowerCase();
   const browserLang=bl.startsWith('tr')?'tr':(bl.startsWith('de')?'de':'en');
@@ -2432,29 +2517,54 @@ window.addEventListener('DOMContentLoaded',async ()=>{
   currentLang=storedLang||defaultLang;
   applyTranslations();
 
+  /* Ziyaretçi kaydı */
   trackVisit();
 
+  /* Event listener'lar */
   const authPassInput=document.getElementById('contactClientPassword');
-  if(authPassInput)authPassInput.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();handleAuthSubmit(e);}});
-  const adminBioEl=document.getElementById('adminAccBio');if(adminBioEl)adminBioEl.addEventListener('input',function(){document.getElementById('adminBioCount').textContent=this.value.length;});
-  ['editClientDay','editClientMonth','editClientYear'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('blur',validateDOB);});
+  if(authPassInput)authPassInput.addEventListener('keydown',function(e){
+    if(e.key==='Enter'){e.preventDefault();handleAuthSubmit(e);}
+  });
+
+  const adminBioEl=document.getElementById('adminAccBio');
+  if(adminBioEl)adminBioEl.addEventListener('input',function(){
+    document.getElementById('adminBioCount').textContent=this.value.length;
+  });
+
+  ['editClientDay','editClientMonth','editClientYear'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.addEventListener('blur',validateDOB);
+  });
+
   checkAdminHash();
+
+  /* IndexedDB başlat */
   try{await openApkDB();}catch(e){}
+
+  /* Chat & Messenger */
   updateChatBadge();
   startChatPolling();
   setupSignupAutoFill();
   initMessengerBtn();
   applyMessengerColor();
+
+  /* Sipariş badge */
   updateOrdersBadge();
   setInterval(updateOrdersBadge,5000);
+
+  /* Messenger konumu */
   setTimeout(updateMessengerDefaultPosition,300);
+
+  /* Marka logoları periyodik güncelle */
   setInterval(updateBrandLogos,2000);
 
   /* 🌤️ Hava durumu başlat */
   setTimeout(()=>{applyWeatherSettings();},500);
-  /* Her 30 dakikada bir hava durumunu yenile */
-  setInterval(()=>{if(!(getSiteContent().general&&getSiteContent().general.weatherEnabled===false))fetchWeather(true);},30*60*1000);
+  setInterval(()=>{
+    if(!(getSiteContent().general&&getSiteContent().general.weatherEnabled===false))fetchWeather(true);
+  },30*60*1000);
 
+  /* Firebase realtime listener'lar */
   setTimeout(()=>{
     listenToFirebaseChanges();
     listenToUsersChanges();
@@ -2473,8 +2583,189 @@ window.addEventListener('DOMContentLoaded',async ()=>{
     }catch(e){}
   },1500);
 
-  try{window.fishSystem=createFishSystem('fish-canvas');applyFishSettings();}catch(e){}
+  /* 🐟 Balık sistemi */
+  try{
+    window.fishSystem=createFishSystem('fish-canvas');
+    applyFishSettings();
+  }catch(e){}
+
+  /* Chat gizliliği ilk uygulama */
+  applyChatVisibility();
 });
+
+/* ============================================================
+   🛡️ GÜVENLİK EKSTRA KORUMALARI
+   ============================================================ */
+/* Sayfa kapanırken temizlik */
+window.addEventListener('beforeunload',()=>{
+  if(chatPollTimer)clearInterval(chatPollTimer);
+});
+
+/* ESC tuşu ile açık modalı kapat */
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='Escape'){
+    const openModals=document.querySelectorAll('.modal-overlay.active,.custom-alert-overlay.active,.lightbox-overlay.active');
+    if(openModals.length){
+      const last=openModals[openModals.length-1];
+      last.classList.remove('active');
+    }
+    closeHeaderProfileMenu();
+    const lm=document.getElementById('langMenu');
+    if(lm)lm.classList.remove('show');
+  }
+});
+
+/* Kısayol: Ctrl+Shift+A → Admin panel */
+document.addEventListener('keydown',(e)=>{
+  if(e.ctrlKey&&e.shiftKey&&(e.key==='A'||e.key==='a')){
+    e.preventDefault();
+    triggerAdminAccess();
+  }
+});
+
+/* ============================================================
+   🎯 GLOBAL FONKSİYON EXPORT (inline onclick için)
+   ============================================================ */
+window.toggleTheme=toggleTheme;
+window.toggleLangMenu=toggleLangMenu;
+window.changeLanguage=changeLanguage;
+window.toggleHeaderProfileMenu=toggleHeaderProfileMenu;
+window.closeHeaderProfileMenu=closeHeaderProfileMenu;
+window.openEditProfileModal=openEditProfileModal;
+window.closeEditProfileModal=closeEditProfileModal;
+window.openChangePasswordModal=openChangePasswordModal;
+window.closeChangePasswordModal=closeChangePasswordModal;
+window.openUserSettingsModal=openUserSettingsModal;
+window.closeUserSettingsModal=closeUserSettingsModal;
+window.openDeleteAccountModal=openDeleteAccountModal;
+window.closeDeleteAccountModal=closeDeleteAccountModal;
+window.confirmLogout=confirmLogout;
+window.openGetInTouchModal=openGetInTouchModal;
+window.closeGetInTouchModal=closeGetInTouchModal;
+window.openDirectContactModal=openDirectContactModal;
+window.closeDirectContactModal=closeDirectContactModal;
+window.switchAuthTab=switchAuthTab;
+window.handleAuthSubmit=handleAuthSubmit;
+window.openForgotPasswordModal=openForgotPasswordModal;
+window.closeForgotPasswordModal=closeForgotPasswordModal;
+window.handleForgotPasswordSubmit=handleForgotPasswordSubmit;
+window.closeResetPasswordModal=closeResetPasswordModal;
+window.handleResetPasswordSubmit=handleResetPasswordSubmit;
+window.openSignupCodeModal=openSignupCodeModal;
+window.backToSignupMock=backToSignupMock;
+window.cancelSignup=cancelSignup;
+window.verifySignupCode=verifySignupCode;
+window.resendSignupEmail=resendSignupEmail;
+window.checkUsernameAvailability=checkUsernameAvailability;
+window.togglePasswordVisibility=togglePasswordVisibility;
+window.handleProfileUpdate=handleProfileUpdate;
+window.handleProfilePhotoUpload=handleProfilePhotoUpload;
+window.resetProfilePhoto=resetProfilePhoto;
+window.updateEditPhotoPreview=updateEditPhotoPreview;
+window.handleChangePassword=handleChangePassword;
+window.handleDeleteAccount=handleDeleteAccount;
+window.handleDeletePasswordSubmit=handleDeletePasswordSubmit;
+window.openDeletePasswordModal=openDeletePasswordModal;
+window.closeDeletePasswordModal=closeDeletePasswordModal;
+window.setCropRatio=setCropRatio;
+window.applyCrop=applyCrop;
+window.closeCropModal=closeCropModal;
+window.closeLightbox=closeLightbox;
+window.openOrderModal=openOrderModal;
+window.closeOrderModal=closeOrderModal;
+window.submitOrder=submitOrder;
+window.selectOrderType=selectOrderType;
+window.openChatPanel=openChatPanel;
+window.closeChatPanel=closeChatPanel;
+window.sendChatMessage=sendChatMessage;
+window.handleChatPhotoUpload=handleChatPhotoUpload;
+window.filterChatUsers=filterChatUsers;
+window.clearChatSearch=clearChatSearch;
+window.replyToMessage=replyToMessage;
+window.cancelReply=cancelReply;
+window.deleteMessage=deleteMessage;
+window.openPublicUserProfile=openPublicUserProfile;
+window.closePublicUserProfile=closePublicUserProfile;
+window.messageFromProfile=messageFromProfile;
+window.triggerAdminAccess=triggerAdminAccess;
+window.closeAdminLogin=closeAdminLogin;
+window.verifyAdminPassword=verifyAdminPassword;
+window.logoutAdmin=logoutAdmin;
+window.closeAdminPanel=closeAdminPanel;
+window.switchAdminTab=switchAdminTab;
+window.toggleUserVerification=toggleUserVerification;
+window.adminViewUser=adminViewUser;
+window.closeAdminUserProfile=closeAdminUserProfile;
+window.adminChatUser=adminChatUser;
+window.openAdminUserEmail=openAdminUserEmail;
+window.closeAdminUserEmail=closeAdminUserEmail;
+window.sendAdminUserEmailSubmit=sendAdminUserEmailSubmit;
+window.deleteUserAdmin=deleteUserAdmin;
+window.exportUsersCSV=exportUsersCSV;
+window.clearAllUsers=clearAllUsers;
+window.viewUserDetail=viewUserDetail;
+window.closeUserDetail=closeUserDetail;
+window.filterActivity=filterActivity;
+window.clearActivityLog=clearActivityLog;
+window.exportActivityCSV=exportActivityCSV;
+window.clearAllChats=clearAllChats;
+window.exportChatsCSV=exportChatsCSV;
+window.openAdminAnyEmail=openAdminAnyEmail;
+window.closeAdminAnyEmail=closeAdminAnyEmail;
+window.previewAnyEmailImage=previewAnyEmailImage;
+window.handleAnyEmailImageUpload=handleAnyEmailImageUpload;
+window.sendAdminAnyEmail=sendAdminAnyEmail;
+window.moveSectionOrder=moveSectionOrder;
+window.editAppSlot=editAppSlot;
+window.closeAdminEdit=closeAdminEdit;
+window.clearAppSlot=clearAppSlot;
+window.saveAppSlot=saveAppSlot;
+window.handleIconUpload=handleIconUpload;
+window.clearIconFile=clearIconFile;
+window.handleApkUpload=handleApkUpload;
+window.clearApkFile=clearApkFile;
+window.saveAdminHeader=saveAdminHeader;
+window.saveAdminExperience=saveAdminExperience;
+window.saveAdminSetup=saveAdminSetup;
+window.saveAdminStack=saveAdminStack;
+window.saveAdminFooter=saveAdminFooter;
+window.saveAdminGeneral=saveAdminGeneral;
+window.saveAdminAccount=saveAdminAccount;
+window.handleAdminPhotoUpload=handleAdminPhotoUpload;
+window.clearAdminPhoto=clearAdminPhoto;
+window.handleFaviconUpload=handleFaviconUpload;
+window.clearFavicon=clearFavicon;
+window.exportSiteBackup=exportSiteBackup;
+window.importSiteBackup=importSiteBackup;
+window.confirmResetSite=confirmResetSite;
+window.toggleSiteClosed=toggleSiteClosed;
+window.toggleWeatherEnabled=toggleWeatherEnabled;
+window.toggleChatEnabled=toggleChatEnabled;
+window.toggleLangVisibility=toggleLangVisibility;
+window.setOrderRequireLogin=setOrderRequireLogin;
+window.setFishEnabled=setFishEnabled;
+window.setConfettiEnabled=setConfettiEnabled;
+window.setTickSoundEnabled=setTickSoundEnabled;
+window.toggleWelcomeEmail=toggleWelcomeEmail;
+window.toggleWelcomePdf=toggleWelcomePdf;
+window.saveWelcomeEmailSettings=saveWelcomeEmailSettings;
+window.renderEffectsPanel=renderEffectsPanel;
+window.renderUserSettingsGrids=renderUserSettingsGrids;
+window.resetUserSettings=resetUserSettings;
+window.refreshWeather=refreshWeather;
+window.approveOrder=approveOrder;
+window.deleteOrder=deleteOrder;
+window.clearAllOrders=clearAllOrders;
+window.updateSocialUrl=updateSocialUrl;
+window.removeSocial=removeSocial;
+window.addSocialPlatformPicker=addSocialPlatformPicker;
+window.pickSocialPlatform=pickSocialPlatform;
+window.closeCustomAlert=closeCustomAlert;
+window.confirmAction=confirmAction;
+
+console.log('%c✅ muminsultani site yüklendi!','background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;padding:6px 12px;border-radius:8px;font-weight:bold;font-size:13px;');
+console.log('%c🔒 Chat gizliliği: '+(isChatEnabled()?'AÇIK':'KAPALI'),'color:#3b82f6;font-weight:bold;');
+console.log('%c⚙️ Admin erişimi: Ctrl+Shift+M veya Ctrl+Shift+A','color:#f59e0b;font-weight:bold;');
 </script>
 </body>
 </html>
