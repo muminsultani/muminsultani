@@ -28,13 +28,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 /* ============================================================
    🌐 CROSS-BROWSER FIX LAYER
    ============================================================ */
 :root{--font-fallback:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'}
-.modal-overlay,.lang-menu,.header-profile-menu,.chat-msg.theirs .chat-msg-text,body[data-panel="glass"] .modal-container,body[data-panel="glass"] .custom-alert-box,#security-curtain,.recording-overlay{-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.modal-overlay,.lang-menu,.header-profile-menu,.chat-msg.theirs .chat-msg-text,body[data-panel="glass"] .modal-container,body[data-panel="glass"] .custom-alert-box,#security-curtain{-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 .chat-msg.theirs .chat-msg-text{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .brand-logo,.intro-logo,.footer-brand,.pub-profile-name{-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .modal-brand{background:linear-gradient(270deg,var(--accent),var(--accent-2),var(--accent),var(--accent-2),var(--accent));background-size:400% 400%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:gradientFlow 8s ease infinite}
@@ -48,11 +49,11 @@ input,textarea,select,.code-input,[contenteditable]{-webkit-user-select:text;-mo
 ::-webkit-scrollbar-thumb:hover{background:rgba(var(--accent-rgb),.8)}
 button,input,textarea,select{-webkit-appearance:none;-moz-appearance:none;appearance:none;font:inherit;color:inherit;background:transparent;border-radius:0}
 input[type="checkbox"],input[type="radio"]{-webkit-appearance:auto;-moz-appearance:auto;appearance:auto}
-#intro-screen,#security-curtain,.recording-overlay{height:100vh;height:100dvh;min-height:-webkit-fill-available}
+#intro-screen,#security-curtain{height:100vh;height:100dvh;min-height:-webkit-fill-available}
 button,a,.app-card,.chat-user-item,.effect-chip,.settings-chip,.admin-tab,.admin-slot-btn,.user-view-btn,.weather-card{touch-action:manipulation}
 @supports (-webkit-touch-callout:none){input,textarea,select,.form-input,.form-textarea,.chat-input,.code-input{font-size:16px !important}}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.modal-overlay,.lang-menu,.header-profile-menu{background:rgba(13,13,21,.96) !important}body.light-mode .modal-overlay,body.light-mode .lang-menu,body.light-mode .header-profile-menu{background:rgba(255,255,255,.98) !important}}
-@supports not (height:100dvh){#intro-screen,#security-curtain,.recording-overlay{height:100vh}}
+@supports not (height:100dvh){#intro-screen,#security-curtain{height:100vh}}
 button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,.app-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%}
 body{-webkit-touch-callout:none;overflow-x:hidden}
@@ -227,6 +228,8 @@ section{border-top:1px solid var(--line-color);padding-top:24px}
 .submit-btn{flex:1;color:#fff;border:none;padding:14px 8px;border-radius:12px;font-weight:600;font-size:.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;text-transform:capitalize}
 .submit-btn.email-btn{background:linear-gradient(135deg,var(--accent),var(--accent-2))}
 .submit-btn.google-btn{background:#fff;color:#1f1f1f;border:1px solid #dadce0}
+
+/* ⭐ ALERT - ARTIK LOGOSUZ */
 .custom-alert-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(5,5,10,.7);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);z-index:20000;display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:opacity .3s;padding:16px;pointer-events:none}
 .custom-alert-overlay.active{opacity:1;visibility:visible;pointer-events:auto}
 .custom-alert-box{background:var(--modal-container-bg);border:1px solid rgba(var(--accent-rgb),.35);border-radius:var(--panel-radius);width:100%;max-width:400px;padding:30px 24px;text-align:center;transform:scale(.88);transition:transform .4s,opacity .3s;opacity:0}
@@ -236,9 +239,8 @@ section{border-top:1px solid var(--line-color);padding-top:24px}
 .custom-alert-btn-group{display:flex;gap:8px;width:100%}
 .custom-alert-btn{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border:none;flex:1;padding:12px 8px;border-radius:12px;font-weight:600;font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;text-transform:capitalize}
 .custom-alert-btn.cancel-btn{background:var(--box-bg);color:var(--text-color-override);border:1px solid var(--line-color)}
-.alert-brand-row{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px}
-.alert-brand-row img{width:34px;height:34px;border-radius:9px;box-shadow:0 3px 10px rgba(var(--accent-rgb),.4)}
-.alert-brand-row .brand-name{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;font-size:1.05rem;font-weight:900;background:linear-gradient(270deg,var(--accent),var(--accent-2));background-size:400% 400%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:gradientFlow 8s ease infinite}
+/* .alert-brand-row kaldırıldı */
+
 footer{border-top:1px solid var(--line-color);padding-top:20px;padding-bottom:12px;display:flex;flex-direction:column;gap:10px}
 .footer-main{display:flex;flex-direction:row;align-items:flex-start;gap:18px}
 .footer-qr-container{background:#fff;padding:12px;border-radius:16px;display:inline-flex}
@@ -342,6 +344,7 @@ footer{border-top:1px solid var(--line-color);padding-top:20px;padding-bottom:12
 .upload-wrapper{position:relative;background:var(--box-bg);border:2px dashed var(--line-color);border-radius:12px;padding:18px;text-align:center;cursor:pointer}
 .upload-wrapper.has-file{border-style:solid;border-color:#22c55e;border-width:2px}
 .upload-wrapper.has-icon{border-style:solid;border-color:var(--accent);border-width:2px}
+.upload-wrapper.uploading{border-style:solid;border-color:#3b82f6;border-width:2px}
 .upload-icon{font-size:1.6rem;color:var(--accent);margin-bottom:6px;display:block}
 .upload-text{font-size:.78rem;color:var(--text-secondary);display:block;font-weight:600}
 .apk-clear-btn{display:inline-flex;align-items:center;gap:5px;margin-top:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:7px 12px;border-radius:10px;font-size:.72rem;font-weight:600;cursor:pointer;text-transform:capitalize}
@@ -455,15 +458,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .chat-reply-preview .reply-name{color:var(--accent);font-weight:600;font-size:.7rem}
 .chat-reply-preview .reply-text{color:var(--text-color-override);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.72rem;margin-top:2px}
 .chat-reply-preview .reply-close{background:transparent;border:none;color:var(--text-secondary);cursor:pointer;font-size:.85rem;padding:4px}
-.recording-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(5,5,10,.85);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);z-index:26000;display:none;flex-direction:column;justify-content:center;align-items:center;gap:22px;padding:20px}
-.recording-overlay.active{display:flex}
-.recording-pulse{width:140px;height:140px;border-radius:50%;background:linear-gradient(135deg,#ef4444,#dc2626);display:flex;align-items:center;justify-content:center;color:#fff;font-size:2.8rem}
-.recording-timer{color:#fff;font-size:1.7rem;font-weight:800;font-family:'Fira Code',monospace}
-.recording-hint{color:#94a3b8;font-size:.85rem;text-align:center;max-width:280px}
-.recording-actions{display:flex;gap:26px}
-.recording-btn{width:66px;height:66px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff}
-.recording-btn.cancel{background:var(--modal-container-bg);border:1px solid rgba(239,68,68,.5);color:#ef4444}
-.recording-btn.send{background:linear-gradient(135deg,#22c55e,#16a34a)}
 .pub-profile-view{display:flex;flex-direction:column;align-items:center;gap:8px;padding:8px 0 4px}
 .pub-profile-avatar{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-weight:800;overflow:hidden;border:4px solid var(--modal-container-bg);position:relative;z-index:1}
 .pub-profile-avatar img{width:100%;height:100%;object-fit:cover}
@@ -551,9 +545,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .order-type-option.active .order-type-check{border-color:var(--accent);background:var(--accent)}
 .order-type-option.active .order-type-check::after{content:'\f00c';font-family:'Font Awesome 6 Free';font-weight:900;color:#fff;font-size:.6rem}
 
-/* ============================================================
-   ✨ HAVA DURUMU + GİZLİLİK + LOGO
-   ============================================================ */
+/* HAVA DURUMU */
 .weather-card{background:linear-gradient(135deg,rgba(var(--accent-rgb),.14),rgba(var(--accent-rgb),.04));border:1px solid rgba(var(--accent-rgb),.3);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
 .weather-card::before{content:'';position:absolute;top:-50%;right:-20%;width:200px;height:200px;background:radial-gradient(circle,rgba(var(--accent-rgb),.18),transparent 70%);pointer-events:none}
 .weather-top{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;z-index:1}
@@ -975,7 +967,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
     <div id="adminUserEmailInfo" style="padding:12px 14px;background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;margin-bottom:14px;font-size:.8rem;display:flex;align-items:center;gap:10px;">
       <div id="aueAvatar" style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;overflow:hidden"></div>
       <div style="flex:1;min-width:0;"><div id="aueName" style="font-weight:700;color:var(--text-color-override);"></div><div id="aueEmail" style="color:var(--text-secondary);font-size:.72rem;margin-top:2px;"></div></div>
-      <img src="https://muminsultani.com/img/ms.png" style="width:28px;height:28px;border-radius:8px" alt="logo">
     </div>
     <form id="adminUserEmailForm" onsubmit="sendAdminUserEmailSubmit(event)">
       <div class="form-group"><label class="form-label"><i class="fa-solid fa-tag" style="color:var(--accent)"></i> Konu</label><input type="text" class="form-input" id="aue-subject" required maxlength="120" placeholder="email konusu"></div>
@@ -994,19 +985,12 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
   </div>
 </div>
 
-<!-- ✨ ADMIN: HERKESE EMAİL GÖNDER (10 MB resim) -->
+<!-- ⭐ HERKESE EMAIL - 100 MB + LOGOSUZ -->
 <div class="modal-overlay admin-z" id="adminAnyEmailModal">
   <div class="modal-container" style="max-width:620px">
     <div class="modal-header">
       <div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Herhangi Birine Email Gönder</div></div>
       <div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminAnyEmail()"><i class="fa-solid fa-xmark"></i></button></div>
-    </div>
-    <div class="any-email-preview-logo" style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--box-bg);border:1px solid var(--line-color);border-radius:10px;margin-bottom:12px;font-size:.72rem;color:var(--text-secondary)">
-      <img src="https://muminsultani.com/img/ms.png" id="any-email-logo-preview" style="width:26px;height:26px;border-radius:6px" alt="logo">
-      <div style="flex:1">
-        <strong id="any-email-brand-text" style="color:var(--accent);font-weight:700">muminsultani</strong><br>
-        <span>Email'in altına otomatik olarak <strong style="color:var(--accent)">muminsultani.com</strong> logosu ve linki eklenecek.</span>
-      </div>
     </div>
     <form id="adminAnyEmailForm" onsubmit="sendAdminAnyEmail(event)">
       <div class="form-group"><label class="form-label"><i class="fa-solid fa-at" style="color:var(--accent)"></i> Alıcı Email</label><input type="email" class="form-input" id="any-email-to" required placeholder="ornek@email.com" oninput="this.value=this.value.toLowerCase().trim()"></div>
@@ -1014,22 +998,22 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
       <div class="form-group"><label class="form-label"><i class="fa-solid fa-tag" style="color:var(--accent)"></i> Konu</label><input type="text" class="form-input" id="any-email-subject" required maxlength="120" placeholder="email konusu"></div>
       <div class="form-group"><label class="form-label"><i class="fa-solid fa-align-left" style="color:var(--accent)"></i> Mesaj</label><textarea class="form-textarea" id="any-email-message" required maxlength="5000" style="min-height:130px" placeholder="mesajınızı buraya yazın..."></textarea></div>
       <div class="toggle-row" style="background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.25)">
-        <div class="toggle-label"><div class="toggle-label-title"><i class="fa-solid fa-image" style="color:#3b82f6"></i> Resim Ekle (max 10 MB)</div><div style="font-size:.62rem;color:var(--text-secondary);margin-top:2px">URL yaz veya bilgisayardan yükle (10 MB'a kadar)</div></div>
+        <div class="toggle-label"><div class="toggle-label-title"><i class="fa-solid fa-image" style="color:#3b82f6"></i> Resim Ekle (max 100 MB)</div><div style="font-size:.62rem;color:var(--text-secondary);margin-top:2px">Firebase Storage'a yüklenir, EmailJS'e sadece URL gönderilir</div></div>
         <label class="toggle-switch"><input type="checkbox" id="any-email-img-enable" onchange="document.getElementById('any-email-img-group').style.display=this.checked?'block':'none'"><span class="toggle-slider"></span></label>
       </div>
       <div id="any-email-img-group" style="display:none">
         <div class="form-group"><label class="form-label">Resim URL</label><input type="text" class="form-input" id="any-email-image" placeholder="https://ornek.com/resim.png" oninput="previewAnyEmailImage(this.value)"></div>
-        <div class="form-group"><label class="form-label">veya Dosyadan Yükle</label>
-          <div class="upload-wrapper" onclick="document.getElementById('any-email-img-file').click()">
-            <i class="fa-solid fa-upload upload-icon"></i>
-            <span class="upload-text" id="any-email-img-file-text">Resim seç (max 10 MB)</span>
+        <div class="form-group"><label class="form-label">veya Dosyadan Yükle (max 100 MB)</label>
+          <div class="upload-wrapper" id="any-email-img-upload-wrapper" onclick="document.getElementById('any-email-img-file').click()">
+            <i class="fa-solid fa-upload upload-icon" id="any-email-img-upload-icon"></i>
+            <span class="upload-text" id="any-email-img-file-text">Resim seç (max 100 MB)</span>
             <input type="file" id="any-email-img-file" accept="image/*" style="display:none" onchange="handleAnyEmailImageUpload(event)">
           </div>
         </div>
-        <img id="any-email-img-preview" style="max-width:100%;max-height:140px;border-radius:10px;margin-top:10px;display:none;border:1px solid var(--line-color);object-fit:contain;background:var(--box-bg)" alt="">
+        <img id="any-email-img-preview" style="max-width:100%;max-height:180px;border-radius:10px;margin-top:10px;display:none;border:1px solid var(--line-color);object-fit:contain;background:var(--box-bg)" alt="">
       </div>
       <div class="toggle-row" style="background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.25)">
-        <div class="toggle-label"><div class="toggle-label-title"><i class="fa-solid fa-link" style="color:#22c55e"></i> Link (Buton) Ekle</div><div style="font-size:.62rem;color:var(--text-secondary);margin-top:2px">Sitemin linki zaten otomatik eklenir</div></div>
+        <div class="toggle-label"><div class="toggle-label-title"><i class="fa-solid fa-link" style="color:#22c55e"></i> Link (Buton) Ekle</div></div>
         <label class="toggle-switch"><input type="checkbox" id="any-email-link-enable" onchange="document.getElementById('any-email-link-group').style.display=this.checked?'block':'none'"><span class="toggle-slider"></span></label>
       </div>
       <div id="any-email-link-group" style="display:none">
@@ -1126,6 +1110,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="admin-stat"><i class="fa-solid fa-calendar-day"></i> <span id="dash-today-visitors">Today: 0</span></div>
 <div class="admin-stat"><i class="fa-solid fa-shield-halved"></i> <span id="dash-privacy-status">Privacy: —</span></div>
 <div class="admin-stat"><i class="fa-solid fa-comment-slash"></i> <span id="dash-chat-status">Chat Feature: —</span></div>
+<div class="admin-stat"><i class="fa-solid fa-database"></i> <span id="dash-storage-status">Storage: —</span></div>
 </div>
 <div class="admin-section" data-section="account">
 <form onsubmit="saveAdminAccount(event)">
@@ -1175,7 +1160,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
   <label class="toggle-switch"><input type="checkbox" id="siteClosedToggle" onchange="toggleSiteClosed(this.checked)"><span class="toggle-slider"></span></label>
 </div>
 
-<!-- ⭐ YENİ: CHAT GİZLEME -->
 <h4 class="admin-subsection-title"><i class="fa-solid fa-comments"></i> Sohbet (Chat) Gizliliği</h4>
 <div class="toggle-row" style="background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.3)">
   <div class="toggle-label"><div class="toggle-label-title"><i class="fa-solid fa-comment-slash" style="color:#3b82f6"></i> Sohbet Özelliği Açık</div><div style="font-size:.62rem;color:var(--text-secondary);margin-top:2px">Kapalıysa messenger butonu ve chat tamamen gizlenir</div></div>
@@ -1390,10 +1374,10 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 </div>
 
+<!-- ⭐ GET IN TOUCH - LOGOSUZ -->
 <div class="custom-alert-overlay" id="getInTouchModal">
 <div class="custom-alert-box" style="max-width:340px;padding:22px 20px;text-align:center">
-<div style="display:flex;justify-content:center;margin-bottom:8px"><div class="custom-alert-icon" style="color:var(--accent);font-size:1.6rem;margin-bottom:0"><i class="fa-solid fa-user-lock"></i></div></div>
-<div style="display:flex;justify-content:center;margin-bottom:4px"><div class="footer-brand" style="font-size:1.3rem;line-height:1">muminsultani</div></div>
+<div style="display:flex;justify-content:center;margin-bottom:14px"><div class="custom-alert-icon" style="color:var(--accent);font-size:1.6rem;margin-bottom:0"><i class="fa-solid fa-user-lock"></i></div></div>
 <div class="custom-alert-message" style="font-size:.85rem;margin-bottom:16px;font-weight:600">Sign In / Sign Up</div>
 <div style="display:flex;gap:8px">
 <button class="custom-alert-btn" onclick="openDirectContactModal()" style="background:linear-gradient(135deg,var(--accent),var(--accent-2));flex:1;padding:10px 6px;font-size:.78rem"><i class="fa-solid fa-right-to-bracket"></i> Sign In</button>
@@ -1402,6 +1386,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 </div>
 
+<!-- ⭐ CUSTOM ALERT - LOGOSUZ (DEFAULT) -->
 <div class="custom-alert-overlay" id="customAlertModal">
 <div class="custom-alert-box">
 <div class="custom-alert-icon" id="customAlertIcon"><i class="fa-solid fa-circle-exclamation"></i></div>
@@ -1409,8 +1394,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="custom-alert-btn-group" id="customAlertBtnGroup"><button class="custom-alert-btn" onclick="closeCustomAlert()">OK</button></div>
 </div>
 </div>
-
-<!-- ==================== SCRIPT BAŞLANGICI ==================== -->
 
 <script>
 /* ============================================================
@@ -1463,37 +1446,6 @@ const HAS_TOUCH='ontouchstart' in window||navigator.maxTouchPoints>0;
 const SUPPORTS_BLUR=(function(){try{return CSS.supports('backdrop-filter','blur(4px)')||CSS.supports('-webkit-backdrop-filter','blur(4px)');}catch(e){return false;}})();
 
 /* ============================================================
-   FISH SYSTEM
-   ============================================================ */
-const FISH_STYLES=[{key:'tropical',name:'Tropikal',icon:'fa-fish'},{key:'school',name:'Sürü',icon:'fa-fish-fins'},{key:'deep',name:'Derin Deniz',icon:'fa-water'},{key:'jellyfish',name:'Denizanası',icon:'fa-meteor'},{key:'shark',name:'Köpekbalığı',icon:'fa-shark'},{key:'mixed',name:'Karışık',icon:'fa-shuffle'}];
-function fishHexRgba(hex,a){if(!hex)return 'rgba(147,51,234,'+a+')';if(hex.indexOf('rgb')===0)return hex;const h=hex.replace('#','');return 'rgba('+parseInt(h.substring(0,2),16)+','+parseInt(h.substring(2,4),16)+','+parseInt(h.substring(4,6),16)+','+a+')';}
-function fishDrawBody(c,x,y,size,c1,c2,dir,tail,type,c3){c.save();c.translate(x,y);c.scale(dir,1);if(type==='shark'){c.fillStyle=c1;c.beginPath();c.moveTo(-size*1.2,0);c.quadraticCurveTo(-size*1.15,-size*0.3,-size*0.85,-size*0.16);c.quadraticCurveTo(-size*0.3,-size*0.68,size*0.42,-size*0.4);c.quadraticCurveTo(size*1,-size*0.16,size*1.2,0);c.quadraticCurveTo(size*1,size*0.25,size*0.42,size*0.4);c.quadraticCurveTo(-size*0.3,size*0.62,-size*0.85,size*0.16);c.quadraticCurveTo(-size*1.15,size*0.3,-size*1.2,0);c.closePath();c.fill();c.fillStyle=c2||'#c9d1d9';c.beginPath();c.moveTo(-size*0.85,size*0.1);c.quadraticCurveTo(size*0.2,size*0.5,size*1.1,0);c.quadraticCurveTo(size*0.4,size*0.32,-size*0.85,size*0.1);c.closePath();c.fill();c.fillStyle=c1;c.beginPath();c.moveTo(-size*1.2,0);c.lineTo(-size*1.65,-size*0.55);c.lineTo(-size*1.5,0);c.lineTo(-size*1.65,size*0.5);c.closePath();c.fill();c.beginPath();c.moveTo(-size*0.2,-size*0.5);c.lineTo(-size*0.03,-size*0.95);c.lineTo(size*0.18,-size*0.45);c.closePath();c.fill();c.fillStyle='#fff';c.beginPath();c.arc(size*0.7,-size*0.1,size*0.11,0,Math.PI*2);c.fill();c.fillStyle='#000';c.beginPath();c.arc(size*0.73,-size*0.1,size*0.06,0,Math.PI*2);c.fill();}else{const wag=Math.sin(tail)*0.4;c.save();c.translate(-size*0.82,0);c.rotate(wag);c.fillStyle=c2;c.beginPath();c.moveTo(0,0);c.lineTo(-size*0.52,-size*0.55);c.lineTo(-size*0.33,0);c.lineTo(-size*0.52,size*0.55);c.closePath();c.fill();c.restore();c.fillStyle=c1;c.beginPath();c.ellipse(0,0,size*0.9,size*0.53,0,0,Math.PI*2);c.fill();const g=c.createLinearGradient(0,-size*0.5,0,size*0.5);g.addColorStop(0,c1);g.addColorStop(1,c2);c.fillStyle=g;c.beginPath();c.ellipse(0,size*0.04,size*0.8,size*0.42,0,0,Math.PI*2);c.fill();c.fillStyle=c2;c.beginPath();c.moveTo(-size*0.1,-size*0.5);c.lineTo(size*0.17,-size*0.85);c.lineTo(size*0.3,-size*0.43);c.closePath();c.fill();c.beginPath();c.moveTo(-size*0.13,size*0.44);c.lineTo(-size*0.04,size*0.75);c.lineTo(size*0.11,size*0.4);c.closePath();c.fill();c.fillStyle='#fff';c.beginPath();c.arc(size*0.48,-size*0.11,size*0.14,0,Math.PI*2);c.fill();c.fillStyle='#0a0a14';c.beginPath();c.arc(size*0.52,-size*0.11,size*0.085,0,Math.PI*2);c.fill();c.fillStyle='rgba(255,255,255,.5)';c.beginPath();c.ellipse(size*0.28,-size*0.24,size*0.15,size*0.055,-0.4,0,Math.PI*2);c.fill();if(c3){c.strokeStyle=fishHexRgba(c3,0.5);c.lineWidth=1.5;for(let i=-1;i<=1;i++){c.beginPath();c.moveTo(i*size*0.25,-size*0.35);c.lineTo(i*size*0.25,size*0.35);c.stroke();}}}c.restore();}
-function fishDrawJelly(c,x,y,size,c1,c2,phase){c.save();c.translate(x,y);const pulse=Math.sin(phase)*0.1+1;const glow=c.createRadialGradient(0,0,0,0,0,size*2.2);glow.addColorStop(0,fishHexRgba(c1,0.32));glow.addColorStop(1,fishHexRgba(c1,0));c.fillStyle=glow;c.beginPath();c.arc(0,0,size*2.2,0,Math.PI*2);c.fill();c.strokeStyle=fishHexRgba(c1,0.7);c.lineWidth=1.6;for(let i=0;i<6;i++){const off=(i-2.5)*size*0.22;c.beginPath();c.moveTo(off,size*0.25);c.quadraticCurveTo(off+Math.sin(phase+i)*size*0.32,size*1,off+Math.sin(phase+i*1.3)*size*0.5,size*1.9);c.stroke();}c.fillStyle=fishHexRgba(c1,0.75);c.beginPath();c.ellipse(0,0,size*pulse,size*0.72*pulse,0,Math.PI,0);c.closePath();c.fill();c.fillStyle=fishHexRgba(c2,0.5);c.beginPath();c.ellipse(0,size*0.05,size*0.85*pulse,size*0.5*pulse,0,Math.PI,0);c.closePath();c.fill();c.fillStyle='rgba(255,255,255,.35)';c.beginPath();c.ellipse(-size*0.32,-size*0.15,size*0.34,size*0.22,0,0,Math.PI*2);c.fill();c.restore();}
-function createFishSystem(canvasId){
-  const canvas=document.getElementById(canvasId);if(!canvas)return{setEnabled:function(){},setStyle:function(){}};
-  const ctx=canvas.getContext('2d');let running=true,enabled=false,style='tropical';let fishes=[],bubbles=[];
-  const TROPI=[['#ff6b6b','#ffa94d','#fff3bf'],['#4dabf7','#74c0fc','#e7f5ff'],['#ffd43b','#fab005','#fff3bf'],['#da77f2','#e599f7','#f3d9fa'],['#51cf66','#8ce99a','#d3f9d8'],['#ff922b','#ffc078','#ffe8cc'],['#22b8cf','#66d9e8','#c5f6fa'],['#f783ac','#faa2c1','#fcc2d7']];
-  const DEEP=[['#3b3b5c','#7c3aed','#a78bfa'],['#1e1b4b','#4338ca','#6366f1'],['#5b21b6','#8b5cf6','#c4b5fd']];
-  const SCH=[['#adb5bd','#ced4da','#e9ecef'],['#748ffc','#a5b4fc','#dbe4ff']];
-  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
-  function pickPal(){let a;if(style==='school')a=SCH;else if(style==='deep'||style==='mixed')a=DEEP;else a=TROPI;return a[Math.floor(Math.random()*a.length)];}
-  function Fish(){this.type=style;this.isShark=(style==='shark');this.dir=Math.random()>0.5?1:-1;this.x=this.dir===1?-120:canvas.width+120;this.baseY=80+Math.random()*(canvas.height-200);this.y=this.baseY;this.size=14+Math.random()*26;const p=pickPal();this.c1=p[0];this.c2=p[1];this.c3=p[2]||p[1];this.speed=(0.5+Math.random()*0.9)*this.dir;this.wobbleAmp=3+Math.random()*7;this.wobbleSpeed=0.02+Math.random()*0.03;this.wobblePhase=Math.random()*Math.PI*2;this.tailPhase=Math.random()*Math.PI*2;this.tailSpeed=0.2+Math.random()*0.15;}
-  Fish.prototype.reset=function(){this.dir=Math.random()>0.5?1:-1;this.x=this.dir===1?-120:canvas.width+120;this.baseY=80+Math.random()*(canvas.height-200);this.y=this.baseY;this.size=14+Math.random()*26;const p=pickPal();this.c1=p[0];this.c2=p[1];this.c3=p[2]||p[1];this.speed=(0.5+Math.random()*0.9)*this.dir;this.wobbleAmp=3+Math.random()*7;this.wobbleSpeed=0.02+Math.random()*0.03;this.wobblePhase=Math.random()*Math.PI*2;this.tailPhase=Math.random()*Math.PI*2;this.tailSpeed=0.2+Math.random()*0.15;this.isShark=(style==='shark');};
-  Fish.prototype.update=function(){this.x+=this.speed;this.wobblePhase+=this.wobbleSpeed;this.y=this.baseY+Math.sin(this.wobblePhase)*this.wobbleAmp;this.tailPhase+=this.tailSpeed;if(this.dir===1&&this.x>canvas.width+140)this.reset();if(this.dir===-1&&this.x<-140)this.reset();};
-  Fish.prototype.draw=function(){fishDrawBody(ctx,this.x,this.y,this.size,this.c1,this.c2,this.dir,this.tailPhase,this.isShark?'shark':'tropical',this.c3);};
-  function Jelly(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=18+Math.random()*22;this.phase=Math.random()*Math.PI*2;this.speed=0.15+Math.random()*0.25;const p=TROPI[Math.floor(Math.random()*TROPI.length)];this.c1=p[0];this.c2=p[2]||p[1];}
-  Jelly.prototype.update=function(){this.phase+=0.03;this.y-=this.speed;this.x+=Math.sin(this.phase*0.6)*0.4;if(this.y<-100){this.y=canvas.height+80;this.x=Math.random()*canvas.width;}};
-  Jelly.prototype.draw=function(){fishDrawJelly(ctx,this.x,this.y,this.size,this.c1,this.c2,this.phase);};
-  function Bubble(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=1+Math.random()*4;this.speed=0.2+Math.random()*0.6;this.phase=Math.random()*Math.PI*2;}
-  Bubble.prototype.update=function(){this.y-=this.speed;this.phase+=0.05;this.x+=Math.sin(this.phase)*0.3;if(this.y<-20){this.y=canvas.height+20;this.x=Math.random()*canvas.width;}};
-  Bubble.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.strokeStyle='rgba(180,220,255,.5)';ctx.lineWidth=1;ctx.stroke();ctx.beginPath();ctx.arc(this.x-this.size*0.3,this.y-this.size*0.3,this.size*0.3,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,.6)';ctx.fill();};
-  function rebuild(){fishes=[];bubbles=[];let fc=8,jc=0;if(style==='school')fc=22;else if(style==='deep')fc=7;else if(style==='jellyfish'){fc=0;jc=6;}else if(style==='shark')fc=4;else if(style==='mixed'){fc=8;jc=3;}for(let i=0;i<fc;i++)fishes.push(new Fish());for(let i=0;i<jc;i++)fishes.push(new Jelly());const bc=(style==='deep'||style==='mixed')?16:8;for(let i=0;i<bc;i++)bubbles.push(new Bubble());}
-  function loop(){if(!running)return;ctx.clearRect(0,0,canvas.width,canvas.height);if(enabled){for(let i=0;i<bubbles.length;i++){bubbles[i].update();bubbles[i].draw();}for(let i=0;i<fishes.length;i++){fishes[i].update();fishes[i].draw();}}requestAnimationFrame(loop);}
-  resize();window.addEventListener('resize',function(){resize();rebuild();});rebuild();loop();
-  return{setEnabled:function(v){enabled=!!v;if(enabled)canvas.classList.add('active');else canvas.classList.remove('active');if(enabled){resize();rebuild();}else ctx.clearRect(0,0,canvas.width,canvas.height);},setStyle:function(s){style=s||'tropical';rebuild();}};
-}
-
-/* ============================================================
    CONFIG
    ============================================================ */
 const FIREBASE_CONFIG={apiKey:"AIzaSyC3Pi88DP7K_4IG-R81LeDaGdhCTmHpo-c",authDomain:"muminsultani-497b5.firebaseapp.com",databaseURL:"https://muminsultani-497b5-default-rtdb.firebaseio.com",projectId:"muminsultani-497b5",storageBucket:"muminsultani-497b5.firebasestorage.app",messagingSenderId:"929484224535",appId:"1:929484224535:web:5e2b05f0b852357212c452"};
@@ -1511,11 +1463,19 @@ const VISITORS_KEY='site_visitors_v1';
 const WEATHER_CACHE_KEY='weather_cache_v1';
 const WEATHER_LOC_KEY='weather_location_v1';
 
+/* ⭐ 100 MB RESIM LIMITI */
+const MAX_IMAGE_SIZE_BYTES = 100 * 1024 * 1024; /* 100 MB */
+const EMAILJS_SAFE_BASE64_LIMIT = 45 * 1024; /* ~45 KB — EmailJS 50KB limitine güvenli sınır */
+
 let currentLang='en',currentAuthMode='signin',currentResetEmail='',pendingFaviconDataUrl=null,pendingAdminPhoto=undefined,currentProfileEmail=null;
 let pendingSignup=null,pendingApkFile=null,pendingApkDelete=false,pendingIconDataUrl=null,pendingIconDelete=false;
 let activeChatUser=null,chatPollTimer=null,chatSearchQuery='',currentReplyTo=null;
 let publicProfileEmail=null,currentEmailTargetUser=null,adminEmailTarget=null,adminViewingEmail=null;
-let anyEmailImageDataUrl=null;
+let anyEmailImageDataUrl=null;   /* Base64 (fallback) */
+let anyEmailImageUrl=null;        /* Firebase Storage URL (preferred) */
+let anyEmailImageFile=null;       /* Raw File object */
+let firebaseStorageAvailable=false;
+
 let cropperInstance=null,apkDB=null,audioCtx=null;
 let confettiParticles=[],confettiRunning=false,confettiCanvas=null,confettiCtx=null,confettiStopTimer=null;
 let messengerPos=null;
@@ -1577,6 +1537,80 @@ function saveUserPrefs(p){try{localStorage.setItem(USER_PREFS_KEY,JSON.stringify
 function clearUserPrefs(){try{localStorage.removeItem(USER_PREFS_KEY);}catch(e){}}
 function setUserPref(k,v){const p=getUserPrefs();p[k]=v;saveUserPrefs(p);}
 
+/* ============================================================
+   🔥 FIREBASE STORAGE — 100 MB GÖRSEL YÜKLEME
+   ============================================================ */
+function initFirebaseStorage(){
+  try{
+    if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;
+    if(typeof firebase.storage!=='function')return false;
+    firebaseStorageAvailable=true;
+    return true;
+  }catch(e){firebaseStorageAvailable=false;return false;}
+}
+
+/* Firebase Storage'a görsel yükle — URL döner */
+async function uploadImageToFirebaseStorage(file){
+  if(!firebaseStorageAvailable)initFirebaseStorage();
+  if(!firebaseStorageAvailable)throw new Error('firebase_storage_unavailable');
+  const storage=firebase.storage();
+  const ext=(file.name&&file.name.lastIndexOf('.')!==-1)?file.name.substring(file.name.lastIndexOf('.')):'.jpg';
+  const fname='email-images/'+Date.now()+'_'+Math.random().toString(36).substring(2,8)+ext;
+  const ref=storage.ref().child(fname);
+  const snapshot=await ref.put(file);
+  const url=await snapshot.ref.getDownloadURL();
+  return url;
+}
+
+/* ============================================================
+   🗜️ GÖRSEL SIKIŞTIRMA — EmailJS 50KB limiti için fallback
+   ============================================================ */
+async function compressImageForEmailJS(file, maxBytes){
+  maxBytes=maxBytes||EMAILJS_SAFE_BASE64_LIMIT;
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=e=>{
+      const img=new Image();
+      img.onload=()=>{
+        const canvas=document.createElement('canvas');
+        let w=img.width,h=img.height;
+        /* Boyut küçült: max 800px genişlik */
+        const maxDim=800;
+        if(w>maxDim||h>maxDim){
+          if(w>h){h=Math.round(h*maxDim/w);w=maxDim;}
+          else{w=Math.round(w*maxDim/h);h=maxDim;}
+        }
+        canvas.width=w;canvas.height=h;
+        const ctx=canvas.getContext('2d');
+        ctx.drawImage(img,0,0,w,h);
+        /* Kalite düşür, byte hedefe ulaşana kadar */
+        let quality=0.75;
+        let dataUrl=canvas.toDataURL('image/jpeg',quality);
+        let guard=0;
+        while(dataUrl.length>maxBytes && quality>0.15 && guard<10){
+          quality-=0.1;
+          dataUrl=canvas.toDataURL('image/jpeg',quality);
+          guard++;
+        }
+        /* Hala büyükse boyutu da küçült */
+        let guard2=0;
+        while(dataUrl.length>maxBytes && w>200 && guard2<5){
+          w=Math.round(w*0.75);h=Math.round(h*0.75);
+          canvas.width=w;canvas.height=h;
+          ctx.drawImage(img,0,0,w,h);
+          dataUrl=canvas.toDataURL('image/jpeg',0.6);
+          guard2++;
+        }
+        resolve(dataUrl);
+      };
+      img.onerror=()=>reject(new Error('image_load_failed'));
+      img.src=e.target.result;
+    };
+    reader.onerror=()=>reject(new Error('file_read_failed'));
+    reader.readAsDataURL(file);
+  });
+}
+
 /* === FIREBASE SYNC === */
 async function loadSiteContentFromFirebase(){try{if(typeof firebase==='undefined')return false;if(!firebase.apps||!firebase.apps.length)return false;const db=firebase.database();const snap=await db.ref('site_content').once('value');const remote=snap.val();if(remote&&typeof remote==='object'){const merged=deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),remote);localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(merged));return true;}}catch(e){}return false;}
 async function saveSiteContentToFirebase(content){try{if(typeof firebase==='undefined')return false;if(!firebase.apps||!firebase.apps.length)return false;if(isApplyingRemote)return false;const db=firebase.database();await db.ref('site_content').set(content);return true;}catch(e){return false;}}
@@ -1607,7 +1641,7 @@ function initAllPasswordMasks(){PASSWORD_FIELDS.forEach(id=>initPasswordMask(id)
 function togglePasswordVisibility(i,ic){const p=document.getElementById(i),t2=document.getElementById(ic);if(!p||!t2)return;if(p.dataset.masked==='1'){p.dataset.masked='0';p.classList.remove('password-mask');t2.className='fa-solid fa-eye-slash';p.value=p.dataset.realValue||'';}else{p.dataset.masked='1';p.classList.add('password-mask');t2.className='fa-solid fa-eye';p.value='*'.repeat((p.dataset.realValue||'').length);}}
 
 /* === FIREBASE INIT === */
-function initFirebase(){try{if(typeof firebase==='undefined'||!FIREBASE_CONFIG||!FIREBASE_CONFIG.databaseURL){firebaseConnected=false;return;}if(!firebase.apps||!firebase.apps.length){firebase.initializeApp(FIREBASE_CONFIG);}const db=firebase.database();firebaseDbRef=db.ref('.info/connected');firebaseDbRef.on('value',function(snap){firebaseConnected=(snap.val()===true);try{const el=document.getElementById('dash-cloud-status');if(el)el.textContent='Cloud: '+(firebaseConnected?'✅':'⚠️');}catch(e){}});}catch(e){firebaseConnected=false;}}
+function initFirebase(){try{if(typeof firebase==='undefined'||!FIREBASE_CONFIG||!FIREBASE_CONFIG.databaseURL){firebaseConnected=false;return;}if(!firebase.apps||!firebase.apps.length){firebase.initializeApp(FIREBASE_CONFIG);}const db=firebase.database();firebaseDbRef=db.ref('.info/connected');firebaseDbRef.on('value',function(snap){firebaseConnected=(snap.val()===true);try{const el=document.getElementById('dash-cloud-status');if(el)el.textContent='Cloud: '+(firebaseConnected?'✅':'⚠️');}catch(e){}});initFirebaseStorage();}catch(e){firebaseConnected=false;}}
 function initEmailJS(){if(!EMAILJS_CONFIG.enabled)return;try{if(typeof emailjs!=='undefined'){emailjs.init({publicKey:EMAILJS_CONFIG.publicKey});}}catch(e){}}
 
 async function sendVerificationEmail(toEmail,code,type){if(!EMAILJS_CONFIG.enabled)return{success:false,reason:'not_configured'};const typeLabels={signup:'Account Verification',reset:'Password Reset'};const brand=getDyn('header.brand','muminsultani');const logoUrl=(getSiteContent().general&&getSiteContent().general.favicon)||'https://muminsultani.com/img/ms.png';const tp={to_email:toEmail,brand,subject:typeLabels[type]||'Verification',type:typeLabels[type]||'Verification',code:String(code),message:'Doğrulama kodunuz: '+code,image_url:logoUrl,has_image:'yes',link_url:'https://muminsultani.com',link_text:brand,has_link:'yes',has_pdf:'no',pdf_url:'',year:new Date().getFullYear()};try{const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EMAILJS_CONFIG.serviceId,template_id:EMAILJS_CONFIG.templateId,user_id:EMAILJS_CONFIG.publicKey,template_params:tp})});const txt=await r.text();if(r.ok&&(txt==='OK'||r.status===200)){logActivity('email_sent',{email:toEmail,name:typeLabels[type]},'Sent: '+toEmail);return{success:true};}return{success:false,reason:txt||('HTTP '+r.status)};}catch(err){return{success:false,reason:err.message||'network_error'};}}
@@ -1631,14 +1665,14 @@ function saveChatMessages(m){try{localStorage.setItem(CHAT_KEY,JSON.stringify(m)
 function getConversationId(a,b){return[String(a||'').toLowerCase(),String(b||'').toLowerCase()].sort().join('__');}
 function getTotalUnread(email){if(!email)return 0;const m=getChatMessages();let t2=0;const tg=email.toLowerCase();for(const k in m){const p=k.split('__');if(p.includes(tg)){t2+=m[k].filter(x=>String(x.to).toLowerCase()===tg&&!x.read).length;}}return t2;}
 
-/* ⭐ CHAT GİZLEME FONKSİYONU */
-function isChatEnabled(){const c=getSiteContent();return !(c.general&&c.general.chatEnabled===false)?!!(c.general&&c.general.chatEnabled):false;}
+/* ⭐ CHAT GİZLEME */
+function isChatEnabled(){const c=getSiteContent();return !!(c.general&&c.general.chatEnabled===true);}
 function updateChatBadge(){
   const enabled=isChatEnabled();
   const mb=document.getElementById('messengerFloatBtn');
   const bn=document.getElementById('brandNotifBadge');
   if(!enabled){
-    if(mb)mb.classList.remove('visible');
+    if(mb){mb.classList.remove('visible');mb.style.display='none';}
     if(bn){bn.classList.remove('show');bn.textContent='0';}
     const mBadge=document.getElementById('messengerBadge');if(mBadge)mBadge.classList.remove('show');
     return;
@@ -1648,7 +1682,7 @@ function updateChatBadge(){
   const total=eff?getTotalUnread(eff.email):0;
   const mBadge=document.getElementById('messengerBadge');
   const isLogged=!!lu||isAdminLoggedIn();
-  if(mb){if(isLogged)mb.classList.add('visible');else mb.classList.remove('visible');}
+  if(mb){mb.style.display='';if(isLogged)mb.classList.add('visible');else mb.classList.remove('visible');}
   if(!isLogged){if(bn){bn.classList.remove('show');bn.textContent='0';}if(mBadge)mBadge.classList.remove('show');return;}
   if(bn){if(total>0){bn.classList.add('show');bn.textContent=total>99?'99+':String(total);}else bn.classList.remove('show');}
   if(mBadge){if(total>0){mBadge.classList.add('show');mBadge.textContent=total>99?'99+':String(total);}else mBadge.classList.remove('show');}
@@ -1701,62 +1735,28 @@ function setConfettiStyle(k){const c=getSiteContent();if(!c.effects)c.effects={}
 function setTickSoundEnabled(v){const c=getSiteContent();if(!c.effects)c.effects={};c.effects.tickSoundEnabled=!!v;saveSiteContent(c);}
 function setTickSoundStyle(k){const c=getSiteContent();if(!c.effects)c.effects={};c.effects.tickSoundStyle=k;saveSiteContent(c);renderEffectsPanel();}
 
-function renderEffectsPanel(){const eff=(getSiteContent().effects)||{};const app=(getSiteContent().appearance)||{};
-  const tg=document.getElementById('themeGrid');if(tg){tg.innerHTML='';THEMES.forEach(t2=>{const c=document.createElement('div');c.className='effect-chip'+((app.theme||'purple')===t2.key?' active':'');c.onclick=()=>setTheme(t2.key);c.innerHTML='<div class="color-swatch" style="background:linear-gradient(135deg,'+t2.c1+','+t2.c2+')"></div><span>'+t2.name+'</span>';tg.appendChild(c);});}
-  const fg=document.getElementById('fontGrid');if(fg){fg.innerHTML='';FONTS_NORMAL.forEach(f=>{const c=document.createElement('div');c.className='effect-chip'+((app.font||'Sora')===f.key?' active':'');c.onclick=()=>setFont(f.key);c.innerHTML='<div class="font-preview" style="font-family:\''+f.key+'\',sans-serif">'+f.label+'</div>';fg.appendChild(c);});}
-  const fcg=document.getElementById('fontColorGrid');if(fcg){fcg.innerHTML='';FONT_COLORS.forEach(fc=>{const c=document.createElement('div');c.className='effect-chip'+((app.fontColor||'default')===fc.key?' active':'');c.onclick=()=>setFontColor(fc.key);c.innerHTML='<div class="color-swatch" style="background:'+(fc.c==='inherit'?'linear-gradient(135deg,#666,#999)':fc.c)+'"></div><span>'+fc.name+'</span>';fcg.appendChild(c);});}
-  const fsg=document.getElementById('formStyleGrid');if(fsg){fsg.innerHTML='';FORM_STYLES.forEach(fs=>{const c=document.createElement('div');c.className='effect-chip'+((app.formStyle||'default')===fs.key?' active':'');c.onclick=()=>setFormStyle(fs.key);c.innerHTML='<i class="fa-solid '+fs.icon+'"></i><span>'+fs.name+'</span>';fsg.appendChild(c);});}
-  const psg=document.getElementById('panelStyleGrid');if(psg){psg.innerHTML='';PANEL_STYLES.forEach(ps=>{const c=document.createElement('div');c.className='effect-chip'+((app.panelStyle||'default')===ps.key?' active':'');c.onclick=()=>setPanelStyle(ps.key);c.innerHTML='<i class="fa-solid '+ps.icon+'"></i><span>'+ps.name+'</span>';psg.appendChild(c);});}
-  const bg=document.getElementById('bgGrid');if(bg){bg.innerHTML='';BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='effect-chip'+((eff.background||'default')===b.key?' active':'');c.onclick=()=>setBackground(b.key);c.innerHTML='<div class="bg-swatch" style="background:'+bgSwatch(b.key)+'"></div><span>'+b.name+'</span>';bg.appendChild(c);});}
-  const ag=document.getElementById('animGrid');if(ag){ag.innerHTML='';ANIM_PRESETS.forEach(a=>{const c=document.createElement('div');c.className='effect-chip'+((eff.siteAnimation||'constellation')===a.key?' active':'');c.onclick=()=>setSiteAnimation(a.key);c.innerHTML='<i class="fa-solid '+a.icon+'"></i><span>'+a.name+'</span>';ag.appendChild(c);});}
-  const cg=document.getElementById('chatBgGrid');if(cg){cg.innerHTML='';CHAT_BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='effect-chip'+((eff.chatBackground||'default')===b.key?' active':'');c.onclick=()=>setChatBackground(b.key);c.innerHTML='<div class="bg-swatch" style="background:'+chatSwatch(b.key)+'"></div><span>'+b.name+'</span>';cg.appendChild(c);});}
-  const mcg=document.getElementById('messengerColorGrid');if(mcg){mcg.innerHTML='';MESSENGER_COLORS.forEach(mc=>{const c=document.createElement('div');c.className='effect-chip'+((eff.messengerColor||'purple')===mc.key?' active':'');c.onclick=()=>setMessengerColor(mc.key);c.innerHTML='<div class="color-swatch" style="background:'+mc.c+'"></div><span>'+mc.name+'</span>';mcg.appendChild(c);});}
-  const cng=document.getElementById('confettiGrid');if(cng){cng.innerHTML='';CONFETTI_PRESETS.forEach(c2=>{const c=document.createElement('div');c.className='effect-chip'+((eff.confettiStyle||'classic')===c2.key?' active':'');c.onclick=()=>{setConfettiStyle(c2.key);fireConfettiBurst(1);};c.innerHTML='<i class="fa-solid '+c2.icon+'"></i><span>'+c2.name+'</span>';cng.appendChild(c);});}
-  const tg2=document.getElementById('tickGrid');if(tg2){tg2.innerHTML='';Object.keys(TICK_STYLES).forEach(k=>{const s=TICK_STYLES[k];const c=document.createElement('div');c.className='effect-chip'+((eff.tickSoundStyle||'default')===k?' active':'');c.onclick=()=>{setTickSoundStyle(k);s.fn();};c.innerHTML='<i class="fa-solid '+s.icon+'"></i><span>'+s.name+'</span>';tg2.appendChild(c);});}
-  const ibg=document.getElementById('introBgGrid');if(ibg){ibg.innerHTML='';INTRO_BGS.forEach(b=>{const c=document.createElement('div');c.className='effect-chip'+((eff.introBg||'default')===b.key?' active':'');c.onclick=()=>setIntroBg(b.key);c.innerHTML='<div class="bg-swatch" style="background:'+bgSwatch(b.key)+'"></div><span>'+b.name+'</span>';ibg.appendChild(c);});}
-  const iag=document.getElementById('introAnimGrid');if(iag){iag.innerHTML='';INTRO_ANIMS.forEach(a=>{const c=document.createElement('div');c.className='effect-chip'+((eff.introAnim||'constellation')===a.key?' active':'');c.onclick=()=>setIntroAnim(a.key);c.innerHTML='<i class="fa-solid '+a.icon+'"></i><span>'+a.name+'</span>';iag.appendChild(c);});}
-  const fishG=document.getElementById('fishStyleGrid');if(fishG){fishG.innerHTML='';FISH_STYLES.forEach(f=>{const c=document.createElement('div');c.className='effect-chip'+((eff.fishStyle||'tropical')===f.key?' active':'');c.onclick=function(){setFishStyle(f.key);};c.innerHTML='<i class="fa-solid '+f.icon+'"></i><span>'+f.name+'</span>';fishG.appendChild(c);});}}
-
-function openUserSettingsModal(){const lu=localStorage.getItem('logged_user');if(!lu)return;renderUserSettingsGrids();document.getElementById('userSettingsModal').classList.add('active');}
-function closeUserSettingsModal(){document.getElementById('userSettingsModal').classList.remove('active');applyAppearance();applyBackground();applyChatBackground();}
-function renderUserSettingsGrids(){const u=getUserPrefs();
-  const tg=document.getElementById('userThemeGrid');if(tg){tg.innerHTML='';THEMES.forEach(t2=>{const c=document.createElement('div');c.className='settings-chip'+((u.theme||'')===t2.key?' active':'');c.onclick=()=>{setUserPref('theme',t2.key);applyAppearance();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:linear-gradient(135deg,'+t2.c1+','+t2.c2+')"></div><span>'+t2.name+'</span>';tg.appendChild(c);});}
-  const fcg=document.getElementById('userFontColorGrid');if(fcg){fcg.innerHTML='';FONT_COLORS.forEach(fc=>{const c=document.createElement('div');c.className='settings-chip'+((u.fontColor||'')===fc.key?' active':'');c.onclick=()=>{setUserPref('fontColor',fc.key);applyAppearance();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:'+(fc.c==='inherit'?'linear-gradient(135deg,#666,#999)':fc.c)+'"></div><span>'+fc.name+'</span>';fcg.appendChild(c);});}
-  const fg=document.getElementById('userFontGrid');if(fg){fg.innerHTML='';FONTS_NORMAL.slice(0,12).forEach(f=>{const c=document.createElement('div');c.className='settings-chip'+((u.font||'')===f.key?' active':'');c.onclick=()=>{setUserPref('font',f.key);applyAppearance();renderUserSettingsGrids();};c.innerHTML='<span style="font-family:\''+f.key+'\',sans-serif;font-size:.9rem">'+f.label+'</span>';fg.appendChild(c);});}
-  const bg=document.getElementById('userBgGrid');if(bg){bg.innerHTML='';BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='settings-chip'+((u.background||'')===b.key?' active':'');c.onclick=()=>{setUserPref('background',b.key);applyBackground();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:'+bgSwatch(b.key)+'"></div><span>'+b.name+'</span>';bg.appendChild(c);});}
-  const cg=document.getElementById('userChatBgGrid');if(cg){cg.innerHTML='';CHAT_BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='settings-chip'+((u.chatBackground||'')===b.key?' active':'');c.onclick=()=>{setUserPref('chatBackground',b.key);applyChatBackground();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:'+chatSwatch(b.key)+'"></div><span>'+b.name+'</span>';cg.appendChild(c);});}}
-function resetUserSettings(){clearUserPrefs();applyAppearance();applyBackground();applyChatBackground();renderUserSettingsGrids();showCustomAlert('Settings reset','success');}
-
-function findPlatform(k){return SOCIAL_PLATFORMS.find(p=>p.key===k)||{key:k,label:k,icon:'fa-solid fa-link',placeholder:'url'};}
-function renderFooterSocials(){const el=document.getElementById('footerSocials');if(!el)return;const list=(getSiteContent().social||[]).filter(s=>s.enabled!==false);el.innerHTML='';list.forEach(s=>{const p=findPlatform(s.platform);const a=document.createElement('a');a.href='#';a.className='social-btn';a.title=p.label;a.innerHTML='<i class="'+p.icon+'" style="font-size:1.1rem;color:var(--accent)"></i>';a.onclick=(e)=>{e.preventDefault();if(s.platform==='gmail')window.open('mailto:'+s.url,'_blank');else window.open(s.url,'_blank');};el.appendChild(a);});}
-function renderAdminSocial(){const list=document.getElementById('socialListAdmin');if(!list)return;const social=(getSiteContent().social||[]);list.innerHTML='';social.forEach((s,idx)=>{const p=findPlatform(s.platform);const row=document.createElement('div');row.className='social-row';row.innerHTML='<i class="'+p.icon+'"></i><input type="text" value="'+escapeHtml(s.url||'')+'" placeholder="'+escapeHtml(p.placeholder)+'" onchange="updateSocialUrl('+idx+',this.value)"><span style="font-size:.65rem;color:var(--text-secondary);font-weight:700">'+p.label+'</span><button class="social-del" onclick="removeSocial('+idx+')"><i class="fa-solid fa-trash"></i></button>';list.appendChild(row);});}
-function addSocialPlatformPicker(){const used=(getSiteContent().social||[]).map(s=>s.platform);const available=SOCIAL_PLATFORMS.filter(p=>!used.includes(p.key));if(!available.length){showCustomAlert('All platforms already added.');return;}const buttonsHtml=available.map(p=>'<button class="custom-alert-btn" style="background:var(--box-bg);color:var(--text-color-override);border:1px solid var(--line-color);margin-bottom:6px;justify-content:flex-start;width:100%;flex-direction:row" onclick="pickSocialPlatform(\''+p.key+'\')"><i class="'+p.icon+'" style="color:var(--accent);width:20px"></i> <span style="margin-left:8px">'+p.label+'</span></button>').join('');const ab=document.getElementById('customAlertModal'),ai=document.getElementById('customAlertIcon'),am=document.getElementById('customAlertMessage'),ag=document.getElementById('customAlertBtnGroup');ai.innerHTML='<i class="fa-solid fa-plus" style="color:var(--accent)"></i>';am.innerHTML='<div style="text-align:left;max-height:300px;overflow-y:auto;display:flex;flex-direction:column">'+buttonsHtml+'</div>';ag.innerHTML='<button class="custom-alert-btn cancel-btn" onclick="closeCustomAlert()" style="flex:1">Cancel</button>';ab.classList.add('active');}
-function pickSocialPlatform(k){closeCustomAlert();const c=getSiteContent();if(!Array.isArray(c.social))c.social=[];c.social.push({platform:k,url:'',enabled:true});saveSiteContent(c);renderAdminSocial();renderFooterSocials();}
-function updateSocialUrl(idx,url){const c=getSiteContent();if(c.social&&c.social[idx]){c.social[idx].url=url.trim();saveSiteContent(c);renderFooterSocials();}}
-function removeSocial(idx){const c=getSiteContent();if(c.social){c.social.splice(idx,1);saveSiteContent(c);renderAdminSocial();renderFooterSocials();}}
-
-function getAudioContext(){if(!audioCtx){try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){return null;}}if(audioCtx.state==='suspended')audioCtx.resume().catch(()=>{});return audioCtx;}
-function tone(freq,dur,type,vol,decay){type=type||'sine';vol=vol||0.05;decay=decay||0.08;try{const c=getAudioContext();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(freq,c.currentTime);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(vol,c.currentTime+.005);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+decay);o.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+dur);}catch(e){}}
-const TICK_STYLES={default:{name:'Default',icon:'fa-bell',fn:function(){tone(2000,0.08);}},soft:{name:'Soft',icon:'fa-feather',fn:function(){tone(800,0.14);}},click:{name:'Click',icon:'fa-computer-mouse',fn:function(){tone(1500,0.03,'square',0.03,0.025);}},pop:{name:'Pop',icon:'fa-droplet',fn:function(){tone(1000,0.1);}},tick:{name:'Tick',icon:'fa-clock',fn:function(){tone(3000,0.02);}},bell:{name:'Bell',icon:'fa-bell',fn:function(){tone(2500,0.15);tone(3750,0.15);}},wood:{name:'Wood',icon:'fa-tree',fn:function(){tone(500,0.09,'triangle',0.06);}},glass:{name:'Glass',icon:'fa-wine-glass',fn:function(){tone(3500,0.12);}},deep:{name:'Deep',icon:'fa-water',fn:function(){tone(400,0.16);}}};
-function playTickSound(){try{const eff=getSiteContent().effects||{};if(eff.tickSoundEnabled===false)return;const s=TICK_STYLES[eff.tickSoundStyle||'default']||TICK_STYLES.default;s.fn();}catch(e){}}
-function playApplauseSound(){try{const c=getAudioContext();if(!c)return;const d=2,sr=c.sampleRate,b=c.createBuffer(1,sr*d,sr),dt=b.getChannelData(0);for(let i=0;i<dt.length;i++){const tt=i/sr,dec=Math.exp(-tt*1.2),cp=(tt*10)%1,ce=cp<.15?Math.exp(-cp*20):0,n=Math.random()*2-1;dt[i]=n*(ce*.6+.15)*dec*.5;}const s=c.createBufferSource();s.buffer=b;const f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=1800;const g=c.createGain();g.gain.setValueAtTime(.5,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);s.connect(f);f.connect(g);g.connect(c.destination);s.start();}catch(e){}}
-
-const CONFETTI_COLORS=['#9333ea','#c084fc','#e879f9','#a855f7','#22c55e','#16a34a','#f59e0b','#eab308','#ef4444','#dc2626','#3b82f6','#0ea5e9','#ec4899','#f472b6','#fbbf24','#ffffff'];
-const CONFETTI_HEARTS=['#ef4444','#dc2626','#ec4899','#f472b6','#f43f5e'];
-const CONFETTI_STARS=['#fbbf24','#f59e0b','#facc15','#eab308'];
-function initConfettiCanvas(){if(confettiCanvas&&confettiCtx)return true;confettiCanvas=document.getElementById('confetti-canvas');if(!confettiCanvas)return false;confettiCtx=confettiCanvas.getContext('2d');return true;}
-function fireConfettiBurst(mult){mult=mult||1;try{const eff=getSiteContent().effects||{};if(eff.confettiEnabled===false)return;}catch(e){return;}if(!initConfettiCanvas())return;confettiCanvas.style.display='block';confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;let style='classic';try{style=(getSiteContent().effects||{}).confettiStyle||'classic';}catch(e){}const W=window.innerWidth,H=window.innerHeight;
-  if(style==='classic'||style==='sides'||style==='top'){const n=Math.floor(150*mult);const cx=style==='sides'?0:W/2,cy=style==='top'?-20:H/2;for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*16+8;confettiParticles.push({x:style==='top'?Math.random()*W:cx,y:style==='top'?-20-Math.random()*100:cy,vx:style==='top'?(Math.random()-.5)*3:Math.cos(a)*s,vy:style==='top'?Math.random()*3+2:Math.sin(a)*s-3,size:Math.random()*10+5,color:CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.32+Math.random()*.15,drag:.985,life:1,shape:Math.random()>.5?'rect':'circle'});}}
-  else if(style==='fireworks'){const bursts=Math.floor(4*mult+2);for(let b=0;b<bursts;b++){const cx=W*(0.2+Math.random()*0.6),cy=H*(0.15+Math.random()*0.5);const n=Math.floor(50*mult);const c=CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)];for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*14+6;confettiParticles.push({x:cx,y:cy,vx:Math.cos(a)*s,vy:Math.sin(a)*s,size:Math.random()*8+4,color:c,rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.25,drag:.985,life:1,shape:Math.random()>.5?'rect':'circle'});}}}
-  else if(style==='hearts'){const n=Math.floor(120*mult);for(let k=0;k<n;k++){confettiParticles.push({x:Math.random()*W,y:-20,vx:(Math.random()-.5)*2,vy:Math.random()*2+1.5,size:Math.random()*12+8,color:CONFETTI_HEARTS[Math.floor(Math.random()*CONFETTI_HEARTS.length)],rotation:0,rotationSpeed:(Math.random()-.5)*.2,gravity:.06,drag:.99,life:1,shape:'heart'});}}
-  else if(style==='stars'){const n=Math.floor(130*mult);for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*18+8;confettiParticles.push({x:W/2,y:H/2,vx:Math.cos(a)*s,vy:Math.sin(a)*s-2,size:Math.random()*10+6,color:CONFETTI_STARS[Math.floor(Math.random()*CONFETTI_STARS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.5,gravity:.25,drag:.985,life:1,shape:'star'});}}
-  if(!confettiRunning){confettiRunning=true;animateConfetti();}if(confettiStopTimer)clearTimeout(confettiStopTimer);confettiStopTimer=setTimeout(()=>{confettiRunning=false;},5500);}
-function drawHeartShape(c,s){c.beginPath();const t2=s/2;c.moveTo(0,t2*0.35);c.bezierCurveTo(t2,t2*0.9,0,s,-s*0.7,t2);c.bezierCurveTo(0,-t2*0.5,-t2,-t2*0.5,-s*0.7,-t2*0.5);c.bezierCurveTo(-t2,-t2*0.5,-s,-t2*0.5,-s,0);c.bezierCurveTo(-s,t2*0.5,-t2*0.9,t2*0.6,0,t2*0.35);c.closePath();c.fill();}
-function drawStarShape(c,s){c.beginPath();for(let i=0;i<5;i++){const a=-Math.PI/2+i*(Math.PI*2/5);c.lineTo(Math.cos(a)*s,Math.sin(a)*s);const a2=a+Math.PI/5;c.lineTo(Math.cos(a2)*s*0.45,Math.sin(a2)*s*0.45);}c.closePath();c.fill();}
-function animateConfetti(){if(!confettiCanvas||!confettiCtx)return;confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);let a=false;for(let i=0;i<confettiParticles.length;i++){const p=confettiParticles[i];if(p.life<=0)continue;a=true;p.vy+=p.gravity;p.vx*=p.drag;p.vy*=p.drag;p.x+=p.vx;p.y+=p.vy;p.rotation+=p.rotationSpeed;p.life-=.006;if(p.y>confettiCanvas.height+120)p.life=0;if(p.x<-120||p.x>confettiCanvas.width+120)p.life=0;confettiCtx.save();confettiCtx.translate(p.x,p.y);confettiCtx.rotate(p.rotation);confettiCtx.globalAlpha=Math.max(0,Math.min(1,p.life));confettiCtx.fillStyle=p.color;const sz=p.size*0.5;if(p.shape==='rect')confettiCtx.fillRect(-sz,-sz/2,sz*2,sz);else if(p.shape==='circle'){confettiCtx.beginPath();confettiCtx.arc(0,0,sz,0,Math.PI*2);confettiCtx.fill();}else if(p.shape==='heart'){drawHeartShape(confettiCtx,p.size);}else if(p.shape==='star'){drawStarShape(confettiCtx,p.size);}confettiCtx.restore();}if(confettiParticles.length>800)confettiParticles=confettiParticles.filter(p=>p.life>0);if(a||confettiRunning)requestAnimationFrame(animateConfetti);else{confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);confettiCanvas.style.display='none';confettiParticles=[];}}
-
-/* === ALERT === */
-function showCustomAlert(message,type,onConfirm){type=type||'info';const ab=document.getElementById('customAlertModal');const ai=document.getElementById('customAlertIcon');const am=document.getElementById('customAlertMessage');const ag=document.getElementById('customAlertBtnGroup');const logoUrl=(getSiteContent().general&&getSiteContent().general.favicon)||'https://muminsultani.com/img/ms.png';const brand=getDyn('header.brand','muminsultani');const iconMap={info:'fa-circle-info',success:'fa-circle-check',error:'fa-circle-exclamation',warning:'fa-triangle-exclamation',delete:'fa-trash-can',lock:'fa-lock',verify:'fa-circle-check'};const iconCls=iconMap[type]||'fa-circle-info';ai.innerHTML='<div class="alert-brand-row"><img src="'+logoUrl+'" alt=""><span class="brand-name">'+brand+'</span></div>'+'<i class="fa-solid '+iconCls+'" style="font-size:1.4rem;color:var(--accent)"></i>';am.innerHTML=message;if(onConfirm){ag.innerHTML='<button class="custom-alert-btn cancel-btn" onclick="closeCustomAlert()" style="flex:1">'+t('gt_cancel')+'</button>'+'<button class="custom-alert-btn" onclick="confirmAction()" style="flex:1;background:linear-gradient(135deg,var(--accent),var(--accent-2))">'+t('gt_yes')+'</button>';window._confirmActionCallback=onConfirm;}else{ag.innerHTML='<button class="custom-alert-btn" onclick="closeCustomAlert()" style="flex:1">'+t('gt_ok')+'</button>';}ab.classList.add('active');}
+/* ============================================================
+   ⭐ CUSTOM ALERT — ARTIK LOGOSUZ
+   ============================================================ */
+function showCustomAlert(message,type,onConfirm){
+  type=type||'info';
+  const ab=document.getElementById('customAlertModal');
+  const ai=document.getElementById('customAlertIcon');
+  const am=document.getElementById('customAlertMessage');
+  const ag=document.getElementById('customAlertBtnGroup');
+  const iconMap={info:'fa-circle-info',success:'fa-circle-check',error:'fa-circle-exclamation',warning:'fa-triangle-exclamation',delete:'fa-trash-can',lock:'fa-lock',verify:'fa-circle-check'};
+  const iconCls=iconMap[type]||'fa-circle-info';
+  /* ⭐ LOGO YOK, SADECE ICON */
+  ai.innerHTML='<i class="fa-solid '+iconCls+'" style="font-size:1.6rem;color:var(--accent)"></i>';
+  am.innerHTML=message;
+  if(onConfirm){
+    ag.innerHTML='<button class="custom-alert-btn cancel-btn" onclick="closeCustomAlert()" style="flex:1">'+t('gt_cancel')+'</button>'+'<button class="custom-alert-btn" onclick="confirmAction()" style="flex:1;background:linear-gradient(135deg,var(--accent),var(--accent-2))">'+t('gt_yes')+'</button>';
+    window._confirmActionCallback=onConfirm;
+  }else{
+    ag.innerHTML='<button class="custom-alert-btn" onclick="closeCustomAlert()" style="flex:1">'+t('gt_ok')+'</button>';
+  }
+  ab.classList.add('active');
+}
 function closeCustomAlert(){document.getElementById('customAlertModal').classList.remove('active');window._confirmActionCallback=null;if(window._pendingLangReset){window._pendingLangReset=false;try{sessionStorage.removeItem('site_lang');}catch(e){}changeLanguage('en');}}
 function confirmAction(){const cb=window._confirmActionCallback;window._confirmActionCallback=null;document.getElementById('customAlertModal').classList.remove('active');if(cb){try{cb();}catch(e){}}}
 
@@ -1906,16 +1906,12 @@ async function sendOrderApprovalEmail(order){if(!EMAILJS_CONFIG.enabled)return{s
    🌤️ HAVA DURUMU
    ============================================================ */
 function getWeatherLabel(code){const w=WEATHER_CODES[code]||WEATHER_CODES[0];return w[currentLang]||w.en;}
-
 async function getLocationCoords(){return new Promise(resolve=>{if(!navigator.geolocation){resolve(null);return;}const timer=setTimeout(()=>resolve(null),6000);navigator.geolocation.getCurrentPosition(pos=>{clearTimeout(timer);resolve({lat:pos.coords.latitude,lon:pos.coords.longitude,city:'Konum',country:'',ts:Date.now()});},err=>{clearTimeout(timer);resolve(null);},{timeout:6000,maximumAge:3600000,enableHighAccuracy:false});});}
-
 async function getLocationByIP(){try{const r=await fetch('https://ipapi.co/json/');if(!r.ok)return null;const d=await r.json();if(d.latitude&&d.longitude){const loc={lat:d.latitude,lon:d.longitude,city:d.city||d.region||d.country_name||'—',country:d.country_code||'',ts:Date.now()};try{localStorage.setItem(WEATHER_LOC_KEY,JSON.stringify(loc));}catch(e){}return loc;}}catch(e){}return null;}
-
 async function fetchWeather(force){
   if(weatherLoading)return;
   if(!force){try{const cached=JSON.parse(localStorage.getItem(WEATHER_CACHE_KEY)||'null');if(cached&&cached.updated&&Date.now()-cached.updated<30*60*1000){weatherData=cached;renderWeather();return;}}catch(e){}}
-  weatherLoading=true;
-  renderWeatherLoading();
+  weatherLoading=true;renderWeatherLoading();
   try{
     let loc=null;
     try{const cl=JSON.parse(localStorage.getItem(WEATHER_LOC_KEY)||'null');if(cl&&Date.now()-cl.ts<12*3600*1000)loc=cl;}catch(e){}
@@ -1923,43 +1919,24 @@ async function fetchWeather(force){
     if(!loc)loc=await getLocationByIP();
     if(!loc)loc={lat:41.0082,lon:28.9784,city:'Istanbul',country:'TR',ts:Date.now()};
     const url='https://api.open-meteo.com/v1/forecast?latitude='+loc.lat+'&longitude='+loc.lon+'&current_weather=true&hourly=relativehumidity_2m,apparent_temperature&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=5';
-    const r=await fetch(url);
-    if(!r.ok)throw new Error('weather-fetch-failed');
+    const r=await fetch(url);if(!r.ok)throw new Error('weather-fetch-failed');
     const d=await r.json();
     if(d.current_weather){
       let humidity=null,feels=null;
-      try{
-        if(d.hourly&&d.hourly.relativehumidity_2m&&d.hourly.time){
-          const nowIdx=d.hourly.time.findIndex(t=>new Date(t)>=new Date());
-          if(nowIdx>=0){humidity=d.hourly.relativehumidity_2m[nowIdx];feels=Math.round(d.hourly.apparent_temperature[nowIdx]);}
-        }
-      }catch(e){}
+      try{if(d.hourly&&d.hourly.relativehumidity_2m&&d.hourly.time){const nowIdx=d.hourly.time.findIndex(t=>new Date(t)>=new Date());if(nowIdx>=0){humidity=d.hourly.relativehumidity_2m[nowIdx];feels=Math.round(d.hourly.apparent_temperature[nowIdx]);}}}catch(e){}
       let forecast=[];
-      try{
-        if(d.daily&&d.daily.time){
-          for(let i=0;i<Math.min(5,d.daily.time.length);i++){
-            forecast.push({date:d.daily.time[i],code:d.daily.weathercode[i],max:Math.round(d.daily.temperature_2m_max[i]),min:Math.round(d.daily.temperature_2m_min[i])});
-          }
-        }
-      }catch(e){}
+      try{if(d.daily&&d.daily.time){for(let i=0;i<Math.min(5,d.daily.time.length);i++){forecast.push({date:d.daily.time[i],code:d.daily.weathercode[i],max:Math.round(d.daily.temperature_2m_max[i]),min:Math.round(d.daily.temperature_2m_min[i])});}}}catch(e){}
       weatherData={temp:Math.round(d.current_weather.temperature),code:d.current_weather.weathercode,wind:Math.round(d.current_weather.windspeed),humidity:humidity,feels:feels,city:loc.city||'—',country:loc.country||'',forecast:forecast,updated:Date.now()};
       try{localStorage.setItem(WEATHER_CACHE_KEY,JSON.stringify(weatherData));}catch(e){}
     }
     renderWeather();
-  }catch(e){
-    console.warn('Weather error:',e);
-    try{weatherData=JSON.parse(localStorage.getItem(WEATHER_CACHE_KEY)||'null');}catch(err){}
-    renderWeather();
-  }
+  }catch(e){console.warn('Weather error:',e);try{weatherData=JSON.parse(localStorage.getItem(WEATHER_CACHE_KEY)||'null');}catch(err){}renderWeather();}
   weatherLoading=false;
 }
-
 function renderWeatherLoading(){const card=document.getElementById('weatherCard');if(!card)return;card.innerHTML='<div class="weather-loading"><i class="fa-solid fa-spinner fa-spin"></i>'+t('weather_loading')+'</div>';}
-
 function renderWeather(){
   const card=document.getElementById('weatherCard');if(!card)return;
-  const c=getSiteContent();
-  const enabled=!(c.general&&c.general.weatherEnabled===false);
+  const c=getSiteContent();const enabled=!(c.general&&c.general.weatherEnabled===false);
   const section=document.getElementById('sectionWeather');
   if(!enabled){if(section)section.style.display='none';return;}
   if(section)section.style.display='block';
@@ -1980,61 +1957,113 @@ function renderWeather(){
   const humidity=weatherData.humidity!==null&&weatherData.humidity!==undefined?weatherData.humidity+'%':'—';
   const feels=weatherData.feels!==null&&weatherData.feels!==undefined?weatherData.feels+'°C':'—';
   card.innerHTML=
-    '<div class="weather-top">'+
-      '<div class="weather-loc"><i class="fa-solid fa-location-dot"></i> '+escapeHtml(weatherData.city||'—')+(weatherData.country?' · '+escapeHtml(weatherData.country):'')+'</div>'+
-      '<button type="button" class="weather-refresh" onclick="event.stopPropagation();refreshWeather()" title="Refresh"><i class="fa-solid fa-rotate-right"></i></button>'+
-    '</div>'+
-    '<div class="weather-main">'+
-      '<i class="fa-solid '+wc.icon+' weather-icon-big" style="color:var(--accent)"></i>'+
-      '<div class="weather-temp-block">'+
-        '<div class="weather-temp">'+weatherData.temp+'°C</div>'+
-        '<div class="weather-desc">'+escapeHtml(getWeatherLabel(weatherData.code))+'</div>'+
-      '</div>'+
-    '</div>'+
-    '<div class="weather-details">'+
-      '<div class="weather-detail"><i class="fa-solid fa-wind"></i><strong>'+weatherData.wind+' km/h</strong><span>'+t('weather_wind')+'</span></div>'+
-      '<div class="weather-detail"><i class="fa-solid fa-droplet"></i><strong>'+humidity+'</strong><span>'+t('weather_humidity')+'</span></div>'+
-      '<div class="weather-detail"><i class="fa-solid fa-temperature-half"></i><strong>'+feels+'</strong><span>'+t('weather_feels')+'</span></div>'+
-    '</div>'+
+    '<div class="weather-top"><div class="weather-loc"><i class="fa-solid fa-location-dot"></i> '+escapeHtml(weatherData.city||'—')+(weatherData.country?' · '+escapeHtml(weatherData.country):'')+'</div><button type="button" class="weather-refresh" onclick="event.stopPropagation();refreshWeather()" title="Refresh"><i class="fa-solid fa-rotate-right"></i></button></div>'+
+    '<div class="weather-main"><i class="fa-solid '+wc.icon+' weather-icon-big" style="color:var(--accent)"></i><div class="weather-temp-block"><div class="weather-temp">'+weatherData.temp+'°C</div><div class="weather-desc">'+escapeHtml(getWeatherLabel(weatherData.code))+'</div></div></div>'+
+    '<div class="weather-details"><div class="weather-detail"><i class="fa-solid fa-wind"></i><strong>'+weatherData.wind+' km/h</strong><span>'+t('weather_wind')+'</span></div><div class="weather-detail"><i class="fa-solid fa-droplet"></i><strong>'+humidity+'</strong><span>'+t('weather_humidity')+'</span></div><div class="weather-detail"><i class="fa-solid fa-temperature-half"></i><strong>'+feels+'</strong><span>'+t('weather_feels')+'</span></div></div>'+
     (forecastHtml?'<div style="margin-top:4px"><div style="font-size:.62rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:8px;">'+t('weather_forecast')+'</div>'+forecastHtml+'</div>':'');
 }
-
 function refreshWeather(){try{localStorage.removeItem(WEATHER_CACHE_KEY);}catch(e){}weatherData=null;fetchWeather(true);}
 function applyWeatherSettings(){const c=getSiteContent();const enabled=!(c.general&&c.general.weatherEnabled===false);const section=document.getElementById('sectionWeather');if(!enabled){if(section)section.style.display='none';return;}if(section)section.style.display='block';if(weatherData)renderWeather();else fetchWeather(false);}
 function toggleWeatherEnabled(v){const c=getSiteContent();if(!c.general)c.general={};c.general.weatherEnabled=!!v;saveSiteContent(c);applyWeatherSettings();showCustomAlert(v?'🌤️ Hava durumu açıldı':'❌ Hava durumu kapatıldı','success');}
 
 /* ============================================================
-   ✉️ ADMIN: HERKESE EMAIL GÖNDER (10 MB resim)
+   ✉️ ADMIN: HERKESE EMAIL — 100 MB RESİM + FIREBASE STORAGE
    ============================================================ */
 function openAdminAnyEmail(){
   anyEmailImageDataUrl=null;
+  anyEmailImageUrl=null;
+  anyEmailImageFile=null;
   const f=document.getElementById('adminAnyEmailForm');if(f)f.reset();
   const ig=document.getElementById('any-email-img-group');if(ig)ig.style.display='none';
   const lg=document.getElementById('any-email-link-group');if(lg)lg.style.display='none';
   const pv=document.getElementById('any-email-img-preview');if(pv){pv.style.display='none';pv.src='';}
-  const ft=document.getElementById('any-email-img-file-text');if(ft)ft.textContent='Resim seç (max 10 MB)';
-  const logoUrl=(getSiteContent().general&&getSiteContent().general.favicon)||'https://muminsultani.com/img/ms.png';
-  const brand=getDyn('header.brand','muminsultani');
-  const lp=document.getElementById('any-email-logo-preview');if(lp)lp.src=logoUrl;
-  const bt=document.getElementById('any-email-brand-text');if(bt)bt.textContent=brand;
+  const ft=document.getElementById('any-email-img-file-text');if(ft)ft.textContent='Resim seç (max 100 MB)';
+  const w=document.getElementById('any-email-img-upload-wrapper');if(w)w.classList.remove('has-file','uploading');
+  const ic=document.getElementById('any-email-img-upload-icon');if(ic)ic.className='fa-solid fa-upload upload-icon';
   document.getElementById('adminAnyEmailModal').classList.add('active');
 }
-function closeAdminAnyEmail(){document.getElementById('adminAnyEmailModal').classList.remove('active');anyEmailImageDataUrl=null;}
+function closeAdminAnyEmail(){document.getElementById('adminAnyEmailModal').classList.remove('active');anyEmailImageDataUrl=null;anyEmailImageUrl=null;anyEmailImageFile=null;}
 function previewAnyEmailImage(url){const pv=document.getElementById('any-email-img-preview');if(!pv)return;if(!url||!/^https?:\/\//i.test(url)){pv.style.display='none';pv.src='';return;}pv.src=url;pv.style.display='block';pv.onerror=()=>{pv.style.display='none';};}
-/* ⭐ 10 MB RESİM LİMİTİ */
-function handleAnyEmailImageUpload(e){
+
+/* ⭐ 100 MB YÜKLEME — FIREBASE STORAGE ÖNCELİKLİ */
+async function handleAnyEmailImageUpload(e){
   const f=e.target.files[0];
-  if(!f||!f.type.startsWith('image/'))return;
-  if(f.size>10*1024*1024){showCustomAlert('Resim max 10 MB olmalı! (Seçilen: '+(f.size/(1024*1024)).toFixed(2)+' MB)','warning');e.target.value='';return;}
-  const r=new FileReader();
-  r.onload=ev=>{
-    anyEmailImageDataUrl=ev.target.result;
-    const pv=document.getElementById('any-email-img-preview');
-    if(pv){pv.src=ev.target.result;pv.style.display='block';}
-    const ft=document.getElementById('any-email-img-file-text');
-    if(ft)ft.textContent=f.name+' ('+(f.size/(1024*1024)).toFixed(2)+' MB)';
-  };
-  r.readAsDataURL(f);
+  if(!f){return;}
+  if(!f.type.startsWith('image/')){showCustomAlert('Lütfen bir resim dosyası seçin.','warning');e.target.value='';return;}
+  /* ⭐ 100 MB LİMİT */
+  if(f.size>MAX_IMAGE_SIZE_BYTES){
+    showCustomAlert('Resim max 100 MB olmalı!<br><span style="font-size:.75rem;color:var(--text-secondary)">Seçilen: '+(f.size/(1024*1024)).toFixed(2)+' MB</span>','warning');
+    e.target.value='';
+    return;
+  }
+
+  anyEmailImageFile=f;
+  const pv=document.getElementById('any-email-img-preview');
+  const ft=document.getElementById('any-email-img-file-text');
+  const w=document.getElementById('any-email-img-upload-wrapper');
+  const ic=document.getElementById('any-email-img-upload-icon');
+
+  /* Aşama 1: Firebase Storage'a yüklemeyi dene */
+  if(w)w.classList.add('uploading');
+  if(ic)ic.className='fa-solid fa-spinner fa-spin upload-icon';
+  if(ft)ft.textContent='Yükleniyor: 0%';
+
+  try{
+    if(!firebaseStorageAvailable)initFirebaseStorage();
+    if(!firebaseStorageAvailable)throw new Error('storage_unavailable');
+
+    const storage=firebase.storage();
+    const ext=(f.name&&f.name.lastIndexOf('.')!==-1)?f.name.substring(f.name.lastIndexOf('.')):'.jpg';
+    const fname='email-images/'+Date.now()+'_'+Math.random().toString(36).substring(2,8)+ext;
+    const ref=storage.ref().child(fname);
+    const uploadTask=ref.put(f);
+
+    /* Progress */
+    await new Promise((resolve,reject)=>{
+      uploadTask.on('state_changed',
+        (snap)=>{
+          const pct=Math.round((snap.bytesTransferred/snap.totalBytes)*100);
+          if(ft)ft.textContent='Yükleniyor: '+pct+'%  ('+(snap.bytesTransferred/(1024*1024)).toFixed(1)+'/'+(snap.totalBytes/(1024*1024)).toFixed(1)+' MB)';
+        },
+        (err)=>{reject(err);},
+        ()=>{resolve();}
+      );
+    });
+
+    const url=await uploadTask.snapshot.ref.getDownloadURL();
+    anyEmailImageUrl=url;
+    anyEmailImageDataUrl=null;
+
+    if(w){w.classList.remove('uploading');w.classList.add('has-file');}
+    if(ic)ic.className='fa-solid fa-circle-check upload-icon';
+    if(ft)ft.textContent='✅ Yüklendi: '+f.name+' ('+(f.size/(1024*1024)).toFixed(2)+' MB)';
+    if(pv){pv.src=url;pv.style.display='block';}
+    console.log('✅ Firebase Storage URL:',url);
+  }catch(err){
+    /* Aşama 2: Fallback — Sıkıştır ve base64 olarak gönder */
+    console.warn('Firebase Storage başarısız, fallback: sıkıştırma aktif.',err);
+    if(ft)ft.textContent='Sıkıştırılıyor...';
+    if(ic)ic.className='fa-solid fa-spinner fa-spin upload-icon';
+    try{
+      const compressed=await compressImageForEmailJS(f,EMAILJS_SAFE_BASE64_LIMIT);
+      anyEmailImageDataUrl=compressed;
+      anyEmailImageUrl=null;
+      if(w){w.classList.remove('uploading');w.classList.add('has-file');}
+      if(ic)ic.className='fa-solid fa-circle-check upload-icon';
+      const kb=Math.round(compressed.length/1024);
+      if(ft)ft.textContent='📦 Sıkıştırıldı: '+f.name+' → ~'+kb+' KB';
+      if(pv){pv.src=compressed;pv.style.display='block';}
+      showCustomAlert('ℹ️ Firebase Storage\'a yüklenemedi.<br>Görsel <strong>otomatik sıkıştırıldı</strong> (~'+kb+' KB) ve email ile gönderilecek.','info');
+    }catch(cErr){
+      if(w)w.classList.remove('uploading');
+      if(ic)ic.className='fa-solid fa-upload upload-icon';
+      if(ft)ft.textContent='Resim seç (max 100 MB)';
+      showCustomAlert('Resim işlenemedi: '+(cErr.message||'unknown'),'error');
+      anyEmailImageDataUrl=null;
+      anyEmailImageUrl=null;
+      anyEmailImageFile=null;
+    }
+  }
 }
 
 async function sendAdminAnyEmail(e){
@@ -2044,14 +2073,26 @@ async function sendAdminAnyEmail(e){
   const subj=document.getElementById('any-email-subject').value.trim();
   const msg=document.getElementById('any-email-message').value.trim();
   const useImg=document.getElementById('any-email-img-enable').checked;
-  const imgUrl=useImg?((document.getElementById('any-email-image').value.trim())||anyEmailImageDataUrl||''):'';
+  const manualUrl=document.getElementById('any-email-image').value.trim();
+  /* ⭐ URL önceliği: Manuel URL > Firebase URL > Base64 (fallback) */
+  let imgUrl='';
+  if(useImg){
+    if(manualUrl){imgUrl=manualUrl;}
+    else if(anyEmailImageUrl){imgUrl=anyEmailImageUrl;}
+    else if(anyEmailImageDataUrl){imgUrl=anyEmailImageDataUrl;}
+  }
   const useLink=document.getElementById('any-email-link-enable').checked;
   const linkUrl=useLink?document.getElementById('any-email-link').value.trim():'';
   const linkText=useLink?(document.getElementById('any-email-link-text').value.trim()||'Siteyi Ziyaret Et'):'';
-  const withPdf=document.getElementById('any-email-pdf')?document.getElementById('any-email-pdf').checked:false;
 
   if(!to||!subj||!msg){showCustomAlert(t('fill_fields'),'warning');return;}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)){showCustomAlert('Geçersiz email adresi!','error');return;}
+
+  /* ⭐ EmailJS 50KB güvenlik kontrolü */
+  if(imgUrl&&imgUrl.indexOf('data:')===0&&imgUrl.length>60*1024){
+    showCustomAlert('⚠️ Base64 görsel çok büyük. Firebase Storage kullanın veya daha küçük bir görsel seçin.','error');
+    return;
+  }
 
   const brand=getDyn('header.brand','muminsultani');
   const siteUrl='https://muminsultani.com';
@@ -2072,7 +2113,7 @@ async function sendAdminAnyEmail(e){
     has_link:'yes',
     site_url:siteUrl,
     site_logo:logoUrl,
-    has_pdf:withPdf?'yes':'no',
+    has_pdf:'no',
     pdf_url:'',
     year:new Date().getFullYear(),
     type:'Custom Email',
@@ -2100,10 +2141,16 @@ async function sendAdminAnyEmail(e){
     if(r.ok&&(txt==='OK'||r.status===200)){
       logActivity('email_sent',{email:to,name:toName||'Custom'},'Admin→ Any: '+subj);
       closeAdminAnyEmail();
-      showCustomAlert('✅ Email gönderildi!<br><span style="font-size:.7rem;color:var(--text-secondary)">Site logosu ve linki otomatik eklendi.</span>','success');
+      const hint=anyEmailImageUrl?'<br><span style="font-size:.7rem;color:var(--text-secondary)">Görsel Firebase Storage üzerinden gönderildi. ✅</span>':'';
+      showCustomAlert('✅ Email gönderildi!'+hint,'success');
       fireConfettiBurst(0.6);
     }else{
-      showCustomAlert('Email hatası: '+(txt||r.status),'error');
+      /* EmailJS hatası — net mesaj */
+      let errMsg=txt||('HTTP '+r.status);
+      if(errMsg.indexOf('Variables size limit')!==-1){
+        errMsg='Görsel çok büyük (EmailJS 50 KB limit).<br><span style="font-size:.7rem">Firebase Storage kullanın (Storage sekmesinden aktif edin).</span>';
+      }
+      showCustomAlert('Email hatası:<br><span style="font-size:.75rem">'+errMsg+'</span>','error');
     }
   }catch(err){
     if(submitBtn){submitBtn.disabled=false;submitBtn.innerHTML=origHTML;}
@@ -2112,13 +2159,106 @@ async function sendAdminAnyEmail(e){
 }
 
 /* ============================================================
-   ADMIN PANEL
+   🐟 FISH SYSTEM (Arka plan balıkları)
+   ============================================================ */
+const FISH_STYLES=[{key:'tropical',name:'Tropikal',icon:'fa-fish'},{key:'school',name:'Sürü',icon:'fa-fish-fins'},{key:'deep',name:'Derin Deniz',icon:'fa-water'},{key:'jellyfish',name:'Denizanası',icon:'fa-meteor'},{key:'shark',name:'Köpekbalığı',icon:'fa-shark'},{key:'mixed',name:'Karışık',icon:'fa-shuffle'}];
+function fishHexRgba(hex,a){if(!hex)return 'rgba(147,51,234,'+a+')';if(hex.indexOf('rgb')===0)return hex;const h=hex.replace('#','');return 'rgba('+parseInt(h.substring(0,2),16)+','+parseInt(h.substring(2,4),16)+','+parseInt(h.substring(4,6),16)+','+a+')';}
+function fishDrawBody(c,x,y,size,c1,c2,dir,tail,type,c3){c.save();c.translate(x,y);c.scale(dir,1);if(type==='shark'){c.fillStyle=c1;c.beginPath();c.moveTo(-size*1.2,0);c.quadraticCurveTo(-size*1.15,-size*0.3,-size*0.85,-size*0.16);c.quadraticCurveTo(-size*0.3,-size*0.68,size*0.42,-size*0.4);c.quadraticCurveTo(size*1,-size*0.16,size*1.2,0);c.quadraticCurveTo(size*1,size*0.25,size*0.42,size*0.4);c.quadraticCurveTo(-size*0.3,size*0.62,-size*0.85,size*0.16);c.quadraticCurveTo(-size*1.15,size*0.3,-size*1.2,0);c.closePath();c.fill();c.fillStyle=c2||'#c9d1d9';c.beginPath();c.moveTo(-size*0.85,size*0.1);c.quadraticCurveTo(size*0.2,size*0.5,size*1.1,0);c.quadraticCurveTo(size*0.4,size*0.32,-size*0.85,size*0.1);c.closePath();c.fill();c.fillStyle=c1;c.beginPath();c.moveTo(-size*1.2,0);c.lineTo(-size*1.65,-size*0.55);c.lineTo(-size*1.5,0);c.lineTo(-size*1.65,size*0.5);c.closePath();c.fill();c.beginPath();c.moveTo(-size*0.2,-size*0.5);c.lineTo(-size*0.03,-size*0.95);c.lineTo(size*0.18,-size*0.45);c.closePath();c.fill();c.fillStyle='#fff';c.beginPath();c.arc(size*0.7,-size*0.1,size*0.11,0,Math.PI*2);c.fill();c.fillStyle='#000';c.beginPath();c.arc(size*0.73,-size*0.1,size*0.06,0,Math.PI*2);c.fill();}else{const wag=Math.sin(tail)*0.4;c.save();c.translate(-size*0.82,0);c.rotate(wag);c.fillStyle=c2;c.beginPath();c.moveTo(0,0);c.lineTo(-size*0.52,-size*0.55);c.lineTo(-size*0.33,0);c.lineTo(-size*0.52,size*0.55);c.closePath();c.fill();c.restore();c.fillStyle=c1;c.beginPath();c.ellipse(0,0,size*0.9,size*0.53,0,0,Math.PI*2);c.fill();const g=c.createLinearGradient(0,-size*0.5,0,size*0.5);g.addColorStop(0,c1);g.addColorStop(1,c2);c.fillStyle=g;c.beginPath();c.ellipse(0,size*0.04,size*0.8,size*0.42,0,0,Math.PI*2);c.fill();c.fillStyle=c2;c.beginPath();c.moveTo(-size*0.1,-size*0.5);c.lineTo(size*0.17,-size*0.85);c.lineTo(size*0.3,-size*0.43);c.closePath();c.fill();c.beginPath();c.moveTo(-size*0.13,size*0.44);c.lineTo(-size*0.04,size*0.75);c.lineTo(size*0.11,size*0.4);c.closePath();c.fill();c.fillStyle='#fff';c.beginPath();c.arc(size*0.48,-size*0.11,size*0.14,0,Math.PI*2);c.fill();c.fillStyle='#0a0a14';c.beginPath();c.arc(size*0.52,-size*0.11,size*0.085,0,Math.PI*2);c.fill();c.fillStyle='rgba(255,255,255,.5)';c.beginPath();c.ellipse(size*0.28,-size*0.24,size*0.15,size*0.055,-0.4,0,Math.PI*2);c.fill();if(c3){c.strokeStyle=fishHexRgba(c3,0.5);c.lineWidth=1.5;for(let i=-1;i<=1;i++){c.beginPath();c.moveTo(i*size*0.25,-size*0.35);c.lineTo(i*size*0.25,size*0.35);c.stroke();}}}c.restore();}
+function fishDrawJelly(c,x,y,size,c1,c2,phase){c.save();c.translate(x,y);const pulse=Math.sin(phase)*0.1+1;const glow=c.createRadialGradient(0,0,0,0,0,size*2.2);glow.addColorStop(0,fishHexRgba(c1,0.32));glow.addColorStop(1,fishHexRgba(c1,0));c.fillStyle=glow;c.beginPath();c.arc(0,0,size*2.2,0,Math.PI*2);c.fill();c.strokeStyle=fishHexRgba(c1,0.7);c.lineWidth=1.6;for(let i=0;i<6;i++){const off=(i-2.5)*size*0.22;c.beginPath();c.moveTo(off,size*0.25);c.quadraticCurveTo(off+Math.sin(phase+i)*size*0.32,size*1,off+Math.sin(phase+i*1.3)*size*0.5,size*1.9);c.stroke();}c.fillStyle=fishHexRgba(c1,0.75);c.beginPath();c.ellipse(0,0,size*pulse,size*0.72*pulse,0,Math.PI,0);c.closePath();c.fill();c.fillStyle=fishHexRgba(c2,0.5);c.beginPath();c.ellipse(0,size*0.05,size*0.85*pulse,size*0.5*pulse,0,Math.PI,0);c.closePath();c.fill();c.fillStyle='rgba(255,255,255,.35)';c.beginPath();c.ellipse(-size*0.32,-size*0.15,size*0.34,size*0.22,0,0,Math.PI*2);c.fill();c.restore();}
+function createFishSystem(canvasId){
+  const canvas=document.getElementById(canvasId);if(!canvas)return{setEnabled:function(){},setStyle:function(){}};
+  const ctx=canvas.getContext('2d');let running=true,enabled=false,style='tropical';let fishes=[],bubbles=[];
+  const TROPI=[['#ff6b6b','#ffa94d','#fff3bf'],['#4dabf7','#74c0fc','#e7f5ff'],['#ffd43b','#fab005','#fff3bf'],['#da77f2','#e599f7','#f3d9fa'],['#51cf66','#8ce99a','#d3f9d8'],['#ff922b','#ffc078','#ffe8cc'],['#22b8cf','#66d9e8','#c5f6fa'],['#f783ac','#faa2c1','#fcc2d7']];
+  const DEEP=[['#3b3b5c','#7c3aed','#a78bfa'],['#1e1b4b','#4338ca','#6366f1'],['#5b21b6','#8b5cf6','#c4b5fd']];
+  const SCH=[['#adb5bd','#ced4da','#e9ecef'],['#748ffc','#a5b4fc','#dbe4ff']];
+  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+  function pickPal(){let a;if(style==='school')a=SCH;else if(style==='deep'||style==='mixed')a=DEEP;else a=TROPI;return a[Math.floor(Math.random()*a.length)];}
+  function Fish(){this.type=style;this.isShark=(style==='shark');this.dir=Math.random()>0.5?1:-1;this.x=this.dir===1?-120:canvas.width+120;this.baseY=80+Math.random()*(canvas.height-200);this.y=this.baseY;this.size=14+Math.random()*26;const p=pickPal();this.c1=p[0];this.c2=p[1];this.c3=p[2]||p[1];this.speed=(0.5+Math.random()*0.9)*this.dir;this.wobbleAmp=3+Math.random()*7;this.wobbleSpeed=0.02+Math.random()*0.03;this.wobblePhase=Math.random()*Math.PI*2;this.tailPhase=Math.random()*Math.PI*2;this.tailSpeed=0.2+Math.random()*0.15;}
+  Fish.prototype.reset=function(){this.dir=Math.random()>0.5?1:-1;this.x=this.dir===1?-120:canvas.width+120;this.baseY=80+Math.random()*(canvas.height-200);this.y=this.baseY;this.size=14+Math.random()*26;const p=pickPal();this.c1=p[0];this.c2=p[1];this.c3=p[2]||p[1];this.speed=(0.5+Math.random()*0.9)*this.dir;this.wobbleAmp=3+Math.random()*7;this.wobbleSpeed=0.02+Math.random()*0.03;this.wobblePhase=Math.random()*Math.PI*2;this.tailPhase=Math.random()*Math.PI*2;this.tailSpeed=0.2+Math.random()*0.15;this.isShark=(style==='shark');};
+  Fish.prototype.update=function(){this.x+=this.speed;this.wobblePhase+=this.wobbleSpeed;this.y=this.baseY+Math.sin(this.wobblePhase)*this.wobbleAmp;this.tailPhase+=this.tailSpeed;if(this.dir===1&&this.x>canvas.width+140)this.reset();if(this.dir===-1&&this.x<-140)this.reset();};
+  Fish.prototype.draw=function(){fishDrawBody(ctx,this.x,this.y,this.size,this.c1,this.c2,this.dir,this.tailPhase,this.isShark?'shark':'tropical',this.c3);};
+  function Jelly(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=18+Math.random()*22;this.phase=Math.random()*Math.PI*2;this.speed=0.15+Math.random()*0.25;const p=TROPI[Math.floor(Math.random()*TROPI.length)];this.c1=p[0];this.c2=p[2]||p[1];}
+  Jelly.prototype.update=function(){this.phase+=0.03;this.y-=this.speed;this.x+=Math.sin(this.phase*0.6)*0.4;if(this.y<-100){this.y=canvas.height+80;this.x=Math.random()*canvas.width;}};
+  Jelly.prototype.draw=function(){fishDrawJelly(ctx,this.x,this.y,this.size,this.c1,this.c2,this.phase);};
+  function Bubble(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=1+Math.random()*4;this.speed=0.2+Math.random()*0.6;this.phase=Math.random()*Math.PI*2;}
+  Bubble.prototype.update=function(){this.y-=this.speed;this.phase+=0.05;this.x+=Math.sin(this.phase)*0.3;if(this.y<-20){this.y=canvas.height+20;this.x=Math.random()*canvas.width;}};
+  Bubble.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.strokeStyle='rgba(180,220,255,.5)';ctx.lineWidth=1;ctx.stroke();ctx.beginPath();ctx.arc(this.x-this.size*0.3,this.y-this.size*0.3,this.size*0.3,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,.6)';ctx.fill();};
+  function rebuild(){fishes=[];bubbles=[];let fc=8,jc=0;if(style==='school')fc=22;else if(style==='deep')fc=7;else if(style==='jellyfish'){fc=0;jc=6;}else if(style==='shark')fc=4;else if(style==='mixed'){fc=8;jc=3;}for(let i=0;i<fc;i++)fishes.push(new Fish());for(let i=0;i<jc;i++)fishes.push(new Jelly());const bc=(style==='deep'||style==='mixed')?16:8;for(let i=0;i<bc;i++)bubbles.push(new Bubble());}
+  function loop(){if(!running)return;ctx.clearRect(0,0,canvas.width,canvas.height);if(enabled){for(let i=0;i<bubbles.length;i++){bubbles[i].update();bubbles[i].draw();}for(let i=0;i<fishes.length;i++){fishes[i].update();fishes[i].draw();}}requestAnimationFrame(loop);}
+  resize();window.addEventListener('resize',function(){resize();rebuild();});rebuild();loop();
+  return{setEnabled:function(v){enabled=!!v;if(enabled)canvas.classList.add('active');else canvas.classList.remove('active');if(enabled){resize();rebuild();}else ctx.clearRect(0,0,canvas.width,canvas.height);},setStyle:function(s){style=s||'tropical';rebuild();}};
+}
+
+/* ============================================================
+   📊 EFFECTS / TICK / CONFETTI
+   ============================================================ */
+function getAudioContext(){if(!audioCtx){try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){return null;}}if(audioCtx.state==='suspended')audioCtx.resume().catch(()=>{});return audioCtx;}
+function tone(freq,dur,type,vol,decay){type=type||'sine';vol=vol||0.05;decay=decay||0.08;try{const c=getAudioContext();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(freq,c.currentTime);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(vol,c.currentTime+.005);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+decay);o.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+dur);}catch(e){}}
+const TICK_STYLES={default:{name:'Default',icon:'fa-bell',fn:function(){tone(2000,0.08);}},soft:{name:'Soft',icon:'fa-feather',fn:function(){tone(800,0.14);}},click:{name:'Click',icon:'fa-computer-mouse',fn:function(){tone(1500,0.03,'square',0.03,0.025);}},pop:{name:'Pop',icon:'fa-droplet',fn:function(){tone(1000,0.1);}},tick:{name:'Tick',icon:'fa-clock',fn:function(){tone(3000,0.02);}},bell:{name:'Bell',icon:'fa-bell',fn:function(){tone(2500,0.15);tone(3750,0.15);}},wood:{name:'Wood',icon:'fa-tree',fn:function(){tone(500,0.09,'triangle',0.06);}},glass:{name:'Glass',icon:'fa-wine-glass',fn:function(){tone(3500,0.12);}},deep:{name:'Deep',icon:'fa-water',fn:function(){tone(400,0.16);}}};
+function playTickSound(){try{const eff=getSiteContent().effects||{};if(eff.tickSoundEnabled===false)return;const s=TICK_STYLES[eff.tickSoundStyle||'default']||TICK_STYLES.default;s.fn();}catch(e){}}
+function playApplauseSound(){try{const c=getAudioContext();if(!c)return;const d=2,sr=c.sampleRate,b=c.createBuffer(1,sr*d,sr),dt=b.getChannelData(0);for(let i=0;i<dt.length;i++){const tt=i/sr,dec=Math.exp(-tt*1.2),cp=(tt*10)%1,ce=cp<.15?Math.exp(-cp*20):0,n=Math.random()*2-1;dt[i]=n*(ce*.6+.15)*dec*.5;}const s=c.createBufferSource();s.buffer=b;const f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=1800;const g=c.createGain();g.gain.setValueAtTime(.5,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);s.connect(f);f.connect(g);g.connect(c.destination);s.start();}catch(e){}}
+
+const CONFETTI_COLORS=['#9333ea','#c084fc','#e879f9','#a855f7','#22c55e','#16a34a','#f59e0b','#eab308','#ef4444','#dc2626','#3b82f6','#0ea5e9','#ec4899','#f472b6','#fbbf24','#ffffff'];
+const CONFETTI_HEARTS=['#ef4444','#dc2626','#ec4899','#f472b6','#f43f5e'];
+const CONFETTI_STARS=['#fbbf24','#f59e0b','#facc15','#eab308'];
+function initConfettiCanvas(){if(confettiCanvas&&confettiCtx)return true;confettiCanvas=document.getElementById('confetti-canvas');if(!confettiCanvas)return false;confettiCtx=confettiCanvas.getContext('2d');return true;}
+function fireConfettiBurst(mult){mult=mult||1;try{const eff=getSiteContent().effects||{};if(eff.confettiEnabled===false)return;}catch(e){return;}if(!initConfettiCanvas())return;confettiCanvas.style.display='block';confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;let style='classic';try{style=(getSiteContent().effects||{}).confettiStyle||'classic';}catch(e){}const W=window.innerWidth,H=window.innerHeight;
+  if(style==='classic'||style==='sides'||style==='top'){const n=Math.floor(150*mult);const cx=style==='sides'?0:W/2,cy=style==='top'?-20:H/2;for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*16+8;confettiParticles.push({x:style==='top'?Math.random()*W:cx,y:style==='top'?-20-Math.random()*100:cy,vx:style==='top'?(Math.random()-.5)*3:Math.cos(a)*s,vy:style==='top'?Math.random()*3+2:Math.sin(a)*s-3,size:Math.random()*10+5,color:CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.32+Math.random()*.15,drag:.985,life:1,shape:Math.random()>.5?'rect':'circle'});}}
+  else if(style==='fireworks'){const bursts=Math.floor(4*mult+2);for(let b=0;b<bursts;b++){const cx=W*(0.2+Math.random()*0.6),cy=H*(0.15+Math.random()*0.5);const n=Math.floor(50*mult);const c=CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)];for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*14+6;confettiParticles.push({x:cx,y:cy,vx:Math.cos(a)*s,vy:Math.sin(a)*s,size:Math.random()*8+4,color:c,rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.25,drag:.985,life:1,shape:Math.random()>.5?'rect':'circle'});}}}
+  else if(style==='hearts'){const n=Math.floor(120*mult);for(let k=0;k<n;k++){confettiParticles.push({x:Math.random()*W,y:-20,vx:(Math.random()-.5)*2,vy:Math.random()*2+1.5,size:Math.random()*12+8,color:CONFETTI_HEARTS[Math.floor(Math.random()*CONFETTI_HEARTS.length)],rotation:0,rotationSpeed:(Math.random()-.5)*.2,gravity:.06,drag:.99,life:1,shape:'heart'});}}
+  else if(style==='stars'){const n=Math.floor(130*mult);for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*18+8;confettiParticles.push({x:W/2,y:H/2,vx:Math.cos(a)*s,vy:Math.sin(a)*s-2,size:Math.random()*10+6,color:CONFETTI_STARS[Math.floor(Math.random()*CONFETTI_STARS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.5,gravity:.25,drag:.985,life:1,shape:'star'});}}
+  if(!confettiRunning){confettiRunning=true;animateConfetti();}if(confettiStopTimer)clearTimeout(confettiStopTimer);confettiStopTimer=setTimeout(()=>{confettiRunning=false;},5500);}
+function drawHeartShape(c,s){c.beginPath();const t2=s/2;c.moveTo(0,t2*0.35);c.bezierCurveTo(t2,t2*0.9,0,s,-s*0.7,t2);c.bezierCurveTo(0,-t2*0.5,-t2,-t2*0.5,-s*0.7,-t2*0.5);c.bezierCurveTo(-t2,-t2*0.5,-s,-t2*0.5,-s,0);c.bezierCurveTo(-s,t2*0.5,-t2*0.9,t2*0.6,0,t2*0.35);c.closePath();c.fill();}
+function drawStarShape(c,s){c.beginPath();for(let i=0;i<5;i++){const a=-Math.PI/2+i*(Math.PI*2/5);c.lineTo(Math.cos(a)*s,Math.sin(a)*s);const a2=a+Math.PI/5;c.lineTo(Math.cos(a2)*s*0.45,Math.sin(a2)*s*0.45);}c.closePath();c.fill();}
+function animateConfetti(){if(!confettiCanvas||!confettiCtx)return;confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);let a=false;for(let i=0;i<confettiParticles.length;i++){const p=confettiParticles[i];if(p.life<=0)continue;a=true;p.vy+=p.gravity;p.vx*=p.drag;p.vy*=p.drag;p.x+=p.vx;p.y+=p.vy;p.rotation+=p.rotationSpeed;p.life-=.006;if(p.y>confettiCanvas.height+120)p.life=0;if(p.x<-120||p.x>confettiCanvas.width+120)p.life=0;confettiCtx.save();confettiCtx.translate(p.x,p.y);confettiCtx.rotate(p.rotation);confettiCtx.globalAlpha=Math.max(0,Math.min(1,p.life));confettiCtx.fillStyle=p.color;const sz=p.size*0.5;if(p.shape==='rect')confettiCtx.fillRect(-sz,-sz/2,sz*2,sz);else if(p.shape==='circle'){confettiCtx.beginPath();confettiCtx.arc(0,0,sz,0,Math.PI*2);confettiCtx.fill();}else if(p.shape==='heart'){drawHeartShape(confettiCtx,p.size);}else if(p.shape==='star'){drawStarShape(confettiCtx,p.size);}confettiCtx.restore();}if(confettiParticles.length>800)confettiParticles=confettiParticles.filter(p=>p.life>0);if(a||confettiRunning)requestAnimationFrame(animateConfetti);else{confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);confettiCanvas.style.display='none';confettiParticles=[];}}
+
+/* ============================================================
+   🎨 EFFECTS PANEL RENDER
+   ============================================================ */
+function renderEffectsPanel(){const eff=(getSiteContent().effects)||{};const app=(getSiteContent().appearance)||{};
+  const tg=document.getElementById('themeGrid');if(tg){tg.innerHTML='';THEMES.forEach(t2=>{const c=document.createElement('div');c.className='effect-chip'+((app.theme||'purple')===t2.key?' active':'');c.onclick=()=>setTheme(t2.key);c.innerHTML='<div class="color-swatch" style="background:linear-gradient(135deg,'+t2.c1+','+t2.c2+')"></div><span>'+t2.name+'</span>';tg.appendChild(c);});}
+  const fg=document.getElementById('fontGrid');if(fg){fg.innerHTML='';FONTS_NORMAL.forEach(f=>{const c=document.createElement('div');c.className='effect-chip'+((app.font||'Sora')===f.key?' active':'');c.onclick=()=>setFont(f.key);c.innerHTML='<div class="font-preview" style="font-family:\''+f.key+'\',sans-serif">'+f.label+'</div>';fg.appendChild(c);});}
+  const fcg=document.getElementById('fontColorGrid');if(fcg){fcg.innerHTML='';FONT_COLORS.forEach(fc=>{const c=document.createElement('div');c.className='effect-chip'+((app.fontColor||'default')===fc.key?' active':'');c.onclick=()=>setFontColor(fc.key);c.innerHTML='<div class="color-swatch" style="background:'+(fc.c==='inherit'?'linear-gradient(135deg,#666,#999)':fc.c)+'"></div><span>'+fc.name+'</span>';fcg.appendChild(c);});}
+  const fsg=document.getElementById('formStyleGrid');if(fsg){fsg.innerHTML='';FORM_STYLES.forEach(fs=>{const c=document.createElement('div');c.className='effect-chip'+((app.formStyle||'default')===fs.key?' active':'');c.onclick=()=>setFormStyle(fs.key);c.innerHTML='<i class="fa-solid '+fs.icon+'"></i><span>'+fs.name+'</span>';fsg.appendChild(c);});}
+  const psg=document.getElementById('panelStyleGrid');if(psg){psg.innerHTML='';PANEL_STYLES.forEach(ps=>{const c=document.createElement('div');c.className='effect-chip'+((app.panelStyle||'default')===ps.key?' active':'');c.onclick=()=>setPanelStyle(ps.key);c.innerHTML='<i class="fa-solid '+ps.icon+'"></i><span>'+ps.name+'</span>';psg.appendChild(c);});}
+  const bg=document.getElementById('bgGrid');if(bg){bg.innerHTML='';BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='effect-chip'+((eff.background||'default')===b.key?' active':'');c.onclick=()=>setBackground(b.key);c.innerHTML='<div class="bg-swatch" style="background:'+bgSwatch(b.key)+'"></div><span>'+b.name+'</span>';bg.appendChild(c);});}
+  const ag=document.getElementById('animGrid');if(ag){ag.innerHTML='';ANIM_PRESETS.forEach(a=>{const c=document.createElement('div');c.className='effect-chip'+((eff.siteAnimation||'constellation')===a.key?' active':'');c.onclick=()=>setSiteAnimation(a.key);c.innerHTML='<i class="fa-solid '+a.icon+'"></i><span>'+a.name+'</span>';ag.appendChild(c);});}
+  const cg=document.getElementById('chatBgGrid');if(cg){cg.innerHTML='';CHAT_BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='effect-chip'+((eff.chatBackground||'default')===b.key?' active':'');c.onclick=()=>setChatBackground(b.key);c.innerHTML='<div class="bg-swatch" style="background:'+chatSwatch(b.key)+'"></div><span>'+b.name+'</span>';cg.appendChild(c);});}
+  const mcg=document.getElementById('messengerColorGrid');if(mcg){mcg.innerHTML='';MESSENGER_COLORS.forEach(mc=>{const c=document.createElement('div');c.className='effect-chip'+((eff.messengerColor||'purple')===mc.key?' active':'');c.onclick=()=>setMessengerColor(mc.key);c.innerHTML='<div class="color-swatch" style="background:'+mc.c+'"></div><span>'+mc.name+'</span>';mcg.appendChild(c);});}
+  const cng=document.getElementById('confettiGrid');if(cng){cng.innerHTML='';CONFETTI_PRESETS.forEach(c2=>{const c=document.createElement('div');c.className='effect-chip'+((eff.confettiStyle||'classic')===c2.key?' active':'');c.onclick=()=>{setConfettiStyle(c2.key);fireConfettiBurst(1);};c.innerHTML='<i class="fa-solid '+c2.icon+'"></i><span>'+c2.name+'</span>';cng.appendChild(c);});}
+  const tg2=document.getElementById('tickGrid');if(tg2){tg2.innerHTML='';Object.keys(TICK_STYLES).forEach(k=>{const s=TICK_STYLES[k];const c=document.createElement('div');c.className='effect-chip'+((eff.tickSoundStyle||'default')===k?' active':'');c.onclick=()=>{setTickSoundStyle(k);s.fn();};c.innerHTML='<i class="fa-solid '+s.icon+'"></i><span>'+s.name+'</span>';tg2.appendChild(c);});}
+  const ibg=document.getElementById('introBgGrid');if(ibg){ibg.innerHTML='';INTRO_BGS.forEach(b=>{const c=document.createElement('div');c.className='effect-chip'+((eff.introBg||'default')===b.key?' active':'');c.onclick=()=>setIntroBg(b.key);c.innerHTML='<div class="bg-swatch" style="background:'+bgSwatch(b.key)+'"></div><span>'+b.name+'</span>';ibg.appendChild(c);});}
+  const iag=document.getElementById('introAnimGrid');if(iag){iag.innerHTML='';INTRO_ANIMS.forEach(a=>{const c=document.createElement('div');c.className='effect-chip'+((eff.introAnim||'constellation')===a.key?' active':'');c.onclick=()=>setIntroAnim(a.key);c.innerHTML='<i class="fa-solid '+a.icon+'"></i><span>'+a.name+'</span>';iag.appendChild(c);});}
+  const fishG=document.getElementById('fishStyleGrid');if(fishG){fishG.innerHTML='';FISH_STYLES.forEach(f=>{const c=document.createElement('div');c.className='effect-chip'+((eff.fishStyle||'tropical')===f.key?' active':'');c.onclick=function(){setFishStyle(f.key);};c.innerHTML='<i class="fa-solid '+f.icon+'"></i><span>'+f.name+'</span>';fishG.appendChild(c);});}}
+
+function openUserSettingsModal(){const lu=localStorage.getItem('logged_user');if(!lu)return;renderUserSettingsGrids();document.getElementById('userSettingsModal').classList.add('active');}
+function closeUserSettingsModal(){document.getElementById('userSettingsModal').classList.remove('active');applyAppearance();applyBackground();applyChatBackground();}
+function renderUserSettingsGrids(){const u=getUserPrefs();
+  const tg=document.getElementById('userThemeGrid');if(tg){tg.innerHTML='';THEMES.forEach(t2=>{const c=document.createElement('div');c.className='settings-chip'+((u.theme||'')===t2.key?' active':'');c.onclick=()=>{setUserPref('theme',t2.key);applyAppearance();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:linear-gradient(135deg,'+t2.c1+','+t2.c2+')"></div><span>'+t2.name+'</span>';tg.appendChild(c);});}
+  const fcg=document.getElementById('userFontColorGrid');if(fcg){fcg.innerHTML='';FONT_COLORS.forEach(fc=>{const c=document.createElement('div');c.className='settings-chip'+((u.fontColor||'')===fc.key?' active':'');c.onclick=()=>{setUserPref('fontColor',fc.key);applyAppearance();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:'+(fc.c==='inherit'?'linear-gradient(135deg,#666,#999)':fc.c)+'"></div><span>'+fc.name+'</span>';fcg.appendChild(c);});}
+  const fg=document.getElementById('userFontGrid');if(fg){fg.innerHTML='';FONTS_NORMAL.slice(0,12).forEach(f=>{const c=document.createElement('div');c.className='settings-chip'+((u.font||'')===f.key?' active':'');c.onclick=()=>{setUserPref('font',f.key);applyAppearance();renderUserSettingsGrids();};c.innerHTML='<span style="font-family:\''+f.key+'\',sans-serif;font-size:.9rem">'+f.label+'</span>';fg.appendChild(c);});}
+  const bg=document.getElementById('userBgGrid');if(bg){bg.innerHTML='';BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='settings-chip'+((u.background||'')===b.key?' active':'');c.onclick=()=>{setUserPref('background',b.key);applyBackground();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:'+bgSwatch(b.key)+'"></div><span>'+b.name+'</span>';bg.appendChild(c);});}
+  const cg=document.getElementById('userChatBgGrid');if(cg){cg.innerHTML='';CHAT_BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='settings-chip'+((u.chatBackground||'')===b.key?' active':'');c.onclick=()=>{setUserPref('chatBackground',b.key);applyChatBackground();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:'+chatSwatch(b.key)+'"></div><span>'+b.name+'</span>';cg.appendChild(c);});}}
+function resetUserSettings(){clearUserPrefs();applyAppearance();applyBackground();applyChatBackground();renderUserSettingsGrids();showCustomAlert('Settings reset','success');}
+
+/* ============================================================
+   📱 SOCIAL
+   ============================================================ */
+function findPlatform(k){return SOCIAL_PLATFORMS.find(p=>p.key===k)||{key:k,label:k,icon:'fa-solid fa-link',placeholder:'url'};}
+function renderFooterSocials(){const el=document.getElementById('footerSocials');if(!el)return;const list=(getSiteContent().social||[]).filter(s=>s.enabled!==false);el.innerHTML='';list.forEach(s=>{const p=findPlatform(s.platform);const a=document.createElement('a');a.href='#';a.className='social-btn';a.title=p.label;a.innerHTML='<i class="'+p.icon+'" style="font-size:1.1rem;color:var(--accent)"></i>';a.onclick=(e)=>{e.preventDefault();if(s.platform==='gmail')window.open('mailto:'+s.url,'_blank');else window.open(s.url,'_blank');};el.appendChild(a);});}
+function renderAdminSocial(){const list=document.getElementById('socialListAdmin');if(!list)return;const social=(getSiteContent().social||[]);list.innerHTML='';social.forEach((s,idx)=>{const p=findPlatform(s.platform);const row=document.createElement('div');row.className='social-row';row.innerHTML='<i class="'+p.icon+'"></i><input type="text" value="'+escapeHtml(s.url||'')+'" placeholder="'+escapeHtml(p.placeholder)+'" onchange="updateSocialUrl('+idx+',this.value)"><span style="font-size:.65rem;color:var(--text-secondary);font-weight:700">'+p.label+'</span><button class="social-del" onclick="removeSocial('+idx+')"><i class="fa-solid fa-trash"></i></button>';list.appendChild(row);});}
+function addSocialPlatformPicker(){const used=(getSiteContent().social||[]).map(s=>s.platform);const available=SOCIAL_PLATFORMS.filter(p=>!used.includes(p.key));if(!available.length){showCustomAlert('All platforms already added.');return;}const buttonsHtml=available.map(p=>'<button class="custom-alert-btn" style="background:var(--box-bg);color:var(--text-color-override);border:1px solid var(--line-color);margin-bottom:6px;justify-content:flex-start;width:100%;flex-direction:row" onclick="pickSocialPlatform(\''+p.key+'\')"><i class="'+p.icon+'" style="color:var(--accent);width:20px"></i> <span style="margin-left:8px">'+p.label+'</span></button>').join('');const ab=document.getElementById('customAlertModal'),ai=document.getElementById('customAlertIcon'),am=document.getElementById('customAlertMessage'),ag=document.getElementById('customAlertBtnGroup');ai.innerHTML='<i class="fa-solid fa-plus" style="color:var(--accent);font-size:1.6rem"></i>';am.innerHTML='<div style="text-align:left;max-height:300px;overflow-y:auto;display:flex;flex-direction:column">'+buttonsHtml+'</div>';ag.innerHTML='<button class="custom-alert-btn cancel-btn" onclick="closeCustomAlert()" style="flex:1">Cancel</button>';ab.classList.add('active');}
+function pickSocialPlatform(k){closeCustomAlert();const c=getSiteContent();if(!Array.isArray(c.social))c.social=[];c.social.push({platform:k,url:'',enabled:true});saveSiteContent(c);renderAdminSocial();renderFooterSocials();}
+function updateSocialUrl(idx,url){const c=getSiteContent();if(c.social&&c.social[idx]){c.social[idx].url=url.trim();saveSiteContent(c);renderFooterSocials();}}
+function removeSocial(idx){const c=getSiteContent();if(c.social){c.social.splice(idx,1);saveSiteContent(c);renderAdminSocial();renderFooterSocials();}}
+
+/* ============================================================
+   🛠️ ADMIN PANEL
    ============================================================ */
 function triggerAdminAccess(){if(isAdminLoggedIn())openAdminPanel();else{document.getElementById('adminLoginModal').classList.add('active');setTimeout(()=>{const i=document.getElementById('adminPasswordInput');if(i){setPasswordValue('adminPasswordInput','');i.focus();}},200);}}
 function closeAdminLogin(){document.getElementById('adminLoginModal').classList.remove('active');}
 function verifyAdminPassword(e){if(e)e.preventDefault();const v=getPasswordValue('adminPasswordInput');if(v===ADMIN_MASTER_PASSWORD){try{sessionStorage.setItem(ADMIN_SESSION_KEY,'yes');}catch(err){}closeAdminLogin();openAdminPanel();fireConfettiBurst(.6);}else{showCustomAlert('Wrong password!');setPasswordValue('adminPasswordInput','');}}
 function logoutAdmin(){try{sessionStorage.removeItem(ADMIN_SESSION_KEY);}catch(e){}closeAdminPanel();}
-
 function openAdminPanel(){refreshAdminUI();document.getElementById('adminPanelModal').classList.add('active');}
 function closeAdminPanel(){document.getElementById('adminPanelModal').classList.remove('active');applySiteContent();applySitePrivacy();applyChatVisibility();if(window._chatPrevUser){try{localStorage.setItem('logged_user',window._chatPrevUser);}catch(e){}window._chatPrevUser=null;try{checkUserSession();}catch(e){}}}
 function switchAdminTab(name,btn){document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));if(btn)btn.classList.add('active');const sec=document.querySelector('.admin-section[data-section="'+name+'"]');if(sec)sec.classList.add('active');if(name==='users')renderAdminUsers();if(name==='activity')renderAdminActivity();if(name==='chats')renderAdminChats();if(name==='apps')renderAdminSlots();if(name==='sections')renderAdminSectionsOrder();if(name==='effects')renderEffectsPanel();if(name==='social')renderAdminSocial();if(name==='account')renderAdminAccount();if(name==='emails')renderWelcomeSettings();if(name==='orders'){renderAdminOrders();updateOrdersBadge();}}
@@ -2134,6 +2274,7 @@ function refreshAdminUI(){
   if(el('dash-chats-count'))el('dash-chats-count').textContent='Chat: '+totalChats;
   if(el('dash-email-status'))el('dash-email-status').textContent='Email: '+(EMAILJS_CONFIG.enabled?'✅':'⚠️');
   if(el('dash-cloud-status'))el('dash-cloud-status').textContent='Cloud: '+(firebaseConnected?'✅':'⚠️');
+  if(el('dash-storage-status'))el('dash-storage-status').textContent='Storage: '+(firebaseStorageAvailable?'✅':'⚠️');
   if(el('dash-last-edit'))el('dash-last-edit').textContent='Last: '+c.lastEdit;
   if(el('dash-chat-status'))el('dash-chat-status').textContent='Chat Feature: '+(isChatEnabled()?'✅ AÇIK':'🔒 GİZLİ');
   if(el('ah-brand'))el('ah-brand').value=c.header.brand;
@@ -2178,6 +2319,8 @@ function refreshDashStats(){
     if(ps){const closed=!!(getSiteContent().general&&getSiteContent().general.siteClosed);ps.textContent='Privacy: '+(closed?'🔒 CLOSED':'🔓 OPEN');}
     const cs=document.getElementById('dash-chat-status');
     if(cs){cs.textContent='Chat Feature: '+(isChatEnabled()?'✅ AÇIK':'🔒 GİZLİ');}
+    const ss=document.getElementById('dash-storage-status');
+    if(ss){ss.textContent='Storage: '+(firebaseStorageAvailable?'✅ Firebase':'⚠️ Fallback');}
     const vis=(getSiteContent().general&&getSiteContent().general.languageVisibility)||{en:true,tr:true,de:true};
     ['en','tr','de'].forEach(k=>{const t2=document.getElementById('langToggle_'+k);if(t2)t2.checked=vis[k]!==false;});
     const sc=document.getElementById('siteClosedToggle');if(sc)sc.checked=!!(getSiteContent().general&&getSiteContent().general.siteClosed);
@@ -2186,7 +2329,7 @@ function refreshDashStats(){
   }catch(e){}
 }
 
-/* === ADMIN: USERS (BLUE TICK) === */
+/* === USERS === */
 function renderAdminUsers(){
   const list=document.getElementById('adminUsersList');if(!list)return;
   const u=getAllUsers();
@@ -2219,7 +2362,6 @@ function renderAdminUsers(){
     list.appendChild(card);
   });
 }
-
 function toggleUserVerification(email){
   if(!email)return;
   if(isAdminUser(email)){showCustomAlert('Admin already verified');return;}
@@ -2227,27 +2369,18 @@ function toggleUserVerification(email){
   const i=u.findIndex(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());
   if(i===-1){showCustomAlert('User not found!','error');return;}
   const currentStatus=!!u[i].isVerified;
-  showCustomAlert(
-    currentStatus?'Bu kullanıcının mavi tikini <strong>kaldırmak</strong> istiyor musun?':'Bu kullanıcıya <strong style="color:#1d9bf0">mavi tik</strong> vermek istiyor musun?',
-    currentStatus?'delete':'verify',
-    function(){
-      u[i].isVerified=!currentStatus;
-      saveAllUsers(u);
-      renderAdminUsers();
-      refreshDashStats();
-      showCustomAlert(u[i].isVerified?'✅ <span style="color:#1d9bf0">Mavi tik verildi!</span>':'Mavi tik kaldırıldı','success');
-      fireConfettiBurst(u[i].isVerified?0.7:0);
-    }
-  );
+  showCustomAlert(currentStatus?'Remove blue tick?':'Give blue tick?',currentStatus?'delete':'verify',function(){
+    u[i].isVerified=!currentStatus;saveAllUsers(u);renderAdminUsers();refreshDashStats();
+    showCustomAlert(u[i].isVerified?'✅ Mavi tik verildi!':'Mavi tik kaldırıldı','success');
+    fireConfettiBurst(u[i].isVerified?0.7:0);
+  });
 }
-
 function viewUserDetail(idx){const users=getAllUsers();const u=users[idx];if(!u)return;const isA=isAdminUser(u.email);const isV=isA||u.isVerified;const vB=isV?getVerifiedBadgeHTML('lg'):'';let rows='<div style="text-align:center;margin-bottom:16px;"><div style="font-size:1.1rem;font-weight:800;display:flex;align-items:center;justify-content:center;gap:6px;">'+escapeHtml(u.name||'unknown')+vB+'</div></div><div class="user-detail-modal-row"><span>ID</span><span>'+escapeHtml(u.userId||'-')+'</span></div><div class="user-detail-modal-row"><span>Email</span><span>'+escapeHtml(u.email||'-')+'</span></div><div class="user-detail-modal-row"><span>Joined</span><span>'+(u.createdAt?fmtDateTime(u.createdAt):'-')+'</span></div>';document.getElementById('userDetailContent').innerHTML=rows;document.getElementById('userDetailModal').classList.add('active');}
 function closeUserDetail(){document.getElementById('userDetailModal').classList.remove('active');}
 function deleteUserAdmin(email){if(!email)return;const u=getAllUsers();const user=u.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());if(!user){showCustomAlert('User not found!');return;}if(isAdminUser(user.email)){showCustomAlert('Admin cannot be deleted!');return;}showCustomAlert('"'+escapeHtml(user.name||user.email)+'" delete?','delete',function(){const tg=String(email).toLowerCase();const nu=u.filter(x=>String(x.email||'').toLowerCase()!==tg);saveAllUsers(nu);renderAdminUsers();updateChatBadge();showCustomAlert('User deleted!','success');});}
 function exportUsersCSV(){const users=getAllUsers();if(!users.length){showCustomAlert('No users.');return;}const rows=[['ID','Name','Username','Email','Verified']];users.forEach(u=>rows.push([u.userId||'',u.name,u.username,u.email,(isAdminUser(u.email)||u.isVerified)?'Yes':'No']));const csv=rows.map(r=>r.map(c=>'"'+String(c||'').replace(/"/g,'""')+'"').join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='users-'+new Date().toISOString().slice(0,10)+'.csv';document.body.appendChild(a);a.click();document.body.removeChild(a);showCustomAlert('CSV downloaded!','success');}
 function clearAllUsers(){showCustomAlert('All users will be deleted!','delete',function(){const u=getAllUsers();const admin=u.find(x=>x.isAdmin===true||isAdminUser(x.email));saveAllUsers(admin?[admin]:[]);checkUserSession();renderAdminUsers();showCustomAlert('Deleted!','success');});}
 
-/* === ADMIN: VIEW USER PROFILE === */
 function adminViewUser(email){
   const users=getAllUsers();
   const u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());
@@ -2261,7 +2394,7 @@ function adminViewUser(email){
   document.getElementById('admin-up-title').textContent=t('admin_user_profile')+' — '+(u.name||'user');
   document.getElementById('adminUserProfileContent').innerHTML=
     '<div class="pub-profile-view">'+
-      '<div class="pub-profile-avatar" style="'+(isA?'border-color:#1d9bf0;':(isV?'border-color:#1d9bf0;':''))+'">'+av+'</div>'+
+      '<div class="pub-profile-avatar" style="'+(isV?'border-color:#1d9bf0;':'')+'">'+av+'</div>'+
       '<div class="pub-profile-name">'+escapeHtml(u.name||'user')+' '+vB+'</div>'+
       (uname?'<div class="pub-profile-username">@'+escapeHtml(uname)+'</div>':'')+
       '<div class="pub-profile-info">'+
@@ -2271,7 +2404,6 @@ function adminViewUser(email){
         '<div class="pub-profile-info-row"><span><i class="fa-solid fa-globe"></i>Website</span><span>'+escapeHtml(u.website||'—')+'</span></div>'+
         '<div class="pub-profile-info-row"><span><i class="fa-solid fa-calendar-days"></i>'+t('joined')+'</span><span>'+escapeHtml(created)+'</span></div>'+
         '<div class="pub-profile-info-row"><span><i class="fa-solid fa-bell"></i>Bio</span><span>'+escapeHtml(u.bio||'—')+'</span></div>'+
-        '<div class="pub-profile-info-row"><span><i class="fa-solid fa-circle-check" style="color:'+(isV?'#1d9bf0':'var(--text-secondary)')+'"></i>Status</span><span style="color:'+(isV?'#1d9bf0':'var(--text-secondary)')+'">'+(isV?'Verified ✓':'Not Verified')+'</span></div>'+
       '</div>'+
       '<div class="pub-profile-actions">'+
         (!isA?'<button class="pub-btn-msg" style="background:linear-gradient(135deg,#1d9bf0,#1a8cd8)" onclick="closeAdminUserProfile();toggleUserVerification(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-circle-check"></i> '+(isV?'Remove Blue Tick':'Give Blue Tick')+'</button>':'')+
@@ -2284,7 +2416,6 @@ function adminViewUser(email){
 }
 function closeAdminUserProfile(){document.getElementById('adminUserProfileModal').classList.remove('active');adminViewingEmail=null;}
 
-/* === ADMIN: CHAT === */
 function adminChatUser(email){
   if(!isChatEnabled()){showCustomAlert('🔒 Sohbet gizli. Önce Genel ayarlardan açın.','warning');return;}
   const admin=getAdminUser();const users=getAllUsers();
@@ -2303,7 +2434,7 @@ function adminChatUser(email){
   },200);
 }
 
-/* === ADMIN: USER EMAIL === */
+/* === ADMIN USER EMAIL === */
 function openAdminUserEmail(email){
   const users=getAllUsers();
   const u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());
@@ -2349,12 +2480,12 @@ async function sendAdminUserEmailSubmit(e){
     if(r.ok&&(txt==='OK'||r.status===200)){
       logActivity('email_sent',{email:adminEmailTarget.email,name:adminEmailTarget.name},'Admin→ User: '+subj);
       closeAdminUserEmail();
-      showCustomAlert('✅ Email gönderildi! (logo ile)','success');
+      showCustomAlert('✅ Email gönderildi!','success');
     }else{showCustomAlert('Email hatası: '+(txt||r.status),'error');}
   }catch(err){if(submitBtn){submitBtn.disabled=false;submitBtn.innerHTML=origHTML;}showCustomAlert('Network hatası!','error');}
 }
 
-/* === ADMIN: ACTIVITY/CHATS === */
+/* === ACTIVITY / CHATS === */
 let activityFilterType='all';
 function renderAdminActivity(){const list=document.getElementById('adminActivityList');if(!list)return;let l=getActivityLog();if(activityFilterType!=='all')l=l.filter(x=>x.type===activityFilterType);l=l.reverse();if(!l.length){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">No records.</p>';return;}list.innerHTML='';l.slice(0,200).forEach(a=>{const item=document.createElement('div');item.className='activity-item';item.innerHTML='<div class="activity-icon"><i class="fa-solid fa-circle-info"></i></div><div class="activity-body"><div class="activity-title">'+escapeHtml(a.name||a.email||'Unknown')+' <span style="font-size:.6rem;padding:1px 6px;border-radius:10px;background:rgba(var(--accent-rgb),.15);color:var(--accent)">'+a.type+'</span></div><div class="activity-meta">'+(a.details?escapeHtml(a.details):'')+'</div></div><div class="activity-time">'+fmtDateTime(a.timestamp)+'</div>';list.appendChild(item);});}
 function filterActivity(type,btn){activityFilterType=type;document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderAdminActivity();}
@@ -2373,13 +2504,13 @@ function applySectionOrder(){const o=getSectionOrder();const c=document.getEleme
 function renderAdminSectionsOrder(){const list=document.getElementById('adminSectionsOrderList');if(!list)return;const o=getSectionOrder();list.innerHTML='';o.forEach((k,i)=>{const item=document.createElement('div');item.className='admin-slot';item.innerHTML='<div class="admin-slot-num">'+(i+1)+'</div><div class="admin-slot-info"><div class="admin-slot-name">'+escapeHtml(t(SECTION_LABEL_KEYS[k]))+'</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="moveSectionOrder('+i+',-1)" '+(i===0?'disabled':'')+'><i class="fa-solid fa-arrow-up"></i></button><button class="admin-slot-btn" onclick="moveSectionOrder('+i+',1)" '+(i===o.length-1?'disabled':'')+'><i class="fa-solid fa-arrow-down"></i></button></div>';list.appendChild(item);});}
 function moveSectionOrder(i,d){const c=getSiteContent();let o=getSectionOrder();const n=i+d;if(n<0||n>=o.length)return;const tmp=o[i];o[i]=o[n];o[n]=tmp;c.sectionsOrder=o;saveSiteContent(c);applySectionOrder();renderAdminSectionsOrder();}
 
-/* === ADMIN: ACCOUNT === */
+/* === ADMIN ACCOUNT === */
 function renderAdminAccount(){const a=getAdminUser();document.getElementById('adminAccName').value=a.name||'';document.getElementById('adminAccUsername').value=(a.username||'').replace(/^@/,'');document.getElementById('adminAccEmail').value=a.email||'';document.getElementById('adminAccId').value=a.userId||'';document.getElementById('adminAccWebsite').value=a.website||'';document.getElementById('adminAccBio').value=a.bio||'';document.getElementById('adminBioCount').textContent=(a.bio||'').length;const p=a.profilePhoto;const pv=document.getElementById('adminPhotoPreview'),ic=document.getElementById('adminPhotoUploadIcon'),cb=document.getElementById('adminPhotoClearBtn');if(p&&pv){pv.src=p;pv.style.display='block';if(ic)ic.style.display='none';if(cb)cb.style.display='inline-flex';}else if(pv){pv.style.display='none';if(ic)ic.style.display='block';if(cb)cb.style.display='none';}pendingAdminPhoto=undefined;}
 function handleAdminPhotoUpload(e){const f=e.target.files[0];if(!f||!f.type.startsWith('image/'))return;if(f.size>3*1024*1024){showCustomAlert('Max 3 MB');e.target.value='';return;}const r=new FileReader();r.onload=ev=>{pendingAdminPhoto=ev.target.result;const pv=document.getElementById('adminPhotoPreview');if(pv){pv.src=ev.target.result;pv.style.display='block';}const ic=document.getElementById('adminPhotoUploadIcon');if(ic)ic.style.display='none';const cb=document.getElementById('adminPhotoClearBtn');if(cb)cb.style.display='inline-flex';};r.readAsDataURL(f);}
 function clearAdminPhoto(){pendingAdminPhoto=null;const pv=document.getElementById('adminPhotoPreview');if(pv)pv.style.display='none';const ic=document.getElementById('adminPhotoUploadIcon');if(ic)ic.style.display='block';const cb=document.getElementById('adminPhotoClearBtn');if(cb)cb.style.display='none';}
 function saveAdminAccount(e){e.preventDefault();const u=getAllUsers();let i=u.findIndex(x=>x.isAdmin===true);if(i===-1)i=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL.toLowerCase());if(i===-1){u.unshift(getAdminUser());i=0;}const nn=document.getElementById('adminAccName').value.trim(),nu=document.getElementById('adminAccUsername').value.trim().replace(/^@/,'').toLowerCase(),ne=document.getElementById('adminAccEmail').value.trim().toLowerCase(),nid=document.getElementById('adminAccId').value.trim(),nw=document.getElementById('adminAccWebsite').value.trim(),nb=document.getElementById('adminAccBio').value.trim();if(!nn||!nu||!ne){showCustomAlert(t('fill_fields'));return;}if(!/^\d{9}$/.test(nid)){showCustomAlert('ID must be 9 digits!');return;}const a=u[i];const oldE=a.email;a.name=nn;a.username=nu;a.email=ne;a.userId=nid;a.website=nw;a.bio=nb;a.isAdmin=true;a.isVerified=true;if(pendingAdminPhoto!==undefined)a.profilePhoto=pendingAdminPhoto||'';saveAllUsers(u);const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);if(cu.isAdmin||String(cu.email||'').toLowerCase()===String(oldE).toLowerCase())localStorage.setItem('logged_user',JSON.stringify(a));}catch(e){}}pendingAdminPhoto=undefined;refreshAdminUI();renderAdminAccount();checkUserSession();showCustomAlert('Saved!','success');}
 
-/* === ADMIN: APPS === */
+/* === ADMIN APPS === */
 function withTimeout(p,ms){ms=ms||5000;return Promise.race([Promise.resolve(p),new Promise(r=>setTimeout(()=>r(null),ms))]);}
 function buildAdminSlotHTML(idx,app){const filled=app.name&&app.name.trim();let iconPreview='';if(app.hasIcon)iconPreview='(icon)';else if(app.icon&&app.icon.trim())iconPreview='<span style="font-size:1.1rem">'+escapeHtml(app.icon.trim())+'</span>';const nameText=filled?escapeHtml(app.name):'<em style="opacity:.5">empty slot '+(idx+1)+'</em>';return '<div class="admin-slot-num">'+(idx+1)+'</div>'+(iconPreview?'<div style="width:26px">'+iconPreview+'</div>':'')+'<div class="admin-slot-info"><div class="admin-slot-name">'+nameText+' '+(app.hasApk?'<span style="font-size:.6rem;color:#22c55e">APK</span>':'')+'</div><div class="admin-slot-url">'+(filled&&app.desc?escapeHtml(app.desc):'')+'</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="editAppSlot('+idx+')"><i class="fa-solid fa-pen"></i></button><button class="admin-slot-btn delete" onclick="clearAppSlot('+idx+')"><i class="fa-solid fa-trash-can"></i></button></div>';}
 function openApkDB(){return new Promise((res,rej)=>{if(apkDB)return res(apkDB);try{if(!('indexedDB' in window))return rej(new Error('no-idb'));const r=indexedDB.open('muminsultani_apk_db_v2',3);r.onupgradeneeded=e=>{const db=e.target.result;if(!db.objectStoreNames.contains('apks'))db.createObjectStore('apks');if(!db.objectStoreNames.contains('icons'))db.createObjectStore('icons');};r.onsuccess=e=>{apkDB=e.target.result;res(apkDB);};r.onerror=e=>rej(e.target.error);}catch(e){rej(e);}});}
@@ -2391,11 +2522,6 @@ async function getIconData(idx){const db=await openApkDB();return new Promise((r
 async function deleteIconData(idx){const db=await openApkDB();return new Promise((res,rej)=>{const tx=db.transaction(['icons'],'readwrite');const r=tx.objectStore('icons').delete('icon_'+idx);r.onsuccess=()=>res();r.onerror=e=>rej(e.target.error);});}
 function formatFileSize(b){if(b<1024)return b+' B';if(b<1024*1024)return (b/1024).toFixed(1)+' KB';return (b/(1024*1024)).toFixed(2)+' MB';}
 async function downloadApk(slotIndex){if(IS_IOS){showCustomAlert('⚠️ APK dosyaları sadece Android cihazlarda kurulabilir.','warning');return;}const lu=localStorage.getItem('logged_user');const uo=lu?JSON.parse(lu):null;const c=getSiteContent();const app=c.apps[slotIndex];if(!app)return;const rl=!!app.requireLogin;if(rl&&!lu){showCustomAlert('⚠️ Sign in required to download APK.','warning');setTimeout(()=>openGetInTouchModal(),300);return;}try{const apk=await withTimeout(getApkFile(slotIndex),60000);if(!apk){showCustomAlert('APK not found!','error');return;}const blob=apk.blob instanceof Blob?apk.blob:new Blob([new Uint8Array(apk.blob)],{type:apk.type||'application/vnd.android.package-archive'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;const bn=(apk.name||('app_slot_'+(slotIndex+1)+'.apk')).replace(/\.apk$/i,'');a.download=bn+'_'+Date.now()+'.apk';a.style.display='none';document.body.appendChild(a);a.click();setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},2500);if(lu)logActivity('apk_download',uo,'Slot #'+(slotIndex+1)+' - '+apk.name);showCustomAlert('✅ Downloaded: '+apk.name,'success');}catch(e){showCustomAlert('Download error!','error');}}
-
-/* === APPLY SITE CONTENT === */
-function applySiteContent(){const c=getSiteContent(),isTR=currentLang==='tr';document.querySelectorAll('.brand-logo, .footer-brand').forEach(el=>el.textContent=c.header.brand);const il=document.querySelector('.intro-logo');if(il)il.textContent=c.header.brand;document.querySelectorAll('.modal-brand').forEach(el=>{if(el.dataset.enhanced!=='1')el.textContent=c.header.brand;});document.getElementById('t-role').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('introSub').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('t-job-title').innerText=isTR?c.experience.titleTr:c.experience.titleEn;document.getElementById('t-job-date').innerText=c.experience.date;document.getElementById('t-job-desc').innerText=isTR?c.experience.descTr:c.experience.descEn;document.getElementById('t-os-val').innerText=isTR?c.setup.osTr:c.setup.osEn;document.getElementById('t-editor-val').innerText=isTR?c.setup.editorTr:c.setup.editorEn;document.getElementById('t-backend-val').innerText=c.stack.backend;document.getElementById('t-frontend-val').innerText=c.stack.frontend;document.getElementById('t-copyright').innerText=c.footer.copyright;if(c.general){if(c.general.pageTitle){document.title=c.general.pageTitle;}if(c.general.favicon){const f=document.getElementById('siteFavicon');if(f)f.href=c.general.favicon;}const md=document.querySelector('meta[name="description"]');if(md&&c.general.metaDesc)md.setAttribute('content',c.general.metaDesc);}renderApplications();applySectionOrder();applyEffectsSettings();renderFooterSocials();updateBrandLogos();applyWeatherSettings();applyChatVisibility();}
-
-async function renderApplications(){if(appsRenderLock)return;appsRenderLock=true;try{const grid=document.getElementById('appsGrid');if(!grid)return;const apps=getSiteContent().apps||[];const isLogged=!!localStorage.getItem('logged_user');const filled=[];for(let i=0;i<8;i++){const a=apps[i]||{};if(a.name&&a.name.trim().length>0)filled.push({idx:i,app:a});}const w=window.innerWidth;let maxVisible=4;if(w>=1025)maxVisible=6;const visible=filled.slice(0,maxVisible);grid.innerHTML='';for(const item of visible){const idx=item.idx,app=item.app;const card=document.createElement('div');card.className='app-card';let iconHTML='📱';if(app.hasIcon){try{const ic=await withTimeout(getIconData(idx),3000);if(ic&&ic.dataUrl)iconHTML='<img src="'+ic.dataUrl+'">';}catch(e){}}else if(app.icon&&app.icon.trim().startsWith('http'))iconHTML='<img src="'+escapeHtml(app.icon.trim())+'">';else if(app.icon&&app.icon.trim())iconHTML=escapeHtml(app.icon.trim());const hasApk=!!app.hasApk;const hasUrl=app.url&&app.url.trim();const rl=!!app.requireLogin;if(hasApk){if(rl&&!isLogged)card.classList.add('locked');card.style.cursor='pointer';card.addEventListener('click',()=>downloadApk(idx));}else if(hasUrl){card.style.cursor='pointer';card.addEventListener('click',()=>{let u=app.url.trim();if(!/^https?:\/\//i.test(u))u='https://'+u;window.open(u,'_blank');});}const dBadge=hasApk?'<span class="apk-download-badge"><i class="fa-solid fa-download"></i></span>':'';let nI='';if(hasApk)nI='<i class="fa-solid fa-download download-icon"></i>';else if(hasUrl)nI='<i class="fa-solid fa-arrow-up-right-from-square"></i>';let tH='';if(hasApk){const lk=rl&&!isLogged;tH='<span class="app-card-tag apk-tag'+(lk?' locked-tag':'')+'"><i class="fa-brands fa-android"></i>APK</span>';}else if(hasUrl)tH='<span class="app-card-tag">LINK</span>';card.innerHTML='<div class="app-card-icon">'+iconHTML+dBadge+'</div><div class="app-card-body"><div class="app-card-name">'+escapeHtml(app.name)+' '+nI+'</div><div class="app-card-desc">'+escapeHtml(app.desc||'')+'</div></div>'+tH;grid.appendChild(card);}}finally{appsRenderLock=false;}}
 
 function renderAdminSlots(){const list=document.getElementById('adminSlotsList');if(!list)return;const apps=getSiteContent().apps||[];list.innerHTML='';apps.forEach((app,idx)=>{const item=document.createElement('div');item.className='admin-slot';item.innerHTML=buildAdminSlotHTML(idx,app);list.appendChild(item);if(app.hasIcon){withTimeout(getIconData(idx),3000).then(icon=>{if(icon&&icon.dataUrl){const h=item.querySelector('div[style*="width:26px"]');if(h)h.innerHTML='<img src="'+icon.dataUrl+'" class="icon-preview-mini">';}}).catch(()=>{});}});}
 async function editAppSlot(idx){const c=getSiteContent();const app=c.apps[idx]||{name:'',desc:'',url:'',icon:'',requireLogin:false};pendingApkFile=null;pendingApkDelete=false;pendingIconDataUrl=null;pendingIconDelete=false;document.getElementById('editSlotIndex').value=idx;document.getElementById('editAppName').value=app.name||'';document.getElementById('editAppDesc').value=app.desc||'';document.getElementById('editAppUrl').value=app.url||'';document.getElementById('editAppRequireLogin').checked=!!app.requireLogin;document.getElementById('editAppApkFile').value='';document.getElementById('editAppIconFile').value='';let eA=null,eI=null;if(app.hasApk){try{eA=await withTimeout(getApkFile(idx),5000);}catch(e){}}if(app.hasIcon){try{eI=await withTimeout(getIconData(idx),5000);}catch(e){}}updateApkUI(eA?{name:eA.name,size:eA.size}:(app.hasApk?{name:app.apkName||'APK',size:app.apkSize||0}:null));if(eI&&eI.dataUrl)updateIconUI({dataUrl:eI.dataUrl});else if(app.icon&&app.icon.trim().startsWith('http'))updateIconUI({dataUrl:app.icon.trim()});else updateIconUI(null);document.getElementById('adminEditModal').classList.add('active');}
@@ -2423,6 +2549,7 @@ function confirmResetSite(){showCustomAlert('All site content will be reset?','d
 function checkAdminHash(){if(window.location.hash==='#manage-muminsultani'||window.location.hash==='#admin'){triggerAdminAccess();history.replaceState(null,'',window.location.pathname+window.location.search);}}
 window.addEventListener('hashchange',checkAdminHash);
 
+/* === WELCOME EMAIL === */
 const WELCOME_DEFAULTS={enabled:true,includePdf:true,subject:'Hoşgeldiniz! 🎉',message:'Merhaba {name},\n\nSitemize kayıt olduğunuz için teşekkür ederiz!'};
 function getWelcomeSettings(){try{const c=getSiteContent();if(!c.welcomeEmail)c.welcomeEmail=JSON.parse(JSON.stringify(WELCOME_DEFAULTS));return c.welcomeEmail;}catch(e){return JSON.parse(JSON.stringify(WELCOME_DEFAULTS));}}
 function saveWelcomeSettings(s){const c=getSiteContent();c.welcomeEmail=s;saveSiteContent(c);}
@@ -2440,57 +2567,43 @@ function trackVisit(){const today=new Date().toISOString().slice(0,10);const s=g
 async function saveVisitorStatsToFirebase(s){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return;await firebase.database().ref('site_visitors').set(s);}catch(e){}}
 async function loadVisitorStatsFromFirebase(){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return;const snap=await firebase.database().ref('site_visitors').once('value');const remote=snap.val();if(remote&&typeof remote==='object'){const local=getVisitorStats();const merged={total:Math.max(local.total||0,remote.total||0),today:remote.dayKey===new Date().toISOString().slice(0,10)?(remote.today||0):(local.today||0),dayKey:remote.dayKey||local.dayKey};localStorage.setItem(VISITORS_KEY,JSON.stringify(merged));}}catch(e){}}
 
-/* === ANIM SYSTEM === */
+/* === APPLY SITE CONTENT === */
+function applySiteContent(){const c=getSiteContent(),isTR=currentLang==='tr';document.querySelectorAll('.brand-logo, .footer-brand').forEach(el=>el.textContent=c.header.brand);const il=document.querySelector('.intro-logo');if(il)il.textContent=c.header.brand;document.querySelectorAll('.modal-brand').forEach(el=>{if(el.dataset.enhanced!=='1')el.textContent=c.header.brand;});document.getElementById('t-role').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('introSub').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('t-job-title').innerText=isTR?c.experience.titleTr:c.experience.titleEn;document.getElementById('t-job-date').innerText=c.experience.date;document.getElementById('t-job-desc').innerText=isTR?c.experience.descTr:c.experience.descEn;document.getElementById('t-os-val').innerText=isTR?c.setup.osTr:c.setup.osEn;document.getElementById('t-editor-val').innerText=isTR?c.setup.editorTr:c.setup.editorEn;document.getElementById('t-backend-val').innerText=c.stack.backend;document.getElementById('t-frontend-val').innerText=c.stack.frontend;document.getElementById('t-copyright').innerText=c.footer.copyright;if(c.general){if(c.general.pageTitle){document.title=c.general.pageTitle;}if(c.general.favicon){const f=document.getElementById('siteFavicon');if(f)f.href=c.general.favicon;}const md=document.querySelector('meta[name="description"]');if(md&&c.general.metaDesc)md.setAttribute('content',c.general.metaDesc);}renderApplications();applySectionOrder();applyEffectsSettings();renderFooterSocials();updateBrandLogos();applyWeatherSettings();applyChatVisibility();}
+
+async function renderApplications(){if(appsRenderLock)return;appsRenderLock=true;try{const grid=document.getElementById('appsGrid');if(!grid)return;const apps=getSiteContent().apps||[];const isLogged=!!localStorage.getItem('logged_user');const filled=[];for(let i=0;i<8;i++){const a=apps[i]||{};if(a.name&&a.name.trim().length>0)filled.push({idx:i,app:a});}const w=window.innerWidth;let maxVisible=4;if(w>=1025)maxVisible=6;const visible=filled.slice(0,maxVisible);grid.innerHTML='';for(const item of visible){const idx=item.idx,app=item.app;const card=document.createElement('div');card.className='app-card';let iconHTML='📱';if(app.hasIcon){try{const ic=await withTimeout(getIconData(idx),3000);if(ic&&ic.dataUrl)iconHTML='<img src="'+ic.dataUrl+'">';}catch(e){}}else if(app.icon&&app.icon.trim().startsWith('http'))iconHTML='<img src="'+escapeHtml(app.icon.trim())+'">';else if(app.icon&&app.icon.trim())iconHTML=escapeHtml(app.icon.trim());const hasApk=!!app.hasApk;const hasUrl=app.url&&app.url.trim();const rl=!!app.requireLogin;if(hasApk){if(rl&&!isLogged)card.classList.add('locked');card.style.cursor='pointer';card.addEventListener('click',()=>downloadApk(idx));}else if(hasUrl){card.style.cursor='pointer';card.addEventListener('click',()=>{let u=app.url.trim();if(!/^https?:\/\//i.test(u))u='https://'+u;window.open(u,'_blank');});}const dBadge=hasApk?'<span class="apk-download-badge"><i class="fa-solid fa-download"></i></span>':'';let nI='';if(hasApk)nI='<i class="fa-solid fa-download download-icon"></i>';else if(hasUrl)nI='<i class="fa-solid fa-arrow-up-right-from-square"></i>';let tH='';if(hasApk){const lk=rl&&!isLogged;tH='<span class="app-card-tag apk-tag'+(lk?' locked-tag':'')+'"><i class="fa-brands fa-android"></i>APK</span>';}else if(hasUrl)tH='<span class="app-card-tag">LINK</span>';card.innerHTML='<div class="app-card-icon">'+iconHTML+dBadge+'</div><div class="app-card-body"><div class="app-card-name">'+escapeHtml(app.name)+' '+nI+'</div><div class="app-card-desc">'+escapeHtml(app.desc||'')+'</div></div>'+tH;grid.appendChild(card);}}finally{appsRenderLock=false;}}
+
+/* ============================================================
+   ANIM SYSTEM
+   ============================================================ */
 function createAnimSystem(canvasId,options){options=options||{};const c=document.getElementById(canvasId);if(!c)return{stop:function(){},setMode:function(){}};const ctx=c.getContext('2d');const baseNP=options.numberOfParticles||55,ld=options.lineDistance||110;let pa=[],running=true;let mode='constellation';function rc(){c.width=window.innerWidth;c.height=window.innerHeight;initMode();}function P(){this.x=Math.random()*c.width;this.y=Math.random()*c.height;this.vx=(Math.random()-.5)*.8;this.vy=(Math.random()-.5)*.8;this.size=Math.random()*1.8+1;}P.prototype.update=function(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>c.width)this.vx=-this.vx;if(this.y<0||this.y>c.height)this.vy=-this.vy;};P.prototype.draw=function(){const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';ctx.fillStyle='rgba('+ar+',.55)';ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();};function initMode(){pa=[];if(mode==='constellation'||mode==='network'){for(let i=0;i<baseNP;i++)pa.push(new P());}else if(mode==='particles'){for(let i=0;i<80;i++)pa.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6,size:Math.random()*3+1,alpha:Math.random()*.5+.3});}}function draw(){if(!running)return;ctx.clearRect(0,0,c.width,c.height);const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';if(mode==='none'){requestAnimationFrame(draw);return;}if(mode==='constellation'){for(let i=0;i<pa.length;i++){pa[i].update();pa[i].draw();for(let j=i+1;j<pa.length;j++){const dx=pa[i].x-pa[j].x,dy=pa[i].y-pa[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<ld){const o=1-(dist/ld);ctx.strokeStyle='rgba('+ar+','+(o*.22)+')';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(pa[i].x,pa[i].y);ctx.lineTo(pa[j].x,pa[j].y);ctx.stroke();}}}}else if(mode==='network'){for(let i=0;i<pa.length;i++){pa[i].update();for(let j=i+1;j<pa.length;j++){const dx=pa[i].x-pa[j].x,dy=pa[i].y-pa[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<180){const o=1-(dist/180);ctx.strokeStyle='rgba('+ar+','+(o*.4)+')';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(pa[i].x,pa[i].y);ctx.lineTo(pa[j].x,pa[j].y);ctx.stroke();}}ctx.beginPath();ctx.arc(pa[i].x,pa[i].y,2.5,0,Math.PI*2);ctx.fillStyle='rgba('+ar+',.7)';ctx.fill();}}else if(mode==='particles'){pa.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>c.width)p.vx=-p.vx;if(p.y<0||p.y>c.height)p.vy=-p.vy;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle='rgba('+ar+','+p.alpha+')';ctx.fill();});}else if(mode==='dots'){for(let x=30;x<c.width;x+=60)for(let y=30;y<c.height;y+=60){ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);ctx.fillStyle='rgba('+ar+',.4)';ctx.fill();}}requestAnimationFrame(draw);}window.addEventListener('resize',rc);rc();draw();return{stop:function(){running=false;},setMode:function(m){mode=m||'constellation';initMode();}};}
 
 function forceRefreshUI(){applyTranslations();try{applySiteContent();}catch(e){}try{checkUserSession();}catch(e){}try{renderApplications();}catch(e){}try{updateChatBadge();}catch(e){}try{applyWeatherSettings();}catch(e){}try{applyChatVisibility();}catch(e){}}
 
+/* ============================================================
+   GLOBAL EVENTS
+   ============================================================ */
 document.addEventListener('click',e=>{getAudioContext();const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.chat-user-item,.chat-send-btn,.chat-profile-btn,.modal-close-btn,.auth-tab-btn,.ratio-btn,.social-btn,.lightbox-close-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.chat-mic-btn,.toggle-switch,.chat-msg-action-btn,.effect-chip,.social-del,.hpm-item,.settings-chip,.hpm-close-x,.order-type-option,.weather-refresh');if(b)playTickSound();},true);
 document.addEventListener('contextmenu',e=>e.preventDefault());
-document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&(e.key==='M'||e.key==='m')){e.preventDefault();triggerAdminAccess();}});
+document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&(e.key==='M'||e.key==='m'||e.key==='A'||e.key==='a')){e.preventDefault();triggerAdminAccess();}if(e.key==='Escape'){const openModals=document.querySelectorAll('.modal-overlay.active,.custom-alert-overlay.active,.lightbox-overlay.active');if(openModals.length){openModals[openModals.length-1].classList.remove('active');}closeHeaderProfileMenu();const lm=document.getElementById('langMenu');if(lm)lm.classList.remove('show');}});
 const curtain=document.getElementById('security-curtain');
 window.addEventListener('blur',()=>{curtain.style.opacity='1';curtain.style.visibility='visible';});
 window.addEventListener('focus',()=>{curtain.style.opacity='0';curtain.style.visibility='hidden';});
 window.addEventListener('resize',()=>{updateMessengerDefaultPosition();if(confettiCanvas&&confettiCanvas.style.display!=='none'){confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;}if(appsResizeTimer)clearTimeout(appsResizeTimer);appsResizeTimer=setTimeout(renderApplications,300);});
+window.addEventListener('beforeunload',()=>{if(chatPollTimer)clearInterval(chatPollTimer);});
 
 /* ============================================================
    🚀 INIT
    ============================================================ */
 window.addEventListener('DOMContentLoaded',async ()=>{
-  /* Çıkış parametresi temizle */
-  try{
-    if(window.location.search.indexOf('logout=1')!==-1){
-      localStorage.removeItem('logged_user');
-      localStorage.removeItem('user_prefs_v1');
-      try{sessionStorage.clear();}catch(e){}
-      history.replaceState(null,'',window.location.pathname);
-    }
-  }catch(e){}
-
-  /* Intro ekranını kapat */
-  setTimeout(()=>{
-    const i=document.getElementById('intro-screen');
-    if(i){
-      i.style.opacity='0';
-      i.style.visibility='hidden';
-      setTimeout(()=>{
-        i.style.display='none';
-        if(window.introConstellation)window.introConstellation.stop();
-      },600);
-    }
-  },1500);
-
-  /* Animasyon sistemlerini başlat */
+  try{if(window.location.search.indexOf('logout=1')!==-1){localStorage.removeItem('logged_user');localStorage.removeItem('user_prefs_v1');try{sessionStorage.clear();}catch(e){}history.replaceState(null,'',window.location.pathname);}}catch(e){}
+  setTimeout(()=>{const i=document.getElementById('intro-screen');if(i){i.style.opacity='0';i.style.visibility='hidden';setTimeout(()=>{i.style.display='none';if(window.introConstellation)window.introConstellation.stop();},600);}},1500);
   window.mainConstellation=createAnimSystem('constellation-canvas',{numberOfParticles:55,lineDistance:110});
   window.introConstellation=createAnimSystem('intro-canvas',{numberOfParticles:50,lineDistance:120});
-
-  /* Firebase + EmailJS + Şifre maskeleri */
   initFirebase();
+  initFirebaseStorage();
   initEmailJS();
   initAllPasswordMasks();
   ensureUserIdsAndAdmin();
-
-  /* Firebase'den veri yükle */
   try{
     await loadSiteContentFromFirebase();
     await loadUsersFromFirebase();
@@ -2499,8 +2612,6 @@ window.addEventListener('DOMContentLoaded',async ()=>{
     await loadVisitorStatsFromFirebase();
     firebaseSyncReady=true;
   }catch(e){}
-
-  /* Tema & Oturum & İçerik */
   initTheme();
   checkUserSession();
   applySiteContent();
@@ -2508,63 +2619,31 @@ window.addEventListener('DOMContentLoaded',async ()=>{
   applyEffectsSettings();
   applySitePrivacy();
   applyChatVisibility();
-
-  /* Dil */
   const storedLang=sessionStorage.getItem('site_lang');
   const bl=(navigator.language||'en').toLowerCase();
   const browserLang=bl.startsWith('tr')?'tr':(bl.startsWith('de')?'de':'en');
   const defaultLang=(getSiteContent().general&&getSiteContent().general.defaultLang)?getSiteContent().general.defaultLang:browserLang;
   currentLang=storedLang||defaultLang;
   applyTranslations();
-
-  /* Ziyaretçi kaydı */
   trackVisit();
-
-  /* Event listener'lar */
   const authPassInput=document.getElementById('contactClientPassword');
-  if(authPassInput)authPassInput.addEventListener('keydown',function(e){
-    if(e.key==='Enter'){e.preventDefault();handleAuthSubmit(e);}
-  });
-
+  if(authPassInput)authPassInput.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();handleAuthSubmit(e);}});
   const adminBioEl=document.getElementById('adminAccBio');
-  if(adminBioEl)adminBioEl.addEventListener('input',function(){
-    document.getElementById('adminBioCount').textContent=this.value.length;
-  });
-
-  ['editClientDay','editClientMonth','editClientYear'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el)el.addEventListener('blur',validateDOB);
-  });
-
+  if(adminBioEl)adminBioEl.addEventListener('input',function(){document.getElementById('adminBioCount').textContent=this.value.length;});
+  ['editClientDay','editClientMonth','editClientYear'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('blur',validateDOB);});
   checkAdminHash();
-
-  /* IndexedDB başlat */
   try{await openApkDB();}catch(e){}
-
-  /* Chat & Messenger */
   updateChatBadge();
   startChatPolling();
   setupSignupAutoFill();
   initMessengerBtn();
   applyMessengerColor();
-
-  /* Sipariş badge */
   updateOrdersBadge();
   setInterval(updateOrdersBadge,5000);
-
-  /* Messenger konumu */
   setTimeout(updateMessengerDefaultPosition,300);
-
-  /* Marka logoları periyodik güncelle */
   setInterval(updateBrandLogos,2000);
-
-  /* 🌤️ Hava durumu başlat */
   setTimeout(()=>{applyWeatherSettings();},500);
-  setInterval(()=>{
-    if(!(getSiteContent().general&&getSiteContent().general.weatherEnabled===false))fetchWeather(true);
-  },30*60*1000);
-
-  /* Firebase realtime listener'lar */
+  setInterval(()=>{if(!(getSiteContent().general&&getSiteContent().general.weatherEnabled===false))fetchWeather(true);},30*60*1000);
   setTimeout(()=>{
     listenToFirebaseChanges();
     listenToUsersChanges();
@@ -2582,49 +2661,12 @@ window.addEventListener('DOMContentLoaded',async ()=>{
       }
     }catch(e){}
   },1500);
-
-  /* 🐟 Balık sistemi */
-  try{
-    window.fishSystem=createFishSystem('fish-canvas');
-    applyFishSettings();
-  }catch(e){}
-
-  /* Chat gizliliği ilk uygulama */
+  try{window.fishSystem=createFishSystem('fish-canvas');applyFishSettings();}catch(e){}
   applyChatVisibility();
 });
 
 /* ============================================================
-   🛡️ GÜVENLİK EKSTRA KORUMALARI
-   ============================================================ */
-/* Sayfa kapanırken temizlik */
-window.addEventListener('beforeunload',()=>{
-  if(chatPollTimer)clearInterval(chatPollTimer);
-});
-
-/* ESC tuşu ile açık modalı kapat */
-document.addEventListener('keydown',(e)=>{
-  if(e.key==='Escape'){
-    const openModals=document.querySelectorAll('.modal-overlay.active,.custom-alert-overlay.active,.lightbox-overlay.active');
-    if(openModals.length){
-      const last=openModals[openModals.length-1];
-      last.classList.remove('active');
-    }
-    closeHeaderProfileMenu();
-    const lm=document.getElementById('langMenu');
-    if(lm)lm.classList.remove('show');
-  }
-});
-
-/* Kısayol: Ctrl+Shift+A → Admin panel */
-document.addEventListener('keydown',(e)=>{
-  if(e.ctrlKey&&e.shiftKey&&(e.key==='A'||e.key==='a')){
-    e.preventDefault();
-    triggerAdminAccess();
-  }
-});
-
-/* ============================================================
-   🎯 GLOBAL FONKSİYON EXPORT (inline onclick için)
+   GLOBAL FONKSİYON EXPORT (inline onclick için)
    ============================================================ */
 window.toggleTheme=toggleTheme;
 window.toggleLangMenu=toggleLangMenu;
@@ -2764,8 +2806,10 @@ window.closeCustomAlert=closeCustomAlert;
 window.confirmAction=confirmAction;
 
 console.log('%c✅ muminsultani site yüklendi!','background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;padding:6px 12px;border-radius:8px;font-weight:bold;font-size:13px;');
+console.log('%c📧 Email görsel: Firebase Storage (max 100 MB) + fallback sıkıştırma','color:#3b82f6;font-weight:bold;');
 console.log('%c🔒 Chat gizliliği: '+(isChatEnabled()?'AÇIK':'KAPALI'),'color:#3b82f6;font-weight:bold;');
-console.log('%c⚙️ Admin erişimi: Ctrl+Shift+M veya Ctrl+Shift+A','color:#f59e0b;font-weight:bold;');
+console.log('%c🎨 Alert logoları kaldırıldı','color:#22c55e;font-weight:bold;');
+console.log('%c⚙️ Admin: Ctrl+Shift+M veya Ctrl+Shift+A','color:#f59e0b;font-weight:bold;');
 </script>
 </body>
 </html>
