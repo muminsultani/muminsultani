@@ -126,6 +126,20 @@ body.bg-mono{background-image:radial-gradient(circle at 20% 20%,rgba(148,163,184
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 .intro-logo{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:2.4rem;font-weight:900;letter-spacing:-1.5px;background:linear-gradient(270deg,var(--accent),var(--accent-2),var(--accent),var(--accent-2),var(--accent));background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientFlow 4s ease infinite;word-break:break-word}
 .intro-sub{font-size:.8rem;color:#94a3b8;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+@media (min-width:641px) and (max-width:1024px){
+  .intro-content{gap:18px}
+  .intro-code-box{font-size:1rem;padding:12px 20px}
+  .intro-logo{font-size:3.2rem;letter-spacing:-2px}
+  .intro-sub{font-size:.9rem;letter-spacing:2.5px}
+  .code-cursor{width:10px;height:18px}
+}
+@media (min-width:1025px){
+  .intro-content{gap:22px}
+  .intro-code-box{font-size:1.15rem;padding:14px 24px}
+  .intro-logo{font-size:3.8rem;letter-spacing:-2.5px}
+  .intro-sub{font-size:1rem;letter-spacing:3px}
+  .code-cursor{width:11px;height:20px}
+}
 @keyframes gradientFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 .wrapper{width:100%;max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
 @media (min-width:1025px){.wrapper{max-width:1350px}body{padding:40px 15px}}
@@ -228,8 +242,6 @@ section{border-top:1px solid var(--line-color);padding-top:24px}
 .submit-btn{flex:1;color:#fff;border:none;padding:14px 8px;border-radius:12px;font-weight:600;font-size:.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;text-transform:capitalize}
 .submit-btn.email-btn{background:linear-gradient(135deg,var(--accent),var(--accent-2))}
 .submit-btn.google-btn{background:#fff;color:#1f1f1f;border:1px solid #dadce0}
-
-/* ⭐ ALERT - ARTIK LOGOSUZ */
 .custom-alert-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(5,5,10,.7);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);z-index:20000;display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:opacity .3s;padding:16px;pointer-events:none}
 .custom-alert-overlay.active{opacity:1;visibility:visible;pointer-events:auto}
 .custom-alert-box{background:var(--modal-container-bg);border:1px solid rgba(var(--accent-rgb),.35);border-radius:var(--panel-radius);width:100%;max-width:400px;padding:30px 24px;text-align:center;transform:scale(.88);transition:transform .4s,opacity .3s;opacity:0}
@@ -239,8 +251,6 @@ section{border-top:1px solid var(--line-color);padding-top:24px}
 .custom-alert-btn-group{display:flex;gap:8px;width:100%}
 .custom-alert-btn{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border:none;flex:1;padding:12px 8px;border-radius:12px;font-weight:600;font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;text-transform:capitalize}
 .custom-alert-btn.cancel-btn{background:var(--box-bg);color:var(--text-color-override);border:1px solid var(--line-color)}
-/* .alert-brand-row kaldırıldı */
-
 footer{border-top:1px solid var(--line-color);padding-top:20px;padding-bottom:12px;display:flex;flex-direction:column;gap:10px}
 .footer-main{display:flex;flex-direction:row;align-items:flex-start;gap:18px}
 .footer-qr-container{background:#fff;padding:12px;border-radius:16px;display:inline-flex}
@@ -281,8 +291,6 @@ footer{border-top:1px solid var(--line-color);padding-top:20px;padding-bottom:12
   .chat-msg-text{font-size:.92rem;padding:12px 16px}
   .chat-input{padding:13px 20px;font-size:16px !important}
   .chat-messages{max-height:58vh}
-  #adminPanelModal .modal-container{max-width:92vw !important;width:92vw !important;padding:34px 40px !important;max-height:92vh}
-  #adminPanelModal .admin-panel-content{max-height:74vh}
 }
 @media (min-width:1025px){
   .modal-container{max-width:680px !important;padding:36px !important}
@@ -291,8 +299,119 @@ footer{border-top:1px solid var(--line-color);padding-top:20px;padding-bottom:12
   .modal-brand{font-size:1.65rem !important}
   .form-input,.form-textarea{padding:14px 20px !important;font-size:16px !important}
   .submit-btn{padding:15px 14px !important;font-size:.92rem !important}
-  #adminPanelModal .modal-container{max-width:94vw !important;width:94vw !important;padding:38px 46px !important}
 }
+
+/* ⭐⭐⭐ ADMIN PANELLER — CİHAZA GÖRE ORANTILI ÖLÇEK ⭐⭐⭐ */
+/* Bilgisayar: %100 | Tablet: %95 | Telefon: %90 (ama her yerde AYNI görünüm) */
+html body .admin-z .modal-container{
+  --admin-scale: 1;
+  max-width: calc(600px * var(--admin-scale)) !important;
+  width: calc(100% - 0px) !important;
+  padding: calc(24px * var(--admin-scale)) !important;
+  max-height: 90vh !important;
+  overflow-y: auto !important;
+  border-radius: calc(var(--panel-radius) * 1) !important;
+}
+html body .admin-z .modal-header{
+  padding-bottom: calc(14px * var(--admin-scale)) !important;
+  margin-bottom: calc(18px * var(--admin-scale)) !important;
+}
+html body .admin-z .modal-brand{
+  font-size: calc(1.25rem * var(--admin-scale)) !important;
+}
+html body .admin-z .modal-title{
+  font-size: calc(.85rem * var(--admin-scale)) !important;
+}
+html body .admin-z .form-input,
+html body .admin-z .form-textarea{
+  padding: calc(11px * var(--admin-scale)) calc(14px * var(--admin-scale)) !important;
+  font-size: calc(16px * var(--admin-scale)) !important;
+}
+html body .admin-z .form-label{
+  font-size: calc(.75rem * var(--admin-scale)) !important;
+  margin-bottom: calc(4px * var(--admin-scale)) !important;
+}
+html body .admin-z .form-group{
+  margin-bottom: calc(12px * var(--admin-scale)) !important;
+}
+html body .admin-z .submit-btn{
+  padding: calc(12px * var(--admin-scale)) calc(8px * var(--admin-scale)) !important;
+  font-size: calc(.8rem * var(--admin-scale)) !important;
+}
+html body .admin-z .admin-action-btn{
+  padding: calc(11px * var(--admin-scale)) !important;
+  font-size: calc(.75rem * var(--admin-scale)) !important;
+}
+html body .admin-z .admin-tab{
+  padding: calc(8px * var(--admin-scale)) calc(14px * var(--admin-scale)) !important;
+  font-size: calc(.72rem * var(--admin-scale)) !important;
+}
+html body .admin-z .admin-stat{
+  padding: calc(10px * var(--admin-scale)) calc(12px * var(--admin-scale)) !important;
+  font-size: calc(.78rem * var(--admin-scale)) !important;
+}
+html body .admin-z .admin-hint{
+  padding: calc(10px * var(--admin-scale)) calc(12px * var(--admin-scale)) !important;
+  font-size: calc(.72rem * var(--admin-scale)) !important;
+}
+html body .admin-z .admin-slot{
+  padding: calc(12px * var(--admin-scale)) !important;
+}
+html body .admin-z .user-card{
+  padding: calc(14px * var(--admin-scale)) !important;
+}
+html body .admin-z .modal-close-btn{
+  width: calc(28px * var(--admin-scale)) !important;
+  height: calc(28px * var(--admin-scale)) !important;
+  font-size: calc(.8rem * var(--admin-scale)) !important;
+}
+html body .admin-z .upload-wrapper{
+  padding: calc(18px * var(--admin-scale)) !important;
+}
+html body .admin-z .upload-text{
+  font-size: calc(.78rem * var(--admin-scale)) !important;
+}
+html body .admin-z .toggle-row{
+  padding: calc(12px * var(--admin-scale)) calc(14px * var(--admin-scale)) !important;
+}
+html body .admin-z .toggle-label{
+  font-size: calc(.78rem * var(--admin-scale)) !important;
+}
+html body .admin-z .admin-panel-content{
+  max-height: calc(58vh * var(--admin-scale)) !important;
+  overflow-y: auto !important;
+}
+html body .admin-z .pub-profile-avatar{
+  width: calc(110px * var(--admin-scale)) !important;
+  height: calc(110px * var(--admin-scale)) !important;
+  font-size: calc(2.6rem * var(--admin-scale)) !important;
+}
+html body .admin-z .pub-profile-name{
+  font-size: calc(1.35rem * var(--admin-scale)) !important;
+}
+html body .admin-z .pub-profile-info-row{
+  font-size: calc(.82rem * var(--admin-scale)) !important;
+  padding: calc(10px * var(--admin-scale)) calc(4px * var(--admin-scale)) !important;
+}
+html body .admin-z .pub-profile-actions button{
+  padding: calc(12px * var(--admin-scale)) calc(14px * var(--admin-scale)) !important;
+  font-size: calc(.84rem * var(--admin-scale)) !important;
+}
+
+/* Tablet — biraz küçük */
+@media (min-width:641px) and (max-width:1024px){
+  html body .admin-z .modal-container{ --admin-scale: 0.95; }
+}
+
+/* Telefon — biraz daha küçük */
+@media (max-width:640px){
+  html body .admin-z .modal-container{
+    --admin-scale: 0.9;
+    max-width: calc(100vw - 24px) !important;
+    padding: calc(20px * var(--admin-scale)) !important;
+  }
+}
+
 .lightbox-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(5,5,10,.8);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);z-index:100000;display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:opacity .3s;padding:20px;pointer-events:none}
 .lightbox-overlay.active{opacity:1;visibility:visible;pointer-events:auto}
 .lightbox-content-box{background:var(--modal-container-bg);border:1px solid var(--line-color);border-radius:20px;width:100%;max-width:420px;padding:16px;position:relative}
@@ -341,10 +460,11 @@ footer{border-top:1px solid var(--line-color);padding-top:20px;padding-bottom:12
 .admin-action-btn.ghost{background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-color-override)}
 .admin-stat{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--box-bg);border:1px solid var(--line-color);border-radius:10px;margin-bottom:6px;font-size:.78rem}
 .admin-stat i{color:var(--accent);width:18px;text-align:center}
-.upload-wrapper{position:relative;background:var(--box-bg);border:2px dashed var(--line-color);border-radius:12px;padding:18px;text-align:center;cursor:pointer}
+.upload-wrapper{position:relative;background:var(--box-bg);border:2px dashed var(--line-color);border-radius:12px;padding:18px;text-align:center;cursor:pointer;transition:all .25s}
 .upload-wrapper.has-file{border-style:solid;border-color:#22c55e;border-width:2px}
 .upload-wrapper.has-icon{border-style:solid;border-color:var(--accent);border-width:2px}
-.upload-wrapper.uploading{border-style:solid;border-color:#3b82f6;border-width:2px}
+.upload-wrapper.uploading{border-style:solid;border-color:#3b82f6;border-width:2px;background:rgba(59,130,246,.05)}
+.upload-wrapper.upload-error{border-style:solid;border-color:#ef4444;border-width:2px;background:rgba(239,68,68,.05)}
 .upload-icon{font-size:1.6rem;color:var(--accent);margin-bottom:6px;display:block}
 .upload-text{font-size:.78rem;color:var(--text-secondary);display:block;font-weight:600}
 .apk-clear-btn{display:inline-flex;align-items:center;gap:5px;margin-top:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:7px 12px;border-radius:10px;font-size:.72rem;font-weight:600;cursor:pointer;text-transform:capitalize}
@@ -544,8 +664,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .order-type-check{width:20px;height:20px;border-radius:50%;border:2px solid var(--line-color);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;position:relative}
 .order-type-option.active .order-type-check{border-color:var(--accent);background:var(--accent)}
 .order-type-option.active .order-type-check::after{content:'\f00c';font-family:'Font Awesome 6 Free';font-weight:900;color:#fff;font-size:.6rem}
-
-/* HAVA DURUMU */
 .weather-card{background:linear-gradient(135deg,rgba(var(--accent-rgb),.14),rgba(var(--accent-rgb),.04));border:1px solid rgba(var(--accent-rgb),.3);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
 .weather-card::before{content:'';position:absolute;top:-50%;right:-20%;width:200px;height:200px;background:radial-gradient(circle,rgba(var(--accent-rgb),.18),transparent 70%);pointer-events:none}
 .weather-top{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;z-index:1}
@@ -572,7 +690,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .forecast-day .f-icon{font-size:1.3rem}
 .forecast-day .f-temp{font-size:.78rem;font-weight:700;color:var(--text-color-override)}
 .forecast-day .f-temp span{font-size:.62rem;color:var(--text-secondary);font-weight:500}
-
 #privacyCurtain{position:fixed;top:0;left:0;width:100vw;height:100vh;background:var(--bg-color);z-index:999999;display:none;flex-direction:column;justify-content:center;align-items:center;gap:16px;text-align:center;padding:24px;background-image:radial-gradient(circle at 30% 20%,rgba(var(--accent-rgb),.15),transparent 60%),radial-gradient(circle at 70% 80%,rgba(var(--accent-rgb),.12),transparent 60%)}
 #privacyCurtain.show{display:flex}
 #privacyCurtain img{width:72px;height:72px;border-radius:18px;box-shadow:0 8px 32px rgba(var(--accent-rgb),.5)}
@@ -949,7 +1066,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 
 <div class="modal-overlay admin-z" id="adminUserProfileModal">
-  <div class="modal-container" style="max-width:480px">
+  <div class="modal-container">
     <div class="modal-header">
       <div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title" id="admin-up-title">User Profile</div></div>
       <div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminUserProfile()"><i class="fa-solid fa-xmark"></i></button></div>
@@ -959,7 +1076,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 
 <div class="modal-overlay admin-z" id="adminUserEmailModal">
-  <div class="modal-container" style="max-width:560px">
+  <div class="modal-container">
     <div class="modal-header">
       <div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Kullanıcıya Email</div></div>
       <div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminUserEmail()"><i class="fa-solid fa-xmark"></i></button></div>
@@ -985,9 +1102,8 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
   </div>
 </div>
 
-<!-- ⭐ HERKESE EMAIL - 100 MB + LOGOSUZ -->
 <div class="modal-overlay admin-z" id="adminAnyEmailModal">
-  <div class="modal-container" style="max-width:620px">
+  <div class="modal-container">
     <div class="modal-header">
       <div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Herhangi Birine Email Gönder</div></div>
       <div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminAnyEmail()"><i class="fa-solid fa-xmark"></i></button></div>
@@ -997,6 +1113,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
       <div class="form-group"><label class="form-label"><i class="fa-solid fa-user" style="color:var(--accent)"></i> Alıcı Adı (opsiyonel)</label><input type="text" class="form-input" id="any-email-name" maxlength="80" placeholder="Sayın Müşteri"></div>
       <div class="form-group"><label class="form-label"><i class="fa-solid fa-tag" style="color:var(--accent)"></i> Konu</label><input type="text" class="form-input" id="any-email-subject" required maxlength="120" placeholder="email konusu"></div>
       <div class="form-group"><label class="form-label"><i class="fa-solid fa-align-left" style="color:var(--accent)"></i> Mesaj</label><textarea class="form-textarea" id="any-email-message" required maxlength="5000" style="min-height:130px" placeholder="mesajınızı buraya yazın..."></textarea></div>
+
       <div class="toggle-row" style="background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.25)">
         <div class="toggle-label"><div class="toggle-label-title"><i class="fa-solid fa-image" style="color:#3b82f6"></i> Resim Ekle (max 100 MB)</div><div style="font-size:.62rem;color:var(--text-secondary);margin-top:2px">Firebase Storage'a yüklenir, EmailJS'e sadece URL gönderilir</div></div>
         <label class="toggle-switch"><input type="checkbox" id="any-email-img-enable" onchange="document.getElementById('any-email-img-group').style.display=this.checked?'block':'none'"><span class="toggle-slider"></span></label>
@@ -1012,6 +1129,24 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
         </div>
         <img id="any-email-img-preview" style="max-width:100%;max-height:180px;border-radius:10px;margin-top:10px;display:none;border:1px solid var(--line-color);object-fit:contain;background:var(--box-bg)" alt="">
       </div>
+
+      <div class="toggle-row" style="background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.25)">
+        <div class="toggle-label"><div class="toggle-label-title"><i class="fa-solid fa-file-pdf" style="color:#ef4444"></i> PDF Ekle (max 100 MB)</div><div style="font-size:.62rem;color:var(--text-secondary);margin-top:2px">Firebase Storage'a yüklenir, alıcıya indirme linki gider</div></div>
+        <label class="toggle-switch"><input type="checkbox" id="any-email-pdf-enable" onchange="document.getElementById('any-email-pdf-group').style.display=this.checked?'block':'none'"><span class="toggle-slider"></span></label>
+      </div>
+      <div id="any-email-pdf-group" style="display:none">
+        <div class="form-group"><label class="form-label">PDF Dosya (max 100 MB)</label>
+          <div class="upload-wrapper" id="any-email-pdf-upload-wrapper" onclick="document.getElementById('any-email-pdf-file').click()">
+            <i class="fa-solid fa-file-pdf upload-icon" id="any-email-pdf-upload-icon" style="color:#ef4444"></i>
+            <span class="upload-text" id="any-email-pdf-file-text">PDF seç (max 100 MB)</span>
+            <input type="file" id="any-email-pdf-file" accept=".pdf,application/pdf" style="display:none" onchange="handleAnyEmailPdfUpload(event)">
+          </div>
+        </div>
+        <div id="any-email-pdf-info" style="display:none;padding:10px 12px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:10px;margin-bottom:10px;font-size:.75rem;align-items:center;gap:8px">
+          <i class="fa-solid fa-file-pdf" style="color:#ef4444;font-size:1.1rem"></i><span id="any-email-pdf-info-text" style="flex:1;color:var(--text-color-override);font-weight:600"></span>
+        </div>
+      </div>
+
       <div class="toggle-row" style="background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.25)">
         <div class="toggle-label"><div class="toggle-label-title"><i class="fa-solid fa-link" style="color:#22c55e"></i> Link (Buton) Ekle</div></div>
         <label class="toggle-switch"><input type="checkbox" id="any-email-link-enable" onchange="document.getElementById('any-email-link-group').style.display=this.checked?'block':'none'"><span class="toggle-slider"></span></label>
@@ -1062,7 +1197,7 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 
 <div class="modal-overlay admin-z" id="adminLoginModal">
-<div class="modal-container" style="max-width:380px">
+<div class="modal-container">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Admin Access</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminLogin()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <form id="adminLoginForm" onsubmit="verifyAdminPassword(event)">
 <p class="item-desc" style="margin-bottom:12px;font-size:.8rem">Restricted area.</p>
@@ -1104,13 +1239,13 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <div class="admin-stat"><i class="fa-solid fa-comments"></i> <span id="dash-chats-count">Chat: 0</span></div>
 <div class="admin-stat"><i class="fa-solid fa-envelope"></i> <span id="dash-email-status">Email: —</span></div>
 <div class="admin-stat"><i class="fa-solid fa-cloud"></i> <span id="dash-cloud-status">Cloud: —</span></div>
+<div class="admin-stat"><i class="fa-solid fa-database"></i> <span id="dash-storage-status">Storage: —</span></div>
 <div class="admin-stat"><i class="fa-solid fa-clock"></i> <span id="dash-last-edit">Last: —</span></div>
 <div class="admin-stat"><i class="fa-solid fa-user-check"></i> <span id="dash-verified-count">Verified: 0</span></div>
 <div class="admin-stat"><i class="fa-solid fa-eye"></i> <span id="dash-visitors-count">Visitors: 0</span></div>
 <div class="admin-stat"><i class="fa-solid fa-calendar-day"></i> <span id="dash-today-visitors">Today: 0</span></div>
 <div class="admin-stat"><i class="fa-solid fa-shield-halved"></i> <span id="dash-privacy-status">Privacy: —</span></div>
 <div class="admin-stat"><i class="fa-solid fa-comment-slash"></i> <span id="dash-chat-status">Chat Feature: —</span></div>
-<div class="admin-stat"><i class="fa-solid fa-database"></i> <span id="dash-storage-status">Storage: —</span></div>
 </div>
 <div class="admin-section" data-section="account">
 <form onsubmit="saveAdminAccount(event)">
@@ -1337,14 +1472,14 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 
 <div class="modal-overlay admin-z" id="userDetailModal">
-<div class="modal-container" style="max-width:480px">
+<div class="modal-container">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">User Details</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeUserDetail()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <div id="userDetailContent"></div>
 </div>
 </div>
 
 <div class="modal-overlay admin-z" id="adminEditModal">
-<div class="modal-container" style="max-width:520px">
+<div class="modal-container">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">Edit App Slot</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeAdminEdit()"><i class="fa-solid fa-xmark"></i></button></div></div>
 <form id="adminEditForm" onsubmit="saveAppSlot(event)">
 <input type="hidden" id="editSlotIndex" value="0">
@@ -1374,7 +1509,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 </div>
 
-<!-- ⭐ GET IN TOUCH - LOGOSUZ -->
 <div class="custom-alert-overlay" id="getInTouchModal">
 <div class="custom-alert-box" style="max-width:340px;padding:22px 20px;text-align:center">
 <div style="display:flex;justify-content:center;margin-bottom:14px"><div class="custom-alert-icon" style="color:var(--accent);font-size:1.6rem;margin-bottom:0"><i class="fa-solid fa-user-lock"></i></div></div>
@@ -1386,7 +1520,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 </div>
 </div>
 
-<!-- ⭐ CUSTOM ALERT - LOGOSUZ (DEFAULT) -->
 <div class="custom-alert-overlay" id="customAlertModal">
 <div class="custom-alert-box">
 <div class="custom-alert-icon" id="customAlertIcon"><i class="fa-solid fa-circle-exclamation"></i></div>
@@ -1417,7 +1550,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
   try{Object.defineProperty(window,'localStorage',{value:_ls,configurable:true});}catch(e){}
   try{Object.defineProperty(window,'sessionStorage',{value:_ss,configurable:true});}catch(e){}
 })();
-
 if(!window.CSS)window.CSS={};
 if(!CSS.escape)CSS.escape=s=>String(s).replace(/[^a-zA-Z0-9_\u00A0-\uFFFF-]/g,c=>'\\'+c);
 if(!Object.assign)Object.assign=function(t){for(let i=1;i<arguments.length;i++){const o=arguments[i];if(!o)continue;for(const k in o)if(Object.prototype.hasOwnProperty.call(o,k))t[k]=o[k];}return t;};
@@ -1435,11 +1567,9 @@ if(!window.crypto)window.crypto={};
 if(!window.crypto.getRandomValues)window.crypto.getRandomValues=arr=>{for(let i=0;i<arr.length;i++)arr[i]=Math.floor(Math.random()*256);return arr;};
 if(!URL.createObjectURL&&window.webkitURL)URL.createObjectURL=window.webkitURL.createObjectURL.bind(window.webkitURL);
 if(!URL.revokeObjectURL&&window.webkitURL)URL.revokeObjectURL=window.webkitURL.revokeObjectURL.bind(window.webkitURL);
-
 function fmtTime(input){try{return new Date(input).toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});}catch(e){const d=new Date(input);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}}
 function fmtDate(input){try{return new Date(input).toLocaleDateString();}catch(e){const d=new Date(input);return d.getDate()+'.'+(d.getMonth()+1)+'.'+d.getFullYear();}}
 function fmtDateTime(input){try{return new Date(input).toLocaleString();}catch(e){const d=new Date(input);return fmtDate(d)+' '+fmtTime(d);}}
-
 const IS_IOS=/iPad|iPhone|iPod/.test(navigator.userAgent)&&!window.MSStream;
 const IS_ANDROID=/Android/i.test(navigator.userAgent);
 const HAS_TOUCH='ontouchstart' in window||navigator.maxTouchPoints>0;
@@ -1463,19 +1593,23 @@ const VISITORS_KEY='site_visitors_v1';
 const WEATHER_CACHE_KEY='weather_cache_v1';
 const WEATHER_LOC_KEY='weather_location_v1';
 
-/* ⭐ 100 MB RESIM LIMITI */
-const MAX_IMAGE_SIZE_BYTES = 100 * 1024 * 1024; /* 100 MB */
-const EMAILJS_SAFE_BASE64_LIMIT = 45 * 1024; /* ~45 KB — EmailJS 50KB limitine güvenli sınır */
+/* ⭐ 100 MB LIMIT + STALL TIMEOUT */
+const MAX_IMAGE_SIZE_BYTES = 100 * 1024 * 1024;
+const MAX_PDF_SIZE_BYTES = 100 * 1024 * 1024;
+const EMAILJS_SAFE_BASE64_LIMIT = 45 * 1024;
+const UPLOAD_STALL_TIMEOUT_MS = 8000;   /* 8 saniye ilerleme yoksa → fallback */
+const UPLOAD_OVERALL_TIMEOUT_MS = 120000; /* 2 dakika toplam limit */
 
 let currentLang='en',currentAuthMode='signin',currentResetEmail='',pendingFaviconDataUrl=null,pendingAdminPhoto=undefined,currentProfileEmail=null;
 let pendingSignup=null,pendingApkFile=null,pendingApkDelete=false,pendingIconDataUrl=null,pendingIconDelete=false;
 let activeChatUser=null,chatPollTimer=null,chatSearchQuery='',currentReplyTo=null;
 let publicProfileEmail=null,currentEmailTargetUser=null,adminEmailTarget=null,adminViewingEmail=null;
-let anyEmailImageDataUrl=null;   /* Base64 (fallback) */
-let anyEmailImageUrl=null;        /* Firebase Storage URL (preferred) */
-let anyEmailImageFile=null;       /* Raw File object */
+let anyEmailImageDataUrl=null;
+let anyEmailImageUrl=null;
+let anyEmailImageFile=null;
+let anyEmailPdfDataUrl=null;     /* PDF URL (Firebase Storage) */
+let anyEmailPdfFile=null;
 let firebaseStorageAvailable=false;
-
 let cropperInstance=null,apkDB=null,audioCtx=null;
 let confettiParticles=[],confettiRunning=false,confettiCanvas=null,confettiCtx=null,confettiStopTimer=null;
 let messengerPos=null;
@@ -1493,9 +1627,7 @@ const LANG={
   de:{role:"Softwareentwickler",sec_apps:"Meine Anwendungen",sec_exp:"Erfahrung",sec_setup:"Setup & Umgebung",sec_stack:"Tech-Stack",sec_weather:"Wetter",contact_sub:"Anmelden / Registrieren",contact_main:"Anmelden um beizutreten",scan_text:"Zum Verbinden scannen",copyright:"© 2026 muminsultani • Alle Rechte vorbehalten.",chat_search_ph:"suchen...",chat_ph:"Nachricht schreiben...",chat_no_users:"keine anderen Benutzer.",chat_no_msgs:"noch keine Nachrichten",chat_start:"starte das Gespräch 👋",chat_you:"du",chat_voice:"🎤 Sprachnachricht",order_title:"Software bestellen",order_sub:"Brauchst du eine Website oder App?",order_main:"Bestellung aufgeben",order_modal_title:"Software bestellen",ord_name:"Name & Nachname",ord_email:"E-Mail",ord_type:"Projekttyp",ord_budget:"Budget",ord_deadline:"Liefertermin",ord_desc:"Projektdetails",ord_submit:"Bestellen",ord_website:"Website",ord_mobile:"Mobile App",ord_web_app:"Web-App",ord_other:"Andere",ord_name_ph:"name & nachname",ord_email_ph:"E-Mail",ord_budget_ph:"optional",ord_deadline_ph:"z.B. 2 Wochen",ord_desc_ph:"Projektdetails",edit_profile:"Profil bearbeiten",change_password:"Passwort ändern",settings:"Einstellungen",delete_account:"Konto löschen",logout:"Abmelden",check_email:"Überprüfe deine E-Mail",enter_code:"Code eingeben",resend:"Erneut senden",verify_email:"E-Mail bestätigen",verify_desc:"Gib den 5-stelligen Code aus deiner E-Mail ein.",code:"Code",verify:"Bestätigen",account_access:"Kontozugriff",signin_tab:"Anmelden",signup_tab:"Registrieren",name:"Name & Nachname",username:"Benutzername",email:"E-Mail",password:"Passwort",forgot:"Passwort vergessen?",next:"Weiter",go:"Los",name_ph:"name & nachname",username_ph:"@benutzername",email_ph:"E-Mail oder Benutzername",password_ph:"Passwort",pw_recovery:"Passwort-Wiederherstellung",pw_recovery_desc:"Gib deine registrierte E-Mail ein.",send:"Senden",reset_pw:"Passwort zurücksetzen",new_password:"Neues Passwort",update:"Aktualisieren",change_pw_title:"Passwort ändern",current_password:"Aktuelles Passwort",confirm_password:"Passwort bestätigen",del_acc_title:"Konto löschen",del_warn:"Warnung: nicht rückgängig zu machen.",delete:"Löschen",confirm_del:"Löschung bestätigen",delete_account_btn:"Konto löschen",edit_title:"Profil bearbeiten",profile_photo:"Profilbild",change_photo:"Foto ändern",reset:"Zurücksetzen",name_surname:"Name & Nachname",website:"Website",dob:"Geburtsdatum",save:"Speichern",settings_title:"Einstellungen",settings_hint:"Passe das Erscheinungsbild deiner Website an.",color_theme:"Farbthema",font_color:"Schriftfarbe",font_family:"Schriftart",background:"Hintergrund",chat_bg:"Chat-Hintergrund",settings_reset:"Zurücksetzen",settings_ok:"OK",crop_photo:"Foto zuschneiden",cancel:"Abbrechen",apply:"Anwenden",message:"Nachricht",close:"Schließen",send_message:"Nachricht senden",user_profile:"Benutzerprofil",joined:"Beigetreten",no_orders:"Noch keine Bestellungen.",you_must_signin:"Du musst dich anmelden, um zu bestellen.",order_received:"Bestellung erhalten! Wir melden uns bald.",fill_fields:"Bitte alle Felder ausfüllen.",invalid_credentials:"Ungültige Anmeldedaten!",email_registered:"E-Mail bereits registriert!",username_taken:"Dieser Benutzername ist bereits vergeben.",min_7:"Mindestens 7 Zeichen.",pw_8:"Passwort muss mindestens 8 Zeichen haben.",signin_success:"Erfolgreich angemeldet!",signup_success:"Konto erfolgreich erstellt!",logout_confirm:"Möchtest du dich wirklich abmelden?",logout_done:"Sitzung beendet.",order_approved:"Bestellung genehmigt und E-Mail gesendet!",gt_signin:"Anmelden",gt_back:"Zurück",gt_ok:"OK",gt_cancel:"Abbrechen",gt_yes:"Ja",min7:"min 7 Zeichen",taken:"vergeben",available:"verfügbar",dob_day_ph:"tt",dob_month_ph:"mm",dob_year_ph:"jjjj",cur_pw_ph:"aktuelles Passwort",new_pw_ph:"neues Passwort",confirm_pw_ph:"Passwort bestätigen",username_ph2:"@benutzername",email_addr_ph:"E-Mail-Adresse",forgot_pw:"Passwort vergessen?",master_pw_ph:"Master-Passwort",privacy_closed:"Diese Seite ist vorübergehend geschlossen. Bitte später erneut versuchen.",admin_user_profile:"Benutzerprofil",admin_chat_user:"Chat",admin_send_email:"E-Mail senden",admin_view:"Anzeigen",admin_verify:"Bestätigen",email_subject_ph:"E-Mail-Betreff",email_message_ph:"Schreibe deine Nachricht hier...",weather_loading:'Wetter wird geladen...',weather_wind:'Wind',weather_humidity:'Luftfeuchtigkeit',weather_feels:'Gefühlt',weather_forecast:'5-Tage-Vorhersage'}
 };
 const LANG_META={en:{label:'English',flag:'gb'},tr:{label:'Türkçe',flag:'tr'},de:{label:'Deutsch',flag:'de'}};
-
 const WEATHER_CODES={0:{icon:'fa-sun',en:'Clear',tr:'Açık',de:'Klar'},1:{icon:'fa-cloud-sun',en:'Mainly clear',tr:'Az bulutlu',de:'Überwiegend klar'},2:{icon:'fa-cloud-sun',en:'Partly cloudy',tr:'Parçalı bulutlu',de:'Teilweise bewölkt'},3:{icon:'fa-cloud',en:'Overcast',tr:'Kapalı',de:'Bedeckt'},45:{icon:'fa-smog',en:'Foggy',tr:'Sisli',de:'Neblig'},48:{icon:'fa-smog',en:'Fog',tr:'Sis',de:'Nebel'},51:{icon:'fa-cloud-rain',en:'Light drizzle',tr:'Hafif çisenti',de:'Leichter Niesel'},53:{icon:'fa-cloud-rain',en:'Drizzle',tr:'Çisenti',de:'Niesel'},55:{icon:'fa-cloud-rain',en:'Dense drizzle',tr:'Yoğun çisenti',de:'Dichter Niesel'},61:{icon:'fa-cloud-rain',en:'Light rain',tr:'Hafif yağmur',de:'Leichter Regen'},63:{icon:'fa-cloud-showers-heavy',en:'Rain',tr:'Yağmurlu',de:'Regen'},65:{icon:'fa-cloud-showers-heavy',en:'Heavy rain',tr:'Şiddetli yağmur',de:'Starker Regen'},71:{icon:'fa-snowflake',en:'Light snow',tr:'Hafif kar',de:'Leichter Schnee'},73:{icon:'fa-snowflake',en:'Snow',tr:'Kar',de:'Schnee'},75:{icon:'fa-snowflake',en:'Heavy snow',tr:'Yoğun kar',de:'Starker Schnee'},77:{icon:'fa-snowflake',en:'Snow grains',tr:'Kar taneleri',de:'Schneegriesel'},80:{icon:'fa-cloud-showers-heavy',en:'Rain showers',tr:'Sağanak',de:'Regenschauer'},81:{icon:'fa-cloud-showers-heavy',en:'Showers',tr:'Sağanaklar',de:'Schauer'},82:{icon:'fa-cloud-showers-heavy',en:'Violent showers',tr:'Şiddetli sağanak',de:'Starke Schauer'},85:{icon:'fa-snowflake',en:'Snow showers',tr:'Kar sağanağı',de:'Schneeschauer'},86:{icon:'fa-snowflake',en:'Heavy snow showers',tr:'Yoğun kar sağanağı',de:'Starke Schneeschauer'},95:{icon:'fa-cloud-bolt',en:'Thunderstorm',tr:'Gök gürültülü',de:'Gewitter'},96:{icon:'fa-cloud-bolt',en:'Thunderstorm + hail',tr:'Gök gürültülü + dolu',de:'Gewitter + Hagel'},99:{icon:'fa-cloud-bolt',en:'Severe thunderstorm',tr:'Şiddetli fırtına',de:'Schweres Gewitter'}};
-
 const THEMES=[{key:'purple',name:'Purple',c1:'#9333ea',c2:'#c084fc'},{key:'blue',name:'Blue',c1:'#2563eb',c2:'#60a5fa'},{key:'green',name:'Green',c1:'#16a34a',c2:'#4ade80'},{key:'red',name:'Red',c1:'#dc2626',c2:'#f87171'},{key:'orange',name:'Orange',c1:'#ea580c',c2:'#fb923c'},{key:'pink',name:'Pink',c1:'#db2777',c2:'#f472b6'},{key:'teal',name:'Teal',c1:'#0d9488',c2:'#2dd4bf'},{key:'indigo',name:'Indigo',c1:'#4f46e5',c2:'#818cf8'},{key:'amber',name:'Amber',c1:'#d97706',c2:'#fbbf24'},{key:'cyan',name:'Cyan',c1:'#0891b2',c2:'#22d3ee'},{key:'rose',name:'Rose',c1:'#e11d48',c2:'#fb7185'},{key:'slate',name:'Slate',c1:'#475569',c2:'#94a3b8'}];
 const FONTS_NORMAL=[{key:'Sora',label:'Sora'},{key:'Inter',label:'Inter'},{key:'Roboto',label:'Roboto'},{key:'Poppins',label:'Poppins'},{key:'Montserrat',label:'Montserrat'},{key:'Lato',label:'Lato'},{key:'Open Sans',label:'Open Sans'},{key:'Raleway',label:'Raleway'},{key:'Nunito',label:'Nunito'},{key:'Work Sans',label:'Work Sans'},{key:'Rubik',label:'Rubik'},{key:'Karla',label:'Karla'},{key:'Manrope',label:'Manrope'},{key:'Outfit',label:'Outfit'},{key:'DM Sans',label:'DM Sans'},{key:'Urbanist',label:'Urbanist'},{key:'Space Grotesk',label:'Space Grotesk'},{key:'Lexend',label:'Lexend'},{key:'Plus Jakarta Sans',label:'Plus Jakarta Sans'}];
 const FONT_COLORS=[{key:'default',name:'Default',c:'inherit'},{key:'white',name:'White',c:'#ffffff'},{key:'black',name:'Black',c:'#000000'},{key:'gray',name:'Gray',c:'#94a3b8'},{key:'purple',name:'Purple',c:'#c084fc'},{key:'blue',name:'Blue',c:'#60a5fa'},{key:'green',name:'Green',c:'#4ade80'},{key:'red',name:'Red',c:'#f87171'},{key:'orange',name:'Orange',c:'#fb923c'},{key:'pink',name:'Pink',c:'#f472b6'},{key:'cyan',name:'Cyan',c:'#22d3ee'},{key:'yellow',name:'Yellow',c:'#facc15'}];
@@ -1509,7 +1641,6 @@ const CONFETTI_PRESETS=[{key:'classic',name:'Classic',icon:'fa-star'},{key:'side
 const INTRO_BGS=[{key:'default',name:'Default'},{key:'aurora',name:'Aurora'},{key:'sunset',name:'Sunset'},{key:'ocean',name:'Ocean'},{key:'forest',name:'Forest'},{key:'lava',name:'Lava'},{key:'cosmic',name:'Cosmic'},{key:'mint',name:'Mint'},{key:'rose',name:'Rose'}];
 const INTRO_ANIMS=ANIM_PRESETS.filter(a=>a.key!=='none');
 const SOCIAL_PLATFORMS=[{key:'github',label:'GitHub',icon:'fa-brands fa-github',placeholder:'https://github.com/username'},{key:'instagram',label:'Instagram',icon:'fa-brands fa-instagram',placeholder:'https://instagram.com/username'},{key:'gmail',label:'Gmail',icon:'fa-solid fa-envelope',placeholder:'email@example.com'},{key:'twitter',label:'Twitter/X',icon:'fa-brands fa-x-twitter',placeholder:'https://x.com/username'},{key:'facebook',label:'Facebook',icon:'fa-brands fa-facebook',placeholder:'https://facebook.com/username'},{key:'youtube',label:'YouTube',icon:'fa-brands fa-youtube',placeholder:'https://youtube.com/@channel'},{key:'linkedin',label:'LinkedIn',icon:'fa-brands fa-linkedin',placeholder:'https://linkedin.com/in/username'},{key:'tiktok',label:'TikTok',icon:'fa-brands fa-tiktok',placeholder:'https://tiktok.com/@username'},{key:'telegram',label:'Telegram',icon:'fa-brands fa-telegram',placeholder:'https://t.me/username'},{key:'whatsapp',label:'WhatsApp',icon:'fa-brands fa-whatsapp',placeholder:'https://wa.me/1234567890'},{key:'discord',label:'Discord',icon:'fa-brands fa-discord',placeholder:'https://discord.gg/invite'},{key:'pinterest',label:'Pinterest',icon:'fa-brands fa-pinterest',placeholder:'https://pinterest.com/username'}];
-
 const DEFAULT_SITE_CONTENT={
   header:{brand:'muminsultani',roleEn:'Software Developer',roleTr:'Yazılım Geliştirici'},
   social:[{platform:'github',url:'https://github.com/muminsultani',enabled:true},{platform:'instagram',url:'https://instagram.com/sultanimumin',enabled:true},{platform:'gmail',url:'muminsultani@hotmail.com',enabled:true}],
@@ -1525,7 +1656,6 @@ const DEFAULT_SITE_CONTENT={
   welcomeEmail:{enabled:true,includePdf:true,subject:'Hoşgeldiniz! 🎉',message:'Merhaba {name},\n\nSitemize kayıt olduğunuz için teşekkür ederiz!\n\nKullanıcı ID: {userId}\nKullanıcı Adı: @{username}\n\nİyi günler dileriz,\nmuminsultani'},
   lastEdit:'—'
 };
-
 function t(key,fallback){const d=LANG[currentLang]||LANG.en;const v=d[key];return(v!==undefined&&v!==null&&v!=='')?v:(fallback!==undefined?fallback:key);}
 function escapeHtml(s){if(s===null||s===undefined)return'';return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 function deepMerge(t,s){for(const k in s){if(s[k]&&typeof s[k]==='object'&&!Array.isArray(s[k])){t[k]=deepMerge(t[k]||{},s[k]);}else if(s[k]!==undefined&&s[k]!==null){t[k]=s[k];}}return t;}
@@ -1538,7 +1668,7 @@ function clearUserPrefs(){try{localStorage.removeItem(USER_PREFS_KEY);}catch(e){
 function setUserPref(k,v){const p=getUserPrefs();p[k]=v;saveUserPrefs(p);}
 
 /* ============================================================
-   🔥 FIREBASE STORAGE — 100 MB GÖRSEL YÜKLEME
+   🔥 FIREBASE STORAGE — STALL DETECTION
    ============================================================ */
 function initFirebaseStorage(){
   try{
@@ -1549,21 +1679,82 @@ function initFirebaseStorage(){
   }catch(e){firebaseStorageAvailable=false;return false;}
 }
 
-/* Firebase Storage'a görsel yükle — URL döner */
-async function uploadImageToFirebaseStorage(file){
+/* ⭐ Yükleme — stall/ilerleme yoksa timeout ile iptal */
+async function uploadToFirebaseStorageWithStallDetection(file, folder, onProgress){
   if(!firebaseStorageAvailable)initFirebaseStorage();
   if(!firebaseStorageAvailable)throw new Error('firebase_storage_unavailable');
+
   const storage=firebase.storage();
-  const ext=(file.name&&file.name.lastIndexOf('.')!==-1)?file.name.substring(file.name.lastIndexOf('.')):'.jpg';
-  const fname='email-images/'+Date.now()+'_'+Math.random().toString(36).substring(2,8)+ext;
+  const safeName=String(file.name||('file_'+Date.now())).replace(/[^a-zA-Z0-9._-]/g,'_');
+  const fname=(folder||'uploads')+'/'+Date.now()+'_'+Math.random().toString(36).substring(2,8)+'_'+safeName;
   const ref=storage.ref().child(fname);
-  const snapshot=await ref.put(file);
-  const url=await snapshot.ref.getDownloadURL();
-  return url;
+  const uploadTask=ref.put(file);
+
+  let lastProgressTime=Date.now();
+  let lastBytes=0;
+  let stalled=false;
+  let aborted=false;
+
+  /* Stall detection timer */
+  const stallChecker=setInterval(()=>{
+    const now=Date.now();
+    if(now-lastProgressTime>UPLOAD_STALL_TIMEOUT_MS){
+      stalled=true;
+      clearInterval(stallChecker);
+      try{uploadTask.cancel();}catch(e){}
+    }
+  },1500);
+
+  /* Overall timeout */
+  const overallTimer=setTimeout(()=>{
+    stalled=true;
+    clearInterval(stallChecker);
+    try{uploadTask.cancel();}catch(e){}
+  },UPLOAD_OVERALL_TIMEOUT_MS);
+
+  try{
+    await new Promise((resolve,reject)=>{
+      uploadTask.on('state_changed',
+        (snap)=>{
+          const now=Date.now();
+          if(snap.bytesTransferred!==lastBytes){
+            lastBytes=snap.bytesTransferred;
+            lastProgressTime=now;
+          }
+          const pct=Math.round((snap.bytesTransferred/snap.totalBytes)*100);
+          if(onProgress)onProgress(pct,snap.bytesTransferred,snap.totalBytes);
+        },
+        (err)=>{
+          clearInterval(stallChecker);
+          clearTimeout(overallTimer);
+          aborted=true;
+          if(stalled)reject(new Error('stalled'));
+          else reject(err);
+        },
+        ()=>{
+          clearInterval(stallChecker);
+          clearTimeout(overallTimer);
+          resolve();
+        }
+      );
+    });
+    const url=await uploadTask.snapshot.ref.getDownloadURL();
+    return url;
+  }catch(err){
+    clearInterval(stallChecker);
+    clearTimeout(overallTimer);
+    if(stalled)throw new Error('upload_stalled');
+    throw err;
+  }
+}
+
+/* Alias */
+async function uploadImageToFirebaseStorage(file){
+  return uploadToFirebaseStorageWithStallDetection(file,'email-images');
 }
 
 /* ============================================================
-   🗜️ GÖRSEL SIKIŞTIRMA — EmailJS 50KB limiti için fallback
+   🗜️ GÖRSEL SIKIŞTIRMA
    ============================================================ */
 async function compressImageForEmailJS(file, maxBytes){
   maxBytes=maxBytes||EMAILJS_SAFE_BASE64_LIMIT;
@@ -1574,7 +1765,6 @@ async function compressImageForEmailJS(file, maxBytes){
       img.onload=()=>{
         const canvas=document.createElement('canvas');
         let w=img.width,h=img.height;
-        /* Boyut küçült: max 800px genişlik */
         const maxDim=800;
         if(w>maxDim||h>maxDim){
           if(w>h){h=Math.round(h*maxDim/w);w=maxDim;}
@@ -1583,7 +1773,6 @@ async function compressImageForEmailJS(file, maxBytes){
         canvas.width=w;canvas.height=h;
         const ctx=canvas.getContext('2d');
         ctx.drawImage(img,0,0,w,h);
-        /* Kalite düşür, byte hedefe ulaşana kadar */
         let quality=0.75;
         let dataUrl=canvas.toDataURL('image/jpeg',quality);
         let guard=0;
@@ -1592,7 +1781,6 @@ async function compressImageForEmailJS(file, maxBytes){
           dataUrl=canvas.toDataURL('image/jpeg',quality);
           guard++;
         }
-        /* Hala büyükse boyutu da küçült */
         let guard2=0;
         while(dataUrl.length>maxBytes && w>200 && guard2<5){
           w=Math.round(w*0.75);h=Math.round(h*0.75);
@@ -1615,15 +1803,12 @@ async function compressImageForEmailJS(file, maxBytes){
 async function loadSiteContentFromFirebase(){try{if(typeof firebase==='undefined')return false;if(!firebase.apps||!firebase.apps.length)return false;const db=firebase.database();const snap=await db.ref('site_content').once('value');const remote=snap.val();if(remote&&typeof remote==='object'){const merged=deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),remote);localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(merged));return true;}}catch(e){}return false;}
 async function saveSiteContentToFirebase(content){try{if(typeof firebase==='undefined')return false;if(!firebase.apps||!firebase.apps.length)return false;if(isApplyingRemote)return false;const db=firebase.database();await db.ref('site_content').set(content);return true;}catch(e){return false;}}
 function listenToFirebaseChanges(){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return;const db=firebase.database();db.ref('site_content').on('value',snap=>{const remote=snap.val();if(!remote||typeof remote!=='object')return;const localRaw=localStorage.getItem(SITE_CONTENT_KEY);if(localRaw!==JSON.stringify(remote)){isApplyingRemote=true;const merged=deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),remote);localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(merged));try{applySiteContent();applySectionOrder();applyEffectsSettings();applySitePrivacy();applyWeatherSettings();applyChatVisibility();}catch(e){}isApplyingRemote=false;}});}catch(e){}}
-
 async function loadUsersFromFirebase(){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;const db=firebase.database();const snap=await db.ref('site_users').once('value');const remote=snap.val();if(Array.isArray(remote)&&remote.length>0){localStorage.setItem(USERS_KEY,JSON.stringify(remote));return true;}}catch(e){}return false;}
 async function saveUsersToFirebase(users){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;const db=firebase.database();await db.ref('site_users').set(users);return true;}catch(e){return false;}}
 function listenToUsersChanges(){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return;const db=firebase.database();db.ref('site_users').on('value',snap=>{const remote=snap.val();if(!Array.isArray(remote))return;const localRaw=localStorage.getItem(USERS_KEY);if(JSON.stringify(remote)!==localRaw){localStorage.setItem(USERS_KEY,JSON.stringify(remote));try{checkUserSession();}catch(e){}}});}catch(e){}}
-
 async function loadOrdersFromFirebase(){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;const db=firebase.database();const snap=await db.ref('site_orders').once('value');const remote=snap.val();if(Array.isArray(remote)){localStorage.setItem(ORDERS_KEY,JSON.stringify(remote));return true;}}catch(e){}return false;}
 async function saveOrdersToFirebase(orders){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;const db=firebase.database();await db.ref('site_orders').set(orders);return true;}catch(e){return false;}}
 function listenToOrdersChanges(){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return;const db=firebase.database();db.ref('site_orders').on('value',snap=>{const remote=snap.val();if(!Array.isArray(remote))return;const localRaw=localStorage.getItem(ORDERS_KEY);if(JSON.stringify(remote)!==localRaw){localStorage.setItem(ORDERS_KEY,JSON.stringify(remote));try{updateOrdersBadge();}catch(e){}}});}catch(e){}}
-
 async function loadChatFromFirebase(){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;const db=firebase.database();const snap=await db.ref('site_chat').once('value');const remote=snap.val();if(remote&&typeof remote==='object'){localStorage.setItem(CHAT_KEY,JSON.stringify(remote));return true;}}catch(e){}return false;}
 async function saveChatToFirebase(chat){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;const db=firebase.database();await db.ref('site_chat').set(chat);return true;}catch(e){return false;}}
 function listenToChatChanges(){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return;const db=firebase.database();db.ref('site_chat').on('value',snap=>{const remote=snap.val();if(!remote||typeof remote!=='object')return;const localRaw=localStorage.getItem(CHAT_KEY);if(JSON.stringify(remote)!==localRaw){localStorage.setItem(CHAT_KEY,JSON.stringify(remote));try{updateChatBadge();}catch(e){}}});}catch(e){}}
@@ -1654,9 +1839,7 @@ function isAdminUser(email){if(!email)return false;const lc=String(email).toLowe
 function getAdminUser(){const u=getAllUsers();let f=u.find(x=>x.isAdmin===true);if(!f)f=u.find(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL.toLowerCase());if(f)return Object.assign({},f,{isAdmin:true,isVerified:true});return{userId:'788133910',name:'muminsultani',username:'muminsultani',email:ADMIN_EMAIL,password:'SUl#784429$',bio:"hello! dear friends I'm #muminsultani.",website:'',profilePhoto:'',following:[],createdAt:'2023-08-18T00:00:00.000Z',isAdmin:true,isVerified:true};}
 function getEffectiveLoggedUser(){const lu=localStorage.getItem('logged_user');if(lu){try{const u=JSON.parse(lu);if(u&&u.email)return u;}catch(e){}}if(isAdminLoggedIn()){const a=getAdminUser();try{localStorage.setItem('logged_user',JSON.stringify(a));}catch(e){}return a;}return null;}
 function getVerifiedBadgeHTML(size){const cls='verified-badge'+(size?(' '+size):'');return '<span class="'+cls+'" title="Verified"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path fill="#1d9bf0" d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18z"/></svg></span>';}
-
 function ensureUserIdsAndAdmin(){try{let u=JSON.parse(localStorage.getItem(USERS_KEY)||'[]');let changed=false;let ai=u.findIndex(x=>x.isAdmin===true);if(ai===-1)ai=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL.toLowerCase());if(ai===-1){u.unshift({userId:'788133910',name:'muminsultani',username:'muminsultani',email:ADMIN_EMAIL,password:'SUl#784429$',bio:"hello! dear friends I'm #muminsultani.",website:'',profilePhoto:'',following:[],createdAt:'2023-08-18T00:00:00.000Z',isAdmin:true,isVerified:true});ai=0;changed=true;}else{if(u[ai].createdAt!=='2023-08-18T00:00:00.000Z'){u[ai].createdAt='2023-08-18T00:00:00.000Z';changed=true;}if(u[ai].email!==ADMIN_EMAIL){u[ai].email=ADMIN_EMAIL;changed=true;}if(u[ai].userId!=='788133910'){u[ai].userId='788133910';changed=true;}if(u[ai].isVerified!==true){u[ai].isVerified=true;changed=true;}}u.forEach(x=>{if(!/^\d{9}$/.test(String(x.userId||''))){x.userId='';changed=true;}if(!x.bio)x.bio='';if(!x.website)x.website='';if(!Array.isArray(x.following))x.following=[];});const seen=new Set();u.forEach(x=>{if(x.userId&&seen.has(x.userId)){x.userId='';changed=true;}else if(x.userId)seen.add(x.userId);});u.forEach(x=>{if(!x.userId){let nid;do{nid=generateRandomUserId();}while(seen.has(nid));x.userId=nid;seen.add(nid);changed=true;}});if(changed){saveAllUsers(u);const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);const f=u.find(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());if(f)localStorage.setItem('logged_user',JSON.stringify(f));}catch(e){}}}}catch(e){}}
-
 function getChatUsersFor(email){const u=getAllUsers();const ce=String(email||'').toLowerCase();let list=u.filter(x=>String(x.email||'').toLowerCase()!==ce);if(!isAdminUser(email)&&!list.some(x=>isAdminUser(x.email))){list.unshift(getAdminUser());}list.sort((a,b)=>{const aa=isAdminUser(a.email)?0:1,ba=isAdminUser(b.email)?0:1;return aa-ba;});return list;}
 function logActivity(type,userData,details){try{let l=JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');const u=userData||{};l.push({type,timestamp:new Date().toISOString(),name:u.name||'',username:u.username||'',email:u.email||'',userId:u.userId||'',details:details||''});if(l.length>2000)l=l.slice(-2000);localStorage.setItem(ACTIVITY_LOG_KEY,JSON.stringify(l));}catch(e){}}
 function getActivityLog(){try{return JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');}catch(e){return[];}}
@@ -1715,10 +1898,8 @@ function applyEffectsSettings(){applyBackground();applyChatBackground();applyInt
 function applyFishSettings(){const eff=getSiteContent().effects||{};if(window.fishSystem){window.fishSystem.setStyle(eff.fishStyle||'tropical');window.fishSystem.setEnabled(eff.fishEnabled===true);}}
 function setFishEnabled(v){const c=getSiteContent();if(!c.effects)c.effects={};c.effects.fishEnabled=!!v;saveSiteContent(c);if(window.fishSystem)window.fishSystem.setEnabled(!!v);showCustomAlert(v?'🐟 Balıklar açıldı':'❌ Balıklar kapatıldı','success');}
 function setFishStyle(k){const c=getSiteContent();if(!c.effects)c.effects={};c.effects.fishStyle=k;saveSiteContent(c);if(window.fishSystem)window.fishSystem.setStyle(k);try{renderEffectsPanel();}catch(e){}}
-
 function bgSwatch(k){const m={default:'linear-gradient(135deg,#05050a,#0d0d15)',aurora:'linear-gradient(135deg,#34d399,#9333ea)',sunset:'linear-gradient(135deg,#fb923c,#ec4899)',ocean:'linear-gradient(135deg,#38bdf8,#0ea5e9)',forest:'linear-gradient(135deg,#22c55e,#15803d)',lava:'linear-gradient(135deg,#ef4444,#f59e0b)',cosmic:'linear-gradient(135deg,#8b5cf6,#ec4899)',mint:'linear-gradient(135deg,#10b981,#2dd4bf)',rose:'linear-gradient(135deg,#f472b6,#fb7185)',mono:'linear-gradient(135deg,#94a3b8,#64748b)'};return m[k]||m.default;}
 function chatSwatch(k){const m={default:'#0d0d15',whatsapp:'#0b141a',telegram:'#17212b',aurora:'#0d1f1f',sunset:'#2a1216',ocean:'#04141f',forest:'#0a1a10',lava:'#1a0808',cosmic:'#14092a',mint:'#08201a',rose:'#250d17'};return m[k]||m.default;}
-
 function setTheme(k){const c=getSiteContent();if(!c.appearance)c.appearance={};c.appearance.theme=k;saveSiteContent(c);applyAppearance();renderEffectsPanel();}
 function setFont(f){const c=getSiteContent();if(!c.appearance)c.appearance={};c.appearance.font=f;saveSiteContent(c);applyAppearance();renderEffectsPanel();}
 function setFontColor(k){const c=getSiteContent();if(!c.appearance)c.appearance={};c.appearance.fontColor=k;saveSiteContent(c);applyAppearance();renderEffectsPanel();}
@@ -1736,7 +1917,7 @@ function setTickSoundEnabled(v){const c=getSiteContent();if(!c.effects)c.effects
 function setTickSoundStyle(k){const c=getSiteContent();if(!c.effects)c.effects={};c.effects.tickSoundStyle=k;saveSiteContent(c);renderEffectsPanel();}
 
 /* ============================================================
-   ⭐ CUSTOM ALERT — ARTIK LOGOSUZ
+   ⭐ CUSTOM ALERT — LOGOSUZ
    ============================================================ */
 function showCustomAlert(message,type,onConfirm){
   type=type||'info';
@@ -1746,7 +1927,6 @@ function showCustomAlert(message,type,onConfirm){
   const ag=document.getElementById('customAlertBtnGroup');
   const iconMap={info:'fa-circle-info',success:'fa-circle-check',error:'fa-circle-exclamation',warning:'fa-triangle-exclamation',delete:'fa-trash-can',lock:'fa-lock',verify:'fa-circle-check'};
   const iconCls=iconMap[type]||'fa-circle-info';
-  /* ⭐ LOGO YOK, SADECE ICON */
   ai.innerHTML='<i class="fa-solid '+iconCls+'" style="font-size:1.6rem;color:var(--accent)"></i>';
   am.innerHTML=message;
   if(onConfirm){
@@ -1769,7 +1949,6 @@ function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('
 function renderLangMenu(){const menu=document.getElementById('langMenu');if(!menu)return;const vis=(getSiteContent().general&&getSiteContent().general.languageVisibility)||{en:true,tr:true,de:true};menu.innerHTML='';Object.keys(LANG_META).forEach(code=>{if(vis[code]===false)return;const meta=LANG_META[code];const btn=document.createElement('button');btn.className='lang-option';btn.onclick=()=>changeLanguage(code);btn.innerHTML='<img src="https://flagcdn.com/'+meta.flag+'.svg" class="lang-flag" alt="'+code.toUpperCase()+'"> '+meta.label;menu.appendChild(btn);});const lt=document.getElementById('currentLangText');const meta=LANG_META[currentLang]||LANG_META.en;if(lt)lt.innerHTML='<img src="https://flagcdn.com/'+meta.flag+'.svg" class="lang-flag" alt="'+currentLang.toUpperCase()+'">';}
 function toggleLangVisibility(code,val){const c=getSiteContent();if(!c.general)c.general={};if(!c.general.languageVisibility)c.general.languageVisibility={en:true,tr:true,de:true};c.general.languageVisibility[code]=!!val;saveSiteContent(c);renderLangMenu();const vis=c.general.languageVisibility;if(vis[currentLang]===false){const first=Object.keys(vis).find(k=>vis[k]!==false)||'en';changeLanguage(first);}showCustomAlert((val?'✅ ':'❌ ')+code.toUpperCase()+' '+(val?'açıldı':'kapatıldı'),'success');}
 function updateBrandLogos(){const logoUrl=(getSiteContent().general&&getSiteContent().general.favicon)||'https://muminsultani.com/img/ms.png';const brand=getDyn('header.brand','muminsultani');document.querySelectorAll('.modal-brand').forEach(el=>{if(el.dataset.enhanced!=='1'){el.dataset.enhanced='1';el.innerHTML='<img src="'+logoUrl+'" class="brand-logo-img" alt=""><span>'+brand+'</span>';}else{const img=el.querySelector('.brand-logo-img');if(img)img.src=logoUrl;const sp=el.querySelector('span');if(sp)sp.textContent=brand;}});}
-
 function applyTranslations(){const d=LANG[currentLang]||LANG.en;const st=(id,v)=>{const e=document.getElementById(id);if(e&&v!==undefined)e.textContent=v;};const sph=(id,v)=>{const e=document.getElementById(id);if(e&&v!==undefined)e.placeholder=v;};
   st('t-role',d.role);st('t-apps-title',d.sec_apps);st('t-exp-title',d.sec_exp);st('t-setup-title',d.sec_setup);st('t-stack-title',d.sec_stack);st('t-weather-title',d.sec_weather);
   st('t-contact-sub',d.contact_sub);st('t-contact-main',d.contact_main);st('t-scan-text',d.scan_text);st('t-copyright',d.copyright);
@@ -1794,7 +1973,6 @@ function applyTranslations(){const d=LANG[currentLang]||LANG.en;const st=(id,v)=
   const fl=document.getElementById('t-forgot-link');if(fl){fl.textContent=d.forgot_pw||d.forgot;}
   const gits=document.getElementById('getInTouchModal');if(gits){const msgEl=gits.querySelector('.custom-alert-message');if(msgEl)msgEl.textContent=d.contact_sub;const btns=gits.querySelectorAll('.custom-alert-btn');if(btns[0])btns[0].innerHTML='<i class="fa-solid fa-right-to-bracket"></i> '+d.gt_signin;if(btns[1])btns[1].innerHTML='<i class="fa-solid fa-arrow-rotate-left"></i> '+d.gt_back;}
   renderLangMenu();updateBrandLogos();}
-
 window.addEventListener('click',function(e){const ld=document.getElementById('langDropdownBtn'),lm=document.getElementById('langMenu');if(ld&&lm&&!ld.contains(e.target)&&!lm.contains(e.target))lm.classList.remove('show');});
 
 /* === ORDER / AUTH === */
@@ -1806,14 +1984,12 @@ function closeGetInTouchModal(){document.getElementById('getInTouchModal').class
 function openDirectContactModal(){closeGetInTouchModal();switchAuthTab('signin');document.getElementById('directContactModal').classList.add('active');setTimeout(()=>{const ei=document.getElementById('contactClientEmail');if(ei)ei.focus();},200);}
 function closeDirectContactModal(){document.getElementById('directContactModal').classList.remove('active');forceRefreshUI();}
 function checkUsernameAvailability(){const i=document.getElementById('contactClientUsername'),m=document.getElementById('usernameAvailabilityMsg');if(!i||!m)return;let un=i.value.trim().replace(/^@/,'');if(!un){m.style.display='none';return;}if(un.length<7){m.style.display='block';m.style.color='#f59e0b';m.innerText=t('min7');return;}const users=getAllUsers();const ex=users.some(u=>String(u.username||'').replace(/^@/,'').toLowerCase()===un.toLowerCase());m.style.display='block';if(ex){m.style.color='#ef4444';m.innerText=t('taken');}else{m.style.color='#22c55e';m.innerText=t('available');}}
-
 function openForgotPasswordModal(e){if(e)e.preventDefault();closeDirectContactModal();document.getElementById('forgotPasswordForm').reset();document.getElementById('forgotPasswordModal').classList.add('active');}
 function closeForgotPasswordModal(){document.getElementById('forgotPasswordModal').classList.remove('active');}
 async function handleForgotPasswordSubmit(e){e.preventDefault();const email=document.getElementById('forgotClientEmail').value.trim().toLowerCase();if(!email){showCustomAlert(t('fill_fields'));return;}let users=getAllUsers();const u=users.find(x=>x.email===email);if(!u){showCustomAlert(currentLang==='tr'?'Email kayıtlı değil!':'Email not registered!');return;}const tp=String(Math.floor(10000+Math.random()*90000));let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');rc[email]=tp;localStorage.setItem('reset_codes',JSON.stringify(rc));currentResetEmail=email;closeForgotPasswordModal();const result=await sendVerificationEmail(email,tp,'reset');if(result.success){showCustomAlert(currentLang==='tr'?'Doğrulama kodu emailinize gönderildi!':'Verification code sent!','success');}else{showCustomAlert(currentLang==='tr'?'Email gönderilemedi.':'Could not send email.','error');return;}setTimeout(()=>openResetPasswordModal(),600);}
 function openResetPasswordModal(){document.getElementById('resetClientEmail').value=currentResetEmail;document.getElementById('resetPasswordForm').reset();clearPasswordField('resetClientNewPassword');document.getElementById('resetClientEmail').value=currentResetEmail;document.getElementById('resetPasswordModal').classList.add('active');}
 function closeResetPasswordModal(){document.getElementById('resetPasswordModal').classList.remove('active');}
 function handleResetPasswordSubmit(e){e.preventDefault();const email=document.getElementById('resetClientEmail').value,code=document.getElementById('resetClientCode').value.trim(),np=getPasswordValue('resetClientNewPassword').trim();if(!code||!np){showCustomAlert(t('fill_fields'));return;}if(!isValidPassword(np)){showCustomAlert(t('pw_8'));return;}let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');if(!rc[email]||rc[email]!==code){showCustomAlert(currentLang==='tr'?'Geçersiz kod!':'Invalid code!');return;}let users=getAllUsers();let ok=false;users=users.map(u=>{if(u.email===email){u.password=np;ok=true;}return u;});if(ok){saveAllUsers(users);delete rc[email];localStorage.setItem('reset_codes',JSON.stringify(rc));closeResetPasswordModal();showCustomAlert(currentLang==='tr'?'Şifre başarıyla sıfırlandı!':'Password reset successfully!','success');}}
-
 function generateSignupCode(){return String(Math.floor(10000+Math.random()*90000));}
 async function openSignupMockModal(email){document.getElementById('signupMockEmailValue').innerText=email;document.getElementById('signupMockModal').classList.add('active');const sb=document.getElementById('signupEmailStatus');const title=document.getElementById('signupMockTitleText');const desc=document.getElementById('signupMockDescText');sb.innerHTML='<div class="email-status-badge"><i class="fa-solid fa-spinner fa-spin"></i> Sending...</div>';title.textContent='Sending...';desc.textContent='Please wait...';const code=pendingSignup?pendingSignup.code:'';const r=await sendVerificationEmail(email,code,'signup');if(r.success){sb.innerHTML='<div class="email-status-badge success"><i class="fa-solid fa-check"></i> Sent</div>';title.textContent=currentLang==='tr'?'Email gönderildi!':'Email sent!';desc.textContent=currentLang==='tr'?'5 haneli doğrulama kodu gönderildi.':'5-digit code sent.';}else{sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Failed</div>';title.textContent=currentLang==='tr'?'Email gönderilemedi':'Email failed';desc.innerHTML='<span style="color:#f59e0b;font-size:.72rem">'+String(r.reason||'unknown').substring(0,150)+'</span>';}}
 async function resendSignupEmail(){if(!pendingSignup)return;const newCode=generateSignupCode();pendingSignup.code=newCode;const sb=document.getElementById('signupEmailStatus');const title=document.getElementById('signupMockTitleText');const desc=document.getElementById('signupMockDescText');sb.innerHTML='<div class="email-status-badge"><i class="fa-solid fa-spinner fa-spin"></i> Resending...</div>';const r=await sendVerificationEmail(pendingSignup.email,newCode,'signup');if(r.success){sb.innerHTML='<div class="email-status-badge success"><i class="fa-solid fa-check"></i> Sent</div>';title.textContent='Email sent!';desc.textContent='New code sent.';}}
@@ -1821,7 +1997,6 @@ function openSignupCodeModal(){document.getElementById('signupMockModal').classL
 function backToSignupMock(){document.getElementById('signupCodeModal').classList.remove('active');if(pendingSignup)openSignupMockModal(pendingSignup.email);}
 function cancelSignup(){pendingSignup=null;document.getElementById('signupMockModal').classList.remove('active');document.getElementById('signupCodeModal').classList.remove('active');}
 function verifySignupCode(e){e.preventDefault();const ec=document.getElementById('signupCodeInput').value.trim();if(!pendingSignup)return;if(ec!==pendingSignup.code){showCustomAlert(currentLang==='tr'?'Geçersiz kod!':'Invalid code!');return;}try{const ub=getAllUsers();const usedIds=new Set(ub.map(u=>String(u.userId||'')));let nid;do{nid=generateRandomUserId();}while(usedIds.has(nid));const nu={userId:nid,name:pendingSignup.name,username:pendingSignup.username,email:pendingSignup.email,password:pendingSignup.password,bio:'',website:'',profilePhoto:'',following:[],createdAt:new Date().toISOString(),isVerified:false};ub.push(nu);saveAllUsers(ub);localStorage.setItem('logged_user',JSON.stringify(nu));logActivity('signup',nu,'New account ID: '+nid);pendingSignup=null;document.getElementById('signupCodeModal').classList.remove('active');document.getElementById('signupMockModal').classList.remove('active');closeDirectContactModal();checkUserSession();renderApplications();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('signup_success')+' 🆔 '+nid,'success');}catch(err){}}
-
 async function handleAuthSubmit(e){if(e)e.preventDefault();const email=document.getElementById('contactClientEmail').value.trim().toLowerCase();const password=getPasswordValue('contactClientPassword').trim();if(!email||!password){showCustomAlert(t('fill_fields'));return;}let users=getAllUsers();if(currentAuthMode==='signup'){const name=document.getElementById('contactClientName').value.trim().toLowerCase();let username=document.getElementById('contactClientUsername').value.trim().replace(/^@/,'');if(!name||!username){showCustomAlert(t('fill_fields'));return;}if(username.length<7){showCustomAlert(t('min_7'));return;}if(users.some(u=>String(u.username||'').toLowerCase()===username.toLowerCase())){showCustomAlert(t('username_taken'));return;}if(!isValidPassword(password)){showCustomAlert(t('pw_8'));return;}if(users.find(u=>u.email===email)){showCustomAlert(t('email_registered'));return;}const code=generateSignupCode();pendingSignup={code,name,username,email,password};await openSignupMockModal(email);return;}else{const ic=email.toLowerCase().trim();let inputName=ic.startsWith('@')?ic.substring(1):ic;let user=users.find(u=>{const em=(u.email||'').toLowerCase()===ic;let un=(u.username||'').toLowerCase().replace(/^@/,'');return(em||un===inputName)&&u.password===password;});if(user){localStorage.setItem('logged_user',JSON.stringify(user));logActivity('signin',user,'Signed in');closeDirectContactModal();forceRefreshUI();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('signin_success'),'success');}else showCustomAlert(t('invalid_credentials'));}}
 
 /* === EDIT PROFILE === */
@@ -1839,7 +2014,6 @@ function handleProfileUpdate(e){e.preventDefault();const lu=localStorage.getItem
 function handleChangePassword(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const op=getPasswordValue('changeOldPassword').trim(),np=getPasswordValue('changeNewPassword').trim(),cp=getPasswordValue('changeConfirmPassword').trim();if(!op||!np||!cp){showCustomAlert(t('fill_fields'));return;}if(!isValidPassword(np)){showCustomAlert(t('pw_8'));return;}try{let u=JSON.parse(lu);let users=getAllUsers();if(u.password!==op){showCustomAlert(currentLang==='tr'?'Mevcut şifre yanlış!':'Current password is incorrect!');return;}if(np!==cp){showCustomAlert(currentLang==='tr'?'Şifreler eşleşmiyor!':'Passwords do not match!');return;}u.password=np;users=users.map(x=>x.email===u.email?u:x);saveAllUsers(users);localStorage.setItem('logged_user',JSON.stringify(u));logActivity('password_change',u,'updated');closeChangePasswordModal();showCustomAlert(currentLang==='tr'?'Şifre değiştirildi!':'Password changed!','success');}catch(err){}}
 function handleDeleteAccount(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const iu=document.getElementById('deleteConfirmUsername').value.trim();try{const u=JSON.parse(lu);const au=(u.username||'').replace(/^@/,'');const ci=iu.replace(/^@/,'');if(ci.toLowerCase()!==au.toLowerCase()){showCustomAlert(currentLang==='tr'?'Kullanıcı adı eşleşmiyor.':'Username does not match.');return;}showCustomAlert(currentLang==='tr'?'Hesabınızı silmek istediğinizden emin misiniz?':'Are you sure you want to delete your account?','delete',function(){document.getElementById('deleteAccountModal').classList.remove('active');openDeletePasswordModal();});}catch(err){}}
 function handleDeletePasswordSubmit(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const ep=getPasswordValue('deleteConfirmPassword').trim();try{const u=JSON.parse(lu);if(u.password!==ep){showCustomAlert(currentLang==='tr'?'Yanlış şifre!':'Incorrect password!');return;}let users=getAllUsers();users=users.filter(x=>x.email!==u.email);saveAllUsers(users);localStorage.removeItem('logged_user');closeDeletePasswordModal();showCustomAlert(currentLang==='tr'?'Hesap silindi.':'Account deleted.','success');window._pendingLangReset=true;forceRefreshUI();}catch(err){}}
-
 function resetProfilePhoto(){const lu=localStorage.getItem('logged_user');if(!lu)return;try{let u=JSON.parse(lu);u.profilePhoto='';let users=getAllUsers();users=users.map(x=>x.email===u.email?u:x);saveAllUsers(users);localStorage.setItem('logged_user',JSON.stringify(u));}catch(e){}updateEditPhotoPreview();updateHeaderProfileAll();}
 function closeLightbox(){document.getElementById('lightboxOverlay').classList.remove('active');}
 function handleProfilePhotoUpload(event){const f=event.target.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{openCropModal(e.target.result);};r.readAsDataURL(f);event.target.value='';}
@@ -1848,16 +2022,11 @@ function closeCropModal(){if(cropperInstance){try{cropperInstance.destroy();}cat
 function setCropRatio(r,btn){document.querySelectorAll('.ratio-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');if(cropperInstance){try{cropperInstance.setAspectRatio(isNaN(r)?NaN:r);}catch(e){}}}
 function applyCrop(){if(!cropperInstance)return;try{const c=cropperInstance.getCroppedCanvas({width:400,height:400,imageSmoothingQuality:'high'});if(!c)return;const d=c.toDataURL('image/png');const lu=localStorage.getItem('logged_user');if(lu){try{let u=JSON.parse(lu);u.profilePhoto=d;let users=getAllUsers();users=users.map(x=>x.email===u.email?u:x);saveAllUsers(users);localStorage.setItem('logged_user',JSON.stringify(u));}catch(e){}}const prev=document.getElementById('editProfilePhotoPreview');if(prev)prev.src=d;closeCropModal();updateHeaderProfileAll();}catch(e){}}
 function updateHeaderProfileAll(){try{checkUserSession();}catch(e){}}
-
 function checkUserSession(){const lu=localStorage.getItem('logged_user');const cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');const abi=document.getElementById('authBoxIcon');const mab=document.getElementById('mainAuthBox');if(lu){try{const u=JSON.parse(lu);if(mab)mab.style.display='none';if(cse)cse.innerText=currentLang==='tr'?'Kullanıcı Hesabı':'User Account';if(cme)cme.innerText=u.name?(currentLang==='tr'?'Hoş geldin, '+u.name:'Welcome, '+u.name):'Session Active';if(abi)abi.className='fa-solid fa-user-check';const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const hpw=document.getElementById('headerProfileWrapper');const hpp=document.getElementById('headerProfilePhoto');const hpmP=document.getElementById('hpmPhoto');const hpmN=document.getElementById('hpmName');const hpmI=document.getElementById('hpmId');if(hpw)hpw.style.display='flex';if(hpp)hpp.src=p;if(hpmP)hpmP.src=p;if(hpmN)hpmN.textContent=u.name||'User';if(hpmI)hpmI.textContent='ID: '+(u.userId||'-');}catch(e){}}else{if(mab)mab.style.display='flex';if(cse)cse.innerText=t('contact_sub');if(cme)cme.innerText=t('contact_main');if(abi)abi.className='fa-solid fa-right-to-bracket';const hpw=document.getElementById('headerProfileWrapper');if(hpw)hpw.style.display='none';}updateChatBadge();setTimeout(updateMessengerDefaultPosition,80);}
-
 function confirmLogout(){showCustomAlert(t('logout_confirm'),'delete',function(){try{localStorage.removeItem('logged_user');localStorage.removeItem('user_prefs_v1');try{sessionStorage.clear();}catch(e){}}catch(e){}setTimeout(function(){try{var base=window.location.href.split('?')[0];window.location.href=base+'?logout=1&t='+Date.now();}catch(e){window.location.reload();}},250);});}
 
 /* === CHAT === */
-function openChatPanel(){
-  if(!isChatEnabled()){showCustomAlert('🔒 Sohbet şu anda kullanılamıyor.','warning');return;}
-  const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert(currentLang==='tr'?'Önce giriş yapın!':'Sign in first!');openGetInTouchModal();return;}
-  document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';document.getElementById('chatReplyPreview').style.display='none';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent=currentLang==='tr'?'Mesajlar':'Messages';chatSearchQuery='';const si=document.getElementById('chatSearchInput');if(si)si.value='';renderChatUsersList();updateChatBadge();}
+function openChatPanel(){if(!isChatEnabled()){showCustomAlert('🔒 Sohbet şu anda kullanılamıyor.','warning');return;}const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert(currentLang==='tr'?'Önce giriş yapın!':'Sign in first!');openGetInTouchModal();return;}document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='flex';document.getElementById('chatConversation').style.display='none';document.getElementById('chatReplyPreview').style.display='none';const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent=currentLang==='tr'?'Mesajlar':'Messages';chatSearchQuery='';const si=document.getElementById('chatSearchInput');if(si)si.value='';renderChatUsersList();updateChatBadge();}
 function closeChatPanel(){document.getElementById('chatPanelModal').classList.remove('active');activeChatUser=null;currentReplyTo=null;const ct=document.getElementById('chat-panel-title');if(ct)ct.textContent=currentLang==='tr'?'Mesajlar':'Messages';}
 function filterChatUsers(){const inp=document.getElementById('chatSearchInput');chatSearchQuery=inp?inp.value.trim().toLowerCase():'';const clr=document.getElementById('chatSearchClear');if(clr){chatSearchQuery?clr.classList.add('show'):clr.classList.remove('show');}renderChatUsersList();}
 function clearChatSearch(){chatSearchQuery='';const inp=document.getElementById('chatSearchInput');if(inp)inp.value='';const clr=document.getElementById('chatSearchClear');if(clr)clr.classList.remove('show');renderChatUsersList();}
@@ -1872,16 +2041,13 @@ function deleteMessage(idx){showCustomAlert(currentLang==='tr'?'Bu mesaj silinsi
 function sendChatMessage(){if(!isChatEnabled())return;const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const inp=document.getElementById('chatInput');if(!inp)return;const text=inp.value.trim();if(!text)return;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);if(!m[cid])m[cid]=[];const nm={from:u.email,to:activeChatUser.email,fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',type:'text',text:text.substring(0,1000),timestamp:new Date().toISOString(),read:false};m[cid].push(nm);saveChatMessages(m);inp.value='';currentReplyTo=null;document.getElementById('chatReplyPreview').style.display='none';renderChatMessages();logActivity('chat_message',u,'To '+activeChatUser.email);}
 function handleChatPhotoUpload(event){const f=event.target.files[0];if(!f||!f.type.startsWith('image/'))return;if(f.size>5*1024*1024){showCustomAlert('Max 5 MB image.');event.target.value='';return;}const r=new FileReader();r.onload=ev=>{const img=new Image();img.onload=()=>{const canvas=document.createElement('canvas');const maxW=800;let w=img.width,h=img.height;if(w>maxW){h=h*maxW/w;w=maxW;}canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);sendPhotoMessage(canvas.toDataURL('image/jpeg',0.78));};img.src=ev.target.result;};r.readAsDataURL(f);event.target.value='';}
 function sendPhotoMessage(dataUrl){const eff=getEffectiveLoggedUser();if(!eff||!activeChatUser)return;const u=eff;const m=getChatMessages();const cid=getConversationId(u.email,activeChatUser.email);if(!m[cid])m[cid]=[];m[cid].push({from:u.email,to:activeChatUser.email,fromName:u.name||'',fromUsername:u.username||'',fromUserId:u.userId||'',type:'photo',photoData:dataUrl,timestamp:new Date().toISOString(),read:false});saveChatMessages(m);renderChatMessages();}
-
 function openPublicUserProfile(email){const eff=getEffectiveLoggedUser();if(!eff){showCustomAlert(currentLang==='tr'?'Giriş yapmalısınız.':'You must sign in.');return;}const users=getAllUsers();let u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());if(!u&&isAdminUser(email))u=getAdminUser();if(!u){showCustomAlert(currentLang==='tr'?'Kullanıcı bulunamadı!':'User not found!');return;}publicProfileEmail=u.email;const initial=(u.name||'U').trim().charAt(0).toUpperCase();const av=u.profilePhoto?'<img src="'+u.profilePhoto+'">':(u.name?escapeHtml(initial):'?');const uname=String(u.username||'').replace(/^@/,'');const created=u.createdAt?fmtDate(u.createdAt):'—';const myEmail=String(eff.email||'').toLowerCase();const isSelf=myEmail===String(u.email||'').toLowerCase();const isAdm=isAdminUser(u.email);const isVer=(isAdm||u.isVerified);const vB=isVer?getVerifiedBadgeHTML('lg'):'';const idNum=escapeHtml(u.userId||'-');let aH='';if(!isSelf){aH+='<button class="pub-btn-msg" onclick="messageFromProfile()"><i class="fa-solid fa-comments"></i> '+t('send_message')+'</button>';}aH+='<button class="pub-btn-close" onclick="closePublicUserProfile()"><i class="fa-solid fa-arrow-left"></i> '+t('close')+'</button>';document.getElementById('pub-profile-title').innerText=t('user_profile');document.getElementById('publicUserProfileContent').innerHTML='<div class="pub-profile-view"><div class="pub-profile-avatar" style="'+(isAdm?'border-color:#1d9bf0;':'')+'">'+av+'</div><div class="pub-profile-name">'+escapeHtml(u.name||'user')+' '+vB+'</div>'+(uname?'<div class="pub-profile-username">@'+escapeHtml(uname)+'</div>':'')+'<div class="pub-profile-info"><div class="pub-profile-info-row"><span><i class="fa-solid fa-id-badge"></i>ID</span><span style="font-family:\'Fira Code\',monospace;font-weight:700;color:var(--accent);">'+idNum+'</span></div><div class="pub-profile-info-row"><span><i class="fa-solid fa-calendar-days"></i>'+t('joined')+'</span><span>'+escapeHtml(created)+'</span></div></div><div class="pub-profile-actions">'+aH+'</div></div>';document.getElementById('publicUserProfileModal').classList.add('active');}
 function closePublicUserProfile(){document.getElementById('publicUserProfileModal').classList.remove('active');publicProfileEmail=null;}
 function messageFromProfile(){if(!publicProfileEmail)return;if(!isChatEnabled()){showCustomAlert('🔒 Sohbet şu anda kullanılamıyor.','warning');return;}const users=getAllUsers();let u=users.find(x=>x.email===publicProfileEmail);if(!u&&isAdminUser(publicProfileEmail))u=getAdminUser();if(!u){closePublicUserProfile();return;}closePublicUserProfile();document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='none';openConversation(u);}
 function startChatPolling(){if(chatPollTimer)clearInterval(chatPollTimer);chatPollTimer=setInterval(()=>{if(!isChatEnabled())return;const lu=localStorage.getItem('logged_user');if(!lu&&!isAdminLoggedIn()){updateChatBadge();return;}updateChatBadge();const p=document.getElementById('chatPanelModal');if(p&&p.classList.contains('active')){const eff=getEffectiveLoggedUser();if(!eff)return;if(activeChatUser){const msgs=getChatMessages();const cid=getConversationId(eff.email,activeChatUser.email);if(msgs[cid]){let c=false;msgs[cid].forEach(m=>{if(String(m.to).toLowerCase()===String(eff.email).toLowerCase()&&!m.read){m.read=true;c=true;}});if(c)saveChatMessages(msgs);}renderChatMessages();}else renderChatUsersList();}},2500);}
-
 function toggleHeaderProfileMenu(e){if(e)e.stopPropagation();const m=document.getElementById('headerProfileMenu');if(!m)return;m.classList.toggle('show');}
 function closeHeaderProfileMenu(){const m=document.getElementById('headerProfileMenu');if(m)m.classList.remove('show');}
 window.addEventListener('click',function(e){const m=document.getElementById('headerProfileMenu');const w=document.getElementById('headerProfileWrapper');if(m&&w&&!w.contains(e.target))m.classList.remove('show');});
-
 function initMessengerBtn(){const btn=document.getElementById('messengerFloatBtn');if(!btn)return;updateMessengerDefaultPosition();const onDown=(e)=>{if(e.target.closest('.messenger-badge'))return;const pt=e.touches?e.touches[0]:e;messengerDragState.isDragging=true;messengerDragState.moved=false;messengerDragState.startX=pt.clientX;messengerDragState.startY=pt.clientY;messengerDragState.startPosX=messengerPos.x;messengerDragState.startPosY=messengerPos.y;btn.classList.add('dragging');};const onMove=(e)=>{if(!messengerDragState.isDragging)return;const pt=e.touches?e.touches[0]:e;const dx=pt.clientX-messengerDragState.startX,dy=pt.clientY-messengerDragState.startY;if(Math.abs(dx)>4||Math.abs(dy)>4)messengerDragState.moved=true;messengerPos.x=Math.max(6,Math.min(window.innerWidth-38,messengerDragState.startPosX+dx));messengerPos.y=Math.max(6,Math.min(window.innerHeight-38,messengerDragState.startPosY+dy));applyMessengerPos();if(e.cancelable)e.preventDefault();};const onUp=()=>{if(!messengerDragState.isDragging)return;messengerDragState.isDragging=false;btn.classList.remove('dragging');if(!messengerDragState.moved){openChatPanel();}};btn.addEventListener('mousedown',onDown);btn.addEventListener('touchstart',onDown,{passive:true});document.addEventListener('mousemove',onMove);document.addEventListener('touchmove',onMove,{passive:false});document.addEventListener('mouseup',onUp);document.addEventListener('touchend',onUp);}
 function updateMessengerDefaultPosition(){const btn=document.getElementById('messengerFloatBtn');if(!btn)return;const hpp=document.getElementById('headerProfilePhoto');const hpw=document.getElementById('headerProfileWrapper');let x=window.innerWidth-44,y=100;if(hpw&&hpw.style.display!=='none'&&hpp){const r=hpp.getBoundingClientRect();x=r.right-34;y=r.bottom+6;}messengerPos={x:Math.max(6,x),y:Math.max(6,y)};applyMessengerPos();}
 function applyMessengerPos(){const btn=document.getElementById('messengerFloatBtn');if(!btn||!messengerPos)return;btn.style.left=messengerPos.x+'px';btn.style.top=messengerPos.y+'px';btn.style.right='auto';btn.style.bottom='auto';}
@@ -1956,55 +2122,55 @@ function renderWeather(){
   }
   const humidity=weatherData.humidity!==null&&weatherData.humidity!==undefined?weatherData.humidity+'%':'—';
   const feels=weatherData.feels!==null&&weatherData.feels!==undefined?weatherData.feels+'°C':'—';
-  card.innerHTML=
-    '<div class="weather-top"><div class="weather-loc"><i class="fa-solid fa-location-dot"></i> '+escapeHtml(weatherData.city||'—')+(weatherData.country?' · '+escapeHtml(weatherData.country):'')+'</div><button type="button" class="weather-refresh" onclick="event.stopPropagation();refreshWeather()" title="Refresh"><i class="fa-solid fa-rotate-right"></i></button></div>'+
-    '<div class="weather-main"><i class="fa-solid '+wc.icon+' weather-icon-big" style="color:var(--accent)"></i><div class="weather-temp-block"><div class="weather-temp">'+weatherData.temp+'°C</div><div class="weather-desc">'+escapeHtml(getWeatherLabel(weatherData.code))+'</div></div></div>'+
-    '<div class="weather-details"><div class="weather-detail"><i class="fa-solid fa-wind"></i><strong>'+weatherData.wind+' km/h</strong><span>'+t('weather_wind')+'</span></div><div class="weather-detail"><i class="fa-solid fa-droplet"></i><strong>'+humidity+'</strong><span>'+t('weather_humidity')+'</span></div><div class="weather-detail"><i class="fa-solid fa-temperature-half"></i><strong>'+feels+'</strong><span>'+t('weather_feels')+'</span></div></div>'+
-    (forecastHtml?'<div style="margin-top:4px"><div style="font-size:.62rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:8px;">'+t('weather_forecast')+'</div>'+forecastHtml+'</div>':'');
+  card.innerHTML='<div class="weather-top"><div class="weather-loc"><i class="fa-solid fa-location-dot"></i> '+escapeHtml(weatherData.city||'—')+(weatherData.country?' · '+escapeHtml(weatherData.country):'')+'</div><button type="button" class="weather-refresh" onclick="event.stopPropagation();refreshWeather()" title="Refresh"><i class="fa-solid fa-rotate-right"></i></button></div>'+'<div class="weather-main"><i class="fa-solid '+wc.icon+' weather-icon-big" style="color:var(--accent)"></i><div class="weather-temp-block"><div class="weather-temp">'+weatherData.temp+'°C</div><div class="weather-desc">'+escapeHtml(getWeatherLabel(weatherData.code))+'</div></div></div>'+'<div class="weather-details"><div class="weather-detail"><i class="fa-solid fa-wind"></i><strong>'+weatherData.wind+' km/h</strong><span>'+t('weather_wind')+'</span></div><div class="weather-detail"><i class="fa-solid fa-droplet"></i><strong>'+humidity+'</strong><span>'+t('weather_humidity')+'</span></div><div class="weather-detail"><i class="fa-solid fa-temperature-half"></i><strong>'+feels+'</strong><span>'+t('weather_feels')+'</span></div></div>'+(forecastHtml?'<div style="margin-top:4px"><div style="font-size:.62rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:8px;">'+t('weather_forecast')+'</div>'+forecastHtml+'</div>':'');
 }
 function refreshWeather(){try{localStorage.removeItem(WEATHER_CACHE_KEY);}catch(e){}weatherData=null;fetchWeather(true);}
 function applyWeatherSettings(){const c=getSiteContent();const enabled=!(c.general&&c.general.weatherEnabled===false);const section=document.getElementById('sectionWeather');if(!enabled){if(section)section.style.display='none';return;}if(section)section.style.display='block';if(weatherData)renderWeather();else fetchWeather(false);}
 function toggleWeatherEnabled(v){const c=getSiteContent();if(!c.general)c.general={};c.general.weatherEnabled=!!v;saveSiteContent(c);applyWeatherSettings();showCustomAlert(v?'🌤️ Hava durumu açıldı':'❌ Hava durumu kapatıldı','success');}
 
 /* ============================================================
-   ✉️ ADMIN: HERKESE EMAIL — 100 MB RESİM + FIREBASE STORAGE
+   ✉️ ADMIN: HERKESE EMAIL — STALL FIX + PDF
    ============================================================ */
 function openAdminAnyEmail(){
   anyEmailImageDataUrl=null;
   anyEmailImageUrl=null;
   anyEmailImageFile=null;
+  anyEmailPdfDataUrl=null;
+  anyEmailPdfFile=null;
   const f=document.getElementById('adminAnyEmailForm');if(f)f.reset();
   const ig=document.getElementById('any-email-img-group');if(ig)ig.style.display='none';
+  const pg=document.getElementById('any-email-pdf-group');if(pg)pg.style.display='none';
   const lg=document.getElementById('any-email-link-group');if(lg)lg.style.display='none';
   const pv=document.getElementById('any-email-img-preview');if(pv){pv.style.display='none';pv.src='';}
+  const pi=document.getElementById('any-email-pdf-info');if(pi)pi.style.display='none';
   const ft=document.getElementById('any-email-img-file-text');if(ft)ft.textContent='Resim seç (max 100 MB)';
-  const w=document.getElementById('any-email-img-upload-wrapper');if(w)w.classList.remove('has-file','uploading');
+  const pft=document.getElementById('any-email-pdf-file-text');if(pft)pft.textContent='PDF seç (max 100 MB)';
+  const w=document.getElementById('any-email-img-upload-wrapper');if(w)w.classList.remove('has-file','uploading','upload-error');
+  const pw=document.getElementById('any-email-pdf-upload-wrapper');if(pw)pw.classList.remove('has-file','uploading','upload-error');
   const ic=document.getElementById('any-email-img-upload-icon');if(ic)ic.className='fa-solid fa-upload upload-icon';
+  const pic=document.getElementById('any-email-pdf-upload-icon');if(pic){pic.className='fa-solid fa-file-pdf upload-icon';pic.style.color='#ef4444';}
   document.getElementById('adminAnyEmailModal').classList.add('active');
 }
-function closeAdminAnyEmail(){document.getElementById('adminAnyEmailModal').classList.remove('active');anyEmailImageDataUrl=null;anyEmailImageUrl=null;anyEmailImageFile=null;}
+function closeAdminAnyEmail(){document.getElementById('adminAnyEmailModal').classList.remove('active');anyEmailImageDataUrl=null;anyEmailImageUrl=null;anyEmailImageFile=null;anyEmailPdfDataUrl=null;anyEmailPdfFile=null;}
 function previewAnyEmailImage(url){const pv=document.getElementById('any-email-img-preview');if(!pv)return;if(!url||!/^https?:\/\//i.test(url)){pv.style.display='none';pv.src='';return;}pv.src=url;pv.style.display='block';pv.onerror=()=>{pv.style.display='none';};}
 
-/* ⭐ 100 MB YÜKLEME — FIREBASE STORAGE ÖNCELİKLİ */
+/* ⭐ GÖRSEL YÜKLEME — STALL DETECTION ile */
 async function handleAnyEmailImageUpload(e){
   const f=e.target.files[0];
   if(!f){return;}
   if(!f.type.startsWith('image/')){showCustomAlert('Lütfen bir resim dosyası seçin.','warning');e.target.value='';return;}
-  /* ⭐ 100 MB LİMİT */
   if(f.size>MAX_IMAGE_SIZE_BYTES){
     showCustomAlert('Resim max 100 MB olmalı!<br><span style="font-size:.75rem;color:var(--text-secondary)">Seçilen: '+(f.size/(1024*1024)).toFixed(2)+' MB</span>','warning');
     e.target.value='';
     return;
   }
-
   anyEmailImageFile=f;
   const pv=document.getElementById('any-email-img-preview');
   const ft=document.getElementById('any-email-img-file-text');
   const w=document.getElementById('any-email-img-upload-wrapper');
   const ic=document.getElementById('any-email-img-upload-icon');
 
-  /* Aşama 1: Firebase Storage'a yüklemeyi dene */
-  if(w)w.classList.add('uploading');
+  if(w){w.classList.remove('has-file','upload-error');w.classList.add('uploading');}
   if(ic)ic.className='fa-solid fa-spinner fa-spin upload-icon';
   if(ft)ft.textContent='Yükleniyor: 0%';
 
@@ -2012,36 +2178,18 @@ async function handleAnyEmailImageUpload(e){
     if(!firebaseStorageAvailable)initFirebaseStorage();
     if(!firebaseStorageAvailable)throw new Error('storage_unavailable');
 
-    const storage=firebase.storage();
-    const ext=(f.name&&f.name.lastIndexOf('.')!==-1)?f.name.substring(f.name.lastIndexOf('.')):'.jpg';
-    const fname='email-images/'+Date.now()+'_'+Math.random().toString(36).substring(2,8)+ext;
-    const ref=storage.ref().child(fname);
-    const uploadTask=ref.put(f);
-
-    /* Progress */
-    await new Promise((resolve,reject)=>{
-      uploadTask.on('state_changed',
-        (snap)=>{
-          const pct=Math.round((snap.bytesTransferred/snap.totalBytes)*100);
-          if(ft)ft.textContent='Yükleniyor: '+pct+'%  ('+(snap.bytesTransferred/(1024*1024)).toFixed(1)+'/'+(snap.totalBytes/(1024*1024)).toFixed(1)+' MB)';
-        },
-        (err)=>{reject(err);},
-        ()=>{resolve();}
-      );
+    const url=await uploadToFirebaseStorageWithStallDetection(f,'email-images',(pct,bt,total)=>{
+      if(ft)ft.textContent='Yükleniyor: '+pct+'%  ('+(bt/(1024*1024)).toFixed(1)+'/'+(total/(1024*1024)).toFixed(1)+' MB)';
     });
 
-    const url=await uploadTask.snapshot.ref.getDownloadURL();
     anyEmailImageUrl=url;
     anyEmailImageDataUrl=null;
-
     if(w){w.classList.remove('uploading');w.classList.add('has-file');}
     if(ic)ic.className='fa-solid fa-circle-check upload-icon';
     if(ft)ft.textContent='✅ Yüklendi: '+f.name+' ('+(f.size/(1024*1024)).toFixed(2)+' MB)';
     if(pv){pv.src=url;pv.style.display='block';}
-    console.log('✅ Firebase Storage URL:',url);
   }catch(err){
-    /* Aşama 2: Fallback — Sıkıştır ve base64 olarak gönder */
-    console.warn('Firebase Storage başarısız, fallback: sıkıştırma aktif.',err);
+    console.warn('Firebase Storage başarısız → fallback:',err);
     if(ft)ft.textContent='Sıkıştırılıyor...';
     if(ic)ic.className='fa-solid fa-spinner fa-spin upload-icon';
     try{
@@ -2053,16 +2201,62 @@ async function handleAnyEmailImageUpload(e){
       const kb=Math.round(compressed.length/1024);
       if(ft)ft.textContent='📦 Sıkıştırıldı: '+f.name+' → ~'+kb+' KB';
       if(pv){pv.src=compressed;pv.style.display='block';}
-      showCustomAlert('ℹ️ Firebase Storage\'a yüklenemedi.<br>Görsel <strong>otomatik sıkıştırıldı</strong> (~'+kb+' KB) ve email ile gönderilecek.','info');
+      const reason=err.message==='upload_stalled'?'Sunucu yanıt vermedi (timeout)':'Firebase Storage aktif değil';
+      showCustomAlert('ℹ️ '+reason+'.<br>Görsel <strong>otomatik sıkıştırıldı</strong> (~'+kb+' KB).','info');
     }catch(cErr){
-      if(w)w.classList.remove('uploading');
+      if(w){w.classList.remove('uploading');w.classList.add('upload-error');}
       if(ic)ic.className='fa-solid fa-upload upload-icon';
       if(ft)ft.textContent='Resim seç (max 100 MB)';
       showCustomAlert('Resim işlenemedi: '+(cErr.message||'unknown'),'error');
-      anyEmailImageDataUrl=null;
-      anyEmailImageUrl=null;
-      anyEmailImageFile=null;
+      anyEmailImageDataUrl=null;anyEmailImageUrl=null;anyEmailImageFile=null;
     }
+  }
+}
+
+/* ⭐ PDF YÜKLEME — STALL DETECTION ile */
+async function handleAnyEmailPdfUpload(e){
+  const f=e.target.files[0];
+  if(!f){return;}
+  const isPdf=f.type==='application/pdf'||/\.pdf$/i.test(f.name);
+  if(!isPdf){showCustomAlert('Lütfen bir PDF dosyası seçin.','warning');e.target.value='';return;}
+  if(f.size>MAX_PDF_SIZE_BYTES){
+    showCustomAlert('PDF max 100 MB olmalı!<br><span style="font-size:.75rem;color:var(--text-secondary)">Seçilen: '+(f.size/(1024*1024)).toFixed(2)+' MB</span>','warning');
+    e.target.value='';
+    return;
+  }
+  anyEmailPdfFile=f;
+  const w=document.getElementById('any-email-pdf-upload-wrapper');
+  const ic=document.getElementById('any-email-pdf-upload-icon');
+  const ft=document.getElementById('any-email-pdf-file-text');
+  const pi=document.getElementById('any-email-pdf-info');
+  const pit=document.getElementById('any-email-pdf-info-text');
+
+  if(w){w.classList.remove('has-file','upload-error');w.classList.add('uploading');}
+  if(ic){ic.className='fa-solid fa-spinner fa-spin upload-icon';ic.style.color='#ef4444';}
+  if(ft)ft.textContent='PDF yükleniyor: 0%';
+
+  try{
+    if(!firebaseStorageAvailable)initFirebaseStorage();
+    if(!firebaseStorageAvailable)throw new Error('storage_unavailable');
+
+    const url=await uploadToFirebaseStorageWithStallDetection(f,'email-pdfs',(pct,bt,total)=>{
+      if(ft)ft.textContent='PDF yükleniyor: '+pct+'%  ('+(bt/(1024*1024)).toFixed(1)+'/'+(total/(1024*1024)).toFixed(1)+' MB)';
+    });
+
+    anyEmailPdfDataUrl=url;
+    if(w){w.classList.remove('uploading');w.classList.add('has-file');}
+    if(ic){ic.className='fa-solid fa-circle-check upload-icon';ic.style.color='#22c55e';}
+    if(ft)ft.textContent='✅ PDF yüklendi: '+f.name;
+    if(pi)pi.style.display='flex';
+    if(pit)pit.textContent=f.name+' ('+(f.size/(1024*1024)).toFixed(2)+' MB) → '+url.substring(0,50)+'...';
+  }catch(err){
+    console.warn('PDF Storage hatası:',err);
+    if(w){w.classList.remove('uploading');w.classList.add('upload-error');}
+    if(ic){ic.className='fa-solid fa-file-pdf upload-icon';ic.style.color='#ef4444';}
+    if(ft)ft.textContent='PDF seç (max 100 MB)';
+    anyEmailPdfDataUrl=null;anyEmailPdfFile=null;
+    const reason=err.message==='upload_stalled'?'Sunucu yanıt vermedi (timeout)':'Firebase Storage aktif değil';
+    showCustomAlert('❌ PDF yüklenemedi!<br><span style="font-size:.75rem">'+reason+'.<br>Lütfen Firebase Console\'dan Storage\'ı aktif edin.</span>','error');
   }
 }
 
@@ -2074,23 +2268,23 @@ async function sendAdminAnyEmail(e){
   const msg=document.getElementById('any-email-message').value.trim();
   const useImg=document.getElementById('any-email-img-enable').checked;
   const manualUrl=document.getElementById('any-email-image').value.trim();
-  /* ⭐ URL önceliği: Manuel URL > Firebase URL > Base64 (fallback) */
   let imgUrl='';
   if(useImg){
-    if(manualUrl){imgUrl=manualUrl;}
-    else if(anyEmailImageUrl){imgUrl=anyEmailImageUrl;}
-    else if(anyEmailImageDataUrl){imgUrl=anyEmailImageDataUrl;}
+    if(manualUrl)imgUrl=manualUrl;
+    else if(anyEmailImageUrl)imgUrl=anyEmailImageUrl;
+    else if(anyEmailImageDataUrl)imgUrl=anyEmailImageDataUrl;
   }
+  const usePdf=document.getElementById('any-email-pdf-enable').checked;
+  const pdfUrl=usePdf?anyEmailPdfDataUrl:'';
   const useLink=document.getElementById('any-email-link-enable').checked;
   const linkUrl=useLink?document.getElementById('any-email-link').value.trim():'';
   const linkText=useLink?(document.getElementById('any-email-link-text').value.trim()||'Siteyi Ziyaret Et'):'';
 
   if(!to||!subj||!msg){showCustomAlert(t('fill_fields'),'warning');return;}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)){showCustomAlert('Geçersiz email adresi!','error');return;}
-
-  /* ⭐ EmailJS 50KB güvenlik kontrolü */
+  if(usePdf&&!pdfUrl){showCustomAlert('⚠️ PDF yüklemeyi tamamlayın veya kapatın.','warning');return;}
   if(imgUrl&&imgUrl.indexOf('data:')===0&&imgUrl.length>60*1024){
-    showCustomAlert('⚠️ Base64 görsel çok büyük. Firebase Storage kullanın veya daha küçük bir görsel seçin.','error');
+    showCustomAlert('⚠️ Base64 görsel çok büyük.','error');
     return;
   }
 
@@ -2098,26 +2292,15 @@ async function sendAdminAnyEmail(e){
   const siteUrl='https://muminsultani.com';
   const logoUrl=(getSiteContent().general&&getSiteContent().general.favicon)||'https://muminsultani.com/img/ms.png';
   const signature='\n\n—\n'+brand+'\n'+siteUrl;
-  const finalMessage=msg+signature;
+  const finalMessage=msg+signature+(pdfUrl?'\n\n📎 PDF: '+pdfUrl:'');
 
   const tp={
-    to_email:to,
-    to_name:toName||to.split('@')[0],
-    brand:brand,
-    subject:subj,
-    message:finalMessage,
-    image_url:imgUrl||logoUrl,
-    has_image:'yes',
-    link_url:linkUrl||siteUrl,
-    link_text:linkText||brand,
-    has_link:'yes',
-    site_url:siteUrl,
-    site_logo:logoUrl,
-    has_pdf:'no',
-    pdf_url:'',
-    year:new Date().getFullYear(),
-    type:'Custom Email',
-    code:'—'
+    to_email:to,to_name:toName||to.split('@')[0],brand:brand,subject:subj,message:finalMessage,
+    image_url:imgUrl||logoUrl,has_image:imgUrl?'yes':'no',
+    link_url:linkUrl||siteUrl,link_text:linkText||brand,has_link:'yes',
+    site_url:siteUrl,site_logo:logoUrl,
+    has_pdf:pdfUrl?'yes':'no',pdf_url:pdfUrl||'',
+    year:new Date().getFullYear(),type:'Custom Email',code:'—'
   };
 
   const form=e.target;
@@ -2127,29 +2310,23 @@ async function sendAdminAnyEmail(e){
 
   try{
     const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        service_id:EMAILJS_CONFIG.serviceId,
-        template_id:EMAILJS_CONFIG.templateId,
-        user_id:EMAILJS_CONFIG.publicKey,
-        template_params:tp
-      })
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({service_id:EMAILJS_CONFIG.serviceId,template_id:EMAILJS_CONFIG.templateId,user_id:EMAILJS_CONFIG.publicKey,template_params:tp})
     });
     const txt=await r.text();
     if(submitBtn){submitBtn.disabled=false;submitBtn.innerHTML=origHTML;}
     if(r.ok&&(txt==='OK'||r.status===200)){
       logActivity('email_sent',{email:to,name:toName||'Custom'},'Admin→ Any: '+subj);
       closeAdminAnyEmail();
-      const hint=anyEmailImageUrl?'<br><span style="font-size:.7rem;color:var(--text-secondary)">Görsel Firebase Storage üzerinden gönderildi. ✅</span>':'';
-      showCustomAlert('✅ Email gönderildi!'+hint,'success');
+      const hints=[];
+      if(anyEmailImageUrl)hints.push('🖼️ görsel');
+      if(anyEmailPdfDataUrl)hints.push('📄 PDF');
+      const hintTxt=hints.length?'<br><span style="font-size:.7rem;color:var(--text-secondary)">'+hints.join(' + ')+' Firebase Storage üzerinden gönderildi ✅</span>':'';
+      showCustomAlert('✅ Email gönderildi!'+hintTxt,'success');
       fireConfettiBurst(0.6);
     }else{
-      /* EmailJS hatası — net mesaj */
       let errMsg=txt||('HTTP '+r.status);
-      if(errMsg.indexOf('Variables size limit')!==-1){
-        errMsg='Görsel çok büyük (EmailJS 50 KB limit).<br><span style="font-size:.7rem">Firebase Storage kullanın (Storage sekmesinden aktif edin).</span>';
-      }
+      if(errMsg.indexOf('Variables size limit')!==-1)errMsg='Görsel/PDF çok büyük (EmailJS limiti).';
       showCustomAlert('Email hatası:<br><span style="font-size:.75rem">'+errMsg+'</span>','error');
     }
   }catch(err){
@@ -2158,8 +2335,9 @@ async function sendAdminAnyEmail(e){
   }
 }
 
+
 /* ============================================================
-   🐟 FISH SYSTEM (Arka plan balıkları)
+   🐟 FISH SYSTEM
    ============================================================ */
 const FISH_STYLES=[{key:'tropical',name:'Tropikal',icon:'fa-fish'},{key:'school',name:'Sürü',icon:'fa-fish-fins'},{key:'deep',name:'Derin Deniz',icon:'fa-water'},{key:'jellyfish',name:'Denizanası',icon:'fa-meteor'},{key:'shark',name:'Köpekbalığı',icon:'fa-shark'},{key:'mixed',name:'Karışık',icon:'fa-shuffle'}];
 function fishHexRgba(hex,a){if(!hex)return 'rgba(147,51,234,'+a+')';if(hex.indexOf('rgb')===0)return hex;const h=hex.replace('#','');return 'rgba('+parseInt(h.substring(0,2),16)+','+parseInt(h.substring(2,4),16)+','+parseInt(h.substring(4,6),16)+','+a+')';}
@@ -2190,14 +2368,13 @@ function createFishSystem(canvasId){
 }
 
 /* ============================================================
-   📊 EFFECTS / TICK / CONFETTI
+   📊 TICK / CONFETTI
    ============================================================ */
 function getAudioContext(){if(!audioCtx){try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){return null;}}if(audioCtx.state==='suspended')audioCtx.resume().catch(()=>{});return audioCtx;}
 function tone(freq,dur,type,vol,decay){type=type||'sine';vol=vol||0.05;decay=decay||0.08;try{const c=getAudioContext();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(freq,c.currentTime);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(vol,c.currentTime+.005);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+decay);o.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+dur);}catch(e){}}
 const TICK_STYLES={default:{name:'Default',icon:'fa-bell',fn:function(){tone(2000,0.08);}},soft:{name:'Soft',icon:'fa-feather',fn:function(){tone(800,0.14);}},click:{name:'Click',icon:'fa-computer-mouse',fn:function(){tone(1500,0.03,'square',0.03,0.025);}},pop:{name:'Pop',icon:'fa-droplet',fn:function(){tone(1000,0.1);}},tick:{name:'Tick',icon:'fa-clock',fn:function(){tone(3000,0.02);}},bell:{name:'Bell',icon:'fa-bell',fn:function(){tone(2500,0.15);tone(3750,0.15);}},wood:{name:'Wood',icon:'fa-tree',fn:function(){tone(500,0.09,'triangle',0.06);}},glass:{name:'Glass',icon:'fa-wine-glass',fn:function(){tone(3500,0.12);}},deep:{name:'Deep',icon:'fa-water',fn:function(){tone(400,0.16);}}};
 function playTickSound(){try{const eff=getSiteContent().effects||{};if(eff.tickSoundEnabled===false)return;const s=TICK_STYLES[eff.tickSoundStyle||'default']||TICK_STYLES.default;s.fn();}catch(e){}}
 function playApplauseSound(){try{const c=getAudioContext();if(!c)return;const d=2,sr=c.sampleRate,b=c.createBuffer(1,sr*d,sr),dt=b.getChannelData(0);for(let i=0;i<dt.length;i++){const tt=i/sr,dec=Math.exp(-tt*1.2),cp=(tt*10)%1,ce=cp<.15?Math.exp(-cp*20):0,n=Math.random()*2-1;dt[i]=n*(ce*.6+.15)*dec*.5;}const s=c.createBufferSource();s.buffer=b;const f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=1800;const g=c.createGain();g.gain.setValueAtTime(.5,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);s.connect(f);f.connect(g);g.connect(c.destination);s.start();}catch(e){}}
-
 const CONFETTI_COLORS=['#9333ea','#c084fc','#e879f9','#a855f7','#22c55e','#16a34a','#f59e0b','#eab308','#ef4444','#dc2626','#3b82f6','#0ea5e9','#ec4899','#f472b6','#fbbf24','#ffffff'];
 const CONFETTI_HEARTS=['#ef4444','#dc2626','#ec4899','#f472b6','#f43f5e'];
 const CONFETTI_STARS=['#fbbf24','#f59e0b','#facc15','#eab308'];
@@ -2230,7 +2407,6 @@ function renderEffectsPanel(){const eff=(getSiteContent().effects)||{};const app
   const ibg=document.getElementById('introBgGrid');if(ibg){ibg.innerHTML='';INTRO_BGS.forEach(b=>{const c=document.createElement('div');c.className='effect-chip'+((eff.introBg||'default')===b.key?' active':'');c.onclick=()=>setIntroBg(b.key);c.innerHTML='<div class="bg-swatch" style="background:'+bgSwatch(b.key)+'"></div><span>'+b.name+'</span>';ibg.appendChild(c);});}
   const iag=document.getElementById('introAnimGrid');if(iag){iag.innerHTML='';INTRO_ANIMS.forEach(a=>{const c=document.createElement('div');c.className='effect-chip'+((eff.introAnim||'constellation')===a.key?' active':'');c.onclick=()=>setIntroAnim(a.key);c.innerHTML='<i class="fa-solid '+a.icon+'"></i><span>'+a.name+'</span>';iag.appendChild(c);});}
   const fishG=document.getElementById('fishStyleGrid');if(fishG){fishG.innerHTML='';FISH_STYLES.forEach(f=>{const c=document.createElement('div');c.className='effect-chip'+((eff.fishStyle||'tropical')===f.key?' active':'');c.onclick=function(){setFishStyle(f.key);};c.innerHTML='<i class="fa-solid '+f.icon+'"></i><span>'+f.name+'</span>';fishG.appendChild(c);});}}
-
 function openUserSettingsModal(){const lu=localStorage.getItem('logged_user');if(!lu)return;renderUserSettingsGrids();document.getElementById('userSettingsModal').classList.add('active');}
 function closeUserSettingsModal(){document.getElementById('userSettingsModal').classList.remove('active');applyAppearance();applyBackground();applyChatBackground();}
 function renderUserSettingsGrids(){const u=getUserPrefs();
@@ -2241,9 +2417,7 @@ function renderUserSettingsGrids(){const u=getUserPrefs();
   const cg=document.getElementById('userChatBgGrid');if(cg){cg.innerHTML='';CHAT_BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='settings-chip'+((u.chatBackground||'')===b.key?' active':'');c.onclick=()=>{setUserPref('chatBackground',b.key);applyChatBackground();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:'+chatSwatch(b.key)+'"></div><span>'+b.name+'</span>';cg.appendChild(c);});}}
 function resetUserSettings(){clearUserPrefs();applyAppearance();applyBackground();applyChatBackground();renderUserSettingsGrids();showCustomAlert('Settings reset','success');}
 
-/* ============================================================
-   📱 SOCIAL
-   ============================================================ */
+/* === SOCIAL === */
 function findPlatform(k){return SOCIAL_PLATFORMS.find(p=>p.key===k)||{key:k,label:k,icon:'fa-solid fa-link',placeholder:'url'};}
 function renderFooterSocials(){const el=document.getElementById('footerSocials');if(!el)return;const list=(getSiteContent().social||[]).filter(s=>s.enabled!==false);el.innerHTML='';list.forEach(s=>{const p=findPlatform(s.platform);const a=document.createElement('a');a.href='#';a.className='social-btn';a.title=p.label;a.innerHTML='<i class="'+p.icon+'" style="font-size:1.1rem;color:var(--accent)"></i>';a.onclick=(e)=>{e.preventDefault();if(s.platform==='gmail')window.open('mailto:'+s.url,'_blank');else window.open(s.url,'_blank');};el.appendChild(a);});}
 function renderAdminSocial(){const list=document.getElementById('socialListAdmin');if(!list)return;const social=(getSiteContent().social||[]);list.innerHTML='';social.forEach((s,idx)=>{const p=findPlatform(s.platform);const row=document.createElement('div');row.className='social-row';row.innerHTML='<i class="'+p.icon+'"></i><input type="text" value="'+escapeHtml(s.url||'')+'" placeholder="'+escapeHtml(p.placeholder)+'" onchange="updateSocialUrl('+idx+',this.value)"><span style="font-size:.65rem;color:var(--text-secondary);font-weight:700">'+p.label+'</span><button class="social-del" onclick="removeSocial('+idx+')"><i class="fa-solid fa-trash"></i></button>';list.appendChild(row);});}
@@ -2262,7 +2436,6 @@ function logoutAdmin(){try{sessionStorage.removeItem(ADMIN_SESSION_KEY);}catch(e
 function openAdminPanel(){refreshAdminUI();document.getElementById('adminPanelModal').classList.add('active');}
 function closeAdminPanel(){document.getElementById('adminPanelModal').classList.remove('active');applySiteContent();applySitePrivacy();applyChatVisibility();if(window._chatPrevUser){try{localStorage.setItem('logged_user',window._chatPrevUser);}catch(e){}window._chatPrevUser=null;try{checkUserSession();}catch(e){}}}
 function switchAdminTab(name,btn){document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));if(btn)btn.classList.add('active');const sec=document.querySelector('.admin-section[data-section="'+name+'"]');if(sec)sec.classList.add('active');if(name==='users')renderAdminUsers();if(name==='activity')renderAdminActivity();if(name==='chats')renderAdminChats();if(name==='apps')renderAdminSlots();if(name==='sections')renderAdminSectionsOrder();if(name==='effects')renderEffectsPanel();if(name==='social')renderAdminSocial();if(name==='account')renderAdminAccount();if(name==='emails')renderWelcomeSettings();if(name==='orders'){renderAdminOrders();updateOrdersBadge();}}
-
 function refreshAdminUI(){
   const c=getSiteContent();const users=getAllUsers();const logs=getActivityLog();const chats=getChatMessages();
   let totalChats=0;for(const k in chats)totalChats+=chats[k].length;
@@ -2274,7 +2447,7 @@ function refreshAdminUI(){
   if(el('dash-chats-count'))el('dash-chats-count').textContent='Chat: '+totalChats;
   if(el('dash-email-status'))el('dash-email-status').textContent='Email: '+(EMAILJS_CONFIG.enabled?'✅':'⚠️');
   if(el('dash-cloud-status'))el('dash-cloud-status').textContent='Cloud: '+(firebaseConnected?'✅':'⚠️');
-  if(el('dash-storage-status'))el('dash-storage-status').textContent='Storage: '+(firebaseStorageAvailable?'✅':'⚠️');
+  if(el('dash-storage-status'))el('dash-storage-status').textContent='Storage: '+(firebaseStorageAvailable?'✅ Firebase':'⚠️ Fallback');
   if(el('dash-last-edit'))el('dash-last-edit').textContent='Last: '+c.lastEdit;
   if(el('dash-chat-status'))el('dash-chat-status').textContent='Chat Feature: '+(isChatEnabled()?'✅ AÇIK':'🔒 GİZLİ');
   if(el('ah-brand'))el('ah-brand').value=c.header.brand;
@@ -2306,7 +2479,6 @@ function refreshAdminUI(){
   try{const cet=document.getElementById('chatEnabledToggle');if(cet)cet.checked=isChatEnabled();}catch(e){}
   try{refreshDashStats();}catch(e){}
 }
-
 function refreshDashStats(){
   try{
     const users=getAllUsers();
@@ -2342,23 +2514,8 @@ function renderAdminUsers(){
     const isA=isAdminUser(user.email);
     const isV=isA||user.isVerified;
     const vB=isV?getVerifiedBadgeHTML('sm'):'';
-    const vBtn=isA
-      ? '<button class="user-view-btn verify big active" disabled title="Admin"><i class="fa-solid fa-circle-check"></i> Admin</button>'
-      : '<button class="user-view-btn verify big'+(isV?' active':'')+'" onclick="toggleUserVerification(\''+se+'\')" title="'+(isV?'Remove Blue Tick':'Give Blue Tick')+'"><i class="fa-solid fa-circle-check"></i> '+(isV?'Verified':'Verify')+'</button>';
-    card.innerHTML='<div class="user-card-avatar">'+av+'</div>'+
-      '<div class="user-card-info">'+
-        '<div class="user-card-name">'+escapeHtml(user.name||'unknown')+vB+'</div>'+
-        '<div class="user-card-detail"><i class="fa-solid fa-id-badge"></i>'+escapeHtml(user.userId||'-')+'</div>'+
-        '<div class="user-card-detail"><i class="fa-solid fa-at"></i>'+escapeHtml(user.username||'-')+'</div>'+
-        '<div class="user-card-detail"><i class="fa-solid fa-envelope"></i>'+escapeHtml(user.email||'-')+'</div>'+
-        '<div class="admin-user-actions">'+
-          '<button class="user-view-btn" onclick="adminViewUser(\''+se+'\')" title="Profile"><i class="fa-solid fa-user"></i> '+t('admin_view')+'</button>'+
-          (isChatEnabled()?'<button class="user-view-btn msg" onclick="adminChatUser(\''+se+'\')" title="Chat"><i class="fa-solid fa-comments"></i> Chat</button>':'')+
-          '<button class="user-view-btn" onclick="openAdminUserEmail(\''+se+'\')" title="Email" style="color:#22c55e"><i class="fa-solid fa-envelope"></i> Email</button>'+
-          vBtn+
-          '<button class="user-view-btn danger" onclick="deleteUserAdmin(\''+se+'\')"><i class="fa-solid fa-trash-can"></i></button>'+
-        '</div>'+
-      '</div>';
+    const vBtn=isA?'<button class="user-view-btn verify big active" disabled title="Admin"><i class="fa-solid fa-circle-check"></i> Admin</button>':'<button class="user-view-btn verify big'+(isV?' active':'')+'" onclick="toggleUserVerification(\''+se+'\')" title="'+(isV?'Remove Blue Tick':'Give Blue Tick')+'"><i class="fa-solid fa-circle-check"></i> '+(isV?'Verified':'Verify')+'</button>';
+    card.innerHTML='<div class="user-card-avatar">'+av+'</div>'+'<div class="user-card-info">'+'<div class="user-card-name">'+escapeHtml(user.name||'unknown')+vB+'</div>'+'<div class="user-card-detail"><i class="fa-solid fa-id-badge"></i>'+escapeHtml(user.userId||'-')+'</div>'+'<div class="user-card-detail"><i class="fa-solid fa-at"></i>'+escapeHtml(user.username||'-')+'</div>'+'<div class="user-card-detail"><i class="fa-solid fa-envelope"></i>'+escapeHtml(user.email||'-')+'</div>'+'<div class="admin-user-actions">'+'<button class="user-view-btn" onclick="adminViewUser(\''+se+'\')" title="Profile"><i class="fa-solid fa-user"></i> '+t('admin_view')+'</button>'+(isChatEnabled()?'<button class="user-view-btn msg" onclick="adminChatUser(\''+se+'\')" title="Chat"><i class="fa-solid fa-comments"></i> Chat</button>':'')+'<button class="user-view-btn" onclick="openAdminUserEmail(\''+se+'\')" title="Email" style="color:#22c55e"><i class="fa-solid fa-envelope"></i> Email</button>'+vBtn+'<button class="user-view-btn danger" onclick="deleteUserAdmin(\''+se+'\')"><i class="fa-solid fa-trash-can"></i></button>'+'</div>'+'</div>';
     list.appendChild(card);
   });
 }
@@ -2380,10 +2537,8 @@ function closeUserDetail(){document.getElementById('userDetailModal').classList.
 function deleteUserAdmin(email){if(!email)return;const u=getAllUsers();const user=u.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());if(!user){showCustomAlert('User not found!');return;}if(isAdminUser(user.email)){showCustomAlert('Admin cannot be deleted!');return;}showCustomAlert('"'+escapeHtml(user.name||user.email)+'" delete?','delete',function(){const tg=String(email).toLowerCase();const nu=u.filter(x=>String(x.email||'').toLowerCase()!==tg);saveAllUsers(nu);renderAdminUsers();updateChatBadge();showCustomAlert('User deleted!','success');});}
 function exportUsersCSV(){const users=getAllUsers();if(!users.length){showCustomAlert('No users.');return;}const rows=[['ID','Name','Username','Email','Verified']];users.forEach(u=>rows.push([u.userId||'',u.name,u.username,u.email,(isAdminUser(u.email)||u.isVerified)?'Yes':'No']));const csv=rows.map(r=>r.map(c=>'"'+String(c||'').replace(/"/g,'""')+'"').join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='users-'+new Date().toISOString().slice(0,10)+'.csv';document.body.appendChild(a);a.click();document.body.removeChild(a);showCustomAlert('CSV downloaded!','success');}
 function clearAllUsers(){showCustomAlert('All users will be deleted!','delete',function(){const u=getAllUsers();const admin=u.find(x=>x.isAdmin===true||isAdminUser(x.email));saveAllUsers(admin?[admin]:[]);checkUserSession();renderAdminUsers();showCustomAlert('Deleted!','success');});}
-
 function adminViewUser(email){
-  const users=getAllUsers();
-  const u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());
+  const users=getAllUsers();const u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());
   if(!u){showCustomAlert('User not found!');return;}
   adminViewingEmail=u.email;
   const isA=isAdminUser(u.email);const isV=isA||u.isVerified;
@@ -2392,30 +2547,10 @@ function adminViewUser(email){
   const uname=String(u.username||'').replace(/^@/,'');
   const created=u.createdAt?fmtDate(u.createdAt):'—';
   document.getElementById('admin-up-title').textContent=t('admin_user_profile')+' — '+(u.name||'user');
-  document.getElementById('adminUserProfileContent').innerHTML=
-    '<div class="pub-profile-view">'+
-      '<div class="pub-profile-avatar" style="'+(isV?'border-color:#1d9bf0;':'')+'">'+av+'</div>'+
-      '<div class="pub-profile-name">'+escapeHtml(u.name||'user')+' '+vB+'</div>'+
-      (uname?'<div class="pub-profile-username">@'+escapeHtml(uname)+'</div>':'')+
-      '<div class="pub-profile-info">'+
-        '<div class="pub-profile-info-row"><span><i class="fa-solid fa-id-badge"></i>ID</span><span style="font-family:\'Fira Code\',monospace;color:var(--accent);font-weight:700">'+escapeHtml(u.userId||'-')+'</span></div>'+
-        '<div class="pub-profile-info-row"><span><i class="fa-solid fa-envelope"></i>Email</span><span>'+escapeHtml(u.email||'-')+'</span></div>'+
-        '<div class="pub-profile-info-row"><span><i class="fa-solid fa-at"></i>Username</span><span>@'+escapeHtml(uname||'-')+'</span></div>'+
-        '<div class="pub-profile-info-row"><span><i class="fa-solid fa-globe"></i>Website</span><span>'+escapeHtml(u.website||'—')+'</span></div>'+
-        '<div class="pub-profile-info-row"><span><i class="fa-solid fa-calendar-days"></i>'+t('joined')+'</span><span>'+escapeHtml(created)+'</span></div>'+
-        '<div class="pub-profile-info-row"><span><i class="fa-solid fa-bell"></i>Bio</span><span>'+escapeHtml(u.bio||'—')+'</span></div>'+
-      '</div>'+
-      '<div class="pub-profile-actions">'+
-        (!isA?'<button class="pub-btn-msg" style="background:linear-gradient(135deg,#1d9bf0,#1a8cd8)" onclick="closeAdminUserProfile();toggleUserVerification(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-circle-check"></i> '+(isV?'Remove Blue Tick':'Give Blue Tick')+'</button>':'')+
-        (isChatEnabled()?'<button class="pub-btn-msg" onclick="closeAdminUserProfile();adminChatUser(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-comments"></i> Chat</button>':'')+
-        '<button class="pub-btn-msg" style="background:linear-gradient(135deg,#22c55e,#16a34a)" onclick="closeAdminUserProfile();openAdminUserEmail(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-envelope"></i> '+t('admin_send_email')+'</button>'+
-        '<button class="pub-btn-close" onclick="closeAdminUserProfile()"><i class="fa-solid fa-arrow-left"></i> '+t('close')+'</button>'+
-      '</div>'+
-    '</div>';
+  document.getElementById('adminUserProfileContent').innerHTML='<div class="pub-profile-view">'+'<div class="pub-profile-avatar" style="'+(isV?'border-color:#1d9bf0;':'')+'">'+av+'</div>'+'<div class="pub-profile-name">'+escapeHtml(u.name||'user')+' '+vB+'</div>'+(uname?'<div class="pub-profile-username">@'+escapeHtml(uname)+'</div>':'')+'<div class="pub-profile-info">'+'<div class="pub-profile-info-row"><span><i class="fa-solid fa-id-badge"></i>ID</span><span style="font-family:\'Fira Code\',monospace;color:var(--accent);font-weight:700">'+escapeHtml(u.userId||'-')+'</span></div>'+'<div class="pub-profile-info-row"><span><i class="fa-solid fa-envelope"></i>Email</span><span>'+escapeHtml(u.email||'-')+'</span></div>'+'<div class="pub-profile-info-row"><span><i class="fa-solid fa-at"></i>Username</span><span>@'+escapeHtml(uname||'-')+'</span></div>'+'<div class="pub-profile-info-row"><span><i class="fa-solid fa-globe"></i>Website</span><span>'+escapeHtml(u.website||'—')+'</span></div>'+'<div class="pub-profile-info-row"><span><i class="fa-solid fa-calendar-days"></i>'+t('joined')+'</span><span>'+escapeHtml(created)+'</span></div>'+'<div class="pub-profile-info-row"><span><i class="fa-solid fa-bell"></i>Bio</span><span>'+escapeHtml(u.bio||'—')+'</span></div>'+'</div>'+'<div class="pub-profile-actions">'+(!isA?'<button class="pub-btn-msg" style="background:linear-gradient(135deg,#1d9bf0,#1a8cd8)" onclick="closeAdminUserProfile();toggleUserVerification(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-circle-check"></i> '+(isV?'Remove Blue Tick':'Give Blue Tick')+'</button>':'')+(isChatEnabled()?'<button class="pub-btn-msg" onclick="closeAdminUserProfile();adminChatUser(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-comments"></i> Chat</button>':'')+'<button class="pub-btn-msg" style="background:linear-gradient(135deg,#22c55e,#16a34a)" onclick="closeAdminUserProfile();openAdminUserEmail(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-envelope"></i> '+t('admin_send_email')+'</button>'+'<button class="pub-btn-close" onclick="closeAdminUserProfile()"><i class="fa-solid fa-arrow-left"></i> '+t('close')+'</button>'+'</div>'+'</div>';
   document.getElementById('adminUserProfileModal').classList.add('active');
 }
 function closeAdminUserProfile(){document.getElementById('adminUserProfileModal').classList.remove('active');adminViewingEmail=null;}
-
 function adminChatUser(email){
   if(!isChatEnabled()){showCustomAlert('🔒 Sohbet gizli. Önce Genel ayarlardan açın.','warning');return;}
   const admin=getAdminUser();const users=getAllUsers();
@@ -2425,19 +2560,12 @@ function adminChatUser(email){
   localStorage.setItem('logged_user',JSON.stringify(admin));
   if(prev&&prev!==JSON.stringify(admin))window._chatPrevUser=prev;
   closeAdminPanel();
-  setTimeout(()=>{
-    document.getElementById('chatPanelModal').classList.add('active');
-    activeChatUser=null;currentReplyTo=null;
-    document.getElementById('chatUsersListWrapper').style.display='none';
-    document.getElementById('chatConversation').style.display='none';
-    openConversation(target);
-  },200);
+  setTimeout(()=>{document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='none';openConversation(target);},200);
 }
 
 /* === ADMIN USER EMAIL === */
 function openAdminUserEmail(email){
-  const users=getAllUsers();
-  const u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());
+  const users=getAllUsers();const u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());
   if(!u){showCustomAlert('User not found!');return;}
   adminEmailTarget=u;
   const av=u.profilePhoto?'<img src="'+u.profilePhoto+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">':(u.name?escapeHtml(u.name.trim().charAt(0).toUpperCase()):'?');
@@ -2466,26 +2594,18 @@ async function sendAdminUserEmailSubmit(e){
   const siteUrl='https://muminsultani.com';
   const logoUrl=(getSiteContent().general&&getSiteContent().general.favicon)||'https://muminsultani.com/img/ms.png';
   const finalMessage=msg+'\n\n—\n'+brand+'\n'+siteUrl;
-  const tp={to_email:adminEmailTarget.email,to_name:adminEmailTarget.name||'',brand:brand,subject:subj,message:finalMessage,
-    image_url:imgUrl||logoUrl,has_image:'yes',
-    link_url:link||siteUrl,link_text:linkText||brand,has_link:'yes',
-    site_url:siteUrl,site_logo:logoUrl,
-    has_pdf:'no',pdf_url:'',year:new Date().getFullYear(),type:'Admin Message',code:'—'};
+  const tp={to_email:adminEmailTarget.email,to_name:adminEmailTarget.name||'',brand:brand,subject:subj,message:finalMessage,image_url:imgUrl||logoUrl,has_image:'yes',link_url:link||siteUrl,link_text:linkText||brand,has_link:'yes',site_url:siteUrl,site_logo:logoUrl,has_pdf:'no',pdf_url:'',year:new Date().getFullYear(),type:'Admin Message',code:'—'};
   const form=e.target;const submitBtn=form.querySelector('button[type="submit"]');const origHTML=submitBtn?submitBtn.innerHTML:'';
   if(submitBtn){submitBtn.disabled=true;submitBtn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Gönderiliyor...';}
   try{
     const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EMAILJS_CONFIG.serviceId,template_id:EMAILJS_CONFIG.templateId,user_id:EMAILJS_CONFIG.publicKey,template_params:tp})});
     const txt=await r.text();
     if(submitBtn){submitBtn.disabled=false;submitBtn.innerHTML=origHTML;}
-    if(r.ok&&(txt==='OK'||r.status===200)){
-      logActivity('email_sent',{email:adminEmailTarget.email,name:adminEmailTarget.name},'Admin→ User: '+subj);
-      closeAdminUserEmail();
-      showCustomAlert('✅ Email gönderildi!','success');
-    }else{showCustomAlert('Email hatası: '+(txt||r.status),'error');}
+    if(r.ok&&(txt==='OK'||r.status===200)){logActivity('email_sent',{email:adminEmailTarget.email,name:adminEmailTarget.name},'Admin→ User: '+subj);closeAdminUserEmail();showCustomAlert('✅ Email gönderildi!','success');}else{showCustomAlert('Email hatası: '+(txt||r.status),'error');}
   }catch(err){if(submitBtn){submitBtn.disabled=false;submitBtn.innerHTML=origHTML;}showCustomAlert('Network hatası!','error');}
 }
 
-/* === ACTIVITY / CHATS === */
+/* === ACTIVITY/CHATS === */
 let activityFilterType='all';
 function renderAdminActivity(){const list=document.getElementById('adminActivityList');if(!list)return;let l=getActivityLog();if(activityFilterType!=='all')l=l.filter(x=>x.type===activityFilterType);l=l.reverse();if(!l.length){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">No records.</p>';return;}list.innerHTML='';l.slice(0,200).forEach(a=>{const item=document.createElement('div');item.className='activity-item';item.innerHTML='<div class="activity-icon"><i class="fa-solid fa-circle-info"></i></div><div class="activity-body"><div class="activity-title">'+escapeHtml(a.name||a.email||'Unknown')+' <span style="font-size:.6rem;padding:1px 6px;border-radius:10px;background:rgba(var(--accent-rgb),.15);color:var(--accent)">'+a.type+'</span></div><div class="activity-meta">'+(a.details?escapeHtml(a.details):'')+'</div></div><div class="activity-time">'+fmtDateTime(a.timestamp)+'</div>';list.appendChild(item);});}
 function filterActivity(type,btn){activityFilterType=type;document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderAdminActivity();}
@@ -2522,7 +2642,6 @@ async function getIconData(idx){const db=await openApkDB();return new Promise((r
 async function deleteIconData(idx){const db=await openApkDB();return new Promise((res,rej)=>{const tx=db.transaction(['icons'],'readwrite');const r=tx.objectStore('icons').delete('icon_'+idx);r.onsuccess=()=>res();r.onerror=e=>rej(e.target.error);});}
 function formatFileSize(b){if(b<1024)return b+' B';if(b<1024*1024)return (b/1024).toFixed(1)+' KB';return (b/(1024*1024)).toFixed(2)+' MB';}
 async function downloadApk(slotIndex){if(IS_IOS){showCustomAlert('⚠️ APK dosyaları sadece Android cihazlarda kurulabilir.','warning');return;}const lu=localStorage.getItem('logged_user');const uo=lu?JSON.parse(lu):null;const c=getSiteContent();const app=c.apps[slotIndex];if(!app)return;const rl=!!app.requireLogin;if(rl&&!lu){showCustomAlert('⚠️ Sign in required to download APK.','warning');setTimeout(()=>openGetInTouchModal(),300);return;}try{const apk=await withTimeout(getApkFile(slotIndex),60000);if(!apk){showCustomAlert('APK not found!','error');return;}const blob=apk.blob instanceof Blob?apk.blob:new Blob([new Uint8Array(apk.blob)],{type:apk.type||'application/vnd.android.package-archive'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;const bn=(apk.name||('app_slot_'+(slotIndex+1)+'.apk')).replace(/\.apk$/i,'');a.download=bn+'_'+Date.now()+'.apk';a.style.display='none';document.body.appendChild(a);a.click();setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},2500);if(lu)logActivity('apk_download',uo,'Slot #'+(slotIndex+1)+' - '+apk.name);showCustomAlert('✅ Downloaded: '+apk.name,'success');}catch(e){showCustomAlert('Download error!','error');}}
-
 function renderAdminSlots(){const list=document.getElementById('adminSlotsList');if(!list)return;const apps=getSiteContent().apps||[];list.innerHTML='';apps.forEach((app,idx)=>{const item=document.createElement('div');item.className='admin-slot';item.innerHTML=buildAdminSlotHTML(idx,app);list.appendChild(item);if(app.hasIcon){withTimeout(getIconData(idx),3000).then(icon=>{if(icon&&icon.dataUrl){const h=item.querySelector('div[style*="width:26px"]');if(h)h.innerHTML='<img src="'+icon.dataUrl+'" class="icon-preview-mini">';}}).catch(()=>{});}});}
 async function editAppSlot(idx){const c=getSiteContent();const app=c.apps[idx]||{name:'',desc:'',url:'',icon:'',requireLogin:false};pendingApkFile=null;pendingApkDelete=false;pendingIconDataUrl=null;pendingIconDelete=false;document.getElementById('editSlotIndex').value=idx;document.getElementById('editAppName').value=app.name||'';document.getElementById('editAppDesc').value=app.desc||'';document.getElementById('editAppUrl').value=app.url||'';document.getElementById('editAppRequireLogin').checked=!!app.requireLogin;document.getElementById('editAppApkFile').value='';document.getElementById('editAppIconFile').value='';let eA=null,eI=null;if(app.hasApk){try{eA=await withTimeout(getApkFile(idx),5000);}catch(e){}}if(app.hasIcon){try{eI=await withTimeout(getIconData(idx),5000);}catch(e){}}updateApkUI(eA?{name:eA.name,size:eA.size}:(app.hasApk?{name:app.apkName||'APK',size:app.apkSize||0}:null));if(eI&&eI.dataUrl)updateIconUI({dataUrl:eI.dataUrl});else if(app.icon&&app.icon.trim().startsWith('http'))updateIconUI({dataUrl:app.icon.trim()});else updateIconUI(null);document.getElementById('adminEditModal').classList.add('active');}
 function closeAdminEdit(){document.getElementById('adminEditModal').classList.remove('active');}
@@ -2534,7 +2653,6 @@ function clearApkFile(){pendingApkFile=null;pendingApkDelete=true;document.getEl
 function updateApkUI(file){const w=document.getElementById('apkUploadWrapper'),tx=document.getElementById('apkUploadText'),b=document.getElementById('apkClearBtn'),ic=document.getElementById('apkUploadIcon');if(file){w.classList.add('has-file');tx.textContent=file.name+' ('+formatFileSize(file.size)+')';b.style.display='inline-flex';if(ic)ic.className='fa-solid fa-circle-check upload-icon';}else{w.classList.remove('has-file');tx.textContent='Tap to choose apk file';b.style.display='none';if(ic)ic.className='fa-solid fa-file-arrow-up upload-icon';}}
 async function saveAppSlot(e){e.preventDefault();const idx=parseInt(document.getElementById('editSlotIndex').value)||0;const c=getSiteContent();const rl=document.getElementById('editAppRequireLogin').checked;let nA={name:document.getElementById('editAppName').value.trim(),desc:document.getElementById('editAppDesc').value.trim(),url:document.getElementById('editAppUrl').value.trim(),icon:c.apps[idx].icon||'',requireLogin:rl,hasApk:c.apps[idx].hasApk||false,apkName:c.apps[idx].apkName||'',apkSize:c.apps[idx].apkSize||0,apkType:c.apps[idx].apkType||'',hasIcon:c.apps[idx].hasIcon||false};if(pendingApkFile){try{await storeApkFile(idx,pendingApkFile);nA.hasApk=true;nA.apkName=pendingApkFile.name;nA.apkSize=pendingApkFile.size;}catch(err){showCustomAlert('APK error');return;}}else if(pendingApkDelete){try{await deleteApkFile(idx);}catch(e){}nA.hasApk=false;nA.apkName='';nA.apkSize=0;}if(pendingIconDataUrl){try{await storeIconData(idx,pendingIconDataUrl);nA.hasIcon=true;}catch(err){showCustomAlert('Icon error');return;}}else if(pendingIconDelete){try{await deleteIconData(idx);}catch(e){}nA.hasIcon=false;}c.apps[idx]=nA;saveSiteContent(c);pendingApkFile=null;pendingApkDelete=false;pendingIconDataUrl=null;pendingIconDelete=false;closeAdminEdit();renderAdminSlots();renderApplications();showCustomAlert('App saved!','success');}
 async function clearAppSlot(idx){const c=getSiteContent();c.apps[idx]={name:'',desc:'',url:'',icon:'',requireLogin:false,hasApk:false,apkName:'',apkSize:0,apkType:'',hasIcon:false};saveSiteContent(c);try{await deleteApkFile(idx);}catch(e){}try{await deleteIconData(idx);}catch(e){}renderAdminSlots();renderApplications();}
-
 function saveAdminHeader(e){e.preventDefault();const c=getSiteContent();c.header.brand=document.getElementById('ah-brand').value.trim()||'muminsultani';c.header.roleEn=document.getElementById('ah-role-en').value.trim()||'Software Developer';c.header.roleTr=document.getElementById('ah-role-tr').value.trim()||'Yazılım Geliştirici';saveSiteContent(c);applySiteContent();applyTranslations();showCustomAlert('Saved!','success');}
 function saveAdminExperience(e){e.preventDefault();const c=getSiteContent();c.experience.titleEn=document.getElementById('ae-t-en').value.trim();c.experience.titleTr=document.getElementById('ae-t-tr').value.trim();c.experience.date=document.getElementById('ae-date').value.trim();c.experience.descEn=document.getElementById('ae-d-en').value.trim();c.experience.descTr=document.getElementById('ae-d-tr').value.trim();saveSiteContent(c);applySiteContent();showCustomAlert('Saved!','success');}
 function saveAdminSetup(e){e.preventDefault();const c=getSiteContent();c.setup.osEn=document.getElementById('au-os-en').value.trim();c.setup.osTr=document.getElementById('au-os-tr').value.trim();c.setup.editorEn=document.getElementById('au-ed-en').value.trim();c.setup.editorTr=document.getElementById('au-ed-tr').value.trim();saveSiteContent(c);applySiteContent();showCustomAlert('Saved!','success');}
@@ -2569,14 +2687,12 @@ async function loadVisitorStatsFromFirebase(){try{if(typeof firebase==='undefine
 
 /* === APPLY SITE CONTENT === */
 function applySiteContent(){const c=getSiteContent(),isTR=currentLang==='tr';document.querySelectorAll('.brand-logo, .footer-brand').forEach(el=>el.textContent=c.header.brand);const il=document.querySelector('.intro-logo');if(il)il.textContent=c.header.brand;document.querySelectorAll('.modal-brand').forEach(el=>{if(el.dataset.enhanced!=='1')el.textContent=c.header.brand;});document.getElementById('t-role').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('introSub').innerText=isTR?c.header.roleTr:c.header.roleEn;document.getElementById('t-job-title').innerText=isTR?c.experience.titleTr:c.experience.titleEn;document.getElementById('t-job-date').innerText=c.experience.date;document.getElementById('t-job-desc').innerText=isTR?c.experience.descTr:c.experience.descEn;document.getElementById('t-os-val').innerText=isTR?c.setup.osTr:c.setup.osEn;document.getElementById('t-editor-val').innerText=isTR?c.setup.editorTr:c.setup.editorEn;document.getElementById('t-backend-val').innerText=c.stack.backend;document.getElementById('t-frontend-val').innerText=c.stack.frontend;document.getElementById('t-copyright').innerText=c.footer.copyright;if(c.general){if(c.general.pageTitle){document.title=c.general.pageTitle;}if(c.general.favicon){const f=document.getElementById('siteFavicon');if(f)f.href=c.general.favicon;}const md=document.querySelector('meta[name="description"]');if(md&&c.general.metaDesc)md.setAttribute('content',c.general.metaDesc);}renderApplications();applySectionOrder();applyEffectsSettings();renderFooterSocials();updateBrandLogos();applyWeatherSettings();applyChatVisibility();}
-
 async function renderApplications(){if(appsRenderLock)return;appsRenderLock=true;try{const grid=document.getElementById('appsGrid');if(!grid)return;const apps=getSiteContent().apps||[];const isLogged=!!localStorage.getItem('logged_user');const filled=[];for(let i=0;i<8;i++){const a=apps[i]||{};if(a.name&&a.name.trim().length>0)filled.push({idx:i,app:a});}const w=window.innerWidth;let maxVisible=4;if(w>=1025)maxVisible=6;const visible=filled.slice(0,maxVisible);grid.innerHTML='';for(const item of visible){const idx=item.idx,app=item.app;const card=document.createElement('div');card.className='app-card';let iconHTML='📱';if(app.hasIcon){try{const ic=await withTimeout(getIconData(idx),3000);if(ic&&ic.dataUrl)iconHTML='<img src="'+ic.dataUrl+'">';}catch(e){}}else if(app.icon&&app.icon.trim().startsWith('http'))iconHTML='<img src="'+escapeHtml(app.icon.trim())+'">';else if(app.icon&&app.icon.trim())iconHTML=escapeHtml(app.icon.trim());const hasApk=!!app.hasApk;const hasUrl=app.url&&app.url.trim();const rl=!!app.requireLogin;if(hasApk){if(rl&&!isLogged)card.classList.add('locked');card.style.cursor='pointer';card.addEventListener('click',()=>downloadApk(idx));}else if(hasUrl){card.style.cursor='pointer';card.addEventListener('click',()=>{let u=app.url.trim();if(!/^https?:\/\//i.test(u))u='https://'+u;window.open(u,'_blank');});}const dBadge=hasApk?'<span class="apk-download-badge"><i class="fa-solid fa-download"></i></span>':'';let nI='';if(hasApk)nI='<i class="fa-solid fa-download download-icon"></i>';else if(hasUrl)nI='<i class="fa-solid fa-arrow-up-right-from-square"></i>';let tH='';if(hasApk){const lk=rl&&!isLogged;tH='<span class="app-card-tag apk-tag'+(lk?' locked-tag':'')+'"><i class="fa-brands fa-android"></i>APK</span>';}else if(hasUrl)tH='<span class="app-card-tag">LINK</span>';card.innerHTML='<div class="app-card-icon">'+iconHTML+dBadge+'</div><div class="app-card-body"><div class="app-card-name">'+escapeHtml(app.name)+' '+nI+'</div><div class="app-card-desc">'+escapeHtml(app.desc||'')+'</div></div>'+tH;grid.appendChild(card);}}finally{appsRenderLock=false;}}
 
 /* ============================================================
    ANIM SYSTEM
    ============================================================ */
 function createAnimSystem(canvasId,options){options=options||{};const c=document.getElementById(canvasId);if(!c)return{stop:function(){},setMode:function(){}};const ctx=c.getContext('2d');const baseNP=options.numberOfParticles||55,ld=options.lineDistance||110;let pa=[],running=true;let mode='constellation';function rc(){c.width=window.innerWidth;c.height=window.innerHeight;initMode();}function P(){this.x=Math.random()*c.width;this.y=Math.random()*c.height;this.vx=(Math.random()-.5)*.8;this.vy=(Math.random()-.5)*.8;this.size=Math.random()*1.8+1;}P.prototype.update=function(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>c.width)this.vx=-this.vx;if(this.y<0||this.y>c.height)this.vy=-this.vy;};P.prototype.draw=function(){const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';ctx.fillStyle='rgba('+ar+',.55)';ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();};function initMode(){pa=[];if(mode==='constellation'||mode==='network'){for(let i=0;i<baseNP;i++)pa.push(new P());}else if(mode==='particles'){for(let i=0;i<80;i++)pa.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6,size:Math.random()*3+1,alpha:Math.random()*.5+.3});}}function draw(){if(!running)return;ctx.clearRect(0,0,c.width,c.height);const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';if(mode==='none'){requestAnimationFrame(draw);return;}if(mode==='constellation'){for(let i=0;i<pa.length;i++){pa[i].update();pa[i].draw();for(let j=i+1;j<pa.length;j++){const dx=pa[i].x-pa[j].x,dy=pa[i].y-pa[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<ld){const o=1-(dist/ld);ctx.strokeStyle='rgba('+ar+','+(o*.22)+')';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(pa[i].x,pa[i].y);ctx.lineTo(pa[j].x,pa[j].y);ctx.stroke();}}}}else if(mode==='network'){for(let i=0;i<pa.length;i++){pa[i].update();for(let j=i+1;j<pa.length;j++){const dx=pa[i].x-pa[j].x,dy=pa[i].y-pa[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<180){const o=1-(dist/180);ctx.strokeStyle='rgba('+ar+','+(o*.4)+')';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(pa[i].x,pa[i].y);ctx.lineTo(pa[j].x,pa[j].y);ctx.stroke();}}ctx.beginPath();ctx.arc(pa[i].x,pa[i].y,2.5,0,Math.PI*2);ctx.fillStyle='rgba('+ar+',.7)';ctx.fill();}}else if(mode==='particles'){pa.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>c.width)p.vx=-p.vx;if(p.y<0||p.y>c.height)p.vy=-p.vy;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle='rgba('+ar+','+p.alpha+')';ctx.fill();});}else if(mode==='dots'){for(let x=30;x<c.width;x+=60)for(let y=30;y<c.height;y+=60){ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);ctx.fillStyle='rgba('+ar+',.4)';ctx.fill();}}requestAnimationFrame(draw);}window.addEventListener('resize',rc);rc();draw();return{stop:function(){running=false;},setMode:function(m){mode=m||'constellation';initMode();}};}
-
 function forceRefreshUI(){applyTranslations();try{applySiteContent();}catch(e){}try{checkUserSession();}catch(e){}try{renderApplications();}catch(e){}try{updateChatBadge();}catch(e){}try{applyWeatherSettings();}catch(e){}try{applyChatVisibility();}catch(e){}}
 
 /* ============================================================
@@ -2666,149 +2782,15 @@ window.addEventListener('DOMContentLoaded',async ()=>{
 });
 
 /* ============================================================
-   GLOBAL FONKSİYON EXPORT (inline onclick için)
+   GLOBAL FONKSİYON EXPORT
    ============================================================ */
-window.toggleTheme=toggleTheme;
-window.toggleLangMenu=toggleLangMenu;
-window.changeLanguage=changeLanguage;
-window.toggleHeaderProfileMenu=toggleHeaderProfileMenu;
-window.closeHeaderProfileMenu=closeHeaderProfileMenu;
-window.openEditProfileModal=openEditProfileModal;
-window.closeEditProfileModal=closeEditProfileModal;
-window.openChangePasswordModal=openChangePasswordModal;
-window.closeChangePasswordModal=closeChangePasswordModal;
-window.openUserSettingsModal=openUserSettingsModal;
-window.closeUserSettingsModal=closeUserSettingsModal;
-window.openDeleteAccountModal=openDeleteAccountModal;
-window.closeDeleteAccountModal=closeDeleteAccountModal;
-window.confirmLogout=confirmLogout;
-window.openGetInTouchModal=openGetInTouchModal;
-window.closeGetInTouchModal=closeGetInTouchModal;
-window.openDirectContactModal=openDirectContactModal;
-window.closeDirectContactModal=closeDirectContactModal;
-window.switchAuthTab=switchAuthTab;
-window.handleAuthSubmit=handleAuthSubmit;
-window.openForgotPasswordModal=openForgotPasswordModal;
-window.closeForgotPasswordModal=closeForgotPasswordModal;
-window.handleForgotPasswordSubmit=handleForgotPasswordSubmit;
-window.closeResetPasswordModal=closeResetPasswordModal;
-window.handleResetPasswordSubmit=handleResetPasswordSubmit;
-window.openSignupCodeModal=openSignupCodeModal;
-window.backToSignupMock=backToSignupMock;
-window.cancelSignup=cancelSignup;
-window.verifySignupCode=verifySignupCode;
-window.resendSignupEmail=resendSignupEmail;
-window.checkUsernameAvailability=checkUsernameAvailability;
-window.togglePasswordVisibility=togglePasswordVisibility;
-window.handleProfileUpdate=handleProfileUpdate;
-window.handleProfilePhotoUpload=handleProfilePhotoUpload;
-window.resetProfilePhoto=resetProfilePhoto;
-window.updateEditPhotoPreview=updateEditPhotoPreview;
-window.handleChangePassword=handleChangePassword;
-window.handleDeleteAccount=handleDeleteAccount;
-window.handleDeletePasswordSubmit=handleDeletePasswordSubmit;
-window.openDeletePasswordModal=openDeletePasswordModal;
-window.closeDeletePasswordModal=closeDeletePasswordModal;
-window.setCropRatio=setCropRatio;
-window.applyCrop=applyCrop;
-window.closeCropModal=closeCropModal;
-window.closeLightbox=closeLightbox;
-window.openOrderModal=openOrderModal;
-window.closeOrderModal=closeOrderModal;
-window.submitOrder=submitOrder;
-window.selectOrderType=selectOrderType;
-window.openChatPanel=openChatPanel;
-window.closeChatPanel=closeChatPanel;
-window.sendChatMessage=sendChatMessage;
-window.handleChatPhotoUpload=handleChatPhotoUpload;
-window.filterChatUsers=filterChatUsers;
-window.clearChatSearch=clearChatSearch;
-window.replyToMessage=replyToMessage;
-window.cancelReply=cancelReply;
-window.deleteMessage=deleteMessage;
-window.openPublicUserProfile=openPublicUserProfile;
-window.closePublicUserProfile=closePublicUserProfile;
-window.messageFromProfile=messageFromProfile;
-window.triggerAdminAccess=triggerAdminAccess;
-window.closeAdminLogin=closeAdminLogin;
-window.verifyAdminPassword=verifyAdminPassword;
-window.logoutAdmin=logoutAdmin;
-window.closeAdminPanel=closeAdminPanel;
-window.switchAdminTab=switchAdminTab;
-window.toggleUserVerification=toggleUserVerification;
-window.adminViewUser=adminViewUser;
-window.closeAdminUserProfile=closeAdminUserProfile;
-window.adminChatUser=adminChatUser;
-window.openAdminUserEmail=openAdminUserEmail;
-window.closeAdminUserEmail=closeAdminUserEmail;
-window.sendAdminUserEmailSubmit=sendAdminUserEmailSubmit;
-window.deleteUserAdmin=deleteUserAdmin;
-window.exportUsersCSV=exportUsersCSV;
-window.clearAllUsers=clearAllUsers;
-window.viewUserDetail=viewUserDetail;
-window.closeUserDetail=closeUserDetail;
-window.filterActivity=filterActivity;
-window.clearActivityLog=clearActivityLog;
-window.exportActivityCSV=exportActivityCSV;
-window.clearAllChats=clearAllChats;
-window.exportChatsCSV=exportChatsCSV;
-window.openAdminAnyEmail=openAdminAnyEmail;
-window.closeAdminAnyEmail=closeAdminAnyEmail;
-window.previewAnyEmailImage=previewAnyEmailImage;
-window.handleAnyEmailImageUpload=handleAnyEmailImageUpload;
-window.sendAdminAnyEmail=sendAdminAnyEmail;
-window.moveSectionOrder=moveSectionOrder;
-window.editAppSlot=editAppSlot;
-window.closeAdminEdit=closeAdminEdit;
-window.clearAppSlot=clearAppSlot;
-window.saveAppSlot=saveAppSlot;
-window.handleIconUpload=handleIconUpload;
-window.clearIconFile=clearIconFile;
-window.handleApkUpload=handleApkUpload;
-window.clearApkFile=clearApkFile;
-window.saveAdminHeader=saveAdminHeader;
-window.saveAdminExperience=saveAdminExperience;
-window.saveAdminSetup=saveAdminSetup;
-window.saveAdminStack=saveAdminStack;
-window.saveAdminFooter=saveAdminFooter;
-window.saveAdminGeneral=saveAdminGeneral;
-window.saveAdminAccount=saveAdminAccount;
-window.handleAdminPhotoUpload=handleAdminPhotoUpload;
-window.clearAdminPhoto=clearAdminPhoto;
-window.handleFaviconUpload=handleFaviconUpload;
-window.clearFavicon=clearFavicon;
-window.exportSiteBackup=exportSiteBackup;
-window.importSiteBackup=importSiteBackup;
-window.confirmResetSite=confirmResetSite;
-window.toggleSiteClosed=toggleSiteClosed;
-window.toggleWeatherEnabled=toggleWeatherEnabled;
-window.toggleChatEnabled=toggleChatEnabled;
-window.toggleLangVisibility=toggleLangVisibility;
-window.setOrderRequireLogin=setOrderRequireLogin;
-window.setFishEnabled=setFishEnabled;
-window.setConfettiEnabled=setConfettiEnabled;
-window.setTickSoundEnabled=setTickSoundEnabled;
-window.toggleWelcomeEmail=toggleWelcomeEmail;
-window.toggleWelcomePdf=toggleWelcomePdf;
-window.saveWelcomeEmailSettings=saveWelcomeEmailSettings;
-window.renderEffectsPanel=renderEffectsPanel;
-window.renderUserSettingsGrids=renderUserSettingsGrids;
-window.resetUserSettings=resetUserSettings;
-window.refreshWeather=refreshWeather;
-window.approveOrder=approveOrder;
-window.deleteOrder=deleteOrder;
-window.clearAllOrders=clearAllOrders;
-window.updateSocialUrl=updateSocialUrl;
-window.removeSocial=removeSocial;
-window.addSocialPlatformPicker=addSocialPlatformPicker;
-window.pickSocialPlatform=pickSocialPlatform;
-window.closeCustomAlert=closeCustomAlert;
-window.confirmAction=confirmAction;
+window.toggleTheme=toggleTheme;window.toggleLangMenu=toggleLangMenu;window.changeLanguage=changeLanguage;window.toggleHeaderProfileMenu=toggleHeaderProfileMenu;window.closeHeaderProfileMenu=closeHeaderProfileMenu;window.openEditProfileModal=openEditProfileModal;window.closeEditProfileModal=closeEditProfileModal;window.openChangePasswordModal=openChangePasswordModal;window.closeChangePasswordModal=closeChangePasswordModal;window.openUserSettingsModal=openUserSettingsModal;window.closeUserSettingsModal=closeUserSettingsModal;window.openDeleteAccountModal=openDeleteAccountModal;window.closeDeleteAccountModal=closeDeleteAccountModal;window.confirmLogout=confirmLogout;window.openGetInTouchModal=openGetInTouchModal;window.closeGetInTouchModal=closeGetInTouchModal;window.openDirectContactModal=openDirectContactModal;window.closeDirectContactModal=closeDirectContactModal;window.switchAuthTab=switchAuthTab;window.handleAuthSubmit=handleAuthSubmit;window.openForgotPasswordModal=openForgotPasswordModal;window.closeForgotPasswordModal=closeForgotPasswordModal;window.handleForgotPasswordSubmit=handleForgotPasswordSubmit;window.closeResetPasswordModal=closeResetPasswordModal;window.handleResetPasswordSubmit=handleResetPasswordSubmit;window.openSignupCodeModal=openSignupCodeModal;window.backToSignupMock=backToSignupMock;window.cancelSignup=cancelSignup;window.verifySignupCode=verifySignupCode;window.resendSignupEmail=resendSignupEmail;window.checkUsernameAvailability=checkUsernameAvailability;window.togglePasswordVisibility=togglePasswordVisibility;window.handleProfileUpdate=handleProfileUpdate;window.handleProfilePhotoUpload=handleProfilePhotoUpload;window.resetProfilePhoto=resetProfilePhoto;window.updateEditPhotoPreview=updateEditPhotoPreview;window.handleChangePassword=handleChangePassword;window.handleDeleteAccount=handleDeleteAccount;window.handleDeletePasswordSubmit=handleDeletePasswordSubmit;window.openDeletePasswordModal=openDeletePasswordModal;window.closeDeletePasswordModal=closeDeletePasswordModal;window.setCropRatio=setCropRatio;window.applyCrop=applyCrop;window.closeCropModal=closeCropModal;window.closeLightbox=closeLightbox;window.openOrderModal=openOrderModal;window.closeOrderModal=closeOrderModal;window.submitOrder=submitOrder;window.selectOrderType=selectOrderType;window.openChatPanel=openChatPanel;window.closeChatPanel=closeChatPanel;window.sendChatMessage=sendChatMessage;window.handleChatPhotoUpload=handleChatPhotoUpload;window.filterChatUsers=filterChatUsers;window.clearChatSearch=clearChatSearch;window.replyToMessage=replyToMessage;window.cancelReply=cancelReply;window.deleteMessage=deleteMessage;window.openPublicUserProfile=openPublicUserProfile;window.closePublicUserProfile=closePublicUserProfile;window.messageFromProfile=messageFromProfile;window.triggerAdminAccess=triggerAdminAccess;window.closeAdminLogin=closeAdminLogin;window.verifyAdminPassword=verifyAdminPassword;window.logoutAdmin=logoutAdmin;window.closeAdminPanel=closeAdminPanel;window.switchAdminTab=switchAdminTab;window.toggleUserVerification=toggleUserVerification;window.adminViewUser=adminViewUser;window.closeAdminUserProfile=closeAdminUserProfile;window.adminChatUser=adminChatUser;window.openAdminUserEmail=openAdminUserEmail;window.closeAdminUserEmail=closeAdminUserEmail;window.sendAdminUserEmailSubmit=sendAdminUserEmailSubmit;window.deleteUserAdmin=deleteUserAdmin;window.exportUsersCSV=exportUsersCSV;window.clearAllUsers=clearAllUsers;window.viewUserDetail=viewUserDetail;window.closeUserDetail=closeUserDetail;window.filterActivity=filterActivity;window.clearActivityLog=clearActivityLog;window.exportActivityCSV=exportActivityCSV;window.clearAllChats=clearAllChats;window.exportChatsCSV=exportChatsCSV;window.openAdminAnyEmail=openAdminAnyEmail;window.closeAdminAnyEmail=closeAdminAnyEmail;window.previewAnyEmailImage=previewAnyEmailImage;window.handleAnyEmailImageUpload=handleAnyEmailImageUpload;window.handleAnyEmailPdfUpload=handleAnyEmailPdfUpload;window.sendAdminAnyEmail=sendAdminAnyEmail;window.moveSectionOrder=moveSectionOrder;window.editAppSlot=editAppSlot;window.closeAdminEdit=closeAdminEdit;window.clearAppSlot=clearAppSlot;window.saveAppSlot=saveAppSlot;window.handleIconUpload=handleIconUpload;window.clearIconFile=clearIconFile;window.handleApkUpload=handleApkUpload;window.clearApkFile=clearApkFile;window.saveAdminHeader=saveAdminHeader;window.saveAdminExperience=saveAdminExperience;window.saveAdminSetup=saveAdminSetup;window.saveAdminStack=saveAdminStack;window.saveAdminFooter=saveAdminFooter;window.saveAdminGeneral=saveAdminGeneral;window.saveAdminAccount=saveAdminAccount;window.handleAdminPhotoUpload=handleAdminPhotoUpload;window.clearAdminPhoto=clearAdminPhoto;window.handleFaviconUpload=handleFaviconUpload;window.clearFavicon=clearFavicon;window.exportSiteBackup=exportSiteBackup;window.importSiteBackup=importSiteBackup;window.confirmResetSite=confirmResetSite;window.toggleSiteClosed=toggleSiteClosed;window.toggleWeatherEnabled=toggleWeatherEnabled;window.toggleChatEnabled=toggleChatEnabled;window.toggleLangVisibility=toggleLangVisibility;window.setOrderRequireLogin=setOrderRequireLogin;window.setFishEnabled=setFishEnabled;window.setConfettiEnabled=setConfettiEnabled;window.setTickSoundEnabled=setTickSoundEnabled;window.toggleWelcomeEmail=toggleWelcomeEmail;window.toggleWelcomePdf=toggleWelcomePdf;window.saveWelcomeEmailSettings=saveWelcomeEmailSettings;window.renderEffectsPanel=renderEffectsPanel;window.renderUserSettingsGrids=renderUserSettingsGrids;window.resetUserSettings=resetUserSettings;window.refreshWeather=refreshWeather;window.approveOrder=approveOrder;window.deleteOrder=deleteOrder;window.clearAllOrders=clearAllOrders;window.updateSocialUrl=updateSocialUrl;window.removeSocial=removeSocial;window.addSocialPlatformPicker=addSocialPlatformPicker;window.pickSocialPlatform=pickSocialPlatform;window.closeCustomAlert=closeCustomAlert;window.confirmAction=confirmAction;
 
 console.log('%c✅ muminsultani site yüklendi!','background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;padding:6px 12px;border-radius:8px;font-weight:bold;font-size:13px;');
-console.log('%c📧 Email görsel: Firebase Storage (max 100 MB) + fallback sıkıştırma','color:#3b82f6;font-weight:bold;');
-console.log('%c🔒 Chat gizliliği: '+(isChatEnabled()?'AÇIK':'KAPALI'),'color:#3b82f6;font-weight:bold;');
-console.log('%c🎨 Alert logoları kaldırıldı','color:#22c55e;font-weight:bold;');
+console.log('%c📧 Email: Firebase Storage (image+PDF, max 100 MB)','color:#3b82f6;font-weight:bold;');
+console.log('%c⏱️ Stall detection: 8 saniye ilerleme yok → otomatik iptal','color:#f59e0b;font-weight:bold;');
+console.log('%c🔒 Chat: '+(isChatEnabled()?'AÇIK':'KAPALI'),'color:#3b82f6;font-weight:bold;');
+console.log('%c🎨 Admin panel: cihaza göre orantılı ölçek (PC 1.0 / Tablet 0.95 / Mobil 0.9)','color:#22c55e;font-weight:bold;');
 console.log('%c⚙️ Admin: Ctrl+Shift+M veya Ctrl+Shift+A','color:#f59e0b;font-weight:bold;');
 </script>
 </body>
