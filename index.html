@@ -31,90 +31,34 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 /* ============================================================
-   🌐 CROSS-BROWSER FIX LAYER — Chrome / Safari / Firefox / Edge / Opera
+   🌐 CROSS-BROWSER FIX LAYER
    ============================================================ */
-
-/* Font fallback her tarayıcıda aynı */
-:root{
-  --font-fallback:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
-}
-
-/* Safari blur desteği */
-.modal-overlay,.lang-menu,.header-profile-menu,.chat-msg.theirs .chat-msg-text,
-body[data-panel="glass"] .modal-container,body[data-panel="glass"] .custom-alert-box,
-#security-curtain,.recording-overlay{
-  -webkit-backdrop-filter:blur(12px);
-  backdrop-filter:blur(12px);
-}
-.chat-msg.theirs .chat-msg-text{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);}
-
-/* Gradient text — Safari için -webkit- şart */
-.brand-logo,.intro-logo,.footer-brand,.modal-brand,.pub-profile-name{
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
-  -webkit-box-decoration-break:clone;
-  box-decoration-break:clone;
-}
-
-/* user-select Safari/Firefox */
+:root{--font-fallback:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'}
+.modal-overlay,.lang-menu,.header-profile-menu,.chat-msg.theirs .chat-msg-text,body[data-panel="glass"] .modal-container,body[data-panel="glass"] .custom-alert-box,#security-curtain,.recording-overlay{-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.chat-msg.theirs .chat-msg-text{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.brand-logo,.intro-logo,.footer-brand,.modal-brand,.pub-profile-name{-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 *{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
 input,textarea,select,.code-input,[contenteditable]{-webkit-user-select:text;-moz-user-select:text;-ms-user-select:text;user-select:text}
-
-/* Flex + ellipsis min-width:0 düzeltmesi */
-.app-card-desc,.chat-user-preview,.chat-user-name,.chat-user-username,
-.admin-slot-name,.user-card-detail,.admin-slot-url{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
-/* Scrollbar normalleştirme */
+.app-card-desc,.chat-user-preview,.chat-user-name,.chat-user-username,.admin-slot-name,.user-card-detail,.admin-slot-url{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 *{-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:rgba(var(--accent-rgb),.6) transparent}
 ::-webkit-scrollbar{width:8px;height:8px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(var(--accent-rgb),.5);border-radius:8px}
 ::-webkit-scrollbar-thumb:hover{background:rgba(var(--accent-rgb),.8)}
-
-/* Form elemanları reset — Safari'de bozuk görünür */
 button,input,textarea,select{-webkit-appearance:none;-moz-appearance:none;appearance:none;font:inherit;color:inherit;background:transparent;border-radius:0}
 input[type="checkbox"],input[type="radio"]{-webkit-appearance:auto;-moz-appearance:auto;appearance:auto}
-
-/* 100vh mobile Safari sorunu */
 #intro-screen,#security-curtain,.recording-overlay{height:100vh;height:100dvh;min-height:-webkit-fill-available}
-
-/* Touch action */
 button,a,.app-card,.chat-user-item,.effect-chip,.settings-chip,.admin-tab,.admin-slot-btn,.user-view-btn{touch-action:manipulation}
-
-/* iOS otomatik zoom engelle */
-@supports (-webkit-touch-callout:none){
-  input,textarea,select,.form-input,.form-textarea,.chat-input,.code-input{font-size:16px !important}
-}
-
-/* backdrop-filter desteklemeyen tarayıcılar */
-@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-  .modal-overlay,.lang-menu,.header-profile-menu{background:rgba(13,13,21,.96) !important}
-  body.light-mode .modal-overlay,body.light-mode .lang-menu,body.light-mode .header-profile-menu{background:rgba(255,255,255,.98) !important}
-}
-
-/* dvh desteklemeyen eski tarayıcılar */
-@supports not (height:100dvh){
-  #intro-screen,#security-curtain,.recording-overlay{height:100vh}
-}
-
-/* focus visible */
+@supports (-webkit-touch-callout:none){input,textarea,select,.form-input,.form-textarea,.chat-input,.code-input{font-size:16px !important}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.modal-overlay,.lang-menu,.header-profile-menu{background:rgba(13,13,21,.96) !important}body.light-mode .modal-overlay,body.light-mode .lang-menu,body.light-mode .header-profile-menu{background:rgba(255,255,255,.98) !important}}
+@supports not (height:100dvh){#intro-screen,#security-curtain,.recording-overlay{height:100vh}}
 button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,.app-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-
-/* Smooth scroll her tarayıcıda */
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%}
-
-/* Flex gap fallback (çok eski Safari) */
-@supports not (gap:1px){
-  .header-actions>*{margin-left:10px}
-  .form-buttons-group>*{margin-right:10px}
-}
-
-/* Touch callout */
+@supports not (gap:1px){.header-actions>*{margin-left:10px}.form-buttons-group>*{margin-right:10px}}
 body{-webkit-touch-callout:none;overflow-x:hidden}
 
 /* ============================================================
-   ORİJİNAL CSS (senin kodun — dokunulmadı)
+   ORİJİNAL CSS
    ============================================================ */
 html{color-scheme:light dark;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;overflow-x:hidden}
@@ -1351,10 +1295,8 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 
 <script>
 /* ============================================================
-   🌐 CROSS-BROWSER SAFETY LAYER — Chrome/Safari/Firefox/Edge/Opera
+   🌐 CROSS-BROWSER SAFETY LAYER
    ============================================================ */
-
-/* 1) Storage Wrapper — Safari private mode & blokajlar için */
 (function(){
   const memory={};
   function safeStorage(real){
@@ -1374,7 +1316,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
   try{Object.defineProperty(window,'sessionStorage',{value:_ss,configurable:true});}catch(e){}
 })();
 
-/* 2) Polyfills */
 if(!window.CSS)window.CSS={};
 if(!CSS.escape)CSS.escape=s=>String(s).replace(/[^a-zA-Z0-9_\u00A0-\uFFFF-]/g,c=>'\\'+c);
 if(!Object.assign)Object.assign=function(t){for(let i=1;i<arguments.length;i++){const o=arguments[i];if(!o)continue;for(const k in o)if(Object.prototype.hasOwnProperty.call(o,k))t[k]=o[k];}return t;};
@@ -1394,28 +1335,17 @@ if(!window.crypto.getRandomValues)window.crypto.getRandomValues=arr=>{for(let i=
 if(!URL.createObjectURL&&window.webkitURL)URL.createObjectURL=window.webkitURL.createObjectURL.bind(window.webkitURL);
 if(!URL.revokeObjectURL&&window.webkitURL)URL.revokeObjectURL=window.webkitURL.revokeObjectURL.bind(window.webkitURL);
 
-/* 3) Cross-browser Date/Time helpers */
-function fmtTime(input){
-  try{return new Date(input).toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});}
-  catch(e){const d=new Date(input);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}
-}
-function fmtDate(input){
-  try{return new Date(input).toLocaleDateString();}
-  catch(e){const d=new Date(input);return d.getDate()+'.'+(d.getMonth()+1)+'.'+d.getFullYear();}
-}
-function fmtDateTime(input){
-  try{return new Date(input).toLocaleString();}
-  catch(e){const d=new Date(input);return fmtDate(d)+' '+fmtTime(d);}
-}
+function fmtTime(input){try{return new Date(input).toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});}catch(e){const d=new Date(input);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}}
+function fmtDate(input){try{return new Date(input).toLocaleDateString();}catch(e){const d=new Date(input);return d.getDate()+'.'+(d.getMonth()+1)+'.'+d.getFullYear();}}
+function fmtDateTime(input){try{return new Date(input).toLocaleString();}catch(e){const d=new Date(input);return fmtDate(d)+' '+fmtTime(d);}}
 
-/* 4) iOS / mobile helpers */
 const IS_IOS=/iPad|iPhone|iPod/.test(navigator.userAgent)&&!window.MSStream;
 const IS_ANDROID=/Android/i.test(navigator.userAgent);
 const HAS_TOUCH='ontouchstart' in window||navigator.maxTouchPoints>0;
 const SUPPORTS_BLUR=(function(){try{return CSS.supports('backdrop-filter','blur(4px)')||CSS.supports('-webkit-backdrop-filter','blur(4px)');}catch(e){return false;}})();
 
 /* ============================================================
-   🐟 FISH SYSTEM — Okyanus Balıkları
+   🐟 FISH SYSTEM
    ============================================================ */
 const FISH_STYLES=[
   {key:'tropical',name:'Tropikal',icon:'fa-fish'},
@@ -1425,154 +1355,69 @@ const FISH_STYLES=[
   {key:'shark',name:'Köpekbalığı',icon:'fa-shark'},
   {key:'mixed',name:'Karışık',icon:'fa-shuffle'}
 ];
-function fishHexRgba(hex,a){
-  if(!hex)return 'rgba(147,51,234,'+a+')';
-  if(hex.indexOf('rgb')===0)return hex;
-  const h=hex.replace('#','');
-  return 'rgba('+parseInt(h.substring(0,2),16)+','+parseInt(h.substring(2,4),16)+','+parseInt(h.substring(4,6),16)+','+a+')';
-}
+function fishHexRgba(hex,a){if(!hex)return 'rgba(147,51,234,'+a+')';if(hex.indexOf('rgb')===0)return hex;const h=hex.replace('#','');return 'rgba('+parseInt(h.substring(0,2),16)+','+parseInt(h.substring(2,4),16)+','+parseInt(h.substring(4,6),16)+','+a+')';}
 function fishDrawBody(c,x,y,size,c1,c2,dir,tail,type,c3){
   c.save();c.translate(x,y);c.scale(dir,1);
   if(type==='shark'){
-    c.fillStyle=c1;c.beginPath();
-    c.moveTo(-size*1.2,0);c.quadraticCurveTo(-size*1.15,-size*0.3,-size*0.85,-size*0.16);
-    c.quadraticCurveTo(-size*0.3,-size*0.68,size*0.42,-size*0.4);
-    c.quadraticCurveTo(size*1,-size*0.16,size*1.2,0);
-    c.quadraticCurveTo(size*1,size*0.25,size*0.42,size*0.4);
-    c.quadraticCurveTo(-size*0.3,size*0.62,-size*0.85,size*0.16);
-    c.quadraticCurveTo(-size*1.15,size*0.3,-size*1.2,0);
-    c.closePath();c.fill();
-    c.fillStyle=c2||'#c9d1d9';c.beginPath();
-    c.moveTo(-size*0.85,size*0.1);c.quadraticCurveTo(size*0.2,size*0.5,size*1.1,0);
-    c.quadraticCurveTo(size*0.4,size*0.32,-size*0.85,size*0.1);c.closePath();c.fill();
-    c.fillStyle=c1;c.beginPath();
-    c.moveTo(-size*1.2,0);c.lineTo(-size*1.65,-size*0.55);c.lineTo(-size*1.5,0);c.lineTo(-size*1.65,size*0.5);c.closePath();c.fill();
+    c.fillStyle=c1;c.beginPath();c.moveTo(-size*1.2,0);c.quadraticCurveTo(-size*1.15,-size*0.3,-size*0.85,-size*0.16);c.quadraticCurveTo(-size*0.3,-size*0.68,size*0.42,-size*0.4);c.quadraticCurveTo(size*1,-size*0.16,size*1.2,0);c.quadraticCurveTo(size*1,size*0.25,size*0.42,size*0.4);c.quadraticCurveTo(-size*0.3,size*0.62,-size*0.85,size*0.16);c.quadraticCurveTo(-size*1.15,size*0.3,-size*1.2,0);c.closePath();c.fill();
+    c.fillStyle=c2||'#c9d1d9';c.beginPath();c.moveTo(-size*0.85,size*0.1);c.quadraticCurveTo(size*0.2,size*0.5,size*1.1,0);c.quadraticCurveTo(size*0.4,size*0.32,-size*0.85,size*0.1);c.closePath();c.fill();
+    c.fillStyle=c1;c.beginPath();c.moveTo(-size*1.2,0);c.lineTo(-size*1.65,-size*0.55);c.lineTo(-size*1.5,0);c.lineTo(-size*1.65,size*0.5);c.closePath();c.fill();
     c.beginPath();c.moveTo(-size*0.2,-size*0.5);c.lineTo(-size*0.03,-size*0.95);c.lineTo(size*0.18,-size*0.45);c.closePath();c.fill();
     c.fillStyle='#fff';c.beginPath();c.arc(size*0.7,-size*0.1,size*0.11,0,Math.PI*2);c.fill();
     c.fillStyle='#000';c.beginPath();c.arc(size*0.73,-size*0.1,size*0.06,0,Math.PI*2);c.fill();
   }else{
-    const wag=Math.sin(tail)*0.4;
-    c.save();c.translate(-size*0.82,0);c.rotate(wag);
-    c.fillStyle=c2;c.beginPath();
-    c.moveTo(0,0);c.lineTo(-size*0.52,-size*0.55);c.lineTo(-size*0.33,0);c.lineTo(-size*0.52,size*0.55);c.closePath();c.fill();
-    c.restore();
+    const wag=Math.sin(tail)*0.4;c.save();c.translate(-size*0.82,0);c.rotate(wag);
+    c.fillStyle=c2;c.beginPath();c.moveTo(0,0);c.lineTo(-size*0.52,-size*0.55);c.lineTo(-size*0.33,0);c.lineTo(-size*0.52,size*0.55);c.closePath();c.fill();c.restore();
     c.fillStyle=c1;c.beginPath();c.ellipse(0,0,size*0.9,size*0.53,0,0,Math.PI*2);c.fill();
-    const g=c.createLinearGradient(0,-size*0.5,0,size*0.5);
-    g.addColorStop(0,c1);g.addColorStop(1,c2);
+    const g=c.createLinearGradient(0,-size*0.5,0,size*0.5);g.addColorStop(0,c1);g.addColorStop(1,c2);
     c.fillStyle=g;c.beginPath();c.ellipse(0,size*0.04,size*0.8,size*0.42,0,0,Math.PI*2);c.fill();
-    c.fillStyle=c2;c.beginPath();
-    c.moveTo(-size*0.1,-size*0.5);c.lineTo(size*0.17,-size*0.85);c.lineTo(size*0.3,-size*0.43);c.closePath();c.fill();
+    c.fillStyle=c2;c.beginPath();c.moveTo(-size*0.1,-size*0.5);c.lineTo(size*0.17,-size*0.85);c.lineTo(size*0.3,-size*0.43);c.closePath();c.fill();
     c.beginPath();c.moveTo(-size*0.13,size*0.44);c.lineTo(-size*0.04,size*0.75);c.lineTo(size*0.11,size*0.4);c.closePath();c.fill();
     c.fillStyle='#fff';c.beginPath();c.arc(size*0.48,-size*0.11,size*0.14,0,Math.PI*2);c.fill();
     c.fillStyle='#0a0a14';c.beginPath();c.arc(size*0.52,-size*0.11,size*0.085,0,Math.PI*2);c.fill();
     c.fillStyle='rgba(255,255,255,.5)';c.beginPath();c.ellipse(size*0.28,-size*0.24,size*0.15,size*0.055,-0.4,0,Math.PI*2);c.fill();
-    if(c3){c.strokeStyle=fishHexRgba(c3,0.5);c.lineWidth=1.5;
-      for(let i=-1;i<=1;i++){c.beginPath();c.moveTo(i*size*0.25,-size*0.35);c.lineTo(i*size*0.25,size*0.35);c.stroke();}}
+    if(c3){c.strokeStyle=fishHexRgba(c3,0.5);c.lineWidth=1.5;for(let i=-1;i<=1;i++){c.beginPath();c.moveTo(i*size*0.25,-size*0.35);c.lineTo(i*size*0.25,size*0.35);c.stroke();}}
   }
   c.restore();
 }
 function fishDrawJelly(c,x,y,size,c1,c2,phase){
   c.save();c.translate(x,y);
   const pulse=Math.sin(phase)*0.1+1;
-  const glow=c.createRadialGradient(0,0,0,0,0,size*2.2);
-  glow.addColorStop(0,fishHexRgba(c1,0.32));glow.addColorStop(1,fishHexRgba(c1,0));
+  const glow=c.createRadialGradient(0,0,0,0,0,size*2.2);glow.addColorStop(0,fishHexRgba(c1,0.32));glow.addColorStop(1,fishHexRgba(c1,0));
   c.fillStyle=glow;c.beginPath();c.arc(0,0,size*2.2,0,Math.PI*2);c.fill();
   c.strokeStyle=fishHexRgba(c1,0.7);c.lineWidth=1.6;
-  for(let i=0;i<6;i++){const off=(i-2.5)*size*0.22;
-    c.beginPath();c.moveTo(off,size*0.25);
-    c.quadraticCurveTo(off+Math.sin(phase+i)*size*0.32,size*1,
-      off+Math.sin(phase+i*1.3)*size*0.5,size*1.9);c.stroke();}
-  c.fillStyle=fishHexRgba(c1,0.75);c.beginPath();
-  c.ellipse(0,0,size*pulse,size*0.72*pulse,0,Math.PI,0);c.closePath();c.fill();
-  c.fillStyle=fishHexRgba(c2,0.5);c.beginPath();
-  c.ellipse(0,size*0.05,size*0.85*pulse,size*0.5*pulse,0,Math.PI,0);c.closePath();c.fill();
-  c.fillStyle='rgba(255,255,255,.35)';c.beginPath();
-  c.ellipse(-size*0.32,-size*0.15,size*0.34,size*0.22,0,0,Math.PI*2);c.fill();
+  for(let i=0;i<6;i++){const off=(i-2.5)*size*0.22;c.beginPath();c.moveTo(off,size*0.25);c.quadraticCurveTo(off+Math.sin(phase+i)*size*0.32,size*1,off+Math.sin(phase+i*1.3)*size*0.5,size*1.9);c.stroke();}
+  c.fillStyle=fishHexRgba(c1,0.75);c.beginPath();c.ellipse(0,0,size*pulse,size*0.72*pulse,0,Math.PI,0);c.closePath();c.fill();
+  c.fillStyle=fishHexRgba(c2,0.5);c.beginPath();c.ellipse(0,size*0.05,size*0.85*pulse,size*0.5*pulse,0,Math.PI,0);c.closePath();c.fill();
+  c.fillStyle='rgba(255,255,255,.35)';c.beginPath();c.ellipse(-size*0.32,-size*0.15,size*0.34,size*0.22,0,0,Math.PI*2);c.fill();
   c.restore();
 }
 function createFishSystem(canvasId){
-  const canvas=document.getElementById(canvasId);
-  if(!canvas)return{setEnabled:function(){},setStyle:function(){}};
-  const ctx=canvas.getContext('2d');
-  let running=true,enabled=false,style='tropical';
-  let fishes=[],bubbles=[];
+  const canvas=document.getElementById(canvasId);if(!canvas)return{setEnabled:function(){},setStyle:function(){}};
+  const ctx=canvas.getContext('2d');let running=true,enabled=false,style='tropical';let fishes=[],bubbles=[];
   const TROPI=[['#ff6b6b','#ffa94d','#fff3bf'],['#4dabf7','#74c0fc','#e7f5ff'],['#ffd43b','#fab005','#fff3bf'],['#da77f2','#e599f7','#f3d9fa'],['#51cf66','#8ce99a','#d3f9d8'],['#ff922b','#ffc078','#ffe8cc'],['#22b8cf','#66d9e8','#c5f6fa'],['#f783ac','#faa2c1','#fcc2d7']];
   const DEEP=[['#3b3b5c','#7c3aed','#a78bfa'],['#1e1b4b','#4338ca','#6366f1'],['#5b21b6','#8b5cf6','#c4b5fd']];
   const SCH=[['#adb5bd','#ced4da','#e9ecef'],['#748ffc','#a5b4fc','#dbe4ff']];
   function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
   function pickPal(){let a;if(style==='school')a=SCH;else if(style==='deep'||style==='mixed')a=DEEP;else a=TROPI;return a[Math.floor(Math.random()*a.length)];}
-  function Fish(){
-    this.type=style;this.isShark=(style==='shark');
-    this.dir=Math.random()>0.5?1:-1;
-    this.x=this.dir===1?-120:canvas.width+120;
-    this.baseY=80+Math.random()*(canvas.height-200);this.y=this.baseY;
-    this.size=14+Math.random()*26;const p=pickPal();this.c1=p[0];this.c2=p[1];this.c3=p[2]||p[1];
-    this.speed=(0.5+Math.random()*0.9)*this.dir;this.wobbleAmp=3+Math.random()*7;
-    this.wobbleSpeed=0.02+Math.random()*0.03;this.wobblePhase=Math.random()*Math.PI*2;
-    this.tailPhase=Math.random()*Math.PI*2;this.tailSpeed=0.2+Math.random()*0.15;
-  }
-  Fish.prototype.reset=function(){
-    this.dir=Math.random()>0.5?1:-1;this.x=this.dir===1?-120:canvas.width+120;
-    this.baseY=80+Math.random()*(canvas.height-200);this.y=this.baseY;
-    this.size=14+Math.random()*26;const p=pickPal();this.c1=p[0];this.c2=p[1];this.c3=p[2]||p[1];
-    this.speed=(0.5+Math.random()*0.9)*this.dir;this.wobbleAmp=3+Math.random()*7;
-    this.wobbleSpeed=0.02+Math.random()*0.03;this.wobblePhase=Math.random()*Math.PI*2;
-    this.tailPhase=Math.random()*Math.PI*2;this.tailSpeed=0.2+Math.random()*0.15;
-    this.isShark=(style==='shark');
-  };
-  Fish.prototype.update=function(){
-    this.x+=this.speed;this.wobblePhase+=this.wobbleSpeed;
-    this.y=this.baseY+Math.sin(this.wobblePhase)*this.wobbleAmp;this.tailPhase+=this.tailSpeed;
-    if(this.dir===1&&this.x>canvas.width+140)this.reset();
-    if(this.dir===-1&&this.x<-140)this.reset();
-  };
+  function Fish(){this.type=style;this.isShark=(style==='shark');this.dir=Math.random()>0.5?1:-1;this.x=this.dir===1?-120:canvas.width+120;this.baseY=80+Math.random()*(canvas.height-200);this.y=this.baseY;this.size=14+Math.random()*26;const p=pickPal();this.c1=p[0];this.c2=p[1];this.c3=p[2]||p[1];this.speed=(0.5+Math.random()*0.9)*this.dir;this.wobbleAmp=3+Math.random()*7;this.wobbleSpeed=0.02+Math.random()*0.03;this.wobblePhase=Math.random()*Math.PI*2;this.tailPhase=Math.random()*Math.PI*2;this.tailSpeed=0.2+Math.random()*0.15;}
+  Fish.prototype.reset=function(){this.dir=Math.random()>0.5?1:-1;this.x=this.dir===1?-120:canvas.width+120;this.baseY=80+Math.random()*(canvas.height-200);this.y=this.baseY;this.size=14+Math.random()*26;const p=pickPal();this.c1=p[0];this.c2=p[1];this.c3=p[2]||p[1];this.speed=(0.5+Math.random()*0.9)*this.dir;this.wobbleAmp=3+Math.random()*7;this.wobbleSpeed=0.02+Math.random()*0.03;this.wobblePhase=Math.random()*Math.PI*2;this.tailPhase=Math.random()*Math.PI*2;this.tailSpeed=0.2+Math.random()*0.15;this.isShark=(style==='shark');};
+  Fish.prototype.update=function(){this.x+=this.speed;this.wobblePhase+=this.wobbleSpeed;this.y=this.baseY+Math.sin(this.wobblePhase)*this.wobbleAmp;this.tailPhase+=this.tailSpeed;if(this.dir===1&&this.x>canvas.width+140)this.reset();if(this.dir===-1&&this.x<-140)this.reset();};
   Fish.prototype.draw=function(){fishDrawBody(ctx,this.x,this.y,this.size,this.c1,this.c2,this.dir,this.tailPhase,this.isShark?'shark':'tropical',this.c3);};
-  function Jelly(){
-    this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;
-    this.size=18+Math.random()*22;this.phase=Math.random()*Math.PI*2;
-    this.speed=0.15+Math.random()*0.25;
-    const p=TROPI[Math.floor(Math.random()*TROPI.length)];this.c1=p[0];this.c2=p[2]||p[1];
-  }
+  function Jelly(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=18+Math.random()*22;this.phase=Math.random()*Math.PI*2;this.speed=0.15+Math.random()*0.25;const p=TROPI[Math.floor(Math.random()*TROPI.length)];this.c1=p[0];this.c2=p[2]||p[1];}
   Jelly.prototype.update=function(){this.phase+=0.03;this.y-=this.speed;this.x+=Math.sin(this.phase*0.6)*0.4;if(this.y<-100){this.y=canvas.height+80;this.x=Math.random()*canvas.width;}};
   Jelly.prototype.draw=function(){fishDrawJelly(ctx,this.x,this.y,this.size,this.c1,this.c2,this.phase);};
   function Bubble(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=1+Math.random()*4;this.speed=0.2+Math.random()*0.6;this.phase=Math.random()*Math.PI*2;}
   Bubble.prototype.update=function(){this.y-=this.speed;this.phase+=0.05;this.x+=Math.sin(this.phase)*0.3;if(this.y<-20){this.y=canvas.height+20;this.x=Math.random()*canvas.width;}};
   Bubble.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.strokeStyle='rgba(180,220,255,.5)';ctx.lineWidth=1;ctx.stroke();ctx.beginPath();ctx.arc(this.x-this.size*0.3,this.y-this.size*0.3,this.size*0.3,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,.6)';ctx.fill();};
-  function rebuild(){
-    fishes=[];bubbles=[];let fc=8,jc=0;
-    if(style==='school')fc=22;else if(style==='deep')fc=7;else if(style==='jellyfish'){fc=0;jc=6;}
-    else if(style==='shark')fc=4;else if(style==='mixed'){fc=8;jc=3;}
-    for(let i=0;i<fc;i++)fishes.push(new Fish());
-    for(let i=0;i<jc;i++)fishes.push(new Jelly());
-    const bc=(style==='deep'||style==='mixed')?16:8;
-    for(let i=0;i<bc;i++)bubbles.push(new Bubble());
-  }
-  function loop(){
-    if(!running)return;ctx.clearRect(0,0,canvas.width,canvas.height);
-    if(enabled){for(let i=0;i<bubbles.length;i++){bubbles[i].update();bubbles[i].draw();}for(let i=0;i<fishes.length;i++){fishes[i].update();fishes[i].draw();}}
-    requestAnimationFrame(loop);
-  }
-  resize();window.addEventListener('resize',function(){resize();rebuild();});
-  rebuild();loop();
-  return{
-    setEnabled:function(v){enabled=!!v;if(enabled)canvas.classList.add('active');else canvas.classList.remove('active');if(enabled){resize();rebuild();}else ctx.clearRect(0,0,canvas.width,canvas.height);},
-    setStyle:function(s){style=s||'tropical';rebuild();}
-  };
+  function rebuild(){fishes=[];bubbles=[];let fc=8,jc=0;if(style==='school')fc=22;else if(style==='deep')fc=7;else if(style==='jellyfish'){fc=0;jc=6;}else if(style==='shark')fc=4;else if(style==='mixed'){fc=8;jc=3;}for(let i=0;i<fc;i++)fishes.push(new Fish());for(let i=0;i<jc;i++)fishes.push(new Jelly());const bc=(style==='deep'||style==='mixed')?16:8;for(let i=0;i<bc;i++)bubbles.push(new Bubble());}
+  function loop(){if(!running)return;ctx.clearRect(0,0,canvas.width,canvas.height);if(enabled){for(let i=0;i<bubbles.length;i++){bubbles[i].update();bubbles[i].draw();}for(let i=0;i<fishes.length;i++){fishes[i].update();fishes[i].draw();}}requestAnimationFrame(loop);}
+  resize();window.addEventListener('resize',function(){resize();rebuild();});rebuild();loop();
+  return{setEnabled:function(v){enabled=!!v;if(enabled)canvas.classList.add('active');else canvas.classList.remove('active');if(enabled){resize();rebuild();}else ctx.clearRect(0,0,canvas.width,canvas.height);},setStyle:function(s){style=s||'tropical';rebuild();}};
 }
-function setFishEnabled(v){
-  const c=getSiteContent();if(!c.effects)c.effects={};c.effects.fishEnabled=!!v;saveSiteContent(c);
-  if(window.fishSystem)window.fishSystem.setEnabled(!!v);
-  showCustomAlert(v?'🐟 Balıklar açıldı':'❌ Balıklar kapatıldı','success');
-}
-function setFishStyle(k){
-  const c=getSiteContent();if(!c.effects)c.effects={};c.effects.fishStyle=k;saveSiteContent(c);
-  if(window.fishSystem)window.fishSystem.setStyle(k);
-  try{renderEffectsPanel();}catch(e){}
-}
-function applyFishSettings(){
-  const eff=getSiteContent().effects||{};
-  if(window.fishSystem){window.fishSystem.setStyle(eff.fishStyle||'tropical');window.fishSystem.setEnabled(eff.fishEnabled===true);}
-}
+function setFishEnabled(v){const c=getSiteContent();if(!c.effects)c.effects={};c.effects.fishEnabled=!!v;saveSiteContent(c);if(window.fishSystem)window.fishSystem.setEnabled(!!v);showCustomAlert(v?'🐟 Balıklar açıldı':'❌ Balıklar kapatıldı','success');}
+function setFishStyle(k){const c=getSiteContent();if(!c.effects)c.effects={};c.effects.fishStyle=k;saveSiteContent(c);if(window.fishSystem)window.fishSystem.setStyle(k);try{renderEffectsPanel();}catch(e){}}
+function applyFishSettings(){const eff=getSiteContent().effects||{};if(window.fishSystem){window.fishSystem.setStyle(eff.fishStyle||'tropical');window.fishSystem.setEnabled(eff.fishEnabled===true);}}
 
 /* ============================================================
    CONFIG
@@ -1587,6 +1432,7 @@ const USER_PREFS_KEY='user_prefs_v1';
 const CHAT_KEY='site_chat_v1';
 const ACTIVITY_LOG_KEY='site_activity_log_v1';
 const ORDERS_KEY='site_orders_v1';
+const USERS_KEY='site_users';
 let currentLang='en',currentAuthMode='signin',currentResetEmail='',pendingFaviconDataUrl=null,pendingAdminPhoto=undefined,currentProfileEmail=null;
 let pendingSignup=null,pendingApkFile=null,pendingApkDelete=false,pendingIconDataUrl=null,pendingIconDelete=false;
 let activeChatUser=null,chatPollTimer=null,chatSearchQuery='',currentReplyTo=null;
@@ -1597,6 +1443,7 @@ let messengerPos=null;
 let messengerDragState={isDragging:false,moved:false,startX:0,startY:0,startPosX:0,startPosY:0};
 let appsRenderLock=false,appsResizeTimer=null;
 let firebaseConnected=false,firebaseDbRef=null;
+let firebaseSyncReady=false,firebaseSyncTimer=null,isApplyingRemote=false;
 const PASSWORD_FIELDS=['adminPasswordInput','contactClientPassword','changeOldPassword','changeNewPassword','changeConfirmPassword','deleteConfirmPassword','resetClientNewPassword'];
 const PW_LABELS={en:{pw_enter:'password',pw_very_weak:'very weak',pw_weak:'weak',pw_medium:'medium',pw_strong:'strong',pw_very_strong:'very strong'},tr:{pw_enter:'şifre',pw_very_weak:'çok zayıf',pw_weak:'zayıf',pw_medium:'orta',pw_strong:'güçlü',pw_very_strong:'çok güçlü'}};
 const LANG={en:{role:"Software Developer",sec_apps:"My Applications",sec_exp:"Experience",sec_setup:"Setup & Environment",sec_stack:"Core Stack",contact_sub:"Sign In / Sign Up",contact_main:"Sign In To Join Us",scan_text:"Scan To Connect",copyright:"© 2026 muminsultani • All Rights Reserved.",chat_search_ph:"search...",chat_ph:"type a message...",chat_no_users:"no other users.",chat_no_msgs:"no messages yet",chat_start:"start the conversation 👋",chat_you:"you",chat_voice:"🎤 voice message",order_title:"Order Software",order_sub:"Need a website or app?",order_main:"Place an Order",order_modal_title:"Order Software",ord_name:"Ad & Soyad",ord_email:"Email",ord_type:"Project Type",ord_budget:"Budget",ord_deadline:"Deadline",ord_desc:"Project Details",ord_submit:"Sipariş Ver",ord_website:"Website",ord_mobile:"Mobile App",ord_web_app:"Web App",ord_other:"Other",ord_name_ph:"name & surname",ord_email_ph:"email",ord_budget_ph:"optional",ord_deadline_ph:"e.g. 2 weeks",ord_desc_ph:"project details",edit_profile:"Edit Profile",change_password:"Change Password",settings:"Settings",delete_account:"Delete Account",logout:"Logout",check_email:"Check Your Email",enter_code:"Enter Code",resend:"Resend",verify_email:"Verify Email",verify_desc:"Enter the 5-digit code from your email.",code:"Code",verify:"Verify",account_access:"Account Access",signin_tab:"Sign In",signup_tab:"Sign Up",name:"Ad & Soyad",username:"Username",email:"Email",password:"Password",forgot:"forgot password?",next:"Next",go:"Go",name_ph:"name & surname",username_ph:"@username",email_ph:"email or username",password_ph:"password",pw_recovery:"Password Recovery",pw_recovery_desc:"Enter your registered email.",send:"Send",reset_pw:"Reset Password",new_password:"New Password",update:"Update",change_pw_title:"Change Password",current_password:"Current Password",confirm_password:"Confirm Password",del_acc_title:"Delete Account",del_warn:"Warning: cannot be undone.",delete:"Delete",confirm_del:"Confirm Deletion",delete_account_btn:"Delete Account",edit_title:"Edit Profile",profile_photo:"Profile Photo",change_photo:"Change Photo",reset:"Reset",name_surname:"Ad & Soyad",website:"Website",dob:"Date of Birth",save:"Save",settings_title:"Settings",settings_hint:"Customize your site appearance.",color_theme:"Color Theme",font_color:"Font Color",font_family:"Font",background:"Background",chat_bg:"Chat Background",settings_reset:"Reset",settings_ok:"OK",crop_photo:"Crop Photo",cancel:"Cancel",apply:"Apply",message:"Message",close:"Close",send_message:"Send Message",user_profile:"User Profile",joined:"Joined",no_orders:"No orders yet.",you_must_signin:"You must sign in to place an order.",order_received:"Order received! We will contact you soon.",fill_fields:"Please fill in all fields.",invalid_credentials:"Invalid credentials!",email_registered:"Email already registered!",username_taken:"This username is already taken.",min_7:"Minimum 7 characters.",pw_8:"Password must be at least 8 characters.",signin_success:"Signed in successfully!",signup_success:"Account created successfully!",logout_confirm:"Are you sure you want to log out?",logout_done:"Session closed.",order_approved:"Order approved and email sent!",gt_signin:"Sign In",gt_back:"Back",gt_ok:"OK",gt_cancel:"Cancel",gt_yes:"Yes",min7:"min 7 chars",taken:"taken",available:"available"},tr:{role:"Yazılım Geliştirici",sec_apps:"Uygulamalarım",sec_exp:"Deneyim",sec_setup:"Kurulum & Ortam",sec_stack:"Temel Yığın",contact_sub:"Giriş Yap / Kayıt Ol",contact_main:"Bize Katılmak İçin Giriş Yapın",scan_text:"Bağlanmak İçin Tarayın",copyright:"© 2026 muminsultani • Tüm Hakları Saklıdır.",chat_search_ph:"ara...",chat_ph:"bir mesaj yaz...",chat_no_users:"başka kullanıcı yok.",chat_no_msgs:"henüz mesaj yok",chat_start:"sohbete başla 👋",chat_you:"sen",chat_voice:"🎤 sesli mesaj",order_title:"Yazılım Siparişi",order_sub:"Web sitesi veya uygulama mı lazım?",order_main:"Sipariş Ver",order_modal_title:"Yazılım Siparişi",ord_name:"Ad & Soyad",ord_email:"Email",ord_type:"Proje Tipi",ord_budget:"Bütçe",ord_deadline:"Teslim Tarihi",ord_desc:"Proje Detayları",ord_submit:"Sipariş Ver",ord_website:"Website",ord_mobile:"Mobil Uygulama",ord_web_app:"Web Uygulaması",ord_other:"Diğer",ord_name_ph:"ad & soyad",ord_email_ph:"email",ord_budget_ph:"opsiyonel",ord_deadline_ph:"örn. 2 hafta",ord_desc_ph:"proje detayları",edit_profile:"Profili Düzenle",change_password:"Şifre Değiştir",settings:"Ayarlar",delete_account:"Hesabı Sil",logout:"Çıkış Yap",check_email:"Emailinizi Kontrol Edin",enter_code:"Kodu Girin",resend:"Yeniden Gönder",verify_email:"Emaili Doğrula",verify_desc:"Emailinizdeki 5 haneli kodu girin.",code:"Kod",verify:"Doğrula",account_access:"Hesap Erişimi",signin_tab:"Giriş Yap",signup_tab:"Kayıt Ol",name:"Ad & Soyad",username:"Kullanıcı Adı",email:"Email",password:"Şifre",forgot:"şifremi unuttum?",next:"İleri",go:"Git",name_ph:"ad & soyad",username_ph:"@username",email_ph:"email veya kullanıcı adı",password_ph:"şifre",pw_recovery:"Şifre Kurtarma",pw_recovery_desc:"Kayıtlı emailinizi girin.",send:"Gönder",reset_pw:"Şifre Sıfırla",new_password:"Yeni Şifre",update:"Güncelle",change_pw_title:"Şifre Değiştir",current_password:"Mevcut Şifre",confirm_password:"Şifre Onayı",del_acc_title:"Hesabı Sil",del_warn:"Uyarı: geri alınamaz.",delete:"Sil",confirm_del:"Silmeyi Onayla",delete_account_btn:"Hesabı Sil",edit_title:"Profili Düzenle",profile_photo:"Profil Fotoğrafı",change_photo:"Fotoğrafı Değiştir",reset:"Sıfırla",name_surname:"Ad & Soyad",website:"Web Sitesi",dob:"Doğum Tarihi",save:"Kaydet",settings_title:"Ayarlar",settings_hint:"Site görünümünüzü özelleştirin.",color_theme:"Renk Teması",font_color:"Yazı Rengi",font_family:"Yazı Tipi",background:"Arkaplan",chat_bg:"Sohbet Arkaplanı",settings_reset:"Sıfırla",settings_ok:"Tamam",crop_photo:"Fotoğrafı Kırp",cancel:"İptal",apply:"Uygula",message:"Mesaj",close:"Kapat",send_message:"Mesaj Gönder",user_profile:"Kullanıcı Profili",joined:"Katıldı",no_orders:"Henüz sipariş yok.",you_must_signin:"Sipariş vermek için giriş yapmalısınız.",order_received:"Siparişiniz alındı! En kısa sürede iletişime geçeceğiz.",fill_fields:"Lütfen tüm alanları doldurun.",invalid_credentials:"Geçersiz bilgiler!",email_registered:"Email zaten kayıtlı!",username_taken:"Bu kullanıcı adı alınmış.",min_7:"En az 7 karakter.",pw_8:"Şifre en az 8 karakter olmalı.",signin_success:"Başarıyla giriş yapıldı!",signup_success:"Hesap başarıyla oluşturuldu!",logout_confirm:"Çıkış yapmak istediğinizden emin misiniz?",logout_done:"Oturum kapatıldı.",order_approved:"Sipariş onaylandı ve email gönderildi!",gt_signin:"Giriş Yap",gt_back:"Geri",gt_ok:"Tamam",gt_cancel:"İptal",gt_yes:"Evet",min7:"min 7 karakter",taken:"alınmış",available:"uygun"}};
@@ -1619,13 +1466,204 @@ function t(key,fallback){const d=LANG[currentLang]||LANG.en;const v=d[key];retur
 function escapeHtml(s){if(s===null||s===undefined)return'';return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 function deepMerge(t,s){for(const k in s){if(s[k]&&typeof s[k]==='object'&&!Array.isArray(s[k])){t[k]=deepMerge(t[k]||{},s[k]);}else if(s[k]!==undefined&&s[k]!==null){t[k]=s[k];}}return t;}
 function getSiteContent(){try{const r=localStorage.getItem(SITE_CONTENT_KEY);if(r){const p=JSON.parse(r);return deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),p);}}catch(e){}return JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT));}
-function saveSiteContent(c){c.lastEdit=new Date().toLocaleString();try{localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(c));}catch(e){}}
+function saveSiteContent(c){
+  c.lastEdit=new Date().toLocaleString();
+  try{localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(c));}catch(e){}
+  if(firebaseSyncTimer)clearTimeout(firebaseSyncTimer);
+  firebaseSyncTimer=setTimeout(()=>{saveSiteContentToFirebase(c);},800);
+}
 function getDyn(path,fb){const c=getSiteContent(),p=path.split('.');let v=c;for(const x of p){if(v&&v[x]!==undefined)v=v[x];else return fb;}return(v===undefined||v===null)?fb:v;}
 function getUserPrefs(){try{return JSON.parse(localStorage.getItem(USER_PREFS_KEY)||'{}');}catch(e){return{};}}
 function saveUserPrefs(p){try{localStorage.setItem(USER_PREFS_KEY,JSON.stringify(p));}catch(e){}}
 function clearUserPrefs(){try{localStorage.removeItem(USER_PREFS_KEY);}catch(e){}}
 function setUserPref(k,v){const p=getUserPrefs();p[k]=v;saveUserPrefs(p);}
 
+/* ============================================================
+   🔥 FIREBASE SYNC — Tüm tarayıcılarda ayarları senkronize et
+   ============================================================ */
+async function loadSiteContentFromFirebase(){
+  try{
+    if(typeof firebase==='undefined')return false;
+    if(!firebase.apps||!firebase.apps.length)return false;
+    const db=firebase.database();
+    const snap=await db.ref('site_content').once('value');
+    const remote=snap.val();
+    if(remote&&typeof remote==='object'){
+      const merged=deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),remote);
+      localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(merged));
+      console.log('✅ Firebase: Site içeriği yüklendi');
+      return true;
+    }
+  }catch(e){console.warn('Firebase load error:',e);}
+  return false;
+}
+async function saveSiteContentToFirebase(content){
+  try{
+    if(typeof firebase==='undefined')return false;
+    if(!firebase.apps||!firebase.apps.length)return false;
+    if(isApplyingRemote)return false;
+    const db=firebase.database();
+    await db.ref('site_content').set(content);
+    console.log('✅ Firebase: Site içeriği kaydedildi');
+    return true;
+  }catch(e){console.warn('Firebase save error:',e);return false;}
+}
+function listenToFirebaseChanges(){
+  try{
+    if(typeof firebase==='undefined')return;
+    if(!firebase.apps||!firebase.apps.length)return;
+    const db=firebase.database();
+    db.ref('site_content').on('value',snap=>{
+      const remote=snap.val();
+      if(!remote||typeof remote!=='object')return;
+      const localRaw=localStorage.getItem(SITE_CONTENT_KEY);
+      let local=null;
+      try{local=JSON.parse(localRaw);}catch(e){}
+      const localStr=local?JSON.stringify(local):'';
+      const remoteStr=JSON.stringify(remote);
+      if(localStr!==remoteStr){
+        isApplyingRemote=true;
+        const merged=deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),remote);
+        localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(merged));
+        try{applySiteContent();applySectionOrder();applyEffectsSettings();}catch(e){}
+        isApplyingRemote=false;
+        console.log('🔄 Firebase: Uzak değişiklik uygulandı');
+      }
+    });
+  }catch(e){console.warn('Firebase listen error:',e);}
+}
+
+/* ============================================================
+   USERS SYNC
+   ============================================================ */
+async function loadUsersFromFirebase(){
+  try{
+    if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;
+    const db=firebase.database();
+    const snap=await db.ref('site_users').once('value');
+    const remote=snap.val();
+    if(Array.isArray(remote)&&remote.length>0){
+      localStorage.setItem(USERS_KEY,JSON.stringify(remote));
+      console.log('✅ Firebase: Kullanıcılar yüklendi');
+      return true;
+    }
+  }catch(e){console.warn('Firebase users load error:',e);}
+  return false;
+}
+async function saveUsersToFirebase(users){
+  try{
+    if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;
+    const db=firebase.database();
+    await db.ref('site_users').set(users);
+    console.log('✅ Firebase: Kullanıcılar kaydedildi');
+    return true;
+  }catch(e){console.warn('Firebase users save error:',e);return false;}
+}
+function listenToUsersChanges(){
+  try{
+    if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return;
+    const db=firebase.database();
+    db.ref('site_users').on('value',snap=>{
+      const remote=snap.val();
+      if(!Array.isArray(remote))return;
+      const localRaw=localStorage.getItem(USERS_KEY);
+      if(JSON.stringify(remote)!==localRaw){
+        localStorage.setItem(USERS_KEY,JSON.stringify(remote));
+        try{checkUserSession();}catch(e){}
+        console.log('🔄 Firebase: Kullanıcılar güncellendi');
+      }
+    });
+  }catch(e){console.warn('Firebase users listen error:',e);}
+}
+
+/* ============================================================
+   ORDERS SYNC
+   ============================================================ */
+async function loadOrdersFromFirebase(){
+  try{
+    if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;
+    const db=firebase.database();
+    const snap=await db.ref('site_orders').once('value');
+    const remote=snap.val();
+    if(Array.isArray(remote)){
+      localStorage.setItem(ORDERS_KEY,JSON.stringify(remote));
+      console.log('✅ Firebase: Siparişler yüklendi');
+      return true;
+    }
+  }catch(e){console.warn('Firebase orders load error:',e);}
+  return false;
+}
+async function saveOrdersToFirebase(orders){
+  try{
+    if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;
+    const db=firebase.database();
+    await db.ref('site_orders').set(orders);
+    console.log('✅ Firebase: Siparişler kaydedildi');
+    return true;
+  }catch(e){console.warn('Firebase orders save error:',e);return false;}
+}
+function listenToOrdersChanges(){
+  try{
+    if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return;
+    const db=firebase.database();
+    db.ref('site_orders').on('value',snap=>{
+      const remote=snap.val();
+      if(!Array.isArray(remote))return;
+      const localRaw=localStorage.getItem(ORDERS_KEY);
+      if(JSON.stringify(remote)!==localRaw){
+        localStorage.setItem(ORDERS_KEY,JSON.stringify(remote));
+        try{updateOrdersBadge();}catch(e){}
+        console.log('🔄 Firebase: Siparişler güncellendi');
+      }
+    });
+  }catch(e){console.warn('Firebase orders listen error:',e);}
+}
+
+/* ============================================================
+   CHAT SYNC
+   ============================================================ */
+async function loadChatFromFirebase(){
+  try{
+    if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;
+    const db=firebase.database();
+    const snap=await db.ref('site_chat').once('value');
+    const remote=snap.val();
+    if(remote&&typeof remote==='object'){
+      localStorage.setItem(CHAT_KEY,JSON.stringify(remote));
+      console.log('✅ Firebase: Chat yüklendi');
+      return true;
+    }
+  }catch(e){console.warn('Firebase chat load error:',e);}
+  return false;
+}
+async function saveChatToFirebase(chat){
+  try{
+    if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;
+    const db=firebase.database();
+    await db.ref('site_chat').set(chat);
+    return true;
+  }catch(e){console.warn('Firebase chat save error:',e);return false;}
+}
+function listenToChatChanges(){
+  try{
+    if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return;
+    const db=firebase.database();
+    db.ref('site_chat').on('value',snap=>{
+      const remote=snap.val();
+      if(!remote||typeof remote!=='object')return;
+      const localRaw=localStorage.getItem(CHAT_KEY);
+      if(JSON.stringify(remote)!==localRaw){
+        localStorage.setItem(CHAT_KEY,JSON.stringify(remote));
+        try{updateChatBadge();}catch(e){}
+        console.log('🔄 Firebase: Chat güncellendi');
+      }
+    });
+  }catch(e){console.warn('Firebase chat listen error:',e);}
+}
+
+/* ============================================================
+   PASSWORD
+   ============================================================ */
 function getPasswordValue(id){const el=document.getElementById(id);if(!el)return '';return el.dataset.pwMaskInit!==undefined?(el.dataset.realValue||''):el.value;}
 function setPasswordValue(id,value){const el=document.getElementById(id);if(!el)return;el.dataset.realValue=value||'';if(el.dataset.masked==='1'){el.value='*'.repeat((value||'').length);}else{el.value=value||'';}}
 function clearPasswordField(id){setPasswordValue(id,'');const w=document.getElementById('pwStrengthWrap_'+id);if(w)w.classList.remove('show');}
@@ -1633,83 +1671,44 @@ function isValidPassword(p){return typeof p==='string'&&p.length>=8;}
 function pwLabel(k){const d=PW_LABELS[currentLang]||PW_LABELS.en;return d[k]||PW_LABELS.en[k]||k;}
 function evaluatePasswordStrength(pw){const rules={length:pw.length>=8,upper:/[A-Z]/.test(pw),lower:/[a-z]/.test(pw),digit:/[0-9]/.test(pw),special:/[^A-Za-z0-9]/.test(pw)};let score=0;Object.values(rules).forEach(v=>{if(v)score++;});if(pw.length>=12)score+=0.5;if(pw.length>=16)score+=0.5;let level=Math.min(5,Math.ceil(score));if(pw.length===0)level=0;const labels={0:{text:pwLabel('pw_enter'),cls:'s1',pct:0},1:{text:pwLabel('pw_very_weak'),cls:'s1',pct:20},2:{text:pwLabel('pw_weak'),cls:'s2',pct:40},3:{text:pwLabel('pw_medium'),cls:'s3',pct:60},4:{text:pwLabel('pw_strong'),cls:'s4',pct:80},5:{text:pwLabel('pw_very_strong'),cls:'s5',pct:100}};return{level,info:labels[level]};}
 function updatePasswordStrength(id,pw){if(id==='contactClientPassword'&&currentAuthMode==='signin'){const w=document.getElementById('pwStrengthWrap_'+id);if(w)w.classList.remove('show');return;}const wrap=document.getElementById('pwStrengthWrap_'+id);if(!wrap)return;if(!pw||pw.length===0){wrap.classList.remove('show');return;}wrap.classList.add('show');const{level,info}=evaluatePasswordStrength(pw);const bar=document.getElementById('pwBar_'+id);if(bar){bar.classList.remove('level-1','level-2','level-3','level-4','level-5');if(level>0)bar.classList.add('level-'+level);}const label=document.getElementById('pwLabel_'+id);if(label){label.className='pw-strength-label '+info.cls;label.textContent=info.text;}const pct=document.getElementById('pwPercent_'+id);if(pct)pct.textContent=info.pct+'%';}
-function initPasswordMask(id){
-  const input=document.getElementById(id);if(!input||input.dataset.pwMaskInit)return;
-  input.dataset.pwMaskInit='1';input.dataset.realValue='';input.dataset.masked='1';
-  input.setAttribute('type','text');input.setAttribute('autocomplete','off');
-  input.classList.add('password-mask');
-  input.addEventListener('input',function(e){
-    const cur=this.value;const real=this.dataset.realValue||'';
-    const inputType=e.inputType||'';let newReal=real;
-    if(inputType==='deleteContentBackward'||inputType==='deleteContentForward'){
-      const pos=this.selectionStart||0;newReal=real.slice(0,pos)+real.slice(pos+1);
-    }else if(inputType==='insertText'||inputType==='insertCompositionText'||!inputType){
-      const added=cur.length-real.length;
-      if(added>0){const pos=(this.selectionStart||cur.length)-added;const chars=cur.substring(pos,pos+added);if(/^\*+$/.test(chars))newReal=real;else newReal=real.slice(0,pos)+chars+real.slice(pos);}
-      else if(added<0){newReal=real.slice(0,cur.length);}
-    }else{newReal=cur.replace(/\*/g,'')||real;}
-    this.dataset.realValue=newReal;
-    if(this.dataset.masked==='1'){this.value='*'.repeat(newReal.length);try{this.setSelectionRange(this.value.length,this.value.length);}catch(err){}}else{this.value=newReal;try{this.setSelectionRange(this.value.length,this.value.length);}catch(err){}}
-    updatePasswordStrength(id,newReal);
-  });
-}
+function initPasswordMask(id){const input=document.getElementById(id);if(!input||input.dataset.pwMaskInit)return;input.dataset.pwMaskInit='1';input.dataset.realValue='';input.dataset.masked='1';input.setAttribute('type','text');input.setAttribute('autocomplete','off');input.classList.add('password-mask');input.addEventListener('input',function(e){const cur=this.value;const real=this.dataset.realValue||'';const inputType=e.inputType||'';let newReal=real;if(inputType==='deleteContentBackward'||inputType==='deleteContentForward'){const pos=this.selectionStart||0;newReal=real.slice(0,pos)+real.slice(pos+1);}else if(inputType==='insertText'||inputType==='insertCompositionText'||!inputType){const added=cur.length-real.length;if(added>0){const pos=(this.selectionStart||cur.length)-added;const chars=cur.substring(pos,pos+added);if(/^\*+$/.test(chars))newReal=real;else newReal=real.slice(0,pos)+chars+real.slice(pos);}else if(added<0){newReal=real.slice(0,cur.length);}}else{newReal=cur.replace(/\*/g,'')||real;}this.dataset.realValue=newReal;if(this.dataset.masked==='1'){this.value='*'.repeat(newReal.length);try{this.setSelectionRange(this.value.length,this.value.length);}catch(err){}}else{this.value=newReal;try{this.setSelectionRange(this.value.length,this.value.length);}catch(err){}}updatePasswordStrength(id,newReal);});}
 function initAllPasswordMasks(){PASSWORD_FIELDS.forEach(id=>initPasswordMask(id));}
 function togglePasswordVisibility(i,ic){const p=document.getElementById(i),t2=document.getElementById(ic);if(!p||!t2)return;if(p.dataset.masked==='1'){p.dataset.masked='0';p.classList.remove('password-mask');t2.className='fa-solid fa-eye-slash';p.value=p.dataset.realValue||'';}else{p.dataset.masked='1';p.classList.add('password-mask');t2.className='fa-solid fa-eye';p.value='*'.repeat((p.dataset.realValue||'').length);}}
 
+/* ============================================================
+   FIREBASE INIT
+   ============================================================ */
 function initFirebase(){try{if(typeof firebase==='undefined'||!FIREBASE_CONFIG||!FIREBASE_CONFIG.databaseURL){firebaseConnected=false;return;}if(!firebase.apps||!firebase.apps.length){firebase.initializeApp(FIREBASE_CONFIG);}const db=firebase.database();firebaseDbRef=db.ref('.info/connected');firebaseDbRef.on('value',function(snap){firebaseConnected=(snap.val()===true);try{const el=document.getElementById('dash-cloud-status');if(el)el.textContent='Cloud: '+(firebaseConnected?'✅':'⚠️');}catch(e){}});}catch(e){firebaseConnected=false;}}
 function initEmailJS(){if(!EMAILJS_CONFIG.enabled)return;try{if(typeof emailjs!=='undefined'){emailjs.init({publicKey:EMAILJS_CONFIG.publicKey});}}catch(e){}}
 async function sendVerificationEmail(toEmail,code,type){if(!EMAILJS_CONFIG.enabled)return{success:false,reason:'not_configured'};const typeLabels={signup:'Account Verification',reset:'Password Reset'};const brand=getDyn('header.brand','muminsultani');const tp={to_email:toEmail,brand,subject:typeLabels[type]||'Verification',type:typeLabels[type]||'Verification',code:String(code),message:'Doğrulama kodunuz: '+code,image_url:'',link_url:'',link_text:'',has_image:'no',has_link:'no',has_pdf:'no',pdf_url:'',year:new Date().getFullYear()};try{const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EMAILJS_CONFIG.serviceId,template_id:EMAILJS_CONFIG.templateId,user_id:EMAILJS_CONFIG.publicKey,template_params:tp})});const txt=await r.text();if(r.ok&&(txt==='OK'||r.status===200)){logActivity('email_sent',{email:toEmail,name:typeLabels[type]},'Sent: '+toEmail);return{success:true};}return{success:false,reason:txt||('HTTP '+r.status)};}catch(err){return{success:false,reason:err.message||'network_error'};}}
 
 function generateRandomUserId(){let id='';for(let i=0;i<9;i++)id+=Math.floor(Math.random()*10);return id;}
 function isAdminLoggedIn(){try{return sessionStorage.getItem(ADMIN_SESSION_KEY)==='yes';}catch(e){return false;}}
-function getAllUsers(){try{return JSON.parse(localStorage.getItem('site_users')||'[]');}catch(e){return[];}}
+function getAllUsers(){try{return JSON.parse(localStorage.getItem(USERS_KEY)||'[]');}catch(e){return[];}}
+function saveAllUsers(u){
+  try{localStorage.setItem(USERS_KEY,JSON.stringify(u));}catch(e){}
+  saveUsersToFirebase(u);
+}
 function isAdminUser(email){if(!email)return false;const lc=String(email).toLowerCase().trim();try{const u=getAllUsers();const ar=u.find(x=>x.isAdmin===true);if(ar&&String(ar.email||'').toLowerCase().trim()===lc)return true;}catch(e){}return lc===ADMIN_EMAIL.toLowerCase();}
 function getAdminUser(){const u=getAllUsers();let f=u.find(x=>x.isAdmin===true);if(!f)f=u.find(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL.toLowerCase());if(f)return Object.assign({},f,{isAdmin:true,isVerified:true});return{userId:'788133910',name:'muminsultani',username:'muminsultani',email:ADMIN_EMAIL,password:'SUl#784429$',bio:"hello! dear friends I'm #muminsultani.",website:'',profilePhoto:'',following:[],createdAt:'2023-08-18T00:00:00.000Z',isAdmin:true,isVerified:true};}
 function getEffectiveLoggedUser(){const lu=localStorage.getItem('logged_user');if(lu){try{const u=JSON.parse(lu);if(u&&u.email)return u;}catch(e){}}if(isAdminLoggedIn()){const a=getAdminUser();try{localStorage.setItem('logged_user',JSON.stringify(a));}catch(e){}return a;}return null;}
 function getVerifiedBadgeHTML(size){const cls='verified-badge'+(size?(' '+size):'');return '<span class="'+cls+'" title="Verified"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path fill="#1d9bf0" d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18z"/></svg></span>';}
 
-function ensureUserIdsAndAdmin(){
-  try{
-    let u=JSON.parse(localStorage.getItem('site_users')||'[]');let changed=false;
-    let ai=u.findIndex(x=>x.isAdmin===true);
-    if(ai===-1)ai=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL.toLowerCase());
-    if(ai===-1){u.unshift({userId:'788133910',name:'muminsultani',username:'muminsultani',email:ADMIN_EMAIL,password:'SUl#784429$',bio:"hello! dear friends I'm #muminsultani.",website:'',profilePhoto:'',following:[],createdAt:'2023-08-18T00:00:00.000Z',isAdmin:true,isVerified:true});ai=0;changed=true;}
-    else{
-      if(u[ai].createdAt!=='2023-08-18T00:00:00.000Z'){u[ai].createdAt='2023-08-18T00:00:00.000Z';changed=true;}
-      if(u[ai].email!==ADMIN_EMAIL){u[ai].email=ADMIN_EMAIL;changed=true;}
-      if(u[ai].userId!=='788133910'){u[ai].userId='788133910';changed=true;}
-      if(u[ai].isVerified!==true){u[ai].isVerified=true;changed=true;}
-    }
-    u.forEach(x=>{if(!/^\d{9}$/.test(String(x.userId||''))){x.userId='';changed=true;}if(!x.bio)x.bio='';if(!x.website)x.website='';if(!Array.isArray(x.following))x.following=[];});
-    const seen=new Set();u.forEach(x=>{if(x.userId&&seen.has(x.userId)){x.userId='';changed=true;}else if(x.userId)seen.add(x.userId);});
-    u.forEach(x=>{if(!x.userId){let nid;do{nid=generateRandomUserId();}while(seen.has(nid));x.userId=nid;seen.add(nid);changed=true;}});
-    if(changed){localStorage.setItem('site_users',JSON.stringify(u));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);const f=u.find(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());if(f)localStorage.setItem('logged_user',JSON.stringify(f));}catch(e){}}}
-  }catch(e){}
-}
+function ensureUserIdsAndAdmin(){try{let u=JSON.parse(localStorage.getItem(USERS_KEY)||'[]');let changed=false;let ai=u.findIndex(x=>x.isAdmin===true);if(ai===-1)ai=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL.toLowerCase());if(ai===-1){u.unshift({userId:'788133910',name:'muminsultani',username:'muminsultani',email:ADMIN_EMAIL,password:'SUl#784429$',bio:"hello! dear friends I'm #muminsultani.",website:'',profilePhoto:'',following:[],createdAt:'2023-08-18T00:00:00.000Z',isAdmin:true,isVerified:true});ai=0;changed=true;}else{if(u[ai].createdAt!=='2023-08-18T00:00:00.000Z'){u[ai].createdAt='2023-08-18T00:00:00.000Z';changed=true;}if(u[ai].email!==ADMIN_EMAIL){u[ai].email=ADMIN_EMAIL;changed=true;}if(u[ai].userId!=='788133910'){u[ai].userId='788133910';changed=true;}if(u[ai].isVerified!==true){u[ai].isVerified=true;changed=true;}}u.forEach(x=>{if(!/^\d{9}$/.test(String(x.userId||''))){x.userId='';changed=true;}if(!x.bio)x.bio='';if(!x.website)x.website='';if(!Array.isArray(x.following))x.following=[];});const seen=new Set();u.forEach(x=>{if(x.userId&&seen.has(x.userId)){x.userId='';changed=true;}else if(x.userId)seen.add(x.userId);});u.forEach(x=>{if(!x.userId){let nid;do{nid=generateRandomUserId();}while(seen.has(nid));x.userId=nid;seen.add(nid);changed=true;}});if(changed){saveAllUsers(u);const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);const f=u.find(x=>String(x.email||'').toLowerCase()===String(cu.email||'').toLowerCase());if(f)localStorage.setItem('logged_user',JSON.stringify(f));}catch(e){}}}}catch(e){}}
 
 function getChatUsersFor(email){const u=getAllUsers();const ce=String(email||'').toLowerCase();let list=u.filter(x=>String(x.email||'').toLowerCase()!==ce);if(!isAdminUser(email)&&!list.some(x=>isAdminUser(x.email))){list.unshift(getAdminUser());}list.sort((a,b)=>{const aa=isAdminUser(a.email)?0:1,ba=isAdminUser(b.email)?0:1;return aa-ba;});return list;}
 function logActivity(type,userData,details){try{let l=JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');const u=userData||{};l.push({type,timestamp:new Date().toISOString(),name:u.name||'',username:u.username||'',email:u.email||'',userId:u.userId||'',details:details||''});if(l.length>2000)l=l.slice(-2000);localStorage.setItem(ACTIVITY_LOG_KEY,JSON.stringify(l));}catch(e){}}
 function getActivityLog(){try{return JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY)||'[]');}catch(e){return[];}}
 function getChatMessages(){try{return JSON.parse(localStorage.getItem(CHAT_KEY)||'{}');}catch(e){return{};}}
-function saveChatMessages(m){try{localStorage.setItem(CHAT_KEY,JSON.stringify(m));}catch(e){}}
+function saveChatMessages(m){
+  try{localStorage.setItem(CHAT_KEY,JSON.stringify(m));}catch(e){}
+  saveChatToFirebase(m);
+}
 function getConversationId(a,b){return[String(a||'').toLowerCase(),String(b||'').toLowerCase()].sort().join('__');}
 function getTotalUnread(email){if(!email)return 0;const m=getChatMessages();let t2=0;const tg=email.toLowerCase();for(const k in m){const p=k.split('__');if(p.includes(tg)){t2+=m[k].filter(x=>String(x.to).toLowerCase()===tg&&!x.read).length;}}return t2;}
 function updateChatBadge(){const lu=localStorage.getItem('logged_user');const eff=getEffectiveLoggedUser();const total=eff?getTotalUnread(eff.email):0;const bn=document.getElementById('brandNotifBadge');const mb=document.getElementById('messengerFloatBtn');const mBadge=document.getElementById('messengerBadge');const isLogged=!!lu||isAdminLoggedIn();if(mb){if(isLogged)mb.classList.add('visible');else mb.classList.remove('visible');}if(!isLogged){if(bn){bn.classList.remove('show');bn.textContent='0';}if(mBadge)mBadge.classList.remove('show');return;}if(bn){if(total>0){bn.classList.add('show');bn.textContent=total>99?'99+':String(total);}else bn.classList.remove('show');}if(mBadge){if(total>0){mBadge.classList.add('show');mBadge.textContent=total>99?'99+':String(total);}else mBadge.classList.remove('show');}}
 
-function applyAppearance(){
-  const a=(getSiteContent().appearance)||{};const u=getUserPrefs();
-  const theme=u.theme||a.theme||'purple';
-  const fontColor=u.fontColor||a.fontColor||'default';
-  const panelStyle=u.panelStyle||a.panelStyle||'default';
-  const formStyle=u.formStyle||a.formStyle||'default';
-  const font=u.font||a.font||'Sora';
-  document.body.dataset.theme=theme;
-  document.body.dataset.fcolor=fontColor;
-  document.body.dataset.panel=panelStyle;
-  document.body.dataset.form=formStyle;
-  const FONT_FALLBACK=", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif";
-  document.documentElement.style.setProperty('--font-main',"'"+font+"'"+FONT_FALLBACK);
-}
+function applyAppearance(){const a=(getSiteContent().appearance)||{};const u=getUserPrefs();const theme=u.theme||a.theme||'purple';const fontColor=u.fontColor||a.fontColor||'default';const panelStyle=u.panelStyle||a.panelStyle||'default';const formStyle=u.formStyle||a.formStyle||'default';const font=u.font||a.font||'Sora';document.body.dataset.theme=theme;document.body.dataset.fcolor=fontColor;document.body.dataset.panel=panelStyle;document.body.dataset.form=formStyle;const FONT_FALLBACK=", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif";document.documentElement.style.setProperty('--font-main',"'"+font+"'"+FONT_FALLBACK);}
 function applyBackground(){const eff=(getSiteContent().effects)||{};const u=getUserPrefs();const bg=u.background||eff.background||'default';BG_PRESETS.forEach(b=>document.body.classList.remove('bg-'+b.key));if(bg&&bg!=='default')document.body.classList.add('bg-'+bg);}
 function applyChatBackground(){const eff=(getSiteContent().effects)||{};const u=getUserPrefs();const bg=u.chatBackground||eff.chatBackground||'default';const box=document.getElementById('chatMessages');if(!box)return;CHAT_BG_PRESETS.forEach(b=>box.classList.remove('chat-bg-'+b.key));if(bg!=='default')box.classList.add('chat-bg-'+bg);}
 function applyMessengerColor(){const eff=(getSiteContent().effects)||{};const key=eff.messengerColor||'purple';const found=MESSENGER_COLORS.find(c=>c.key===key)||MESSENGER_COLORS[0];const btn=document.getElementById('messengerFloatBtn');if(btn){btn.style.setProperty('--messenger-color',found.c);const svgPaths=btn.querySelectorAll('svg path');svgPaths.forEach(p=>{p.style.fill=found.c;});}}
@@ -1837,14 +1836,14 @@ function openGetInTouchModal(){const lu=localStorage.getItem('logged_user');if(l
 function closeGetInTouchModal(){document.getElementById('getInTouchModal').classList.remove('active');}
 function openDirectContactModal(){closeGetInTouchModal();switchAuthTab('signin');document.getElementById('directContactModal').classList.add('active');setTimeout(()=>{const ei=document.getElementById('contactClientEmail');if(ei)ei.focus();},200);}
 function closeDirectContactModal(){document.getElementById('directContactModal').classList.remove('active');forceRefreshUI();}
-function checkUsernameAvailability(){const i=document.getElementById('contactClientUsername'),m=document.getElementById('usernameAvailabilityMsg');if(!i||!m)return;let un=i.value.trim().replace(/^@/,'');if(!un){m.style.display='none';return;}if(un.length<7){m.style.display='block';m.style.color='#f59e0b';m.innerText=t('min7');return;}const users=JSON.parse(localStorage.getItem('site_users')||'[]');const ex=users.some(u=>String(u.username||'').replace(/^@/,'').toLowerCase()===un.toLowerCase());m.style.display='block';if(ex){m.style.color='#ef4444';m.innerText=t('taken');}else{m.style.color='#22c55e';m.innerText=t('available');}}
+function checkUsernameAvailability(){const i=document.getElementById('contactClientUsername'),m=document.getElementById('usernameAvailabilityMsg');if(!i||!m)return;let un=i.value.trim().replace(/^@/,'');if(!un){m.style.display='none';return;}if(un.length<7){m.style.display='block';m.style.color='#f59e0b';m.innerText=t('min7');return;}const users=getAllUsers();const ex=users.some(u=>String(u.username||'').replace(/^@/,'').toLowerCase()===un.toLowerCase());m.style.display='block';if(ex){m.style.color='#ef4444';m.innerText=t('taken');}else{m.style.color='#22c55e';m.innerText=t('available');}}
 
 function openForgotPasswordModal(e){if(e)e.preventDefault();closeDirectContactModal();document.getElementById('forgotPasswordForm').reset();document.getElementById('forgotPasswordModal').classList.add('active');}
 function closeForgotPasswordModal(){document.getElementById('forgotPasswordModal').classList.remove('active');}
-async function handleForgotPasswordSubmit(e){e.preventDefault();const email=document.getElementById('forgotClientEmail').value.trim().toLowerCase();if(!email){showCustomAlert(t('fill_fields'));return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');const u=users.find(x=>x.email===email);if(!u){showCustomAlert(currentLang==='tr'?'Email kayıtlı değil!':'Email not registered!');return;}const tp=String(Math.floor(10000+Math.random()*90000));let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');rc[email]=tp;localStorage.setItem('reset_codes',JSON.stringify(rc));currentResetEmail=email;closeForgotPasswordModal();const result=await sendVerificationEmail(email,tp,'reset');if(result.success){showCustomAlert(currentLang==='tr'?'Doğrulama kodu emailinize gönderildi!':'Verification code sent!','success');}else{showCustomAlert(currentLang==='tr'?'Email gönderilemedi.':'Could not send email.','error');return;}setTimeout(()=>openResetPasswordModal(),600);}
+async function handleForgotPasswordSubmit(e){e.preventDefault();const email=document.getElementById('forgotClientEmail').value.trim().toLowerCase();if(!email){showCustomAlert(t('fill_fields'));return;}let users=getAllUsers();const u=users.find(x=>x.email===email);if(!u){showCustomAlert(currentLang==='tr'?'Email kayıtlı değil!':'Email not registered!');return;}const tp=String(Math.floor(10000+Math.random()*90000));let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');rc[email]=tp;localStorage.setItem('reset_codes',JSON.stringify(rc));currentResetEmail=email;closeForgotPasswordModal();const result=await sendVerificationEmail(email,tp,'reset');if(result.success){showCustomAlert(currentLang==='tr'?'Doğrulama kodu emailinize gönderildi!':'Verification code sent!','success');}else{showCustomAlert(currentLang==='tr'?'Email gönderilemedi.':'Could not send email.','error');return;}setTimeout(()=>openResetPasswordModal(),600);}
 function openResetPasswordModal(){document.getElementById('resetClientEmail').value=currentResetEmail;document.getElementById('resetPasswordForm').reset();clearPasswordField('resetClientNewPassword');document.getElementById('resetClientEmail').value=currentResetEmail;document.getElementById('resetPasswordModal').classList.add('active');}
 function closeResetPasswordModal(){document.getElementById('resetPasswordModal').classList.remove('active');}
-function handleResetPasswordSubmit(e){e.preventDefault();const email=document.getElementById('resetClientEmail').value,code=document.getElementById('resetClientCode').value.trim(),np=getPasswordValue('resetClientNewPassword').trim();if(!code||!np){showCustomAlert(t('fill_fields'));return;}if(!isValidPassword(np)){showCustomAlert(t('pw_8'));return;}let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');if(!rc[email]||rc[email]!==code){showCustomAlert(currentLang==='tr'?'Geçersiz kod!':'Invalid code!');return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');let ok=false;users=users.map(u=>{if(u.email===email){u.password=np;ok=true;}return u;});if(ok){localStorage.setItem('site_users',JSON.stringify(users));delete rc[email];localStorage.setItem('reset_codes',JSON.stringify(rc));closeResetPasswordModal();showCustomAlert(currentLang==='tr'?'Şifre başarıyla sıfırlandı!':'Password reset successfully!','success');}}
+function handleResetPasswordSubmit(e){e.preventDefault();const email=document.getElementById('resetClientEmail').value,code=document.getElementById('resetClientCode').value.trim(),np=getPasswordValue('resetClientNewPassword').trim();if(!code||!np){showCustomAlert(t('fill_fields'));return;}if(!isValidPassword(np)){showCustomAlert(t('pw_8'));return;}let rc=JSON.parse(localStorage.getItem('reset_codes')||'{}');if(!rc[email]||rc[email]!==code){showCustomAlert(currentLang==='tr'?'Geçersiz kod!':'Invalid code!');return;}let users=getAllUsers();let ok=false;users=users.map(u=>{if(u.email===email){u.password=np;ok=true;}return u;});if(ok){saveAllUsers(users);delete rc[email];localStorage.setItem('reset_codes',JSON.stringify(rc));closeResetPasswordModal();showCustomAlert(currentLang==='tr'?'Şifre başarıyla sıfırlandı!':'Password reset successfully!','success');}}
 
 function generateSignupCode(){return String(Math.floor(10000+Math.random()*90000));}
 async function openSignupMockModal(email){document.getElementById('signupMockEmailValue').innerText=email;document.getElementById('signupMockModal').classList.add('active');const sb=document.getElementById('signupEmailStatus');const title=document.getElementById('signupMockTitleText');const desc=document.getElementById('signupMockDescText');sb.innerHTML='<div class="email-status-badge"><i class="fa-solid fa-spinner fa-spin"></i> Sending...</div>';title.textContent='Sending...';desc.textContent='Please wait...';const code=pendingSignup?pendingSignup.code:'';const r=await sendVerificationEmail(email,code,'signup');if(r.success){sb.innerHTML='<div class="email-status-badge success"><i class="fa-solid fa-check"></i> Sent</div>';title.textContent=currentLang==='tr'?'Email gönderildi!':'Email sent!';desc.textContent=currentLang==='tr'?'5 haneli doğrulama kodu gönderildi.':'5-digit code sent.';}else{sb.innerHTML='<div class="email-status-badge error"><i class="fa-solid fa-triangle-exclamation"></i> Failed</div>';title.textContent=currentLang==='tr'?'Email gönderilemedi':'Email failed';desc.innerHTML='<span style="color:#f59e0b;font-size:.72rem">'+String(r.reason||'unknown').substring(0,150)+'</span>';}}
@@ -1852,9 +1851,9 @@ async function resendSignupEmail(){if(!pendingSignup)return;const newCode=genera
 function openSignupCodeModal(){document.getElementById('signupMockModal').classList.remove('active');document.getElementById('signupCodeInput').value='';document.getElementById('signupCodeModal').classList.add('active');}
 function backToSignupMock(){document.getElementById('signupCodeModal').classList.remove('active');if(pendingSignup)openSignupMockModal(pendingSignup.email);}
 function cancelSignup(){pendingSignup=null;document.getElementById('signupMockModal').classList.remove('active');document.getElementById('signupCodeModal').classList.remove('active');}
-function verifySignupCode(e){e.preventDefault();const ec=document.getElementById('signupCodeInput').value.trim();if(!pendingSignup)return;if(ec!==pendingSignup.code){showCustomAlert(currentLang==='tr'?'Geçersiz kod!':'Invalid code!');return;}try{const ub=JSON.parse(localStorage.getItem('site_users')||'[]');const usedIds=new Set(ub.map(u=>String(u.userId||'')));let nid;do{nid=generateRandomUserId();}while(usedIds.has(nid));const nu={userId:nid,name:pendingSignup.name,username:pendingSignup.username,email:pendingSignup.email,password:pendingSignup.password,bio:'',website:'',profilePhoto:'',following:[],createdAt:new Date().toISOString(),isVerified:false};ub.push(nu);localStorage.setItem('site_users',JSON.stringify(ub));localStorage.setItem('logged_user',JSON.stringify(nu));logActivity('signup',nu,'New account ID: '+nid);pendingSignup=null;document.getElementById('signupCodeModal').classList.remove('active');document.getElementById('signupMockModal').classList.remove('active');closeDirectContactModal();checkUserSession();renderApplications();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('signup_success')+' 🆔 '+nid,'success');}catch(err){}}
+function verifySignupCode(e){e.preventDefault();const ec=document.getElementById('signupCodeInput').value.trim();if(!pendingSignup)return;if(ec!==pendingSignup.code){showCustomAlert(currentLang==='tr'?'Geçersiz kod!':'Invalid code!');return;}try{const ub=getAllUsers();const usedIds=new Set(ub.map(u=>String(u.userId||'')));let nid;do{nid=generateRandomUserId();}while(usedIds.has(nid));const nu={userId:nid,name:pendingSignup.name,username:pendingSignup.username,email:pendingSignup.email,password:pendingSignup.password,bio:'',website:'',profilePhoto:'',following:[],createdAt:new Date().toISOString(),isVerified:false};ub.push(nu);saveAllUsers(ub);localStorage.setItem('logged_user',JSON.stringify(nu));logActivity('signup',nu,'New account ID: '+nid);pendingSignup=null;document.getElementById('signupCodeModal').classList.remove('active');document.getElementById('signupMockModal').classList.remove('active');closeDirectContactModal();checkUserSession();renderApplications();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('signup_success')+' 🆔 '+nid,'success');}catch(err){}}
 
-async function handleAuthSubmit(e){if(e)e.preventDefault();const email=document.getElementById('contactClientEmail').value.trim().toLowerCase();const password=getPasswordValue('contactClientPassword').trim();if(!email||!password){showCustomAlert(t('fill_fields'));return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');if(currentAuthMode==='signup'){const name=document.getElementById('contactClientName').value.trim().toLowerCase();let username=document.getElementById('contactClientUsername').value.trim().replace(/^@/,'');if(!name||!username){showCustomAlert(t('fill_fields'));return;}if(username.length<7){showCustomAlert(t('min_7'));return;}if(users.some(u=>String(u.username||'').toLowerCase()===username.toLowerCase())){showCustomAlert(t('username_taken'));return;}if(!isValidPassword(password)){showCustomAlert(t('pw_8'));return;}if(users.find(u=>u.email===email)){showCustomAlert(t('email_registered'));return;}const code=generateSignupCode();pendingSignup={code,name,username,email,password};await openSignupMockModal(email);return;}else{const ic=email.toLowerCase().trim();let inputName=ic.startsWith('@')?ic.substring(1):ic;let user=users.find(u=>{const em=(u.email||'').toLowerCase()===ic;let un=(u.username||'').toLowerCase().replace(/^@/,'');return(em||un===inputName)&&u.password===password;});if(user){localStorage.setItem('logged_user',JSON.stringify(user));logActivity('signin',user,'Signed in');closeDirectContactModal();forceRefreshUI();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('signin_success'),'success');}else showCustomAlert(t('invalid_credentials'));}}
+async function handleAuthSubmit(e){if(e)e.preventDefault();const email=document.getElementById('contactClientEmail').value.trim().toLowerCase();const password=getPasswordValue('contactClientPassword').trim();if(!email||!password){showCustomAlert(t('fill_fields'));return;}let users=getAllUsers();if(currentAuthMode==='signup'){const name=document.getElementById('contactClientName').value.trim().toLowerCase();let username=document.getElementById('contactClientUsername').value.trim().replace(/^@/,'');if(!name||!username){showCustomAlert(t('fill_fields'));return;}if(username.length<7){showCustomAlert(t('min_7'));return;}if(users.some(u=>String(u.username||'').toLowerCase()===username.toLowerCase())){showCustomAlert(t('username_taken'));return;}if(!isValidPassword(password)){showCustomAlert(t('pw_8'));return;}if(users.find(u=>u.email===email)){showCustomAlert(t('email_registered'));return;}const code=generateSignupCode();pendingSignup={code,name,username,email,password};await openSignupMockModal(email);return;}else{const ic=email.toLowerCase().trim();let inputName=ic.startsWith('@')?ic.substring(1):ic;let user=users.find(u=>{const em=(u.email||'').toLowerCase()===ic;let un=(u.username||'').toLowerCase().replace(/^@/,'');return(em||un===inputName)&&u.password===password;});if(user){localStorage.setItem('logged_user',JSON.stringify(user));logActivity('signin',user,'Signed in');closeDirectContactModal();forceRefreshUI();playApplauseSound();fireConfettiBurst(1.2);showCustomAlert(t('signin_success'),'success');}else showCustomAlert(t('invalid_credentials'));}}
 
 function openEditProfileModal(){const lu=localStorage.getItem('logged_user');if(!lu)return;try{const u=JSON.parse(lu);document.getElementById('editClientName').value=u.name||'';document.getElementById('editClientUsername').value=(u.username||'').replace(/^@/,'');document.getElementById('editClientEmail').value=u.email||'';document.getElementById('editClientWebsite').value=u.website||'';document.getElementById('editClientDay').value=u.birthDay||'';document.getElementById('editClientMonth').value=u.birthMonth||'';document.getElementById('editClientYear').value=u.birthYear||'';const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const prev=document.getElementById('editProfilePhotoPreview');if(prev)prev.src=p;}catch(e){}document.getElementById('editProfileModal').classList.add('active');}
 function closeEditProfileModal(){document.getElementById('editProfileModal').classList.remove('active');forceRefreshUI();}
@@ -1866,18 +1865,18 @@ function closeDeleteAccountModal(){document.getElementById('deleteAccountModal')
 function openDeletePasswordModal(){clearPasswordField('deleteConfirmPassword');document.getElementById('confirmDeletePasswordModal').classList.add('active');}
 function closeDeletePasswordModal(){document.getElementById('confirmDeletePasswordModal').classList.remove('active');}
 function validateDOB(){const day=document.getElementById('editClientDay'),mon=document.getElementById('editClientMonth'),yr=document.getElementById('editClientYear');if(day&&day.value){let v=parseInt(day.value);if(isNaN(v)||v<1||v>31)day.value='';}if(mon&&mon.value){let v=parseInt(mon.value);if(isNaN(v)||v<1||v>12)mon.value='';}if(yr&&yr.value){let v=parseInt(yr.value);if(isNaN(v)||v<1920||v>2014){yr.value='';showCustomAlert(currentLang==='tr'?'Yıl 1920 - 2014 arası olmalı':'Year must be 1920 - 2014','warning');}}}
-function handleProfileUpdate(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const nn=document.getElementById('editClientName').value.trim(),nu=document.getElementById('editClientUsername').value.trim(),ne=document.getElementById('editClientEmail').value.trim();const web=document.getElementById('editClientWebsite').value.trim(),bd=document.getElementById('editClientDay').value.trim(),bm=document.getElementById('editClientMonth').value.trim(),by=document.getElementById('editClientYear').value.trim();validateDOB();if(!nn||!nu||!ne){showCustomAlert(t('fill_fields'));return;}if(nu.length<7){showCustomAlert(t('min_7'));return;}try{let u=JSON.parse(lu);let users=JSON.parse(localStorage.getItem('site_users')||'[]');if(users.some(x=>x.email!==u.email&&x.email===ne)){showCustomAlert(t('email_registered'));return;}u.name=nn;u.username=nu;u.bio='';u.website=web;u.birthDay=bd;u.birthMonth=bm;u.birthYear=by;users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));logActivity('profile_update',u,'Updated');closeEditProfileModal();checkUserSession();renderApplications();showCustomAlert(currentLang==='tr'?'Profil güncellendi!':'Profile updated!','success');}catch(err){}}
-function handleChangePassword(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const op=getPasswordValue('changeOldPassword').trim(),np=getPasswordValue('changeNewPassword').trim(),cp=getPasswordValue('changeConfirmPassword').trim();if(!op||!np||!cp){showCustomAlert(t('fill_fields'));return;}if(!isValidPassword(np)){showCustomAlert(t('pw_8'));return;}try{let u=JSON.parse(lu);let users=JSON.parse(localStorage.getItem('site_users')||'[]');if(u.password!==op){showCustomAlert(currentLang==='tr'?'Mevcut şifre yanlış!':'Current password is incorrect!');return;}if(np!==cp){showCustomAlert(currentLang==='tr'?'Şifreler eşleşmiyor!':'Passwords do not match!');return;}u.password=np;users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));logActivity('password_change',u,'updated');closeChangePasswordModal();showCustomAlert(currentLang==='tr'?'Şifre değiştirildi!':'Password changed!','success');}catch(err){}}
+function handleProfileUpdate(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const nn=document.getElementById('editClientName').value.trim(),nu=document.getElementById('editClientUsername').value.trim(),ne=document.getElementById('editClientEmail').value.trim();const web=document.getElementById('editClientWebsite').value.trim(),bd=document.getElementById('editClientDay').value.trim(),bm=document.getElementById('editClientMonth').value.trim(),by=document.getElementById('editClientYear').value.trim();validateDOB();if(!nn||!nu||!ne){showCustomAlert(t('fill_fields'));return;}if(nu.length<7){showCustomAlert(t('min_7'));return;}try{let u=JSON.parse(lu);let users=getAllUsers();if(users.some(x=>x.email!==u.email&&x.email===ne)){showCustomAlert(t('email_registered'));return;}u.name=nn;u.username=nu;u.bio='';u.website=web;u.birthDay=bd;u.birthMonth=bm;u.birthYear=by;users=users.map(x=>x.email===u.email?u:x);saveAllUsers(users);localStorage.setItem('logged_user',JSON.stringify(u));logActivity('profile_update',u,'Updated');closeEditProfileModal();checkUserSession();renderApplications();showCustomAlert(currentLang==='tr'?'Profil güncellendi!':'Profile updated!','success');}catch(err){}}
+function handleChangePassword(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const op=getPasswordValue('changeOldPassword').trim(),np=getPasswordValue('changeNewPassword').trim(),cp=getPasswordValue('changeConfirmPassword').trim();if(!op||!np||!cp){showCustomAlert(t('fill_fields'));return;}if(!isValidPassword(np)){showCustomAlert(t('pw_8'));return;}try{let u=JSON.parse(lu);let users=getAllUsers();if(u.password!==op){showCustomAlert(currentLang==='tr'?'Mevcut şifre yanlış!':'Current password is incorrect!');return;}if(np!==cp){showCustomAlert(currentLang==='tr'?'Şifreler eşleşmiyor!':'Passwords do not match!');return;}u.password=np;users=users.map(x=>x.email===u.email?u:x);saveAllUsers(users);localStorage.setItem('logged_user',JSON.stringify(u));logActivity('password_change',u,'updated');closeChangePasswordModal();showCustomAlert(currentLang==='tr'?'Şifre değiştirildi!':'Password changed!','success');}catch(err){}}
 function handleDeleteAccount(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const iu=document.getElementById('deleteConfirmUsername').value.trim();try{const u=JSON.parse(lu);const au=(u.username||'').replace(/^@/,'');const ci=iu.replace(/^@/,'');if(ci.toLowerCase()!==au.toLowerCase()){showCustomAlert(currentLang==='tr'?'Kullanıcı adı eşleşmiyor.':'Username does not match.');return;}showCustomAlert(currentLang==='tr'?'Hesabınızı silmek istediğinizden emin misiniz?':'Are you sure you want to delete your account?','delete',function(){document.getElementById('deleteAccountModal').classList.remove('active');openDeletePasswordModal();});}catch(err){}}
-function handleDeletePasswordSubmit(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const ep=getPasswordValue('deleteConfirmPassword').trim();try{const u=JSON.parse(lu);if(u.password!==ep){showCustomAlert(currentLang==='tr'?'Yanlış şifre!':'Incorrect password!');return;}let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.filter(x=>x.email!==u.email);localStorage.setItem('site_users',JSON.stringify(users));localStorage.removeItem('logged_user');closeDeletePasswordModal();showCustomAlert(currentLang==='tr'?'Hesap silindi.':'Account deleted.','success');window._pendingLangReset=true;forceRefreshUI();}catch(err){}}
+function handleDeletePasswordSubmit(e){e.preventDefault();const lu=localStorage.getItem('logged_user');if(!lu)return;const ep=getPasswordValue('deleteConfirmPassword').trim();try{const u=JSON.parse(lu);if(u.password!==ep){showCustomAlert(currentLang==='tr'?'Yanlış şifre!':'Incorrect password!');return;}let users=getAllUsers();users=users.filter(x=>x.email!==u.email);saveAllUsers(users);localStorage.removeItem('logged_user');closeDeletePasswordModal();showCustomAlert(currentLang==='tr'?'Hesap silindi.':'Account deleted.','success');window._pendingLangReset=true;forceRefreshUI();}catch(err){}}
 
-function resetProfilePhoto(){const lu=localStorage.getItem('logged_user');if(!lu)return;try{let u=JSON.parse(lu);u.profilePhoto='';let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));}catch(e){}updateEditPhotoPreview();updateHeaderProfileAll();}
+function resetProfilePhoto(){const lu=localStorage.getItem('logged_user');if(!lu)return;try{let u=JSON.parse(lu);u.profilePhoto='';let users=getAllUsers();users=users.map(x=>x.email===u.email?u:x);saveAllUsers(users);localStorage.setItem('logged_user',JSON.stringify(u));}catch(e){}updateEditPhotoPreview();updateHeaderProfileAll();}
 function closeLightbox(){document.getElementById('lightboxOverlay').classList.remove('active');}
 function handleProfilePhotoUpload(event){const f=event.target.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{openCropModal(e.target.result);};r.readAsDataURL(f);event.target.value='';}
 function openCropModal(src){const ci=document.getElementById('cropImage');ci.src=src;document.querySelectorAll('.ratio-btn').forEach(b=>b.classList.remove('active'));const db=document.querySelector('.ratio-btn');if(db)db.classList.add('active');document.getElementById('cropModal').classList.add('active');if(cropperInstance){try{cropperInstance.destroy();}catch(e){}cropperInstance=null;}const ic=()=>{try{cropperInstance=new Cropper(ci,{aspectRatio:1,viewMode:1,autoCropArea:.9,background:false,responsive:true});}catch(e){}};if(ci.complete&&ci.naturalWidth>0)setTimeout(ic,50);else ci.onload=()=>setTimeout(ic,50);}
 function closeCropModal(){if(cropperInstance){try{cropperInstance.destroy();}catch(e){}cropperInstance=null;}document.getElementById('cropModal').classList.remove('active');}
 function setCropRatio(r,btn){document.querySelectorAll('.ratio-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');if(cropperInstance){try{cropperInstance.setAspectRatio(isNaN(r)?NaN:r);}catch(e){}}}
-function applyCrop(){if(!cropperInstance)return;try{const c=cropperInstance.getCroppedCanvas({width:400,height:400,imageSmoothingQuality:'high'});if(!c)return;const d=c.toDataURL('image/png');const lu=localStorage.getItem('logged_user');if(lu){try{let u=JSON.parse(lu);u.profilePhoto=d;let users=JSON.parse(localStorage.getItem('site_users')||'[]');users=users.map(x=>x.email===u.email?u:x);localStorage.setItem('site_users',JSON.stringify(users));localStorage.setItem('logged_user',JSON.stringify(u));}catch(e){}}const prev=document.getElementById('editProfilePhotoPreview');if(prev)prev.src=d;closeCropModal();updateHeaderProfileAll();}catch(e){}}
+function applyCrop(){if(!cropperInstance)return;try{const c=cropperInstance.getCroppedCanvas({width:400,height:400,imageSmoothingQuality:'high'});if(!c)return;const d=c.toDataURL('image/png');const lu=localStorage.getItem('logged_user');if(lu){try{let u=JSON.parse(lu);u.profilePhoto=d;let users=getAllUsers();users=users.map(x=>x.email===u.email?u:x);saveAllUsers(users);localStorage.setItem('logged_user',JSON.stringify(u));}catch(e){}}const prev=document.getElementById('editProfilePhotoPreview');if(prev)prev.src=d;closeCropModal();updateHeaderProfileAll();}catch(e){}}
 function updateHeaderProfileAll(){try{checkUserSession();}catch(e){}}
 
 function checkUserSession(){const lu=localStorage.getItem('logged_user');const cse=document.getElementById('t-contact-sub'),cme=document.getElementById('t-contact-main');const abi=document.getElementById('authBoxIcon');const mab=document.getElementById('mainAuthBox');if(lu){try{const u=JSON.parse(lu);if(mab)mab.style.display='none';if(cse)cse.innerText=currentLang==='tr'?'Kullanıcı Hesabı':'User Account';if(cme)cme.innerText=u.name?(currentLang==='tr'?'Hoş geldin, '+u.name:'Welcome, '+u.name):'Session Active';if(abi)abi.className='fa-solid fa-user-check';const p=u.profilePhoto||'https://api.dicebear.com/7.x/avataaars/svg?seed='+encodeURIComponent(u.username||'muminsultani');const hpw=document.getElementById('headerProfileWrapper');const hpp=document.getElementById('headerProfilePhoto');const hpmP=document.getElementById('hpmPhoto');const hpmN=document.getElementById('hpmName');const hpmI=document.getElementById('hpmId');if(hpw)hpw.style.display='flex';if(hpp)hpp.src=p;if(hpmP)hpmP.src=p;if(hpmN)hpmN.textContent=u.name||'User';if(hpmI)hpmI.textContent='ID: '+(u.userId||'-');}catch(e){}}else{if(mab)mab.style.display='flex';if(cse)cse.innerText=t('contact_sub');if(cme)cme.innerText=t('contact_main');if(abi)abi.className='fa-solid fa-right-to-bracket';const hpw=document.getElementById('headerProfileWrapper');if(hpw)hpw.style.display='none';}updateChatBadge();setTimeout(updateMessengerDefaultPosition,80);}
@@ -1914,7 +1913,7 @@ function updateMessengerDefaultPosition(){const btn=document.getElementById('mes
 function applyMessengerPos(){const btn=document.getElementById('messengerFloatBtn');if(!btn||!messengerPos)return;btn.style.left=messengerPos.x+'px';btn.style.top=messengerPos.y+'px';btn.style.right='auto';btn.style.bottom='auto';}
 
 function getOrders(){try{return JSON.parse(localStorage.getItem(ORDERS_KEY)||'[]');}catch(e){return[];}}
-function saveOrders(o){try{localStorage.setItem(ORDERS_KEY,JSON.stringify(o));}catch(e){}}
+function saveOrders(o){try{localStorage.setItem(ORDERS_KEY,JSON.stringify(o));}catch(e){}saveOrdersToFirebase(o);}
 function getOrderSettings(){const c=getSiteContent();if(!c.general)c.general={};if(c.general.orderRequireLogin===undefined)c.general.orderRequireLogin=true;return{requireLogin:c.general.orderRequireLogin};}
 function setOrderRequireLogin(v){const c=getSiteContent();if(!c.general)c.general={};c.general.orderRequireLogin=!!v;saveSiteContent(c);showCustomAlert(v?'🔒 Order requires login':'🔓 Anyone can order','success');}
 function openOrderModal(){const s=getOrderSettings();const lu=localStorage.getItem('logged_user');if(s.requireLogin&&!lu){showCustomAlert('⚠️ '+t('you_must_signin'),'warning');setTimeout(()=>openGetInTouchModal(),400);return;}const f=document.getElementById('orderForm');if(f)f.reset();const ot=document.getElementById('orderType');if(ot)ot.value='website';document.querySelectorAll('.order-type-option').forEach(o=>{o.classList.toggle('active',o.getAttribute('data-value')==='website');});if(lu){try{const u=JSON.parse(lu);const n=document.getElementById('orderName'),m=document.getElementById('orderEmail');if(n&&!n.value)n.value=u.name||'';if(m&&!m.value)m.value=u.email||'';}catch(e){}}document.getElementById('orderModal').classList.add('active');}
@@ -1924,7 +1923,7 @@ function getUnreadOrdersCount(){return getOrders().filter(o=>o.status==='new'||!
 function updateOrdersBadge(){const b=document.getElementById('ordersTabBadge');const c=getUnreadOrdersCount();if(b){if(c>0){b.style.display='inline-flex';b.textContent=c>99?'99+':String(c);}else b.style.display='none';}}
 function renderAdminOrders(){const list=document.getElementById('adminOrdersList');if(!list)return;const orders=getOrders();if(!orders.length){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">'+t('no_orders')+'</p>';return;}list.innerHTML='';orders.forEach((o,idx)=>{const st=o.status||'new';const badge='<span class="order-status-badge '+st+'">'+(st==='new'?'● NEW':st==='read'?'READ':'✓ APPROVED')+'</span>';const item=document.createElement('div');item.className='user-card';item.style.borderLeft='3px solid var(--accent)';item.innerHTML='<div class="user-card-info" style="flex:1"><div class="user-card-name">'+escapeHtml(o.name)+' <span style="font-size:.6rem;padding:1px 6px;border-radius:8px;background:rgba(var(--accent-rgb),.15);color:var(--accent)">'+escapeHtml(o.type)+'</span> '+badge+'</div><div class="user-card-detail"><i class="fa-solid fa-envelope"></i>'+escapeHtml(o.email)+'</div><div class="user-card-detail" style="margin-top:6px;color:var(--text-color-override);white-space:pre-wrap;font-size:.72rem;">'+escapeHtml(o.description)+'</div></div><div class="user-card-btns">'+(o.status!=='approved'?'<button class="user-view-btn" onclick="approveOrder('+idx+')" style="color:#22c55e"><i class="fa-solid fa-check-double"></i></button>':'')+'<button class="user-view-btn danger" onclick="deleteOrder('+idx+')"><i class="fa-solid fa-trash-can"></i></button></div>';list.appendChild(item);});}
 function deleteOrder(idx){showCustomAlert('Delete this order?','delete',()=>{const o=getOrders();o.splice(idx,1);saveOrders(o);updateOrdersBadge();renderAdminOrders();});}
-function clearAllOrders(){showCustomAlert('Delete all orders?','delete',()=>{localStorage.removeItem(ORDERS_KEY);updateOrdersBadge();renderAdminOrders();});}
+function clearAllOrders(){showCustomAlert('Delete all orders?','delete',()=>{localStorage.removeItem(ORDERS_KEY);saveOrdersToFirebase([]);updateOrdersBadge();renderAdminOrders();});}
 async function approveOrder(idx){const orders=getOrders();if(!orders[idx])return;showCustomAlert('Approve this order and send email?','warning',async function(){const r=await sendOrderApprovalEmail(orders[idx]);if(r.success){orders[idx].status='approved';orders[idx].read=true;saveOrders(orders);renderAdminOrders();updateOrdersBadge();showCustomAlert('✅ '+t('order_approved'),'success');fireConfettiBurst(.8);}else{showCustomAlert('Email failed: '+(r.reason||'unknown'),'error');}});}
 async function sendOrderApprovalEmail(order){if(!EMAILJS_CONFIG.enabled)return{success:false,reason:'not_configured'};const brand=getDyn('header.brand','muminsultani');const bodyText='Hello '+order.name+',\n\nYour order has been approved! 🎉\n\n• Type: '+order.type+'\n• Budget: '+(order.budget||'Not specified')+'\n• Deadline: '+(order.deadline||'Not specified')+'\n\nDescription:\n'+order.description+'\n\nWe will contact you soon.\n\nThanks,\n'+brand;const tp={to_email:order.email,brand,subject:'✅ Order Approved — '+brand,message:bodyText,image_url:'',link_url:'https://muminsultani.com',link_text:'Visit Site',has_image:'no',has_link:'yes',has_pdf:'no',pdf_url:'',year:new Date().getFullYear(),type:'Order Approval',code:'—'};try{const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EMAILJS_CONFIG.serviceId,template_id:EMAILJS_CONFIG.templateId,user_id:EMAILJS_CONFIG.publicKey,template_params:tp})});const txt=await r.text();if(r.ok&&(txt==='OK'||r.status===200))return{success:true};return{success:false,reason:txt||('HTTP '+r.status)};}catch(err){return{success:false,reason:err.message||'network_error'};}}
 
@@ -1934,19 +1933,19 @@ function verifyAdminPassword(e){if(e)e.preventDefault();const v=getPasswordValue
 function logoutAdmin(){try{sessionStorage.removeItem(ADMIN_SESSION_KEY);}catch(e){}closeAdminPanel();}
 
 function renderAdminUsers(){const list=document.getElementById('adminUsersList');if(!list)return;const u=getAllUsers();if(!u.length){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">No users.</p>';return;}list.innerHTML='';u.forEach((user,idx)=>{const card=document.createElement('div');card.className='user-card';const av=user.profilePhoto?'<img src="'+user.profilePhoto+'">':(user.name?user.name.trim().charAt(0).toUpperCase():'?');const se=escapeHtml(String(user.email||''));const isA=isAdminUser(user.email);const isV=isA||user.isVerified;const vB=isV?getVerifiedBadgeHTML('sm'):'';const vB2=isA?'':'<button class="user-view-btn verify'+(isV?' active':'')+'" onclick="toggleUserVerification(\''+se+'\')"><i class="fa-solid fa-circle-check"></i></button>';card.innerHTML='<div class="user-card-avatar">'+av+'</div><div class="user-card-info"><div class="user-card-name">'+escapeHtml(user.name||'unknown')+vB+'</div><div class="user-card-detail"><i class="fa-solid fa-id-badge"></i>'+escapeHtml(user.userId||'-')+'</div><div class="user-card-detail"><i class="fa-solid fa-at"></i>'+escapeHtml(user.username||'-')+'</div><div class="user-card-detail"><i class="fa-solid fa-envelope"></i>'+escapeHtml(user.email||'-')+'</div></div><div class="user-card-btns">'+vB2+'<button class="user-view-btn danger" onclick="deleteUserAdmin(\''+se+'\')"><i class="fa-solid fa-trash-can"></i></button></div>';list.appendChild(card);});}
-function toggleUserVerification(email){if(!email)return;if(isAdminUser(email)){showCustomAlert('Admin already verified');return;}let u=getAllUsers();const i=u.findIndex(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());if(i===-1)return;u[i].isVerified=!u[i].isVerified;localStorage.setItem('site_users',JSON.stringify(u));renderAdminUsers();showCustomAlert(u[i].isVerified?'✅ Granted':'Removed','success');}
+function toggleUserVerification(email){if(!email)return;if(isAdminUser(email)){showCustomAlert('Admin already verified');return;}let u=getAllUsers();const i=u.findIndex(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());if(i===-1)return;u[i].isVerified=!u[i].isVerified;saveAllUsers(u);renderAdminUsers();showCustomAlert(u[i].isVerified?'✅ Granted':'Removed','success');}
 function viewUserDetail(idx){const users=getAllUsers();const u=users[idx];if(!u)return;const isA=isAdminUser(u.email);const isV=isA||u.isVerified;const vB=isV?getVerifiedBadgeHTML('lg'):'';let rows='<div style="text-align:center;margin-bottom:16px;"><div style="font-size:1.1rem;font-weight:800;display:flex;align-items:center;justify-content:center;gap:6px;">'+escapeHtml(u.name||'unknown')+vB+'</div></div><div class="user-detail-modal-row"><span>ID</span><span>'+escapeHtml(u.userId||'-')+'</span></div><div class="user-detail-modal-row"><span>Email</span><span>'+escapeHtml(u.email||'-')+'</span></div><div class="user-detail-modal-row"><span>Joined</span><span>'+(u.createdAt?fmtDateTime(u.createdAt):'-')+'</span></div>';document.getElementById('userDetailContent').innerHTML=rows;document.getElementById('userDetailModal').classList.add('active');}
 function closeUserDetail(){document.getElementById('userDetailModal').classList.remove('active');}
-function deleteUserAdmin(email){if(!email)return;const u=getAllUsers();const user=u.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());if(!user){showCustomAlert('User not found!');return;}if(isAdminUser(user.email)){showCustomAlert('Admin cannot be deleted!');return;}showCustomAlert('"'+escapeHtml(user.name||user.email)+'" delete?','delete',function(){const tg=String(email).toLowerCase();const nu=u.filter(x=>String(x.email||'').toLowerCase()!==tg);localStorage.setItem('site_users',JSON.stringify(nu));renderAdminUsers();updateChatBadge();showCustomAlert('User deleted!','success');});}
+function deleteUserAdmin(email){if(!email)return;const u=getAllUsers();const user=u.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());if(!user){showCustomAlert('User not found!');return;}if(isAdminUser(user.email)){showCustomAlert('Admin cannot be deleted!');return;}showCustomAlert('"'+escapeHtml(user.name||user.email)+'" delete?','delete',function(){const tg=String(email).toLowerCase();const nu=u.filter(x=>String(x.email||'').toLowerCase()!==tg);saveAllUsers(nu);renderAdminUsers();updateChatBadge();showCustomAlert('User deleted!','success');});}
 function exportUsersCSV(){const users=getAllUsers();if(!users.length){showCustomAlert('No users.');return;}const rows=[['ID','Name','Username','Email','Verified']];users.forEach(u=>rows.push([u.userId||'',u.name,u.username,u.email,(isAdminUser(u.email)||u.isVerified)?'Yes':'No']));const csv=rows.map(r=>r.map(c=>'"'+String(c||'').replace(/"/g,'""')+'"').join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='users-'+new Date().toISOString().slice(0,10)+'.csv';document.body.appendChild(a);a.click();document.body.removeChild(a);showCustomAlert('CSV downloaded!','success');}
-function clearAllUsers(){showCustomAlert('All users will be deleted!','delete',function(){const u=getAllUsers();const admin=u.find(x=>x.isAdmin===true||isAdminUser(x.email));localStorage.setItem('site_users',JSON.stringify(admin?[admin]:[]));checkUserSession();renderAdminUsers();showCustomAlert('Deleted!','success');});}
+function clearAllUsers(){showCustomAlert('All users will be deleted!','delete',function(){const u=getAllUsers();const admin=u.find(x=>x.isAdmin===true||isAdminUser(x.email));saveAllUsers(admin?[admin]:[]);checkUserSession();renderAdminUsers();showCustomAlert('Deleted!','success');});}
 let activityFilterType='all';
 function renderAdminActivity(){const list=document.getElementById('adminActivityList');if(!list)return;let l=getActivityLog();if(activityFilterType!=='all')l=l.filter(x=>x.type===activityFilterType);l=l.reverse();if(!l.length){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">No records.</p>';return;}list.innerHTML='';l.slice(0,200).forEach(a=>{const item=document.createElement('div');item.className='activity-item';item.innerHTML='<div class="activity-icon"><i class="fa-solid fa-circle-info"></i></div><div class="activity-body"><div class="activity-title">'+escapeHtml(a.name||a.email||'Unknown')+' <span style="font-size:.6rem;padding:1px 6px;border-radius:10px;background:rgba(var(--accent-rgb),.15);color:var(--accent)">'+a.type+'</span></div><div class="activity-meta">'+(a.details?escapeHtml(a.details):'')+'</div></div><div class="activity-time">'+fmtDateTime(a.timestamp)+'</div>';list.appendChild(item);});}
 function filterActivity(type,btn){activityFilterType=type;document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderAdminActivity();}
 function clearActivityLog(){showCustomAlert('All activity logs will be deleted!','delete',function(){localStorage.removeItem(ACTIVITY_LOG_KEY);renderAdminActivity();refreshAdminUI();showCustomAlert('Deleted!','success');});}
 function exportActivityCSV(){const logs=getActivityLog();if(!logs.length){showCustomAlert('No records.');return;}const rows=[['Time','Type','Name','User ID','Email','Details']];logs.forEach(l=>rows.push([l.timestamp,l.type,l.name,l.userId||'',l.email,l.details]));const csv=rows.map(r=>r.map(c=>'"'+String(c||'').replace(/"/g,'""')+'"').join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='activity-'+new Date().toISOString().slice(0,10)+'.csv';document.body.appendChild(a);a.click();document.body.removeChild(a);showCustomAlert('CSV downloaded!','success');}
 function renderAdminChats(){const list=document.getElementById('adminChatsList');if(!list)return;const msgs=getChatMessages();let total=0;for(const k in msgs)total+=msgs[k].length;if(total===0){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">No messages.</p>';return;}list.innerHTML='';}
-function clearAllChats(){showCustomAlert('All chats will be deleted!','delete',function(){localStorage.removeItem(CHAT_KEY);updateChatBadge();renderAdminChats();showCustomAlert('Deleted!','success');});}
+function clearAllChats(){showCustomAlert('All chats will be deleted!','delete',function(){localStorage.removeItem(CHAT_KEY);saveChatToFirebase({});updateChatBadge();renderAdminChats();showCustomAlert('Deleted!','success');});}
 function exportChatsCSV(){const msgs=getChatMessages();const rows=[['From','To','Name','Text','Time','Read']];let c=0;for(const k in msgs){msgs[k].forEach(m=>{rows.push([m.from,m.to,m.fromName||'',m.text||m.type,m.timestamp,m.read?'Yes':'No']);c++;});}if(!c){showCustomAlert('No messages.');return;}const csv=rows.map(r=>r.map(x=>'"'+String(x||'').replace(/"/g,'""')+'"').join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='chats-'+new Date().toISOString().slice(0,10)+'.csv';document.body.appendChild(a);a.click();document.body.removeChild(a);showCustomAlert('CSV downloaded!','success');}
 
 const SECTION_KEYS=['apps','experience','order','setup','stack'];
@@ -1960,7 +1959,7 @@ function moveSectionOrder(i,d){const c=getSiteContent();let o=getSectionOrder();
 function renderAdminAccount(){const a=getAdminUser();document.getElementById('adminAccName').value=a.name||'';document.getElementById('adminAccUsername').value=(a.username||'').replace(/^@/,'');document.getElementById('adminAccEmail').value=a.email||'';document.getElementById('adminAccId').value=a.userId||'';document.getElementById('adminAccWebsite').value=a.website||'';document.getElementById('adminAccBio').value=a.bio||'';document.getElementById('adminBioCount').textContent=(a.bio||'').length;const p=a.profilePhoto;const pv=document.getElementById('adminPhotoPreview'),ic=document.getElementById('adminPhotoUploadIcon'),cb=document.getElementById('adminPhotoClearBtn');if(p&&pv){pv.src=p;pv.style.display='block';if(ic)ic.style.display='none';if(cb)cb.style.display='inline-flex';}else if(pv){pv.style.display='none';if(ic)ic.style.display='block';if(cb)cb.style.display='none';}pendingAdminPhoto=undefined;}
 function handleAdminPhotoUpload(e){const f=e.target.files[0];if(!f||!f.type.startsWith('image/'))return;if(f.size>3*1024*1024){showCustomAlert('Max 3 MB');e.target.value='';return;}const r=new FileReader();r.onload=ev=>{pendingAdminPhoto=ev.target.result;const pv=document.getElementById('adminPhotoPreview');if(pv){pv.src=ev.target.result;pv.style.display='block';}const ic=document.getElementById('adminPhotoUploadIcon');if(ic)ic.style.display='none';const cb=document.getElementById('adminPhotoClearBtn');if(cb)cb.style.display='inline-flex';};r.readAsDataURL(f);}
 function clearAdminPhoto(){pendingAdminPhoto=null;const pv=document.getElementById('adminPhotoPreview');if(pv)pv.style.display='none';const ic=document.getElementById('adminPhotoUploadIcon');if(ic)ic.style.display='block';const cb=document.getElementById('adminPhotoClearBtn');if(cb)cb.style.display='none';}
-function saveAdminAccount(e){e.preventDefault();const u=getAllUsers();let i=u.findIndex(x=>x.isAdmin===true);if(i===-1)i=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL.toLowerCase());if(i===-1){u.unshift(getAdminUser());i=0;}const nn=document.getElementById('adminAccName').value.trim(),nu=document.getElementById('adminAccUsername').value.trim().replace(/^@/,'').toLowerCase(),ne=document.getElementById('adminAccEmail').value.trim().toLowerCase(),nid=document.getElementById('adminAccId').value.trim(),nw=document.getElementById('adminAccWebsite').value.trim(),nb=document.getElementById('adminAccBio').value.trim();if(!nn||!nu||!ne){showCustomAlert(t('fill_fields'));return;}if(!/^\d{9}$/.test(nid)){showCustomAlert('ID must be 9 digits!');return;}const a=u[i];const oldE=a.email;a.name=nn;a.username=nu;a.email=ne;a.userId=nid;a.website=nw;a.bio=nb;a.isAdmin=true;a.isVerified=true;if(pendingAdminPhoto!==undefined)a.profilePhoto=pendingAdminPhoto||'';localStorage.setItem('site_users',JSON.stringify(u));const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);if(cu.isAdmin||String(cu.email||'').toLowerCase()===String(oldE).toLowerCase())localStorage.setItem('logged_user',JSON.stringify(a));}catch(e){}}pendingAdminPhoto=undefined;refreshAdminUI();renderAdminAccount();checkUserSession();showCustomAlert('Saved!','success');}
+function saveAdminAccount(e){e.preventDefault();const u=getAllUsers();let i=u.findIndex(x=>x.isAdmin===true);if(i===-1)i=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL.toLowerCase());if(i===-1){u.unshift(getAdminUser());i=0;}const nn=document.getElementById('adminAccName').value.trim(),nu=document.getElementById('adminAccUsername').value.trim().replace(/^@/,'').toLowerCase(),ne=document.getElementById('adminAccEmail').value.trim().toLowerCase(),nid=document.getElementById('adminAccId').value.trim(),nw=document.getElementById('adminAccWebsite').value.trim(),nb=document.getElementById('adminAccBio').value.trim();if(!nn||!nu||!ne){showCustomAlert(t('fill_fields'));return;}if(!/^\d{9}$/.test(nid)){showCustomAlert('ID must be 9 digits!');return;}const a=u[i];const oldE=a.email;a.name=nn;a.username=nu;a.email=ne;a.userId=nid;a.website=nw;a.bio=nb;a.isAdmin=true;a.isVerified=true;if(pendingAdminPhoto!==undefined)a.profilePhoto=pendingAdminPhoto||'';saveAllUsers(u);const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);if(cu.isAdmin||String(cu.email||'').toLowerCase()===String(oldE).toLowerCase())localStorage.setItem('logged_user',JSON.stringify(a));}catch(e){}}pendingAdminPhoto=undefined;refreshAdminUI();renderAdminAccount();checkUserSession();showCustomAlert('Saved!','success');}
 function withTimeout(p,ms){ms=ms||5000;return Promise.race([Promise.resolve(p),new Promise(r=>setTimeout(()=>r(null),ms))]);}
 function buildAdminSlotHTML(idx,app){const filled=app.name&&app.name.trim();let iconPreview='';if(app.hasIcon)iconPreview='(icon)';else if(app.icon&&app.icon.trim())iconPreview='<span style="font-size:1.1rem">'+escapeHtml(app.icon.trim())+'</span>';const nameText=filled?escapeHtml(app.name):'<em style="opacity:.5">empty slot '+(idx+1)+'</em>';return '<div class="admin-slot-num">'+(idx+1)+'</div>'+(iconPreview?'<div style="width:26px">'+iconPreview+'</div>':'')+'<div class="admin-slot-info"><div class="admin-slot-name">'+nameText+' '+(app.hasApk?'<span style="font-size:.6rem;color:#22c55e">APK</span>':'')+'</div><div class="admin-slot-url">'+(filled&&app.desc?escapeHtml(app.desc):'')+'</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="editAppSlot('+idx+')"><i class="fa-solid fa-pen"></i></button><button class="admin-slot-btn delete" onclick="clearAppSlot('+idx+')"><i class="fa-solid fa-trash-can"></i></button></div>';}
 function openApkDB(){return new Promise((res,rej)=>{if(apkDB)return res(apkDB);try{if(!('indexedDB' in window))return rej(new Error('no-idb'));const r=indexedDB.open('muminsultani_apk_db_v2',3);r.onupgradeneeded=e=>{const db=e.target.result;if(!db.objectStoreNames.contains('apks'))db.createObjectStore('apks');if(!db.objectStoreNames.contains('icons'))db.createObjectStore('icons');};r.onsuccess=e=>{apkDB=e.target.result;res(apkDB);};r.onerror=e=>rej(e.target.error);}catch(e){rej(e);}});}
@@ -2078,7 +2077,7 @@ function handleFaviconUpload(e){const f=e.target.files[0];if(!f||!f.type.startsW
 function clearFavicon(){pendingFaviconDataUrl=null;const pv=document.getElementById('faviconPreview');if(pv)pv.style.display='none';const ic=document.getElementById('faviconUploadIcon');if(ic)ic.style.display='block';const b=document.getElementById('faviconClearBtn');if(b)b.style.display='none';const c=getSiteContent();if(c.general)c.general.favicon='';saveSiteContent(c);applySiteContent();}
 function exportSiteBackup(){const c=getSiteContent();const data=JSON.stringify(c,null,2);const blob=new Blob([data],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='muminsultani-backup-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();document.body.removeChild(a);showCustomAlert('Backup downloaded!','success');}
 function importSiteBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);saveSiteContent(deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),d));applySiteContent();applySectionOrder();applyEffectsSettings();refreshAdminUI();showCustomAlert('Backup loaded!','success');}catch(err){showCustomAlert('Invalid file!');}e.target.value='';};r.readAsText(f);}
-function confirmResetSite(){showCustomAlert('All site content will be reset?','delete',async function(){localStorage.removeItem(SITE_CONTENT_KEY);try{for(let i=0;i<8;i++){await withTimeout(deleteApkFile(i),3000);await withTimeout(deleteIconData(i),3000);}}catch(e){}applySiteContent();applySectionOrder();applyEffectsSettings();refreshAdminUI();showCustomAlert('Reset!','success');});}
+function confirmResetSite(){showCustomAlert('All site content will be reset?','delete',async function(){localStorage.removeItem(SITE_CONTENT_KEY);try{for(let i=0;i<8;i++){await withTimeout(deleteApkFile(i),3000);await withTimeout(deleteIconData(i),3000);}}catch(e){}const def=JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT));try{localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(def));}catch(e){}saveSiteContentToFirebase(def);applySiteContent();applySectionOrder();applyEffectsSettings();refreshAdminUI();showCustomAlert('Reset!','success');});}
 function checkAdminHash(){if(window.location.hash==='#manage-muminsultani'||window.location.hash==='#admin'){triggerAdminAccess();history.replaceState(null,'',window.location.pathname+window.location.search);}}
 window.addEventListener('hashchange',checkAdminHash);
 
@@ -2102,27 +2101,68 @@ document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&(e.key==='M'||
 const curtain=document.getElementById('security-curtain');
 window.addEventListener('blur',()=>{curtain.style.opacity='1';curtain.style.visibility='visible';});
 window.addEventListener('focus',()=>{curtain.style.opacity='0';curtain.style.visibility='hidden';});
-
 window.addEventListener('resize',()=>{updateMessengerDefaultPosition();if(confettiCanvas&&confettiCanvas.style.display!=='none'){confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;}if(appsResizeTimer)clearTimeout(appsResizeTimer);appsResizeTimer=setTimeout(renderApplications,300);});
 
+/* ============================================================
+   🚀 DOMContentLoaded — Firebase Sync Entegre
+   ============================================================ */
 window.addEventListener('DOMContentLoaded',async ()=>{
   try{if(window.location.search.indexOf('logout=1')!==-1){localStorage.removeItem('logged_user');localStorage.removeItem('user_prefs_v1');try{sessionStorage.clear();}catch(e){}history.replaceState(null,'',window.location.pathname);}}catch(e){}
   setTimeout(()=>{const i=document.getElementById('intro-screen');if(i){i.style.opacity='0';i.style.visibility='hidden';setTimeout(()=>{i.style.display='none';if(window.introConstellation)window.introConstellation.stop();},600);}},1500);
-  ensureUserIdsAndAdmin();initTheme();initEmailJS();initFirebase();initAllPasswordMasks();
-  checkUserSession();applySiteContent();applySectionOrder();applyEffectsSettings();
+  initFirebase();
+  initEmailJS();
+  initAllPasswordMasks();
+  ensureUserIdsAndAdmin();
+
+  /* 🔥 FIREBASE'DEN VERİLERİ ÇEK */
+  try{
+    const loadedContent=await loadSiteContentFromFirebase();
+    const loadedUsers=await loadUsersFromFirebase();
+    const loadedOrders=await loadOrdersFromFirebase();
+    const loadedChat=await loadChatFromFirebase();
+    if(loadedContent||loadedUsers||loadedOrders||loadedChat){
+      console.log('🔥 Firebase senkronizasyonu aktif');
+      firebaseSyncReady=true;
+    }
+  }catch(e){console.warn('Firebase sync skipped:',e);}
+
+  /* Ayarları uygula */
+  initTheme();
+  checkUserSession();
+  applySiteContent();
+  applySectionOrder();
+  applyEffectsSettings();
+
   const storedLang=sessionStorage.getItem('site_lang');
   const browserLang=(navigator.language||'en').toLowerCase().startsWith('tr')?'tr':'en';
   const defaultLang=(getSiteContent().general&&getSiteContent().general.defaultLang)?getSiteContent().general.defaultLang:browserLang;
   currentLang=storedLang||defaultLang;
   applyTranslations();
+
   const authPassInput=document.getElementById('contactClientPassword');
   if(authPassInput)authPassInput.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();handleAuthSubmit(e);}});
   const adminBioEl=document.getElementById('adminAccBio');if(adminBioEl)adminBioEl.addEventListener('input',function(){document.getElementById('adminBioCount').textContent=this.value.length;});
   ['editClientDay','editClientMonth','editClientYear'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('blur',validateDOB);});
-  checkAdminHash();openApkDB().catch(()=>{});updateChatBadge();startChatPolling();
-  setupSignupAutoFill();initMessengerBtn();applyMessengerColor();updateOrdersBadge();
+  checkAdminHash();
+  try{await openApkDB();}catch(e){}
+  updateChatBadge();
+  startChatPolling();
+  setupSignupAutoFill();
+  initMessengerBtn();
+  applyMessengerColor();
+  updateOrdersBadge();
   setInterval(updateOrdersBadge,5000);
   setTimeout(updateMessengerDefaultPosition,300);
+
+  /* 🔥 FIREBASE REAL-TIME DİNLEYİCİLERİ BAŞLAT */
+  setTimeout(()=>{
+    listenToFirebaseChanges();
+    listenToUsersChanges();
+    listenToOrdersChanges();
+    listenToChatChanges();
+    console.log('🔥 Firebase real-time listeners aktif');
+  },1500);
+
   try{window.fishSystem=createFishSystem('fish-canvas');applyFishSettings();}catch(e){console.warn('Fish init error:',e);}
 });
 </script>
