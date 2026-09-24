@@ -31,6 +31,9 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
+/* ============================================================
+   🌐 CROSS-BROWSER FIX LAYER
+   ============================================================ */
 :root{--font-fallback:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'}
 .modal-overlay,.lang-menu,.header-profile-menu,.chat-msg.theirs .chat-msg-text,body[data-panel="glass"] .modal-container,body[data-panel="glass"] .custom-alert-box,#security-curtain{-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 .chat-msg.theirs .chat-msg-text{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
@@ -54,6 +57,10 @@ button,a,.app-card,.chat-user-item,.effect-chip,.settings-chip,.admin-tab,.admin
 button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,.app-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%}
 body{-webkit-touch-callout:none;overflow-x:hidden}
+
+/* ============================================================
+   ORİJİNAL CSS
+   ============================================================ */
 html{color-scheme:light dark;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;overflow-x:hidden}
 img{-webkit-user-drag:none}
@@ -121,6 +128,8 @@ body.bg-mono{background-image:radial-gradient(circle at 20% 20%,rgba(148,163,184
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 .intro-logo{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:2.4rem;font-weight:900;letter-spacing:-1.5px;background:linear-gradient(270deg,var(--accent),var(--accent-2),var(--accent),var(--accent-2),var(--accent));background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientFlow 4s ease infinite;word-break:break-word}
 .intro-sub{font-size:.8rem;color:#94a3b8;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+
+/* ⭐ INTRO — TABLET */
 @media (min-width:641px) and (max-width:1024px){
   .intro-content{gap:22px}
   .intro-code-box{font-size:1.1rem;padding:14px 24px}
@@ -128,6 +137,7 @@ body.bg-mono{background-image:radial-gradient(circle at 20% 20%,rgba(148,163,184
   .intro-sub{font-size:1rem;letter-spacing:3px}
   .code-cursor{width:11px;height:20px}
 }
+/* ⭐⭐ INTRO — DESKTOP (BÜYÜTÜLDÜ) */
 @media (min-width:1025px){
   .intro-content{gap:32px}
   .intro-code-box{font-size:1.6rem;padding:20px 36px;border-radius:14px}
@@ -159,7 +169,6 @@ body.bg-mono{background-image:radial-gradient(circle at 20% 20%,rgba(148,163,184
 .lang-flag{width:22px;height:15px;border-radius:3px;object-fit:cover;vertical-align:middle}
 .header-bottom-row{margin-top:8px;margin-bottom:14px}
 .role-text{font-size:1.05rem;color:var(--text-secondary);font-weight:400}
-
 .social-btn{font-size:1.25rem;text-decoration:none;display:inline-flex;align-items:center;cursor:pointer;background:transparent;border:none;transition:transform .3s}
 .social-btn:hover{transform:translateY(-3px) scale(1.1)}
 section{border-top:1px solid var(--line-color);padding-top:24px}
@@ -296,6 +305,13 @@ footer{border-top:1px solid var(--line-color);padding-top:20px;padding-bottom:12
   .form-input,.form-textarea{padding:14px 20px !important;font-size:16px !important}
   .submit-btn{padding:15px 14px !important;font-size:.92rem !important}
 }
+
+/* ============================================================
+   ⭐⭐⭐ ADMIN PANELLER — SARI GÖRSELE GÖRE BOYUTLAR ⭐⭐⭐
+   Desktop (kırmızı): 900×550+  |  Tablet (mavi): 640×500+  |  Mobile (turuncu): dar+tall
+   ============================================================ */
+
+/* DESKTOP VARSAYILAN — EN BÜYÜK */
 html body .admin-z .modal-container{
   max-width:900px !important;
   width:100% !important;
@@ -348,9 +364,19 @@ html body .admin-z .bg-swatch{height:42px !important;}
 html body .admin-z .color-swatch{height:42px !important;}
 html body .admin-z .social-row{padding:12px !important;}
 html body .admin-z .social-row i{font-size:1.3rem !important;}
+
+/* TABLET — mavi iç kutu (orta büyüklük) */
 @media (min-width:641px) and (max-width:1024px){
-  html body .admin-z .modal-container{max-width:640px !important;min-height:500px !important;max-height:90vh !important;padding:26px !important;}
-  html body .admin-z .admin-panel-content{min-height:340px !important;max-height:68vh !important;}
+  html body .admin-z .modal-container{
+    max-width:640px !important;
+    min-height:500px !important;
+    max-height:90vh !important;
+    padding:26px !important;
+  }
+  html body .admin-z .admin-panel-content{
+    min-height:340px !important;
+    max-height:68vh !important;
+  }
   html body .admin-z .modal-brand{font-size:1.35rem !important;}
   html body .admin-z .modal-title{font-size:.92rem !important;}
   html body .admin-z .form-input,html body .admin-z .form-textarea{padding:12px 15px !important;}
@@ -369,9 +395,20 @@ html body .admin-z .social-row i{font-size:1.3rem !important;}
   html body .admin-z .effect-chip{padding:12px 8px !important;font-size:.75rem !important;}
   html body .admin-z .bg-swatch{height:38px !important;}
 }
+
+/* MOBILE — turuncu iç kutu (dar + uzun) */
 @media (max-width:640px){
-  html body .admin-z .modal-container{max-width:calc(100vw - 20px) !important;min-height:78vh !important;max-height:94vh !important;padding:18px !important;border-radius:18px !important;}
-  html body .admin-z .admin-panel-content{min-height:56vh !important;max-height:74vh !important;}
+  html body .admin-z .modal-container{
+    max-width:calc(100vw - 20px) !important;
+    min-height:78vh !important;
+    max-height:94vh !important;
+    padding:18px !important;
+    border-radius:18px !important;
+  }
+  html body .admin-z .admin-panel-content{
+    min-height:56vh !important;
+    max-height:74vh !important;
+  }
   html body .admin-z .modal-brand{font-size:1.15rem !important;}
   html body .admin-z .modal-title{font-size:.8rem !important;}
   html body .admin-z .modal-header{padding-bottom:12px !important;margin-bottom:14px !important;}
@@ -405,6 +442,7 @@ html body .admin-z .social-row i{font-size:1.3rem !important;}
   html body .admin-z .social-row{padding:9px !important;}
   html body .admin-z .admin-slot{padding:11px !important;}
 }
+
 .lightbox-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(5,5,10,.8);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);z-index:100000;display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:opacity .3s;padding:20px;pointer-events:none}
 .lightbox-overlay.active{opacity:1;visibility:visible;pointer-events:auto}
 .lightbox-content-box{background:var(--modal-container-bg);border:1px solid var(--line-color);border-radius:20px;width:100%;max-width:420px;padding:16px;position:relative}
@@ -430,7 +468,6 @@ html body .admin-z .social-row i{font-size:1.3rem !important;}
 .btn-crop-cancel{background:var(--box-bg);color:var(--text-color-override);border:1px solid var(--line-color) !important}
 .btn-crop-apply{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff}
 .code-input{text-align:center !important;font-family:'Fira Code',monospace !important;font-size:16px !important;letter-spacing:8px !important;font-weight:700 !important;color:var(--accent) !important}
-
 .admin-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:6px;border-bottom:1px solid var(--line-color);scrollbar-width:none}
 .admin-tabs::-webkit-scrollbar{display:none}
 .admin-tab{flex-shrink:0;padding:8px 14px;border-radius:10px;background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-secondary);font-size:.72rem;font-weight:700;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:5px}
@@ -1210,7 +1247,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <button class="admin-tab" data-tab="activity" onclick="switchAdminTab('activity',this)"><i class="fa-solid fa-list-activity"></i> <span>Activity</span></button>
 <button class="admin-tab" data-tab="chats" onclick="switchAdminTab('chats',this)"><i class="fa-solid fa-comments"></i> <span>Chats</span></button>
 <button class="admin-tab" data-tab="emails" onclick="switchAdminTab('emails',this)"><i class="fa-solid fa-envelope"></i> <span>Emails</span></button>
-<button class="admin-tab" data-tab="whatsapp" onclick="switchAdminTab('whatsapp',this)"><i class="fa-brands fa-whatsapp"></i> <span>WhatsApp</span></button>
 <button class="admin-tab" data-tab="orders" onclick="switchAdminTab('orders',this)"><i class="fa-solid fa-cart-shopping"></i> <span>Orders</span><span class="tab-badge" id="ordersTabBadge" style="display:none">0</span></button>
 <button class="admin-tab" data-tab="header" onclick="switchAdminTab('header',this)"><i class="fa-solid fa-heading"></i> <span>Header</span></button>
 <button class="admin-tab" data-tab="social" onclick="switchAdminTab('social',this)"><i class="fa-solid fa-share-nodes"></i> <span>Social</span></button>
@@ -1224,7 +1260,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 <button class="admin-tab" data-tab="footer" onclick="switchAdminTab('footer',this)"><i class="fa-solid fa-shoe-prints"></i> <span>Footer</span></button>
 <button class="admin-tab" data-tab="backup" onclick="switchAdminTab('backup',this)"><i class="fa-solid fa-database"></i> <span>Backup</span></button>
 </div>
-
 <div class="admin-panel-content">
 <div class="admin-section active" data-section="dashboard">
 <div class="admin-hint"><i class="fa-solid fa-shield-halved" style="color:var(--accent)"></i> <strong>Full control mode</strong></div>
@@ -1349,60 +1384,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
     <div class="form-buttons-group"><button type="submit" class="submit-btn email-btn"><i class="fa-solid fa-floppy-disk"></i> Kaydet</button></div>
   </form>
 </div>
-
-<div class="admin-section" data-section="whatsapp">
-  <div class="admin-hint" style="background:rgba(37,211,102,.08);border-color:rgba(37,211,102,.3)">
-    <i class="fa-brands fa-whatsapp" style="color:#25D366;font-size:1.2rem"></i> 
-    <strong>WhatsApp Toplu Mesaj Sistemi</strong><br>
-    <span style="font-size:.68rem">Kullanıcılara WhatsApp üzerinden mesaj gönderin. Numara kayıtlı olmalıdır.</span>
-  </div>
-  <h4 class="admin-subsection-title"><i class="fa-solid fa-users"></i> Kullanıcı Seç</h4>
-  <div class="admin-actions-grid" style="margin-bottom:12px">
-    <button class="admin-action-btn primary" onclick="whatsappSelectAll()"><i class="fa-solid fa-check-double"></i> Tümünü Seç</button>
-    <button class="admin-action-btn ghost" onclick="whatsappDeselectAll()"><i class="fa-solid fa-xmark"></i> Temizle</button>
-    <button class="admin-action-btn ghost" onclick="whatsappRefreshList()"><i class="fa-solid fa-rotate-right"></i> Yenile</button>
-  </div>
-  <input type="text" class="form-input" id="whatsappSearchInput" placeholder="🔍 Ara (isim, kullanıcı adı, numara)..." oninput="whatsappFilterUsers()" style="margin-bottom:10px">
-  <div id="whatsappUserList" style="max-height:280px;overflow-y:auto;padding:4px;background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;margin-bottom:14px"></div>
-  <h4 class="admin-subsection-title"><i class="fa-solid fa-message"></i> Mesaj İçeriği</h4>
-  <div class="form-group">
-    <label class="form-label">Mesaj Şablonu</label>
-    <textarea class="form-textarea" id="whatsappMessageTemplate" maxlength="1000" style="min-height:110px" placeholder="Merhaba {name}!">Merhaba {name}! 👋
-
-Sitemizden gönderilen mesajdır.
-
-Saygılar,
-muminsultani</textarea>
-    <div style="font-size:.65rem;color:var(--text-secondary);margin-top:4px;">
-      Değişkenler: <code style="color:var(--accent)">{name}</code> <code style="color:var(--accent)">{username}</code> <code style="color:var(--accent)">{userId}</code>
-    </div>
-  </div>
-  <div class="toggle-row" style="background:rgba(37,211,102,.06);border-color:rgba(37,211,102,.25)">
-    <div class="toggle-label">
-      <div class="toggle-label-title"><i class="fa-solid fa-clock" style="color:#25D366"></i> Mesajlar arası bekleme (saniye)</div>
-    </div>
-    <input type="number" class="form-input" id="whatsappDelay" value="3" min="1" max="60" style="width:80px;text-align:center;padding:8px">
-  </div>
-  <div class="form-buttons-group" style="margin-top:14px;flex-direction:column;gap:8px">
-    <button type="button" class="submit-btn" onclick="whatsappSendToSelected()" style="width:100%;background:linear-gradient(135deg,#25D366,#128C7E)">
-      <i class="fa-brands fa-whatsapp" style="font-size:1.1rem"></i> Seçili Kişilere Gönder (Sıralı)
-    </button>
-    <button type="button" class="submit-btn" onclick="whatsappOpenChatsOnly()" style="width:100%;background:var(--box-bg);color:var(--text-color-override);border:1px solid var(--line-color)">
-      <i class="fa-solid fa-comment-dots"></i> Sadece Sohbetleri Aç (Göndermeden)
-    </button>
-  </div>
-  <div id="whatsappProgressBox" style="display:none;margin-top:14px;padding:12px 14px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.3);border-radius:12px">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-      <i class="fa-brands fa-whatsapp" style="color:#25D366;font-size:1.2rem"></i>
-      <strong id="whatsappProgressTitle" style="font-size:.85rem">Gönderiliyor...</strong>
-    </div>
-    <div style="height:8px;background:var(--line-color);border-radius:8px;overflow:hidden;margin-bottom:8px">
-      <div id="whatsappProgressBar" style="height:100%;width:0%;background:linear-gradient(90deg,#25D366,#128C7E);transition:width .3s;border-radius:8px"></div>
-    </div>
-    <div style="font-size:.72rem;color:var(--text-secondary)" id="whatsappProgressText">0 / 0 gönderildi</div>
-  </div>
-</div>
-
 <div class="admin-section" data-section="orders">
   <div class="admin-hint"><i class="fa-solid fa-bell" style="color:var(--accent)"></i> Gelen yazılım siparişleri burada görünür.</div>
   <div class="toggle-row" style="background:rgba(147,51,234,.08);border-color:rgba(147,51,234,.3)">
@@ -1536,6 +1517,7 @@ muminsultani</textarea>
 </div>
 </div>
 </div>
+
 <div class="modal-overlay admin-z" id="userDetailModal">
 <div class="modal-container">
 <div class="modal-header"><div class="modal-header-left"><div class="modal-brand">muminsultani</div><div class="modal-title">User Details</div></div><div class="modal-header-actions"><button class="modal-close-btn" onclick="closeUserDetail()"><i class="fa-solid fa-xmark"></i></button></div></div>
@@ -1593,81 +1575,6 @@ muminsultani</textarea>
 </div>
 </div>
 
-<!-- WhatsApp modalları -->
-<div class="modal-overlay admin-z" id="adminUserWhatsappModal">
-  <div class="modal-container" style="max-width:420px">
-    <div class="modal-header">
-      <div class="modal-header-left">
-        <div class="modal-brand">muminsultani</div>
-        <div class="modal-title">WhatsApp Numarası</div>
-      </div>
-      <div class="modal-header-actions">
-        <button class="modal-close-btn" onclick="closeAdminUserWhatsapp()"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-    </div>
-    <div id="adminUserWhatsappInfo" style="padding:12px 14px;background:var(--box-bg);border:1px solid var(--line-color);border-radius:12px;margin-bottom:14px;font-size:.8rem;display:flex;align-items:center;gap:10px;">
-      <div id="auwAvatar" style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;overflow:hidden"></div>
-      <div style="flex:1;min-width:0;">
-        <div id="auwName" style="font-weight:700;color:var(--text-color-override);"></div>
-        <div id="auwEmail" style="color:var(--text-secondary);font-size:.72rem;margin-top:2px;"></div>
-      </div>
-    </div>
-    <form id="adminUserWhatsappForm" onsubmit="saveAdminUserWhatsapp(event)">
-      <div class="form-group">
-        <label class="form-label"><i class="fa-brands fa-whatsapp" style="color:#25D366"></i> Telefon Numarası (ülke kodu ile)</label>
-        <input type="text" class="form-input" id="auw-phone" maxlength="20" placeholder="+905551234567" oninput="this.value=this.value.replace(/[^0-9+]/g,'')">
-        <div style="font-size:.65rem;color:var(--text-secondary);margin-top:6px;">
-          Örnek: <strong>+905551234567</strong> (Türkiye) veya <strong>+14155551234</strong> (ABD)
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">WhatsApp'ta Görünen İsim (opsiyonel)</label>
-        <input type="text" class="form-input" id="auw-displayname" maxlength="60" placeholder="Örn: Ahmet Y.">
-      </div>
-      <div class="form-buttons-group">
-        <button type="submit" class="submit-btn" style="width:100%;background:linear-gradient(135deg,#25D366,#128C7E)">
-          <i class="fa-solid fa-floppy-disk"></i> Kaydet
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<div class="modal-overlay admin-z" id="adminWhatsappConfirmModal">
-  <div class="modal-container" style="max-width:480px">
-    <div class="modal-header">
-      <div class="modal-header-left">
-        <div class="modal-brand">muminsultani</div>
-        <div class="modal-title">WhatsApp Gönderim Onayı</div>
-      </div>
-      <div class="modal-header-actions">
-        <button class="modal-close-btn" onclick="closeAdminWhatsappConfirm()"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-    </div>
-    <div style="padding:14px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.3);border-radius:12px;margin-bottom:14px">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-        <i class="fa-brands fa-whatsapp" style="color:#25D366;font-size:1.6rem"></i>
-        <div>
-          <div style="font-weight:800;font-size:.9rem;color:var(--text-color-override)" id="whatsappConfirmCount">0 kişi</div>
-          <div style="font-size:.7rem;color:var(--text-secondary)">seçili kullanıcı</div>
-        </div>
-      </div>
-      <div style="font-size:.75rem;color:var(--text-color-override);background:var(--bg-color);padding:10px;border-radius:8px;white-space:pre-wrap;max-height:150px;overflow-y:auto" id="whatsappConfirmPreview"></div>
-    </div>
-    <div class="admin-hint" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.3);font-size:.72rem">
-      <i class="fa-solid fa-triangle-exclamation" style="color:#f59e0b"></i>
-      <strong>Uyarı:</strong> Tarayıcı her kişi için WhatsApp Web'i açacaktır. Popup engelleyicisini kapatın.
-    </div>
-    <div class="form-buttons-group" style="margin-top:14px">
-      <button type="button" class="submit-btn" onclick="closeAdminWhatsappConfirm()" style="background:var(--box-bg);color:var(--text-color-override);border:1px solid var(--line-color)">
-        <i class="fa-solid fa-xmark"></i> İptal
-      </button>
-      <button type="button" class="submit-btn" onclick="startWhatsappBulkSend()" style="background:linear-gradient(135deg,#25D366,#128C7E)">
-        <i class="fa-brands fa-whatsapp"></i> Başlat
-      </button>
-    </div>
-  </div>
-</div>
 
 <script>
 /* ============================================================
@@ -1756,10 +1663,6 @@ let appsRenderLock=false,appsResizeTimer=null;
 let firebaseConnected=false,firebaseDbRef=null;
 let firebaseSyncReady=false,firebaseSyncTimer=null,isApplyingRemote=false;
 let weatherData=null,weatherLoading=false;
-let whatsappSelectedEmails=[];
-let whatsappSending=false;
-let whatsappCancelFlag=false;
-let adminWhatsappTarget=null;
 const PASSWORD_FIELDS=['adminPasswordInput','contactClientPassword','changeOldPassword','changeNewPassword','changeConfirmPassword','deleteConfirmPassword','resetClientNewPassword'];
 const PW_LABELS={en:{pw_enter:'password',pw_very_weak:'very weak',pw_weak:'weak',pw_medium:'medium',pw_strong:'strong',pw_very_strong:'very strong'},tr:{pw_enter:'şifre',pw_very_weak:'çok zayıf',pw_weak:'zayıf',pw_medium:'orta',pw_strong:'güçlü',pw_very_strong:'çok güçlü'},de:{pw_enter:'passwort',pw_very_weak:'sehr schwach',pw_weak:'schwach',pw_medium:'mittel',pw_strong:'stark',pw_very_strong:'sehr stark'}};
 
@@ -1799,7 +1702,6 @@ const INTRO_BGS=[{key:'default',name:'Default'},{key:'aurora',name:'Aurora'},{ke
 const INTRO_ANIMS=ANIM_PRESETS.filter(a=>a.key!=='none');
 const FISH_STYLES=[{key:'tropical',name:'Tropikal',icon:'fa-fish'},{key:'school',name:'Sürü',icon:'fa-fish-fins'},{key:'deep',name:'Derin Deniz',icon:'fa-water'},{key:'jellyfish',name:'Denizanası',icon:'fa-meteor'},{key:'shark',name:'Köpekbalığı',icon:'fa-shark'},{key:'mixed',name:'Karışık',icon:'fa-shuffle'}];
 const SOCIAL_PLATFORMS=[{key:'github',label:'GitHub',icon:'fa-brands fa-github',placeholder:'https://github.com/username'},{key:'instagram',label:'Instagram',icon:'fa-brands fa-instagram',placeholder:'https://instagram.com/username'},{key:'gmail',label:'Gmail',icon:'fa-solid fa-envelope',placeholder:'email@example.com'},{key:'twitter',label:'Twitter/X',icon:'fa-brands fa-x-twitter',placeholder:'https://x.com/username'},{key:'facebook',label:'Facebook',icon:'fa-brands fa-facebook',placeholder:'https://facebook.com/username'},{key:'youtube',label:'YouTube',icon:'fa-brands fa-youtube',placeholder:'https://youtube.com/@channel'},{key:'linkedin',label:'LinkedIn',icon:'fa-brands fa-linkedin',placeholder:'https://linkedin.com/in/username'},{key:'tiktok',label:'TikTok',icon:'fa-brands fa-tiktok',placeholder:'https://tiktok.com/@username'},{key:'telegram',label:'Telegram',icon:'fa-brands fa-telegram',placeholder:'https://t.me/username'},{key:'whatsapp',label:'WhatsApp',icon:'fa-brands fa-whatsapp',placeholder:'https://wa.me/1234567890'},{key:'discord',label:'Discord',icon:'fa-brands fa-discord',placeholder:'https://discord.gg/invite'},{key:'pinterest',label:'Pinterest',icon:'fa-brands fa-pinterest',placeholder:'https://pinterest.com/username'}];
-
 const DEFAULT_SITE_CONTENT={
   header:{brand:'muminsultani',roleEn:'Software Developer',roleTr:'Yazılım Geliştirici',roleDe:'Softwareentwickler'},
   social:[{platform:'github',url:'https://github.com/muminsultani',enabled:true},{platform:'instagram',url:'https://instagram.com/sultanimumin',enabled:true},{platform:'gmail',url:'muminsultani@hotmail.com',enabled:true}],
@@ -1815,7 +1717,6 @@ const DEFAULT_SITE_CONTENT={
   welcomeEmail:{enabled:true,includePdf:true,subject:'Hoşgeldiniz! 🎉',message:'Merhaba {name},\n\nSitemize kayıt olduğunuz için teşekkür ederiz!\n\nKullanıcı ID: {userId}\nKullanıcı Adı: @{username}\n\nİyi günler dileriz,\nmuminsultani'},
   lastEdit:'—'
 };
-
 function t(key,fallback){const d=LANG[currentLang]||LANG.en;const v=d[key];return(v!==undefined&&v!==null&&v!=='')?v:(fallback!==undefined?fallback:key);}
 function escapeHtml(s){if(s===null||s===undefined)return'';return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 function deepMerge(t,s){for(const k in s){if(s[k]&&typeof s[k]==='object'&&!Array.isArray(s[k])){t[k]=deepMerge(t[k]||{},s[k]);}else if(s[k]!==undefined&&s[k]!==null){t[k]=s[k];}}return t;}
@@ -1998,7 +1899,6 @@ function setFishStyle(k){const c=getSiteContent();if(!c.effects)c.effects={};c.e
 function setIntroFishEnabled(v){const c=getSiteContent();if(!c.effects)c.effects={};c.effects.introFishEnabled=!!v;saveSiteContent(c);if(window.introFishSystem)window.introFishSystem.setEnabled(!!v);showCustomAlert(v?'🐟 Intro balıkları açıldı':'❌ Intro balıkları kapatıldı','success');}
 function setIntroFishStyle(k){const c=getSiteContent();if(!c.effects)c.effects={};c.effects.introFishStyle=k;saveSiteContent(c);if(window.introFishSystem)window.introFishSystem.setStyle(k);try{renderIntroPanel();}catch(e){}}
 function setIntroSparkleEnabled(v){const c=getSiteContent();if(!c.effects)c.effects={};c.effects.introSparkleEnabled=!!v;saveSiteContent(c);if(window.introSparkle)window.introSparkle.setEnabled(!!v);showCustomAlert(v?'✨ Sparkle açıldı':'❌ Sparkle kapatıldı','success');}
-
 function bgSwatch(k){const m={default:'linear-gradient(135deg,#05050a,#0d0d15)',aurora:'linear-gradient(135deg,#34d399,#9333ea)',sunset:'linear-gradient(135deg,#fb923c,#ec4899)',ocean:'linear-gradient(135deg,#38bdf8,#0ea5e9)',forest:'linear-gradient(135deg,#22c55e,#15803d)',lava:'linear-gradient(135deg,#ef4444,#f59e0b)',cosmic:'linear-gradient(135deg,#8b5cf6,#ec4899)',mint:'linear-gradient(135deg,#10b981,#2dd4bf)',rose:'linear-gradient(135deg,#f472b6,#fb7185)',mono:'linear-gradient(135deg,#94a3b8,#64748b)'};return m[k]||m.default;}
 function chatSwatch(k){const m={default:'#0d0d15',whatsapp:'#0b141a',telegram:'#17212b',aurora:'#0d1f1f',sunset:'#2a1216',ocean:'#04141f',forest:'#0a1a10',lava:'#1a0808',cosmic:'#14092a',mint:'#08201a',rose:'#250d17'};return m[k]||m.default;}
 function setTheme(k){const c=getSiteContent();if(!c.appearance)c.appearance={};c.appearance.theme=k;saveSiteContent(c);applyAppearance();renderEffectsPanel();}
@@ -2144,7 +2044,6 @@ function closeOrderModal(){document.getElementById('orderModal').classList.remov
 function submitOrder(e){e.preventDefault();const s=getOrderSettings();const logged=!!localStorage.getItem('logged_user');if(s.requireLogin&&!logged){closeOrderModal();showCustomAlert('⚠️ '+t('you_must_signin'),'warning');setTimeout(()=>openGetInTouchModal(),400);return;}const o={id:'o_'+Date.now()+'_'+Math.random().toString(36).substring(2,6),name:document.getElementById('orderName').value.trim(),email:document.getElementById('orderEmail').value.trim().toLowerCase(),type:document.getElementById('orderType').value,budget:document.getElementById('orderBudget').value.trim(),deadline:document.getElementById('orderDeadline').value.trim(),description:document.getElementById('orderDesc').value.trim(),timestamp:new Date().toISOString(),status:'new',read:false,guest:!logged};if(!o.name||!o.email||!o.description){showCustomAlert(t('fill_fields'));return;}const all=getOrders();all.unshift(o);saveOrders(all);updateOrdersBadge();logActivity('order_submitted',{name:o.name,email:o.email},'Type: '+o.type);closeOrderModal();playApplauseSound();fireConfettiBurst(1);showCustomAlert('✅ '+t('order_received'),'success');}
 function getUnreadOrdersCount(){return getOrders().filter(o=>o.status==='new'||!o.read).length;}
 function updateOrdersBadge(){const b=document.getElementById('ordersTabBadge');const c=getUnreadOrdersCount();if(b){if(c>0){b.style.display='inline-flex';b.textContent=c>99?'99+':String(c);}else b.style.display='none';}}
-
 function renderAdminOrders(){const list=document.getElementById('adminOrdersList');if(!list)return;const orders=getOrders();if(!orders.length){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">'+t('no_orders')+'</p>';return;}list.innerHTML='';orders.forEach((o,idx)=>{const st=o.status||'new';const badge='<span class="order-status-badge '+st+'">'+(st==='new'?'● NEW':st==='read'?'READ':'✓ APPROVED')+'</span>';const item=document.createElement('div');item.className='user-card';item.style.borderLeft='3px solid var(--accent)';item.innerHTML='<div class="user-card-info" style="flex:1"><div class="user-card-name">'+escapeHtml(o.name)+' <span style="font-size:.6rem;padding:1px 6px;border-radius:8px;background:rgba(var(--accent-rgb),.15);color:var(--accent)">'+escapeHtml(o.type)+'</span> '+badge+'</div><div class="user-card-detail"><i class="fa-solid fa-envelope"></i>'+escapeHtml(o.email)+'</div><div class="user-card-detail" style="margin-top:6px;color:var(--text-color-override);white-space:pre-wrap;font-size:.72rem;">'+escapeHtml(o.description)+'</div></div><div class="user-card-btns">'+(o.status!=='approved'?'<button class="user-view-btn" onclick="approveOrder('+idx+')" style="color:#22c55e"><i class="fa-solid fa-check-double"></i></button>':'')+'<button class="user-view-btn danger" onclick="deleteOrder('+idx+')"><i class="fa-solid fa-trash-can"></i></button></div>';list.appendChild(item);});}
 function deleteOrder(idx){showCustomAlert('Delete this order?','delete',()=>{const o=getOrders();o.splice(idx,1);saveOrders(o);updateOrdersBadge();renderAdminOrders();});}
 function clearAllOrders(){showCustomAlert('Delete all orders?','delete',()=>{localStorage.removeItem(ORDERS_KEY);saveOrdersToFirebase([]);updateOrdersBadge();renderAdminOrders();});}
@@ -2161,341 +2060,162 @@ function renderWeather(){const card=document.getElementById('weatherCard');if(!c
 function refreshWeather(){try{localStorage.removeItem(WEATHER_CACHE_KEY);}catch(e){}weatherData=null;fetchWeather(true);}
 function applyWeatherSettings(){const c=getSiteContent();const enabled=!(c.general&&c.general.weatherEnabled===false);const section=document.getElementById('sectionWeather');if(!enabled){if(section)section.style.display='none';return;}if(section)section.style.display='block';if(weatherData)renderWeather();else fetchWeather(false);}
 function toggleWeatherEnabled(v){const c=getSiteContent();if(!c.general)c.general={};c.general.weatherEnabled=!!v;saveSiteContent(c);applyWeatherSettings();showCustomAlert(v?'🌤️ Hava durumu açıldı':'❌ Hava durumu kapatıldı','success');}
-
-/* === FISH SYSTEM === */
-function fishHexRgba(hex,a){if(!hex)return 'rgba(147,51,234,'+a+')';if(hex.indexOf('rgb')===0)return hex;const h=hex.replace('#','');return 'rgba('+parseInt(h.substring(0,2),16)+','+parseInt(h.substring(2,4),16)+','+parseInt(h.substring(4,6),16)+','+a+')';}
-function fishDrawBody(c,x,y,size,c1,c2,dir,tail,type,c3){c.save();c.translate(x,y);c.scale(dir,1);if(type==='shark'){c.fillStyle=c1;c.beginPath();c.moveTo(-size*1.2,0);c.quadraticCurveTo(-size*1.15,-size*0.3,-size*0.85,-size*0.16);c.quadraticCurveTo(-size*0.3,-size*0.68,size*0.42,-size*0.4);c.quadraticCurveTo(size*1,-size*0.16,size*1.2,0);c.quadraticCurveTo(size*1,size*0.25,size*0.42,size*0.4);c.quadraticCurveTo(-size*0.3,size*0.62,-size*0.85,size*0.16);c.quadraticCurveTo(-size*1.15,size*0.3,-size*1.2,0);c.closePath();c.fill();c.fillStyle=c2||'#c9d1d9';c.beginPath();c.moveTo(-size*0.85,size*0.1);c.quadraticCurveTo(size*0.2,size*0.5,size*1.1,0);c.quadraticCurveTo(size*0.4,size*0.32,-size*0.85,size*0.1);c.closePath();c.fill();c.fillStyle=c1;c.beginPath();c.moveTo(-size*1.2,0);c.lineTo(-size*1.65,-size*0.55);c.lineTo(-size*1.5,0);c.lineTo(-size*1.65,size*0.5);c.closePath();c.fill();c.beginPath();c.moveTo(-size*0.2,-size*0.5);c.lineTo(-size*0.03,-size*0.95);c.lineTo(size*0.18,-size*0.45);c.closePath();c.fill();c.fillStyle='#fff';c.beginPath();c.arc(size*0.7,-size*0.1,size*0.11,0,Math.PI*2);c.fill();c.fillStyle='#000';c.beginPath();c.arc(size*0.73,-size*0.1,size*0.06,0,Math.PI*2);c.fill();}else{const wag=Math.sin(tail)*0.4;c.save();c.translate(-size*0.82,0);c.rotate(wag);c.fillStyle=c2;c.beginPath();c.moveTo(0,0);c.lineTo(-size*0.52,-size*0.55);c.lineTo(-size*0.33,0);c.lineTo(-size*0.52,size*0.55);c.closePath();c.fill();c.restore();c.fillStyle=c1;c.beginPath();c.ellipse(0,0,size*0.9,size*0.53,0,0,Math.PI*2);c.fill();const g=c.createLinearGradient(0,-size*0.5,0,size*0.5);g.addColorStop(0,c1);g.addColorStop(1,c2);c.fillStyle=g;c.beginPath();c.ellipse(0,size*0.04,size*0.8,size*0.42,0,0,Math.PI*2);c.fill();c.fillStyle=c2;c.beginPath();c.moveTo(-size*0.1,-size*0.5);c.lineTo(size*0.17,-size*0.85);c.lineTo(size*0.3,-size*0.43);c.closePath();c.fill();c.beginPath();c.moveTo(-size*0.13,size*0.44);c.lineTo(-size*0.04,size*0.75);c.lineTo(size*0.11,size*0.4);c.closePath();c.fill();c.fillStyle='#fff';c.beginPath();c.arc(size*0.48,-size*0.11,size*0.14,0,Math.PI*2);c.fill();c.fillStyle='#0a0a14';c.beginPath();c.arc(size*0.52,-size*0.11,size*0.085,0,Math.PI*2);c.fill();c.fillStyle='rgba(255,255,255,.5)';c.beginPath();c.ellipse(size*0.28,-size*0.24,size*0.15,size*0.055,-0.4,0,Math.PI*2);c.fill();if(c3){c.strokeStyle=fishHexRgba(c3,0.5);c.lineWidth=1.5;for(let i=-1;i<=1;i++){c.beginPath();c.moveTo(i*size*0.25,-size*0.35);c.lineTo(i*size*0.25,size*0.35);c.stroke();}}}c.restore();}
-function fishDrawJelly(c,x,y,size,c1,c2,phase){c.save();c.translate(x,y);const pulse=Math.sin(phase)*0.1+1;const glow=c.createRadialGradient(0,0,0,0,0,size*2.2);glow.addColorStop(0,fishHexRgba(c1,0.32));glow.addColorStop(1,fishHexRgba(c1,0));c.fillStyle=glow;c.beginPath();c.arc(0,0,size*2.2,0,Math.PI*2);c.fill();c.strokeStyle=fishHexRgba(c1,0.7);c.lineWidth=1.6;for(let i=0;i<6;i++){const off=(i-2.5)*size*0.22;c.beginPath();c.moveTo(off,size*0.25);c.quadraticCurveTo(off+Math.sin(phase+i)*size*0.32,size*1,off+Math.sin(phase+i*1.3)*size*0.5,size*1.9);c.stroke();}c.fillStyle=fishHexRgba(c1,0.75);c.beginPath();c.ellipse(0,0,size*pulse,size*0.72*pulse,0,Math.PI,0);c.closePath();c.fill();c.fillStyle=fishHexRgba(c2,0.5);c.beginPath();c.ellipse(0,size*0.05,size*0.85*pulse,size*0.5*pulse,0,Math.PI,0);c.closePath();c.fill();c.fillStyle='rgba(255,255,255,.35)';c.beginPath();c.ellipse(-size*0.32,-size*0.15,size*0.34,size*0.22,0,0,Math.PI*2);c.fill();c.restore();}
-function createFishSystem(canvasId){
-  const canvas=document.getElementById(canvasId);if(!canvas)return{setEnabled:function(){},setStyle:function(){}};
-  const ctx=canvas.getContext('2d');let running=true,enabled=false,style='tropical';let fishes=[],bubbles=[];
-  const TROPI=[['#ff6b6b','#ffa94d','#fff3bf'],['#4dabf7','#74c0fc','#e7f5ff'],['#ffd43b','#fab005','#fff3bf'],['#da77f2','#e599f7','#f3d9fa'],['#51cf66','#8ce99a','#d3f9d8'],['#ff922b','#ffc078','#ffe8cc'],['#22b8cf','#66d9e8','#c5f6fa'],['#f783ac','#faa2c1','#fcc2d7']];
-  const DEEP=[['#3b3b5c','#7c3aed','#a78bfa'],['#1e1b4b','#4338ca','#6366f1'],['#5b21b6','#8b5cf6','#c4b5fd']];
-  const SCH=[['#adb5bd','#ced4da','#e9ecef'],['#748ffc','#a5b4fc','#dbe4ff']];
-  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
-  function pickPal(){let a;if(style==='school')a=SCH;else if(style==='deep'||style==='mixed')a=DEEP;else a=TROPI;return a[Math.floor(Math.random()*a.length)];}
-  function Fish(){this.isShark=(style==='shark');this.dir=Math.random()>0.5?1:-1;this.x=this.dir===1?-120:canvas.width+120;this.baseY=80+Math.random()*(canvas.height-200);this.y=this.baseY;this.size=14+Math.random()*26;const p=pickPal();this.c1=p[0];this.c2=p[1];this.c3=p[2]||p[1];this.speed=(0.5+Math.random()*0.9)*this.dir;this.wobbleAmp=3+Math.random()*7;this.wobbleSpeed=0.02+Math.random()*0.03;this.wobblePhase=Math.random()*Math.PI*2;this.tailPhase=Math.random()*Math.PI*2;this.tailSpeed=0.2+Math.random()*0.15;}
-  Fish.prototype.reset=function(){this.dir=Math.random()>0.5?1:-1;this.x=this.dir===1?-120:canvas.width+120;this.baseY=80+Math.random()*(canvas.height-200);this.y=this.baseY;this.size=14+Math.random()*26;const p=pickPal();this.c1=p[0];this.c2=p[1];this.c3=p[2]||p[1];this.speed=(0.5+Math.random()*0.9)*this.dir;this.isShark=(style==='shark');};
-  Fish.prototype.update=function(){this.x+=this.speed;this.wobblePhase+=this.wobbleSpeed;this.y=this.baseY+Math.sin(this.wobblePhase)*this.wobbleAmp;this.tailPhase+=this.tailSpeed;if(this.dir===1&&this.x>canvas.width+140)this.reset();if(this.dir===-1&&this.x<-140)this.reset();};
-  Fish.prototype.draw=function(){fishDrawBody(ctx,this.x,this.y,this.size,this.c1,this.c2,this.dir,this.tailPhase,this.isShark?'shark':'tropical',this.c3);};
-  function Jelly(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=18+Math.random()*22;this.phase=Math.random()*Math.PI*2;this.speed=0.15+Math.random()*0.25;const p=TROPI[Math.floor(Math.random()*TROPI.length)];this.c1=p[0];this.c2=p[2]||p[1];}
-  Jelly.prototype.update=function(){this.phase+=0.03;this.y-=this.speed;this.x+=Math.sin(this.phase*0.6)*0.4;if(this.y<-100){this.y=canvas.height+80;this.x=Math.random()*canvas.width;}};
-  Jelly.prototype.draw=function(){fishDrawJelly(ctx,this.x,this.y,this.size,this.c1,this.c2,this.phase);};
-  function Bubble(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=1+Math.random()*4;this.speed=0.2+Math.random()*0.6;this.phase=Math.random()*Math.PI*2;}
-  Bubble.prototype.update=function(){this.y-=this.speed;this.phase+=0.05;this.x+=Math.sin(this.phase)*0.3;if(this.y<-20){this.y=canvas.height+20;this.x=Math.random()*canvas.width;}};
-  Bubble.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.strokeStyle='rgba(180,220,255,.5)';ctx.lineWidth=1;ctx.stroke();ctx.beginPath();ctx.arc(this.x-this.size*0.3,this.y-this.size*0.3,this.size*0.3,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,.6)';ctx.fill();};
-  function rebuild(){fishes=[];bubbles=[];let fc=8,jc=0;if(style==='school')fc=22;else if(style==='deep')fc=7;else if(style==='jellyfish'){fc=0;jc=6;}else if(style==='shark')fc=4;else if(style==='mixed'){fc=8;jc=3;}for(let i=0;i<fc;i++)fishes.push(new Fish());for(let i=0;i<jc;i++)fishes.push(new Jelly());const bc=(style==='deep'||style==='mixed')?16:8;for(let i=0;i<bc;i++)bubbles.push(new Bubble());}
-  function loop(){if(!running)return;ctx.clearRect(0,0,canvas.width,canvas.height);if(enabled){for(let i=0;i<bubbles.length;i++){bubbles[i].update();bubbles[i].draw();}for(let i=0;i<fishes.length;i++){fishes[i].update();fishes[i].draw();}}requestAnimationFrame(loop);}
-  resize();window.addEventListener('resize',function(){resize();rebuild();});rebuild();loop();
-  return{setEnabled:function(v){enabled=!!v;if(enabled)canvas.classList.add('active');else canvas.classList.remove('active');if(enabled){resize();rebuild();}else ctx.clearRect(0,0,canvas.width,canvas.height);},setStyle:function(s){style=s||'tropical';rebuild();}};
-}
-function createIntroFishSystem(canvasId){
-  const canvas=document.getElementById(canvasId);if(!canvas)return{setEnabled:function(){},setStyle:function(){}};
-  const ctx=canvas.getContext('2d');let running=true,enabled=false,style='tropical';let fishes=[],bubbles=[];
-  const TROPI=[['#ff6b6b','#ffa94d','#fff3bf'],['#4dabf7','#74c0fc','#e7f5ff'],['#ffd43b','#fab005','#fff3bf'],['#da77f2','#e599f7','#f3d9fa'],['#51cf66','#8ce99a','#d3f9d8'],['#ff922b','#ffc078','#ffe8cc']];
-  const DEEP=[['#3b3b5c','#7c3aed','#a78bfa'],['#1e1b4b','#4338ca','#6366f1']];
-  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
-  function pickPal(){let a;if(style==='deep')a=DEEP;else a=TROPI;return a[Math.floor(Math.random()*a.length)];}
-  function IFish(){this.dir=Math.random()>0.5?1:-1;this.x=this.dir===1?-80:canvas.width+80;this.baseY=60+Math.random()*(canvas.height-120);this.y=this.baseY;this.size=10+Math.random()*18;const p=pickPal();this.c1=p[0];this.c2=p[1];this.c3=p[2]||p[1];this.speed=(0.4+Math.random()*0.8)*this.dir;this.wobbleAmp=2+Math.random()*5;this.wobbleSpeed=0.02+Math.random()*0.03;this.wobblePhase=Math.random()*Math.PI*2;this.tailPhase=Math.random()*Math.PI*2;this.tailSpeed=0.2+Math.random()*0.15;this.alpha=0.35+Math.random()*0.35;}
-  IFish.prototype.update=function(){this.x+=this.speed;this.wobblePhase+=this.wobbleSpeed;this.y=this.baseY+Math.sin(this.wobblePhase)*this.wobbleAmp;this.tailPhase+=this.tailSpeed;if(this.dir===1&&this.x>canvas.width+100)this.reset();if(this.dir===-1&&this.x<-100)this.reset();};
-  IFish.prototype.reset=function(){this.dir=Math.random()>0.5?1:-1;this.x=this.dir===1?-80:canvas.width+80;this.baseY=60+Math.random()*(canvas.height-120);this.size=10+Math.random()*18;const p=pickPal();this.c1=p[0];this.c2=p[1];this.c3=p[2]||p[1];this.speed=(0.4+Math.random()*0.8)*this.dir;};
-  IFish.prototype.draw=function(){ctx.save();ctx.globalAlpha=this.alpha;fishDrawBody(ctx,this.x,this.y,this.size,this.c1,this.c2,this.dir,this.tailPhase,'tropical',this.c3);ctx.restore();};
-  function IBubble(){this.x=Math.random()*canvas.width;this.y=canvas.height+Math.random()*100;this.size=1+Math.random()*3;this.speed=0.3+Math.random()*0.7;this.phase=Math.random()*Math.PI*2;}
-  IBubble.prototype.update=function(){this.y-=this.speed;this.phase+=0.05;this.x+=Math.sin(this.phase)*0.3;if(this.y<-20){this.y=canvas.height+20;this.x=Math.random()*canvas.width;}};
-  IBubble.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.strokeStyle='rgba(180,220,255,.35)';ctx.lineWidth=1;ctx.stroke();};
-  function rebuild(){fishes=[];bubbles=[];let fc=6;if(style==='school')fc=16;if(style==='deep')fc=5;for(let i=0;i<fc;i++)fishes.push(new IFish());for(let i=0;i<10;i++)bubbles.push(new IBubble());}
-  function loop(){if(!running)return;ctx.clearRect(0,0,canvas.width,canvas.height);if(enabled){for(let i=0;i<bubbles.length;i++){bubbles[i].update();bubbles[i].draw();}for(let i=0;i<fishes.length;i++){fishes[i].update();fishes[i].draw();}}requestAnimationFrame(loop);}
-  resize();window.addEventListener('resize',()=>{resize();rebuild();});rebuild();loop();
-  return{setEnabled:function(v){enabled=!!v;if(enabled)canvas.classList.add('active');else canvas.classList.remove('active');if(enabled){resize();rebuild();}else ctx.clearRect(0,0,canvas.width,canvas.height);},setStyle:function(s){style=s||'tropical';rebuild();}};
-}
-function createIntroSparkle(){
-  const el=document.getElementById('intro-screen');if(!el)return{setEnabled:function(){}};
-  let enabled=true;
-  const container=document.createElement('div');
-  container.id='introSparkles';
-  container.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden';
-  el.appendChild(container);
-  function makeSparkle(){
-    if(!enabled)return;
-    const s=document.createElement('div');
-    const size=2+Math.random()*3;
-    s.style.cssText='position:absolute;width:'+size+'px;height:'+size+'px;border-radius:50%;background:#fff;box-shadow:0 0 8px #fff,0 0 16px rgba(192,132,252,.8);left:'+(Math.random()*100)+'%;top:'+(Math.random()*100)+'%;opacity:0;transition:opacity .8s,transform .8s';
-    container.appendChild(s);
-    requestAnimationFrame(()=>{s.style.opacity='1';s.style.transform='scale(1.8)';});
-    setTimeout(()=>{s.style.opacity='0';s.style.transform='scale(0.5)';},800+Math.random()*400);
-    setTimeout(()=>{try{s.remove();}catch(e){}},1800);
-  }
-  setInterval(()=>{if(enabled){makeSparkle();if(Math.random()>0.5)makeSparkle();}},350);
-  return{setEnabled:function(v){enabled=!!v;if(!v){container.innerHTML='';}}};
-}
-
-/* === TICK / CONFETTI === */
-function getAudioContext(){if(!audioCtx){try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){return null;}}if(audioCtx.state==='suspended')audioCtx.resume().catch(()=>{});return audioCtx;}
-function tone(freq,dur,type,vol,decay){type=type||'sine';vol=vol||0.05;decay=decay||0.08;try{const c=getAudioContext();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(freq,c.currentTime);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(vol,c.currentTime+.005);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+decay);o.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+dur);}catch(e){}}
-const TICK_STYLES={default:{name:'Default',icon:'fa-bell',fn:function(){tone(2000,0.08);}},soft:{name:'Soft',icon:'fa-feather',fn:function(){tone(800,0.14);}},click:{name:'Click',icon:'fa-computer-mouse',fn:function(){tone(1500,0.03,'square',0.03,0.025);}},pop:{name:'Pop',icon:'fa-droplet',fn:function(){tone(1000,0.1);}},tick:{name:'Tick',icon:'fa-clock',fn:function(){tone(3000,0.02);}},bell:{name:'Bell',icon:'fa-bell',fn:function(){tone(2500,0.15);tone(3750,0.15);}},wood:{name:'Wood',icon:'fa-tree',fn:function(){tone(500,0.09,'triangle',0.06);}},glass:{name:'Glass',icon:'fa-wine-glass',fn:function(){tone(3500,0.12);}},deep:{name:'Deep',icon:'fa-water',fn:function(){tone(400,0.16);}}};
-function playTickSound(){try{const eff=getSiteContent().effects||{};if(eff.tickSoundEnabled===false)return;const s=TICK_STYLES[eff.tickSoundStyle||'default']||TICK_STYLES.default;s.fn();}catch(e){}}
-function playApplauseSound(){try{const c=getAudioContext();if(!c)return;const d=2,sr=c.sampleRate,b=c.createBuffer(1,sr*d,sr),dt=b.getChannelData(0);for(let i=0;i<dt.length;i++){const tt=i/sr,dec=Math.exp(-tt*1.2),cp=(tt*10)%1,ce=cp<.15?Math.exp(-cp*20):0,n=Math.random()*2-1;dt[i]=n*(ce*.6+.15)*dec*.5;}const s=c.createBufferSource();s.buffer=b;const f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=1800;const g=c.createGain();g.gain.setValueAtTime(.5,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);s.connect(f);f.connect(g);g.connect(c.destination);s.start();}catch(e){}}
-const CONFETTI_COLORS=['#9333ea','#c084fc','#e879f9','#a855f7','#22c55e','#16a34a','#f59e0b','#eab308','#ef4444','#dc2626','#3b82f6','#0ea5e9','#ec4899','#f472b6','#fbbf24','#ffffff'];
-const CONFETTI_HEARTS=['#ef4444','#dc2626','#ec4899','#f472b6','#f43f5e'];
-const CONFETTI_STARS=['#fbbf24','#f59e0b','#facc15','#eab308'];
-function initConfettiCanvas(){if(confettiCanvas&&confettiCtx)return true;confettiCanvas=document.getElementById('confetti-canvas');if(!confettiCanvas)return false;confettiCtx=confettiCanvas.getContext('2d');return true;}
-function fireConfettiBurst(mult){mult=mult||1;try{const eff=getSiteContent().effects||{};if(eff.confettiEnabled===false)return;}catch(e){return;}if(!initConfettiCanvas())return;confettiCanvas.style.display='block';confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;let style='classic';try{style=(getSiteContent().effects||{}).confettiStyle||'classic';}catch(e){}const W=window.innerWidth,H=window.innerHeight;
-  if(style==='classic'||style==='sides'||style==='top'){const n=Math.floor(150*mult);const cx=style==='sides'?0:W/2,cy=style==='top'?-20:H/2;for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*16+8;confettiParticles.push({x:style==='top'?Math.random()*W:cx,y:style==='top'?-20-Math.random()*100:cy,vx:style==='top'?(Math.random()-.5)*3:Math.cos(a)*s,vy:style==='top'?Math.random()*3+2:Math.sin(a)*s-3,size:Math.random()*10+5,color:CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.32+Math.random()*.15,drag:.985,life:1,shape:Math.random()>.5?'rect':'circle'});}}
-  else if(style==='fireworks'){const bursts=Math.floor(4*mult+2);for(let b=0;b<bursts;b++){const cx=W*(0.2+Math.random()*0.6),cy=H*(0.15+Math.random()*0.5);const n=Math.floor(50*mult);const c=CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)];for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*14+6;confettiParticles.push({x:cx,y:cy,vx:Math.cos(a)*s,vy:Math.sin(a)*s,size:Math.random()*8+4,color:c,rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.25,drag:.985,life:1,shape:Math.random()>.5?'rect':'circle'});}}}
-  else if(style==='hearts'){const n=Math.floor(120*mult);for(let k=0;k<n;k++){confettiParticles.push({x:Math.random()*W,y:-20,vx:(Math.random()-.5)*2,vy:Math.random()*2+1.5,size:Math.random()*12+8,color:CONFETTI_HEARTS[Math.floor(Math.random()*CONFETTI_HEARTS.length)],rotation:0,rotationSpeed:(Math.random()-.5)*.2,gravity:.06,drag:.99,life:1,shape:'heart'});}}
-  else if(style==='stars'){const n=Math.floor(130*mult);for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*18+8;confettiParticles.push({x:W/2,y:H/2,vx:Math.cos(a)*s,vy:Math.sin(a)*s-2,size:Math.random()*10+6,color:CONFETTI_STARS[Math.floor(Math.random()*CONFETTI_STARS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.5,gravity:.25,drag:.985,life:1,shape:'star'});}}
-  if(!confettiRunning){confettiRunning=true;animateConfetti();}if(confettiStopTimer)clearTimeout(confettiStopTimer);confettiStopTimer=setTimeout(()=>{confettiRunning=false;},5500);}
-function drawHeartShape(c,s){c.beginPath();const t2=s/2;c.moveTo(0,t2*0.35);c.bezierCurveTo(t2,t2*0.9,0,s,-s*0.7,t2);c.bezierCurveTo(0,-t2*0.5,-t2,-t2*0.5,-s*0.7,-t2*0.5);c.bezierCurveTo(-t2,-t2*0.5,-s,-t2*0.5,-s,0);c.bezierCurveTo(-s,t2*0.5,-t2*0.9,t2*0.6,0,t2*0.35);c.closePath();c.fill();}
-function drawStarShape(c,s){c.beginPath();for(let i=0;i<5;i++){const a=-Math.PI/2+i*(Math.PI*2/5);c.lineTo(Math.cos(a)*s,Math.sin(a)*s);const a2=a+Math.PI/5;c.lineTo(Math.cos(a2)*s*0.45,Math.sin(a2)*s*0.45);}c.closePath();c.fill();}
-function animateConfetti(){if(!confettiCanvas||!confettiCtx)return;confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);let a=false;for(let i=0;i<confettiParticles.length;i++){const p=confettiParticles[i];if(p.life<=0)continue;a=true;p.vy+=p.gravity;p.vx*=p.drag;p.vy*=p.drag;p.x+=p.vx;p.y+=p.vy;p.rotation+=p.rotationSpeed;p.life-=.006;if(p.y>confettiCanvas.height+120)p.life=0;if(p.x<-120||p.x>confettiCanvas.width+120)p.life=0;confettiCtx.save();confettiCtx.translate(p.x,p.y);confettiCtx.rotate(p.rotation);confettiCtx.globalAlpha=Math.max(0,Math.min(1,p.life));confettiCtx.fillStyle=p.color;const sz=p.size*0.5;if(p.shape==='rect')confettiCtx.fillRect(-sz,-sz/2,sz*2,sz);else if(p.shape==='circle'){confettiCtx.beginPath();confettiCtx.arc(0,0,sz,0,Math.PI*2);confettiCtx.fill();}else if(p.shape==='heart'){drawHeartShape(confettiCtx,p.size);}else if(p.shape==='star'){drawStarShape(confettiCtx,p.size);}confettiCtx.restore();}if(confettiParticles.length>800)confettiParticles=confettiParticles.filter(p=>p.life>0);if(a||confettiRunning)requestAnimationFrame(animateConfetti);else{confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);confettiCanvas.style.display='none';confettiParticles=[];}}
-
-function createAnimSystem(canvasId,options){
-  options=options||{};
-  const c=document.getElementById(canvasId);if(!c)return{stop:function(){},setMode:function(){}};
-  const ctx=c.getContext('2d');
-  const baseNP=options.numberOfParticles||55,ld=options.lineDistance||110;
-  let pa=[],running=true,mode='constellation';
-  let extraState={};
-  function rc(){c.width=window.innerWidth;c.height=window.innerHeight;initMode();}
-  function P(){this.x=Math.random()*c.width;this.y=Math.random()*c.height;this.vx=(Math.random()-.5)*.8;this.vy=(Math.random()-.5)*.8;this.size=Math.random()*1.8+1;}
-  P.prototype.update=function(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>c.width)this.vx=-this.vx;if(this.y<0||this.y>c.height)this.vy=-this.vy;};
-  P.prototype.draw=function(){const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';ctx.fillStyle='rgba('+ar+',.55)';ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();};
-  function initMode(){
-    pa=[];extraState={};
-    if(mode==='constellation'||mode==='network'){for(let i=0;i<baseNP;i++)pa.push(new P());}
-    else if(mode==='particles'){for(let i=0;i<80;i++)pa.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6,size:Math.random()*3+1,alpha:Math.random()*.5+.3});}
-    else if(mode==='matrix'){const cols=Math.floor(c.width/20);extraState.drops=[];for(let i=0;i<cols;i++)extraState.drops[i]=Math.random()*c.height/20;}
-    else if(mode==='bubbles'){extraState.bubbles=[];for(let i=0;i<40;i++)extraState.bubbles.push({x:Math.random()*c.width,y:c.height+Math.random()*c.height,r:3+Math.random()*15,vy:-(0.3+Math.random()*1),phase:Math.random()*Math.PI*2,alpha:0.15+Math.random()*0.25});}
-    else if(mode==='sparkles'){extraState.sparkles=[];for(let i=0;i<70;i++)extraState.sparkles.push({x:Math.random()*c.width,y:Math.random()*c.height,size:1+Math.random()*2.5,phase:Math.random()*Math.PI*2,speed:0.02+Math.random()*0.04});}
-    else if(mode==='galaxy'){extraState.galaxyStars=[];const cx=c.width/2,cy=c.height/2;for(let i=0;i<200;i++){const arm=i%3;const angle=(i/200)*Math.PI*6+arm*2.09;const radius=20+Math.random()*Math.min(c.width,c.height)*0.45;extraState.galaxyStars.push({cx:cx,cy:cy,angle:angle,radius:radius,speed:0.0004+Math.random()*0.0008,size:0.5+Math.random()*1.8,color:'rgba('+(180+Math.floor(Math.random()*75))+',150,255,'+(0.4+Math.random()*0.5)+')'});}}
-    else if(mode==='snow'){extraState.snow=[];for(let i=0;i<80;i++)extraState.snow.push({x:Math.random()*c.width,y:Math.random()*c.height,r:1+Math.random()*3,vy:0.3+Math.random()*1,vx:(Math.random()-.5)*0.5,phase:Math.random()*Math.PI*2});}
-    else if(mode==='rain'){extraState.rain=[];for(let i=0;i<120;i++)extraState.rain.push({x:Math.random()*c.width,y:Math.random()*c.height,len:8+Math.random()*14,vy:6+Math.random()*6,vx:-1-Math.random()});}
-    else if(mode==='hearts'){extraState.hearts=[];for(let i=0;i<30;i++)extraState.hearts.push({x:Math.random()*c.width,y:c.height+Math.random()*c.height,size:8+Math.random()*14,vy:-(0.4+Math.random()*0.9),vx:(Math.random()-.5)*0.5,phase:Math.random()*Math.PI*2,color:CONFETTI_HEARTS[Math.floor(Math.random()*CONFETTI_HEARTS.length)]});}
-    else if(mode==='stars-fall'){extraState.fallStars=[];for(let i=0;i<15;i++)extraState.fallStars.push({x:Math.random()*c.width,y:Math.random()*c.height*0.5,vy:3+Math.random()*4,vx:2+Math.random()*3,len:60+Math.random()*80,alpha:0,delay:Math.random()*200});}
-    else if(mode==='fireworks'){extraState.fw=[];extraState.fwTimer=0;}
-  }
-  function drawFireworks(){
-    if(!extraState.fw)extraState.fw=[];
-    extraState.fwTimer=(extraState.fwTimer||0)+1;
-    if(extraState.fwTimer>50){extraState.fwTimer=0;extraState.fw.push({x:100+Math.random()*(c.width-200),y:80+Math.random()*(c.height*0.4),vx:(Math.random()-.5)*2,vy:-3-Math.random()*2,life:1,age:0,burst:false,color:CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)],particles:[]});}
-    for(let i=extraState.fw.length-1;i>=0;i--){
-      const f=extraState.fw[i];
-      if(!f.burst){f.x+=f.vx;f.y+=f.vy;f.vy+=0.06;f.age++;ctx.beginPath();ctx.arc(f.x,f.y,3,0,Math.PI*2);ctx.fillStyle=f.color;ctx.fill();
-        if(f.vy>=0||f.age>50){f.burst=true;for(let k=0;k<40;k++){const a=Math.random()*Math.PI*2,s=Math.random()*5+2;f.particles.push({x:f.x,y:f.y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:1,size:1.5+Math.random()*2,color:f.color});}}
-      } else {
-        for(let k=f.particles.length-1;k>=0;k--){const p=f.particles[k];p.x+=p.vx;p.y+=p.vy;p.vy+=0.08;p.vx*=0.985;p.vy*=0.985;p.life-=0.02;if(p.life<=0){f.particles.splice(k,1);continue;}ctx.beginPath();ctx.arc(p.x,p.y,p.size*p.life,0,Math.PI*2);ctx.fillStyle=p.color;ctx.globalAlpha=p.life;ctx.fill();ctx.globalAlpha=1;}
-        if(f.particles.length===0)extraState.fw.splice(i,1);
-      }
-    }
-  }
-  function drawMatrix(){const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';ctx.font='14px monospace';if(!extraState.drops)return;for(let i=0;i<extraState.drops.length;i++){const x=i*20;const y=extraState.drops[i]*20;ctx.fillStyle='rgba('+ar+',0.85)';ctx.fillText(String.fromCharCode(0x30A0+Math.floor(Math.random()*96)),x,y);ctx.fillStyle='rgba('+ar+',0.15)';ctx.fillText(String.fromCharCode(0x30A0+Math.floor(Math.random()*96)),x,y-20);extraState.drops[i]+=0.5+Math.random()*0.5;if(y>c.height&&Math.random()>0.975)extraState.drops[i]=0;}}
-  function drawBubbles(){if(!extraState.bubbles)return;const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';extraState.bubbles.forEach(b=>{b.y+=b.vy;b.phase+=0.03;b.x+=Math.sin(b.phase)*0.4;if(b.y<-30){b.y=c.height+30;b.x=Math.random()*c.width;}ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);ctx.strokeStyle='rgba('+ar+','+b.alpha+')';ctx.lineWidth=1;ctx.stroke();ctx.beginPath();ctx.arc(b.x-b.r*0.3,b.y-b.r*0.3,b.r*0.25,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+(b.alpha*0.8)+')';ctx.fill();});}
-  function drawSparkles(){if(!extraState.sparkles)return;const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';extraState.sparkles.forEach(s=>{s.phase+=s.speed;const alpha=(Math.sin(s.phase)+1)/2;ctx.beginPath();ctx.arc(s.x,s.y,s.size,0,Math.PI*2);ctx.fillStyle='rgba('+ar+','+alpha+')';ctx.fill();const g=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.size*6);g.addColorStop(0,'rgba('+ar+','+(alpha*0.35)+')');g.addColorStop(1,'rgba('+ar+',0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(s.x,s.y,s.size*6,0,Math.PI*2);ctx.fill();});}
-  function drawGalaxy(){if(!extraState.galaxyStars)return;ctx.fillStyle='rgba(0,0,0,0.15)';ctx.fillRect(0,0,c.width,c.height);extraState.galaxyStars.forEach(s=>{s.angle+=s.speed;const x=s.cx+Math.cos(s.angle)*s.radius;const y=s.cy+Math.sin(s.angle)*s.radius*0.6;ctx.beginPath();ctx.arc(x,y,s.size,0,Math.PI*2);ctx.fillStyle=s.color;ctx.fill();});}
-  function drawSnow(){if(!extraState.snow)return;extraState.snow.forEach(s=>{s.y+=s.vy;s.x+=s.vx+Math.sin(s.phase)*0.3;s.phase+=0.02;if(s.y>c.height+10){s.y=-10;s.x=Math.random()*c.width;}ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,.85)';ctx.fill();});}
-  function drawRain(){if(!extraState.rain)return;extraState.rain.forEach(r=>{r.y+=r.vy;r.x+=r.vx;if(r.y>c.height+20){r.y=-20;r.x=Math.random()*c.width;}ctx.beginPath();ctx.moveTo(r.x,r.y);ctx.lineTo(r.x-r.vx*2,r.y-r.len);ctx.strokeStyle='rgba(180,220,255,.6)';ctx.lineWidth=1.2;ctx.stroke();});}
-  function drawHearts(){if(!extraState.hearts)return;extraState.hearts.forEach(h=>{h.y+=h.vy;h.x+=h.vx+Math.sin(h.phase)*0.5;h.phase+=0.03;if(h.y<-30){h.y=c.height+30;h.x=Math.random()*c.width;}ctx.save();ctx.translate(h.x,h.y);ctx.fillStyle=h.color;ctx.globalAlpha=0.7;drawHeartShape(ctx,h.size);ctx.globalAlpha=1;ctx.restore();});}
-  function drawFallingStars(){if(!extraState.fallStars)return;extraState.fallStars.forEach(s=>{if(s.delay>0){s.delay--;return;}s.x+=s.vx;s.y+=s.vy;s.alpha=Math.min(1,s.alpha+0.05);const grd=ctx.createLinearGradient(s.x,s.y,s.x-s.len*0.3,s.y-s.len);grd.addColorStop(0,'rgba(255,255,255,'+s.alpha+')');grd.addColorStop(1,'rgba(255,255,255,0)');ctx.strokeStyle=grd;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(s.x-s.len*0.3,s.y-s.len);ctx.stroke();if(s.x>c.width+100||s.y>c.height+100){s.x=-50;s.y=Math.random()*c.height*0.5;s.alpha=0;s.delay=Math.random()*200;}});}
-  function draw(){
-    if(!running)return;
-    if(mode!=='galaxy')ctx.clearRect(0,0,c.width,c.height);
-    const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';
-    if(mode==='none'){requestAnimationFrame(draw);return;}
-    if(mode==='constellation'){for(let i=0;i<pa.length;i++){pa[i].update();pa[i].draw();for(let j=i+1;j<pa.length;j++){const dx=pa[i].x-pa[j].x,dy=pa[i].y-pa[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<ld){const o=1-(dist/ld);ctx.strokeStyle='rgba('+ar+','+(o*.22)+')';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(pa[i].x,pa[i].y);ctx.lineTo(pa[j].x,pa[j].y);ctx.stroke();}}}}
-    else if(mode==='network'){for(let i=0;i<pa.length;i++){pa[i].update();for(let j=i+1;j<pa.length;j++){const dx=pa[i].x-pa[j].x,dy=pa[i].y-pa[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<180){const o=1-(dist/180);ctx.strokeStyle='rgba('+ar+','+(o*.4)+')';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(pa[i].x,pa[i].y);ctx.lineTo(pa[j].x,pa[j].y);ctx.stroke();}}ctx.beginPath();ctx.arc(pa[i].x,pa[i].y,2.5,0,Math.PI*2);ctx.fillStyle='rgba('+ar+',.7)';ctx.fill();}}
-    else if(mode==='particles'){pa.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>c.width)p.vx=-p.vx;if(p.y<0||p.y>c.height)p.vy=-p.vy;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle='rgba('+ar+','+p.alpha+')';ctx.fill();});}
-    else if(mode==='dots'){for(let x=30;x<c.width;x+=60)for(let y=30;y<c.height;y+=60){ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);ctx.fillStyle='rgba('+ar+',.4)';ctx.fill();}}
-    else if(mode==='fireworks'){drawFireworks();}
-    else if(mode==='matrix'){drawMatrix();}
-    else if(mode==='bubbles'){drawBubbles();}
-    else if(mode==='sparkles'){drawSparkles();}
-    else if(mode==='galaxy'){drawGalaxy();}
-    else if(mode==='snow'){drawSnow();}
-    else if(mode==='rain'){drawRain();}
-    else if(mode==='hearts'){drawHearts();}
-    else if(mode==='stars-fall'){drawFallingStars();}
-    requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize',rc);rc();draw();
-  return{stop:function(){running=false;},setMode:function(m){mode=m||'constellation';initMode();}};
-}
-
-/* === EFFECTS + INTRO PANEL RENDER === */
-function renderEffectsPanel(){
-  const eff=(getSiteContent().effects)||{},app=(getSiteContent().appearance)||{};
-  const tg=document.getElementById('themeGrid');if(tg){tg.innerHTML='';THEMES.forEach(t2=>{const c=document.createElement('div');c.className='effect-chip'+((app.theme||'purple')===t2.key?' active':'');c.onclick=()=>setTheme(t2.key);c.innerHTML='<div class="color-swatch" style="background:linear-gradient(135deg,'+t2.c1+','+t2.c2+')"></div><span>'+t2.name+'</span>';tg.appendChild(c);});}
-  const fg=document.getElementById('fontGrid');if(fg){fg.innerHTML='';FONTS_NORMAL.forEach(f=>{const c=document.createElement('div');c.className='effect-chip'+((app.font||'Sora')===f.key?' active':'');c.onclick=()=>setFont(f.key);c.innerHTML='<div class="font-preview" style="font-family:\''+f.key+'\',sans-serif">'+f.label+'</div>';fg.appendChild(c);});}
-  const fcg=document.getElementById('fontColorGrid');if(fcg){fcg.innerHTML='';FONT_COLORS.forEach(fc=>{const c=document.createElement('div');c.className='effect-chip'+((app.fontColor||'default')===fc.key?' active':'');c.onclick=()=>setFontColor(fc.key);c.innerHTML='<div class="color-swatch" style="background:'+(fc.c==='inherit'?'linear-gradient(135deg,#666,#999)':fc.c)+'"></div><span>'+fc.name+'</span>';fcg.appendChild(c);});}
-  const fsg=document.getElementById('formStyleGrid');if(fsg){fsg.innerHTML='';FORM_STYLES.forEach(fs=>{const c=document.createElement('div');c.className='effect-chip'+((app.formStyle||'default')===fs.key?' active':'');c.onclick=()=>setFormStyle(fs.key);c.innerHTML='<i class="fa-solid '+fs.icon+'"></i><span>'+fs.name+'</span>';fsg.appendChild(c);});}
-  const psg=document.getElementById('panelStyleGrid');if(psg){psg.innerHTML='';PANEL_STYLES.forEach(ps=>{const c=document.createElement('div');c.className='effect-chip'+((app.panelStyle||'default')===ps.key?' active':'');c.onclick=()=>setPanelStyle(ps.key);c.innerHTML='<i class="fa-solid '+ps.icon+'"></i><span>'+ps.name+'</span>';psg.appendChild(c);});}
-  const bg=document.getElementById('bgGrid');if(bg){bg.innerHTML='';BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='effect-chip'+((eff.background||'default')===b.key?' active':'');c.onclick=()=>setBackground(b.key);c.innerHTML='<div class="bg-swatch" style="background:'+bgSwatch(b.key)+'"></div><span>'+b.name+'</span>';bg.appendChild(c);});}
-  const ag=document.getElementById('animGrid');if(ag){ag.innerHTML='';ANIM_PRESETS.forEach(a=>{const c=document.createElement('div');c.className='effect-chip'+((eff.siteAnimation||'constellation')===a.key?' active':'');c.onclick=()=>setSiteAnimation(a.key);c.innerHTML='<i class="fa-solid '+a.icon+'"></i><span>'+a.name+'</span>';ag.appendChild(c);});}
-  const cg=document.getElementById('chatBgGrid');if(cg){cg.innerHTML='';CHAT_BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='effect-chip'+((eff.chatBackground||'default')===b.key?' active':'');c.onclick=()=>setChatBackground(b.key);c.innerHTML='<div class="bg-swatch" style="background:'+chatSwatch(b.key)+'"></div><span>'+b.name+'</span>';cg.appendChild(c);});}
-  const mcg=document.getElementById('messengerColorGrid');if(mcg){mcg.innerHTML='';MESSENGER_COLORS.forEach(mc=>{const c=document.createElement('div');c.className='effect-chip'+((eff.messengerColor||'purple')===mc.key?' active':'');c.onclick=()=>setMessengerColor(mc.key);c.innerHTML='<div class="color-swatch" style="background:'+mc.c+'"></div><span>'+mc.name+'</span>';mcg.appendChild(c);});}
-  const cng=document.getElementById('confettiGrid');if(cng){cng.innerHTML='';CONFETTI_PRESETS.forEach(c2=>{const c=document.createElement('div');c.className='effect-chip'+((eff.confettiStyle||'classic')===c2.key?' active':'');c.onclick=()=>{setConfettiStyle(c2.key);fireConfettiBurst(1);};c.innerHTML='<i class="fa-solid '+c2.icon+'"></i><span>'+c2.name+'</span>';cng.appendChild(c);});}
-  const tg2=document.getElementById('tickGrid');if(tg2){tg2.innerHTML='';Object.keys(TICK_STYLES).forEach(k=>{const s=TICK_STYLES[k];const c=document.createElement('div');c.className='effect-chip'+((eff.tickSoundStyle||'default')===k?' active':'');c.onclick=()=>{setTickSoundStyle(k);s.fn();};c.innerHTML='<i class="fa-solid '+s.icon+'"></i><span>'+s.name+'</span>';tg2.appendChild(c);});}
-  const fishG=document.getElementById('fishStyleGrid');if(fishG){fishG.innerHTML='';FISH_STYLES.forEach(f=>{const c=document.createElement('div');c.className='effect-chip'+((eff.fishStyle||'tropical')===f.key?' active':'');c.onclick=()=>setFishStyle(f.key);c.innerHTML='<i class="fa-solid '+f.icon+'"></i><span>'+f.name+'</span>';fishG.appendChild(c);});}
-  const fet=document.getElementById('fishEnabledToggle');if(fet)fet.checked=!!eff.fishEnabled;
-  const cet=document.getElementById('confettiEnabledToggle');if(cet)cet.checked=eff.confettiEnabled!==false;
-  const tet=document.getElementById('tickSoundEnabledToggle');if(tet)tet.checked=eff.tickSoundEnabled!==false;
-  try{renderIntroPanel();}catch(e){}
-}
-function renderIntroPanel(){
-  const eff=(getSiteContent().effects)||{};
-  const iag=document.getElementById('introAnimGrid');
-  if(iag){iag.innerHTML='';INTRO_ANIMS.forEach(a=>{const c=document.createElement('div');c.className='effect-chip'+((eff.introAnim||'constellation')===a.key?' active':'');c.onclick=()=>setIntroAnim(a.key);c.innerHTML='<i class="fa-solid '+a.icon+'"></i><span>'+a.name+'</span>';iag.appendChild(c);});}
-  const ibg=document.getElementById('introBgGrid');
-  if(ibg){ibg.innerHTML='';INTRO_BGS.forEach(b=>{const c=document.createElement('div');c.className='effect-chip'+((eff.introBg||'default')===b.key?' active':'');c.onclick=()=>setIntroBg(b.key);c.innerHTML='<div class="bg-swatch" style="background:'+bgSwatch(b.key)+'"></div><span>'+b.name+'</span>';ibg.appendChild(c);});}
-  const ift=document.getElementById('introFishToggle');if(ift)ift.checked=!!eff.introFishEnabled;
-  const ifg=document.getElementById('introFishStyleGrid');
-  if(ifg){ifg.innerHTML='';FISH_STYLES.forEach(f=>{const c=document.createElement('div');c.className='effect-chip'+((eff.introFishStyle||'tropical')===f.key?' active':'');c.onclick=()=>setIntroFishStyle(f.key);c.innerHTML='<i class="fa-solid '+f.icon+'"></i><span>'+f.name+'</span>';ifg.appendChild(c);});}
-  const ist=document.getElementById('introSparkleToggle');if(ist)ist.checked=eff.introSparkleEnabled!==false;
-}
-function openUserSettingsModal(){const lu=localStorage.getItem('logged_user');if(!lu)return;renderUserSettingsGrids();document.getElementById('userSettingsModal').classList.add('active');}
-function closeUserSettingsModal(){document.getElementById('userSettingsModal').classList.remove('active');applyAppearance();applyBackground();applyChatBackground();}
-function renderUserSettingsGrids(){const u=getUserPrefs();
-  const tg=document.getElementById('userThemeGrid');if(tg){tg.innerHTML='';THEMES.forEach(t2=>{const c=document.createElement('div');c.className='settings-chip'+((u.theme||'')===t2.key?' active':'');c.onclick=()=>{setUserPref('theme',t2.key);applyAppearance();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:linear-gradient(135deg,'+t2.c1+','+t2.c2+')"></div><span>'+t2.name+'</span>';tg.appendChild(c);});}
-  const fcg=document.getElementById('userFontColorGrid');if(fcg){fcg.innerHTML='';FONT_COLORS.forEach(fc=>{const c=document.createElement('div');c.className='settings-chip'+((u.fontColor||'')===fc.key?' active':'');c.onclick=()=>{setUserPref('fontColor',fc.key);applyAppearance();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:'+(fc.c==='inherit'?'linear-gradient(135deg,#666,#999)':fc.c)+'"></div><span>'+fc.name+'</span>';fcg.appendChild(c);});}
-  const fg=document.getElementById('userFontGrid');if(fg){fg.innerHTML='';FONTS_NORMAL.slice(0,12).forEach(f=>{const c=document.createElement('div');c.className='settings-chip'+((u.font||'')===f.key?' active':'');c.onclick=()=>{setUserPref('font',f.key);applyAppearance();renderUserSettingsGrids();};c.innerHTML='<span style="font-family:\''+f.key+'\',sans-serif;font-size:.9rem">'+f.label+'</span>';fg.appendChild(c);});}
-  const bg=document.getElementById('userBgGrid');if(bg){bg.innerHTML='';BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='settings-chip'+((u.background||'')===b.key?' active':'');c.onclick=()=>{setUserPref('background',b.key);applyBackground();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:'+bgSwatch(b.key)+'"></div><span>'+b.name+'</span>';bg.appendChild(c);});}
-  const cg=document.getElementById('userChatBgGrid');if(cg){cg.innerHTML='';CHAT_BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='settings-chip'+((u.chatBackground||'')===b.key?' active':'');c.onclick=()=>{setUserPref('chatBackground',b.key);applyChatBackground();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:'+chatSwatch(b.key)+'"></div><span>'+b.name+'</span>';cg.appendChild(c);});}}
-function resetUserSettings(){clearUserPrefs();applyAppearance();applyBackground();applyChatBackground();renderUserSettingsGrids();showCustomAlert('Settings reset','success');}
-
-/* === SOCIAL === */
-function findPlatform(k){return SOCIAL_PLATFORMS.find(p=>p.key===k)||{key:k,label:k,icon:'fa-solid fa-link',placeholder:'url'};}
-function renderFooterSocials(){const el=document.getElementById('footerSocials');if(!el)return;const list=(getSiteContent().social||[]).filter(s=>s.enabled!==false);el.innerHTML='';list.forEach(s=>{const p=findPlatform(s.platform);const a=document.createElement('a');a.href='#';a.className='social-btn';a.title=p.label;a.innerHTML='<i class="'+p.icon+'" style="font-size:1.1rem;color:var(--accent)"></i>';a.onclick=(e)=>{e.preventDefault();if(s.platform==='gmail')window.open('mailto:'+s.url,'_blank');else window.open(s.url,'_blank');};el.appendChild(a);});}
-function renderAdminSocial(){const list=document.getElementById('socialListAdmin');if(!list)return;const social=(getSiteContent().social||[]);list.innerHTML='';social.forEach((s,idx)=>{const p=findPlatform(s.platform);const row=document.createElement('div');row.className='social-row';row.innerHTML='<i class="'+p.icon+'"></i><input type="text" value="'+escapeHtml(s.url||'')+'" placeholder="'+escapeHtml(p.placeholder)+'" onchange="updateSocialUrl('+idx+',this.value)"><span style="font-size:.65rem;color:var(--text-secondary);font-weight:700">'+p.label+'</span><button class="social-del" onclick="removeSocial('+idx+')"><i class="fa-solid fa-trash"></i></button>';list.appendChild(row);});}
-function addSocialPlatformPicker(){const used=(getSiteContent().social||[]).map(s=>s.platform);const available=SOCIAL_PLATFORMS.filter(p=>!used.includes(p.key));if(!available.length){showCustomAlert('All platforms already added.');return;}const buttonsHtml=available.map(p=>'<button class="custom-alert-btn" style="background:var(--box-bg);color:var(--text-color-override);border:1px solid var(--line-color);margin-bottom:6px;justify-content:flex-start;width:100%;flex-direction:row" onclick="pickSocialPlatform(\''+p.key+'\')"><i class="'+p.icon+'" style="color:var(--accent);width:20px"></i> <span style="margin-left:8px">'+p.label+'</span></button>').join('');const ab=document.getElementById('customAlertModal'),ai=document.getElementById('customAlertIcon'),am=document.getElementById('customAlertMessage'),ag=document.getElementById('customAlertBtnGroup');ai.innerHTML='<i class="fa-solid fa-plus" style="color:var(--accent);font-size:1.6rem"></i>';am.innerHTML='<div style="text-align:left;max-height:300px;overflow-y:auto;display:flex;flex-direction:column">'+buttonsHtml+'</div>';ag.innerHTML='<button class="custom-alert-btn cancel-btn" onclick="closeCustomAlert()" style="flex:1">Cancel</button>';ab.classList.add('active');}
-function pickSocialPlatform(k){closeCustomAlert();const c=getSiteContent();if(!Array.isArray(c.social))c.social=[];c.social.push({platform:k,url:'',enabled:true});saveSiteContent(c);renderAdminSocial();renderFooterSocials();}
-function updateSocialUrl(idx,url){const c=getSiteContent();if(c.social&&c.social[idx]){c.social[idx].url=url.trim();saveSiteContent(c);renderFooterSocials();}}
-function removeSocial(idx){const c=getSiteContent();if(c.social){c.social.splice(idx,1);saveSiteContent(c);renderAdminSocial();renderFooterSocials();}}
+/* DEVAM EDECEK PARÇA 3'TE */
 
 /* ============================================================
-   📱 WHATSAPP TOPLU MESAJ SİSTEMİ
+   ✉️ ADMIN: HERKESE EMAIL — Çok Katmanlı Upload + PDF
    ============================================================ */
-function whatsappNormalizePhone(phone){if(!phone)return '';let p=String(phone).replace(/[^0-9+]/g,'');if(p.startsWith('+'))p=p.substring(1);if(p.startsWith('00'))p=p.substring(2);return p;}
-function whatsappBuildMessage(user){const tpl=document.getElementById('whatsappMessageTemplate')?.value||'';return tpl.replace(/\{name\}/g,user.name||'').replace(/\{username\}/g,String(user.username||'').replace(/^@/,'')).replace(/\{userId\}/g,user.userId||'').replace(/\{email\}/g,user.email||'');}
-function renderWhatsappUserList(){
-  const list=document.getElementById('whatsappUserList');if(!list)return;
-  const users=getAllUsers();
-  const query=(document.getElementById('whatsappSearchInput')?.value||'').toLowerCase().trim();
-  let filtered=users;
-  if(query){filtered=users.filter(u=>{const n=String(u.name||'').toLowerCase();const un=String(u.username||'').toLowerCase();const ph=String(u.whatsapp||'').toLowerCase();const em=String(u.email||'').toLowerCase();return n.includes(query)||un.includes(query)||ph.includes(query)||em.includes(query);});}
-  if(!filtered.length){list.innerHTML='<div style="padding:24px;text-align:center;color:var(--text-secondary);font-size:.8rem;">Kullanıcı bulunamadı.</div>';return;}
-  list.innerHTML='';
-  filtered.forEach(u=>{
-    const email=String(u.email||'').toLowerCase();
-    const hasPhone=!!(u.whatsapp&&u.whatsapp.trim());
-    const isSelected=whatsappSelectedEmails.includes(email);
-    const av=u.profilePhoto?'<img src="'+u.profilePhoto+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">':(u.name?escapeHtml(u.name.trim().charAt(0).toUpperCase()):'?');
-    const isA=isAdminUser(u.email);
-    const vB=(isA||u.isVerified)?getVerifiedBadgeHTML('sm'):'';
-    const row=document.createElement('div');
-    row.style.cssText='display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;margin-bottom:4px;cursor:pointer;border:1px solid '+(isSelected?'rgba(37,211,102,.5)':'var(--line-color)')+';background:'+(isSelected?'rgba(37,211,102,.08)':'var(--box-bg)')+';transition:all .2s';
-    row.onclick=()=>whatsappToggleSelect(email);
-    row.innerHTML='<div style="width:20px;height:20px;border-radius:50%;border:2px solid '+(isSelected?'#25D366':'var(--line-color)')+';background:'+(isSelected?'#25D366':'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0">'+(isSelected?'<i class="fa-solid fa-check" style="color:#fff;font-size:.6rem"></i>':'')+'</div>'+'<div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;flex-shrink:0;overflow:hidden">'+av+'</div>'+'<div style="flex:1;min-width:0">'+'<div style="font-size:.82rem;font-weight:700;color:var(--text-color-override);display:flex;align-items:center;gap:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escapeHtml(u.name||'user')+' '+vB+'</div>'+'<div style="font-size:.68rem;color:var(--text-secondary);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><i class="fa-solid fa-at" style="color:var(--accent);margin-right:3px"></i>'+escapeHtml(String(u.username||'').replace(/^@/,''))+'</div>'+'<div style="font-size:.68rem;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(hasPhone?'<i class="fa-brands fa-whatsapp" style="color:#25D366;margin-right:3px"></i><span style="color:#25D366;font-weight:700">'+escapeHtml(u.whatsapp)+'</span>':'<i class="fa-solid fa-phone-slash" style="color:#ef4444;margin-right:3px"></i><span style="color:#ef4444">Numara yok</span>')+'</div>'+'</div>'+'<button class="admin-slot-btn" onclick="event.stopPropagation();openAdminUserWhatsapp(\''+email.replace(/'/g,'')+'\')" style="flex-shrink:0" title="Numara düzenle"><i class="fa-solid fa-phone" style="color:#25D366"></i></button>';
-    list.appendChild(row);
-  });
+function openAdminAnyEmail(){
+  anyEmailImageDataUrl=null;anyEmailImageUrl=null;anyEmailImageFile=null;
+  anyEmailPdfDataUrl=null;anyEmailPdfFile=null;
+  const f=document.getElementById('adminAnyEmailForm');if(f)f.reset();
+  const ig=document.getElementById('any-email-img-group');if(ig)ig.style.display='none';
+  const pg=document.getElementById('any-email-pdf-group');if(pg)pg.style.display='none';
+  const lg=document.getElementById('any-email-link-group');if(lg)lg.style.display='none';
+  const pv=document.getElementById('any-email-img-preview');if(pv){pv.style.display='none';pv.src='';}
+  const pi=document.getElementById('any-email-pdf-info');if(pi)pi.style.display='none';
+  const ft=document.getElementById('any-email-img-file-text');if(ft)ft.textContent='Resim seç (max 100 MB)';
+  const pft=document.getElementById('any-email-pdf-file-text');if(pft)pft.textContent='PDF seç (max 100 MB)';
+  const w=document.getElementById('any-email-img-upload-wrapper');if(w)w.classList.remove('has-file','uploading','upload-error');
+  const pw=document.getElementById('any-email-pdf-upload-wrapper');if(pw)pw.classList.remove('has-file','uploading','upload-error');
+  const ic=document.getElementById('any-email-img-upload-icon');if(ic)ic.className='fa-solid fa-upload upload-icon';
+  const pic=document.getElementById('any-email-pdf-upload-icon');if(pic){pic.className='fa-solid fa-file-pdf upload-icon';pic.style.color='#ef4444';}
+  document.getElementById('adminAnyEmailModal').classList.add('active');
 }
-function whatsappToggleSelect(email){const idx=whatsappSelectedEmails.indexOf(email);if(idx===-1)whatsappSelectedEmails.push(email);else whatsappSelectedEmails.splice(idx,1);renderWhatsappUserList();}
-function whatsappSelectAll(){const users=getAllUsers();users.forEach(u=>{const email=String(u.email||'').toLowerCase();if(!whatsappSelectedEmails.includes(email))whatsappSelectedEmails.push(email);});renderWhatsappUserList();}
-function whatsappDeselectAll(){whatsappSelectedEmails=[];renderWhatsappUserList();}
-function whatsappRefreshList(){whatsappSelectedEmails=[];const si=document.getElementById('whatsappSearchInput');if(si)si.value='';renderWhatsappUserList();}
-function whatsappFilterUsers(){renderWhatsappUserList();}
-function openAdminUserWhatsapp(email){
-  const users=getAllUsers();
-  const u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());
-  if(!u){showCustomAlert('Kullanıcı bulunamadı!','error');return;}
-  adminWhatsappTarget=u;
-  const av=u.profilePhoto?'<img src="'+u.profilePhoto+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">':escapeHtml((u.name||'U').trim().charAt(0).toUpperCase());
-  const avEl=document.getElementById('auwAvatar');
-  if(u.profilePhoto){avEl.innerHTML=av;avEl.style.padding='0';}else{avEl.textContent=av;avEl.style.padding='';}
-  document.getElementById('auwName').textContent=u.name||'user';
-  document.getElementById('auwEmail').textContent=u.email||'';
-  document.getElementById('auw-phone').value=u.whatsapp||'';
-  document.getElementById('auw-displayname').value=u.whatsappName||'';
-  document.getElementById('adminUserWhatsappModal').classList.add('active');
-}
-function closeAdminUserWhatsapp(){document.getElementById('adminUserWhatsappModal').classList.remove('active');adminWhatsappTarget=null;}
-function saveAdminUserWhatsapp(e){
-  e.preventDefault();
-  if(!adminWhatsappTarget)return;
-  const phone=document.getElementById('auw-phone').value.trim();
-  const displayname=document.getElementById('auw-displayname').value.trim();
-  if(phone&&!/^\+?[0-9]{8,15}$/.test(phone.replace(/\s/g,''))){showCustomAlert('Geçersiz telefon numarası! Ülke kodu ile girin.','error');return;}
-  const users=getAllUsers();
-  const idx=users.findIndex(x=>String(x.email||'').toLowerCase()===String(adminWhatsappTarget.email).toLowerCase());
-  if(idx===-1){showCustomAlert('Kullanıcı bulunamadı!','error');return;}
-  users[idx].whatsapp=phone;
-  users[idx].whatsappName=displayname;
-  saveAllUsers(users);
-  const lu=localStorage.getItem('logged_user');
-  if(lu){try{const cu=JSON.parse(lu);if(String(cu.email||'').toLowerCase()===String(adminWhatsappTarget.email).toLowerCase()){localStorage.setItem('logged_user',JSON.stringify(users[idx]));}}catch(err){}}
-  closeAdminUserWhatsapp();
-  renderWhatsappUserList();
-  showCustomAlert('✅ Numara kaydedildi','success');
-}
-function whatsappSendToSelected(){
-  if(whatsappSending){showCustomAlert('Zaten gönderim devam ediyor!','warning');return;}
-  const selected=whatsappSelectedEmails.slice();
-  if(!selected.length){showCustomAlert('Önce kullanıcı seçin!','warning');return;}
-  const users=getAllUsers();
-  const valid=[];
-  const noPhone=[];
-  selected.forEach(email=>{const u=users.find(x=>String(x.email||'').toLowerCase()===email);if(!u)return;if(!u.whatsapp||!u.whatsapp.trim())noPhone.push(u);else valid.push(u);});
-  if(!valid.length){showCustomAlert('Seçili kullanıcıların hiçbirinde WhatsApp numarası yok!','warning');return;}
-  const tpl=document.getElementById('whatsappMessageTemplate').value.trim();
-  if(!tpl){showCustomAlert('Mesaj şablonu boş!','warning');return;}
-  const firstMsg=whatsappBuildMessage(valid[0]);
-  document.getElementById('whatsappConfirmCount').textContent=valid.length+' kişi'+(noPhone.length?' ('+noPhone.length+' numara yok)':'');
-  document.getElementById('whatsappConfirmPreview').textContent=firstMsg.substring(0,500)+(firstMsg.length>500?'...':'');
-  document.getElementById('adminWhatsappConfirmModal').classList.add('active');
-  window._whatsappPendingList=valid;
-}
-function closeAdminWhatsappConfirm(){document.getElementById('adminWhatsappConfirmModal').classList.remove('active');window._whatsappPendingList=null;}
-async function startWhatsappBulkSend(){
-  const list=window._whatsappPendingList||[];
-  if(!list.length)return;
-  closeAdminWhatsappConfirm();
-  whatsappSending=true;
-  whatsappCancelFlag=false;
-  const delay=Math.max(1,Math.min(60,parseInt(document.getElementById('whatsappDelay').value)||3))*1000;
-  const box=document.getElementById('whatsappProgressBox');
-  const bar=document.getElementById('whatsappProgressBar');
-  const txt=document.getElementById('whatsappProgressText');
-  const title=document.getElementById('whatsappProgressTitle');
-  box.style.display='block';
-  bar.style.width='0%';
-  txt.textContent='0 / '+list.length+' gönderildi';
-  title.textContent='Gönderiliyor...';
-  logActivity('whatsapp_bulk_start',{email:'admin'},list.length+' kişiye WhatsApp mesajı');
-  for(let i=0;i<list.length;i++){
-    if(whatsappCancelFlag){title.textContent='İptal edildi ('+i+'/'+list.length+')';break;}
-    const u=list[i];
-    const phone=whatsappNormalizePhone(u.whatsapp);
-    const msg=whatsappBuildMessage(u);
-    const url='https://wa.me/'+phone+'?text='+encodeURIComponent(msg);
-    try{const w=window.open(url,'_blank','noopener,noreferrer');if(!w){showCustomAlert('Popup engellendi! Lütfen tarayıcı izinlerini açın.','error');break;}}catch(err){console.warn('WhatsApp açılamadı:',err);}
-    const pct=Math.round(((i+1)/list.length)*100);
-    bar.style.width=pct+'%';
-    txt.textContent=(i+1)+' / '+list.length+' gönderildi — '+(u.name||u.email);
-    logActivity('whatsapp_sent',u,'To: '+phone);
-    if(i<list.length-1){await new Promise(r=>setTimeout(r,delay));}
+function closeAdminAnyEmail(){document.getElementById('adminAnyEmailModal').classList.remove('active');anyEmailImageDataUrl=null;anyEmailImageUrl=null;anyEmailImageFile=null;anyEmailPdfDataUrl=null;anyEmailPdfFile=null;}
+function previewAnyEmailImage(url){const pv=document.getElementById('any-email-img-preview');if(!pv)return;if(!url||!/^https?:\/\//i.test(url)){pv.style.display='none';pv.src='';return;}pv.src=url;pv.style.display='block';pv.onerror=()=>{pv.style.display='none';};}
+
+async function handleAnyEmailImageUpload(e){
+  const f=e.target.files[0];
+  if(!f){return;}
+  if(!f.type.startsWith('image/')){showCustomAlert('Lütfen bir resim dosyası seçin.','warning');e.target.value='';return;}
+  if(f.size>MAX_IMAGE_SIZE_BYTES){showCustomAlert('Resim max 100 MB olmalı!<br><span style="font-size:.75rem;color:var(--text-secondary)">Seçilen: '+(f.size/(1024*1024)).toFixed(2)+' MB</span>','warning');e.target.value='';return;}
+  anyEmailImageFile=f;
+  const pv=document.getElementById('any-email-img-preview');
+  const ft=document.getElementById('any-email-img-file-text');
+  const w=document.getElementById('any-email-img-upload-wrapper');
+  const ic=document.getElementById('any-email-img-upload-icon');
+  if(w){w.classList.remove('has-file','upload-error');w.classList.add('uploading');}
+  if(ic)ic.className='fa-solid fa-spinner fa-spin upload-icon';
+  if(ft)ft.textContent='Yükleniyor: 0%';
+  try{
+    const result=await uploadFileMultiLayer(f,'email-images',
+      (pct,bt,total)=>{if(ft)ft.textContent='Yükleniyor: '+pct+'%  ('+(bt/(1024*1024)).toFixed(1)+'/'+(total/(1024*1024)).toFixed(1)+' MB)';},
+      (stage,method)=>{if(ft)ft.textContent='⏳ '+method+' deneniyor...';}
+    );
+    anyEmailImageUrl=result.url;anyEmailImageDataUrl=null;
+    if(w){w.classList.remove('uploading');w.classList.add('has-file');}
+    if(ic)ic.className='fa-solid fa-circle-check upload-icon';
+    if(ft)ft.textContent='✅ Yüklendi ('+result.method+'): '+f.name+' ('+(f.size/(1024*1024)).toFixed(2)+' MB)';
+    if(pv){pv.src=result.url;pv.style.display='block';}
+  }catch(err){
+    console.warn('Tüm upload yöntemleri başarısız → sıkıştırma:',err);
+    if(ft)ft.textContent='Sıkıştırılıyor...';
+    if(ic)ic.className='fa-solid fa-spinner fa-spin upload-icon';
+    try{
+      const compressed=await compressImageForEmailJS(f,EMAILJS_SAFE_BASE64_LIMIT);
+      anyEmailImageDataUrl=compressed;anyEmailImageUrl=null;
+      if(w){w.classList.remove('uploading');w.classList.add('has-file');}
+      if(ic)ic.className='fa-solid fa-circle-check upload-icon';
+      const kb=Math.round(compressed.length/1024);
+      if(ft)ft.textContent='📦 Sıkıştırıldı: '+f.name+' → ~'+kb+' KB';
+      if(pv){pv.src=compressed;pv.style.display='block';}
+      showCustomAlert('ℹ️ Yükleme servisleri başarısız.<br>Görsel <strong>otomatik sıkıştırıldı</strong> (~'+kb+' KB).','info');
+    }catch(cErr){
+      if(w){w.classList.remove('uploading');w.classList.add('upload-error');}
+      if(ic)ic.className='fa-solid fa-upload upload-icon';
+      if(ft)ft.textContent='Resim seç (max 100 MB)';
+      showCustomAlert('Resim işlenemedi: '+(cErr.message||'unknown'),'error');
+      anyEmailImageDataUrl=null;anyEmailImageUrl=null;anyEmailImageFile=null;
+    }
   }
-  whatsappSending=false;
-  title.textContent='✅ Tamamlandı!';
-  bar.style.width='100%';
-  setTimeout(()=>{box.style.display='none';},4000);
-  fireConfettiBurst(0.8);
 }
-function whatsappOpenChatsOnly(){
-  const selected=whatsappSelectedEmails.slice();
-  if(!selected.length){showCustomAlert('Önce kullanıcı seçin!','warning');return;}
-  const users=getAllUsers();
-  let opened=0;
-  selected.forEach(email=>{const u=users.find(x=>String(x.email||'').toLowerCase()===email);if(!u||!u.whatsapp)return;const phone=whatsappNormalizePhone(u.whatsapp);window.open('https://wa.me/'+phone,'_blank','noopener,noreferrer');opened++;});
-  if(!opened)showCustomAlert('Numara bulunamadı!','warning');
-  else showCustomAlert(opened+' sohbet açıldı','success');
+
+async function handleAnyEmailPdfUpload(e){
+  const f=e.target.files[0];
+  if(!f){return;}
+  const isPdf=f.type==='application/pdf'||/\.pdf$/i.test(f.name);
+  if(!isPdf){showCustomAlert('Lütfen bir PDF dosyası seçin.','warning');e.target.value='';return;}
+  if(f.size>MAX_PDF_SIZE_BYTES){showCustomAlert('PDF max 100 MB olmalı!<br><span style="font-size:.75rem;color:var(--text-secondary)">Seçilen: '+(f.size/(1024*1024)).toFixed(2)+' MB</span>','warning');e.target.value='';return;}
+  anyEmailPdfFile=f;
+  const w=document.getElementById('any-email-pdf-upload-wrapper');
+  const ic=document.getElementById('any-email-pdf-upload-icon');
+  const ft=document.getElementById('any-email-pdf-file-text');
+  const pi=document.getElementById('any-email-pdf-info');
+  const pit=document.getElementById('any-email-pdf-info-text');
+  if(w){w.classList.remove('has-file','upload-error');w.classList.add('uploading');}
+  if(ic){ic.className='fa-solid fa-spinner fa-spin upload-icon';ic.style.color='#ef4444';}
+  if(ft)ft.textContent='PDF yükleniyor: 0%';
+  try{
+    const result=await uploadFileMultiLayer(f,'email-pdfs',
+      (pct,bt,total)=>{if(ft)ft.textContent='PDF yükleniyor: '+pct+'%  ('+(bt/(1024*1024)).toFixed(1)+'/'+(total/(1024*1024)).toFixed(1)+' MB)';},
+      (stage,method)=>{if(ft)ft.textContent='⏳ '+method+' deneniyor...';}
+    );
+    anyEmailPdfDataUrl=result.url;
+    if(w){w.classList.remove('uploading');w.classList.add('has-file');}
+    if(ic){ic.className='fa-solid fa-circle-check upload-icon';ic.style.color='#22c55e';}
+    if(ft)ft.textContent='✅ PDF yüklendi ('+result.method+'): '+f.name;
+    if(pi)pi.style.display='flex';
+    if(pit)pit.textContent=f.name+' ('+(f.size/(1024*1024)).toFixed(2)+' MB)';
+  }catch(err){
+    console.warn('PDF yüklenemedi:',err);
+    if(w){w.classList.remove('uploading');w.classList.add('upload-error');}
+    if(ic){ic.className='fa-solid fa-file-pdf upload-icon';ic.style.color='#ef4444';}
+    if(ft)ft.textContent='PDF seç (max 100 MB)';
+    anyEmailPdfDataUrl=null;anyEmailPdfFile=null;
+    showCustomAlert('❌ PDF yüklenemedi!<br><span style="font-size:.75rem">Tüm yükleme servisleri başarısız. İnternet bağlantınızı kontrol edin.</span>','error');
+  }
+}
+
+async function sendAdminAnyEmail(e){
+  e.preventDefault();
+  const to=document.getElementById('any-email-to').value.trim().toLowerCase();
+  const toName=document.getElementById('any-email-name').value.trim()||'';
+  const subj=document.getElementById('any-email-subject').value.trim();
+  const msg=document.getElementById('any-email-message').value.trim();
+  const useImg=document.getElementById('any-email-img-enable').checked;
+  const manualUrl=document.getElementById('any-email-image').value.trim();
+  let imgUrl='';
+  if(useImg){if(manualUrl)imgUrl=manualUrl;else if(anyEmailImageUrl)imgUrl=anyEmailImageUrl;else if(anyEmailImageDataUrl)imgUrl=anyEmailImageDataUrl;}
+  const usePdf=document.getElementById('any-email-pdf-enable').checked;
+  const pdfUrl=usePdf?anyEmailPdfDataUrl:'';
+  const useLink=document.getElementById('any-email-link-enable').checked;
+  const linkUrl=useLink?document.getElementById('any-email-link').value.trim():'';
+  const linkText=useLink?(document.getElementById('any-email-link-text').value.trim()||'Siteyi Ziyaret Et'):'';
+  if(!to||!subj||!msg){showCustomAlert(t('fill_fields'),'warning');return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)){showCustomAlert('Geçersiz email adresi!','error');return;}
+  if(usePdf&&!pdfUrl){showCustomAlert('⚠️ PDF yüklemeyi tamamlayın veya kapatın.','warning');return;}
+  if(imgUrl&&imgUrl.indexOf('data:')===0&&imgUrl.length>60*1024){showCustomAlert('⚠️ Base64 görsel çok büyük.','error');return;}
+  const brand=getDyn('header.brand','muminsultani');
+  const siteUrl='https://muminsultani.com';
+  const logoUrl=(getSiteContent().general&&getSiteContent().general.favicon)||'https://muminsultani.com/img/ms.png';
+  const signature='\n\n—\n'+brand+'\n'+siteUrl;
+  const finalMessage=msg+signature+(pdfUrl?'\n\n📎 PDF: '+pdfUrl:'');
+  const tp={to_email:to,to_name:toName||to.split('@')[0],brand:brand,subject:subj,message:finalMessage,
+    image_url:imgUrl||logoUrl,has_image:imgUrl?'yes':'no',
+    link_url:linkUrl||siteUrl,link_text:linkText||brand,has_link:'yes',
+    site_url:siteUrl,site_logo:logoUrl,
+    has_pdf:pdfUrl?'yes':'no',pdf_url:pdfUrl||'',
+    year:new Date().getFullYear(),type:'Custom Email',code:'—'};
+  const form=e.target;const submitBtn=form.querySelector('button[type="submit"]');const origHTML=submitBtn?submitBtn.innerHTML:'';
+  if(submitBtn){submitBtn.disabled=true;submitBtn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Gönderiliyor...';}
+  try{
+    const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EMAILJS_CONFIG.serviceId,template_id:EMAILJS_CONFIG.templateId,user_id:EMAILJS_CONFIG.publicKey,template_params:tp})});
+    const txt=await r.text();
+    if(submitBtn){submitBtn.disabled=false;submitBtn.innerHTML=origHTML;}
+    if(r.ok&&(txt==='OK'||r.status===200)){
+      logActivity('email_sent',{email:to,name:toName||'Custom'},'Admin→ Any: '+subj);
+      closeAdminAnyEmail();
+      const hints=[];if(anyEmailImageUrl)hints.push('🖼️ görsel');if(anyEmailPdfDataUrl)hints.push('📄 PDF');
+      const hintTxt=hints.length?'<br><span style="font-size:.7rem;color:var(--text-secondary)">'+hints.join(' + ')+' başarıyla gönderildi ✅</span>':'';
+      showCustomAlert('✅ Email gönderildi!'+hintTxt,'success');
+      fireConfettiBurst(0.6);
+    }else{
+      let errMsg=txt||('HTTP '+r.status);
+      if(errMsg.indexOf('Variables size limit')!==-1)errMsg='Görsel/PDF çok büyük (EmailJS limiti).';
+      showCustomAlert('Email hatası:<br><span style="font-size:.75rem">'+errMsg+'</span>','error');
+    }
+  }catch(err){if(submitBtn){submitBtn.disabled=false;submitBtn.innerHTML=origHTML;}showCustomAlert('Network hatası!','error');}
 }
 
 /* ============================================================
@@ -2524,7 +2244,6 @@ function switchAdminTab(name,btn){
   if(name==='account')renderAdminAccount();
   if(name==='emails')renderWelcomeSettings();
   if(name==='orders'){renderAdminOrders();updateOrdersBadge();}
-  if(name==='whatsapp')renderWhatsappUserList();
 }
 function refreshAdminUI(){
   const c=getSiteContent();const users=getAllUsers();const logs=getActivityLog();const chats=getChatMessages();
@@ -2598,160 +2317,19 @@ function refreshDashStats(){
 }
 
 /* === USERS === */
-function renderAdminUsers(){const list=document.getElementById('adminUsersList');if(!list)return;const u=getAllUsers();if(!u.length){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">No users.</p>';return;}list.innerHTML='';u.forEach((user,idx)=>{const card=document.createElement('div');card.className='user-card';const av=user.profilePhoto?'<img src="'+user.profilePhoto+'">':(user.name?user.name.trim().charAt(0).toUpperCase():'?');const se=escapeHtml(String(user.email||''));const isA=isAdminUser(user.email);const isV=isA||user.isVerified;const vB=isV?getVerifiedBadgeHTML('sm'):'';const vBtn=isA?'<button class="user-view-btn verify big active" disabled><i class="fa-solid fa-circle-check"></i> Admin</button>':'<button class="user-view-btn verify big'+(isV?' active':'')+'" onclick="toggleUserVerification(\''+se+'\')"><i class="fa-solid fa-circle-check"></i> '+(isV?'Verified':'Verify')+'</button>';card.innerHTML='<div class="user-card-avatar">'+av+'</div>'+'<div class="user-card-info">'+'<div class="user-card-name">'+escapeHtml(user.name||'unknown')+vB+'</div>'+'<div class="user-card-detail"><i class="fa-solid fa-id-badge"></i>'+escapeHtml(user.userId||'-')+'</div>'+'<div class="user-card-detail"><i class="fa-solid fa-at"></i>'+escapeHtml(user.username||'-')+'</div>'+'<div class="user-card-detail"><i class="fa-solid fa-envelope"></i>'+escapeHtml(user.email||'-')+'</div>'+'<div class="admin-user-actions">'+'<button class="user-view-btn" onclick="adminViewUser(\''+se+'\')"><i class="fa-solid fa-user"></i> '+t('admin_view')+'</button>'+(isChatEnabled()?'<button class="user-view-btn msg" onclick="adminChatUser(\''+se+'\')"><i class="fa-solid fa-comments"></i> Chat</button>':'')+'<button class="user-view-btn" onclick="openAdminUserEmail(\''+se+'\')" style="color:#22c55e"><i class="fa-solid fa-envelope"></i> Email</button>'+'<button class="user-view-btn" onclick="openAdminUserWhatsapp(\''+se+'\')" style="color:#25D366"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>'+vBtn+'<button class="user-view-btn danger" onclick="deleteUserAdmin(\''+se+'\')"><i class="fa-solid fa-trash-can"></i></button>'+'</div>'+'</div>';list.appendChild(card);});}
+function renderAdminUsers(){const list=document.getElementById('adminUsersList');if(!list)return;const u=getAllUsers();if(!u.length){list.innerHTML='<p style="text-align:center;padding:30px;color:var(--text-secondary);font-size:.85rem;">No users.</p>';return;}list.innerHTML='';u.forEach((user,idx)=>{const card=document.createElement('div');card.className='user-card';const av=user.profilePhoto?'<img src="'+user.profilePhoto+'">':(user.name?user.name.trim().charAt(0).toUpperCase():'?');const se=escapeHtml(String(user.email||''));const isA=isAdminUser(user.email);const isV=isA||user.isVerified;const vB=isV?getVerifiedBadgeHTML('sm'):'';const vBtn=isA?'<button class="user-view-btn verify big active" disabled><i class="fa-solid fa-circle-check"></i> Admin</button>':'<button class="user-view-btn verify big'+(isV?' active':'')+'" onclick="toggleUserVerification(\''+se+'\')"><i class="fa-solid fa-circle-check"></i> '+(isV?'Verified':'Verify')+'</button>';card.innerHTML='<div class="user-card-avatar">'+av+'</div>'+'<div class="user-card-info">'+'<div class="user-card-name">'+escapeHtml(user.name||'unknown')+vB+'</div>'+'<div class="user-card-detail"><i class="fa-solid fa-id-badge"></i>'+escapeHtml(user.userId||'-')+'</div>'+'<div class="user-card-detail"><i class="fa-solid fa-at"></i>'+escapeHtml(user.username||'-')+'</div>'+'<div class="user-card-detail"><i class="fa-solid fa-envelope"></i>'+escapeHtml(user.email||'-')+'</div>'+'<div class="admin-user-actions">'+'<button class="user-view-btn" onclick="adminViewUser(\''+se+'\')"><i class="fa-solid fa-user"></i> '+t('admin_view')+'</button>'+(isChatEnabled()?'<button class="user-view-btn msg" onclick="adminChatUser(\''+se+'\')"><i class="fa-solid fa-comments"></i> Chat</button>':'')+'<button class="user-view-btn" onclick="openAdminUserEmail(\''+se+'\')" style="color:#22c55e"><i class="fa-solid fa-envelope"></i> Email</button>'+vBtn+'<button class="user-view-btn danger" onclick="deleteUserAdmin(\''+se+'\')"><i class="fa-solid fa-trash-can"></i></button>'+'</div>'+'</div>';list.appendChild(card);});}
 function toggleUserVerification(email){if(!email)return;if(isAdminUser(email)){showCustomAlert('Admin already verified');return;}let u=getAllUsers();const i=u.findIndex(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());if(i===-1){showCustomAlert('User not found!','error');return;}const currentStatus=!!u[i].isVerified;showCustomAlert(currentStatus?'Remove blue tick?':'Give blue tick?',currentStatus?'delete':'verify',function(){u[i].isVerified=!currentStatus;saveAllUsers(u);renderAdminUsers();refreshDashStats();showCustomAlert(u[i].isVerified?'✅ Mavi tik verildi!':'Mavi tik kaldırıldı','success');fireConfettiBurst(u[i].isVerified?0.7:0);});}
 function viewUserDetail(idx){const users=getAllUsers();const u=users[idx];if(!u)return;const isA=isAdminUser(u.email);const isV=isA||u.isVerified;const vB=isV?getVerifiedBadgeHTML('lg'):'';let rows='<div style="text-align:center;margin-bottom:16px;"><div style="font-size:1.1rem;font-weight:800;display:flex;align-items:center;justify-content:center;gap:6px;">'+escapeHtml(u.name||'unknown')+vB+'</div></div><div class="user-detail-modal-row"><span>ID</span><span>'+escapeHtml(u.userId||'-')+'</span></div><div class="user-detail-modal-row"><span>Email</span><span>'+escapeHtml(u.email||'-')+'</span></div>';document.getElementById('userDetailContent').innerHTML=rows;document.getElementById('userDetailModal').classList.add('active');}
 function closeUserDetail(){document.getElementById('userDetailModal').classList.remove('active');}
 function deleteUserAdmin(email){if(!email)return;const u=getAllUsers();const user=u.find(x=>String(x.email||'').toLowerCase()===String(email).toLowerCase());if(!user){showCustomAlert('User not found!');return;}if(isAdminUser(user.email)){showCustomAlert('Admin cannot be deleted!');return;}showCustomAlert('"'+escapeHtml(user.name||user.email)+'" delete?','delete',function(){const tg=String(email).toLowerCase();const nu=u.filter(x=>String(x.email||'').toLowerCase()!==tg);saveAllUsers(nu);renderAdminUsers();updateChatBadge();showCustomAlert('User deleted!','success');});}
-function exportUsersCSV(){const users=getAllUsers();if(!users.length){showCustomAlert('No users.');return;}const rows=[['ID','Name','Username','Email','WhatsApp','Verified']];users.forEach(u=>rows.push([u.userId||'',u.name,u.username,u.email,u.whatsapp||'',(isAdminUser(u.email)||u.isVerified)?'Yes':'No']));const csv=rows.map(r=>r.map(c=>'"'+String(c||'').replace(/"/g,'""')+'"').join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='users-'+new Date().toISOString().slice(0,10)+'.csv';document.body.appendChild(a);a.click();document.body.removeChild(a);showCustomAlert('CSV downloaded!','success');}
+function exportUsersCSV(){const users=getAllUsers();if(!users.length){showCustomAlert('No users.');return;}const rows=[['ID','Name','Username','Email','Verified']];users.forEach(u=>rows.push([u.userId||'',u.name,u.username,u.email,(isAdminUser(u.email)||u.isVerified)?'Yes':'No']));const csv=rows.map(r=>r.map(c=>'"'+String(c||'').replace(/"/g,'""')+'"').join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='users-'+new Date().toISOString().slice(0,10)+'.csv';document.body.appendChild(a);a.click();document.body.removeChild(a);showCustomAlert('CSV downloaded!','success');}
 function clearAllUsers(){showCustomAlert('All users will be deleted!','delete',function(){const u=getAllUsers();const admin=u.find(x=>x.isAdmin===true||isAdminUser(x.email));saveAllUsers(admin?[admin]:[]);checkUserSession();renderAdminUsers();showCustomAlert('Deleted!','success');});}
-
-function adminViewUser(email){const users=getAllUsers();const u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());if(!u){showCustomAlert('User not found!');return;}adminViewingEmail=u.email;const isA=isAdminUser(u.email);const isV=isA||u.isVerified;const vB=isV?getVerifiedBadgeHTML('xl'):'';const av=u.profilePhoto?'<img src="'+u.profilePhoto+'">':(u.name?escapeHtml(u.name.trim().charAt(0).toUpperCase()):'?');const uname=String(u.username||'').replace(/^@/,'');const created=u.createdAt?fmtDate(u.createdAt):'—';document.getElementById('admin-up-title').textContent=t('admin_user_profile')+' — '+(u.name||'user');document.getElementById('adminUserProfileContent').innerHTML='<div class="pub-profile-view">'+'<div class="pub-profile-avatar" style="'+(isV?'border-color:#1d9bf0;':'')+'">'+av+'</div>'+'<div class="pub-profile-name">'+escapeHtml(u.name||'user')+' '+vB+'</div>'+(uname?'<div class="pub-profile-username">@'+escapeHtml(uname)+'</div>':'')+'<div class="pub-profile-info">'+'<div class="pub-profile-info-row"><span><i class="fa-solid fa-id-badge"></i>ID</span><span style="font-family:\'Fira Code\',monospace;color:var(--accent);font-weight:700">'+escapeHtml(u.userId||'-')+'</span></div>'+'<div class="pub-profile-info-row"><span><i class="fa-solid fa-envelope"></i>Email</span><span>'+escapeHtml(u.email||'-')+'</span></div>'+'<div class="pub-profile-info-row"><span><i class="fa-solid fa-at"></i>Username</span><span>@'+escapeHtml(uname||'-')+'</span></div>'+(u.whatsapp?'<div class="pub-profile-info-row"><span><i class="fa-brands fa-whatsapp" style="color:#25D366"></i>WhatsApp</span><span style="color:#25D366;font-weight:700">'+escapeHtml(u.whatsapp)+'</span></div>':'')+'<div class="pub-profile-info-row"><span><i class="fa-solid fa-globe"></i>Website</span><span>'+escapeHtml(u.website||'—')+'</span></div>'+'<div class="pub-profile-info-row"><span><i class="fa-solid fa-calendar-days"></i>'+t('joined')+'</span><span>'+escapeHtml(created)+'</span></div>'+'</div>'+'<div class="pub-profile-actions">'+(!isA?'<button class="pub-btn-msg" style="background:linear-gradient(135deg,#1d9bf0,#1a8cd8)" onclick="closeAdminUserProfile();toggleUserVerification(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-circle-check"></i> '+(isV?'Remove Blue Tick':'Give Blue Tick')+'</button>':'')+(isChatEnabled()?'<button class="pub-btn-msg" onclick="closeAdminUserProfile();adminChatUser(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-comments"></i> Chat</button>':'')+'<button class="pub-btn-msg" style="background:linear-gradient(135deg,#22c55e,#16a34a)" onclick="closeAdminUserProfile();openAdminUserEmail(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-envelope"></i> '+t('admin_send_email')+'</button>'+'<button class="pub-btn-msg" style="background:linear-gradient(135deg,#25D366,#128C7E)" onclick="closeAdminUserProfile();openAdminUserWhatsapp(\''+escapeHtml(u.email)+'\')"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>'+'<button class="pub-btn-close" onclick="closeAdminUserProfile()"><i class="fa-solid fa-arrow-left"></i> '+t('close')+'</button>'+'</div>'+'</div>';document.getElementById('adminUserProfileModal').classList.add('active');}
+function adminViewUser(email){const users=getAllUsers();const u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());if(!u){showCustomAlert('User not found!');return;}adminViewingEmail=u.email;const isA=isAdminUser(u.email);const isV=isA||u.isVerified;const vB=isV?getVerifiedBadgeHTML('xl'):'';const av=u.profilePhoto?'<img src="'+u.profilePhoto+'">':(u.name?escapeHtml(u.name.trim().charAt(0).toUpperCase()):'?');const uname=String(u.username||'').replace(/^@/,'');const created=u.createdAt?fmtDate(u.createdAt):'—';document.getElementById('admin-up-title').textContent=t('admin_user_profile')+' — '+(u.name||'user');document.getElementById('adminUserProfileContent').innerHTML='<div class="pub-profile-view">'+'<div class="pub-profile-avatar" style="'+(isV?'border-color:#1d9bf0;':'')+'">'+av+'</div>'+'<div class="pub-profile-name">'+escapeHtml(u.name||'user')+' '+vB+'</div>'+(uname?'<div class="pub-profile-username">@'+escapeHtml(uname)+'</div>':'')+'<div class="pub-profile-info">'+'<div class="pub-profile-info-row"><span><i class="fa-solid fa-id-badge"></i>ID</span><span style="font-family:\'Fira Code\',monospace;color:var(--accent);font-weight:700">'+escapeHtml(u.userId||'-')+'</span></div>'+'<div class="pub-profile-info-row"><span><i class="fa-solid fa-envelope"></i>Email</span><span>'+escapeHtml(u.email||'-')+'</span></div>'+'<div class="pub-profile-info-row"><span><i class="fa-solid fa-at"></i>Username</span><span>@'+escapeHtml(uname||'-')+'</span></div>'+'<div class="pub-profile-info-row"><span><i class="fa-solid fa-globe"></i>Website</span><span>'+escapeHtml(u.website||'—')+'</span></div>'+'<div class="pub-profile-info-row"><span><i class="fa-solid fa-calendar-days"></i>'+t('joined')+'</span><span>'+escapeHtml(created)+'</span></div>'+'</div>'+'<div class="pub-profile-actions">'+(!isA?'<button class="pub-btn-msg" style="background:linear-gradient(135deg,#1d9bf0,#1a8cd8)" onclick="closeAdminUserProfile();toggleUserVerification(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-circle-check"></i> '+(isV?'Remove Blue Tick':'Give Blue Tick')+'</button>':'')+(isChatEnabled()?'<button class="pub-btn-msg" onclick="closeAdminUserProfile();adminChatUser(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-comments"></i> Chat</button>':'')+'<button class="pub-btn-msg" style="background:linear-gradient(135deg,#22c55e,#16a34a)" onclick="closeAdminUserProfile();openAdminUserEmail(\''+escapeHtml(u.email)+'\')"><i class="fa-solid fa-envelope"></i> '+t('admin_send_email')+'</button>'+'<button class="pub-btn-close" onclick="closeAdminUserProfile()"><i class="fa-solid fa-arrow-left"></i> '+t('close')+'</button>'+'</div>'+'</div>';document.getElementById('adminUserProfileModal').classList.add('active');}
 function closeAdminUserProfile(){document.getElementById('adminUserProfileModal').classList.remove('active');adminViewingEmail=null;}
 function adminChatUser(email){if(!isChatEnabled()){showCustomAlert('🔒 Sohbet gizli.','warning');return;}const admin=getAdminUser();const users=getAllUsers();const target=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());if(!target){showCustomAlert('User not found!');return;}const prev=localStorage.getItem('logged_user');localStorage.setItem('logged_user',JSON.stringify(admin));if(prev&&prev!==JSON.stringify(admin))window._chatPrevUser=prev;closeAdminPanel();setTimeout(()=>{document.getElementById('chatPanelModal').classList.add('active');activeChatUser=null;currentReplyTo=null;document.getElementById('chatUsersListWrapper').style.display='none';document.getElementById('chatConversation').style.display='none';openConversation(target);},200);}
 function openAdminUserEmail(email){const users=getAllUsers();const u=users.find(x=>String(x.email||'').toLowerCase()===String(email||'').toLowerCase());if(!u){showCustomAlert('User not found!');return;}adminEmailTarget=u;const av=u.profilePhoto?'<img src="'+u.profilePhoto+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">':(u.name?escapeHtml(u.name.trim().charAt(0).toUpperCase()):'?');const avEl=document.getElementById('aueAvatar');if(u.profilePhoto){avEl.innerHTML=av;avEl.style.padding='0';}else{avEl.textContent=av;avEl.style.padding='';}document.getElementById('aueName').textContent=u.name||'user';document.getElementById('aueEmail').textContent=u.email||'';document.getElementById('adminUserEmailForm').reset();const ig=document.getElementById('aue-img-group');if(ig)ig.style.display='none';const lg=document.getElementById('aue-link-group');if(lg)lg.style.display='none';document.getElementById('adminUserEmailModal').classList.add('active');}
 function closeAdminUserEmail(){document.getElementById('adminUserEmailModal').classList.remove('active');adminEmailTarget=null;}
 async function sendAdminUserEmailSubmit(e){e.preventDefault();if(!adminEmailTarget)return;const subj=document.getElementById('aue-subject').value.trim();const msg=document.getElementById('aue-message').value.trim();const useImg=document.getElementById('aue-img-enable')?document.getElementById('aue-img-enable').checked:false;const imgUrl=useImg?document.getElementById('aue-image').value.trim():'';const useLink=document.getElementById('aue-link-enable')?document.getElementById('aue-link-enable').checked:false;const link=useLink?document.getElementById('aue-link').value.trim():'';const linkText=useLink?(document.getElementById('aue-link-text').value.trim()||'Siteyi Ziyaret Et'):'';if(!subj||!msg){showCustomAlert(t('fill_fields'));return;}const brand=getDyn('header.brand','muminsultani');const siteUrl='https://muminsultani.com';const logoUrl=(getSiteContent().general&&getSiteContent().general.favicon)||'https://muminsultani.com/img/ms.png';const finalMessage=msg+'\n\n—\n'+brand+'\n'+siteUrl;const tp={to_email:adminEmailTarget.email,to_name:adminEmailTarget.name||'',brand:brand,subject:subj,message:finalMessage,image_url:imgUrl||logoUrl,has_image:'yes',link_url:link||siteUrl,link_text:linkText||brand,has_link:'yes',site_url:siteUrl,site_logo:logoUrl,has_pdf:'no',pdf_url:'',year:new Date().getFullYear(),type:'Admin Message',code:'—'};const form=e.target;const submitBtn=form.querySelector('button[type="submit"]');const origHTML=submitBtn?submitBtn.innerHTML:'';if(submitBtn){submitBtn.disabled=true;submitBtn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i>...';}try{const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EMAILJS_CONFIG.serviceId,template_id:EMAILJS_CONFIG.templateId,user_id:EMAILJS_CONFIG.publicKey,template_params:tp})});const txt=await r.text();if(submitBtn){submitBtn.disabled=false;submitBtn.innerHTML=origHTML;}if(r.ok&&(txt==='OK'||r.status===200)){logActivity('email_sent',{email:adminEmailTarget.email,name:adminEmailTarget.name},'Admin→ User: '+subj);closeAdminUserEmail();showCustomAlert('✅ Email gönderildi!','success');}else{showCustomAlert('Email hatası: '+(txt||r.status),'error');}}catch(err){if(submitBtn){submitBtn.disabled=false;submitBtn.innerHTML=origHTML;}showCustomAlert('Network hatası!','error');}}
-
-/* === ADMIN: HERKESE EMAIL === */
-function openAdminAnyEmail(){
-  anyEmailImageDataUrl=null;anyEmailImageUrl=null;anyEmailImageFile=null;
-  anyEmailPdfDataUrl=null;anyEmailPdfFile=null;
-  const f=document.getElementById('adminAnyEmailForm');if(f)f.reset();
-  const ig=document.getElementById('any-email-img-group');if(ig)ig.style.display='none';
-  const pg=document.getElementById('any-email-pdf-group');if(pg)pg.style.display='none';
-  const lg=document.getElementById('any-email-link-group');if(lg)lg.style.display='none';
-  const pv=document.getElementById('any-email-img-preview');if(pv){pv.style.display='none';pv.src='';}
-  const pi=document.getElementById('any-email-pdf-info');if(pi)pi.style.display='none';
-  const ft=document.getElementById('any-email-img-file-text');if(ft)ft.textContent='Resim seç (max 100 MB)';
-  const pft=document.getElementById('any-email-pdf-file-text');if(pft)pft.textContent='PDF seç (max 100 MB)';
-  const w=document.getElementById('any-email-img-upload-wrapper');if(w)w.classList.remove('has-file','uploading','upload-error');
-  const pw=document.getElementById('any-email-pdf-upload-wrapper');if(pw)pw.classList.remove('has-file','uploading','upload-error');
-  const ic=document.getElementById('any-email-img-upload-icon');if(ic)ic.className='fa-solid fa-upload upload-icon';
-  const pic=document.getElementById('any-email-pdf-upload-icon');if(pic){pic.className='fa-solid fa-file-pdf upload-icon';pic.style.color='#ef4444';}
-  document.getElementById('adminAnyEmailModal').classList.add('active');
-}
-function closeAdminAnyEmail(){document.getElementById('adminAnyEmailModal').classList.remove('active');anyEmailImageDataUrl=null;anyEmailImageUrl=null;anyEmailImageFile=null;anyEmailPdfDataUrl=null;anyEmailPdfFile=null;}
-function previewAnyEmailImage(url){const pv=document.getElementById('any-email-img-preview');if(!pv)return;if(!url||!/^https?:\/\//i.test(url)){pv.style.display='none';pv.src='';return;}pv.src=url;pv.style.display='block';pv.onerror=()=>{pv.style.display='none';};}
-async function handleAnyEmailImageUpload(e){
-  const f=e.target.files[0];
-  if(!f){return;}
-  if(!f.type.startsWith('image/')){showCustomAlert('Lütfen bir resim dosyası seçin.','warning');e.target.value='';return;}
-  if(f.size>MAX_IMAGE_SIZE_BYTES){showCustomAlert('Resim max 100 MB olmalı!<br><span style="font-size:.75rem;color:var(--text-secondary)">Seçilen: '+(f.size/(1024*1024)).toFixed(2)+' MB</span>','warning');e.target.value='';return;}
-  anyEmailImageFile=f;
-  const pv=document.getElementById('any-email-img-preview');
-  const ft=document.getElementById('any-email-img-file-text');
-  const w=document.getElementById('any-email-img-upload-wrapper');
-  const ic=document.getElementById('any-email-img-upload-icon');
-  if(w){w.classList.remove('has-file','upload-error');w.classList.add('uploading');}
-  if(ic)ic.className='fa-solid fa-spinner fa-spin upload-icon';
-  if(ft)ft.textContent='Yükleniyor: 0%';
-  try{
-    const result=await uploadFileMultiLayer(f,'email-images',(pct,bt,total)=>{if(ft)ft.textContent='Yükleniyor: '+pct+'%  ('+(bt/(1024*1024)).toFixed(1)+'/'+(total/(1024*1024)).toFixed(1)+' MB)';},(stage,method)=>{if(ft)ft.textContent='⏳ '+method+' deneniyor...';});
-    anyEmailImageUrl=result.url;anyEmailImageDataUrl=null;
-    if(w){w.classList.remove('uploading');w.classList.add('has-file');}
-    if(ic)ic.className='fa-solid fa-circle-check upload-icon';
-    if(ft)ft.textContent='✅ Yüklendi ('+result.method+'): '+f.name+' ('+(f.size/(1024*1024)).toFixed(2)+' MB)';
-    if(pv){pv.src=result.url;pv.style.display='block';}
-  }catch(err){
-    console.warn('Tüm upload yöntemleri başarısız → sıkıştırma:',err);
-    if(ft)ft.textContent='Sıkıştırılıyor...';
-    if(ic)ic.className='fa-solid fa-spinner fa-spin upload-icon';
-    try{
-      const compressed=await compressImageForEmailJS(f,EMAILJS_SAFE_BASE64_LIMIT);
-      anyEmailImageDataUrl=compressed;anyEmailImageUrl=null;
-      if(w){w.classList.remove('uploading');w.classList.add('has-file');}
-      if(ic)ic.className='fa-solid fa-circle-check upload-icon';
-      const kb=Math.round(compressed.length/1024);
-      if(ft)ft.textContent='📦 Sıkıştırıldı: '+f.name+' → ~'+kb+' KB';
-      if(pv){pv.src=compressed;pv.style.display='block';}
-      showCustomAlert('ℹ️ Yükleme servisleri başarısız.<br>Görsel <strong>otomatik sıkıştırıldı</strong> (~'+kb+' KB).','info');
-    }catch(cErr){
-      if(w){w.classList.remove('uploading');w.classList.add('upload-error');}
-      if(ic)ic.className='fa-solid fa-upload upload-icon';
-      if(ft)ft.textContent='Resim seç (max 100 MB)';
-      showCustomAlert('Resim işlenemedi: '+(cErr.message||'unknown'),'error');
-      anyEmailImageDataUrl=null;anyEmailImageUrl=null;anyEmailImageFile=null;
-    }
-  }
-}
-async function handleAnyEmailPdfUpload(e){
-  const f=e.target.files[0];
-  if(!f){return;}
-  const isPdf=f.type==='application/pdf'||/\.pdf$/i.test(f.name);
-  if(!isPdf){showCustomAlert('Lütfen bir PDF dosyası seçin.','warning');e.target.value='';return;}
-  if(f.size>MAX_PDF_SIZE_BYTES){showCustomAlert('PDF max 100 MB olmalı!<br><span style="font-size:.75rem;color:var(--text-secondary)">Seçilen: '+(f.size/(1024*1024)).toFixed(2)+' MB</span>','warning');e.target.value='';return;}
-  anyEmailPdfFile=f;
-  const w=document.getElementById('any-email-pdf-upload-wrapper');
-  const ic=document.getElementById('any-email-pdf-upload-icon');
-  const ft=document.getElementById('any-email-pdf-file-text');
-  const pi=document.getElementById('any-email-pdf-info');
-  const pit=document.getElementById('any-email-pdf-info-text');
-  if(w){w.classList.remove('has-file','upload-error');w.classList.add('uploading');}
-  if(ic){ic.className='fa-solid fa-spinner fa-spin upload-icon';ic.style.color='#ef4444';}
-  if(ft)ft.textContent='PDF yükleniyor: 0%';
-  try{
-    const result=await uploadFileMultiLayer(f,'email-pdfs',(pct,bt,total)=>{if(ft)ft.textContent='PDF yükleniyor: '+pct+'%  ('+(bt/(1024*1024)).toFixed(1)+'/'+(total/(1024*1024)).toFixed(1)+' MB)';},(stage,method)=>{if(ft)ft.textContent='⏳ '+method+' deneniyor...';});
-    anyEmailPdfDataUrl=result.url;
-    if(w){w.classList.remove('uploading');w.classList.add('has-file');}
-    if(ic){ic.className='fa-solid fa-circle-check upload-icon';ic.style.color='#22c55e';}
-    if(ft)ft.textContent='✅ PDF yüklendi ('+result.method+'): '+f.name;
-    if(pi)pi.style.display='flex';
-    if(pit)pit.textContent=f.name+' ('+(f.size/(1024*1024)).toFixed(2)+' MB)';
-  }catch(err){
-    console.warn('PDF yüklenemedi:',err);
-    if(w){w.classList.remove('uploading');w.classList.add('upload-error');}
-    if(ic){ic.className='fa-solid fa-file-pdf upload-icon';ic.style.color='#ef4444';}
-    if(ft)ft.textContent='PDF seç (max 100 MB)';
-    anyEmailPdfDataUrl=null;anyEmailPdfFile=null;
-    showCustomAlert('❌ PDF yüklenemedi!<br><span style="font-size:.75rem">Tüm yükleme servisleri başarısız.</span>','error');
-  }
-}
-async function sendAdminAnyEmail(e){
-  e.preventDefault();
-  const to=document.getElementById('any-email-to').value.trim().toLowerCase();
-  const toName=document.getElementById('any-email-name').value.trim()||'';
-  const subj=document.getElementById('any-email-subject').value.trim();
-  const msg=document.getElementById('any-email-message').value.trim();
-  const useImg=document.getElementById('any-email-img-enable').checked;
-  const manualUrl=document.getElementById('any-email-image').value.trim();
-  let imgUrl='';
-  if(useImg){if(manualUrl)imgUrl=manualUrl;else if(anyEmailImageUrl)imgUrl=anyEmailImageUrl;else if(anyEmailImageDataUrl)imgUrl=anyEmailImageDataUrl;}
-  const usePdf=document.getElementById('any-email-pdf-enable').checked;
-  const pdfUrl=usePdf?anyEmailPdfDataUrl:'';
-  const useLink=document.getElementById('any-email-link-enable').checked;
-  const linkUrl=useLink?document.getElementById('any-email-link').value.trim():'';
-  const linkText=useLink?(document.getElementById('any-email-link-text').value.trim()||'Siteyi Ziyaret Et'):'';
-  if(!to||!subj||!msg){showCustomAlert(t('fill_fields'),'warning');return;}
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)){showCustomAlert('Geçersiz email adresi!','error');return;}
-  if(usePdf&&!pdfUrl){showCustomAlert('⚠️ PDF yüklemeyi tamamlayın veya kapatın.','warning');return;}
-  if(imgUrl&&imgUrl.indexOf('data:')===0&&imgUrl.length>60*1024){showCustomAlert('⚠️ Base64 görsel çok büyük.','error');return;}
-  const brand=getDyn('header.brand','muminsultani');
-  const siteUrl='https://muminsultani.com';
-  const logoUrl=(getSiteContent().general&&getSiteContent().general.favicon)||'https://muminsultani.com/img/ms.png';
-  const signature='\n\n—\n'+brand+'\n'+siteUrl;
-  const finalMessage=msg+signature+(pdfUrl?'\n\n📎 PDF: '+pdfUrl:'');
-  const tp={to_email:to,to_name:toName||to.split('@')[0],brand:brand,subject:subj,message:finalMessage,image_url:imgUrl||logoUrl,has_image:imgUrl?'yes':'no',link_url:linkUrl||siteUrl,link_text:linkText||brand,has_link:'yes',site_url:siteUrl,site_logo:logoUrl,has_pdf:pdfUrl?'yes':'no',pdf_url:pdfUrl||'',year:new Date().getFullYear(),type:'Custom Email',code:'—'};
-  const form=e.target;const submitBtn=form.querySelector('button[type="submit"]');const origHTML=submitBtn?submitBtn.innerHTML:'';
-  if(submitBtn){submitBtn.disabled=true;submitBtn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Gönderiliyor...';}
-  try{
-    const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EMAILJS_CONFIG.serviceId,template_id:EMAILJS_CONFIG.templateId,user_id:EMAILJS_CONFIG.publicKey,template_params:tp})});
-    const txt=await r.text();
-    if(submitBtn){submitBtn.disabled=false;submitBtn.innerHTML=origHTML;}
-    if(r.ok&&(txt==='OK'||r.status===200)){
-      logActivity('email_sent',{email:to,name:toName||'Custom'},'Admin→ Any: '+subj);
-      closeAdminAnyEmail();
-      const hints=[];if(anyEmailImageUrl)hints.push('🖼️ görsel');if(anyEmailPdfDataUrl)hints.push('📄 PDF');
-      const hintTxt=hints.length?'<br><span style="font-size:.7rem;color:var(--text-secondary)">'+hints.join(' + ')+' başarıyla gönderildi ✅</span>':'';
-      showCustomAlert('✅ Email gönderildi!'+hintTxt,'success');
-      fireConfettiBurst(0.6);
-    }else{
-      let errMsg=txt||('HTTP '+r.status);
-      if(errMsg.indexOf('Variables size limit')!==-1)errMsg='Görsel/PDF çok büyük (EmailJS limiti).';
-      showCustomAlert('Email hatası:<br><span style="font-size:.75rem">'+errMsg+'</span>','error');
-    }
-  }catch(err){if(submitBtn){submitBtn.disabled=false;submitBtn.innerHTML=origHTML;}showCustomAlert('Network hatası!','error');}
-}
 
 /* === ACTIVITY/CHATS === */
 let activityFilterType='all';
@@ -2776,7 +2354,7 @@ function handleAdminPhotoUpload(e){const f=e.target.files[0];if(!f||!f.type.star
 function clearAdminPhoto(){pendingAdminPhoto=null;const pv=document.getElementById('adminPhotoPreview');if(pv)pv.style.display='none';const ic=document.getElementById('adminPhotoUploadIcon');if(ic)ic.style.display='block';const cb=document.getElementById('adminPhotoClearBtn');if(cb)cb.style.display='none';}
 function saveAdminAccount(e){e.preventDefault();const u=getAllUsers();let i=u.findIndex(x=>x.isAdmin===true);if(i===-1)i=u.findIndex(x=>String(x.email||'').toLowerCase()===ADMIN_EMAIL.toLowerCase());if(i===-1){u.unshift(getAdminUser());i=0;}const nn=document.getElementById('adminAccName').value.trim(),nu=document.getElementById('adminAccUsername').value.trim().replace(/^@/,'').toLowerCase(),ne=document.getElementById('adminAccEmail').value.trim().toLowerCase(),nid=document.getElementById('adminAccId').value.trim(),nw=document.getElementById('adminAccWebsite').value.trim(),nb=document.getElementById('adminAccBio').value.trim();if(!nn||!nu||!ne){showCustomAlert(t('fill_fields'));return;}if(!/^\d{9}$/.test(nid)){showCustomAlert('ID must be 9 digits!');return;}const a=u[i];const oldE=a.email;a.name=nn;a.username=nu;a.email=ne;a.userId=nid;a.website=nw;a.bio=nb;a.isAdmin=true;a.isVerified=true;if(pendingAdminPhoto!==undefined)a.profilePhoto=pendingAdminPhoto||'';saveAllUsers(u);const lu=localStorage.getItem('logged_user');if(lu){try{const cu=JSON.parse(lu);if(cu.isAdmin||String(cu.email||'').toLowerCase()===String(oldE).toLowerCase())localStorage.setItem('logged_user',JSON.stringify(a));}catch(e){}}pendingAdminPhoto=undefined;refreshAdminUI();renderAdminAccount();checkUserSession();showCustomAlert('Saved!','success');}
 
-/* === ADMIN APPS (SLOTS + APK + ICON) === */
+/* === ADMIN APPS === */
 function withTimeout(p,ms){ms=ms||5000;return Promise.race([Promise.resolve(p),new Promise(r=>setTimeout(()=>r(null),ms))]);}
 function buildAdminSlotHTML(idx,app){const filled=app.name&&app.name.trim();let iconPreview='';if(app.hasIcon)iconPreview='(icon)';else if(app.icon&&app.icon.trim())iconPreview='<span style="font-size:1.1rem">'+escapeHtml(app.icon.trim())+'</span>';const nameText=filled?escapeHtml(app.name):'<em style="opacity:.5">empty slot '+(idx+1)+'</em>';return '<div class="admin-slot-num">'+(idx+1)+'</div>'+(iconPreview?'<div style="width:26px">'+iconPreview+'</div>':'')+'<div class="admin-slot-info"><div class="admin-slot-name">'+nameText+' '+(app.hasApk?'<span style="font-size:.6rem;color:#22c55e">APK</span>':'')+'</div><div class="admin-slot-url">'+(filled&&app.desc?escapeHtml(app.desc):'')+'</div></div><div class="admin-slot-btns"><button class="admin-slot-btn" onclick="editAppSlot('+idx+')"><i class="fa-solid fa-pen"></i></button><button class="admin-slot-btn delete" onclick="clearAppSlot('+idx+')"><i class="fa-solid fa-trash-can"></i></button></div>';}
 function openApkDB(){return new Promise((res,rej)=>{if(apkDB)return res(apkDB);try{if(!('indexedDB' in window))return rej(new Error('no-idb'));const r=indexedDB.open('muminsultani_apk_db_v2',3);r.onupgradeneeded=e=>{const db=e.target.result;if(!db.objectStoreNames.contains('apks'))db.createObjectStore('apks');if(!db.objectStoreNames.contains('icons'))db.createObjectStore('icons');};r.onsuccess=e=>{apkDB=e.target.result;res(apkDB);};r.onerror=e=>rej(e.target.error);}catch(e){rej(e);}});}
@@ -2814,8 +2392,6 @@ function importSiteBackup(e){const f=e.target.files[0];if(!f)return;const r=new 
 function confirmResetSite(){showCustomAlert('All site content will be reset?','delete',async function(){localStorage.removeItem(SITE_CONTENT_KEY);try{for(let i=0;i<8;i++){await withTimeout(deleteApkFile(i),3000);await withTimeout(deleteIconData(i),3000);}}catch(e){}const def=JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT));try{localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(def));}catch(e){}saveSiteContentToFirebase(def);applySiteContent();applySectionOrder();applyEffectsSettings();refreshAdminUI();showCustomAlert('Reset!','success');});}
 function checkAdminHash(){if(window.location.hash==='#manage-muminsultani'||window.location.hash==='#admin'){triggerAdminAccess();history.replaceState(null,'',window.location.pathname+window.location.search);}}
 window.addEventListener('hashchange',checkAdminHash);
-
-/* === WELCOME EMAIL === */
 const WELCOME_DEFAULTS={enabled:true,includePdf:true,subject:'Hoşgeldiniz! 🎉',message:'Merhaba {name},\n\nSitemize kayıt olduğunuz için teşekkür ederiz!'};
 function getWelcomeSettings(){try{const c=getSiteContent();if(!c.welcomeEmail)c.welcomeEmail=JSON.parse(JSON.stringify(WELCOME_DEFAULTS));return c.welcomeEmail;}catch(e){return JSON.parse(JSON.stringify(WELCOME_DEFAULTS));}}
 function saveWelcomeSettings(s){const c=getSiteContent();c.welcomeEmail=s;saveSiteContent(c);}
@@ -2823,8 +2399,6 @@ function toggleWelcomeEmail(v){const s=getWelcomeSettings();s.enabled=!!v;saveWe
 function toggleWelcomePdf(v){const s=getWelcomeSettings();s.includePdf=!!v;saveWelcomeSettings(s);showCustomAlert(v?'✅ ON':'❌ OFF','success');}
 function saveWelcomeEmailSettings(e){e.preventDefault();const s=getWelcomeSettings();s.subject=document.getElementById('ag-welcome-subject').value.trim()||WELCOME_DEFAULTS.subject;s.message=document.getElementById('ag-welcome-message').value.trim()||WELCOME_DEFAULTS.message;saveWelcomeSettings(s);showCustomAlert('✅ Saved','success');}
 function renderWelcomeSettings(){const s=getWelcomeSettings();const en=document.getElementById('ag-welcome-enabled');const pdf=document.getElementById('ag-welcome-pdf');const sub=document.getElementById('ag-welcome-subject');const msg=document.getElementById('ag-welcome-message');if(en)en.checked=s.enabled!==false;if(pdf)pdf.checked=s.includePdf!==false;if(sub)sub.value=s.subject||WELCOME_DEFAULTS.subject;if(msg)msg.value=s.message||WELCOME_DEFAULTS.message;}
-
-/* === SITE PRIVACY + VISITORS === */
 function applySitePrivacy(){const c=getSiteContent();const closed=!!(c.general&&c.general.siteClosed);const curtain=document.getElementById('privacyCurtain');if(!curtain)return;const lu=localStorage.getItem('logged_user');const isAdm=isAdminLoggedIn()||(lu&&(()=>{try{return isAdminUser(JSON.parse(lu).email);}catch(e){return false;}})());if(closed&&!isAdm){curtain.classList.add('show');const p=document.getElementById('privacyMsg');if(p)p.textContent=t('privacy_closed');const b=document.getElementById('privacyBrandName');if(b)b.textContent=getDyn('header.brand','muminsultani');const img=curtain.querySelector('img');const logoUrl=(getSiteContent().general&&getSiteContent().general.favicon)||'https://muminsultani.com/img/ms.png';if(img)img.src=logoUrl;}else{curtain.classList.remove('show');}}
 function toggleSiteClosed(val){const c=getSiteContent();if(!c.general)c.general={};c.general.siteClosed=!!val;saveSiteContent(c);applySitePrivacy();showCustomAlert(val?'🔒 Site kapatıldı.':'🔓 Site açıldı.','success');}
 function getVisitorStats(){try{return JSON.parse(localStorage.getItem(VISITORS_KEY)||'{"total":0,"today":0,"dayKey":""}');}catch(e){return{total:0,today:0,dayKey:''};}}
@@ -2865,6 +2439,227 @@ function applySiteContent(){
 }
 async function renderApplications(){if(appsRenderLock)return;appsRenderLock=true;try{const grid=document.getElementById('appsGrid');if(!grid)return;const apps=getSiteContent().apps||[];const isLogged=!!localStorage.getItem('logged_user');const filled=[];for(let i=0;i<8;i++){const a=apps[i]||{};if(a.name&&a.name.trim().length>0)filled.push({idx:i,app:a});}const w=window.innerWidth;let maxVisible=4;if(w>=1025)maxVisible=6;const visible=filled.slice(0,maxVisible);grid.innerHTML='';for(const item of visible){const idx=item.idx,app=item.app;const card=document.createElement('div');card.className='app-card';let iconHTML='📱';if(app.hasIcon){try{const ic=await withTimeout(getIconData(idx),3000);if(ic&&ic.dataUrl)iconHTML='<img src="'+ic.dataUrl+'">';}catch(e){}}else if(app.icon&&app.icon.trim().startsWith('http'))iconHTML='<img src="'+escapeHtml(app.icon.trim())+'">';else if(app.icon&&app.icon.trim())iconHTML=escapeHtml(app.icon.trim());const hasApk=!!app.hasApk;const hasUrl=app.url&&app.url.trim();const rl=!!app.requireLogin;if(hasApk){if(rl&&!isLogged)card.classList.add('locked');card.style.cursor='pointer';card.addEventListener('click',()=>downloadApk(idx));}else if(hasUrl){card.style.cursor='pointer';card.addEventListener('click',()=>{let u=app.url.trim();if(!/^https?:\/\//i.test(u))u='https://'+u;window.open(u,'_blank');});}const dBadge=hasApk?'<span class="apk-download-badge"><i class="fa-solid fa-download"></i></span>':'';let nI='';if(hasApk)nI='<i class="fa-solid fa-download download-icon"></i>';else if(hasUrl)nI='<i class="fa-solid fa-arrow-up-right-from-square"></i>';let tH='';if(hasApk){const lk=rl&&!isLogged;tH='<span class="app-card-tag apk-tag'+(lk?' locked-tag':'')+'"><i class="fa-brands fa-android"></i>APK</span>';}else if(hasUrl)tH='<span class="app-card-tag">LINK</span>';card.innerHTML='<div class="app-card-icon">'+iconHTML+dBadge+'</div><div class="app-card-body"><div class="app-card-name">'+escapeHtml(app.name)+' '+nI+'</div><div class="app-card-desc">'+escapeHtml(app.desc||'')+'</div></div>'+tH;grid.appendChild(card);}}finally{appsRenderLock=false;}}
 function forceRefreshUI(){applyTranslations();try{applySiteContent();}catch(e){}try{checkUserSession();}catch(e){}try{renderApplications();}catch(e){}try{updateChatBadge();}catch(e){}try{applyWeatherSettings();}catch(e){}try{applyChatVisibility();}catch(e){}}
+
+/* ============================================================
+   🐟 FISH SYSTEM — Ana sayfa arka plan
+   ============================================================ */
+function fishHexRgba(hex,a){if(!hex)return 'rgba(147,51,234,'+a+')';if(hex.indexOf('rgb')===0)return hex;const h=hex.replace('#','');return 'rgba('+parseInt(h.substring(0,2),16)+','+parseInt(h.substring(2,4),16)+','+parseInt(h.substring(4,6),16)+','+a+')';}
+function fishDrawBody(c,x,y,size,c1,c2,dir,tail,type,c3){c.save();c.translate(x,y);c.scale(dir,1);if(type==='shark'){c.fillStyle=c1;c.beginPath();c.moveTo(-size*1.2,0);c.quadraticCurveTo(-size*1.15,-size*0.3,-size*0.85,-size*0.16);c.quadraticCurveTo(-size*0.3,-size*0.68,size*0.42,-size*0.4);c.quadraticCurveTo(size*1,-size*0.16,size*1.2,0);c.quadraticCurveTo(size*1,size*0.25,size*0.42,size*0.4);c.quadraticCurveTo(-size*0.3,size*0.62,-size*0.85,size*0.16);c.quadraticCurveTo(-size*1.15,size*0.3,-size*1.2,0);c.closePath();c.fill();c.fillStyle=c2||'#c9d1d9';c.beginPath();c.moveTo(-size*0.85,size*0.1);c.quadraticCurveTo(size*0.2,size*0.5,size*1.1,0);c.quadraticCurveTo(size*0.4,size*0.32,-size*0.85,size*0.1);c.closePath();c.fill();c.fillStyle=c1;c.beginPath();c.moveTo(-size*1.2,0);c.lineTo(-size*1.65,-size*0.55);c.lineTo(-size*1.5,0);c.lineTo(-size*1.65,size*0.5);c.closePath();c.fill();c.beginPath();c.moveTo(-size*0.2,-size*0.5);c.lineTo(-size*0.03,-size*0.95);c.lineTo(size*0.18,-size*0.45);c.closePath();c.fill();c.fillStyle='#fff';c.beginPath();c.arc(size*0.7,-size*0.1,size*0.11,0,Math.PI*2);c.fill();c.fillStyle='#000';c.beginPath();c.arc(size*0.73,-size*0.1,size*0.06,0,Math.PI*2);c.fill();}else{const wag=Math.sin(tail)*0.4;c.save();c.translate(-size*0.82,0);c.rotate(wag);c.fillStyle=c2;c.beginPath();c.moveTo(0,0);c.lineTo(-size*0.52,-size*0.55);c.lineTo(-size*0.33,0);c.lineTo(-size*0.52,size*0.55);c.closePath();c.fill();c.restore();c.fillStyle=c1;c.beginPath();c.ellipse(0,0,size*0.9,size*0.53,0,0,Math.PI*2);c.fill();const g=c.createLinearGradient(0,-size*0.5,0,size*0.5);g.addColorStop(0,c1);g.addColorStop(1,c2);c.fillStyle=g;c.beginPath();c.ellipse(0,size*0.04,size*0.8,size*0.42,0,0,Math.PI*2);c.fill();c.fillStyle=c2;c.beginPath();c.moveTo(-size*0.1,-size*0.5);c.lineTo(size*0.17,-size*0.85);c.lineTo(size*0.3,-size*0.43);c.closePath();c.fill();c.beginPath();c.moveTo(-size*0.13,size*0.44);c.lineTo(-size*0.04,size*0.75);c.lineTo(size*0.11,size*0.4);c.closePath();c.fill();c.fillStyle='#fff';c.beginPath();c.arc(size*0.48,-size*0.11,size*0.14,0,Math.PI*2);c.fill();c.fillStyle='#0a0a14';c.beginPath();c.arc(size*0.52,-size*0.11,size*0.085,0,Math.PI*2);c.fill();c.fillStyle='rgba(255,255,255,.5)';c.beginPath();c.ellipse(size*0.28,-size*0.24,size*0.15,size*0.055,-0.4,0,Math.PI*2);c.fill();if(c3){c.strokeStyle=fishHexRgba(c3,0.5);c.lineWidth=1.5;for(let i=-1;i<=1;i++){c.beginPath();c.moveTo(i*size*0.25,-size*0.35);c.lineTo(i*size*0.25,size*0.35);c.stroke();}}}c.restore();}
+function fishDrawJelly(c,x,y,size,c1,c2,phase){c.save();c.translate(x,y);const pulse=Math.sin(phase)*0.1+1;const glow=c.createRadialGradient(0,0,0,0,0,size*2.2);glow.addColorStop(0,fishHexRgba(c1,0.32));glow.addColorStop(1,fishHexRgba(c1,0));c.fillStyle=glow;c.beginPath();c.arc(0,0,size*2.2,0,Math.PI*2);c.fill();c.strokeStyle=fishHexRgba(c1,0.7);c.lineWidth=1.6;for(let i=0;i<6;i++){const off=(i-2.5)*size*0.22;c.beginPath();c.moveTo(off,size*0.25);c.quadraticCurveTo(off+Math.sin(phase+i)*size*0.32,size*1,off+Math.sin(phase+i*1.3)*size*0.5,size*1.9);c.stroke();}c.fillStyle=fishHexRgba(c1,0.75);c.beginPath();c.ellipse(0,0,size*pulse,size*0.72*pulse,0,Math.PI,0);c.closePath();c.fill();c.fillStyle=fishHexRgba(c2,0.5);c.beginPath();c.ellipse(0,size*0.05,size*0.85*pulse,size*0.5*pulse,0,Math.PI,0);c.closePath();c.fill();c.fillStyle='rgba(255,255,255,.35)';c.beginPath();c.ellipse(-size*0.32,-size*0.15,size*0.34,size*0.22,0,0,Math.PI*2);c.fill();c.restore();}
+function createFishSystem(canvasId){
+  const canvas=document.getElementById(canvasId);if(!canvas)return{setEnabled:function(){},setStyle:function(){}};
+  const ctx=canvas.getContext('2d');let running=true,enabled=false,style='tropical';let fishes=[],bubbles=[];
+  const TROPI=[['#ff6b6b','#ffa94d','#fff3bf'],['#4dabf7','#74c0fc','#e7f5ff'],['#ffd43b','#fab005','#fff3bf'],['#da77f2','#e599f7','#f3d9fa'],['#51cf66','#8ce99a','#d3f9d8'],['#ff922b','#ffc078','#ffe8cc'],['#22b8cf','#66d9e8','#c5f6fa'],['#f783ac','#faa2c1','#fcc2d7']];
+  const DEEP=[['#3b3b5c','#7c3aed','#a78bfa'],['#1e1b4b','#4338ca','#6366f1'],['#5b21b6','#8b5cf6','#c4b5fd']];
+  const SCH=[['#adb5bd','#ced4da','#e9ecef'],['#748ffc','#a5b4fc','#dbe4ff']];
+  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+  function pickPal(){let a;if(style==='school')a=SCH;else if(style==='deep'||style==='mixed')a=DEEP;else a=TROPI;return a[Math.floor(Math.random()*a.length)];}
+  function Fish(){this.isShark=(style==='shark');this.dir=Math.random()>0.5?1:-1;this.x=this.dir===1?-120:canvas.width+120;this.baseY=80+Math.random()*(canvas.height-200);this.y=this.baseY;this.size=14+Math.random()*26;const p=pickPal();this.c1=p[0];this.c2=p[1];this.c3=p[2]||p[1];this.speed=(0.5+Math.random()*0.9)*this.dir;this.wobbleAmp=3+Math.random()*7;this.wobbleSpeed=0.02+Math.random()*0.03;this.wobblePhase=Math.random()*Math.PI*2;this.tailPhase=Math.random()*Math.PI*2;this.tailSpeed=0.2+Math.random()*0.15;}
+  Fish.prototype.reset=function(){this.dir=Math.random()>0.5?1:-1;this.x=this.dir===1?-120:canvas.width+120;this.baseY=80+Math.random()*(canvas.height-200);this.y=this.baseY;this.size=14+Math.random()*26;const p=pickPal();this.c1=p[0];this.c2=p[1];this.c3=p[2]||p[1];this.speed=(0.5+Math.random()*0.9)*this.dir;this.isShark=(style==='shark');};
+  Fish.prototype.update=function(){this.x+=this.speed;this.wobblePhase+=this.wobbleSpeed;this.y=this.baseY+Math.sin(this.wobblePhase)*this.wobbleAmp;this.tailPhase+=this.tailSpeed;if(this.dir===1&&this.x>canvas.width+140)this.reset();if(this.dir===-1&&this.x<-140)this.reset();};
+  Fish.prototype.draw=function(){fishDrawBody(ctx,this.x,this.y,this.size,this.c1,this.c2,this.dir,this.tailPhase,this.isShark?'shark':'tropical',this.c3);};
+  function Jelly(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=18+Math.random()*22;this.phase=Math.random()*Math.PI*2;this.speed=0.15+Math.random()*0.25;const p=TROPI[Math.floor(Math.random()*TROPI.length)];this.c1=p[0];this.c2=p[2]||p[1];}
+  Jelly.prototype.update=function(){this.phase+=0.03;this.y-=this.speed;this.x+=Math.sin(this.phase*0.6)*0.4;if(this.y<-100){this.y=canvas.height+80;this.x=Math.random()*canvas.width;}};
+  Jelly.prototype.draw=function(){fishDrawJelly(ctx,this.x,this.y,this.size,this.c1,this.c2,this.phase);};
+  function Bubble(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=1+Math.random()*4;this.speed=0.2+Math.random()*0.6;this.phase=Math.random()*Math.PI*2;}
+  Bubble.prototype.update=function(){this.y-=this.speed;this.phase+=0.05;this.x+=Math.sin(this.phase)*0.3;if(this.y<-20){this.y=canvas.height+20;this.x=Math.random()*canvas.width;}};
+  Bubble.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.strokeStyle='rgba(180,220,255,.5)';ctx.lineWidth=1;ctx.stroke();ctx.beginPath();ctx.arc(this.x-this.size*0.3,this.y-this.size*0.3,this.size*0.3,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,.6)';ctx.fill();};
+  function rebuild(){fishes=[];bubbles=[];let fc=8,jc=0;if(style==='school')fc=22;else if(style==='deep')fc=7;else if(style==='jellyfish'){fc=0;jc=6;}else if(style==='shark')fc=4;else if(style==='mixed'){fc=8;jc=3;}for(let i=0;i<fc;i++)fishes.push(new Fish());for(let i=0;i<jc;i++)fishes.push(new Jelly());const bc=(style==='deep'||style==='mixed')?16:8;for(let i=0;i<bc;i++)bubbles.push(new Bubble());}
+  function loop(){if(!running)return;ctx.clearRect(0,0,canvas.width,canvas.height);if(enabled){for(let i=0;i<bubbles.length;i++){bubbles[i].update();bubbles[i].draw();}for(let i=0;i<fishes.length;i++){fishes[i].update();fishes[i].draw();}}requestAnimationFrame(loop);}
+  resize();window.addEventListener('resize',function(){resize();rebuild();});rebuild();loop();
+  return{setEnabled:function(v){enabled=!!v;if(enabled)canvas.classList.add('active');else canvas.classList.remove('active');if(enabled){resize();rebuild();}else ctx.clearRect(0,0,canvas.width,canvas.height);},setStyle:function(s){style=s||'tropical';rebuild();}};
+}
+
+/* === INTRO FISH SYSTEM === */
+function createIntroFishSystem(canvasId){
+  const canvas=document.getElementById(canvasId);if(!canvas)return{setEnabled:function(){},setStyle:function(){}};
+  const ctx=canvas.getContext('2d');let running=true,enabled=false,style='tropical';let fishes=[],bubbles=[];
+  const TROPI=[['#ff6b6b','#ffa94d','#fff3bf'],['#4dabf7','#74c0fc','#e7f5ff'],['#ffd43b','#fab005','#fff3bf'],['#da77f2','#e599f7','#f3d9fa'],['#51cf66','#8ce99a','#d3f9d8'],['#ff922b','#ffc078','#ffe8cc']];
+  const DEEP=[['#3b3b5c','#7c3aed','#a78bfa'],['#1e1b4b','#4338ca','#6366f1']];
+  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+  function pickPal(){let a;if(style==='deep')a=DEEP;else a=TROPI;return a[Math.floor(Math.random()*a.length)];}
+  function IFish(){this.dir=Math.random()>0.5?1:-1;this.x=this.dir===1?-80:canvas.width+80;this.baseY=60+Math.random()*(canvas.height-120);this.y=this.baseY;this.size=10+Math.random()*18;const p=pickPal();this.c1=p[0];this.c2=p[1];this.c3=p[2]||p[1];this.speed=(0.4+Math.random()*0.8)*this.dir;this.wobbleAmp=2+Math.random()*5;this.wobbleSpeed=0.02+Math.random()*0.03;this.wobblePhase=Math.random()*Math.PI*2;this.tailPhase=Math.random()*Math.PI*2;this.tailSpeed=0.2+Math.random()*0.15;this.alpha=0.35+Math.random()*0.35;}
+  IFish.prototype.update=function(){this.x+=this.speed;this.wobblePhase+=this.wobbleSpeed;this.y=this.baseY+Math.sin(this.wobblePhase)*this.wobbleAmp;this.tailPhase+=this.tailSpeed;if(this.dir===1&&this.x>canvas.width+100)this.reset();if(this.dir===-1&&this.x<-100)this.reset();};
+  IFish.prototype.reset=function(){this.dir=Math.random()>0.5?1:-1;this.x=this.dir===1?-80:canvas.width+80;this.baseY=60+Math.random()*(canvas.height-120);this.size=10+Math.random()*18;const p=pickPal();this.c1=p[0];this.c2=p[1];this.c3=p[2]||p[1];this.speed=(0.4+Math.random()*0.8)*this.dir;};
+  IFish.prototype.draw=function(){ctx.save();ctx.globalAlpha=this.alpha;fishDrawBody(ctx,this.x,this.y,this.size,this.c1,this.c2,this.dir,this.tailPhase,'tropical',this.c3);ctx.restore();};
+  function IBubble(){this.x=Math.random()*canvas.width;this.y=canvas.height+Math.random()*100;this.size=1+Math.random()*3;this.speed=0.3+Math.random()*0.7;this.phase=Math.random()*Math.PI*2;}
+  IBubble.prototype.update=function(){this.y-=this.speed;this.phase+=0.05;this.x+=Math.sin(this.phase)*0.3;if(this.y<-20){this.y=canvas.height+20;this.x=Math.random()*canvas.width;}};
+  IBubble.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.strokeStyle='rgba(180,220,255,.35)';ctx.lineWidth=1;ctx.stroke();};
+  function rebuild(){fishes=[];bubbles=[];let fc=6;if(style==='school')fc=16;if(style==='deep')fc=5;for(let i=0;i<fc;i++)fishes.push(new IFish());for(let i=0;i<10;i++)bubbles.push(new IBubble());}
+  function loop(){if(!running)return;ctx.clearRect(0,0,canvas.width,canvas.height);if(enabled){for(let i=0;i<bubbles.length;i++){bubbles[i].update();bubbles[i].draw();}for(let i=0;i<fishes.length;i++){fishes[i].update();fishes[i].draw();}}requestAnimationFrame(loop);}
+  resize();window.addEventListener('resize',()=>{resize();rebuild();});rebuild();loop();
+  return{setEnabled:function(v){enabled=!!v;if(enabled)canvas.classList.add('active');else canvas.classList.remove('active');if(enabled){resize();rebuild();}else ctx.clearRect(0,0,canvas.width,canvas.height);},setStyle:function(s){style=s||'tropical';rebuild();}};
+}
+
+/* === INTRO SPARKLE === */
+function createIntroSparkle(){
+  const el=document.getElementById('intro-screen');if(!el)return{setEnabled:function(){}};
+  let enabled=true;
+  const container=document.createElement('div');
+  container.id='introSparkles';
+  container.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden';
+  el.appendChild(container);
+  function makeSparkle(){
+    if(!enabled)return;
+    const s=document.createElement('div');
+    const size=2+Math.random()*3;
+    s.style.cssText='position:absolute;width:'+size+'px;height:'+size+'px;border-radius:50%;background:#fff;box-shadow:0 0 8px #fff,0 0 16px rgba(192,132,252,.8);left:'+(Math.random()*100)+'%;top:'+(Math.random()*100)+'%;opacity:0;transition:opacity .8s,transform .8s';
+    container.appendChild(s);
+    requestAnimationFrame(()=>{s.style.opacity='1';s.style.transform='scale(1.8)';});
+    setTimeout(()=>{s.style.opacity='0';s.style.transform='scale(0.5)';},800+Math.random()*400);
+    setTimeout(()=>{try{s.remove();}catch(e){}},1800);
+  }
+  setInterval(()=>{if(enabled){makeSparkle();if(Math.random()>0.5)makeSparkle();}},350);
+  return{setEnabled:function(v){enabled=!!v;if(!v){container.innerHTML='';}}};
+}
+
+/* ============================================================
+   📊 TICK / CONFETTI
+   ============================================================ */
+function getAudioContext(){if(!audioCtx){try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){return null;}}if(audioCtx.state==='suspended')audioCtx.resume().catch(()=>{});return audioCtx;}
+function tone(freq,dur,type,vol,decay){type=type||'sine';vol=vol||0.05;decay=decay||0.08;try{const c=getAudioContext();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(freq,c.currentTime);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(vol,c.currentTime+.005);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+decay);o.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+dur);}catch(e){}}
+const TICK_STYLES={default:{name:'Default',icon:'fa-bell',fn:function(){tone(2000,0.08);}},soft:{name:'Soft',icon:'fa-feather',fn:function(){tone(800,0.14);}},click:{name:'Click',icon:'fa-computer-mouse',fn:function(){tone(1500,0.03,'square',0.03,0.025);}},pop:{name:'Pop',icon:'fa-droplet',fn:function(){tone(1000,0.1);}},tick:{name:'Tick',icon:'fa-clock',fn:function(){tone(3000,0.02);}},bell:{name:'Bell',icon:'fa-bell',fn:function(){tone(2500,0.15);tone(3750,0.15);}},wood:{name:'Wood',icon:'fa-tree',fn:function(){tone(500,0.09,'triangle',0.06);}},glass:{name:'Glass',icon:'fa-wine-glass',fn:function(){tone(3500,0.12);}},deep:{name:'Deep',icon:'fa-water',fn:function(){tone(400,0.16);}}};
+function playTickSound(){try{const eff=getSiteContent().effects||{};if(eff.tickSoundEnabled===false)return;const s=TICK_STYLES[eff.tickSoundStyle||'default']||TICK_STYLES.default;s.fn();}catch(e){}}
+function playApplauseSound(){try{const c=getAudioContext();if(!c)return;const d=2,sr=c.sampleRate,b=c.createBuffer(1,sr*d,sr),dt=b.getChannelData(0);for(let i=0;i<dt.length;i++){const tt=i/sr,dec=Math.exp(-tt*1.2),cp=(tt*10)%1,ce=cp<.15?Math.exp(-cp*20):0,n=Math.random()*2-1;dt[i]=n*(ce*.6+.15)*dec*.5;}const s=c.createBufferSource();s.buffer=b;const f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=1800;const g=c.createGain();g.gain.setValueAtTime(.5,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);s.connect(f);f.connect(g);g.connect(c.destination);s.start();}catch(e){}}
+const CONFETTI_COLORS=['#9333ea','#c084fc','#e879f9','#a855f7','#22c55e','#16a34a','#f59e0b','#eab308','#ef4444','#dc2626','#3b82f6','#0ea5e9','#ec4899','#f472b6','#fbbf24','#ffffff'];
+const CONFETTI_HEARTS=['#ef4444','#dc2626','#ec4899','#f472b6','#f43f5e'];
+const CONFETTI_STARS=['#fbbf24','#f59e0b','#facc15','#eab308'];
+function initConfettiCanvas(){if(confettiCanvas&&confettiCtx)return true;confettiCanvas=document.getElementById('confetti-canvas');if(!confettiCanvas)return false;confettiCtx=confettiCanvas.getContext('2d');return true;}
+function fireConfettiBurst(mult){mult=mult||1;try{const eff=getSiteContent().effects||{};if(eff.confettiEnabled===false)return;}catch(e){return;}if(!initConfettiCanvas())return;confettiCanvas.style.display='block';confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;let style='classic';try{style=(getSiteContent().effects||{}).confettiStyle||'classic';}catch(e){}const W=window.innerWidth,H=window.innerHeight;
+  if(style==='classic'||style==='sides'||style==='top'){const n=Math.floor(150*mult);const cx=style==='sides'?0:W/2,cy=style==='top'?-20:H/2;for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*16+8;confettiParticles.push({x:style==='top'?Math.random()*W:cx,y:style==='top'?-20-Math.random()*100:cy,vx:style==='top'?(Math.random()-.5)*3:Math.cos(a)*s,vy:style==='top'?Math.random()*3+2:Math.sin(a)*s-3,size:Math.random()*10+5,color:CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.32+Math.random()*.15,drag:.985,life:1,shape:Math.random()>.5?'rect':'circle'});}}
+  else if(style==='fireworks'){const bursts=Math.floor(4*mult+2);for(let b=0;b<bursts;b++){const cx=W*(0.2+Math.random()*0.6),cy=H*(0.15+Math.random()*0.5);const n=Math.floor(50*mult);const c=CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)];for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*14+6;confettiParticles.push({x:cx,y:cy,vx:Math.cos(a)*s,vy:Math.sin(a)*s,size:Math.random()*8+4,color:c,rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.4,gravity:.25,drag:.985,life:1,shape:Math.random()>.5?'rect':'circle'});}}}
+  else if(style==='hearts'){const n=Math.floor(120*mult);for(let k=0;k<n;k++){confettiParticles.push({x:Math.random()*W,y:-20,vx:(Math.random()-.5)*2,vy:Math.random()*2+1.5,size:Math.random()*12+8,color:CONFETTI_HEARTS[Math.floor(Math.random()*CONFETTI_HEARTS.length)],rotation:0,rotationSpeed:(Math.random()-.5)*.2,gravity:.06,drag:.99,life:1,shape:'heart'});}}
+  else if(style==='stars'){const n=Math.floor(130*mult);for(let k=0;k<n;k++){const a=Math.random()*Math.PI*2,s=Math.random()*18+8;confettiParticles.push({x:W/2,y:H/2,vx:Math.cos(a)*s,vy:Math.sin(a)*s-2,size:Math.random()*10+6,color:CONFETTI_STARS[Math.floor(Math.random()*CONFETTI_STARS.length)],rotation:Math.random()*Math.PI*2,rotationSpeed:(Math.random()-.5)*.5,gravity:.25,drag:.985,life:1,shape:'star'});}}
+  if(!confettiRunning){confettiRunning=true;animateConfetti();}if(confettiStopTimer)clearTimeout(confettiStopTimer);confettiStopTimer=setTimeout(()=>{confettiRunning=false;},5500);}
+function drawHeartShape(c,s){c.beginPath();const t2=s/2;c.moveTo(0,t2*0.35);c.bezierCurveTo(t2,t2*0.9,0,s,-s*0.7,t2);c.bezierCurveTo(0,-t2*0.5,-t2,-t2*0.5,-s*0.7,-t2*0.5);c.bezierCurveTo(-t2,-t2*0.5,-s,-t2*0.5,-s,0);c.bezierCurveTo(-s,t2*0.5,-t2*0.9,t2*0.6,0,t2*0.35);c.closePath();c.fill();}
+function drawStarShape(c,s){c.beginPath();for(let i=0;i<5;i++){const a=-Math.PI/2+i*(Math.PI*2/5);c.lineTo(Math.cos(a)*s,Math.sin(a)*s);const a2=a+Math.PI/5;c.lineTo(Math.cos(a2)*s*0.45,Math.sin(a2)*s*0.45);}c.closePath();c.fill();}
+function animateConfetti(){if(!confettiCanvas||!confettiCtx)return;confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);let a=false;for(let i=0;i<confettiParticles.length;i++){const p=confettiParticles[i];if(p.life<=0)continue;a=true;p.vy+=p.gravity;p.vx*=p.drag;p.vy*=p.drag;p.x+=p.vx;p.y+=p.vy;p.rotation+=p.rotationSpeed;p.life-=.006;if(p.y>confettiCanvas.height+120)p.life=0;if(p.x<-120||p.x>confettiCanvas.width+120)p.life=0;confettiCtx.save();confettiCtx.translate(p.x,p.y);confettiCtx.rotate(p.rotation);confettiCtx.globalAlpha=Math.max(0,Math.min(1,p.life));confettiCtx.fillStyle=p.color;const sz=p.size*0.5;if(p.shape==='rect')confettiCtx.fillRect(-sz,-sz/2,sz*2,sz);else if(p.shape==='circle'){confettiCtx.beginPath();confettiCtx.arc(0,0,sz,0,Math.PI*2);confettiCtx.fill();}else if(p.shape==='heart'){drawHeartShape(confettiCtx,p.size);}else if(p.shape==='star'){drawStarShape(confettiCtx,p.size);}confettiCtx.restore();}if(confettiParticles.length>800)confettiParticles=confettiParticles.filter(p=>p.life>0);if(a||confettiRunning)requestAnimationFrame(animateConfetti);else{confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);confettiCanvas.style.display='none';confettiParticles=[];}}
+
+/* ============================================================
+   ⭐ ANIM SYSTEM — TÜM ANİMASYON MODLARI
+   ============================================================ */
+function createAnimSystem(canvasId,options){
+  options=options||{};
+  const c=document.getElementById(canvasId);if(!c)return{stop:function(){},setMode:function(){}};
+  const ctx=c.getContext('2d');
+  const baseNP=options.numberOfParticles||55,ld=options.lineDistance||110;
+  let pa=[],running=true,mode='constellation';
+  let extraState={};
+  function rc(){c.width=window.innerWidth;c.height=window.innerHeight;initMode();}
+  function P(){this.x=Math.random()*c.width;this.y=Math.random()*c.height;this.vx=(Math.random()-.5)*.8;this.vy=(Math.random()-.5)*.8;this.size=Math.random()*1.8+1;}
+  P.prototype.update=function(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>c.width)this.vx=-this.vx;if(this.y<0||this.y>c.height)this.vy=-this.vy;};
+  P.prototype.draw=function(){const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';ctx.fillStyle='rgba('+ar+',.55)';ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();};
+  function initMode(){
+    pa=[];extraState={};
+    if(mode==='constellation'||mode==='network'){for(let i=0;i<baseNP;i++)pa.push(new P());}
+    else if(mode==='particles'){for(let i=0;i<80;i++)pa.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6,size:Math.random()*3+1,alpha:Math.random()*.5+.3});}
+    else if(mode==='matrix'){const cols=Math.floor(c.width/20);extraState.drops=[];for(let i=0;i<cols;i++)extraState.drops[i]=Math.random()*c.height/20;}
+    else if(mode==='bubbles'){extraState.bubbles=[];for(let i=0;i<40;i++)extraState.bubbles.push({x:Math.random()*c.width,y:c.height+Math.random()*c.height,r:3+Math.random()*15,vy:-(0.3+Math.random()*1),phase:Math.random()*Math.PI*2,alpha:0.15+Math.random()*0.25});}
+    else if(mode==='sparkles'){extraState.sparkles=[];for(let i=0;i<70;i++)extraState.sparkles.push({x:Math.random()*c.width,y:Math.random()*c.height,size:1+Math.random()*2.5,phase:Math.random()*Math.PI*2,speed:0.02+Math.random()*0.04});}
+    else if(mode==='galaxy'){extraState.galaxyStars=[];const cx=c.width/2,cy=c.height/2;for(let i=0;i<200;i++){const arm=i%3;const angle=(i/200)*Math.PI*6+arm*2.09;const radius=20+Math.random()*Math.min(c.width,c.height)*0.45;extraState.galaxyStars.push({cx:cx,cy:cy,angle:angle,radius:radius,speed:0.0004+Math.random()*0.0008,size:0.5+Math.random()*1.8,color:'rgba('+(180+Math.floor(Math.random()*75))+',150,255,'+(0.4+Math.random()*0.5)+')'});}}
+    else if(mode==='snow'){extraState.snow=[];for(let i=0;i<80;i++)extraState.snow.push({x:Math.random()*c.width,y:Math.random()*c.height,r:1+Math.random()*3,vy:0.3+Math.random()*1,vx:(Math.random()-.5)*0.5,phase:Math.random()*Math.PI*2});}
+    else if(mode==='rain'){extraState.rain=[];for(let i=0;i<120;i++)extraState.rain.push({x:Math.random()*c.width,y:Math.random()*c.height,len:8+Math.random()*14,vy:6+Math.random()*6,vx:-1-Math.random()});}
+    else if(mode==='hearts'){extraState.hearts=[];for(let i=0;i<30;i++)extraState.hearts.push({x:Math.random()*c.width,y:c.height+Math.random()*c.height,size:8+Math.random()*14,vy:-(0.4+Math.random()*0.9),vx:(Math.random()-.5)*0.5,phase:Math.random()*Math.PI*2,color:CONFETTI_HEARTS[Math.floor(Math.random()*CONFETTI_HEARTS.length)]});}
+    else if(mode==='stars-fall'){extraState.fallStars=[];for(let i=0;i<15;i++)extraState.fallStars.push({x:Math.random()*c.width,y:Math.random()*c.height*0.5,vy:3+Math.random()*4,vx:2+Math.random()*3,len:60+Math.random()*80,alpha:0,delay:Math.random()*200});}
+    else if(mode==='fireworks'){extraState.fw=[];extraState.fwTimer=0;}
+  }
+  function drawFireworks(){
+    if(!extraState.fw)extraState.fw=[];
+    extraState.fwTimer=(extraState.fwTimer||0)+1;
+    if(extraState.fwTimer>50){extraState.fwTimer=0;extraState.fw.push({x:100+Math.random()*(c.width-200),y:80+Math.random()*(c.height*0.4),vx:(Math.random()-.5)*2,vy:-3-Math.random()*2,life:1,age:0,burst:false,color:CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)],particles:[]});}
+    for(let i=extraState.fw.length-1;i>=0;i--){
+      const f=extraState.fw[i];
+      if(!f.burst){f.x+=f.vx;f.y+=f.vy;f.vy+=0.06;f.age++;ctx.beginPath();ctx.arc(f.x,f.y,3,0,Math.PI*2);ctx.fillStyle=f.color;ctx.fill();
+        if(f.vy>=0||f.age>50){f.burst=true;for(let k=0;k<40;k++){const a=Math.random()*Math.PI*2,s=Math.random()*5+2;f.particles.push({x:f.x,y:f.y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:1,size:1.5+Math.random()*2,color:f.color});}}
+      } else {
+        for(let k=f.particles.length-1;k>=0;k--){const p=f.particles[k];p.x+=p.vx;p.y+=p.vy;p.vy+=0.08;p.vx*=0.985;p.vy*=0.985;p.life-=0.02;if(p.life<=0){f.particles.splice(k,1);continue;}ctx.beginPath();ctx.arc(p.x,p.y,p.size*p.life,0,Math.PI*2);ctx.fillStyle=p.color;ctx.globalAlpha=p.life;ctx.fill();ctx.globalAlpha=1;}
+        if(f.particles.length===0)extraState.fw.splice(i,1);
+      }
+    }
+  }
+  function drawMatrix(){const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';ctx.font='14px monospace';if(!extraState.drops)return;for(let i=0;i<extraState.drops.length;i++){const x=i*20;const y=extraState.drops[i]*20;ctx.fillStyle='rgba('+ar+',0.85)';ctx.fillText(String.fromCharCode(0x30A0+Math.floor(Math.random()*96)),x,y);ctx.fillStyle='rgba('+ar+',0.15)';ctx.fillText(String.fromCharCode(0x30A0+Math.floor(Math.random()*96)),x,y-20);extraState.drops[i]+=0.5+Math.random()*0.5;if(y>c.height&&Math.random()>0.975)extraState.drops[i]=0;}}
+  function drawBubbles(){if(!extraState.bubbles)return;const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';extraState.bubbles.forEach(b=>{b.y+=b.vy;b.phase+=0.03;b.x+=Math.sin(b.phase)*0.4;if(b.y<-30){b.y=c.height+30;b.x=Math.random()*c.width;}ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);ctx.strokeStyle='rgba('+ar+','+b.alpha+')';ctx.lineWidth=1;ctx.stroke();ctx.beginPath();ctx.arc(b.x-b.r*0.3,b.y-b.r*0.3,b.r*0.25,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+(b.alpha*0.8)+')';ctx.fill();});}
+  function drawSparkles(){if(!extraState.sparkles)return;const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';extraState.sparkles.forEach(s=>{s.phase+=s.speed;const alpha=(Math.sin(s.phase)+1)/2;ctx.beginPath();ctx.arc(s.x,s.y,s.size,0,Math.PI*2);ctx.fillStyle='rgba('+ar+','+alpha+')';ctx.fill();const g=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.size*6);g.addColorStop(0,'rgba('+ar+','+(alpha*0.35)+')');g.addColorStop(1,'rgba('+ar+',0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(s.x,s.y,s.size*6,0,Math.PI*2);ctx.fill();});}
+  function drawGalaxy(){if(!extraState.galaxyStars)return;ctx.fillStyle='rgba(0,0,0,0.15)';ctx.fillRect(0,0,c.width,c.height);extraState.galaxyStars.forEach(s=>{s.angle+=s.speed;const x=s.cx+Math.cos(s.angle)*s.radius;const y=s.cy+Math.sin(s.angle)*s.radius*0.6;ctx.beginPath();ctx.arc(x,y,s.size,0,Math.PI*2);ctx.fillStyle=s.color;ctx.fill();});}
+  function drawSnow(){if(!extraState.snow)return;extraState.snow.forEach(s=>{s.y+=s.vy;s.x+=s.vx+Math.sin(s.phase)*0.3;s.phase+=0.02;if(s.y>c.height+10){s.y=-10;s.x=Math.random()*c.width;}ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,.85)';ctx.fill();});}
+  function drawRain(){if(!extraState.rain)return;extraState.rain.forEach(r=>{r.y+=r.vy;r.x+=r.vx;if(r.y>c.height+20){r.y=-20;r.x=Math.random()*c.width;}ctx.beginPath();ctx.moveTo(r.x,r.y);ctx.lineTo(r.x-r.vx*2,r.y-r.len);ctx.strokeStyle='rgba(180,220,255,.6)';ctx.lineWidth=1.2;ctx.stroke();});}
+  function drawHearts(){if(!extraState.hearts)return;extraState.hearts.forEach(h=>{h.y+=h.vy;h.x+=h.vx+Math.sin(h.phase)*0.5;h.phase+=0.03;if(h.y<-30){h.y=c.height+30;h.x=Math.random()*c.width;}ctx.save();ctx.translate(h.x,h.y);ctx.fillStyle=h.color;ctx.globalAlpha=0.7;drawHeartShape(ctx,h.size);ctx.globalAlpha=1;ctx.restore();});}
+  function drawFallingStars(){if(!extraState.fallStars)return;extraState.fallStars.forEach(s=>{if(s.delay>0){s.delay--;return;}s.x+=s.vx;s.y+=s.vy;s.alpha=Math.min(1,s.alpha+0.05);const grd=ctx.createLinearGradient(s.x,s.y,s.x-s.len*0.3,s.y-s.len);grd.addColorStop(0,'rgba(255,255,255,'+s.alpha+')');grd.addColorStop(1,'rgba(255,255,255,0)');ctx.strokeStyle=grd;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(s.x-s.len*0.3,s.y-s.len);ctx.stroke();if(s.x>c.width+100||s.y>c.height+100){s.x=-50;s.y=Math.random()*c.height*0.5;s.alpha=0;s.delay=Math.random()*200;}});}
+  function draw(){
+    if(!running)return;
+    if(mode!=='galaxy')ctx.clearRect(0,0,c.width,c.height);
+    const ar=getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim()||'147,51,234';
+    if(mode==='none'){requestAnimationFrame(draw);return;}
+    if(mode==='constellation'){for(let i=0;i<pa.length;i++){pa[i].update();pa[i].draw();for(let j=i+1;j<pa.length;j++){const dx=pa[i].x-pa[j].x,dy=pa[i].y-pa[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<ld){const o=1-(dist/ld);ctx.strokeStyle='rgba('+ar+','+(o*.22)+')';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(pa[i].x,pa[i].y);ctx.lineTo(pa[j].x,pa[j].y);ctx.stroke();}}}}
+    else if(mode==='network'){for(let i=0;i<pa.length;i++){pa[i].update();for(let j=i+1;j<pa.length;j++){const dx=pa[i].x-pa[j].x,dy=pa[i].y-pa[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<180){const o=1-(dist/180);ctx.strokeStyle='rgba('+ar+','+(o*.4)+')';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(pa[i].x,pa[i].y);ctx.lineTo(pa[j].x,pa[j].y);ctx.stroke();}}ctx.beginPath();ctx.arc(pa[i].x,pa[i].y,2.5,0,Math.PI*2);ctx.fillStyle='rgba('+ar+',.7)';ctx.fill();}}
+    else if(mode==='particles'){pa.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>c.width)p.vx=-p.vx;if(p.y<0||p.y>c.height)p.vy=-p.vy;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle='rgba('+ar+','+p.alpha+')';ctx.fill();});}
+    else if(mode==='dots'){for(let x=30;x<c.width;x+=60)for(let y=30;y<c.height;y+=60){ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);ctx.fillStyle='rgba('+ar+',.4)';ctx.fill();}}
+    else if(mode==='fireworks'){drawFireworks();}
+    else if(mode==='matrix'){drawMatrix();}
+    else if(mode==='bubbles'){drawBubbles();}
+    else if(mode==='sparkles'){drawSparkles();}
+    else if(mode==='galaxy'){drawGalaxy();}
+    else if(mode==='snow'){drawSnow();}
+    else if(mode==='rain'){drawRain();}
+    else if(mode==='hearts'){drawHearts();}
+    else if(mode==='stars-fall'){drawFallingStars();}
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',rc);rc();draw();
+  return{stop:function(){running=false;},setMode:function(m){mode=m||'constellation';initMode();}};
+}
+
+/* ============================================================
+   🎨 EFFECTS + INTRO PANEL RENDER
+   ============================================================ */
+function renderEffectsPanel(){
+  const eff=(getSiteContent().effects)||{},app=(getSiteContent().appearance)||{};
+  const tg=document.getElementById('themeGrid');if(tg){tg.innerHTML='';THEMES.forEach(t2=>{const c=document.createElement('div');c.className='effect-chip'+((app.theme||'purple')===t2.key?' active':'');c.onclick=()=>setTheme(t2.key);c.innerHTML='<div class="color-swatch" style="background:linear-gradient(135deg,'+t2.c1+','+t2.c2+')"></div><span>'+t2.name+'</span>';tg.appendChild(c);});}
+  const fg=document.getElementById('fontGrid');if(fg){fg.innerHTML='';FONTS_NORMAL.forEach(f=>{const c=document.createElement('div');c.className='effect-chip'+((app.font||'Sora')===f.key?' active':'');c.onclick=()=>setFont(f.key);c.innerHTML='<div class="font-preview" style="font-family:\''+f.key+'\',sans-serif">'+f.label+'</div>';fg.appendChild(c);});}
+  const fcg=document.getElementById('fontColorGrid');if(fcg){fcg.innerHTML='';FONT_COLORS.forEach(fc=>{const c=document.createElement('div');c.className='effect-chip'+((app.fontColor||'default')===fc.key?' active':'');c.onclick=()=>setFontColor(fc.key);c.innerHTML='<div class="color-swatch" style="background:'+(fc.c==='inherit'?'linear-gradient(135deg,#666,#999)':fc.c)+'"></div><span>'+fc.name+'</span>';fcg.appendChild(c);});}
+  const fsg=document.getElementById('formStyleGrid');if(fsg){fsg.innerHTML='';FORM_STYLES.forEach(fs=>{const c=document.createElement('div');c.className='effect-chip'+((app.formStyle||'default')===fs.key?' active':'');c.onclick=()=>setFormStyle(fs.key);c.innerHTML='<i class="fa-solid '+fs.icon+'"></i><span>'+fs.name+'</span>';fsg.appendChild(c);});}
+  const psg=document.getElementById('panelStyleGrid');if(psg){psg.innerHTML='';PANEL_STYLES.forEach(ps=>{const c=document.createElement('div');c.className='effect-chip'+((app.panelStyle||'default')===ps.key?' active':'');c.onclick=()=>setPanelStyle(ps.key);c.innerHTML='<i class="fa-solid '+ps.icon+'"></i><span>'+ps.name+'</span>';psg.appendChild(c);});}
+  const bg=document.getElementById('bgGrid');if(bg){bg.innerHTML='';BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='effect-chip'+((eff.background||'default')===b.key?' active':'');c.onclick=()=>setBackground(b.key);c.innerHTML='<div class="bg-swatch" style="background:'+bgSwatch(b.key)+'"></div><span>'+b.name+'</span>';bg.appendChild(c);});}
+  const ag=document.getElementById('animGrid');if(ag){ag.innerHTML='';ANIM_PRESETS.forEach(a=>{const c=document.createElement('div');c.className='effect-chip'+((eff.siteAnimation||'constellation')===a.key?' active':'');c.onclick=()=>setSiteAnimation(a.key);c.innerHTML='<i class="fa-solid '+a.icon+'"></i><span>'+a.name+'</span>';ag.appendChild(c);});}
+  const cg=document.getElementById('chatBgGrid');if(cg){cg.innerHTML='';CHAT_BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='effect-chip'+((eff.chatBackground||'default')===b.key?' active':'');c.onclick=()=>setChatBackground(b.key);c.innerHTML='<div class="bg-swatch" style="background:'+chatSwatch(b.key)+'"></div><span>'+b.name+'</span>';cg.appendChild(c);});}
+  const mcg=document.getElementById('messengerColorGrid');if(mcg){mcg.innerHTML='';MESSENGER_COLORS.forEach(mc=>{const c=document.createElement('div');c.className='effect-chip'+((eff.messengerColor||'purple')===mc.key?' active':'');c.onclick=()=>setMessengerColor(mc.key);c.innerHTML='<div class="color-swatch" style="background:'+mc.c+'"></div><span>'+mc.name+'</span>';mcg.appendChild(c);});}
+  const cng=document.getElementById('confettiGrid');if(cng){cng.innerHTML='';CONFETTI_PRESETS.forEach(c2=>{const c=document.createElement('div');c.className='effect-chip'+((eff.confettiStyle||'classic')===c2.key?' active':'');c.onclick=()=>{setConfettiStyle(c2.key);fireConfettiBurst(1);};c.innerHTML='<i class="fa-solid '+c2.icon+'"></i><span>'+c2.name+'</span>';cng.appendChild(c);});}
+  const tg2=document.getElementById('tickGrid');if(tg2){tg2.innerHTML='';Object.keys(TICK_STYLES).forEach(k=>{const s=TICK_STYLES[k];const c=document.createElement('div');c.className='effect-chip'+((eff.tickSoundStyle||'default')===k?' active':'');c.onclick=()=>{setTickSoundStyle(k);s.fn();};c.innerHTML='<i class="fa-solid '+s.icon+'"></i><span>'+s.name+'</span>';tg2.appendChild(c);});}
+  const fishG=document.getElementById('fishStyleGrid');if(fishG){fishG.innerHTML='';FISH_STYLES.forEach(f=>{const c=document.createElement('div');c.className='effect-chip'+((eff.fishStyle||'tropical')===f.key?' active':'');c.onclick=()=>setFishStyle(f.key);c.innerHTML='<i class="fa-solid '+f.icon+'"></i><span>'+f.name+'</span>';fishG.appendChild(c);});}
+  const fet=document.getElementById('fishEnabledToggle');if(fet)fet.checked=!!eff.fishEnabled;
+  const cet=document.getElementById('confettiEnabledToggle');if(cet)cet.checked=eff.confettiEnabled!==false;
+  const tet=document.getElementById('tickSoundEnabledToggle');if(tet)tet.checked=eff.tickSoundEnabled!==false;
+  try{renderIntroPanel();}catch(e){}
+}
+function renderIntroPanel(){
+  const eff=(getSiteContent().effects)||{};
+  const iag=document.getElementById('introAnimGrid');
+  if(iag){iag.innerHTML='';INTRO_ANIMS.forEach(a=>{const c=document.createElement('div');c.className='effect-chip'+((eff.introAnim||'constellation')===a.key?' active':'');c.onclick=()=>setIntroAnim(a.key);c.innerHTML='<i class="fa-solid '+a.icon+'"></i><span>'+a.name+'</span>';iag.appendChild(c);});}
+  const ibg=document.getElementById('introBgGrid');
+  if(ibg){ibg.innerHTML='';INTRO_BGS.forEach(b=>{const c=document.createElement('div');c.className='effect-chip'+((eff.introBg||'default')===b.key?' active':'');c.onclick=()=>setIntroBg(b.key);c.innerHTML='<div class="bg-swatch" style="background:'+bgSwatch(b.key)+'"></div><span>'+b.name+'</span>';ibg.appendChild(c);});}
+  const ift=document.getElementById('introFishToggle');if(ift)ift.checked=!!eff.introFishEnabled;
+  const ifg=document.getElementById('introFishStyleGrid');
+  if(ifg){ifg.innerHTML='';FISH_STYLES.forEach(f=>{const c=document.createElement('div');c.className='effect-chip'+((eff.introFishStyle||'tropical')===f.key?' active':'');c.onclick=()=>setIntroFishStyle(f.key);c.innerHTML='<i class="fa-solid '+f.icon+'"></i><span>'+f.name+'</span>';ifg.appendChild(c);});}
+  const ist=document.getElementById('introSparkleToggle');if(ist)ist.checked=eff.introSparkleEnabled!==false;
+}
+function openUserSettingsModal(){const lu=localStorage.getItem('logged_user');if(!lu)return;renderUserSettingsGrids();document.getElementById('userSettingsModal').classList.add('active');}
+function closeUserSettingsModal(){document.getElementById('userSettingsModal').classList.remove('active');applyAppearance();applyBackground();applyChatBackground();}
+function renderUserSettingsGrids(){const u=getUserPrefs();
+  const tg=document.getElementById('userThemeGrid');if(tg){tg.innerHTML='';THEMES.forEach(t2=>{const c=document.createElement('div');c.className='settings-chip'+((u.theme||'')===t2.key?' active':'');c.onclick=()=>{setUserPref('theme',t2.key);applyAppearance();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:linear-gradient(135deg,'+t2.c1+','+t2.c2+')"></div><span>'+t2.name+'</span>';tg.appendChild(c);});}
+  const fcg=document.getElementById('userFontColorGrid');if(fcg){fcg.innerHTML='';FONT_COLORS.forEach(fc=>{const c=document.createElement('div');c.className='settings-chip'+((u.fontColor||'')===fc.key?' active':'');c.onclick=()=>{setUserPref('fontColor',fc.key);applyAppearance();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:'+(fc.c==='inherit'?'linear-gradient(135deg,#666,#999)':fc.c)+'"></div><span>'+fc.name+'</span>';fcg.appendChild(c);});}
+  const fg=document.getElementById('userFontGrid');if(fg){fg.innerHTML='';FONTS_NORMAL.slice(0,12).forEach(f=>{const c=document.createElement('div');c.className='settings-chip'+((u.font||'')===f.key?' active':'');c.onclick=()=>{setUserPref('font',f.key);applyAppearance();renderUserSettingsGrids();};c.innerHTML='<span style="font-family:\''+f.key+'\',sans-serif;font-size:.9rem">'+f.label+'</span>';fg.appendChild(c);});}
+  const bg=document.getElementById('userBgGrid');if(bg){bg.innerHTML='';BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='settings-chip'+((u.background||'')===b.key?' active':'');c.onclick=()=>{setUserPref('background',b.key);applyBackground();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:'+bgSwatch(b.key)+'"></div><span>'+b.name+'</span>';bg.appendChild(c);});}
+  const cg=document.getElementById('userChatBgGrid');if(cg){cg.innerHTML='';CHAT_BG_PRESETS.forEach(b=>{const c=document.createElement('div');c.className='settings-chip'+((u.chatBackground||'')===b.key?' active':'');c.onclick=()=>{setUserPref('chatBackground',b.key);applyChatBackground();renderUserSettingsGrids();};c.innerHTML='<div style="width:100%;height:26px;border-radius:6px;background:'+chatSwatch(b.key)+'"></div><span>'+b.name+'</span>';cg.appendChild(c);});}}
+function resetUserSettings(){clearUserPrefs();applyAppearance();applyBackground();applyChatBackground();renderUserSettingsGrids();showCustomAlert('Settings reset','success');}
+
+/* === SOCIAL === */
+function findPlatform(k){return SOCIAL_PLATFORMS.find(p=>p.key===k)||{key:k,label:k,icon:'fa-solid fa-link',placeholder:'url'};}
+function renderFooterSocials(){const el=document.getElementById('footerSocials');if(!el)return;const list=(getSiteContent().social||[]).filter(s=>s.enabled!==false);el.innerHTML='';list.forEach(s=>{const p=findPlatform(s.platform);const a=document.createElement('a');a.href='#';a.className='social-btn';a.title=p.label;a.innerHTML='<i class="'+p.icon+'" style="font-size:1.1rem;color:var(--accent)"></i>';a.onclick=(e)=>{e.preventDefault();if(s.platform==='gmail')window.open('mailto:'+s.url,'_blank');else window.open(s.url,'_blank');};el.appendChild(a);});}
+function renderAdminSocial(){const list=document.getElementById('socialListAdmin');if(!list)return;const social=(getSiteContent().social||[]);list.innerHTML='';social.forEach((s,idx)=>{const p=findPlatform(s.platform);const row=document.createElement('div');row.className='social-row';row.innerHTML='<i class="'+p.icon+'"></i><input type="text" value="'+escapeHtml(s.url||'')+'" placeholder="'+escapeHtml(p.placeholder)+'" onchange="updateSocialUrl('+idx+',this.value)"><span style="font-size:.65rem;color:var(--text-secondary);font-weight:700">'+p.label+'</span><button class="social-del" onclick="removeSocial('+idx+')"><i class="fa-solid fa-trash"></i></button>';list.appendChild(row);});}
+function addSocialPlatformPicker(){const used=(getSiteContent().social||[]).map(s=>s.platform);const available=SOCIAL_PLATFORMS.filter(p=>!used.includes(p.key));if(!available.length){showCustomAlert('All platforms already added.');return;}const buttonsHtml=available.map(p=>'<button class="custom-alert-btn" style="background:var(--box-bg);color:var(--text-color-override);border:1px solid var(--line-color);margin-bottom:6px;justify-content:flex-start;width:100%;flex-direction:row" onclick="pickSocialPlatform(\''+p.key+'\')"><i class="'+p.icon+'" style="color:var(--accent);width:20px"></i> <span style="margin-left:8px">'+p.label+'</span></button>').join('');const ab=document.getElementById('customAlertModal'),ai=document.getElementById('customAlertIcon'),am=document.getElementById('customAlertMessage'),ag=document.getElementById('customAlertBtnGroup');ai.innerHTML='<i class="fa-solid fa-plus" style="color:var(--accent);font-size:1.6rem"></i>';am.innerHTML='<div style="text-align:left;max-height:300px;overflow-y:auto;display:flex;flex-direction:column">'+buttonsHtml+'</div>';ag.innerHTML='<button class="custom-alert-btn cancel-btn" onclick="closeCustomAlert()" style="flex:1">Cancel</button>';ab.classList.add('active');}
+function pickSocialPlatform(k){closeCustomAlert();const c=getSiteContent();if(!Array.isArray(c.social))c.social=[];c.social.push({platform:k,url:'',enabled:true});saveSiteContent(c);renderAdminSocial();renderFooterSocials();}
+function updateSocialUrl(idx,url){const c=getSiteContent();if(c.social&&c.social[idx]){c.social[idx].url=url.trim();saveSiteContent(c);renderFooterSocials();}}
+function removeSocial(idx){const c=getSiteContent();if(c.social){c.social.splice(idx,1);saveSiteContent(c);renderAdminSocial();renderFooterSocials();}}
 
 /* ============================================================
    GLOBAL EVENTS
@@ -2934,13 +2729,12 @@ window.addEventListener('DOMContentLoaded',async ()=>{
 /* ============================================================
    GLOBAL FONKSİYON EXPORT
    ============================================================ */
-window.toggleTheme=toggleTheme;window.toggleLangMenu=toggleLangMenu;window.changeLanguage=changeLanguage;window.toggleHeaderProfileMenu=toggleHeaderProfileMenu;window.closeHeaderProfileMenu=closeHeaderProfileMenu;window.openEditProfileModal=openEditProfileModal;window.closeEditProfileModal=closeEditProfileModal;window.openChangePasswordModal=openChangePasswordModal;window.closeChangePasswordModal=closeChangePasswordModal;window.openUserSettingsModal=openUserSettingsModal;window.closeUserSettingsModal=closeUserSettingsModal;window.openDeleteAccountModal=openDeleteAccountModal;window.closeDeleteAccountModal=closeDeleteAccountModal;window.confirmLogout=confirmLogout;window.openGetInTouchModal=openGetInTouchModal;window.closeGetInTouchModal=closeGetInTouchModal;window.openDirectContactModal=openDirectContactModal;window.closeDirectContactModal=closeDirectContactModal;window.switchAuthTab=switchAuthTab;window.handleAuthSubmit=handleAuthSubmit;window.openForgotPasswordModal=openForgotPasswordModal;window.closeForgotPasswordModal=closeForgotPasswordModal;window.handleForgotPasswordSubmit=handleForgotPasswordSubmit;window.closeResetPasswordModal=closeResetPasswordModal;window.handleResetPasswordSubmit=handleResetPasswordSubmit;window.openSignupCodeModal=openSignupCodeModal;window.backToSignupMock=backToSignupMock;window.cancelSignup=cancelSignup;window.verifySignupCode=verifySignupCode;window.resendSignupEmail=resendSignupEmail;window.checkUsernameAvailability=checkUsernameAvailability;window.togglePasswordVisibility=togglePasswordVisibility;window.handleProfileUpdate=handleProfileUpdate;window.handleProfilePhotoUpload=handleProfilePhotoUpload;window.resetProfilePhoto=resetProfilePhoto;window.updateEditPhotoPreview=updateEditPhotoPreview;window.handleChangePassword=handleChangePassword;window.handleDeleteAccount=handleDeleteAccount;window.handleDeletePasswordSubmit=handleDeletePasswordSubmit;window.openDeletePasswordModal=openDeletePasswordModal;window.closeDeletePasswordModal=closeDeletePasswordModal;window.setCropRatio=setCropRatio;window.applyCrop=applyCrop;window.closeCropModal=closeCropModal;window.closeLightbox=closeLightbox;window.openOrderModal=openOrderModal;window.closeOrderModal=closeOrderModal;window.submitOrder=submitOrder;window.selectOrderType=selectOrderType;window.openChatPanel=openChatPanel;window.closeChatPanel=closeChatPanel;window.sendChatMessage=sendChatMessage;window.handleChatPhotoUpload=handleChatPhotoUpload;window.filterChatUsers=filterChatUsers;window.clearChatSearch=clearChatSearch;window.replyToMessage=replyToMessage;window.cancelReply=cancelReply;window.deleteMessage=deleteMessage;window.openPublicUserProfile=openPublicUserProfile;window.closePublicUserProfile=closePublicUserProfile;window.messageFromProfile=messageFromProfile;window.triggerAdminAccess=triggerAdminAccess;window.closeAdminLogin=closeAdminLogin;window.verifyAdminPassword=verifyAdminPassword;window.logoutAdmin=logoutAdmin;window.closeAdminPanel=closeAdminPanel;window.switchAdminTab=switchAdminTab;window.toggleUserVerification=toggleUserVerification;window.adminViewUser=adminViewUser;window.closeAdminUserProfile=closeAdminUserProfile;window.adminChatUser=adminChatUser;window.openAdminUserEmail=openAdminUserEmail;window.closeAdminUserEmail=closeAdminUserEmail;window.sendAdminUserEmailSubmit=sendAdminUserEmailSubmit;window.deleteUserAdmin=deleteUserAdmin;window.exportUsersCSV=exportUsersCSV;window.clearAllUsers=clearAllUsers;window.viewUserDetail=viewUserDetail;window.closeUserDetail=closeUserDetail;window.filterActivity=filterActivity;window.clearActivityLog=clearActivityLog;window.exportActivityCSV=exportActivityCSV;window.clearAllChats=clearAllChats;window.exportChatsCSV=exportChatsCSV;window.openAdminAnyEmail=openAdminAnyEmail;window.closeAdminAnyEmail=closeAdminAnyEmail;window.previewAnyEmailImage=previewAnyEmailImage;window.handleAnyEmailImageUpload=handleAnyEmailImageUpload;window.handleAnyEmailPdfUpload=handleAnyEmailPdfUpload;window.sendAdminAnyEmail=sendAdminAnyEmail;window.moveSectionOrder=moveSectionOrder;window.editAppSlot=editAppSlot;window.closeAdminEdit=closeAdminEdit;window.clearAppSlot=clearAppSlot;window.saveAppSlot=saveAppSlot;window.handleIconUpload=handleIconUpload;window.clearIconFile=clearIconFile;window.handleApkUpload=handleApkUpload;window.clearApkFile=clearApkFile;window.saveAdminHeader=saveAdminHeader;window.saveAdminExperience=saveAdminExperience;window.saveAdminSetup=saveAdminSetup;window.saveAdminStack=saveAdminStack;window.saveAdminFooter=saveAdminFooter;window.saveAdminGeneral=saveAdminGeneral;window.saveAdminAccount=saveAdminAccount;window.handleAdminPhotoUpload=handleAdminPhotoUpload;window.clearAdminPhoto=clearAdminPhoto;window.handleFaviconUpload=handleFaviconUpload;window.clearFavicon=clearFavicon;window.exportSiteBackup=exportSiteBackup;window.importSiteBackup=importSiteBackup;window.confirmResetSite=confirmResetSite;window.toggleSiteClosed=toggleSiteClosed;window.toggleWeatherEnabled=toggleWeatherEnabled;window.toggleChatEnabled=toggleChatEnabled;window.toggleLangVisibility=toggleLangVisibility;window.setOrderRequireLogin=setOrderRequireLogin;window.setFishEnabled=setFishEnabled;window.setIntroFishEnabled=setIntroFishEnabled;window.setIntroFishStyle=setIntroFishStyle;window.setIntroSparkleEnabled=setIntroSparkleEnabled;window.setConfettiEnabled=setConfettiEnabled;window.setTickSoundEnabled=setTickSoundEnabled;window.toggleWelcomeEmail=toggleWelcomeEmail;window.toggleWelcomePdf=toggleWelcomePdf;window.saveWelcomeEmailSettings=saveWelcomeEmailSettings;window.renderEffectsPanel=renderEffectsPanel;window.renderIntroPanel=renderIntroPanel;window.renderUserSettingsGrids=renderUserSettingsGrids;window.resetUserSettings=resetUserSettings;window.refreshWeather=refreshWeather;window.approveOrder=approveOrder;window.deleteOrder=deleteOrder;window.clearAllOrders=clearAllOrders;window.updateSocialUrl=updateSocialUrl;window.removeSocial=removeSocial;window.addSocialPlatformPicker=addSocialPlatformPicker;window.pickSocialPlatform=pickSocialPlatform;window.closeCustomAlert=closeCustomAlert;window.confirmAction=confirmAction;window.whatsappSelectAll=whatsappSelectAll;window.whatsappDeselectAll=whatsappDeselectAll;window.whatsappFilterUsers=whatsappFilterUsers;window.whatsappRefreshList=whatsappRefreshList;window.whatsappToggleSelect=whatsappToggleSelect;window.whatsappSendToSelected=whatsappSendToSelected;window.whatsappOpenChatsOnly=whatsappOpenChatsOnly;window.startWhatsappBulkSend=startWhatsappBulkSend;window.closeAdminWhatsappConfirm=closeAdminWhatsappConfirm;window.openAdminUserWhatsapp=openAdminUserWhatsapp;window.closeAdminUserWhatsapp=closeAdminUserWhatsapp;window.saveAdminUserWhatsapp=saveAdminUserWhatsapp;
+window.toggleTheme=toggleTheme;window.toggleLangMenu=toggleLangMenu;window.changeLanguage=changeLanguage;window.toggleHeaderProfileMenu=toggleHeaderProfileMenu;window.closeHeaderProfileMenu=closeHeaderProfileMenu;window.openEditProfileModal=openEditProfileModal;window.closeEditProfileModal=closeEditProfileModal;window.openChangePasswordModal=openChangePasswordModal;window.closeChangePasswordModal=closeChangePasswordModal;window.openUserSettingsModal=openUserSettingsModal;window.closeUserSettingsModal=closeUserSettingsModal;window.openDeleteAccountModal=openDeleteAccountModal;window.closeDeleteAccountModal=closeDeleteAccountModal;window.confirmLogout=confirmLogout;window.openGetInTouchModal=openGetInTouchModal;window.closeGetInTouchModal=closeGetInTouchModal;window.openDirectContactModal=openDirectContactModal;window.closeDirectContactModal=closeDirectContactModal;window.switchAuthTab=switchAuthTab;window.handleAuthSubmit=handleAuthSubmit;window.openForgotPasswordModal=openForgotPasswordModal;window.closeForgotPasswordModal=closeForgotPasswordModal;window.handleForgotPasswordSubmit=handleForgotPasswordSubmit;window.closeResetPasswordModal=closeResetPasswordModal;window.handleResetPasswordSubmit=handleResetPasswordSubmit;window.openSignupCodeModal=openSignupCodeModal;window.backToSignupMock=backToSignupMock;window.cancelSignup=cancelSignup;window.verifySignupCode=verifySignupCode;window.resendSignupEmail=resendSignupEmail;window.checkUsernameAvailability=checkUsernameAvailability;window.togglePasswordVisibility=togglePasswordVisibility;window.handleProfileUpdate=handleProfileUpdate;window.handleProfilePhotoUpload=handleProfilePhotoUpload;window.resetProfilePhoto=resetProfilePhoto;window.updateEditPhotoPreview=updateEditPhotoPreview;window.handleChangePassword=handleChangePassword;window.handleDeleteAccount=handleDeleteAccount;window.handleDeletePasswordSubmit=handleDeletePasswordSubmit;window.openDeletePasswordModal=openDeletePasswordModal;window.closeDeletePasswordModal=closeDeletePasswordModal;window.setCropRatio=setCropRatio;window.applyCrop=applyCrop;window.closeCropModal=closeCropModal;window.closeLightbox=closeLightbox;window.openOrderModal=openOrderModal;window.closeOrderModal=closeOrderModal;window.submitOrder=submitOrder;window.selectOrderType=selectOrderType;window.openChatPanel=openChatPanel;window.closeChatPanel=closeChatPanel;window.sendChatMessage=sendChatMessage;window.handleChatPhotoUpload=handleChatPhotoUpload;window.filterChatUsers=filterChatUsers;window.clearChatSearch=clearChatSearch;window.replyToMessage=replyToMessage;window.cancelReply=cancelReply;window.deleteMessage=deleteMessage;window.openPublicUserProfile=openPublicUserProfile;window.closePublicUserProfile=closePublicUserProfile;window.messageFromProfile=messageFromProfile;window.triggerAdminAccess=triggerAdminAccess;window.closeAdminLogin=closeAdminLogin;window.verifyAdminPassword=verifyAdminPassword;window.logoutAdmin=logoutAdmin;window.closeAdminPanel=closeAdminPanel;window.switchAdminTab=switchAdminTab;window.toggleUserVerification=toggleUserVerification;window.adminViewUser=adminViewUser;window.closeAdminUserProfile=closeAdminUserProfile;window.adminChatUser=adminChatUser;window.openAdminUserEmail=openAdminUserEmail;window.closeAdminUserEmail=closeAdminUserEmail;window.sendAdminUserEmailSubmit=sendAdminUserEmailSubmit;window.deleteUserAdmin=deleteUserAdmin;window.exportUsersCSV=exportUsersCSV;window.clearAllUsers=clearAllUsers;window.viewUserDetail=viewUserDetail;window.closeUserDetail=closeUserDetail;window.filterActivity=filterActivity;window.clearActivityLog=clearActivityLog;window.exportActivityCSV=exportActivityCSV;window.clearAllChats=clearAllChats;window.exportChatsCSV=exportChatsCSV;window.openAdminAnyEmail=openAdminAnyEmail;window.closeAdminAnyEmail=closeAdminAnyEmail;window.previewAnyEmailImage=previewAnyEmailImage;window.handleAnyEmailImageUpload=handleAnyEmailImageUpload;window.handleAnyEmailPdfUpload=handleAnyEmailPdfUpload;window.sendAdminAnyEmail=sendAdminAnyEmail;window.moveSectionOrder=moveSectionOrder;window.editAppSlot=editAppSlot;window.closeAdminEdit=closeAdminEdit;window.clearAppSlot=clearAppSlot;window.saveAppSlot=saveAppSlot;window.handleIconUpload=handleIconUpload;window.clearIconFile=clearIconFile;window.handleApkUpload=handleApkUpload;window.clearApkFile=clearApkFile;window.saveAdminHeader=saveAdminHeader;window.saveAdminExperience=saveAdminExperience;window.saveAdminSetup=saveAdminSetup;window.saveAdminStack=saveAdminStack;window.saveAdminFooter=saveAdminFooter;window.saveAdminGeneral=saveAdminGeneral;window.saveAdminAccount=saveAdminAccount;window.handleAdminPhotoUpload=handleAdminPhotoUpload;window.clearAdminPhoto=clearAdminPhoto;window.handleFaviconUpload=handleFaviconUpload;window.clearFavicon=clearFavicon;window.exportSiteBackup=exportSiteBackup;window.importSiteBackup=importSiteBackup;window.confirmResetSite=confirmResetSite;window.toggleSiteClosed=toggleSiteClosed;window.toggleWeatherEnabled=toggleWeatherEnabled;window.toggleChatEnabled=toggleChatEnabled;window.toggleLangVisibility=toggleLangVisibility;window.setOrderRequireLogin=setOrderRequireLogin;window.setFishEnabled=setFishEnabled;window.setIntroFishEnabled=setIntroFishEnabled;window.setIntroFishStyle=setIntroFishStyle;window.setIntroSparkleEnabled=setIntroSparkleEnabled;window.setConfettiEnabled=setConfettiEnabled;window.setTickSoundEnabled=setTickSoundEnabled;window.toggleWelcomeEmail=toggleWelcomeEmail;window.toggleWelcomePdf=toggleWelcomePdf;window.saveWelcomeEmailSettings=saveWelcomeEmailSettings;window.renderEffectsPanel=renderEffectsPanel;window.renderIntroPanel=renderIntroPanel;window.renderUserSettingsGrids=renderUserSettingsGrids;window.resetUserSettings=resetUserSettings;window.refreshWeather=refreshWeather;window.approveOrder=approveOrder;window.deleteOrder=deleteOrder;window.clearAllOrders=clearAllOrders;window.updateSocialUrl=updateSocialUrl;window.removeSocial=removeSocial;window.addSocialPlatformPicker=addSocialPlatformPicker;window.pickSocialPlatform=pickSocialPlatform;window.closeCustomAlert=closeCustomAlert;window.confirmAction=confirmAction;
 
 console.log('%c✅ muminsultani site yüklendi!','background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;padding:6px 12px;border-radius:8px;font-weight:bold;font-size:13px;');
 console.log('%c📐 Admin panel: Desktop 900×550 / Tablet 640×500 / Mobile dar+tall','color:#22c55e;font-weight:bold;');
 console.log('%c✨ Desktop intro: 6.5rem logo + 1.6rem code box','color:#f59e0b;font-weight:bold;');
 console.log('%c📧 Upload: Firebase → tmpfiles → catbox → sıkıştırma (100 MB)','color:#3b82f6;font-weight:bold;');
-console.log('%c📱 WhatsApp: Toplu mesaj gönderimi','color:#25D366;font-weight:bold;');
 console.log('%c⚙️ Admin: Ctrl+Shift+M veya Ctrl+Shift+A','color:#f59e0b;font-weight:bold;');
 </script>
 </body>
