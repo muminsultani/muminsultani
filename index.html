@@ -878,6 +878,27 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 @keyframes animMatrix { 0% { opacity: 1; transform: translateY(0); } 50% { opacity: 0.3; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
 .anim-matrix .single-logo-img { animation-name: animMatrix; }
 
+
+/* Admin paneldeki logo animasyon butonlarının kesilmesini önler ve kaydırma ekler */
+#logoAnimGrid {
+    max-height: 320px;       /* Yükseklik sınırı */
+    overflow-y: auto;         /* Dikey kaydırma */
+    padding-right: 6px;       /* Kaydırma çubuğu için boşluk */
+    -webkit-overflow-scrolling: touch; /* Mobilde yumuşak kaydırma */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+/* Kaydırma çubuğunu şık yapalım */
+#logoAnimGrid::-webkit-scrollbar {
+    width: 6px;
+}
+#logoAnimGrid::-webkit-scrollbar-thumb {
+    background: rgba(147, 51, 234, 0.5);
+    border-radius: 6px;
+}
+
 </style>
 </head>
 <body data-theme="purple" data-fcolor="default" data-panel="default" data-form="default">
