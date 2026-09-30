@@ -170,7 +170,7 @@ body.light-mode #intro-screen .intro-logo{background:linear-gradient(270deg,#933
 body.light-mode #intro-screen .intro-code-box{background:rgba(147,51,234,0.1) !important;border-color:rgba(147,51,234,0.3) !important;color:#9333ea !important}
 body.light-mode #intro-screen .intro-sub{color:#64748b !important}
 body.light-mode #intro-screen .code-keyword,body.light-mode #intro-screen .code-string{color:#9333ea !important}
-body.light-mode #intro-screen .code-cursor{background-color:#9333ea !important}
+body.light-mode #intro-screen .code-cur!sor{background-color:#9333ea !important}
 
 /* ============================================================
    WRAPPER & LAYOUT
@@ -707,6 +707,177 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .bio-counter{text-align:right;font-size:.65rem;color:var(--text-secondary);margin-top:4px}
 button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media print{.messenger-float-btn,#constellation-canvas,#fish-canvas,#confetti-canvas,#intro-screen{display:none !important}}
+
+/* ============================================================
+   SABİT LOGO (Sadece Resim, Hareket Yok)
+   ============================================================ */
+.single-logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    opacity: 0;
+    animation: logoFadeIn 1s ease forwards;
+}
+
+/* Logo Resmi */
+.single-logo-img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 20px;
+    /* Hafif bir gölge, ama hareket yok */
+    filter: drop-shadow(0 8px 25px rgba(147, 51, 234, 0.5));
+}
+
+/* Sadece görünme animasyonu (Bu da hareket değil, sadece ekrana gelme) */
+@keyframes logoFadeIn {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+
+/* ============================================================
+   SABİT LOGO - Duyarlı (Mobil / Tablet / Masaüstü) + Şeffaf + HAREKETLİ
+   ============================================================ */
+.single-logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    opacity: 0;
+    animation: logoFadeIn 1s ease forwards;
+}
+
+/* Logo Resmi */
+.single-logo-img {
+    /* Mobil için varsayılan boyut */
+    width: 180px;
+    height: 180px;
+    
+    object-fit: contain;
+    border-radius: 20px;
+    
+    /* Hafif şeffaflık (0.75 = %75 görünür) */
+    opacity: 0.75;
+    
+    /* Hafif gölge, şeffaflıkla uyumlu */
+    filter: drop-shadow(0 8px 25px rgba(147, 51, 234, 0.4));
+    
+    /* Hareket animasyonu (Süzülme) */
+    animation: logoFloat 3s ease-in-out infinite;
+    
+    /* Yumuşak geçiş (fareyle üzerine gelince netleşir) */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Fareyle üzerine gelince tamamen görünür olsun (Masaüstü için hoş bir detay) */
+.single-logo-img:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    animation-play-state: paused; /* Fareyle üzerine gelince hareket dursun */
+}
+
+/* Görünme Animasyonu */
+@keyframes logoFadeIn {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Süzülme Animasyonu (Hareket) */
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+/* --- TABLET İÇİN (641px - 1024px) --- */
+@media (min-width: 641px) and (max-width: 1024px) {
+    .single-logo-img {
+        width: 300px;   /* Daha da büyük */
+        height: 300px;
+        opacity: 0.7;   /* Biraz daha şeffaf */
+    }
+}
+
+/* --- MASAÜSTÜ İÇİN (1025px ve üzeri) --- */
+@media (min-width: 1025px) {
+    .single-logo-img {
+        width: 400px;   /* En büyük boyut */
+        height: 400px;
+        opacity: 0.65;  /* En şeffaf hali */
+    }
+}
+
+
+/* ============================================================
+   LOGO İÇİN 15 FARKLI ANİMASYON
+   ============================================================ */
+.single-logo-wrapper.animated .single-logo-img {
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+/* 1. Süzülme (Float) - Varsayılan */
+@keyframes animFloat { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-12px) rotate(2deg); } }
+.anim-float .single-logo-img { animation-name: animFloat; }
+
+/* 2. Dönme (Spin) */
+@keyframes animSpin { 100% { transform: rotate(360deg); } }
+.anim-spin .single-logo-img { animation-name: animSpin; }
+
+/* 3. Nabız (Pulse) */
+@keyframes animPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+.anim-pulse .single-logo-img { animation-name: animPulse; }
+
+/* 4. Sallanma (Shake) */
+@keyframes animShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px) rotate(-3deg); } 75% { transform: translateX(6px) rotate(3deg); } }
+.anim-shake .single-logo-img { animation-name: animShake; }
+
+/* 5. Renk Akışı (Color Flow) */
+@keyframes animColorFlow { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
+.anim-colorflow .single-logo-img { animation-name: animColorFlow; }
+
+/* 6. Zıplama (Bounce) */
+@keyframes animBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-25px); } }
+.anim-bounce .single-logo-img { animation-name: animBounce; }
+
+/* 7. Işıma (Glow) */
+@keyframes animGlow { 0%, 100% { filter: drop-shadow(0 8px 25px rgba(147, 51, 234, 0.5)); } 50% { filter: drop-shadow(0 8px 40px #c084fc) drop-shadow(0 0 80px #9333ea); } }
+.anim-glow .single-logo-img { animation-name: animGlow; }
+
+/* 8. Dalga (Wave) */
+@keyframes animWave { 0%, 100% { transform: translateY(0) rotate(0deg); } 25% { transform: translateY(-12px) rotate(-5deg); } 75% { transform: translateY(12px) rotate(5deg); } }
+.anim-wave .single-logo-img { animation-name: animWave; }
+
+/* 9. Esneme (Stretch) */
+@keyframes animStretch { 0%, 100% { transform: scaleY(1) scaleX(1); } 50% { transform: scaleY(1.2) scaleX(0.9); } }
+.anim-stretch .single-logo-img { animation-name: animStretch; }
+
+/* 10. Takla (Flip) */
+@keyframes animFlip { 0% { transform: perspective(400px) rotateY(0deg); } 100% { transform: perspective(400px) rotateY(360deg); } }
+.anim-flip .single-logo-img { animation-name: animFlip; }
+
+/* 11. Manyetik (Magnet) */
+@keyframes animMagnet { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(-6px, -6px); } 75% { transform: translate(6px, 6px); } }
+.anim-magnet .single-logo-img { animation-name: animMagnet; }
+
+/* 12. Parıltı (Shimmer) */
+@keyframes animShimmer { 0% { filter: brightness(1); } 50% { filter: brightness(1.6) drop-shadow(0 0 20px #fff); } 100% { filter: brightness(1); } }
+.anim-shimmer .single-logo-img { animation-name: animShimmer; }
+
+/* 13. Kalp Atışı (Heartbeat) */
+@keyframes animHeartbeat { 0%, 100% { transform: scale(1); } 14% { transform: scale(1.1); } 28% { transform: scale(1); } 42% { transform: scale(1.1); } 70% { transform: scale(1); } }
+.anim-heartbeat .single-logo-img { animation-name: animHeartbeat; }
+
+/* 14. Sürüklenme (Drift) */
+@keyframes animDrift { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 33% { transform: translate(10px, -10px) rotate(4deg); } 66% { transform: translate(-10px, 10px) rotate(-4deg); } }
+.anim-drift .single-logo-img { animation-name: animDrift; }
+
+/* 15. Matrix */
+@keyframes animMatrix { 0% { opacity: 1; transform: translateY(0); } 50% { opacity: 0.3; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
+.anim-matrix .single-logo-img { animation-name: animMatrix; }
+
 </style>
 </head>
 <body data-theme="purple" data-fcolor="default" data-panel="default" data-form="default">
@@ -732,12 +903,14 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   <div class="intro-bg" id="introBg"></div>
   <canvas id="intro-canvas"></canvas>
   <canvas id="intro-fish-canvas"></canvas>
-  <div class="intro-content">
-    <div class="intro-code-box" id="introCodeBox"><span class="code-keyword">const</span> dev = <span class="code-string">"muminsultani"</span>;<span class="code-cursor"></span></div>
-    <div class="intro-logo" id="introLogo">muminsultani</div>
-    <div class="intro-sub" id="introSub">Software Developer</div>
-  </div>
+  
+<div class="intro-content">
+    <div class="single-logo-wrapper" id="introSingleLogo">
+        <img src="https://muminsultani.com/img/android-chrome-192x192.png" alt="muminsultani logo" class="single-logo-img">
+    </div>
 </div>
+</div>
+
 
 <!-- Messenger Float -->
 <button id="messengerFloatBtn" class="messenger-float-btn" title="Messages" style="display:none">
@@ -1849,6 +2022,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
         <h4 class="admin-subsection-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Intro Animasyonu</h4>
         <div class="effect-grid" id="introAnimGrid"></div>
         <h4 class="admin-subsection-title"><i class="fa-solid fa-image"></i> Intro Arka Planı</h4>
+        <h4 class="admin-subsection-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Logo Animasyonu</h4>
+        <div class="effect-grid" id="logoAnimGrid"></div>
         <div class="effect-grid" id="introBgGrid"></div>
         <h4 class="admin-subsection-title"><i class="fa-solid fa-fish"></i> Intro Balıkları</h4>
         <div class="toggle-row" style="background:rgba(56,189,248,.08);border-color:rgba(56,189,248,.3)">
@@ -4023,6 +4198,15 @@ window.addEventListener('DOMContentLoaded',async ()=>{
   }
 });
 
+
+setTimeout(() => {
+    const wrapper = document.getElementById('introSingleLogo');
+    if (wrapper) {
+        wrapper.classList.add('animated');
+        applyLogoAnimation();
+    }
+}, 1500);
+
 /* ============================================================
    🌐 GLOBAL EVENTS
    ============================================================ */
@@ -4060,6 +4244,78 @@ console.log('%c📐 Admin panel: Ctrl+Shift+M veya Ctrl+Shift+A','color:#22c55e;
 console.log('%c🪙 Bitcoin + Ethereum + Hava Durumu widget (canlı sparkline grafik)','color:#f59e0b;font-weight:bold;');
 console.log('%c🔐 Sign up email kontrolü + otomatik username','color:#ef4444;font-weight:bold;');
 console.log('%c🎉 Kod 9 parçada tamamlandı! 🎯','color:#22c55e;font-weight:bold;font-size:13px;');
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ... diğer kodlar ...
+    setTimeout(() => {
+        const wrapper = document.getElementById('introSingleLogo');
+        if (wrapper) {
+            // Sadece görünür yap, hareket yok
+            wrapper.style.opacity = '1';
+        }
+    }, 1000);
+});
+
+
+// Logo Animasyon Butonlarını Oluştur
+const LOGO_ANIMATIONS = [
+    { key: 'anim-float', name: 'Süzülme', icon: 'fa-arrow-up' },
+    { key: 'anim-spin', name: 'Dönme', icon: 'fa-rotate' },
+    { key: 'anim-pulse', name: 'Nabız', icon: 'fa-heart-pulse' },
+    { key: 'anim-shake', name: 'Sallanma', icon: 'fa-arrows-left-right' },
+    { key: 'anim-colorflow', name: 'Renk Akışı', icon: 'fa-palette' },
+    { key: 'anim-bounce', name: 'Zıplama', icon: 'fa-arrow-up-from-bracket' },
+    { key: 'anim-glow', name: 'Işıma', icon: 'fa-sun' },
+    { key: 'anim-wave', name: 'Dalga', icon: 'fa-water' },
+    { key: 'anim-stretch', name: 'Esneme', icon: 'fa-arrows-up-down' },
+    { key: 'anim-flip', name: 'Takla', icon: 'fa-arrows-rotate' },
+    { key: 'anim-magnet', name: 'Manyetik', icon: 'fa-magnet' },
+    { key: 'anim-shimmer', name: 'Parıltı', icon: 'fa-star' },
+    { key: 'anim-heartbeat', name: 'Kalp Atışı', icon: 'fa-heart' },
+    { key: 'anim-drift', name: 'Sürüklenme', icon: 'fa-wind' },
+    { key: 'anim-matrix', name: 'Matrix', icon: 'fa-code' }
+];
+
+const logoGrid = document.getElementById('logoAnimGrid');
+if (logoGrid) {
+    logoGrid.innerHTML = '';
+    const currentAnim = getLogoAnim();
+    LOGO_ANIMATIONS.forEach(anim => {
+        const chip = document.createElement('div');
+        chip.className = 'effect-chip' + (currentAnim === anim.key ? ' active' : '');
+        chip.onclick = () => setLogoAnimation(anim.key);
+        chip.innerHTML = `<i class="fa-solid ${anim.icon}"></i><span>${anim.name}</span>`;
+        logoGrid.appendChild(chip);
+    });
+}
+
+
+function getLogoAnim() {
+    const c = getSiteContent();
+    return (c.effects && c.effects.logoAnimation) || 'anim-float';
+}
+
+function setLogoAnimation(key) {
+    const c = getSiteContent();
+    if (!c.effects) c.effects = {};
+    c.effects.logoAnimation = key;
+    saveSiteContent(c);
+    applyLogoAnimation();
+    if (typeof renderIntroPanel === 'function') renderIntroPanel();
+    showCustomAlert('✅ Logo animasyonu değiştirildi!', 'success');
+}
+
+function applyLogoAnimation() {
+    const wrapper = document.getElementById('introSingleLogo');
+    if (!wrapper) return;
+    wrapper.className = 'single-logo-wrapper';
+    const animKey = getLogoAnim();
+    if (animKey && animKey !== 'none') {
+        wrapper.classList.add('animated', animKey);
+    }
+}
+
 
 </script>
 </body>
