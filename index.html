@@ -111,12 +111,22 @@ body.bg-mono{background-image:radial-gradient(circle at 20% 20%,rgba(148,163,184
 #fish-canvas.active{opacity:1}
 #confetti-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:99998;display:none}
 
-/* Privacy & Security */
+/* Security & Privacy */
 #security-curtain{position:fixed;top:0;left:0;width:100vw;height:100vh;background:var(--bg-color);z-index:99999;display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:opacity .2s ease;pointer-events:none}
-#privacyCurtain{display:none !important}
+
+/* Privacy Curtain */
+#privacyCurtain{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;background:var(--bg-color);z-index:999999;display:none;flex-direction:column;justify-content:center;align-items:center;gap:18px;text-align:center;padding:24px;background-image:radial-gradient(circle at 30% 20%,rgba(var(--accent-rgb),.15),transparent 60%),radial-gradient(circle at 70% 80%,rgba(var(--accent-rgb),.12),transparent 60%)}
+#privacyCurtain.show{display:flex}
+#privacyCurtain .privacy-logo{width:90px;height:90px;border-radius:22px;box-shadow:0 8px 32px rgba(var(--accent-rgb),.5);object-fit:cover}
+#privacyCurtain h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:2rem;font-weight:900;background:linear-gradient(270deg,var(--accent),var(--accent-2));background-size:400% 400%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:gradientFlow 8s ease infinite}
+#privacyCurtain .lock-icon{font-size:2.4rem;color:var(--accent);margin-bottom:-4px;animation:lockPulse 2.4s ease-in-out infinite}
+@keyframes lockPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+#privacyCurtain p{color:var(--text-secondary);font-size:.9rem;max-width:380px;line-height:1.55}
+#privacyCurtain .privacy-admin-btn{margin-top:14px;background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-secondary);padding:10px 18px;border-radius:12px;font-size:.75rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+#privacyCurtain .privacy-admin-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--box-hover-bg)}
 
 /* ============================================================
-   INTRO SCREEN (YENİ — Otomatik tema, sabit logo)
+   INTRO SCREEN (Yuvarlak logo canvas çizimi KALDIRILDI)
    ============================================================ */
 #intro-screen{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;display:flex;justify-content:center;align-items:center;z-index:9999;transition:opacity .6s,visibility .6s;overflow:hidden;background:transparent}
 #intro-screen::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;z-index:-1;transition:background .5s ease,opacity .5s ease}
@@ -126,11 +136,6 @@ body.bg-mono{background-image:radial-gradient(circle at 20% 20%,rgba(148,163,184
 #intro-fish-canvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0;transition:opacity .6s}
 #intro-fish-canvas.active{opacity:1}
 .intro-content{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;padding:0 16px;position:relative;z-index:2}
-.intro-code-box{font-family:'Fira Code',monospace;font-size:.85rem;color:var(--accent-2);background:rgba(var(--accent-rgb),.15);border:1px solid rgba(var(--accent-rgb),.3);padding:9px 16px;border-radius:10px;display:inline-flex;align-items:center;gap:6px}
-.code-keyword{color:var(--accent-2)}
-.code-string{color:var(--accent-2)}
-.code-cursor{display:inline-block;width:8px;height:14px;background-color:var(--accent-2);animation:blink .8s infinite;vertical-align:middle;margin-left:2px}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 .intro-logo{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.8rem;font-weight:900;letter-spacing:-1px;background:linear-gradient(270deg,var(--accent),var(--accent-2),var(--accent),var(--accent-2),var(--accent));background-size:400% 400%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:gradientFlow 4s ease infinite;word-break:break-word}
 .intro-sub{font-size:.8rem;color:#94a3b8;letter-spacing:2px;text-transform:uppercase;font-weight:600}
 @keyframes gradientFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
@@ -138,13 +143,13 @@ body.bg-mono{background-image:radial-gradient(circle at 20% 20%,rgba(148,163,184
 @media (min-width:1025px){.intro-content{gap:32px}.intro-logo{font-size:4.5rem;letter-spacing:-3px}.intro-sub{font-size:1.3rem;letter-spacing:4px}}
 
 /* ============================================================
-   LOGO (SABİT — Yamuk değil, responsive, küçültülmüş)
+   LOGO (Büyük ve sabit)
    ============================================================ */
 .single-logo-wrapper{
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-bottom:20px;
+  margin-bottom:22px;
   width:auto;
   height:auto;
   transform:none;
@@ -152,12 +157,12 @@ body.bg-mono{background-image:radial-gradient(circle at 20% 20%,rgba(148,163,184
   transition:none;
 }
 .single-logo-img{
-  width:110px;
-  height:110px;
+  width:180px;
+  height:180px;
   object-fit:contain;
-  border-radius:18px;
-  opacity:0.92;
-  filter:drop-shadow(0 8px 25px rgba(147,51,234,0.5));
+  border-radius:26px;
+  opacity:0.95;
+  filter:drop-shadow(0 8px 30px rgba(147,51,234,0.55));
   transition:opacity 0.3s ease, transform 0.3s ease;
   animation:logoFloat 3s ease-in-out infinite;
   display:block;
@@ -165,48 +170,47 @@ body.bg-mono{background-image:radial-gradient(circle at 20% 20%,rgba(148,163,184
 }
 .single-logo-img:hover{opacity:1;transform:scale(1.05);animation-play-state:paused}
 @keyframes logoFadeIn{0%{opacity:0;transform:scale(0.95);}100%{opacity:1;transform:scale(1);}}
-@keyframes logoFloat{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-8px) rotate(0deg);}}
+@keyframes logoFloat{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-10px) rotate(0deg);}}
 @media (min-width:641px) and (max-width:1024px){
-  .single-logo-img{width:150px;height:150px;border-radius:22px;}
+  .single-logo-img{width:220px;height:220px;border-radius:32px;}
 }
 @media (min-width:1025px){
-  .single-logo-img{width:180px;height:180px;border-radius:26px;}
+  .single-logo-img{width:260px;height:260px;border-radius:38px;}
 }
 .single-logo-wrapper.animated .single-logo-img{animation-duration:2.5s;animation-iteration-count:infinite;animation-timing-function:ease-in-out}
-@keyframes animFloat{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-12px) rotate(0deg);}}
+@keyframes animFloat{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-14px) rotate(0deg);}}
 .anim-float .single-logo-img{animation-name:animFloat;}
 @keyframes animSpin{100%{transform:rotate(360deg);}}
 .anim-spin .single-logo-img{animation-name:animSpin;}
 @keyframes animPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
 .anim-pulse .single-logo-img{animation-name:animPulse;}
-@keyframes animShake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
+@keyframes animShake{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px);}75%{transform:translateX(8px);}}
 .anim-shake .single-logo-img{animation-name:animShake;}
-@keyframes animColorFlow{0%{filter:hue-rotate(0deg);}100%{filter:hue-rotate(360deg);}}
+@keyframes animColorFlow{0%{filter:drop-shadow(0 8px 30px rgba(147,51,234,0.55)) hue-rotate(0deg);}100%{filter:drop-shadow(0 8px 30px rgba(147,51,234,0.55)) hue-rotate(360deg);}}
 .anim-colorflow .single-logo-img{animation-name:animColorFlow;}
-@keyframes animBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-20px);}}
+@keyframes animBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-24px);}}
 .anim-bounce .single-logo-img{animation-name:animBounce;}
-@keyframes animGlow{0%,100%{filter:drop-shadow(0 8px 25px rgba(147,51,234,0.5));}50%{filter:drop-shadow(0 8px 40px #c084fc) drop-shadow(0 0 60px #9333ea);}}
+@keyframes animGlow{0%,100%{filter:drop-shadow(0 8px 30px rgba(147,51,234,0.55));}50%{filter:drop-shadow(0 8px 45px #c084fc) drop-shadow(0 0 70px #9333ea);}}
 .anim-glow .single-logo-img{animation-name:animGlow;}
-@keyframes animWave{0%,100%{transform:translateY(0) rotate(0deg);}25%{transform:translateY(-10px) rotate(-3deg);}75%{transform:translateY(10px) rotate(3deg);}}
+@keyframes animWave{0%,100%{transform:translateY(0) rotate(0deg);}25%{transform:translateY(-12px) rotate(-4deg);}75%{transform:translateY(12px) rotate(4deg);}}
 .anim-wave .single-logo-img{animation-name:animWave;}
-@keyframes animStretch{0%,100%{transform:scaleY(1) scaleX(1);}50%{transform:scaleY(1.15) scaleX(0.92);}}
+@keyframes animStretch{0%,100%{transform:scaleY(1) scaleX(1);}50%{transform:scaleY(1.18) scaleX(0.9);}}
 .anim-stretch .single-logo-img{animation-name:animStretch;}
 @keyframes animFlip{0%{transform:perspective(400px) rotateY(0deg);}100%{transform:perspective(400px) rotateY(360deg);}}
 .anim-flip .single-logo-img{animation-name:animFlip;}
-@keyframes animMagnet{0%,100%{transform:translate(0,0);}25%{transform:translate(-5px,-5px);}75%{transform:translate(5px,5px);}}
+@keyframes animMagnet{0%,100%{transform:translate(0,0);}25%{transform:translate(-7px,-7px);}75%{transform:translate(7px,7px);}}
 .anim-magnet .single-logo-img{animation-name:animMagnet;}
-@keyframes animShimmer{0%{filter:brightness(1);}50%{filter:brightness(1.5) drop-shadow(0 0 20px #fff);}100%{filter:brightness(1);}}
+@keyframes animShimmer{0%{filter:brightness(1) drop-shadow(0 8px 30px rgba(147,51,234,0.55));}50%{filter:brightness(1.6) drop-shadow(0 0 24px #fff);}100%{filter:brightness(1) drop-shadow(0 8px 30px rgba(147,51,234,0.55));}}
 .anim-shimmer .single-logo-img{animation-name:animShimmer;}
-@keyframes animHeartbeat{0%,100%{transform:scale(1);}14%{transform:scale(1.08);}28%{transform:scale(1);}42%{transform:scale(1.08);}70%{transform:scale(1);}}
+@keyframes animHeartbeat{0%,100%{transform:scale(1);}14%{transform:scale(1.1);}28%{transform:scale(1);}42%{transform:scale(1.1);}70%{transform:scale(1);}}
 .anim-heartbeat .single-logo-img{animation-name:animHeartbeat;}
-@keyframes animDrift{0%,100%{transform:translate(0,0) rotate(0deg);}33%{transform:translate(8px,-8px) rotate(3deg);}66%{transform:translate(-8px,8px) rotate(-3deg);}}
+@keyframes animDrift{0%,100%{transform:translate(0,0) rotate(0deg);}33%{transform:translate(12px,-12px) rotate(4deg);}66%{transform:translate(-12px,12px) rotate(-4deg);}}
 .anim-drift .single-logo-img{animation-name:animDrift;}
-@keyframes animMatrix{0%{opacity:1;transform:translateY(0);}50%{opacity:0.4;transform:translateY(-8px);}100%{opacity:1;transform:translateY(0);}}
+@keyframes animMatrix{0%{opacity:1;transform:translateY(0);}50%{opacity:0.4;transform:translateY(-10px);}100%{opacity:1;transform:translateY(0);}}
 .anim-matrix .single-logo-img{animation-name:animMatrix;}
 
-/* Logo animasyon grid - scroll */
 #logoAnimGrid{
-  max-height:320px;
+  max-height:340px;
   overflow-y:auto;
   padding-right:6px;
   -webkit-overflow-scrolling:touch;
@@ -352,7 +356,7 @@ section{border-top:1px solid var(--line-color);padding-top:24px}
 .forecast-day .f-temp span{font-size:.62rem;color:var(--text-secondary);font-weight:500}
 
 /* ============================================================
-   WIDGETS (Hava durumu widget'ı kaldırıldı)
+   WIDGETS
    ============================================================ */
 .widget-card{background:linear-gradient(135deg,rgba(var(--accent-rgb),0.12),rgba(var(--accent-rgb),0.04));border:1px solid rgba(var(--accent-rgb),0.3);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;transition:all 0.3s ease}
 .widget-card:hover{border-color:var(--accent);transform:translateY(-2px)}
@@ -374,7 +378,6 @@ section{border-top:1px solid var(--line-color);padding-top:24px}
 .widget-prayer-name{color:var(--text-secondary);font-weight:600;}
 .widget-prayer-time{color:var(--text-color-override);font-weight:600;}
 .widget-selector{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px;}
-@media (min-width:641px){.widget-selector{grid-template-columns:repeat(2,1fr);}}
 .widget-checkbox{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--box-bg);border:1px solid var(--line-color);border-radius:10px;cursor:pointer;font-size:.75rem;color:var(--text-color-override);transition:all 0.2s;}
 .widget-checkbox:hover{border-color:var(--accent);}
 .widget-checkbox input{accent-color:var(--accent);width:16px;height:16px;}
@@ -425,7 +428,6 @@ footer{border-top:1px solid var(--line-color);padding-top:20px;padding-bottom:12
 .modal-header-left{display:flex;flex-direction:row;align-items:center;gap:8px;flex:1;min-width:0;order:1}
 .modal-header-actions{display:flex;align-items:center;gap:8px;order:3;margin-left:auto}
 .modal-title{flex:1;text-align:center;font-size:.95rem;font-weight:600;color:var(--text-secondary);margin:0;order:2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.modal-brand{display:none !important}
 .modal-close-btn{background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-secondary);width:28px;height:28px;border-radius:10px;font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .modal-close-btn:hover{border-color:var(--accent);color:var(--accent);transform:rotate(90deg)}
 @media (min-width:768px){.modal-container{max-width:600px;padding:30px}.modal-close-btn{width:34px;height:34px;font-size:.95rem}}
@@ -682,12 +684,6 @@ body.light-mode .chat-msg.theirs .chat-msg-text{background:#fff;border-color:rgb
 .filter-chip{flex-shrink:0;padding:6px 12px;border-radius:20px;background:var(--box-bg);border:1px solid var(--line-color);color:var(--text-secondary);font-size:.7rem;font-weight:600;cursor:pointer;white-space:nowrap}
 .filter-chip.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent}
 
-/* User detail */
-.user-detail-modal-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line-color);font-size:.8rem;gap:10px}
-.user-detail-modal-row:last-child{border-bottom:none}
-.user-detail-modal-row span:first-child{color:var(--text-secondary);font-weight:600}
-.user-detail-modal-row span:last-child{color:var(--text-color-override);font-weight:500;text-align:right;word-break:break-all}
-
 /* Order */
 .order-section-box{background:linear-gradient(135deg,rgba(var(--accent-rgb),.12),rgba(var(--accent-rgb),.04));border:1px solid rgba(var(--accent-rgb),.3)}
 .order-status-badge{display:inline-flex;align-items:center;gap:3px;font-size:.55rem;font-weight:800;padding:2px 7px;border-radius:8px;text-transform:uppercase;letter-spacing:.5px}
@@ -752,10 +748,18 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 <!-- Security -->
 <div id="security-curtain"></div>
 
-<!-- Privacy (KALDIRILDI) -->
-<div id="privacyCurtain" style="display:none !important"></div>
+<!-- Privacy Curtain -->
+<div id="privacyCurtain">
+  <img class="privacy-logo" src="https://muminsultani.com/img/ms.png" alt="logo">
+  <h1 id="privacyBrandName">muminsultani</h1>
+  <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
+  <p id="privacyMsg">Site geçici olarak kapalıdır. Lütfen daha sonra tekrar deneyin.</p>
+  <button type="button" class="privacy-admin-btn" onclick="triggerAdminAccess()">
+    <i class="fa-solid fa-user-shield"></i> Admin Girişi
+  </button>
+</div>
 
-<!-- Intro -->
+<!-- Intro — Sadece kendi logo resmimiz. Canvas içinde yuvarlak logo ÇİZİLMEZ. -->
 <div id="intro-screen" class="intro-dark">
   <canvas id="intro-canvas"></canvas>
   <canvas id="intro-fish-canvas"></canvas>
@@ -774,9 +778,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 
 <div class="wrapper">
 
-<!-- ============================================================
-     HEADER
-     ============================================================ -->
+<!-- HEADER -->
 <header class="header-section">
   <div class="header-top">
     <div class="brand-wrap">
@@ -828,9 +830,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   </div>
 </header>
 
-<!-- ============================================================
-     CONTENT SECTIONS
-     ============================================================ -->
+<!-- CONTENT SECTIONS -->
 <div id="contentSections" style="display:flex;flex-direction:column;gap:32px">
 
   <section id="sectionWidgets" style="display:none">
@@ -890,9 +890,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 
 </div>
 
-<!-- ============================================================
-     FOOTER
-     ============================================================ -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-main">
     <div class="footer-qr-container">
@@ -997,7 +995,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 </div>
 
 <!-- ============================================================
-     MODAL — DIRECT CONTACT
+     MODAL — DIRECT CONTACT (SIGN IN / SIGN UP)
      ============================================================ -->
 <div class="modal-overlay" id="directContactModal">
   <div class="modal-container">
@@ -1567,7 +1565,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 </div>
 
 <!-- ============================================================
-     MODAL — ADMIN PANEL (Intro Kod Animasyonu KALDIRILDI)
+     MODAL — ADMIN PANEL
      ============================================================ -->
 <div class="modal-overlay admin-z" id="adminPanelModal">
   <div class="modal-container">
@@ -1621,6 +1619,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
         <div class="admin-stat"><i class="fa-solid fa-user-check"></i> <span id="dash-verified-count">Verified: 0</span></div>
         <div class="admin-stat"><i class="fa-solid fa-eye"></i> <span id="dash-visitors-count">Visitors: 0</span></div>
         <div class="admin-stat"><i class="fa-solid fa-calendar-day"></i> <span id="dash-today-visitors">Today: 0</span></div>
+        <div class="admin-stat"><i class="fa-solid fa-shield-halved"></i> <span id="dash-privacy-status">Privacy: —</span></div>
         <div class="admin-stat"><i class="fa-solid fa-comment-slash"></i> <span id="dash-chat-status">Chat Feature: —</span></div>
       </div>
 
@@ -1682,6 +1681,15 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
         <div class="toggle-row"><div class="toggle-label"><div class="toggle-label-title">🇬🇧 English</div></div><label class="toggle-switch"><input type="checkbox" id="langToggle_en" onchange="toggleLangVisibility('en',this.checked)"><span class="toggle-slider"></span></label></div>
         <div class="toggle-row"><div class="toggle-label"><div class="toggle-label-title">🇹🇷 Türkçe</div></div><label class="toggle-switch"><input type="checkbox" id="langToggle_tr" onchange="toggleLangVisibility('tr',this.checked)"><span class="toggle-slider"></span></label></div>
         <div class="toggle-row"><div class="toggle-label"><div class="toggle-label-title">🇩🇪 Deutsch</div></div><label class="toggle-switch"><input type="checkbox" id="langToggle_de" onchange="toggleLangVisibility('de',this.checked)"><span class="toggle-slider"></span></label></div>
+
+        <h4 class="admin-subsection-title"><i class="fa-solid fa-shield-halved"></i> Site Gizliliği</h4>
+        <div class="toggle-row" style="background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3)">
+          <div class="toggle-label">
+            <div class="toggle-label-title"><i class="fa-solid fa-lock" style="color:#ef4444"></i> Siteyi Kapat (Gizli Mod)</div>
+            <div style="font-size:.65rem;color:var(--text-secondary);margin-top:2px">Ziyaretçiler "kapalı" ekranı görür. Admin #admin ile girer</div>
+          </div>
+          <label class="toggle-switch"><input type="checkbox" id="siteClosedToggle" onchange="toggleSiteClosed(this.checked)"><span class="toggle-slider"></span></label>
+        </div>
 
         <h4 class="admin-subsection-title"><i class="fa-solid fa-comments"></i> Sohbet (Chat) Gizliliği</h4>
         <div class="toggle-row" style="background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.3)">
@@ -1869,7 +1877,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
         <div class="effect-grid" id="fishStyleGrid"></div>
       </div>
 
-      <!-- INTRO (Kod Animasyonu KALDIRILDI) -->
+      <!-- INTRO -->
       <div class="admin-section" data-section="intro">
         <div class="admin-hint"><i class="fa-solid fa-mobile-screen" style="color:var(--accent)"></i> Intro ekranının animasyonunu, balıklarını ve arka planını özelleştirin.</div>
         <h4 class="admin-subsection-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Intro Animasyonu</h4>
@@ -1889,7 +1897,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
         </div>
       </div>
 
-      <!-- WIDGETS (Sadece Bitcoin & Ethereum) -->
+      <!-- WIDGETS -->
       <div class="admin-section" data-section="widgets">
         <div class="admin-hint">
           <i class="fa-solid fa-puzzle-piece" style="color:var(--accent)"></i> 
@@ -2119,8 +2127,8 @@ const PASSWORD_FIELDS=['adminPasswordInput','contactClientPassword','changeOldPa
 const PW_LABELS={en:{pw_enter:'password',pw_very_weak:'very weak',pw_weak:'weak',pw_medium:'medium',pw_strong:'strong',pw_very_strong:'very strong'},tr:{pw_enter:'şifre',pw_very_weak:'çok zayıf',pw_weak:'zayıf',pw_medium:'orta',pw_strong:'güçlü',pw_very_strong:'çok güçlü'},de:{pw_enter:'passwort',pw_very_weak:'sehr schwach',pw_weak:'schwach',pw_medium:'mittel',pw_strong:'stark',pw_very_strong:'sehr stark'}};
 
 const LANG={
-en:{role:"Software Developer",sec_apps:"My Applications",sec_exp:"Experience",sec_setup:"Setup & Environment",sec_stack:"Core Stack",sec_weather:"Weather",sec_widgets:"Widgets",contact_sub:"Sign In / Sign Up",contact_main:"Sign In To Join Us",scan_text:"Scan To Connect",copyright:"© 2026 muminsultani • All Rights Reserved.",chat_search_ph:"search...",chat_ph:"type a message...",chat_no_users:"no other users.",chat_no_msgs:"no messages yet",chat_start:"start the conversation 👋",chat_you:"you",chat_voice:"🎤 voice message",order_title:"Order Software",order_sub:"Need a website or app?",order_main:"Place an Order",order_modal_title:"Order Software",ord_name:"Name & Surname",ord_email:"Email",ord_type:"Project Type",ord_budget:"Budget",ord_deadline:"Deadline",ord_desc:"Project Details",ord_submit:"Order",ord_website:"Website",ord_mobile:"Mobile App",ord_web_app:"Web App",ord_other:"Other",ord_name_ph:"name & surname",ord_email_ph:"email",ord_budget_ph:"optional",ord_deadline_ph:"e.g. 2 weeks",ord_desc_ph:"project details",edit_profile:"Edit Profile",change_password:"Change Password",settings:"Settings",delete_account:"Delete Account",logout:"Logout",check_email:"Check Your Email",enter_code:"Enter Code",resend:"Resend",verify_email:"Verify Email",verify_desc:"Enter the 5-digit code from your email.",code:"Code",verify:"Verify",account_access:"Account Access",signin_tab:"Sign In",signup_tab:"Sign Up",name:"Name & Surname",username:"Username",email:"Email",password:"Password",forgot:"forgot password?",next:"Next",go:"Go",name_ph:"name & surname",username_ph:"@username",email_ph:"email or username",password_ph:"password",pw_recovery:"Password Recovery",pw_recovery_desc:"Enter your registered email.",send:"Send",reset_pw:"Reset Password",new_password:"New Password",update:"Update",change_pw_title:"Change Password",current_password:"Current Password",confirm_password:"Confirm Password",del_acc_title:"Delete Account",del_warn:"Warning: cannot be undone.",delete:"Delete",confirm_del:"Confirm Deletion",delete_account_btn:"Delete Account",edit_title:"Edit Profile",profile_photo:"Profile Photo",change_photo:"Change Photo",reset:"Reset",name_surname:"Name & Surname",website:"Website",dob:"Date of Birth",save:"Save",settings_title:"Settings",settings_hint:"Customize your site appearance.",color_theme:"Color Theme",font_color:"Font Color",font_family:"Font",background:"Background",chat_bg:"Chat Background",settings_reset:"Reset",settings_ok:"OK",crop_photo:"Crop Photo",cancel:"Cancel",apply:"Apply",message:"Message",close:"Close",send_message:"Send Message",user_profile:"User Profile",joined:"Joined",no_orders:"No orders yet.",you_must_signin:"You must sign in to place an order.",order_received:"Order received! We will contact you soon.",fill_fields:"Please fill in all fields.",invalid_credentials:"Invalid credentials!",email_registered:"Email already registered!",username_taken:"This username is already taken.",min_7:"Minimum 7 characters.",pw_8:"Password must be at least 8 characters.",signin_success:"Signed in successfully!",signup_success:"Account created successfully!",logout_confirm:"Are you sure you want to log out?",logout_done:"Session closed.",order_approved:"Order approved and email sent!",gt_signin:"Sign In",gt_back:"Back",gt_ok:"OK",gt_cancel:"Cancel",gt_yes:"Yes",min7:"min 7 chars",taken:"taken",available:"available",dob_day_ph:'dd',dob_month_ph:'mm',dob_year_ph:'yyyy',cur_pw_ph:'current password',new_pw_ph:'new password',confirm_pw_ph:'confirm password',username_ph2:'@username',email_addr_ph:'email address',forgot_pw:'forgot password?',master_pw_ph:'master password',privacy_closed:'This site is temporarily closed.',admin_user_profile:'User Profile',admin_chat_user:'Chat',admin_send_email:'Send Email',admin_view:'View',admin_verify:'Verify',email_subject_ph:'email subject',email_message_ph:'write your message here...',weather_loading:'Loading weather...',weather_wind:'Wind',weather_humidity:'Humidity',weather_feels:'Feels like',weather_forecast:'5-Day Forecast',widgets_title:'Widgets'},
-tr:{role:"Yazılım Geliştirici",sec_apps:"Uygulamalarım",sec_exp:"Deneyim",sec_setup:"Kurulum & Ortam",sec_stack:"Temel Yığın",sec_weather:"Hava Durumu",sec_widgets:"Widget'lar",contact_sub:"Giriş Yap / Kayıt Ol",contact_main:"Bize Katılmak İçin Giriş Yapın",scan_text:"Bağlanmak İçin Tarayın",copyright:"© 2026 muminsultani • Tüm Hakları Saklıdır.",chat_search_ph:"ara...",chat_ph:"bir mesaj yaz...",chat_no_users:"başka kullanıcı yok.",chat_no_msgs:"henüz mesaj yok",chat_start:"sohbete başla 👋",chat_you:"sen",chat_voice:"🎤 sesli mesaj",order_title:"Yazılım Siparişi",order_sub:"Web sitesi veya uygulama mı lazım?",order_main:"Sipariş Ver",order_modal_title:"Yazılım Siparişi",ord_name:"Ad & Soyad",ord_email:"Email",ord_type:"Proje Tipi",ord_budget:"Bütçe",ord_deadline:"Teslim Tarihi",ord_desc:"Proje Detayları",ord_submit:"Sipariş Ver",ord_website:"Website",ord_mobile:"Mobil Uygulama",ord_web_app:"Web Uygulaması",ord_other:"Diğer",ord_name_ph:"ad & soyad",ord_email_ph:"email",ord_budget_ph:"opsiyonel",ord_deadline_ph:"örn. 2 hafta",ord_desc_ph:"proje detayları",edit_profile:"Profili Düzenle",change_password:"Şifre Değiştir",settings:"Ayarlar",delete_account:"Hesabı Sil",logout:"Çıkış Yap",check_email:"Emailinizi Kontrol Edin",enter_code:"Kodu Girin",resend:"Yeniden Gönder",verify_email:"Emaili Doğrula",verify_desc:"Emailinizdeki 5 haneli kodu girin.",code:"Kod",verify:"Doğrula",account_access:"Hesap Erişimi",signin_tab:"Giriş Yap",signup_tab:"Kayıt Ol",name:"Ad & Soyad",username:"Kullanıcı Adı",email:"Email",password:"Şifre",forgot:"şifremi unuttum?",next:"İleri",go:"Git",name_ph:"ad & soyad",username_ph:"@username",email_ph:"email veya kullanıcı adı",password_ph:"şifre",pw_recovery:"Şifre Kurtarma",pw_recovery_desc:"Kayıtlı emailinizi girin.",send:"Gönder",reset_pw:"Şifre Sıfırla",new_password:"Yeni Şifre",update:"Güncelle",change_pw_title:"Şifre Değiştir",current_password:"Mevcut Şifre",confirm_password:"Şifre Onayı",del_acc_title:"Hesabı Sil",del_warn:"Uyarı: geri alınamaz.",delete:"Sil",confirm_del:"Silmeyi Onayla",delete_account_btn:"Hesabı Sil",edit_title:"Profili Düzenle",profile_photo:"Profil Fotoğrafı",change_photo:"Fotoğrafı Değiştir",reset:"Sıfırla",name_surname:"Ad & Soyad",website:"Web Sitesi",dob:"Doğum Tarihi",save:"Kaydet",settings_title:"Ayarlar",settings_hint:"Site görünümünüzü özelleştirin.",color_theme:"Renk Teması",font_color:"Yazı Rengi",font_family:"Yazı Tipi",background:"Arkaplan",chat_bg:"Sohbet Arkaplanı",settings_reset:"Sıfırla",settings_ok:"Tamam",crop_photo:"Fotoğrafı Kırp",cancel:"İptal",apply:"Uygula",message:"Mesaj",close:"Kapat",send_message:"Mesaj Gönder",user_profile:"Kullanıcı Profili",joined:"Katıldı",no_orders:"Henüz sipariş yok.",you_must_signin:"Sipariş vermek için giriş yapmalısınız.",order_received:"Siparişiniz alındı! En kısa sürede iletişime geçeceğiz.",fill_fields:"Lütfen tüm alanları doldurun.",invalid_credentials:"Geçersiz bilgiler!",email_registered:"Email zaten kayıtlı!",username_taken:"Bu kullanıcı adı alınmış.",min_7:"En az 7 karakter.",pw_8:"Şifre en az 8 karakter olmalı.",signin_success:"Başarıyla giriş yapıldı!",signup_success:"Hesap başarıyla oluşturuldu!",logout_confirm:"Çıkış yapmak istediğinizden emin misiniz?",logout_done:"Oturum kapatıldı.",order_approved:"Sipariş onaylandı ve email gönderildi!",gt_signin:"Giriş Yap",gt_back:"Geri",gt_ok:"Tamam",gt_cancel:"İptal",gt_yes:"Evet",min7:"min 7 karakter",taken:"alınmış",available:"uygun",dob_day_ph:'gg',dob_month_ph:'aa',dob_year_ph:'yyyy',cur_pw_ph:'mevcut şifre',new_pw_ph:'yeni şifre',confirm_pw_ph:'şifre onayı',username_ph2:'@kullanıcıadı',email_addr_ph:'email adresi',forgot_pw:'şifremi unuttum?',master_pw_ph:'ana şifre',privacy_closed:'Site geçici olarak kapalıdır.',admin_user_profile:'Kullanıcı Profili',admin_chat_user:'Sohbet',admin_send_email:'Email Gönder',admin_view:'Görüntüle',admin_verify:'Doğrula',email_subject_ph:'email konusu',email_message_ph:'mesajınızı buraya yazın...',weather_loading:'Hava durumu yükleniyor...',weather_wind:'Rüzgar',weather_humidity:'Nem',weather_feels:'Hissedilen',weather_forecast:'5 Günlük Tahmin',widgets_title:'Widget\'lar'},
+en:{role:"Software Developer",sec_apps:"My Applications",sec_exp:"Experience",sec_setup:"Setup & Environment",sec_stack:"Core Stack",sec_weather:"Weather",sec_widgets:"Widgets",contact_sub:"Sign In / Sign Up",contact_main:"Sign In To Join Us",scan_text:"Scan To Connect",copyright:"© 2026 muminsultani • All Rights Reserved.",chat_search_ph:"search...",chat_ph:"type a message...",chat_no_users:"no other users.",chat_no_msgs:"no messages yet",chat_start:"start the conversation 👋",chat_you:"you",chat_voice:"🎤 voice message",order_title:"Order Software",order_sub:"Need a website or app?",order_main:"Place an Order",order_modal_title:"Order Software",ord_name:"Name & Surname",ord_email:"Email",ord_type:"Project Type",ord_budget:"Budget",ord_deadline:"Deadline",ord_desc:"Project Details",ord_submit:"Order",ord_website:"Website",ord_mobile:"Mobile App",ord_web_app:"Web App",ord_other:"Other",ord_name_ph:"name & surname",ord_email_ph:"email",ord_budget_ph:"optional",ord_deadline_ph:"e.g. 2 weeks",ord_desc_ph:"project details",edit_profile:"Edit Profile",change_password:"Change Password",settings:"Settings",delete_account:"Delete Account",logout:"Logout",check_email:"Check Your Email",enter_code:"Enter Code",resend:"Resend",verify_email:"Verify Email",verify_desc:"Enter the 5-digit code from your email.",code:"Code",verify:"Verify",account_access:"Account Access",signin_tab:"Sign In",signup_tab:"Sign Up",name:"Name & Surname",username:"Username",email:"Email",password:"Password",forgot:"forgot password?",next:"Next",go:"Go",name_ph:"name & surname",username_ph:"@username",email_ph:"email or username",password_ph:"password",pw_recovery:"Password Recovery",pw_recovery_desc:"Enter your registered email.",send:"Send",reset_pw:"Reset Password",new_password:"New Password",update:"Update",change_pw_title:"Change Password",current_password:"Current Password",confirm_password:"Confirm Password",del_acc_title:"Delete Account",del_warn:"Warning: cannot be undone.",delete:"Delete",confirm_del:"Confirm Deletion",delete_account_btn:"Delete Account",edit_title:"Edit Profile",profile_photo:"Profile Photo",change_photo:"Change Photo",reset:"Reset",name_surname:"Name & Surname",website:"Website",dob:"Date of Birth",save:"Save",settings_title:"Settings",settings_hint:"Customize your site appearance.",color_theme:"Color Theme",font_color:"Font Color",font_family:"Font",background:"Background",chat_bg:"Chat Background",settings_reset:"Reset",settings_ok:"OK",crop_photo:"Crop Photo",cancel:"Cancel",apply:"Apply",message:"Message",close:"Close",send_message:"Send Message",user_profile:"User Profile",joined:"Joined",no_orders:"No orders yet.",you_must_signin:"You must sign in to place an order.",order_received:"Order received! We will contact you soon.",fill_fields:"Please fill in all fields.",invalid_credentials:"Invalid credentials!",email_registered:"Email already registered!",username_taken:"This username is already taken.",min_7:"Minimum 7 characters.",pw_8:"Password must be at least 8 characters.",signin_success:"Signed in successfully!",signup_success:"Account created successfully!",logout_confirm:"Are you sure you want to log out?",logout_done:"Session closed.",order_approved:"Order approved and email sent!",gt_signin:"Sign In",gt_back:"Back",gt_ok:"OK",gt_cancel:"Cancel",gt_yes:"Yes",min7:"min 7 chars",taken:"taken",available:"available",dob_day_ph:'dd',dob_month_ph:'mm',dob_year_ph:'yyyy',cur_pw_ph:'current password',new_pw_ph:'new password',confirm_pw_ph:'confirm password',username_ph2:'@username',email_addr_ph:'email address',forgot_pw:'forgot password?',master_pw_ph:'master password',privacy_closed:'This site is temporarily closed. Please try again later.',admin_user_profile:'User Profile',admin_chat_user:'Chat',admin_send_email:'Send Email',admin_view:'View',admin_verify:'Verify',email_subject_ph:'email subject',email_message_ph:'write your message here...',weather_loading:'Loading weather...',weather_wind:'Wind',weather_humidity:'Humidity',weather_feels:'Feels like',weather_forecast:'5-Day Forecast',widgets_title:'Widgets'},
+tr:{role:"Yazılım Geliştirici",sec_apps:"Uygulamalarım",sec_exp:"Deneyim",sec_setup:"Kurulum & Ortam",sec_stack:"Temel Yığın",sec_weather:"Hava Durumu",sec_widgets:"Widget'lar",contact_sub:"Giriş Yap / Kayıt Ol",contact_main:"Bize Katılmak İçin Giriş Yapın",scan_text:"Bağlanmak İçin Tarayın",copyright:"© 2026 muminsultani • Tüm Hakları Saklıdır.",chat_search_ph:"ara...",chat_ph:"bir mesaj yaz...",chat_no_users:"başka kullanıcı yok.",chat_no_msgs:"henüz mesaj yok",chat_start:"sohbete başla 👋",chat_you:"sen",chat_voice:"🎤 sesli mesaj",order_title:"Yazılım Siparişi",order_sub:"Web sitesi veya uygulama mı lazım?",order_main:"Sipariş Ver",order_modal_title:"Yazılım Siparişi",ord_name:"Ad & Soyad",ord_email:"Email",ord_type:"Proje Tipi",ord_budget:"Bütçe",ord_deadline:"Teslim Tarihi",ord_desc:"Proje Detayları",ord_submit:"Sipariş Ver",ord_website:"Website",ord_mobile:"Mobil Uygulama",ord_web_app:"Web Uygulaması",ord_other:"Diğer",ord_name_ph:"ad & soyad",ord_email_ph:"email",ord_budget_ph:"opsiyonel",ord_deadline_ph:"örn. 2 hafta",ord_desc_ph:"proje detayları",edit_profile:"Profili Düzenle",change_password:"Şifre Değiştir",settings:"Ayarlar",delete_account:"Hesabı Sil",logout:"Çıkış Yap",check_email:"Emailinizi Kontrol Edin",enter_code:"Kodu Girin",resend:"Yeniden Gönder",verify_email:"Emaili Doğrula",verify_desc:"Emailinizdeki 5 haneli kodu girin.",code:"Kod",verify:"Doğrula",account_access:"Hesap Erişimi",signin_tab:"Giriş Yap",signup_tab:"Kayıt Ol",name:"Ad & Soyad",username:"Kullanıcı Adı",email:"Email",password:"Şifre",forgot:"şifremi unuttum?",next:"İleri",go:"Git",name_ph:"ad & soyad",username_ph:"@username",email_ph:"email veya kullanıcı adı",password_ph:"şifre",pw_recovery:"Şifre Kurtarma",pw_recovery_desc:"Kayıtlı emailinizi girin.",send:"Gönder",reset_pw:"Şifre Sıfırla",new_password:"Yeni Şifre",update:"Güncelle",change_pw_title:"Şifre Değiştir",current_password:"Mevcut Şifre",confirm_password:"Şifre Onayı",del_acc_title:"Hesabı Sil",del_warn:"Uyarı: geri alınamaz.",delete:"Sil",confirm_del:"Silmeyi Onayla",delete_account_btn:"Hesabı Sil",edit_title:"Profili Düzenle",profile_photo:"Profil Fotoğrafı",change_photo:"Fotoğrafı Değiştir",reset:"Sıfırla",name_surname:"Ad & Soyad",website:"Web Sitesi",dob:"Doğum Tarihi",save:"Kaydet",settings_title:"Ayarlar",settings_hint:"Site görünümünüzü özelleştirin.",color_theme:"Renk Teması",font_color:"Yazı Rengi",font_family:"Yazı Tipi",background:"Arkaplan",chat_bg:"Sohbet Arkaplanı",settings_reset:"Sıfırla",settings_ok:"Tamam",crop_photo:"Fotoğrafı Kırp",cancel:"İptal",apply:"Uygula",message:"Mesaj",close:"Kapat",send_message:"Mesaj Gönder",user_profile:"Kullanıcı Profili",joined:"Katıldı",no_orders:"Henüz sipariş yok.",you_must_signin:"Sipariş vermek için giriş yapmalısınız.",order_received:"Siparişiniz alındı! En kısa sürede iletişime geçeceğiz.",fill_fields:"Lütfen tüm alanları doldurun.",invalid_credentials:"Geçersiz bilgiler!",email_registered:"Email zaten kayıtlı!",username_taken:"Bu kullanıcı adı alınmış.",min_7:"En az 7 karakter.",pw_8:"Şifre en az 8 karakter olmalı.",signin_success:"Başarıyla giriş yapıldı!",signup_success:"Hesap başarıyla oluşturuldu!",logout_confirm:"Çıkış yapmak istediğinizden emin misiniz?",logout_done:"Oturum kapatıldı.",order_approved:"Sipariş onaylandı ve email gönderildi!",gt_signin:"Giriş Yap",gt_back:"Geri",gt_ok:"Tamam",gt_cancel:"İptal",gt_yes:"Evet",min7:"min 7 karakter",taken:"alınmış",available:"uygun",dob_day_ph:'gg',dob_month_ph:'aa',dob_year_ph:'yyyy',cur_pw_ph:'mevcut şifre',new_pw_ph:'yeni şifre',confirm_pw_ph:'şifre onayı',username_ph2:'@kullanıcıadı',email_addr_ph:'email adresi',forgot_pw:'şifremi unuttum?',master_pw_ph:'ana şifre',privacy_closed:'Site geçici olarak kapalıdır. Lütfen daha sonra tekrar deneyin.',admin_user_profile:'Kullanıcı Profili',admin_chat_user:'Sohbet',admin_send_email:'Email Gönder',admin_view:'Görüntüle',admin_verify:'Doğrula',email_subject_ph:'email konusu',email_message_ph:'mesajınızı buraya yazın...',weather_loading:'Hava durumu yükleniyor...',weather_wind:'Rüzgar',weather_humidity:'Nem',weather_feels:'Hissedilen',weather_forecast:'5 Günlük Tahmin',widgets_title:'Widget\'lar'},
 de:{role:"Softwareentwickler",sec_apps:"Meine Anwendungen",sec_exp:"Erfahrung",sec_setup:"Setup & Umgebung",sec_stack:"Tech-Stack",sec_weather:"Wetter",sec_widgets:"Widgets",contact_sub:"Anmelden / Registrieren",contact_main:"Anmelden um beizutreten",scan_text:"Zum Verbinden scannen",copyright:"© 2026 muminsultani • Alle Rechte vorbehalten.",chat_search_ph:"suchen...",chat_ph:"Nachricht schreiben...",chat_no_users:"keine anderen Benutzer.",chat_no_msgs:"noch keine Nachrichten",chat_start:"starte das Gespräch 👋",chat_you:"du",chat_voice:"🎤 Sprachnachricht",order_title:"Software bestellen",order_sub:"Brauchst du eine Website oder App?",order_main:"Bestellung aufgeben",order_modal_title:"Software bestellen",ord_name:"Name & Nachname",ord_email:"E-Mail",ord_type:"Projekttyp",ord_budget:"Budget",ord_deadline:"Liefertermin",ord_desc:"Projektdetails",ord_submit:"Bestellen",ord_website:"Website",ord_mobile:"Mobile App",ord_web_app:"Web-App",ord_other:"Andere",ord_name_ph:"name & nachname",ord_email_ph:"E-Mail",ord_budget_ph:"optional",ord_deadline_ph:"z.B. 2 Wochen",ord_desc_ph:"Projektdetails",edit_profile:"Profil bearbeiten",change_password:"Passwort ändern",settings:"Einstellungen",delete_account:"Konto löschen",logout:"Abmelden",check_email:"Überprüfe deine E-Mail",enter_code:"Code eingeben",resend:"Erneut senden",verify_email:"E-Mail bestätigen",verify_desc:"Gib den 5-stelligen Code ein.",code:"Code",verify:"Bestätigen",account_access:"Kontozugriff",signin_tab:"Anmelden",signup_tab:"Registrieren",name:"Name & Nachname",username:"Benutzername",email:"E-Mail",password:"Passwort",forgot:"Passwort vergessen?",next:"Weiter",go:"Los",name_ph:"name & nachname",username_ph:"@benutzername",email_ph:"E-Mail oder Benutzername",password_ph:"Passwort",pw_recovery:"Passwort-Wiederherstellung",pw_recovery_desc:"Gib deine registrierte E-Mail ein.",send:"Senden",reset_pw:"Passwort zurücksetzen",new_password:"Neues Passwort",update:"Aktualisieren",change_pw_title:"Passwort ändern",current_password:"Aktuelles Passwort",confirm_password:"Passwort bestätigen",del_acc_title:"Konto löschen",del_warn:"Warnung: nicht rückgängig zu machen.",delete:"Löschen",confirm_del:"Löschung bestätigen",delete_account_btn:"Konto löschen",edit_title:"Profil bearbeiten",profile_photo:"Profilbild",change_photo:"Foto ändern",reset:"Zurücksetzen",name_surname:"Name & Nachname",website:"Website",dob:"Geburtsdatum",save:"Speichern",settings_title:"Einstellungen",settings_hint:"Passe das Erscheinungsbild an.",color_theme:"Farbthema",font_color:"Schriftfarbe",font_family:"Schriftart",background:"Hintergrund",chat_bg:"Chat-Hintergrund",settings_reset:"Zurücksetzen",settings_ok:"OK",crop_photo:"Foto zuschneiden",cancel:"Abbrechen",apply:"Anwenden",message:"Nachricht",close:"Schließen",send_message:"Nachricht senden",user_profile:"Benutzerprofil",joined:"Beigetreten",no_orders:"Noch keine Bestellungen.",you_must_signin:"Du musst dich anmelden, um zu bestellen.",order_received:"Bestellung erhalten! Wir melden uns bald.",fill_fields:"Bitte alle Felder ausfüllen.",invalid_credentials:"Ungültige Anmeldedaten!",email_registered:"E-Mail bereits registriert!",username_taken:"Dieser Benutzername ist bereits vergeben.",min_7:"Mindestens 7 Zeichen.",pw_8:"Passwort muss mindestens 8 Zeichen haben.",signin_success:"Erfolgreich angemeldet!",signup_success:"Konto erfolgreich erstellt!",logout_confirm:"Möchtest du dich wirklich abmelden?",logout_done:"Sitzung beendet.",order_approved:"Bestellung genehmigt und E-Mail gesendet!",gt_signin:"Anmelden",gt_back:"Zurück",gt_ok:"OK",gt_cancel:"Abbrechen",gt_yes:"Ja",min7:"min 7 Zeichen",taken:"vergeben",available:"verfügbar",dob_day_ph:"tt",dob_month_ph:"mm",dob_year_ph:"jjjj",cur_pw_ph:"aktuelles Passwort",new_pw_ph:"neues Passwort",confirm_pw_ph:"Passwort bestätigen",username_ph2:"@benutzername",email_addr_ph:"E-Mail-Adresse",forgot_pw:"Passwort vergessen?",master_pw_ph:"Master-Passwort",privacy_closed:"Diese Seite ist vorübergehend geschlossen.",admin_user_profile:"Benutzerprofil",admin_chat_user:"Chat",admin_send_email:"E-Mail senden",admin_view:"Anzeigen",admin_verify:"Bestätigen",email_subject_ph:"E-Mail-Betreff",email_message_ph:"Schreibe deine Nachricht hier...",weather_loading:'Wetter wird geladen...',weather_wind:'Wind',weather_humidity:'Luftfeuchtigkeit',weather_feels:'Gefühlt',weather_forecast:'5-Tage-Vorhersage',widgets_title:'Widgets'}};
 
 const LANG_META={en:{label:'English',flag:'gb'},tr:{label:'Türkçe',flag:'tr'},de:{label:'Deutsch',flag:'de'}};
@@ -2135,7 +2143,6 @@ const BG_PRESETS=[{key:'default',name:'Default'},{key:'aurora',name:'Aurora'},{k
 const ANIM_PRESETS=[{key:'none',name:'None',icon:'fa-ban'},{key:'constellation',name:'Stars',icon:'fa-star'},{key:'particles',name:'Particles',icon:'fa-circle-nodes'},{key:'network',name:'Network',icon:'fa-diagram-project'},{key:'dots',name:'Dots',icon:'fa-ellipsis'},{key:'fireworks',name:'Fireworks',icon:'fa-fire'},{key:'matrix',name:'Matrix',icon:'fa-code'},{key:'bubbles',name:'Bubbles',icon:'fa-circle'},{key:'sparkles',name:'Sparkles',icon:'fa-sparkles'},{key:'galaxy',name:'Galaxy',icon:'fa-meteor'},{key:'snow',name:'Snow',icon:'fa-snowflake'},{key:'rain',name:'Rain',icon:'fa-cloud-rain'},{key:'hearts',name:'Hearts',icon:'fa-heart'},{key:'stars-fall',name:'Falling Stars',icon:'fa-star-of-life'}];
 const CHAT_BG_PRESETS=[{key:'default',name:'Default'},{key:'whatsapp',name:'WhatsApp'},{key:'telegram',name:'Telegram'},{key:'aurora',name:'Aurora'},{key:'sunset',name:'Sunset'},{key:'ocean',name:'Ocean'},{key:'forest',name:'Forest'},{key:'lava',name:'Lava'},{key:'cosmic',name:'Cosmic'},{key:'mint',name:'Mint'},{key:'rose',name:'Rose'}];
 const CONFETTI_PRESETS=[{key:'classic',name:'Classic',icon:'fa-star'},{key:'sides',name:'Sides',icon:'fa-arrows-left-right'},{key:'top',name:'Top',icon:'fa-cloud-arrow-down'},{key:'fireworks',name:'Fireworks',icon:'fa-fire'},{key:'hearts',name:'Hearts',icon:'fa-heart'},{key:'stars',name:'Stars',icon:'fa-star-of-life'}];
-const INTRO_BGS=[{key:'default',name:'Default'},{key:'aurora',name:'Aurora'},{key:'sunset',name:'Sunset'},{key:'ocean',name:'Ocean'},{key:'forest',name:'Forest'},{key:'lava',name:'Lava'},{key:'cosmic',name:'Cosmic'},{key:'mint',name:'Mint'},{key:'rose',name:'Rose'}];
 const INTRO_ANIMS=ANIM_PRESETS.filter(a=>a.key!=='none');
 const FISH_STYLES=[{key:'tropical',name:'Tropikal',icon:'fa-fish'},{key:'school',name:'Sürü',icon:'fa-fish-fins'},{key:'deep',name:'Derin Deniz',icon:'fa-water'},{key:'jellyfish',name:'Denizanası',icon:'fa-meteor'},{key:'shark',name:'Köpekbalığı',icon:'fa-shark'},{key:'mixed',name:'Karışık',icon:'fa-shuffle'}];
 const LOGO_ANIMATIONS=[
@@ -2158,7 +2165,7 @@ const LOGO_ANIMATIONS=[
 const SOCIAL_PLATFORMS=[{key:'github',label:'GitHub',icon:'fa-brands fa-github',placeholder:'https://github.com/username'},{key:'instagram',label:'Instagram',icon:'fa-brands fa-instagram',placeholder:'https://instagram.com/username'},{key:'gmail',label:'Gmail',icon:'fa-solid fa-envelope',placeholder:'email@example.com'},{key:'twitter',label:'Twitter/X',icon:'fa-brands fa-x-twitter',placeholder:'https://x.com/username'},{key:'facebook',label:'Facebook',icon:'fa-brands fa-facebook',placeholder:'https://facebook.com/username'},{key:'youtube',label:'YouTube',icon:'fa-brands fa-youtube',placeholder:'https://youtube.com/@channel'},{key:'linkedin',label:'LinkedIn',icon:'fa-brands fa-linkedin',placeholder:'https://linkedin.com/in/username'},{key:'tiktok',label:'TikTok',icon:'fa-brands fa-tiktok',placeholder:'https://tiktok.com/@username'},{key:'telegram',label:'Telegram',icon:'fa-brands fa-telegram',placeholder:'https://t.me/username'},{key:'whatsapp',label:'WhatsApp',icon:'fa-brands fa-whatsapp',placeholder:'https://wa.me/1234567890'},{key:'discord',label:'Discord',icon:'fa-brands fa-discord',placeholder:'https://discord.gg/invite'},{key:'pinterest',label:'Pinterest',icon:'fa-brands fa-pinterest',placeholder:'https://pinterest.com/username'}];
 
 /* ============================================================
-   ⚙️ DEFAULT CONTENT (widgets: sadece bitcoin + ethereum)
+   ⚙️ DEFAULT CONTENT
    ============================================================ */
 const DEFAULT_SITE_CONTENT={
   header:{brand:'muminsultani',roleEn:'Software Developer',roleTr:'Yazılım Geliştirici',roleDe:'Softwareentwickler'},
@@ -2189,7 +2196,6 @@ function getSiteContent(){
     if(r){
       const p=JSON.parse(r);
       const merged=deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),p);
-      if(merged.general)merged.general.siteClosed=false;
       if(merged.widgets&&Array.isArray(merged.widgets.list)){
         merged.widgets.list=merged.widgets.list.filter(k=>k==='bitcoin'||k==='ethereum');
       }
@@ -2199,12 +2205,12 @@ function getSiteContent(){
   return JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT));
 }
 function saveSiteContent(c){
-  if(c.general)c.general.siteClosed=false;
   if(c.widgets&&Array.isArray(c.widgets.list)){c.widgets.list=c.widgets.list.filter(k=>k==='bitcoin'||k==='ethereum');}
   c.lastEdit=new Date().toLocaleString();
   try{localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(c));}catch(e){}
   if(firebaseSyncTimer)clearTimeout(firebaseSyncTimer);
   firebaseSyncTimer=setTimeout(()=>{saveSiteContentToFirebase(c);},800);
+  applySitePrivacy();
 }
 function getDyn(path,fb){const c=getSiteContent(),p=path.split('.');let v=c;for(const x of p){if(v&&v[x]!==undefined)v=v[x];else return fb;}return(v===undefined||v===null)?fb:v;}
 function getUserPrefs(){try{return JSON.parse(localStorage.getItem(USER_PREFS_KEY)||'{}');}catch(e){return{};}}
@@ -2239,9 +2245,9 @@ function initFirebaseStorage(){
   }catch(e){firebaseStorageAvailable=false;return false;}
 }
 function initEmailJS(){if(!EMAILJS_CONFIG.enabled)return;try{if(typeof emailjs!=='undefined'){emailjs.init({publicKey:EMAILJS_CONFIG.publicKey});}}catch(e){}}
-async function loadSiteContentFromFirebase(){try{if(typeof firebase==='undefined')return false;if(!firebase.apps||!firebase.apps.length)return false;const snap=await firebase.database().ref('site_content').once('value');const remote=snap.val();if(remote&&typeof remote==='object'){if(remote.general)remote.general.siteClosed=false;const merged=deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),remote);if(merged.widgets&&Array.isArray(merged.widgets.list))merged.widgets.list=merged.widgets.list.filter(k=>k==='bitcoin'||k==='ethereum');localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(merged));return true;}}catch(e){}return false;}
-async function saveSiteContentToFirebase(content){try{if(typeof firebase==='undefined')return false;if(!firebase.apps||!firebase.apps.length)return false;if(isApplyingRemote)return false;if(content.general)content.general.siteClosed=false;if(content.widgets&&Array.isArray(content.widgets.list))content.widgets.list=content.widgets.list.filter(k=>k==='bitcoin'||k==='ethereum');await firebase.database().ref('site_content').set(content);return true;}catch(e){return false;}}
-function listenToFirebaseChanges(){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return;firebase.database().ref('site_content').on('value',snap=>{const remote=snap.val();if(!remote||typeof remote!=='object')return;if(remote.general)remote.general.siteClosed=false;const localRaw=localStorage.getItem(SITE_CONTENT_KEY);if(localRaw!==JSON.stringify(remote)){isApplyingRemote=true;const merged=deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),remote);if(merged.widgets&&Array.isArray(merged.widgets.list))merged.widgets.list=merged.widgets.list.filter(k=>k==='bitcoin'||k==='ethereum');localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(merged));try{applySiteContent();applySectionOrder();applyEffectsSettings();applyWeatherSettings();applyChatVisibility();applyIntroAutoTheme();}catch(e){}isApplyingRemote=false;}});}catch(e){}}
+async function loadSiteContentFromFirebase(){try{if(typeof firebase==='undefined')return false;if(!firebase.apps||!firebase.apps.length)return false;const snap=await firebase.database().ref('site_content').once('value');const remote=snap.val();if(remote&&typeof remote==='object'){const merged=deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),remote);if(merged.widgets&&Array.isArray(merged.widgets.list))merged.widgets.list=merged.widgets.list.filter(k=>k==='bitcoin'||k==='ethereum');localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(merged));return true;}}catch(e){}return false;}
+async function saveSiteContentToFirebase(content){try{if(typeof firebase==='undefined')return false;if(!firebase.apps||!firebase.apps.length)return false;if(isApplyingRemote)return false;if(content.widgets&&Array.isArray(content.widgets.list))content.widgets.list=content.widgets.list.filter(k=>k==='bitcoin'||k==='ethereum');await firebase.database().ref('site_content').set(content);return true;}catch(e){return false;}}
+function listenToFirebaseChanges(){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return;firebase.database().ref('site_content').on('value',snap=>{const remote=snap.val();if(!remote||typeof remote!=='object')return;const localRaw=localStorage.getItem(SITE_CONTENT_KEY);if(localRaw!==JSON.stringify(remote)){isApplyingRemote=true;const merged=deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),remote);if(merged.widgets&&Array.isArray(merged.widgets.list))merged.widgets.list=merged.widgets.list.filter(k=>k==='bitcoin'||k==='ethereum');localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(merged));try{applySiteContent();applySectionOrder();applyEffectsSettings();applyWeatherSettings();applyChatVisibility();applyIntroAutoTheme();applySitePrivacy();}catch(e){}isApplyingRemote=false;}});}catch(e){}}
 async function loadUsersFromFirebase(){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;const snap=await firebase.database().ref('site_users').once('value');const remote=snap.val();if(Array.isArray(remote)&&remote.length>0){localStorage.setItem(USERS_KEY,JSON.stringify(remote));return true;}}catch(e){}return false;}
 async function saveUsersToFirebase(users){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return false;await firebase.database().ref('site_users').set(users);return true;}catch(e){return false;}}
 function listenToUsersChanges(){try{if(typeof firebase==='undefined'||!firebase.apps||!firebase.apps.length)return;firebase.database().ref('site_users').on('value',snap=>{const remote=snap.val();if(!Array.isArray(remote))return;const localRaw=localStorage.getItem(USERS_KEY);if(JSON.stringify(remote)!==localRaw){localStorage.setItem(USERS_KEY,JSON.stringify(remote));try{checkUserSession();}catch(e){}}});}catch(e){}}
@@ -2419,7 +2425,7 @@ function getActivityLog(){try{return JSON.parse(localStorage.getItem(ACTIVITY_LO
 console.log('%c✅ JS 2/4 yüklendi (Firebase+Upload+Password+Users)','background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;padding:6px 12px;border-radius:8px;font-weight:bold;');
 
 /* ============================================================
-   🧩 WIDGETS (Sadece Bitcoin & Ethereum)
+   🧩 WIDGETS
    ============================================================ */
 function getWidgetSettings(){const c=getSiteContent();if(!c.widgets)c.widgets={enabled:false,list:['bitcoin','ethereum'],position:'between'};if(!Array.isArray(c.widgets.list))c.widgets.list=['bitcoin','ethereum'];c.widgets.list=c.widgets.list.filter(k=>k==='bitcoin'||k==='ethereum');return c.widgets;}
 function saveWidgetSettings(s){const c=getSiteContent();c.widgets=s;saveSiteContent(c);}
@@ -2457,10 +2463,7 @@ function applyWidgetPosition(){
     else parent.appendChild(section);
   }
 }
-function applyWidgetSettings(){
-  applyWidgetPosition();
-  renderWidgets();
-}
+function applyWidgetSettings(){applyWidgetPosition();renderWidgets();}
 function renderWidgets(){
   const s=getWidgetSettings();
   const grid=document.getElementById('widgetsGrid');if(!grid)return;
@@ -3029,6 +3032,38 @@ function setIntroAutoTheme(v){
 }
 
 /* ============================================================
+   🔒 PRIVACY CURTAIN
+   ============================================================ */
+function applySitePrivacy(){
+  const c=getSiteContent();
+  const closed=!!(c.general&&c.general.siteClosed);
+  const curtain=document.getElementById('privacyCurtain');
+  if(!curtain)return;
+  if(closed&&!isAdminLoggedIn()){
+    const p=document.getElementById('privacyMsg');
+    if(p)p.textContent=t('privacy_closed');
+    const b=document.getElementById('privacyBrandName');
+    if(b)b.textContent=getDyn('header.brand','muminsultani');
+    const img=curtain.querySelector('.privacy-logo');
+    const logoUrl=(getSiteContent().general&&getSiteContent().general.favicon)||'https://muminsultani.com/img/ms.png';
+    if(img)img.src=logoUrl;
+    curtain.classList.add('show');
+  }else{
+    curtain.classList.remove('show');
+  }
+}
+function toggleSiteClosed(val){
+  const c=getSiteContent();
+  if(!c.general)c.general={};
+  c.general.siteClosed=!!val;
+  saveSiteContent(c);
+  applySitePrivacy();
+  showCustomAlert(val?'🔒 Site kapatıldı. Admin #admin ile girebilir.':'🔓 Site açıldı.','success');
+  const st=document.getElementById('dash-privacy-status');
+  if(st)st.textContent='Privacy: '+(val?'🔒 CLOSED':'🔓 OPEN');
+}
+
+/* ============================================================
    🎨 EFFECTS
    ============================================================ */
 function applyIntroSettings(){
@@ -3040,7 +3075,7 @@ function applyIntroSettings(){
   applyIntroAutoTheme();
   applyLogoAnimation();
 }
-function applyEffectsSettings(){applyBackground();applyChatBackground();applyIntroSettings();applyAppearance();applyMessengerColor();applyFishSettings();applyPlaceholderStyle();}
+function applyEffectsSettings(){applyBackground();applyChatBackground();applyIntroSettings();applyAppearance();applyMessengerColor();applyFishSettings();applyPlaceholderStyle();applySitePrivacy();}
 function applyFishSettings(){const eff=getSiteContent().effects||{};if(window.fishSystem){window.fishSystem.setStyle(eff.fishStyle||'tropical');window.fishSystem.setEnabled(eff.fishEnabled===true);}}
 function setFishEnabled(v){const c=getSiteContent();if(!c.effects)c.effects={};c.effects.fishEnabled=!!v;saveSiteContent(c);if(window.fishSystem)window.fishSystem.setEnabled(!!v);showCustomAlert(v?'🐟 Balıklar açıldı':'❌ Balıklar kapatıldı','success');}
 function setFishStyle(k){const c=getSiteContent();if(!c.effects)c.effects={};c.effects.fishStyle=k;saveSiteContent(c);if(window.fishSystem)window.fishSystem.setStyle(k);try{renderEffectsPanel();}catch(e){}}
@@ -3065,7 +3100,7 @@ function setTickSoundEnabled(v){const c=getSiteContent();if(!c.effects)c.effects
 function setTickSoundStyle(k){const c=getSiteContent();if(!c.effects)c.effects={};c.effects.tickSoundStyle=k;saveSiteContent(c);renderEffectsPanel();}
 
 /* ============================================================
-   🎨 LOGO ANIMASYON (DÜZELTİLDİ)
+   🎨 LOGO ANIMASYON
    ============================================================ */
 function getLogoAnim(){const c=getSiteContent();return (c.effects&&c.effects.logoAnimation)||'anim-float';}
 function setLogoAnimation(key){
@@ -3074,8 +3109,9 @@ function setLogoAnimation(key){
   c.effects.logoAnimation=key;
   saveSiteContent(c);
   applyLogoAnimation();
-  try{renderLogoAnimationGrid();}catch(e){}
-  showCustomAlert('✅ Logo animasyonu: '+key.replace('anim-',''),'success');
+  renderLogoAnimationGrid();
+  const found=LOGO_ANIMATIONS.find(a=>a.key===key);
+  showCustomAlert('✅ Logo animasyonu: '+(found?found.name:key.replace('anim-','')),'success');
 }
 function applyLogoAnimation(){
   const wrapper=document.getElementById('introSingleLogo');
@@ -3111,7 +3147,7 @@ function renderLogoAnimationGrid(){
 }
 
 /* ============================================================
-   🎨 EFFECTS PANEL RENDER (Intro Kod Animasyonu YOK)
+   🎨 EFFECTS PANEL RENDER
    ============================================================ */
 function renderEffectsPanel(){
   const eff=(getSiteContent().effects)||{},app=(getSiteContent().appearance)||{};
@@ -3145,7 +3181,7 @@ function renderEffectsPanel(){
 }
 
 /* ============================================================
-   🎨 INTRO PANEL RENDER (Kod Animasyonu KALDIRILDI)
+   🎨 INTRO PANEL RENDER
    ============================================================ */
 function renderIntroPanel(){
   const eff=(getSiteContent().effects)||{};
@@ -3156,7 +3192,6 @@ function renderIntroPanel(){
   const ifg=document.getElementById('introFishStyleGrid');
   if(ifg){ifg.innerHTML='';FISH_STYLES.forEach(f=>{const c=document.createElement('div');c.className='effect-chip'+((eff.introFishStyle||'tropical')===f.key?' active':'');c.onclick=()=>setIntroFishStyle(f.key);c.innerHTML='<i class="fa-solid '+f.icon+'"></i><span>'+f.name+'</span>';ifg.appendChild(c);});}
   const ist=document.getElementById('introSparkleToggle');if(ist)ist.checked=eff.introSparkleEnabled!==false;
-  const iat=document.getElementById('introAutoThemeToggle');if(iat)iat.checked=!(eff.introAutoTheme===false);
 }
 
 /* ============================================================
@@ -3211,7 +3246,7 @@ async function renderApplications(){
     }
   }finally{appsRenderLock=false;}
 }
-function forceRefreshUI(){applyTranslations();try{applySiteContent();}catch(e){}try{checkUserSession();}catch(e){}try{renderApplications();}catch(e){}try{updateChatBadge();}catch(e){}try{applyWeatherSettings();}catch(e){}try{applyChatVisibility();}catch(e){}try{applyWidgetSettings();}catch(e){}}
+function forceRefreshUI(){applyTranslations();try{applySiteContent();}catch(e){}try{checkUserSession();}catch(e){}try{renderApplications();}catch(e){}try{updateChatBadge();}catch(e){}try{applyWeatherSettings();}catch(e){}try{applyChatVisibility();}catch(e){}try{applyWidgetSettings();}catch(e){}try{applySitePrivacy();}catch(e){}}
 
 /* ============================================================
    📌 APPLY SITE CONTENT
@@ -3220,10 +3255,8 @@ function applySiteContent(){
   const c=getSiteContent();const l=currentLang;
   document.querySelectorAll('.brand-logo, .footer-brand').forEach(el=>el.textContent=c.header.brand);
   const il=document.querySelector('.intro-logo');if(il)il.textContent=c.header.brand;
-  document.querySelectorAll('.modal-brand').forEach(el=>{if(el.dataset.enhanced!=='1')el.textContent=c.header.brand;});
   const role=(l==='tr'?c.header.roleTr:(l==='de'?(c.header.roleDe||'Softwareentwickler'):c.header.roleEn));
   const roleEl=document.getElementById('t-role');if(roleEl)roleEl.innerText=role;
-  const introSubEl=document.getElementById('introSub');if(introSubEl)introSubEl.innerText=role;
   const jobTitle=(l==='tr'?c.experience.titleTr:(l==='de'?(c.experience.titleDe||c.experience.titleEn):c.experience.titleEn));
   const jobTEl=document.getElementById('t-job-title');if(jobTEl)jobTEl.innerText=jobTitle;
   const jobDEl=document.getElementById('t-job-date');if(jobDEl)jobDEl.innerText=c.experience.date;
@@ -3242,34 +3275,36 @@ function applySiteContent(){
     if(c.general.favicon){const f=document.getElementById('siteFavicon');if(f)f.href=c.general.favicon;}
     const md=document.querySelector('meta[name="description"]');if(md&&c.general.metaDesc)md.setAttribute('content',c.general.metaDesc);
   }
-  renderApplications();applySectionOrder();applyEffectsSettings();renderFooterSocials();updateBrandLogos();applyWeatherSettings();applyChatVisibility();applyWidgetSettings();
+  renderApplications();applySectionOrder();applyEffectsSettings();renderFooterSocials();updateBrandLogos();applyWeatherSettings();applyChatVisibility();applyWidgetSettings();applySitePrivacy();
 }
 function findPlatform(k){return SOCIAL_PLATFORMS.find(p=>p.key===k)||{key:k,label:k,icon:'fa-solid fa-link',placeholder:'url'};}
 function renderFooterSocials(){const el=document.getElementById('footerSocials');if(!el)return;const list=(getSiteContent().social||[]).filter(s=>s.enabled!==false);el.innerHTML='';list.forEach(s=>{const p=findPlatform(s.platform);const a=document.createElement('a');a.href='#';a.className='social-btn';a.title=p.label;a.innerHTML='<i class="'+p.icon+'" style="font-size:1.1rem;color:var(--accent)"></i>';a.onclick=(e)=>{e.preventDefault();if(s.platform==='gmail')window.open('mailto:'+s.url,'_blank');else window.open(s.url,'_blank');};el.appendChild(a);});}
 
-console.log('%c✅ JS 3/4 yüklendi (Chat+Order+Weather+Appearance+Effects+Logo)','background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;padding:6px 12px;border-radius:8px;font-weight:bold;');
+console.log('%c✅ JS 3/4 yüklendi (Chat+Order+Weather+Appearance+Effects+Privacy+Logo)','background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;padding:6px 12px;border-radius:8px;font-weight:bold;');
 
 /* ============================================================
    🔐 ADMIN PANEL
    ============================================================ */
 function triggerAdminAccess(){
+  const pc=document.getElementById('privacyCurtain');
+  if(pc)pc.classList.remove('show');
   if(isAdminLoggedIn())openAdminPanel();
   else{
     document.getElementById('adminLoginModal').classList.add('active');
     setTimeout(()=>{const i=document.getElementById('adminPasswordInput');if(i){setPasswordValue('adminPasswordInput','');i.focus();}},200);
   }
 }
-function closeAdminLogin(){document.getElementById('adminLoginModal').classList.remove('active');}
+function closeAdminLogin(){document.getElementById('adminLoginModal').classList.remove('active');applySitePrivacy();}
 function verifyAdminPassword(e){
   if(e)e.preventDefault();
   const v=getPasswordValue('adminPasswordInput');
   const runtimePw=(function(){try{return localStorage.getItem('admin_master_password')||ADMIN_MASTER_PASSWORD;}catch(err){return ADMIN_MASTER_PASSWORD;}})();
-  if(v===runtimePw){try{sessionStorage.setItem(ADMIN_SESSION_KEY,'yes');}catch(err){}closeAdminLogin();openAdminPanel();fireConfettiBurst(.6);}
+  if(v===runtimePw){try{sessionStorage.setItem(ADMIN_SESSION_KEY,'yes');}catch(err){}closeAdminLogin();applySitePrivacy();openAdminPanel();fireConfettiBurst(.6);}
   else{showCustomAlert('Wrong password!');setPasswordValue('adminPasswordInput','');}
 }
-function logoutAdmin(){try{sessionStorage.removeItem(ADMIN_SESSION_KEY);}catch(e){}closeAdminPanel();}
+function logoutAdmin(){try{sessionStorage.removeItem(ADMIN_SESSION_KEY);}catch(e){}closeAdminPanel();applySitePrivacy();}
 function openAdminPanel(){refreshAdminUI();document.getElementById('adminPanelModal').classList.add('active');}
-function closeAdminPanel(){document.getElementById('adminPanelModal').classList.remove('active');applySiteContent();applyChatVisibility();if(window._chatPrevUser){try{localStorage.setItem('logged_user',window._chatPrevUser);}catch(e){}window._chatPrevUser=null;try{checkUserSession();}catch(e){}}}
+function closeAdminPanel(){document.getElementById('adminPanelModal').classList.remove('active');applySiteContent();applyChatVisibility();applySitePrivacy();if(window._chatPrevUser){try{localStorage.setItem('logged_user',window._chatPrevUser);}catch(e){}window._chatPrevUser=null;try{checkUserSession();}catch(e){}}}
 function switchAdminTab(name,btn){
   document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
@@ -3302,6 +3337,7 @@ function refreshAdminUI(){
   if(el('dash-storage-status'))el('dash-storage-status').textContent='Storage: '+(firebaseStorageAvailable?'✅ Firebase':'⚠️ Fallback');
   if(el('dash-last-edit'))el('dash-last-edit').textContent='Last: '+c.lastEdit;
   if(el('dash-chat-status'))el('dash-chat-status').textContent='Chat Feature: '+(isChatEnabled()?'✅ AÇIK':'🔒 GİZLİ');
+  if(el('dash-privacy-status'))el('dash-privacy-status').textContent='Privacy: '+(c.general&&c.general.siteClosed?'🔒 CLOSED':'🔓 OPEN');
   if(el('ah-brand'))el('ah-brand').value=c.header.brand;
   if(el('ah-role-en'))el('ah-role-en').value=c.header.roleEn;
   if(el('ah-role-tr'))el('ah-role-tr').value=c.header.roleTr;
@@ -3324,6 +3360,7 @@ function refreshAdminUI(){
   try{const ort=document.getElementById('orderRequireLoginToggle');if(ort)ort.checked=!c.general||c.general.orderRequireLogin!==false;}catch(e){}
   try{const fet=document.getElementById('fishEnabledToggle');if(fet)fet.checked=!!(c.effects&&c.effects.fishEnabled);}catch(e){}
   try{const cet=document.getElementById('chatEnabledToggle');if(cet)cet.checked=isChatEnabled();}catch(e){}
+  try{const sct=document.getElementById('siteClosedToggle');if(sct)sct.checked=!!(c.general&&c.general.siteClosed);}catch(e){}
   try{refreshDashStats();}catch(e){}
 }
 function refreshDashStats(){
@@ -3336,8 +3373,11 @@ function refreshDashStats(){
     const td=document.getElementById('dash-today-visitors');if(td)td.textContent='Today: '+(s.today||0);
     const cs=document.getElementById('dash-chat-status');
     if(cs)cs.textContent='Chat Feature: '+(isChatEnabled()?'✅ AÇIK':'🔒 GİZLİ');
+    const ps=document.getElementById('dash-privacy-status');
+    if(ps)ps.textContent='Privacy: '+((getSiteContent().general&&getSiteContent().general.siteClosed)?'🔒 CLOSED':'🔓 OPEN');
     const vis=(getSiteContent().general&&getSiteContent().general.languageVisibility)||{en:true,tr:true,de:true};
     ['en','tr','de'].forEach(k=>{const t2=document.getElementById('langToggle_'+k);if(t2)t2.checked=vis[k]!==false;});
+    const sct=document.getElementById('siteClosedToggle');if(sct)sct.checked=!!(getSiteContent().general&&getSiteContent().general.siteClosed);
     const wt=document.getElementById('weatherEnabledToggle');if(wt)wt.checked=!(getSiteContent().general&&getSiteContent().general.weatherEnabled===false);
     const cet=document.getElementById('chatEnabledToggle');if(cet)cet.checked=isChatEnabled();
     const iat=document.getElementById('introAutoThemeToggle');if(iat)iat.checked=!(getSiteContent().effects&&getSiteContent().effects.introAutoTheme===false);
@@ -3403,15 +3443,14 @@ function saveAdminGeneral(e){
   const ps=document.getElementById('ag-placeholder-style');if(ps)c.general.placeholderStyle=ps.value;
   const pc=document.getElementById('ag-placeholder-color');if(pc)c.general.placeholderColor=pc.value;
   const po=document.getElementById('ag-placeholder-opacity');if(po)c.general.placeholderOpacity=parseFloat(po.value);
-  c.general.siteClosed=false;
-  saveSiteContent(c);applySiteContent();applyTranslations();applyPlaceholderStyle();updateBrandLogos();
+  saveSiteContent(c);applySiteContent();applyTranslations();applyPlaceholderStyle();updateBrandLogos();applyLogoAnimation();
   showCustomAlert('Saved!','success');
 }
 function handleFaviconUpload(e){const f=e.target.files[0];if(!f||!f.type.startsWith('image/'))return;if(f.size>2*1024*1024){showCustomAlert('Max 2 MB');e.target.value='';return;}const r=new FileReader();r.onload=ev=>{pendingFaviconDataUrl=ev.target.result;const pv=document.getElementById('faviconPreview');if(pv){pv.src=ev.target.result;pv.style.display='block';}const ic=document.getElementById('faviconUploadIcon');if(ic)ic.style.display='none';const b=document.getElementById('faviconClearBtn');if(b)b.style.display='inline-flex';};r.readAsDataURL(f);}
 function clearFavicon(){pendingFaviconDataUrl=null;const pv=document.getElementById('faviconPreview');if(pv)pv.style.display='none';const ic=document.getElementById('faviconUploadIcon');if(ic)ic.style.display='block';const b=document.getElementById('faviconClearBtn');if(b)b.style.display='none';const c=getSiteContent();if(c.general)c.general.favicon='';saveSiteContent(c);applySiteContent();updateBrandLogos();applyLogoAnimation();}
 function exportSiteBackup(){const c=getSiteContent();const data=JSON.stringify(c,null,2);const blob=new Blob([data],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='muminsultani-backup-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();document.body.removeChild(a);showCustomAlert('Backup downloaded!','success');}
-function importSiteBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.general)d.general.siteClosed=false;saveSiteContent(deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),d));applySiteContent();applySectionOrder();applyEffectsSettings();refreshAdminUI();showCustomAlert('Backup loaded!','success');}catch(err){showCustomAlert('Invalid file!');}e.target.value='';};r.readAsText(f);}
-function confirmResetSite(){showCustomAlert('All site content will be reset?','delete',async function(){localStorage.removeItem(SITE_CONTENT_KEY);try{for(let i=0;i<8;i++){await withTimeout(deleteApkFile(i),3000);await withTimeout(deleteIconData(i),3000);}}catch(e){}const def=JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT));def.general.siteClosed=false;try{localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(def));}catch(e){}saveSiteContentToFirebase(def);applySiteContent();applySectionOrder();applyEffectsSettings();refreshAdminUI();showCustomAlert('Reset!','success');});}
+function importSiteBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);saveSiteContent(deepMerge(JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT)),d));applySiteContent();applySectionOrder();applyEffectsSettings();refreshAdminUI();showCustomAlert('Backup loaded!','success');}catch(err){showCustomAlert('Invalid file!');}e.target.value='';};r.readAsText(f);}
+function confirmResetSite(){showCustomAlert('All site content will be reset?','delete',async function(){localStorage.removeItem(SITE_CONTENT_KEY);try{for(let i=0;i<8;i++){await withTimeout(deleteApkFile(i),3000);await withTimeout(deleteIconData(i),3000);}}catch(e){}const def=JSON.parse(JSON.stringify(DEFAULT_SITE_CONTENT));try{localStorage.setItem(SITE_CONTENT_KEY,JSON.stringify(def));}catch(e){}saveSiteContentToFirebase(def);applySiteContent();applySectionOrder();applyEffectsSettings();refreshAdminUI();showCustomAlert('Reset!','success');});}
 function checkAdminHash(){if(window.location.hash==='#manage-muminsultani'||window.location.hash==='#admin'){triggerAdminAccess();history.replaceState(null,'',window.location.pathname+window.location.search);}}
 window.addEventListener('hashchange',checkAdminHash);
 
@@ -4311,6 +4350,7 @@ window.addEventListener('DOMContentLoaded',async ()=>{
   applyChatVisibility();
   setTimeout(()=>{const wrapper=document.getElementById('introSingleLogo');if(wrapper){wrapper.classList.add('animated');applyLogoAnimation();}},300);
   startIntroThemeWatcher();
+  applySitePrivacy();
 });
 
 /* ============================================================
@@ -4318,7 +4358,7 @@ window.addEventListener('DOMContentLoaded',async ()=>{
    ============================================================ */
 document.addEventListener('click',e=>{
   getAudioContext();
-  const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.chat-user-item,.chat-send-btn,.chat-profile-btn,.modal-close-btn,.auth-tab-btn,.ratio-btn,.social-btn,.lightbox-close-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.chat-mic-btn,.toggle-switch,.chat-msg-action-btn,.effect-chip,.social-del,.hpm-item,.settings-chip,.hpm-close-x,.order-type-option,.weather-refresh');
+  const b=e.target.closest('button,.lang-option,.custom-alert-btn,.submit-btn,.theme-toggle-btn,.chat-user-item,.chat-send-btn,.chat-profile-btn,.modal-close-btn,.auth-tab-btn,.ratio-btn,.social-btn,.lightbox-close-btn,.app-card,.admin-slot-btn,.admin-tab,.admin-action-btn,.apk-clear-btn,.user-view-btn,.filter-chip,.chat-mic-btn,.toggle-switch,.chat-msg-action-btn,.effect-chip,.social-del,.hpm-item,.settings-chip,.hpm-close-x,.order-type-option,.weather-refresh,.privacy-admin-btn');
   if(b)playTickSound();
 },true);
 document.addEventListener('contextmenu',e=>e.preventDefault());
@@ -4340,22 +4380,19 @@ window.addEventListener('beforeunload',()=>{if(chatPollTimer)clearInterval(chatP
 /* ============================================================
    📤 GLOBAL EXPORT
    ============================================================ */
-window.toggleTheme=toggleTheme;window.toggleLangMenu=toggleLangMenu;window.changeLanguage=changeLanguage;window.toggleHeaderProfileMenu=toggleHeaderProfileMenu;window.closeHeaderProfileMenu=closeHeaderProfileMenu;window.openEditProfileModal=openEditProfileModal;window.closeEditProfileModal=closeEditProfileModal;window.openChangePasswordModal=openChangePasswordModal;window.closeChangePasswordModal=closeChangePasswordModal;window.openUserSettingsModal=openUserSettingsModal;window.closeUserSettingsModal=closeUserSettingsModal;window.openDeleteAccountModal=openDeleteAccountModal;window.closeDeleteAccountModal=closeDeleteAccountModal;window.confirmLogout=confirmLogout;window.openGetInTouchModal=openGetInTouchModal;window.closeGetInTouchModal=closeGetInTouchModal;window.openDirectContactModal=openDirectContactModal;window.closeDirectContactModal=closeDirectContactModal;window.switchAuthTab=switchAuthTab;window.handleAuthSubmit=handleAuthSubmit;window.openForgotPasswordModal=openForgotPasswordModal;window.closeForgotPasswordModal=closeForgotPasswordModal;window.handleForgotPasswordSubmit=handleForgotPasswordSubmit;window.closeResetPasswordModal=closeResetPasswordModal;window.handleResetPasswordSubmit=handleResetPasswordSubmit;window.openSignupCodeModal=openSignupCodeModal;window.backToSignupMock=backToSignupMock;window.cancelSignup=cancelSignup;window.verifySignupCode=verifySignupCode;window.resendSignupEmail=resendSignupEmail;window.checkUsernameAvailability=checkUsernameAvailability;window.checkEmailAvailability=checkEmailAvailability;window.togglePasswordVisibility=togglePasswordVisibility;window.handleProfileUpdate=handleProfileUpdate;window.handleProfilePhotoUpload=handleProfilePhotoUpload;window.resetProfilePhoto=resetProfilePhoto;window.updateEditPhotoPreview=updateEditPhotoPreview;window.handleChangePassword=handleChangePassword;window.handleDeleteAccount=handleDeleteAccount;window.handleDeletePasswordSubmit=handleDeletePasswordSubmit;window.openDeletePasswordModal=openDeletePasswordModal;window.closeDeletePasswordModal=closeDeletePasswordModal;window.setCropRatio=setCropRatio;window.applyCrop=applyCrop;window.closeCropModal=closeCropModal;window.closeLightbox=closeLightbox;window.openOrderModal=openOrderModal;window.closeOrderModal=closeOrderModal;window.submitOrder=submitOrder;window.selectOrderType=selectOrderType;window.openChatPanel=openChatPanel;window.closeChatPanel=closeChatPanel;window.sendChatMessage=sendChatMessage;window.handleChatPhotoUpload=handleChatPhotoUpload;window.filterChatUsers=filterChatUsers;window.clearChatSearch=clearChatSearch;window.replyToMessage=replyToMessage;window.cancelReply=cancelReply;window.deleteMessage=deleteMessage;window.openPublicUserProfile=openPublicUserProfile;window.closePublicUserProfile=closePublicUserProfile;window.messageFromProfile=messageFromProfile;window.triggerAdminAccess=triggerAdminAccess;window.closeAdminLogin=closeAdminLogin;window.verifyAdminPassword=verifyAdminPassword;window.logoutAdmin=logoutAdmin;window.closeAdminPanel=closeAdminPanel;window.switchAdminTab=switchAdminTab;window.toggleUserVerification=toggleUserVerification;window.adminViewUser=adminViewUser;window.closeAdminUserProfile=closeAdminUserProfile;window.adminChatUser=adminChatUser;window.openAdminUserEmail=openAdminUserEmail;window.closeAdminUserEmail=closeAdminUserEmail;window.sendAdminUserEmailSubmit=sendAdminUserEmailSubmit;window.deleteUserAdmin=deleteUserAdmin;window.exportUsersCSV=exportUsersCSV;window.clearAllUsers=clearAllUsers;window.filterActivity=filterActivity;window.clearActivityLog=clearActivityLog;window.exportActivityCSV=exportActivityCSV;window.clearAllChats=clearAllChats;window.exportChatsCSV=exportChatsCSV;window.openAdminAnyEmail=openAdminAnyEmail;window.closeAdminAnyEmail=closeAdminAnyEmail;window.previewAnyEmailImage=previewAnyEmailImage;window.handleAnyEmailImageUpload=handleAnyEmailImageUpload;window.handleAnyEmailPdfUpload=handleAnyEmailPdfUpload;window.sendAdminAnyEmail=sendAdminAnyEmail;window.moveSectionOrder=moveSectionOrder;window.editAppSlot=editAppSlot;window.closeAdminEdit=closeAdminEdit;window.clearAppSlot=clearAppSlot;window.saveAppSlot=saveAppSlot;window.handleIconUpload=handleIconUpload;window.clearIconFile=clearIconFile;window.handleApkUpload=handleApkUpload;window.clearApkFile=clearApkFile;window.saveAdminHeader=saveAdminHeader;window.saveAdminFooter=saveAdminFooter;window.saveAdminGeneral=saveAdminGeneral;window.saveAdminAccount=saveAdminAccount;window.handleAdminPhotoUpload=handleAdminPhotoUpload;window.clearAdminPhoto=clearAdminPhoto;window.handleFaviconUpload=handleFaviconUpload;window.clearFavicon=clearFavicon;window.exportSiteBackup=exportSiteBackup;window.importSiteBackup=importSiteBackup;window.confirmResetSite=confirmResetSite;window.toggleWeatherEnabled=toggleWeatherEnabled;window.toggleChatEnabled=toggleChatEnabled;window.toggleLangVisibility=toggleLangVisibility;window.setOrderRequireLogin=setOrderRequireLogin;window.setFishEnabled=setFishEnabled;window.setIntroFishEnabled=setIntroFishEnabled;window.setIntroFishStyle=setIntroFishStyle;window.setIntroSparkleEnabled=setIntroSparkleEnabled;window.setIntroAutoTheme=setIntroAutoTheme;window.setConfettiEnabled=setConfettiEnabled;window.setTickSoundEnabled=setTickSoundEnabled;window.toggleWelcomeEmail=toggleWelcomeEmail;window.toggleWelcomePdf=toggleWelcomePdf;window.saveWelcomeEmailSettings=saveWelcomeEmailSettings;window.renderEffectsPanel=renderEffectsPanel;window.renderIntroPanel=renderIntroPanel;window.renderLogoAnimationGrid=renderLogoAnimationGrid;window.renderUserSettingsGrids=renderUserSettingsGrids;window.resetUserSettings=resetUserSettings;window.refreshWeather=refreshWeather;window.approveOrder=approveOrder;window.deleteOrder=deleteOrder;window.clearAllOrders=clearAllOrders;window.updateSocialUrl=updateSocialUrl;window.removeSocial=removeSocial;window.addSocialPlatformPicker=addSocialPlatformPicker;window.pickSocialPlatform=pickSocialPlatform;window.closeCustomAlert=closeCustomAlert;window.confirmAction=confirmAction;window.autoFillSurname=autoFillSurname;window.changeAdminPassword=changeAdminPassword;window.renderWidgetsAdmin=renderWidgetsAdmin;window.toggleWidget=toggleWidget;window.setIntroAnim=setIntroAnim;window.applyPlaceholderStyle=applyPlaceholderStyle;window.forceRefreshWidgets=forceRefreshWidgets;window.setTheme=setTheme;window.setFont=setFont;window.setFontColor=setFontColor;window.setFormStyle=setFormStyle;window.setPanelStyle=setPanelStyle;window.setBackground=setBackground;window.setSiteAnimation=setSiteAnimation;window.setChatBackground=setChatBackground;window.setMessengerColor=setMessengerColor;window.setConfettiStyle=setConfettiStyle;window.setTickSoundStyle=setTickSoundStyle;window.setFishStyle=setFishStyle;window.setLogoAnimation=setLogoAnimation;window.getLogoAnim=getLogoAnim;window.applyLogoAnimation=applyLogoAnimation;window.applyIntroAutoTheme=applyIntroAutoTheme;
+window.toggleTheme=toggleTheme;window.toggleLangMenu=toggleLangMenu;window.changeLanguage=changeLanguage;window.toggleHeaderProfileMenu=toggleHeaderProfileMenu;window.closeHeaderProfileMenu=closeHeaderProfileMenu;window.openEditProfileModal=openEditProfileModal;window.closeEditProfileModal=closeEditProfileModal;window.openChangePasswordModal=openChangePasswordModal;window.closeChangePasswordModal=closeChangePasswordModal;window.openUserSettingsModal=openUserSettingsModal;window.closeUserSettingsModal=closeUserSettingsModal;window.openDeleteAccountModal=openDeleteAccountModal;window.closeDeleteAccountModal=closeDeleteAccountModal;window.confirmLogout=confirmLogout;window.openGetInTouchModal=openGetInTouchModal;window.closeGetInTouchModal=closeGetInTouchModal;window.openDirectContactModal=openDirectContactModal;window.closeDirectContactModal=closeDirectContactModal;window.switchAuthTab=switchAuthTab;window.handleAuthSubmit=handleAuthSubmit;window.openForgotPasswordModal=openForgotPasswordModal;window.closeForgotPasswordModal=closeForgotPasswordModal;window.handleForgotPasswordSubmit=handleForgotPasswordSubmit;window.closeResetPasswordModal=closeResetPasswordModal;window.handleResetPasswordSubmit=handleResetPasswordSubmit;window.openSignupCodeModal=openSignupCodeModal;window.backToSignupMock=backToSignupMock;window.cancelSignup=cancelSignup;window.verifySignupCode=verifySignupCode;window.resendSignupEmail=resendSignupEmail;window.checkUsernameAvailability=checkUsernameAvailability;window.checkEmailAvailability=checkEmailAvailability;window.togglePasswordVisibility=togglePasswordVisibility;window.handleProfileUpdate=handleProfileUpdate;window.handleProfilePhotoUpload=handleProfilePhotoUpload;window.resetProfilePhoto=resetProfilePhoto;window.updateEditPhotoPreview=updateEditPhotoPreview;window.handleChangePassword=handleChangePassword;window.handleDeleteAccount=handleDeleteAccount;window.handleDeletePasswordSubmit=handleDeletePasswordSubmit;window.openDeletePasswordModal=openDeletePasswordModal;window.closeDeletePasswordModal=closeDeletePasswordModal;window.setCropRatio=setCropRatio;window.applyCrop=applyCrop;window.closeCropModal=closeCropModal;window.closeLightbox=closeLightbox;window.openOrderModal=openOrderModal;window.closeOrderModal=closeOrderModal;window.submitOrder=submitOrder;window.selectOrderType=selectOrderType;window.openChatPanel=openChatPanel;window.closeChatPanel=closeChatPanel;window.sendChatMessage=sendChatMessage;window.handleChatPhotoUpload=handleChatPhotoUpload;window.filterChatUsers=filterChatUsers;window.clearChatSearch=clearChatSearch;window.replyToMessage=replyToMessage;window.cancelReply=cancelReply;window.deleteMessage=deleteMessage;window.openPublicUserProfile=openPublicUserProfile;window.closePublicUserProfile=closePublicUserProfile;window.messageFromProfile=messageFromProfile;window.triggerAdminAccess=triggerAdminAccess;window.closeAdminLogin=closeAdminLogin;window.verifyAdminPassword=verifyAdminPassword;window.logoutAdmin=logoutAdmin;window.closeAdminPanel=closeAdminPanel;window.switchAdminTab=switchAdminTab;window.toggleUserVerification=toggleUserVerification;window.adminViewUser=adminViewUser;window.closeAdminUserProfile=closeAdminUserProfile;window.adminChatUser=adminChatUser;window.openAdminUserEmail=openAdminUserEmail;window.closeAdminUserEmail=closeAdminUserEmail;window.sendAdminUserEmailSubmit=sendAdminUserEmailSubmit;window.deleteUserAdmin=deleteUserAdmin;window.exportUsersCSV=exportUsersCSV;window.clearAllUsers=clearAllUsers;window.filterActivity=filterActivity;window.clearActivityLog=clearActivityLog;window.exportActivityCSV=exportActivityCSV;window.clearAllChats=clearAllChats;window.exportChatsCSV=exportChatsCSV;window.openAdminAnyEmail=openAdminAnyEmail;window.closeAdminAnyEmail=closeAdminAnyEmail;window.previewAnyEmailImage=previewAnyEmailImage;window.handleAnyEmailImageUpload=handleAnyEmailImageUpload;window.handleAnyEmailPdfUpload=handleAnyEmailPdfUpload;window.sendAdminAnyEmail=sendAdminAnyEmail;window.moveSectionOrder=moveSectionOrder;window.editAppSlot=editAppSlot;window.closeAdminEdit=closeAdminEdit;window.clearAppSlot=clearAppSlot;window.saveAppSlot=saveAppSlot;window.handleIconUpload=handleIconUpload;window.clearIconFile=clearIconFile;window.handleApkUpload=handleApkUpload;window.clearApkFile=clearApkFile;window.saveAdminHeader=saveAdminHeader;window.saveAdminFooter=saveAdminFooter;window.saveAdminGeneral=saveAdminGeneral;window.saveAdminAccount=saveAdminAccount;window.handleAdminPhotoUpload=handleAdminPhotoUpload;window.clearAdminPhoto=clearAdminPhoto;window.handleFaviconUpload=handleFaviconUpload;window.clearFavicon=clearFavicon;window.exportSiteBackup=exportSiteBackup;window.importSiteBackup=importSiteBackup;window.confirmResetSite=confirmResetSite;window.toggleWeatherEnabled=toggleWeatherEnabled;window.toggleChatEnabled=toggleChatEnabled;window.toggleLangVisibility=toggleLangVisibility;window.setOrderRequireLogin=setOrderRequireLogin;window.setFishEnabled=setFishEnabled;window.setIntroFishEnabled=setIntroFishEnabled;window.setIntroFishStyle=setIntroFishStyle;window.setIntroSparkleEnabled=setIntroSparkleEnabled;window.setIntroAutoTheme=setIntroAutoTheme;window.setConfettiEnabled=setConfettiEnabled;window.setTickSoundEnabled=setTickSoundEnabled;window.toggleWelcomeEmail=toggleWelcomeEmail;window.toggleWelcomePdf=toggleWelcomePdf;window.saveWelcomeEmailSettings=saveWelcomeEmailSettings;window.renderEffectsPanel=renderEffectsPanel;window.renderIntroPanel=renderIntroPanel;window.renderLogoAnimationGrid=renderLogoAnimationGrid;window.renderUserSettingsGrids=renderUserSettingsGrids;window.resetUserSettings=resetUserSettings;window.refreshWeather=refreshWeather;window.approveOrder=approveOrder;window.deleteOrder=deleteOrder;window.clearAllOrders=clearAllOrders;window.updateSocialUrl=updateSocialUrl;window.removeSocial=removeSocial;window.addSocialPlatformPicker=addSocialPlatformPicker;window.pickSocialPlatform=pickSocialPlatform;window.closeCustomAlert=closeCustomAlert;window.confirmAction=confirmAction;window.autoFillSurname=autoFillSurname;window.changeAdminPassword=changeAdminPassword;window.renderWidgetsAdmin=renderWidgetsAdmin;window.toggleWidget=toggleWidget;window.setIntroAnim=setIntroAnim;window.applyPlaceholderStyle=applyPlaceholderStyle;window.forceRefreshWidgets=forceRefreshWidgets;window.setTheme=setTheme;window.setFont=setFont;window.setFontColor=setFontColor;window.setFormStyle=setFormStyle;window.setPanelStyle=setPanelStyle;window.setBackground=setBackground;window.setSiteAnimation=setSiteAnimation;window.setChatBackground=setChatBackground;window.setMessengerColor=setMessengerColor;window.setConfettiStyle=setConfettiStyle;window.setTickSoundStyle=setTickSoundStyle;window.setFishStyle=setFishStyle;window.setLogoAnimation=setLogoAnimation;window.getLogoAnim=getLogoAnim;window.applyLogoAnimation=applyLogoAnimation;window.applyIntroAutoTheme=applyIntroAutoTheme;window.toggleSiteClosed=toggleSiteClosed;window.applySitePrivacy=applySitePrivacy;
 
 /* ============================================================
    🏁 SON LOG'LAR
    ============================================================ */
 console.log('%c✅ muminsultani site TAMAMEN yüklendi!','background:linear-gradient(135deg,#9333ea,#c084fc);color:#fff;padding:8px 16px;border-radius:10px;font-weight:bold;font-size:14px;');
-console.log('%c📐 Admin panel: Ctrl+Shift+M veya Ctrl+Shift+A','color:#22c55e;font-weight:bold;');
-console.log('%c🔓 SİTE HER ZAMAN AÇIK','color:#22c55e;font-weight:bold;');
-console.log('%c🎨 Logo animasyonu düzeltildi — seçince değişiyor','color:#22c55e;font-weight:bold;');
-console.log('%c🖼️ Intro logosu yamuk değil + responsive küçültüldü','color:#22c55e;font-weight:bold;');
-console.log('%c🪙 Widget: sadece Bitcoin & Ethereum','color:#22c55e;font-weight:bold;');
-console.log('%c🎯 Widget konumu sabit kalıyor (dil değişince kaymıyor)','color:#22c55e;font-weight:bold;');
-console.log('%c🌓 Intro otomatik tema (6-20 arası light)','color:#22c55e;font-weight:bold;');
-console.log('%c🗑️ Intro Kod Animasyonu kaldırıldı','color:#22c55e;font-weight:bold;');
-console.log('%c🗑️ Hava Durumu widget kaldırıldı','color:#22c55e;font-weight:bold;');
-console.log('%c🎉 8 parça tamamlandı — 4080+ satır kod!','color:#22c55e;font-weight:bold;font-size:14px;');
+console.log('%c📐 Admin panel: Ctrl+Shift+M veya Ctrl+Shift+A veya #admin','color:#22c55e;font-weight:bold;');
+console.log('%c🚫 Intro yuvarlak mor logo TAMAMEN KALDIRILDI','color:#22c55e;font-weight:bold;');
+console.log('%c🔒 Privacy Curtain geri geldi — admin panelden kontrol','color:#22c55e;font-weight:bold;');
+console.log('%c🎨 Logo büyük: mobil 180, tablet 220, masaüstü 260','color:#22c55e;font-weight:bold;');
+console.log('%c🖼️ Logo animasyonu tamir edildi — seçince anında değişir','color:#22c55e;font-weight:bold;');
+console.log('%c🎯 Widget: sadece Bitcoin & Ethereum','color:#22c55e;font-weight:bold;');
+console.log('%c🎉 8 parça TAMAMLANDI — ~4330 satır kod!','color:#22c55e;font-weight:bold;font-size:14px;');
 </script>
 </body>
 </html>
